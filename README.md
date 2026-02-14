@@ -32,9 +32,9 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 ### CDN (Fastest)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui.min.js"></script>
 ```
 
 ### Download
@@ -99,7 +99,7 @@ The SUI JavaScript toolkit checks for `typeof lucide !== 'undefined'` in exactly
 
 ## Accessibility Evidence
 
-SUI claims WCAG 2.1 AA compliance. Here are the receipts.
+Here is a quick review of SUI vs WCAG 2.1 AA compliance.
 
 ### Contrast Ratios (Light Mode)
 
@@ -114,8 +114,8 @@ SUI claims WCAG 2.1 AA compliance. Here are the receipts.
 | `--sui-info-strong` (#0E7490) | `--sui-info-soft` (#ECFEFF) | 5.2:1 | AA |
 | `--sui-neutral-strong` (#334155) | `--sui-neutral-soft` (#F1F5F9) | 9.5:1 | AAA |
 | `--sui-pro-strong` (#6D28D9) | `--sui-pro-soft` (#F5F3FF) | 6.5:1 | AA |
-| `--sui-text-muted` (#64748B) | `--sui-bg-card` (#FFFFFF) | 5.0:1 | AA |
-| `--sui-text-muted` (#64748B) | `--sui-bg-elevated` (#F1F5F9) | 4.56:1 | AA |
+| `--sui-text-muted` (#5C6C80) | `--sui-bg-card` (#FFFFFF) | 5.37:1 | AA |
+| `--sui-text-muted` (#5C6C80) | `--sui-bg-elevated` (#F1F5F9) | 4.90:1 | AA |
 | `--sui-blue-strong` (#1D4ED8) | `--sui-blue-soft` (#DBEAFE) | 6.68:1 | AAA |
 | White | `--sui-blue-primary` (#3B82F6) | 3.7:1 | AA-lg |
 | White | `--sui-success-strong` (#15803D) | 5.0:1 | AA |
@@ -431,15 +431,15 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```html
 <!-- Production (minified) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui.min.js"></script>
 
 <!-- Development (readable) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/sui-tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/sui-tokens.css">
 ```
 
-Replace `@2.0.2` with any version tag. Use exact versions in production, not `@main`.
+Replace `@2.0.3` with any version tag. Use exact versions in production, not `@main`.
 
 ---
 
