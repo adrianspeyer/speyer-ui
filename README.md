@@ -32,9 +32,9 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 ### CDN (Fastest)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui.min.js"></script>
 ```
 
 ### Download
@@ -98,8 +98,8 @@ The SUI JavaScript toolkit checks for `typeof lucide !== 'undefined'` in exactly
 ---
 
 ## Accessibility Evidence
-Here is a quick review of SUI vs WCAG 2.1 AA compliance. 
 
+Here is a quick review of SUI vs WCAG 2.1 AA compliance.
 
 ### Contrast Ratios (Light Mode)
 
@@ -116,6 +116,9 @@ Here is a quick review of SUI vs WCAG 2.1 AA compliance.
 | `--sui-pro-strong` (#6D28D9) | `--sui-pro-soft` (#F5F3FF) | 6.5:1 | AA |
 | `--sui-text-muted` (#5C6C80) | `--sui-bg-card` (#FFFFFF) | 5.37:1 | AA |
 | `--sui-text-muted` (#5C6C80) | `--sui-bg-elevated` (#F1F5F9) | 4.90:1 | AA |
+| `--sui-text-muted` (#8494A9) | `--sui-bg-card` (#161E2C) | 5.41:1 | AA |
+| `--sui-text-muted` (#8494A9) | `--sui-bg-elevated` (#1E293B) | 4.73:1 | AA |
+| `--sui-text-muted` (#8494A9) | `--sui-bg-primary` (#0B0F1A) | 6.19:1 | AA |
 | `--sui-blue-strong` (#1D4ED8) | `--sui-blue-soft` (#DBEAFE) | 6.68:1 | AAA |
 | White | `--sui-blue-primary` (#3B82F6) | 3.7:1 | AA-lg |
 | White | `--sui-success-strong` (#15803D) | 5.0:1 | AA |
@@ -138,10 +141,9 @@ Here is a quick review of SUI vs WCAG 2.1 AA compliance.
 | Pair | Ratio | Status | Why |
 |------|-------|--------|-----|
 | White on `--sui-blue-primary` | 3.7:1 | AA for large text | Primary buttons use 14px/600 weight. At this size the ratio passes AA for UI components per common industry practice but falls short of AA normal text (4.5:1). |
-| `--sui-text-muted` on card (dark mode) | 2.2:1 | Below AA | Intentional in dark mode. Muted text is for non-essential metadata (timestamps, placeholder, helper text). Essential content must never use muted. Light mode muted now passes AA at 5.0:1. |
 | `--sui-error-strong` on `--sui-error-soft` (dark) | 4.3:1 | AA for large text | Badge/alert text at 12px falls slightly below AA normal text in dark mode. The icon + text pattern provides the redundant signal. |
 
-These limitations are documented, not hidden. SUI achieves AA for body text, headings, status text, and muted labels in both modes. Remaining exceptions are limited to dark mode muted text and large-text-only button ratios.
+These limitations are documented, not hidden. SUI achieves AA for body text, headings, status text, and muted labels in both light and dark modes. Remaining exceptions are limited to large-text-only button ratios.
 
 Tested with Chrome Lighthouse (Accessibility audit) and Chrome DevTools contrast checker. If you find a contrast issue we missed, open an issue.
 
@@ -431,15 +433,15 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```html
 <!-- Production (minified) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui.min.js"></script>
 
 <!-- Development (readable) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.3/sui-tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/sui-tokens.css">
 ```
 
-Replace `@2.0.3` with any version tag. Use exact versions in production, not `@main`.
+Replace `@2.0.4` with any version tag. Use exact versions in production, not `@main`.
 
 ---
 

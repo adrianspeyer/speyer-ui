@@ -4,6 +4,16 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.4] — 2026-02-14
+
+### Fixed (Lighthouse Accessibility Retest — Dark Mode)
+- **Dark mode muted text contrast failure:** `--sui-text-muted` in dark mode was #475569 — failed AA on all three dark surfaces: 2.53:1 on body (#0B0F1A), 2.21:1 on card (#161E2C), 1.93:1 on elevated (#1E293B). Lightened to #8494A9 (6.19:1 on body, 5.41:1 on card, 4.73:1 on elevated — all AA pass). Affected 16 elements: 4 `.sui-kpi-label` divs, 9 `<small>` inside `.sui-card-muted`, 2 file description `<small>`, and 1 footer `<small>`.
+
+### Lesson
+- The same token can fail differently in light and dark modes. After fixing a token in one mode, always retest the other mode against all its background surfaces.
+
+---
+
 ## [2.0.3] — 2026-02-14
 
 ### Fixed (Lighthouse Accessibility Retest — 96 → 100)
