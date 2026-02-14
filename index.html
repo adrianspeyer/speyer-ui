@@ -1,1083 +1,877 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Speyer UI System (SUI) — Living Spec + Example Usage</title>
-
-  <!-- SUI Tokens (repo-local) -->
-  <link rel="stylesheet" href="./sui-tokens.css" />
-
-  <!-- Font: strict weights 400/600/700 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speyer UI System — Design System Demo</title>
+  <meta name="description" content="A lightweight, accessible design system for building clear, modern web applications. Made in Canada with love.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./sui-tokens.css">
   <style>
-    /* ============================================================
-       SUI DEMO PAGE STYLES (NOT TOKENS)
-       - Tokens remain canonical in sui-tokens.css
-       - This <style> is demo-only layout + component wiring
-       - All colors must come from SUI variables
-       ============================================================ */
 
-    :root {
-      --demo-max: 1120px;
-      --demo-gap: 16px;
-      --demo-radius: 16px;
-      --demo-radius-sm: 12px;
-      --demo-shadow: 0 12px 28px rgba(2, 6, 23, 0.08);
-      --demo-shadow-dark: 0 16px 32px rgba(0, 0, 0, 0.35);
-    }
-
-    html, body {
-      height: 100%;
-    }
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background: var(--sui-bg);
       color: var(--sui-text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      transition: background var(--sui-duration) var(--sui-ease), color var(--sui-duration) var(--sui-ease);
     }
-
-    /* Typography (strict) */
-    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
-    h2 { font-size: 24px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; margin: 0; }
-    h3 { font-size: 20px; font-weight: 600; line-height: 1.3; margin: 0; }
-
-    p { margin: 0; }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    a:hover { text-decoration: underline; }
 
     /* Layout */
-    .wrap {
-      max-width: var(--demo-max);
-      margin: 0 auto;
-      padding: 24px 16px 64px;
-    }
-
-    @media (min-width: 768px) {
-      .wrap { padding: 32px 24px 80px; }
-    }
-
-    /* Top Nav */
-    .topbar {
+    .sui-container { max-width: 1200px; margin: 0 auto; padding: var(--sui-space-6); }
+    .sui-nav {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--sui-surface) 70%, transparent);
       border-bottom: 1px solid var(--sui-border);
-      background: color-mix(in srgb, var(--sui-surface) 88%, transparent);
     }
-
-    .topbar-inner {
-      max-width: var(--demo-max);
+    .sui-nav-inner {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 14px 16px;
+      padding: var(--sui-space-4) var(--sui-space-6);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: var(--sui-space-4);
     }
 
-    @media (min-width: 768px) {
-      .topbar-inner { padding: 14px 24px; }
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 220px;
-    }
-
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--sui-blue);
-      color: #fff;
-      box-shadow: 0 10px 22px rgba(59, 130, 246, 0.28);
-    }
-
-    .brand-title {
-      display: none;
-      line-height: 1.05;
-    }
-
-    @media (min-width: 640px) {
-      .brand-title { display: block; }
-    }
-
-    .brand-title strong { font-weight: 700; }
-    .brand-title small {
-      display: inline-flex;
-      margin-left: 8px;
-      padding: 3px 8px;
+    .sui-brand { display: flex; align-items: center; gap: var(--sui-space-3); }
+    .sui-logo {
+      width: 42px; height: 42px;
+      border-radius: var(--sui-radius-card);
+      background: var(--sui-blue-soft);
       border: 1px solid var(--sui-border);
-      border-radius: 10px;
+      display: grid; place-items: center;
+      box-shadow: var(--sui-shadow);
+    }
+    .sui-brand-title { font-weight: 700; letter-spacing: -0.01em; }
+    .sui-version {
+      margin-left: var(--sui-space-2);
       font-size: 12px;
       font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--sui-border);
       color: var(--sui-muted);
       background: var(--sui-surface);
-      vertical-align: middle;
     }
 
     /* Tabs */
-    .tabs {
+    .sui-tabs {
       display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px;
+      gap: var(--sui-space-2);
+      padding: var(--sui-space-2);
+      border-radius: 999px;
       border: 1px solid var(--sui-border);
-      border-radius: 14px;
       background: var(--sui-surface);
     }
-
-    .tab {
-      height: 34px;
-      padding: 0 12px;
-      border-radius: 10px;
-      border: 1px solid transparent;
+    .sui-tab {
+      border: 0;
       background: transparent;
-      color: var(--sui-subtext);
+      color: var(--sui-text-secondary);
       font-weight: 700;
       font-size: 12px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
       cursor: pointer;
-      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
-      user-select: none;
+      transition: background var(--sui-duration) var(--sui-ease), color var(--sui-duration) var(--sui-ease);
+      outline: none;
     }
-
-    .tab[aria-selected="true"] {
+    .sui-tab[aria-selected="true"] {
       background: var(--sui-bg);
-      border-color: var(--sui-border);
       color: var(--sui-blue);
-      box-shadow: 0 8px 18px rgba(2, 6, 23, 0.06);
+      box-shadow: var(--sui-shadow);
     }
-
-    .tab:active { transform: translateY(1px); }
-    .tab:focus-visible {
-      outline: 3px solid var(--sui-blue-soft);
-      outline-offset: 2px;
-    }
-
-    /* Controls */
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .iconbtn {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1px solid var(--sui-border);
-      background: var(--sui-surface);
-      color: var(--sui-text);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-
-    .iconbtn:hover { border-color: color-mix(in srgb, var(--sui-blue) 35%, var(--sui-border)); }
-    .iconbtn:active { transform: translateY(1px); }
-    .iconbtn:focus-visible {
-      outline: 3px solid var(--sui-blue-soft);
-      outline-offset: 2px;
-    }
-
-    /* Panels */
-    .panel {
-      display: none;
-      animation: fadeIn 420ms ease both;
-    }
-    .panel[aria-hidden="false"] { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Shared SUI-ish components (demo wiring) */
-    .sui-card {
-      background: var(--sui-surface);
-      border: 1px solid var(--sui-border);
-      border-radius: 16px;
-    }
-
-    .sui-card.elevated {
-      box-shadow: var(--demo-shadow);
-    }
-
-    .dark .sui-card.elevated {
-      box-shadow: var(--demo-shadow-dark);
-    }
-
-    .sui-grid {
-      display: grid;
-      gap: var(--demo-gap);
-    }
-
-    .grid-2 { grid-template-columns: 1fr; }
-    .grid-3 { grid-template-columns: 1fr; }
-    .grid-4 { grid-template-columns: 1fr; }
-
-    @media (min-width: 640px) {
-      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (min-width: 1024px) {
-      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    }
-
-    .pad-16 { padding: 16px; }
-    .pad-20 { padding: 20px; }
-    .pad-24 { padding: 24px; }
-    .pad-28 { padding: 28px; }
-
-    .muted { color: var(--sui-subtext); }
-    .tiny { font-size: 12px; }
-    .xs { font-size: 13px; }
-    .sm { font-size: 14px; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .sui-tab:focus-visible { outline: 3px solid var(--sui-blue-soft); outline-offset: 2px; }
 
     /* Buttons */
     .sui-btn {
       height: 44px;
-      padding: 0 18px;
-      border-radius: 12px;
+      padding: 0 16px;
+      border-radius: var(--sui-radius);
       border: 1px solid var(--sui-border);
       background: var(--sui-surface);
       color: var(--sui-text);
       font-weight: 700;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 10px;
       cursor: pointer;
-      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+      transition: transform var(--sui-duration) var(--sui-ease), background var(--sui-duration) var(--sui-ease), border-color var(--sui-duration) var(--sui-ease);
     }
-
-    .sui-btn:focus-visible {
-      outline: 3px solid var(--sui-blue-soft);
-      outline-offset: 2px;
-    }
-    .sui-btn:active { transform: translateY(1px); }
+    .sui-btn:hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--sui-blue) 35%, var(--sui-border)); }
+    .sui-btn:active { transform: translateY(0); }
+    .sui-btn:focus-visible { outline: 3px solid var(--sui-blue-soft); outline-offset: 2px; }
 
     .sui-btn-primary {
       background: var(--sui-blue);
-      border-color: color-mix(in srgb, var(--sui-blue) 70%, var(--sui-border));
+      border-color: color-mix(in srgb, var(--sui-blue) 60%, var(--sui-border));
       color: #fff;
-      box-shadow: 0 10px 22px rgba(59, 130, 246, 0.28);
+      box-shadow: 0 10px 25px rgba(59,130,246,0.22);
     }
-    .sui-btn-primary:hover {
-      background: var(--sui-blue-hover);
-      border-color: color-mix(in srgb, var(--sui-blue-hover) 70%, var(--sui-border));
+    .sui-btn-primary:hover { background: var(--sui-blue-hover); }
+    .sui-btn-primary:active { background: var(--sui-blue-active); }
+
+    .sui-btn-ghost { background: transparent; }
+    .sui-btn-sm { height: 36px; padding: 0 12px; font-size: 12px; }
+
+    .sui-btn-icon svg { width: 16px; height: 16px; }
+
+    /* Cards */
+    .sui-card {
+      background: var(--sui-surface);
+      border: 1px solid var(--sui-border);
+      border-radius: var(--sui-radius-card);
+      box-shadow: var(--sui-shadow);
+      transition: transform var(--sui-duration) var(--sui-ease), border-color var(--sui-duration) var(--sui-ease);
+    }
+    .sui-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--sui-blue) 18%, var(--sui-border)); }
+    .sui-card-pad { padding: var(--sui-space-5); }
+
+    .sui-card-header {
+      padding: var(--sui-space-5);
+      border-bottom: 1px solid var(--sui-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sui-space-3);
     }
 
-    /* Badge (icon + label, no color alone) */
+    /* Typography */
+    .sui-h1 { font-size: 32px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+    .sui-h2 { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+    .sui-h3 { font-size: 20px; font-weight: 600; line-height: 1.3; }
+    .sui-lead { color: var(--sui-text-secondary); margin-top: var(--sui-space-2); }
+    .sui-muted { color: var(--sui-muted); }
+    .sui-meta {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sui-text-secondary);
+    }
+    .sui-help { color: var(--sui-text-secondary); font-size: 13px; margin-top: var(--sui-space-2); }
+
+    /* Panels */
+    .sui-tab-panel { display: none; padding-top: var(--sui-space-6); }
+    .sui-tab-panel[aria-hidden="false"] { display: block; }
+
+    /* Grids */
+    .sui-grid { display: grid; gap: var(--sui-space-4); }
+    .sui-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .sui-grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .sui-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+    @media (max-width: 980px) {
+      .sui-container { padding: var(--sui-space-5); }
+      .sui-grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .sui-grid-3 { grid-template-columns: 1fr; }
+      .sui-grid-2 { grid-template-columns: 1fr; }
+      .sui-tabs { display: none; }
+    }
+
+    /* Hero */
+    .sui-hero { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sui-space-4); }
+    .sui-hero-actions { display: flex; gap: var(--sui-space-3); flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 980px) {
+      .sui-hero { flex-direction: column; align-items: flex-start; }
+      .sui-hero-actions { justify-content: flex-start; }
+    }
+
+    /* Badges */
     .sui-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
-      border: 1px solid var(--sui-border);
-      background: var(--sui-bg);
-      color: var(--sui-text);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      white-space: nowrap;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--sui-border);
+      background: color-mix(in srgb, var(--sui-surface) 75%, transparent);
+      color: var(--sui-text);
     }
+    .sui-badge-success { background: rgba(34,197,94,0.12); color: var(--sui-success); }
+    .sui-badge-warning { background: rgba(245,158,11,0.12); color: var(--sui-warning); }
+    .sui-badge-error { background: rgba(239,68,68,0.12); color: var(--sui-error-strong); }
+    .sui-badge-info { background: rgba(6,182,212,0.12); color: var(--sui-info); }
+    .sui-badge-blue { background: rgba(59,130,246,0.12); color: var(--sui-blue); }
 
-    .sui-badge-blue {
-      background: var(--sui-blue-soft);
-      border-color: color-mix(in srgb, var(--sui-blue) 20%, var(--sui-border));
-      color: var(--sui-blue);
+    /* Status label (icon + text) */
+    .sui-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-
-    .sui-badge-success {
-      background: color-mix(in srgb, var(--sui-success) 18%, var(--sui-bg));
-      border-color: color-mix(in srgb, var(--sui-success) 24%, var(--sui-border));
-      color: var(--sui-success);
-    }
-
-    .sui-badge-warning {
-      background: color-mix(in srgb, var(--sui-warning) 18%, var(--sui-bg));
-      border-color: color-mix(in srgb, var(--sui-warning) 24%, var(--sui-border));
-      color: var(--sui-warning);
-    }
-
-    .sui-badge-error {
-      background: color-mix(in srgb, var(--sui-error) 18%, var(--sui-bg));
-      border-color: color-mix(in srgb, var(--sui-error) 24%, var(--sui-border));
-      color: var(--sui-error);
-    }
+    .sui-status-icon svg { width: 16px; height: 16px; }
+    .sui-status-success { color: var(--sui-success); }
+    .sui-status-warning { color: var(--sui-warning); }
+    .sui-status-error { color: var(--sui-error-strong); }
 
     /* Table */
-    .sui-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
+    .sui-table-wrapper { overflow-x: auto; }
+    .sui-table { width: 100%; border-collapse: collapse; }
+    .sui-table th, .sui-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--sui-border); }
+    .sui-table th { font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sui-muted); background: var(--sui-bg); }
 
-    .sui-table thead th {
-      text-align: left;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--sui-muted);
-      padding: 14px 16px;
-      background: var(--sui-bg);
-      border-bottom: 1px solid var(--sui-border);
-    }
-
-    .sui-table tbody td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--sui-border);
-      vertical-align: middle;
-    }
-
-    .sui-table tbody tr:hover {
-      background: color-mix(in srgb, var(--sui-blue-soft) 10%, transparent);
-    }
-
-    /* Alerts (icon + title + detail) */
+    /* Alert blocks */
     .sui-alert {
-      display: flex;
-      gap: 12px;
-      padding: 14px;
-      border-radius: 14px;
+      padding: var(--sui-space-4);
+      border-radius: var(--sui-radius-card);
       border: 1px solid var(--sui-border);
       background: var(--sui-bg);
-    }
-
-    .sui-alert strong {
-      display: block;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .sui-alert p {
-      font-size: 12px;
-      color: var(--sui-subtext);
-      line-height: 1.35;
-    }
-
-    /* Page sections */
-    .page-header {
       display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin: 18px 0 22px;
+      gap: var(--sui-space-3);
+      align-items: flex-start;
     }
-
-    @media (min-width: 768px) {
-      .page-header {
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 18px;
-        margin: 22px 0 26px;
-      }
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .sui-alert-icon svg { width: 18px; height: 18px; }
+    .sui-alert-title { font-weight: 800; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .sui-alert-info { color: var(--sui-info); }
+    .sui-alert-warning { color: var(--sui-warning); }
+    .sui-alert-content { color: var(--sui-text); }
+    .sui-alert-content .sui-muted { margin-top: 4px; display: block; }
 
     /* Footer */
-    footer {
-      margin-top: 56px;
-      padding: 28px 16px;
+    .sui-footer {
+      margin-top: var(--sui-space-8);
+      padding: var(--sui-space-6) 0;
       border-top: 1px solid var(--sui-border);
-      background: var(--sui-surface);
-      text-align: center;
       color: var(--sui-muted);
+      text-align: center;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    footer .links {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin-bottom: 12px;
-    }
+    /* Theme toggle */
+    .sui-theme-btn { width: 44px; padding: 0; justify-content: center; }
 
-    footer .links button {
-      background: transparent;
-      border: 0;
-      color: var(--sui-subtext);
-      cursor: pointer;
-      padding: 8px;
-      border-radius: 12px;
-      transition: color 160ms ease, background 160ms ease;
-    }
-    footer .links button:hover {
-      color: var(--sui-blue);
-      background: color-mix(in srgb, var(--sui-blue-soft) 18%, transparent);
-    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: var(--sui-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--sui-border); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--sui-muted); }
 
-    /* Accessible skip link */
-    .skip {
-      position: absolute;
-      left: -999px;
-      top: 8px;
-      background: var(--sui-surface);
-      color: var(--sui-text);
-      border: 1px solid var(--sui-border);
-      border-radius: 12px;
-      padding: 10px 14px;
-      z-index: 9999;
-    }
-    .skip:focus {
-      left: 12px;
-    }
-
-    /* Small helper: visually hidden */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
   </style>
 </head>
-
-<body class="transition-colors">
-  <a class="skip" href="#main">Skip to content</a>
-
-  <!-- Top Nav -->
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand" aria-label="Speyer UI System">
-        <div class="brand-mark" aria-hidden="true">
-          <i data-lucide="layers" width="20" height="20"></i>
+<body>
+  <header class="sui-nav">
+    <div class="sui-nav-inner">
+      <div class="sui-brand">
+        <div class="sui-logo" aria-hidden="true">
+          <!-- Minimal “layers” mark -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sui-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M12 2 2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
         </div>
-        <div class="brand-title">
-          <strong>Speyer UI</strong>
-          <small>v1.0.0</small>
+        <div>
+          <div class="sui-brand-title">Speyer UI <span class="sui-version">v1.0.0</span></div>
         </div>
       </div>
 
-      <!-- Tabs -->
-      <nav class="tabs" aria-label="SUI views">
-        <button
-          id="tab-preview"
-          class="tab"
-          type="button"
-          aria-selected="true"
-          aria-controls="panel-preview"
-        >
-          <i data-lucide="layout-template" width="16" height="16" aria-hidden="true"></i>
-          Preview
-        </button>
+      <div class="sui-tabs" role="tablist" aria-label="Demo sections">
+          <button class="sui-tab" role="tab" aria-selected="true" aria-controls="panel-preview" id="tab-preview">Preview</button>
+          <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-example" id="tab-example">Example Usage</button>
+          <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-designers" id="tab-designers">For Designers</button>
+          <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-ai" id="tab-ai">AI Prompt</button>
+</div>
 
-        <button
-          id="tab-example"
-          class="tab"
-          type="button"
-          aria-selected="false"
-          aria-controls="panel-example"
-        >
-          <i data-lucide="app-window" width="16" height="16" aria-hidden="true"></i>
-          Example Usage
-        </button>
-
-        <button
-          id="tab-prompt"
-          class="tab"
-          type="button"
-          aria-selected="false"
-          aria-controls="panel-prompt"
-        >
-          <i data-lucide="bot" width="16" height="16" aria-hidden="true"></i>
-          AI Prompt
-        </button>
-      </nav>
-
-      <div class="controls">
-        <button id="toggleTheme" class="iconbtn" type="button" aria-label="Toggle dark mode">
-          <span class="sr-only">Toggle dark mode</span>
-          <i data-lucide="moon" width="18" height="18" aria-hidden="true"></i>
-        </button>
-      </div>
+      <button class="sui-btn sui-theme-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <span aria-hidden="true" id="themeIcon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>
+          </svg>
+        </span>
+      </button>
     </div>
   </header>
 
-  <main id="main" class="wrap">
-    <!-- =========================================================
-         PANEL: PREVIEW (DEFAULT)
-         ========================================================= -->
-    <section id="panel-preview" class="panel" aria-hidden="false">
-      <div class="page-header">
-        <div>
-          <h1>Living Specification</h1>
-          <p class="muted" style="margin-top: 10px;">
-            A strict, token-driven UI system focused on clarity, accessibility, and consistency.
-          </p>
-        </div>
+  <main class="sui-container">
 
-        <div class="actions">
-          <button class="sui-btn" type="button">
-            <i data-lucide="share-2" width="16" height="16" aria-hidden="true"></i>
+    <!-- TAB 1: PREVIEW -->
+    <div class="sui-tab-panel" id="panel-preview" role="tabpanel" aria-labelledby="tab-preview" aria-hidden="false">
+      <div class="sui-hero">
+        <div>
+          <h1 class="sui-h1">Living Specification</h1>
+          <p class="sui-lead">A strict, token-driven UI system focused on clarity, accessibility, and consistency.</p>
+        </div>
+        <div class="sui-hero-actions">
+          <button class="sui-btn">
+            <span class="sui-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </span>
             Export
           </button>
-          <button class="sui-btn sui-btn-primary" type="button">
-            <i data-lucide="sparkles" width="16" height="16" aria-hidden="true"></i>
-            Generate UI
-          </button>
+          <input class="sui-btn" style="width: 220px; justify-content: flex-start; font-weight: 600; color: var(--sui-text-secondary);" value="Search tokens…" aria-label="Search tokens" readonly>
         </div>
       </div>
 
-      <div class="sui-grid grid-2">
-        <div class="sui-card pad-24 elevated">
-          <h2>Philosophy</h2>
-          <p class="muted sm" style="margin-top: 10px; line-height: 1.6;">
-            Speyer UI is designed to be easy to read, mobile-first, and predictable. Tokens are the
-            contract. Components are simple, repeatable patterns.
-          </p>
+      <section class="sui-grid sui-grid-2" style="margin-top: var(--sui-space-6);">
+        <div class="sui-card sui-card-pad">
+          <h2 class="sui-h2">Philosophy</h2>
+          <p class="sui-help">Speyer UI is designed to be easy to read, mobile-first, and predictable. Tokens are the contract. Components are simple, repeatable patterns.</p>
 
-          <div class="sui-grid" style="margin-top: 18px; gap: 10px;">
-            <div class="sui-alert" role="note" aria-label="No color alone rule">
-              <i data-lucide="eye" width="18" height="18" aria-hidden="true" style="color: var(--sui-blue); margin-top: 2px;"></i>
-              <div>
-                <strong>No Color Alone</strong>
-                <p>Status must include icon + label, not just color.</p>
+          <div class="sui-grid" style="margin-top: var(--sui-space-4);">
+            <div class="sui-alert" role="note">
+              <div class="sui-alert-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--sui-text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+              <div class="sui-alert-content">
+                <div class="sui-alert-title">No Color Alone</div>
+                <span class="sui-muted">Status must include icon + label, not just color.</span>
               </div>
             </div>
 
-            <div class="sui-alert" role="note" aria-label="Token fidelity rule">
-              <i data-lucide="shield-check" width="18" height="18" aria-hidden="true" style="color: var(--sui-success); margin-top: 2px;"></i>
-              <div>
-                <strong>Token Fidelity</strong>
-                <p>All colors come from <span class="mono">--sui-*</span> variables.</p>
+            <div class="sui-alert" role="note">
+              <div class="sui-alert-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--sui-success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="sui-alert-content">
+                <div class="sui-alert-title">Token Fidelity</div>
+                <span class="sui-muted">All colors come from <code>--sui-*</code> variables.</span>
               </div>
             </div>
 
-            <div class="sui-alert" role="note" aria-label="Geometry rule">
-              <i data-lucide="square" width="18" height="18" aria-hidden="true" style="color: var(--sui-warning); margin-top: 2px;"></i>
-              <div>
-                <strong>Geometry</strong>
-                <p>Buttons/inputs: 12px radius. Cards: 16px radius. 8px grid.</p>
+            <div class="sui-alert" role="note">
+              <div class="sui-alert-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--sui-warning)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M8 12h8"/>
+                </svg>
+              </div>
+              <div class="sui-alert-content">
+                <div class="sui-alert-title">Geometry</div>
+                <span class="sui-muted">Buttons/inputs: 12px radius. Cards: 16px radius. 8px grid.</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="sui-card pad-24 elevated">
-          <h2>Tokens Snapshot</h2>
-          <p class="muted sm" style="margin-top: 10px; line-height: 1.6;">
-            The demo UI consumes your repo’s <span class="mono">sui-tokens.css</span>.
-            Toggle dark mode to validate variable switching.
-          </p>
+        <div class="sui-card sui-card-pad">
+          <h2 class="sui-h2">Tokens Snapshot</h2>
+          <p class="sui-help">The demo UI consumes your repo’s <code>sui-tokens.css</code>. Toggle dark mode to validate variable switching.</p>
 
-          <div class="sui-grid grid-2" style="margin-top: 18px; gap: 12px;">
-            <div class="sui-card pad-16">
-              <div class="tiny" style="font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sui-muted);">
-                Primary
-              </div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 10px;">
-                <div class="mono sm">--sui-blue</div>
-                <div style="width: 40px; height: 18px; border-radius: 10px; background: var(--sui-blue); border: 1px solid var(--sui-border);" aria-label="Blue token swatch"></div>
+          <div class="sui-grid sui-grid-2" style="margin-top: var(--sui-space-4);">
+            <div class="sui-card sui-card-pad" style="padding: var(--sui-space-4);">
+              <div class="sui-meta">Primary</div>
+              <div style="margin-top: 10px; display:flex; align-items:center; justify-content:space-between;">
+                <code style="font-weight:800;">--sui-blue</code>
+                <span style="width:34px;height:18px;border-radius:999px;border:1px solid var(--sui-border); background: var(--sui-blue);"></span>
               </div>
             </div>
-
-            <div class="sui-card pad-16">
-              <div class="tiny" style="font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sui-muted);">
-                Surface
-              </div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 10px;">
-                <div class="mono sm">--sui-surface</div>
-                <div style="width: 40px; height: 18px; border-radius: 10px; background: var(--sui-surface); border: 1px solid var(--sui-border);" aria-label="Surface token swatch"></div>
+            <div class="sui-card sui-card-pad" style="padding: var(--sui-space-4);">
+              <div class="sui-meta">Surface</div>
+              <div style="margin-top: 10px; display:flex; align-items:center; justify-content:space-between;">
+                <code style="font-weight:800;">--sui-surface</code>
+                <span style="width:34px;height:18px;border-radius:999px;border:1px solid var(--sui-border); background: var(--sui-surface);"></span>
               </div>
             </div>
-
-            <div class="sui-card pad-16">
-              <div class="tiny" style="font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sui-muted);">
-                Border
-              </div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 10px;">
-                <div class="mono sm">--sui-border</div>
-                <div style="width: 40px; height: 18px; border-radius: 10px; background: var(--sui-border); border: 1px solid var(--sui-border);" aria-label="Border token swatch"></div>
+            <div class="sui-card sui-card-pad" style="padding: var(--sui-space-4);">
+              <div class="sui-meta">Border</div>
+              <div style="margin-top: 10px; display:flex; align-items:center; justify-content:space-between;">
+                <code style="font-weight:800;">--sui-border</code>
+                <span style="width:34px;height:18px;border-radius:999px;border:1px solid var(--sui-border); background: var(--sui-border);"></span>
               </div>
             </div>
-
-            <div class="sui-card pad-16">
-              <div class="tiny" style="font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sui-muted);">
-                Text
-              </div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 10px;">
-                <div class="mono sm">--sui-text</div>
-                <div style="width: 40px; height: 18px; border-radius: 10px; background: var(--sui-text); border: 1px solid var(--sui-border);" aria-label="Text token swatch"></div>
+            <div class="sui-card sui-card-pad" style="padding: var(--sui-space-4);">
+              <div class="sui-meta">Text</div>
+              <div style="margin-top: 10px; display:flex; align-items:center; justify-content:space-between;">
+                <code style="font-weight:800;">--sui-text</code>
+                <span style="width:34px;height:18px;border-radius:999px;border:1px solid var(--sui-border); background: var(--sui-text);"></span>
               </div>
             </div>
           </div>
 
-          <div class="sui-card pad-16" style="margin-top: 14px;">
-            <div class="tiny" style="font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sui-muted);">
-              Status badges (icon + label)
-            </div>
-
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px;">
+          <div class="sui-card" style="margin-top: var(--sui-space-4); padding: var(--sui-space-4);">
+            <div class="sui-meta">Status Badges (icon + label)</div>
+            <div style="margin-top: 12px; display:flex; flex-wrap: wrap; gap: var(--sui-space-2);">
               <span class="sui-badge sui-badge-success">
-                <i data-lucide="check-circle" width="14" height="14" aria-hidden="true"></i>
+                <span aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                    <path d="M20 6 9 17l-5-5"/>
+                  </svg>
+                </span>
                 Success
               </span>
-
               <span class="sui-badge sui-badge-warning">
-                <i data-lucide="alert-triangle" width="14" height="14" aria-hidden="true"></i>
+                <span aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                </span>
                 Warning
               </span>
-
               <span class="sui-badge sui-badge-error">
-                <i data-lucide="x-circle" width="14" height="14" aria-hidden="true"></i>
+                <span aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                    <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                  </svg>
+                </span>
                 Error
               </span>
-
               <span class="sui-badge sui-badge-blue">
-                <i data-lucide="activity" width="14" height="14" aria-hidden="true"></i>
+                <span aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </span>
                 Stable
               </span>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="sui-card pad-24 elevated" style="margin-top: 18px;">
-        <h2>Components</h2>
-        <p class="muted sm" style="margin-top: 10px; line-height: 1.6;">
-          Components are intentionally simple. Avoid cleverness; prioritize readability and predictable structure.
-        </p>
+      <section style="margin-top: var(--sui-space-7);">
+        <h2 class="sui-h2">Components</h2>
+        <p class="sui-help">Components are intentionally simple. Avoid cleverness; prioritize readability and predictable structure.</p>
 
-        <div class="sui-grid grid-3" style="margin-top: 18px;">
-          <div class="sui-card pad-20">
-            <h3>Buttons</h3>
-            <p class="muted xs" style="margin-top: 8px; line-height: 1.5;">
-              44px height, 12px radius, strong focus ring.
-            </p>
-            <div class="actions" style="margin-top: 14px;">
-              <button class="sui-btn" type="button">
-                <i data-lucide="arrow-right" width="16" height="16" aria-hidden="true"></i>
-                Secondary
-              </button>
-              <button class="sui-btn sui-btn-primary" type="button">
-                <i data-lucide="zap" width="16" height="16" aria-hidden="true"></i>
-                Primary
-              </button>
+        <div class="sui-grid sui-grid-3" style="margin-top: var(--sui-space-4);">
+          <div class="sui-card sui-card-pad">
+            <h3 class="sui-h3">Buttons</h3>
+            <p class="sui-help">44px height, 12px radius, strong focus ring.</p>
+            <div style="margin-top: var(--sui-space-3); display:flex; gap: var(--sui-space-2); flex-wrap: wrap;">
+              <button class="sui-btn sui-btn-primary">Primary</button>
+              <button class="sui-btn">Secondary</button>
+              <button class="sui-btn sui-btn-ghost">Ghost</button>
             </div>
           </div>
 
-          <div class="sui-card pad-20">
-            <h3>Cards</h3>
-            <p class="muted xs" style="margin-top: 8px; line-height: 1.5;">
-              Surface + border only. Elevation is optional and subtle.
-            </p>
-            <div class="sui-card pad-16" style="margin-top: 14px;">
-              <div class="tiny" style="font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sui-muted);">
-                Example
+          <div class="sui-card sui-card-pad">
+            <h3 class="sui-h3">Cards</h3>
+            <p class="sui-help">16px radius, subtle shadow, clear border.</p>
+            <div class="sui-alert" style="margin-top: var(--sui-space-3);">
+              <div class="sui-alert-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--sui-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2 2 7l10 5 10-5-10-5z"/>
+                  <path d="M2 17l10 5 10-5"/>
+                </svg>
               </div>
-              <p class="muted sm" style="margin-top: 8px; line-height: 1.55;">
-                This nested card demonstrates composability without new tokens.
-              </p>
+              <div class="sui-alert-content">
+                <div class="sui-alert-title">Predictable Structure</div>
+                <span class="sui-muted">Same spacing rules everywhere.</span>
+              </div>
             </div>
           </div>
 
-          <div class="sui-card pad-20">
-            <h3>Alerts</h3>
-            <p class="muted xs" style="margin-top: 8px; line-height: 1.5;">
-              Always icon + title + detail. No color-only meaning.
-            </p>
-            <div class="sui-grid" style="margin-top: 14px; gap: 10px;">
-              <div class="sui-alert">
-                <i data-lucide="info" width="18" height="18" aria-hidden="true" style="color: var(--sui-info); margin-top: 2px;"></i>
-                <div>
-                  <strong>Info</strong>
-                  <p>Use for neutral system guidance.</p>
-                </div>
+          <div class="sui-card sui-card-pad">
+            <h3 class="sui-h3">Status</h3>
+            <p class="sui-help">Always icon + label.</p>
+            <div style="margin-top: var(--sui-space-3); display:grid; gap: var(--sui-space-2);">
+              <div class="sui-status sui-status-success">
+                <span class="sui-status-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5"/>
+                  </svg>
+                </span>
+                Passed
               </div>
-              <div class="sui-alert">
-                <i data-lucide="alert-triangle" width="18" height="18" aria-hidden="true" style="color: var(--sui-warning); margin-top: 2px;"></i>
-                <div>
-                  <strong>Warning</strong>
-                  <p>Highlight a potential problem early.</p>
-                </div>
+              <div class="sui-status sui-status-warning">
+                <span class="sui-status-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                </span>
+                Needs Review
+              </div>
+              <div class="sui-status sui-status-error">
+                <span class="sui-status-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                  </svg>
+                </span>
+                Failed
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <!-- =========================================================
-         PANEL: EXAMPLE USAGE
-         ========================================================= -->
-    <section id="panel-example" class="panel" aria-hidden="true">
-      <div class="page-header">
+    <!-- TAB 2: EXAMPLE USAGE -->
+    <div class="sui-tab-panel" id="panel-example" role="tabpanel" aria-labelledby="tab-example" aria-hidden="true">
+      <div class="sui-hero">
         <div>
-          <h1>Example Usage</h1>
-          <p class="muted" style="margin-top: 10px;">
-            A sample dashboard-style screen built strictly from SUI tokens and demo wiring.
-          </p>
+          <h1 class="sui-h1">Example Usage</h1>
+          <p class="sui-lead">A realistic dashboard built strictly with tokens + simple, repeatable components (no Tailwind, no hard-coded colors).</p>
         </div>
-
-        <div class="actions">
-          <button class="sui-btn" type="button">
-            <i data-lucide="share-2" width="16" height="16" aria-hidden="true"></i>
+        <div class="sui-hero-actions">
+          <button class="sui-btn sui-btn-ghost">
+            <span class="sui-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </span>
             Export
           </button>
-          <button class="sui-btn sui-btn-primary" type="button">
-            <i data-lucide="plus" width="16" height="16" aria-hidden="true"></i>
+          <button class="sui-btn sui-btn-primary">
+            <span class="sui-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </span>
             New Instance
           </button>
         </div>
       </div>
 
       <!-- Stats -->
-      <div class="sui-grid grid-4">
-        <div class="sui-card pad-20 elevated" style="display:flex; flex-direction:column; gap: 10px;">
-          <div class="tiny" style="font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sui-subtext);">
-            Network Health
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px;">
-            <div style="font-size: 30px; font-weight: 800;">99.9%</div>
+      <section class="sui-grid sui-grid-4" aria-label="Key metrics">
+        <div class="sui-card sui-card-pad">
+          <div class="sui-meta">Network Health</div>
+          <div class="sui-card-row">
+            <div class="sui-kpi">99.9%</div>
             <span class="sui-badge sui-badge-blue">
-              <i data-lucide="activity" width="14" height="14" aria-hidden="true"></i>
-              Stable
+              <span aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </span>
+              STABLE
             </span>
           </div>
+          <div class="sui-help">SLA across the last 24 hours.</div>
         </div>
 
-        <div class="sui-card pad-20 elevated" style="display:flex; flex-direction:column; gap: 10px;">
-          <div class="tiny" style="font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sui-subtext);">
-            Active Users
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px;">
-            <div style="font-size: 30px; font-weight: 800;">1,284</div>
+        <div class="sui-card sui-card-pad">
+          <div class="sui-meta">Active Users</div>
+          <div class="sui-card-row">
+            <div class="sui-kpi">1,284</div>
             <span class="sui-badge sui-badge-success">
-              <i data-lucide="trending-up" width="14" height="14" aria-hidden="true"></i>
+              <span aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+                </svg>
+              </span>
               +12%
             </span>
           </div>
+          <div class="sui-help">Week-over-week growth.</div>
         </div>
 
-        <div class="sui-card pad-20 elevated" style="display:flex; flex-direction:column; gap: 10px;">
-          <div class="tiny" style="font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sui-subtext);">
-            A11y Score
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px;">
-            <div style="font-size: 30px; font-weight: 800;">AA+</div>
+        <div class="sui-card sui-card-pad">
+          <div class="sui-meta">A11y Score</div>
+          <div class="sui-card-row">
+            <div class="sui-kpi">AA+</div>
             <span class="sui-badge sui-badge-success">
-              <i data-lucide="check-circle" width="14" height="14" aria-hidden="true"></i>
-              Passed
+              <span aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+              </span>
+              PASSED
             </span>
           </div>
+          <div class="sui-help">No color-alone for statuses.</div>
         </div>
 
-        <div class="sui-card pad-20 elevated" style="display:flex; flex-direction:column; gap: 10px;">
-          <div class="tiny" style="font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sui-subtext);">
-            Sync Rate
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px;">
-            <div style="font-size: 30px; font-weight: 800;">2ms</div>
-            <span class="sui-badge sui-badge-blue">
-              <i data-lucide="zap" width="14" height="14" aria-hidden="true"></i>
-              Fast
+        <div class="sui-card sui-card-pad">
+          <div class="sui-meta">Sync Rate</div>
+          <div class="sui-card-row">
+            <div class="sui-kpi">2ms</div>
+            <span class="sui-badge sui-badge-info">
+              <span aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+              </span>
+              FAST
             </span>
           </div>
+          <div class="sui-help">Median write acknowledgement.</div>
         </div>
-      </div>
+      </section>
 
       <!-- Main row -->
-      <div class="sui-grid grid-3" style="margin-top: 16px;">
-        <!-- Table -->
-        <div class="sui-card elevated" style="grid-column: 1 / -1;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding: 18px 20px; border-bottom: 1px solid var(--sui-border);">
-            <h3>Recent Deployments</h3>
-            <button class="sui-btn" type="button" style="height: 36px; padding: 0 12px; border-radius: 10px; font-size: 12px;">
-              <i data-lucide="arrow-right" width="14" height="14" aria-hidden="true"></i>
-              View All
-            </button>
+      <section class="sui-grid sui-grid-3" aria-label="Dashboard content">
+        <div class="sui-card" style="grid-column: 1 / -1;">
+          <div class="sui-card-header">
+            <div>
+              <h2 class="sui-h2" style="margin:0;">Recent Deployments</h2>
+              <p class="sui-help" style="margin:4px 0 0;">Statuses use icon + label (never color alone).</p>
+            </div>
+            <button class="sui-btn sui-btn-ghost sui-btn-sm">View all</button>
           </div>
 
-          <div style="overflow-x:auto;">
-            <table class="sui-table" aria-label="Recent deployments">
+          <div class="sui-table-wrapper" role="region" aria-label="Recent deployments table" tabindex="0">
+            <table class="sui-table">
               <thead>
                 <tr>
-                  <th>Project</th>
-                  <th>Status</th>
-                  <th>Owner</th>
+                  <th scope="col">Project</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">Updated</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="font-weight: 800;">Nexus Alpha</td>
+                  <td><strong>Nexus Alpha</strong></td>
                   <td>
-                    <span class="sui-badge sui-badge-success">
-                      <i data-lucide="check-circle" width="14" height="14" aria-hidden="true"></i>
-                      Deployed
+                    <span class="sui-status sui-status-success">
+                      <span class="sui-status-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20 6 9 17l-5-5"/>
+                        </svg>
+                      </span>
+                      DEPLOYED
                     </span>
                   </td>
-                  <td class="muted">Adrian Speyer</td>
+                  <td>Adrian Speyer</td>
+                  <td class="sui-muted">2h ago</td>
                 </tr>
                 <tr>
-                  <td style="font-weight: 800;">Beta Horizon</td>
+                  <td><strong>Beta Horizon</strong></td>
                   <td>
-                    <span class="sui-badge sui-badge-warning">
-                      <i data-lucide="alert-triangle" width="14" height="14" aria-hidden="true"></i>
-                      Pending
+                    <span class="sui-status sui-status-warning">
+                      <span class="sui-status-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                      </span>
+                      PENDING
                     </span>
                   </td>
-                  <td class="muted">Design Team</td>
+                  <td>Design Team</td>
+                  <td class="sui-muted">Yesterday</td>
                 </tr>
                 <tr>
-                  <td style="font-weight: 800;">Legacy Core</td>
+                  <td><strong>Legacy Core</strong></td>
                   <td>
-                    <span class="sui-badge sui-badge-error">
-                      <i data-lucide="x-circle" width="14" height="14" aria-hidden="true"></i>
-                      Failed
+                    <span class="sui-status sui-status-error">
+                      <span class="sui-status-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                      </span>
+                      FAILED
                     </span>
                   </td>
-                  <td class="muted">System Admin</td>
+                  <td>System Admin</td>
+                  <td class="sui-muted">3d ago</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- Alerts column -->
-        <div class="sui-grid" style="grid-column: 1 / -1; gap: 16px;">
-          <div class="sui-card pad-24 elevated">
-            <h3>System Alerts</h3>
-            <div class="sui-grid" style="margin-top: 14px; gap: 10px;">
-              <div class="sui-alert" role="status" aria-label="Security patch alert">
-                <i data-lucide="info" width="18" height="18" aria-hidden="true" style="color: var(--sui-info); margin-top: 2px;"></i>
-                <div>
-                  <strong>Security Patch</strong>
-                  <p>A new version of SUI Core is ready.</p>
-                </div>
-              </div>
+        <div class="sui-card sui-card-pad" style="grid-column: 1 / -1;">
+          <h2 class="sui-h2" style="margin:0 0 var(--sui-space-3);">System Alerts</h2>
 
-              <div class="sui-alert" role="status" aria-label="Contrast warning alert">
-                <i data-lucide="alert-triangle" width="18" height="18" aria-hidden="true" style="color: var(--sui-warning); margin-top: 2px;"></i>
-                <div>
-                  <strong>Contrast Warning</strong>
-                  <p>Footer link contrast is below 4.5:1.</p>
-                </div>
+          <div class="sui-grid sui-grid-2">
+            <div class="sui-alert sui-alert-info" role="status" aria-label="Security patch alert">
+              <div class="sui-alert-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+              </div>
+              <div class="sui-alert-content">
+                <div class="sui-alert-title">Security Patch</div>
+                <div class="sui-muted">A new version of SUI Core is ready.</div>
+              </div>
+            </div>
+
+            <div class="sui-alert sui-alert-warning" role="status" aria-label="Contrast warning alert">
+              <div class="sui-alert-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </div>
+              <div class="sui-alert-content">
+                <div class="sui-alert-title">Contrast Warning</div>
+                <div class="sui-muted">Footer link contrast is below 4.5:1.</div>
               </div>
             </div>
           </div>
 
-          <div class="sui-card pad-28 elevated" style="
-            border-style: dashed;
-            border-color: color-mix(in srgb, var(--sui-blue) 26%, var(--sui-border));
-            background: linear-gradient(135deg,
-              color-mix(in srgb, var(--sui-blue-soft) 55%, transparent),
-              transparent 60%);
-          ">
-            <h3>A11y Check</h3>
-            <p class="muted xs" style="margin-top: 10px; line-height: 1.55;">
-              Ensure all imagery has alternative text and charts are readable without color.
-            </p>
-
-            <button class="sui-btn" type="button" style="width: 100%; margin-top: 14px; height: 44px;">
-              <i data-lucide="shield" width="16" height="16" aria-hidden="true"></i>
-              Run Compliance Test
-            </button>
+          <div class="sui-card" style="margin-top: var(--sui-space-4); padding: var(--sui-space-4); border-style: dashed;">
+            <div class="sui-card-row">
+              <div>
+                <h3 class="sui-h3" style="margin:0 0 6px;">A11y Check</h3>
+                <p class="sui-help" style="margin:0;">Ensure imagery has alt text and charts stay readable without color.</p>
+              </div>
+              <button class="sui-btn sui-btn-primary">Run compliance test</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <!-- =========================================================
-         PANEL: AI PROMPT
-         ========================================================= -->
-    <section id="panel-prompt" class="panel" aria-hidden="true">
-      <div class="page-header" style="justify-content:center; text-align:center;">
-        <div style="max-width: 840px; margin: 0 auto;">
-          <div class="sui-card pad-20" style="display:inline-flex; border-radius: 18px; align-items:center; justify-content:center;">
-            <i data-lucide="bot" width="30" height="30" aria-hidden="true" style="color: var(--sui-blue);"></i>
-          </div>
-          <h1 style="margin-top: 14px;">AI System Integration</h1>
-          <p class="muted" style="margin-top: 10px; font-size: 16px; line-height: 1.6;">
-            Use SUI as a strict system instruction. Always build with tokens and the “no color alone” rule.
-          </p>
+    <!-- TAB 2: FOR DESIGNERS -->
+    <div class="sui-tab-panel" id="panel-designers" role="tabpanel" aria-labelledby="tab-designers" aria-hidden="true">
+      <h1 class="sui-h1">For Designers</h1>
+      <p class="sui-lead">A practical handoff format: tokens, spacing, components, and accessibility rules — without ambiguity.</p>
+
+      <div class="sui-grid sui-grid-2" style="margin-top: var(--sui-space-6);">
+        <div class="sui-card sui-card-pad">
+          <h2 class="sui-h2">Design Rules</h2>
+          <ul style="margin-top: var(--sui-space-3); padding-left: 18px; color: var(--sui-text-secondary);">
+            <li><strong>Mobile-first</strong>: layout collapses cleanly without “special cases”.</li>
+            <li><strong>8px grid</strong>: spacing is predictable across screens.</li>
+            <li><strong>Token-only colors</strong>: no one-off hex values.</li>
+            <li><strong>Readable typography</strong>: Inter 400/600/700 only.</li>
+          </ul>
         </div>
-      </div>
 
-      <div class="sui-card elevated" style="overflow:hidden;">
-        <div style="padding: 18px 20px; border-bottom: 1px solid var(--sui-border); display:flex; align-items:center; justify-content:space-between; gap: 12px;">
-          <div style="display:flex; align-items:center; gap: 10px;">
-            <span style="width: 10px; height: 10px; border-radius: 999px; background: var(--sui-success); box-shadow: 0 0 0 6px color-mix(in srgb, var(--sui-success) 18%, transparent);"></span>
-            <span class="tiny" style="font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sui-subtext);">
-              Current SUI Protocol
+        <div class="sui-card sui-card-pad">
+          <h2 class="sui-h2">Color Blind Safety</h2>
+          <p class="sui-help">Designed for red/green color blindness: statuses never rely on color alone. Every state has an icon + label, and contrast is kept high for text and interactive elements.</p>
+
+          <div style="margin-top: var(--sui-space-3); display:flex; flex-wrap: wrap; gap: var(--sui-space-2);">
+            <span class="sui-badge sui-badge-success">
+              <span aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+              </span>
+              Success
+            </span>
+            <span class="sui-badge sui-badge-warning">
+              <span aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                  <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </span>
+              Warning
+            </span>
+            <span class="sui-badge sui-badge-error">
+              <span aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                  <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+              </span>
+              Error
             </span>
           </div>
-
-          <button id="copyPromptBtn" class="sui-btn sui-btn-primary" type="button" style="height: 40px; padding: 0 14px; border-radius: 12px; font-size: 12px;">
-            <i data-lucide="copy" width="14" height="14" aria-hidden="true"></i>
-            <span id="copyPromptLabel">Copy System Prompt</span>
-          </button>
-        </div>
-
-        <div style="padding: 20px;">
-          <div class="sui-card pad-20" style="background: var(--sui-bg); border-color: var(--sui-border);">
-            <pre id="promptText" class="mono sm" style="margin: 0; white-space: pre-wrap; line-height: 1.65;">I am using the Speyer UI System (SUI). Strictly follow these constraints:
-
-1) Tokens only:
-   - Use ONLY CSS variables defined in sui-tokens.css (e.g., --sui-bg, --sui-surface, --sui-border, --sui-blue, --sui-blue-hover, --sui-blue-soft, --sui-text, --sui-subtext, --sui-muted, --sui-success, --sui-warning, --sui-error, --sui-info).
-   - Do NOT use arbitrary hex colors in component styling.
-
-2) Typography (strict):
-   - Font: Inter
-   - Allowed weights: 400, 600, 700 only
-   - H1: 32px / 700
-   - H2: 24px / 600
-   - H3: 20px / 600
-
-3) Accessibility (non-negotiable):
-   - No color alone. Every status MUST include an icon + text label.
-   - Maintain strong contrast and readable spacing.
-   - Use focus-visible outlines (3px) with --sui-blue-soft.
-
-4) Geometry:
-   - Buttons/inputs: 12px radius, 44px height
-   - Cards: 16px radius
-   - Use an 8px spacing grid
-
-5) Output expectations:
-   - Mobile-first layout, responsive breakpoints
-   - Simple, predictable components
-   - Avoid “clever” UI; prioritize clarity and consistency</pre>
-          </div>
-
-          <div class="sui-grid grid-2" style="margin-top: 16px;">
-            <div class="sui-card pad-20">
-              <h3 style="font-size: 14px;">How to Prompt</h3>
-              <p class="muted xs" style="margin-top: 8px; line-height: 1.55;">
-                Paste the protocol, then describe your screen. Example: “Build a settings page in SUI with profile, security, and notifications.”
-              </p>
-            </div>
-
-            <div class="sui-card pad-20">
-              <h3 style="font-size: 14px;">Maintaining Token Integrity</h3>
-              <p class="muted xs" style="margin-top: 8px; line-height: 1.55;">
-                Tell the AI: “Always use SUI variables. Do not introduce new colors or Tailwind defaults.”
-              </p>
-            </div>
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- TAB 3: AI PROMPT -->
+    <div class="sui-tab-panel" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" aria-hidden="true">
+      <h1 class="sui-h1">AI Prompt</h1>
+      <p class="sui-lead">Use this as a system instruction when generating UI so components stay consistent and accessible.</p>
+
+      <div class="sui-card sui-card-pad" style="margin-top: var(--sui-space-6);">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap: var(--sui-space-3); flex-wrap: wrap;">
+          <div class="sui-meta">Current SUI Protocol</div>
+          <button class="sui-btn sui-btn-primary sui-btn-sm" id="copyPromptBtn">Copy system prompt</button>
+        </div>
+
+        <pre id="promptText" style="margin-top: var(--sui-space-4); white-space: pre-wrap; background: var(--sui-bg); border: 1px solid var(--sui-border); padding: var(--sui-space-4); border-radius: var(--sui-radius-card); overflow:auto; font-size: 13px; line-height: 1.6; color: var(--sui-text);"><code>I am using the Speyer UI System (SUI). Strictly follow these constraints:
+
+1) Tokens are the contract. All colors MUST come from ./sui-tokens.css variables (no one-off hex values).
+2) Typography: Inter weights 400/600/700 only. H1 32px, H2 24px, H3 20px.
+3) Geometry: Buttons/inputs radius 12px, cards radius 16px, 8px spacing grid.
+4) Accessibility: No status uses color alone — every state includes an icon + text label.
+5) Dark mode: Use data-theme="dark" on the root element and rely on tokens for switching.
+
+Build simple, readable UI. Avoid cleverness. Prioritize clarity and predictability.
+
+Repo token file from this URL:
+https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
+
+Use the CSS custom properties defined in that file.</code></pre>
+
+        <p class="sui-help" style="margin-top: var(--sui-space-3);">Tip: include “red/green color blindness safe” as a hard requirement — then enforce icon + label everywhere.</p>
+      </div>
+    </div>
+
+    <div class="sui-footer">
+      Speyer UI System • v1.0.0 • MIT License
+      <div style="margin-top: var(--sui-space-3); display:flex; justify-content:center; gap: var(--sui-space-3);">
+        <a href="#" aria-label="GitHub" style="color: inherit;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 19c-4 1.5-4-2.5-5-3m10 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 18 4.77 5.07 5.07 0 0 0 17.91 1S16.73.65 14 2.48a13.38 13.38 0 0 0-5 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   </main>
 
-  <footer>
-    <div class="links" aria-label="social links">
-      <button type="button" aria-label="GitHub">
-        <i data-lucide="github" width="18" height="18" aria-hidden="true"></i>
-      </button>
-      <button type="button" aria-label="Twitter/X">
-        <i data-lucide="twitter" width="18" height="18" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="tiny" style="font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase;">
-      Speyer UI System • v1.0.0 • MIT License
-    </div>
-  </footer>
-
   <script>
-    // Icons
-    lucide.createIcons();
-
-    // Theme toggle (adds/removes .dark on <html>)
-    const themeBtn = document.getElementById("toggleTheme");
+    // ---- Theme (token-driven) ----
     const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
 
-    // If user has system preference and no explicit selection, keep default (light).
-    // This respects "Preview should be default" without forcing dark.
-    themeBtn.addEventListener("click", () => {
-      root.classList.toggle("dark");
-      // Swap icon for clarity
-      themeBtn.innerHTML = root.classList.contains("dark")
-        ? '<span class="sr-only">Toggle dark mode</span><i data-lucide="sun" width="18" height="18" aria-hidden="true"></i>'
-        : '<span class="sr-only">Toggle dark mode</span><i data-lucide="moon" width="18" height="18" aria-hidden="true"></i>';
-      lucide.createIcons();
-    });
+    function setTheme(mode) {
+      if (mode === 'dark') root.setAttribute('data-theme', 'dark');
+      else root.removeAttribute('data-theme');
 
-    // Tabs
-    const tabs = [
-      { tab: "tab-preview", panel: "panel-preview" },
-      { tab: "tab-example", panel: "panel-example" },
-      { tab: "tab-prompt", panel: "panel-prompt" },
-    ];
-
-    function setActive(tabId) {
-      tabs.forEach(({ tab, panel }) => {
-        const t = document.getElementById(tab);
-        const p = document.getElementById(panel);
-        const active = tab === tabId;
-        t.setAttribute("aria-selected", active ? "true" : "false");
-        p.setAttribute("aria-hidden", active ? "false" : "true");
-      });
+      themeIcon.innerHTML = mode === 'dark'
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>';
     }
 
-    tabs.forEach(({ tab }) => {
-      document.getElementById(tab).addEventListener("click", () => setActive(tab));
+    // Persist theme
+    const savedTheme = localStorage.getItem('sui-theme');
+    if (savedTheme === 'dark') setTheme('dark');
+
+    themeBtn.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      setTheme(next);
+      localStorage.setItem('sui-theme', next === 'dark' ? 'dark' : 'light');
     });
 
-    // Default: Preview is active (already in markup), but keep it explicit for safety.
-    setActive("tab-preview");
+    // ---- Tabs ----
+    const tabs = [...document.querySelectorAll('.sui-tab')];
+    const panels = [...document.querySelectorAll('.sui-tab-panel')];
 
-    // Copy prompt
-    const copyBtn = document.getElementById("copyPromptBtn");
-    const copyLabel = document.getElementById("copyPromptLabel");
-    const promptEl = document.getElementById("promptText");
+    function selectTab(tabEl) {
+      tabs.forEach(t => t.setAttribute('aria-selected', t === tabEl ? 'true' : 'false'));
+      panels.forEach(p => p.setAttribute('aria-hidden', p.id === tabEl.getAttribute('aria-controls') ? 'false' : 'true'));
+      tabEl.focus();
+    }
 
-    copyBtn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(promptEl.innerText);
-        const original = copyLabel.innerText;
-        copyLabel.innerText = "Copied!";
-        setTimeout(() => (copyLabel.innerText = original), 1600);
-      } catch (e) {
-        const original = copyLabel.innerText;
-        copyLabel.innerText = "Copy failed";
-        setTimeout(() => (copyLabel.innerText = original), 1600);
-      }
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', (e) => {
+        const i = tabs.indexOf(tab);
+        if (e.key === 'ArrowRight') selectTab(tabs[(i + 1) % tabs.length]);
+        if (e.key === 'ArrowLeft') selectTab(tabs[(i - 1 + tabs.length) % tabs.length]);
+      });
+    });
+
+    // ---- Copy prompt ----
+    const copyBtn = document.getElementById('copyPromptBtn');
+    copyBtn.addEventListener('click', async () => {
+      const text = document.getElementById('promptText').innerText;
+      await navigator.clipboard.writeText(text);
+      const original = copyBtn.textContent;
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => copyBtn.textContent = original, 1600);
     });
   </script>
 </body>
