@@ -5,7 +5,7 @@ A lightweight design system built around four constraints:
 1. **Accessibility is mandatory, not optional.** WCAG 2.1 AA is the baseline, tested and documented.
 2. **No build tools required.** Three files, drop them in, it works.
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
-4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
+4. **Status is never communicated by colour alone.** Every badge, alert, and indicator requires icon + text.
 
 45KB minified. Zero required dependencies. Works with any framework or none.
 
@@ -17,13 +17,11 @@ Built for internal tools, SaaS dashboards, and lightweight web applications.
 
 ## Why This Exists
 
-I'm color blind. When I started using AI coding assistants to build web applications, every tool produced interfaces that relied on color to communicate status — green for success, red for error, with no icons, no labels, nothing else. I'd ship a dashboard and realize I couldn't tell which rows were active and which had failed.
+I'm colour blind. When I started using AI coding assistants to build web applications, every project was inconsistent and depended on the AI's decisions. Sometimes it produced interfaces that relied on colour to communicate status, or readability and contrast were way off. I got tired of having to manually go back and fix things and thought there had to be a better way.
 
-I asked the AI to "make it accessible." It added some ARIA labels and moved on. The colors stayed. The pattern stayed.
+So I built SUI for myself — a system where the components themselves won't let you skip accessibility and understood what the expectation was rather than guessing. Most importantly, it ensures things like you can't create a success badge without an icon and a label. You can't build an alert without a text description. The constraint is structural, not aspirational.
 
-So I built SUI — a system where the components themselves won't let you skip accessibility. You can't create a success badge without an icon and a label. You can't build an alert without a text description. The constraint is structural, not aspirational.
-
-I use this for my own work. I'm sharing it because if you're color blind, or you build for people who are, or you just think UI should work for everyone without a 200MB `node_modules` folder — this might be useful to you too.
+I now use this for my own work. I'm sharing it because if you're colour blind, or just want a nice, cool-looking UI system that works easily as you vibe code without a 200MB `node_modules` folder — this might be useful to you too.
 
 — [Adrian Speyer](https://github.com/adrianspeyer)
 
@@ -81,7 +79,7 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
-| `sui-tokens.css` | Design tokens (colors, spacing, typography, shadows) | 4KB | Yes |
+| `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | 4KB | Yes |
 | `sui-components.css` | Component classes built from tokens | 32KB | Yes |
 | `sui.js` | Interactive behaviors (modals, toasts, dropdowns) | 9KB | **No** |
 
@@ -101,7 +99,7 @@ The SUI JavaScript toolkit checks for `typeof lucide !== 'undefined'` in exactly
 
 ## Accessibility Evidence
 
-SUI claims WCAG 2.1 AA compliance. Here are the receipts.
+Here is SUI vs WCAG 2.1 AA compliance. 
 
 ### Contrast Ratios (Light Mode)
 
@@ -154,7 +152,7 @@ These limitations are documented, not hidden. SUI achieves AA for body text, hea
 | Tooltip | Focus trigger shows | — | — | — |
 | Pagination | Focus each button | Navigate | — | — |
 
-### Color-Blind Design
+### Colour-Blind Design
 
 SUI uses red and green hues for success/error states. These hues are **never the only signal.** Every status pattern includes:
 
@@ -186,11 +184,11 @@ Toggle with JavaScript: `SUI.theme.toggle()` or `SUI.theme.set('dark')`.
 
 ---
 
-## Color System
+## Colour System
 
-All colors are CSS custom properties with the `--sui-` prefix. Every color has light and dark mode values defined in three blocks: `:root`, `[data-theme="dark"]`, and `@media (prefers-color-scheme: dark)`.
+All colours are CSS custom properties with the `--sui-` prefix. Every color has light and dark mode values defined in three blocks: `:root`, `[data-theme="dark"]`, and `@media (prefers-color-scheme: dark)`.
 
-### Status Colors
+### Status Colours
 
 Each status has three tokens: base (icons), strong (text on soft backgrounds), soft (backgrounds).
 
@@ -274,7 +272,7 @@ Modifiers: `sui-badge-outline` · `sui-badge-sm` · `sui-badge-dot` · `sui-badg
 
 `sui-avatar` · `sui-avatar-sm` (32px) · `sui-avatar-md` (40px) · `sui-avatar-lg` (56px) · `sui-avatar-group`
 
-No images by design. Deterministic colors from initials via `sui.js`. Privacy-friendly, no broken states, no CDN dependency.
+No images by design. Deterministic colours from initials via `sui.js`. Privacy-friendly, no broken states, no CDN dependency.
 
 ### Progress Bars
 
@@ -417,7 +415,7 @@ SUI.toast.success('Saved!', 'Details here')    // Auto-dismiss, stackable
 SUI.toast.error('Failed', 'Try again')
 SUI.dropdown.toggle(element)                   // Click toggle, outside-click close
 SUI.copy.text('string')                        // Clipboard with fallback
-SUI.avatar.colorFor('AS')                      // Deterministic color from initials
+SUI.avatar.colorFor('AS')                      // Deterministic colour from initials
 ```
 
 ---
@@ -436,7 +434,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/sui-tokens.css">
 ```
 
-Replace `@2.0.0` with any version tag. Use exact versions in production, not `@main`.
+Replace `@2.0.1` with any version tag. Use exact versions in production, not `@main`.
 
 ---
 
@@ -494,7 +492,7 @@ Then create a [GitHub Release](https://github.com/adrianspeyer/speyer-ui/release
 
 - [ ] Light mode contrast meets documented levels
 - [ ] Dark mode contrast meets documented levels
-- [ ] Color blindness simulation tested (Chrome DevTools → Rendering)
+- [ ] Colour blindness simulation tested (Chrome DevTools → Rendering)
 - [ ] All status indicators include text + icon
 - [ ] Mobile layout verified (320px minimum)
 - [ ] Keyboard navigation works for all interactive elements
