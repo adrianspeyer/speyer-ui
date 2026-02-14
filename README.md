@@ -101,7 +101,7 @@ The SUI JavaScript toolkit checks for `typeof lucide !== 'undefined'` in exactly
 
 ## Accessibility Evidence
 
-SUI claims WCAG 2.1 AA compliance. Here are the receipts.
+Here is SUI vs WCAG 2.1 AA compliance. 
 
 ### Contrast Ratios (Light Mode)
 
