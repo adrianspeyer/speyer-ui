@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speyer UI System — Design System Demo</title>
+  <meta name="description" content="A lightweight, accessible design system for building clear, modern web applications. Made in Canada with love.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sui-blue-primary: #3B82F6;
+      --sui-blue-hover: #2563EB;
+      --sui-blue-active: #1E40AF;
+      --sui-blue-soft: #DBEAFE;
+      --sui-blue-focus: #93C5FD;
+      --sui-bg-primary: #F9FBFD;
+      --sui-bg-card: #FFFFFF;
+      --sui-bg-elevated: #F1F5F9;
+      --sui-border: #E5EDF5;
+      --sui-text-primary: #0F172A;
+      --sui-text-secondary: #475569;
+      --sui-text-muted: #94A3B8;
+      --sui-text-inverse: #FFFFFF;
+      --sui-success: #22C55E;
+      --sui-success-strong: #15803D;
+      --sui-warning: #F59E0B;
+      --sui-error: #EF4444;
+      --sui-error-strong: #B91C1C;
+      --sui-info: #06B6D4;
+      --sui-font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+      --sui-text-h1: 32px;
+      --sui-text-h2: 24px;
+      --sui-text-h3: 20px;
+      --sui-text-body: 16px;
+      --sui-text-small: 14px;
+      --sui-text-meta: 12px;
+      --sui-weight-regular: 400;
+      --sui-weight-semibold: 600;
+      --sui-weight-bold: 700;
+      --sui-leading-body: 1.5;
+      --sui-leading-heading: 1.3;
+      --sui-space-1: 4px;
+      --sui-space-2: 8px;
+      --sui-space-3: 16px;
+      --sui-space-4: 24px;
+      --sui-space-5: 32px;
+      --sui-space-6: 48px;
+      --sui-radius-sm: 8px;
+      --sui-radius-md: 12px;
+      --sui-radius-lg: 16px;
+      --sui-radius-full: 9999px;
+      --sui-duration-fast: 150ms;
+      --sui-duration-normal: 250ms;
+      --sui-easing: ease-out;
+      --sui-max-width: 1280px;
+      --sui-touch-target: 44px;
+    }
+    [data-theme="dark"] {
+      --sui-blue-primary: #60A5FA;
+      --sui-blue-hover: #3B82F6;
+      --sui-blue-active: #2563EB;
+      --sui-blue-soft: #1E3A8A;
+      --sui-blue-focus: #60A5FA;
+      --sui-bg-primary: #0B0F1A;
+      --sui-bg-card: #161E2C;
+      --sui-bg-elevated: #1E293B;
+      --sui-border: #242F3E;
+      --sui-text-primary: #F8FAFC;
+      --sui-text-secondary: #94A3B8;
+      --sui-text-muted: #475569;
+      --sui-text-inverse: #FFFFFF;
+      --sui-success: #4ADE80;
+      --sui-success-strong: #22C55E;
+      --sui-warning: #FBBF24;
+      --sui-error: #F87171;
+      --sui-error-strong: #EF4444;
+      --sui-info: #22D3EE;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :root { --sui-duration-fast: 0ms; --sui-duration-normal: 0ms; }
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      font-family: var(--sui-font-primary);
+      font-size: var(--sui-text-body);
+      line-height: var(--sui-leading-body);
+      color: var(--sui-text-primary);
+      background-color: var(--sui-bg-primary);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color var(--sui-duration-normal) var(--sui-easing), color var(--sui-duration-normal) var(--sui-easing);
+    }
+    .sui-container { max-width: var(--sui-max-width); margin: 0 auto; padding: 0 var(--sui-space-4); }
+    .sui-grid { display: grid; gap: var(--sui-space-4); }
+    .sui-grid-2 { grid-template-columns: 1fr; }
+    .sui-grid-3 { grid-template-columns: 1fr; }
+    .sui-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 640px) { .sui-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 768px) { .sui-grid-2 { grid-template-columns: repeat(2, 1fr); } .sui-grid-3 { grid-template-columns: repeat(3, 1fr); } }
+    .sui-flex { display: flex; flex-wrap: wrap; gap: var(--sui-space-2); align-items: center; }
+    .sui-header {
+      position: sticky; top: 0; z-index: 100; height: 64px;
+      display: flex; align-items: center;
+      border-bottom: 1px solid var(--sui-border);
+      background: var(--sui-bg-card);
+      transition: background-color var(--sui-duration-normal) var(--sui-easing), border-color var(--sui-duration-normal) var(--sui-easing);
+    }
+    .sui-header-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .sui-logo { display: flex; align-items: center; gap: var(--sui-space-2); text-decoration: none; color: var(--sui-text-primary); }
+    .sui-logo-icon {
+      width: 32px; height: 32px; background: var(--sui-blue-primary); border-radius: var(--sui-radius-sm);
+      display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--sui-weight-bold); font-size: var(--sui-text-small);
+      transition: background-color var(--sui-duration-normal) var(--sui-easing);
+    }
+    .sui-logo-text { font-size: var(--sui-text-h3); font-weight: var(--sui-weight-bold); }
+    .sui-logo-version { font-size: var(--sui-text-meta); color: var(--sui-text-muted); font-weight: var(--sui-weight-regular); margin-left: var(--sui-space-1); }
+    .sui-header-actions { display: flex; align-items: center; gap: var(--sui-space-2); }
+    .sui-tabs {
+      display: flex; background: var(--sui-bg-elevated); border-radius: var(--sui-radius-md);
+      padding: var(--sui-space-1); gap: var(--sui-space-1);
+      transition: background-color var(--sui-duration-normal) var(--sui-easing);
+    }
+    .sui-tab {
+      padding: var(--sui-space-2) var(--sui-space-3); border-radius: var(--sui-radius-sm);
+      font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); font-family: var(--sui-font-primary);
+      letter-spacing: 0.05em; text-transform: uppercase; color: var(--sui-text-secondary);
+      background: transparent; border: none; cursor: pointer; white-space: nowrap; min-height: 36px;
+      transition: all var(--sui-duration-fast) var(--sui-easing);
+    }
+    .sui-tab:hover { color: var(--sui-text-primary); }
+    .sui-tab:focus-visible { outline: 2px solid var(--sui-blue-focus); outline-offset: 2px; }
+    .sui-tab[aria-selected="true"] { background: var(--sui-bg-card); color: var(--sui-text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .sui-tab-panel { display: none; }
+    .sui-tab-panel[aria-hidden="false"] { display: block; }
+    .sui-theme-toggle {
+      min-height: var(--sui-touch-target); min-width: var(--sui-touch-target);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--sui-radius-md); border: 1px solid var(--sui-border); background: var(--sui-bg-card);
+      cursor: pointer; transition: all var(--sui-duration-fast) var(--sui-easing);
+    }
+    .sui-theme-toggle:hover { background: var(--sui-blue-soft); border-color: var(--sui-blue-primary); }
+    .sui-theme-toggle:focus-visible { outline: 2px solid var(--sui-blue-focus); outline-offset: 2px; }
+    .sui-theme-toggle svg { width: 18px; height: 18px; color: var(--sui-text-secondary); }
+    .sui-card {
+      background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); padding: var(--sui-space-4);
+      transition: background-color var(--sui-duration-normal) var(--sui-easing), border-color var(--sui-duration-normal) var(--sui-easing);
+    }
+    .sui-card-title { font-size: var(--sui-text-h3); font-weight: var(--sui-weight-semibold); line-height: var(--sui-leading-heading); margin-bottom: var(--sui-space-2); }
+    .sui-card-text { color: var(--sui-text-secondary); font-size: var(--sui-text-small); }
+    .sui-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--sui-space-2);
+      min-height: var(--sui-touch-target); padding: var(--sui-space-2) var(--sui-space-4);
+      border-radius: var(--sui-radius-md); font-family: var(--sui-font-primary);
+      font-size: var(--sui-text-small); font-weight: var(--sui-weight-semibold); line-height: 1;
+      text-decoration: none; cursor: pointer; border: 2px solid transparent;
+      transition: all var(--sui-duration-fast) var(--sui-easing);
+    }
+    .sui-btn:focus-visible { outline: 2px solid var(--sui-blue-focus); outline-offset: 2px; }
+    .sui-btn-primary { background: var(--sui-blue-primary); color: var(--sui-text-inverse); }
+    .sui-btn-primary:hover { background: var(--sui-blue-hover); }
+    .sui-btn-primary:active { background: var(--sui-blue-active); }
+    .sui-btn-secondary { background: transparent; color: var(--sui-blue-primary); border-color: var(--sui-blue-primary); }
+    .sui-btn-secondary:hover { background: var(--sui-blue-soft); }
+    .sui-btn-ghost { background: transparent; color: var(--sui-text-secondary); }
+    .sui-btn-ghost:hover { background: var(--sui-bg-elevated); color: var(--sui-text-primary); }
+    .sui-btn-danger { background: var(--sui-error); color: var(--sui-text-inverse); }
+    .sui-btn-danger:hover { opacity: 0.9; }
+    .sui-btn-success { background: var(--sui-success); color: var(--sui-text-inverse); }
+    .sui-btn-success:hover { opacity: 0.9; }
+    .sui-btn-sm { min-height: 36px; padding: var(--sui-space-1) var(--sui-space-3); font-size: var(--sui-text-meta); }
+    .sui-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+    .sui-input-group { display: flex; flex-direction: column; gap: var(--sui-space-1); }
+    .sui-input-label { font-size: var(--sui-text-small); font-weight: var(--sui-weight-semibold); }
+    .sui-input {
+      min-height: var(--sui-touch-target); padding: var(--sui-space-2) var(--sui-space-3);
+      border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md);
+      font-family: var(--sui-font-primary); font-size: var(--sui-text-body);
+      color: var(--sui-text-primary); background: var(--sui-bg-card);
+      transition: border-color var(--sui-duration-fast) var(--sui-easing), box-shadow var(--sui-duration-fast) var(--sui-easing);
+    }
+    .sui-input::placeholder { color: var(--sui-text-muted); }
+    .sui-input:focus { outline: none; border-color: var(--sui-blue-primary); box-shadow: 0 0 0 3px var(--sui-blue-soft); }
+    .sui-input-error { border-color: var(--sui-error); }
+    .sui-input-error:focus { box-shadow: 0 0 0 3px rgba(239,68,68,0.15); }
+    .sui-input-hint { font-size: var(--sui-text-meta); color: var(--sui-text-muted); }
+    .sui-input-error-msg { display: flex; align-items: center; gap: var(--sui-space-1); font-size: var(--sui-text-meta); color: var(--sui-error); font-weight: var(--sui-weight-semibold); }
+    .sui-select {
+      min-height: var(--sui-touch-target); padding: var(--sui-space-2) var(--sui-space-3); padding-right: var(--sui-space-5);
+      border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md);
+      font-family: var(--sui-font-primary); font-size: var(--sui-text-body);
+      color: var(--sui-text-primary); background: var(--sui-bg-card); appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%23475569' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; cursor: pointer;
+      transition: border-color var(--sui-duration-fast) var(--sui-easing);
+    }
+    .sui-select:focus { outline: none; border-color: var(--sui-blue-primary); box-shadow: 0 0 0 3px var(--sui-blue-soft); }
+    .sui-checkbox-label { display: flex; align-items: center; gap: var(--sui-space-2); cursor: pointer; font-size: var(--sui-text-small); min-height: var(--sui-touch-target); }
+    .sui-checkbox { width: 20px; height: 20px; accent-color: var(--sui-blue-primary); cursor: pointer; }
+    .sui-alert {
+      display: flex; align-items: flex-start; gap: var(--sui-space-3); padding: var(--sui-space-3);
+      border-radius: var(--sui-radius-md); border-left: 4px solid; font-size: var(--sui-text-small);
+      transition: background-color var(--sui-duration-normal) var(--sui-easing);
+    }
+    .sui-alert-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+    .sui-alert-icon svg { width: 20px; height: 20px; }
+    .sui-alert-content { flex: 1; }
+    .sui-alert-title { font-weight: var(--sui-weight-semibold); margin-bottom: 2px; }
+    .sui-alert-success { background: rgba(34,197,94,0.08); border-color: var(--sui-success-strong); color: var(--sui-success-strong); }
+    [data-theme="dark"] .sui-alert-success { background: rgba(74,222,128,0.08); color: var(--sui-success); }
+    .sui-alert-warning { background: rgba(245,158,11,0.08); border-color: var(--sui-warning); color: #92400E; }
+    [data-theme="dark"] .sui-alert-warning { background: rgba(251,191,36,0.08); color: var(--sui-warning); }
+    .sui-alert-error { background: rgba(239,68,68,0.08); border-color: var(--sui-error-strong); color: var(--sui-error-strong); }
+    [data-theme="dark"] .sui-alert-error { background: rgba(248,113,113,0.08); color: var(--sui-error); }
+    .sui-alert-info { background: rgba(6,182,212,0.08); border-color: var(--sui-info); color: #0E7490; }
+    [data-theme="dark"] .sui-alert-info { background: rgba(34,211,238,0.08); color: var(--sui-info); }
+    .sui-badge {
+      display: inline-flex; align-items: center; gap: var(--sui-space-1);
+      padding: 2px var(--sui-space-2); border-radius: var(--sui-radius-full);
+      font-size: var(--sui-text-meta); font-weight: var(--sui-weight-semibold);
+    }
+    .sui-badge-blue { background: var(--sui-blue-soft); color: var(--sui-blue-primary); }
+    .sui-badge-success { background: rgba(34,197,94,0.12); color: var(--sui-success-strong); }
+    [data-theme="dark"] .sui-badge-success { color: var(--sui-success); }
+    .sui-badge-warning { background: rgba(245,158,11,0.12); color: #92400E; }
+    [data-theme="dark"] .sui-badge-warning { color: var(--sui-warning); }
+    .sui-badge-error { background: rgba(239,68,68,0.12); color: var(--sui-error-strong); }
+    [data-theme="dark"] .sui-badge-error { color: var(--sui-error); }
+    .sui-table-wrapper { overflow-x: auto; border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); transition: border-color var(--sui-duration-normal) var(--sui-easing); }
+    .sui-table { width: 100%; border-collapse: collapse; font-size: var(--sui-text-small); }
+    .sui-table th { text-align: left; padding: var(--sui-space-3); font-weight: var(--sui-weight-semibold); color: var(--sui-text-secondary); background: var(--sui-bg-elevated); border-bottom: 1px solid var(--sui-border); font-size: var(--sui-text-meta); text-transform: uppercase; letter-spacing: 0.05em; }
+    .sui-table td { padding: var(--sui-space-3); border-bottom: 1px solid var(--sui-border); }
+    .sui-table tr:last-child td { border-bottom: none; }
+    .sui-table tr:hover td { background: var(--sui-bg-elevated); transition: background-color var(--sui-duration-fast) var(--sui-easing); }
+    .sui-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--sui-space-2); }
+    .sui-swatch { border-radius: var(--sui-radius-md); overflow: hidden; border: 1px solid var(--sui-border); transition: border-color var(--sui-duration-normal) var(--sui-easing); }
+    .sui-swatch-color { height: 56px; }
+    .sui-swatch-info { padding: var(--sui-space-2); background: var(--sui-bg-card); }
+    .sui-swatch-name { font-size: var(--sui-text-meta); font-weight: var(--sui-weight-semibold); }
+    .sui-swatch-value { font-size: 11px; color: var(--sui-text-muted); font-family: 'SF Mono','Fira Code',monospace; }
+    .sui-type-row { display: flex; align-items: baseline; gap: var(--sui-space-4); padding: var(--sui-space-3) 0; border-bottom: 1px solid var(--sui-border); }
+    .sui-type-row:last-child { border-bottom: none; }
+    .sui-type-meta { min-width: 130px; font-size: var(--sui-text-meta); color: var(--sui-text-muted); font-family: 'SF Mono','Fira Code',monospace; flex-shrink: 0; }
+    .sui-space-demo { display: flex; align-items: center; gap: var(--sui-space-3); padding: var(--sui-space-2) 0; }
+    .sui-space-bar { height: 24px; background: var(--sui-blue-soft); border: 1px solid var(--sui-blue-primary); border-radius: 4px; opacity: 0.7; transition: all var(--sui-duration-normal) var(--sui-easing); }
+    .sui-space-label { font-size: var(--sui-text-meta); color: var(--sui-text-muted); font-family: 'SF Mono','Fira Code',monospace; min-width: 100px; }
+    .sui-radius-demo { display: flex; flex-wrap: wrap; gap: var(--sui-space-3); }
+    .sui-radius-box { width: 80px; height: 80px; background: var(--sui-blue-soft); border: 2px solid var(--sui-blue-primary); display: flex; align-items: center; justify-content: center; font-size: var(--sui-text-meta); font-weight: var(--sui-weight-semibold); color: var(--sui-blue-primary); transition: all var(--sui-duration-normal) var(--sui-easing); }
+    .sui-feature-icon { width: 48px; height: 48px; background: var(--sui-blue-soft); border-radius: var(--sui-radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--sui-space-3); transition: background-color var(--sui-duration-normal) var(--sui-easing); }
+    .sui-feature-icon svg { width: 24px; height: 24px; color: var(--sui-blue-primary); }
+    .sui-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sui-space-3); text-align: center; }
+    @media (min-width: 640px) { .sui-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    .sui-stat-value { font-size: var(--sui-text-h1); font-weight: var(--sui-weight-bold); color: var(--sui-blue-primary); line-height: var(--sui-leading-heading); }
+    .sui-stat-label { font-size: var(--sui-text-small); color: var(--sui-text-secondary); margin-top: var(--sui-space-1); }
+    .sui-section { padding: var(--sui-space-6) 0; border-bottom: 1px solid var(--sui-border); }
+    .sui-section:last-child { border-bottom: none; }
+    .sui-section-title { font-size: var(--sui-text-h2); font-weight: var(--sui-weight-bold); line-height: var(--sui-leading-heading); margin-bottom: var(--sui-space-2); }
+    .sui-section-desc { font-size: var(--sui-text-body); color: var(--sui-text-secondary); margin-bottom: var(--sui-space-4); max-width: 640px; }
+    .sui-label { font-size: var(--sui-text-meta); font-weight: var(--sui-weight-semibold); color: var(--sui-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--sui-space-2); }
+    .sui-subsection { margin-bottom: var(--sui-space-5); }
+    .sui-prompt-box { background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); padding: var(--sui-space-4); transition: all var(--sui-duration-normal) var(--sui-easing); }
+    .sui-prompt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sui-space-3); }
+    .sui-prompt-label { font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); text-transform: uppercase; letter-spacing: 0.05em; color: var(--sui-text-muted); }
+    .sui-prompt-code { font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size: var(--sui-text-small); line-height: 1.7; white-space: pre-wrap; word-break: break-word; color: var(--sui-text-primary); }
+    .sui-tip-box { padding: var(--sui-space-3); border-radius: var(--sui-radius-md); background: var(--sui-blue-soft); border: 1px solid var(--sui-blue-primary); font-size: var(--sui-text-small); transition: all var(--sui-duration-normal) var(--sui-easing); }
+    .sui-tip-box strong { font-weight: var(--sui-weight-semibold); }
+    .sui-hero { text-align: center; padding: var(--sui-space-6) var(--sui-space-3); }
+    .sui-hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: var(--sui-weight-bold); line-height: 1.15; margin-bottom: var(--sui-space-3); }
+    .sui-hero-sub { font-size: clamp(16px, 2.5vw, 20px); color: var(--sui-text-secondary); max-width: 600px; margin: 0 auto var(--sui-space-4); }
+    .sui-code { font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size: var(--sui-text-meta); background: var(--sui-bg-elevated); padding: 2px 6px; border-radius: 4px; }
+    .sui-footer { padding: var(--sui-space-5) 0; text-align: center; color: var(--sui-text-muted); font-size: var(--sui-text-small); border-top: 1px solid var(--sui-border); }
+    .sui-footer a { color: var(--sui-blue-primary); text-decoration: none; }
+    .sui-footer a:hover { text-decoration: underline; }
+    .sui-footer a:focus-visible { outline: 2px solid var(--sui-blue-focus); outline-offset: 2px; }
+    @media (max-width: 640px) {
+      .sui-type-row { flex-direction: column; gap: var(--sui-space-1); }
+      .sui-type-meta { min-width: unset; }
+      .sui-tabs { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="sui-header" role="banner">
+    <div class="sui-container sui-header-inner">
+      <a href="#" class="sui-logo" aria-label="Speyer UI System Home">
+        <div class="sui-logo-icon" aria-hidden="true">S</div>
+        <span class="sui-logo-text">Speyer UI<span class="sui-logo-version">v1.0</span></span>
+      </a>
+      <div class="sui-header-actions">
+        <div class="sui-tabs" role="tablist" aria-label="Demo sections">
+          <button class="sui-tab" role="tab" aria-selected="true" aria-controls="panel-preview" id="tab-preview">Preview</button>
+          <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-designers" id="tab-designers">For Designers</button>
+          <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-ai" id="tab-ai">AI Tools</button>
+        </div>
+        <a href="https://github.com/adrianspeyer/speyer-ui" class="sui-btn sui-btn-ghost sui-btn-sm" target="_blank" rel="noopener" aria-label="View on GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <button class="sui-theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main class="sui-container">
+    <!-- TAB 1: PREVIEW -->
+    <div class="sui-tab-panel" id="panel-preview" role="tabpanel" aria-labelledby="tab-preview" aria-hidden="false">
+      <div class="sui-hero">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--sui-blue-soft);color:var(--sui-blue-primary);padding:4px 16px;border-radius:var(--sui-radius-full);font-size:var(--sui-text-meta);font-weight:var(--sui-weight-semibold);margin-bottom:var(--sui-space-4);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg>
+          Open Source Design System
+        </div>
+        <h1>Speyer UI System</h1>
+        <p class="sui-hero-sub">A lightweight, accessible design system for building clear, modern, and readable web applications.</p>
+        <div class="sui-flex" style="justify-content:center;gap:var(--sui-space-3);">
+          <a href="https://github.com/adrianspeyer/speyer-ui" class="sui-btn sui-btn-primary" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+          <button class="sui-btn sui-btn-secondary" onclick="switchTab('tab-designers')">Explore Components</button>
+        </div>
+        <p style="font-size:var(--sui-text-small);color:var(--sui-text-muted);margin-top:var(--sui-space-4);">Made in Canada with love 🇨🇦</p>
+      </div>
+      <section class="sui-section">
+        <h2 class="sui-section-title" style="text-align:center;">Core Principles</h2>
+        <p class="sui-section-desc" style="text-align:center;margin-left:auto;margin-right:auto;">Every decision in SUI flows from these five principles.</p>
+        <div class="sui-grid sui-grid-3" style="margin-top:var(--sui-space-4);">
+          <div class="sui-card" style="text-align:center;"><div class="sui-feature-icon" style="margin:0 auto var(--sui-space-3);" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h3 class="sui-card-title">Readability</h3><p class="sui-card-text">Text and data are easy to scan and understand at a glance.</p></div>
+          <div class="sui-card" style="text-align:center;"><div class="sui-feature-icon" style="margin:0 auto var(--sui-space-3);" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg></div><h3 class="sui-card-title">Accessibility</h3><p class="sui-card-text">WCAG 2.1 AA compliant. Works for everyone, including screen readers.</p></div>
+          <div class="sui-card" style="text-align:center;"><div class="sui-feature-icon" style="margin:0 auto var(--sui-space-3);" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h3 class="sui-card-title">Mobile-First</h3><p class="sui-card-text">Built for small screens first. 44px touch targets. Scales up gracefully.</p></div>
+          <div class="sui-card" style="text-align:center;"><div class="sui-feature-icon" style="margin:0 auto var(--sui-space-3);" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div><h3 class="sui-card-title">Color-Blind Friendly</h3><p class="sui-card-text">Color is never the only indicator. Every status uses icon + text.</p></div>
+          <div class="sui-card" style="text-align:center;"><div class="sui-feature-icon" style="margin:0 auto var(--sui-space-3);" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><h3 class="sui-card-title">Consistency</h3><p class="sui-card-text">Same components, same behavior, same look — everywhere.</p></div>
+        </div>
+      </section>
+      <section class="sui-section">
+        <div class="sui-stats-grid">
+          <div class="sui-card"><div class="sui-stat-value">AA</div><div class="sui-stat-label">WCAG Compliance</div></div>
+          <div class="sui-card"><div class="sui-stat-value">44px</div><div class="sui-stat-label">Min Touch Target</div></div>
+          <div class="sui-card"><div class="sui-stat-value">8px</div><div class="sui-stat-label">Spacing Grid</div></div>
+          <div class="sui-card"><div class="sui-stat-value">0</div><div class="sui-stat-label">Dependencies</div></div>
+        </div>
+      </section>
+      <section class="sui-section">
+        <h2 class="sui-section-title">Live Preview</h2>
+        <p class="sui-section-desc">Interactive SUI components. Toggle dark mode to see both themes.</p>
+        <div class="sui-grid sui-grid-2">
+          <div class="sui-card">
+            <h3 class="sui-card-title">Sample Form</h3>
+            <div style="display:flex;flex-direction:column;gap:var(--sui-space-3);margin-top:var(--sui-space-3);">
+              <div class="sui-input-group"><label class="sui-input-label" for="p-name">Project Name</label><input class="sui-input" type="text" id="p-name" placeholder="Enter project name..."></div>
+              <div class="sui-input-group"><label class="sui-input-label" for="p-role">Role</label><select class="sui-select" id="p-role"><option>Designer</option><option>Developer</option><option>Product Manager</option></select></div>
+              <label class="sui-checkbox-label"><input class="sui-checkbox" type="checkbox" checked> I agree to the terms</label>
+              <button class="sui-btn sui-btn-primary" style="width:100%;">Create Project</button>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:var(--sui-space-3);">
+            <div class="sui-alert sui-alert-success" role="alert"><span class="sui-alert-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><div class="sui-alert-content"><div class="sui-alert-title">Saved successfully</div><div>Your changes have been saved and published.</div></div></div>
+            <div class="sui-alert sui-alert-warning" role="alert"><span class="sui-alert-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><div class="sui-alert-content"><div class="sui-alert-title">Review required</div><div>Some fields need your attention before submitting.</div></div></div>
+            <div class="sui-alert sui-alert-error" role="alert"><span class="sui-alert-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span><div class="sui-alert-content"><div class="sui-alert-title">Upload failed</div><div>The file exceeds the maximum size of 10MB.</div></div></div>
+            <div class="sui-alert sui-alert-info" role="alert"><span class="sui-alert-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><div class="sui-alert-content"><div class="sui-alert-title">Changes applied</div><div>Your new settings will take effect in the next session.</div></div></div>
+          </div>
+        </div>
+        <div style="margin-top:var(--sui-space-5);"><div class="sui-table-wrapper"><table class="sui-table"><thead><tr><th>Name</th><th>Role</th><th>Status</th><th>Last Active</th></tr></thead><tbody><tr><td>Sarah Chen</td><td>Designer</td><td><span class="sui-badge sui-badge-success">✔ Active</span></td><td>2 min ago</td></tr><tr><td>Marcus Johnson</td><td>Developer</td><td><span class="sui-badge sui-badge-success">✔ Active</span></td><td>15 min ago</td></tr><tr><td>Priya Patel</td><td>Product Manager</td><td><span class="sui-badge sui-badge-warning">⚠ Away</span></td><td>3 hours ago</td></tr><tr><td>David Kim</td><td>Engineer</td><td><span class="sui-badge sui-badge-error">✕ Offline</span></td><td>2 days ago</td></tr></tbody></table></div></div>
+      </section>
+    </div>
+    <!-- TAB 2: FOR DESIGNERS -->
+    <div class="sui-tab-panel" id="panel-designers" role="tabpanel" aria-labelledby="tab-designers" aria-hidden="true">
+      <section class="sui-section">
+        <h2 class="sui-section-title">Colors</h2><p class="sui-section-desc">Token-based color system. Values adapt automatically between light and dark modes.</p>
+        <div class="sui-subsection"><p class="sui-label">Brand & Actions</p><div class="sui-swatch-grid"><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-blue-primary);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">blue-primary</div><div class="sui-swatch-value">#3B82F6</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-blue-hover);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">blue-hover</div><div class="sui-swatch-value">#2563EB</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-blue-active);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">blue-active</div><div class="sui-swatch-value">#1E40AF</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-blue-soft);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">blue-soft</div><div class="sui-swatch-value">#DBEAFE</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-blue-focus);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">blue-focus</div><div class="sui-swatch-value">#93C5FD</div></div></div></div></div>
+        <div class="sui-subsection"><p class="sui-label">Backgrounds & Borders</p><div class="sui-swatch-grid"><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-bg-primary);border-bottom:1px solid var(--sui-border);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">bg-primary</div><div class="sui-swatch-value">#F9FBFD</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-bg-card);border-bottom:1px solid var(--sui-border);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">bg-card</div><div class="sui-swatch-value">#FFFFFF</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-bg-elevated);border-bottom:1px solid var(--sui-border);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">bg-elevated</div><div class="sui-swatch-value">#F1F5F9</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-border);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">border</div><div class="sui-swatch-value">#E5EDF5</div></div></div></div></div>
+        <div class="sui-subsection"><p class="sui-label">Text</p><div class="sui-swatch-grid"><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-text-primary);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">text-primary</div><div class="sui-swatch-value">#0F172A</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-text-secondary);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">text-secondary</div><div class="sui-swatch-value">#475569</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-text-muted);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">text-muted</div><div class="sui-swatch-value">#94A3B8</div></div></div></div></div>
+        <div class="sui-subsection"><p class="sui-label">Status Colors</p><div class="sui-swatch-grid"><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-success);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">success</div><div class="sui-swatch-value">#22C55E</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-warning);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">warning</div><div class="sui-swatch-value">#F59E0B</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-error);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">error</div><div class="sui-swatch-value">#EF4444</div></div></div><div class="sui-swatch"><div class="sui-swatch-color" style="background:var(--sui-info);"></div><div class="sui-swatch-info"><div class="sui-swatch-name">info</div><div class="sui-swatch-value">#06B6D4</div></div></div></div></div>
+      </section>
+      <section class="sui-section">
+        <h2 class="sui-section-title">Typography</h2><p class="sui-section-desc">Inter is the primary typeface. Clean, readable, and optimized for screens.</p>
+        <div class="sui-card"><div class="sui-type-row"><span class="sui-type-meta">H1 — 32px / 700</span><span style="font-size:32px;font-weight:700;line-height:1.3;">The quick brown fox</span></div><div class="sui-type-row"><span class="sui-type-meta">H2 — 24px / 600</span><span style="font-size:24px;font-weight:600;line-height:1.3;">The quick brown fox</span></div><div class="sui-type-row"><span class="sui-type-meta">H3 — 20px / 600</span><span style="font-size:20px;font-weight:600;line-height:1.3;">The quick brown fox</span></div><div class="sui-type-row"><span class="sui-type-meta">Body — 16px / 400</span><span style="font-size:16px;font-weight:400;line-height:1.5;">The quick brown fox jumps over the lazy dog.</span></div><div class="sui-type-row"><span class="sui-type-meta">Small — 14px / 400</span><span style="font-size:14px;font-weight:400;line-height:1.5;">The quick brown fox jumps over the lazy dog.</span></div><div class="sui-type-row"><span class="sui-type-meta">Meta — 12px / 400</span><span style="font-size:12px;font-weight:400;line-height:1.5;">The quick brown fox jumps over the lazy dog.</span></div></div>
+      </section>
+      <section class="sui-section">
+        <h2 class="sui-section-title">Spacing</h2><p class="sui-section-desc">8px base grid. Six tokens from compact (4px) to generous (48px).</p>
+        <div class="sui-card"><div class="sui-space-demo"><span class="sui-space-label">space-1: 4px</span><div class="sui-space-bar" style="width:4px;"></div></div><div class="sui-space-demo"><span class="sui-space-label">space-2: 8px</span><div class="sui-space-bar" style="width:8px;"></div></div><div class="sui-space-demo"><span class="sui-space-label">space-3: 16px</span><div class="sui-space-bar" style="width:16px;"></div></div><div class="sui-space-demo"><span class="sui-space-label">space-4: 24px</span><div class="sui-space-bar" style="width:24px;"></div></div><div class="sui-space-demo"><span class="sui-space-label">space-5: 32px</span><div class="sui-space-bar" style="width:32px;"></div></div><div class="sui-space-demo"><span class="sui-space-label">space-6: 48px</span><div class="sui-space-bar" style="width:48px;"></div></div></div>
+      </section>
+      <section class="sui-section">
+        <h2 class="sui-section-title">Buttons</h2><p class="sui-section-desc">Touch-friendly (44px minimum), with visible focus states. Tab through to see focus rings.</p>
+        <div class="sui-subsection"><p class="sui-label">Variants</p><div class="sui-flex"><button class="sui-btn sui-btn-primary">Primary</button><button class="sui-btn sui-btn-secondary">Secondary</button><button class="sui-btn sui-btn-ghost">Ghost</button><button class="sui-btn sui-btn-danger">Danger</button><button class="sui-btn sui-btn-success">Success</button></div></div>
+        <div class="sui-subsection"><p class="sui-label">With Icons</p><div class="sui-flex"><button class="sui-btn sui-btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Add Item</button><button class="sui-btn sui-btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</button></div></div>
+        <div class="sui-subsection"><p class="sui-label">Small & Disabled</p><div class="sui-flex"><button class="sui-btn sui-btn-primary sui-btn-sm">Small Primary</button><button class="sui-btn sui-btn-secondary sui-btn-sm">Small Secondary</button><button class="sui-btn sui-btn-primary" disabled>Disabled</button></div></div>
+      </section>
+      <section class="sui-section">
+        <h2 class="sui-section-title">Inputs</h2><p class="sui-section-desc">Clear borders, visible focus rings, and accessible error messages with icon + text.</p>
+        <div class="sui-grid sui-grid-2">
+          <div class="sui-card">
+            <div class="sui-input-group" style="margin-bottom:var(--sui-space-3);"><label class="sui-input-label" for="d-name">Full Name</label><input class="sui-input" type="text" id="d-name" placeholder="Enter your name"><span class="sui-input-hint">As it appears on your account.</span></div>
+            <div class="sui-input-group" style="margin-bottom:var(--sui-space-3);"><label class="sui-input-label" for="d-email">Email Address</label><input class="sui-input sui-input-error" type="email" id="d-email" value="invalid-email" aria-describedby="d-email-err" aria-invalid="true"><span class="sui-input-error-msg" id="d-email-err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Please enter a valid email address.</span></div>
+            <div class="sui-input-group"><label class="sui-input-label" for="d-select">Role</label><select class="sui-select" id="d-select"><option>Designer</option><option>Developer</option><option>Product Manager</option></select></div>
+          </div>
+          <div class="sui-card">
+            <div class="sui-input-group" style="margin-bottom:var(--sui-space-3);"><label class="sui-input-label" for="d-msg">Message</label><textarea class="sui-input" id="d-msg" rows="4" placeholder="Type your message..." style="resize:vertical;"></textarea></div>
+            <div class="sui-input-group" style="margin-bottom:var(--sui-space-3);"><label class="sui-input-label" for="d-dis">Disabled Input</label><input class="sui-input" type="text" id="d-dis" value="Cannot edit" disabled style="opacity:0.5;cursor:not-allowed;"></div>
+            <label class="sui-checkbox-label"><input class="sui-checkbox" type="checkbox" checked> Subscribe to updates</label>
+          </div>
+        </div>
+      </section>
+      <section class="sui-section">
+        <h2 class="sui-section-title">Badges</h2><p class="sui-section-desc">Compact status indicators — always paired with descriptive text, never color alone.</p>
+        <div class="sui-flex" style="gap:var(--sui-space-3);"><span class="sui-badge sui-badge-blue">● Active</span><span class="sui-badge sui-badge-success">✔ Complete</span><span class="sui-badge sui-badge-warning">⚠ Pending</span><span class="sui-badge sui-badge-error">✕ Failed</span></div>
+      </section>
+      <section class="sui-section">
+        <h2 class="sui-section-title">Border Radius</h2><p class="sui-section-desc">Four radius tokens from subtle to fully rounded.</p>
+        <div class="sui-radius-demo"><div class="sui-radius-box" style="border-radius:var(--sui-radius-sm);">8px</div><div class="sui-radius-box" style="border-radius:var(--sui-radius-md);">12px</div><div class="sui-radius-box" style="border-radius:var(--sui-radius-lg);">16px</div><div class="sui-radius-box" style="border-radius:var(--sui-radius-full);width:80px;">Full</div></div>
+      </section>
+    </div>
+    <!-- TAB 3: AI TOOLS -->
+    <div class="sui-tab-panel" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" aria-hidden="true">
+      <section class="sui-section" style="border-bottom:none;">
+        <div style="text-align:center;margin-bottom:var(--sui-space-6);">
+          <div class="sui-feature-icon" style="margin:0 auto var(--sui-space-3);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <h2 style="font-size:var(--sui-text-h1);font-weight:var(--sui-weight-bold);margin-bottom:var(--sui-space-2);">AI Integration</h2>
+          <p style="color:var(--sui-text-secondary);max-width:600px;margin:0 auto;">No AI has SUI in its training data. Copy one of these prompts to teach any AI assistant how to build with the Speyer UI System.</p>
+        </div>
+        <div class="sui-subsection">
+          <h3 class="sui-section-title">Quick Prompt</h3><p class="sui-section-desc">Recommended for most tasks. Paste this before describing what you want built.</p>
+          <div class="sui-prompt-box"><div class="sui-prompt-header"><span class="sui-prompt-label">System Prompt</span><button class="sui-btn sui-btn-primary sui-btn-sm" onclick="copyPrompt('quick')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span id="copyBtnQuick">Copy Prompt</span></button></div><pre class="sui-prompt-code" id="promptQuick">I want you to use the Speyer UI System (SUI) for this project.
+
+## Step 1: Fetch the design tokens
+Fetch the official SUI CSS token file from this URL:
+https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
+
+Use the CSS custom properties defined in that file as the foundation for all styling. All tokens use the --sui- prefix.
+
+## Step 2: Confirm display mode
+Before writing any code, ask me:
+"Would you like light mode only, dark mode only, or both (with a toggle)?"
+Then implement accordingly:
+- Light mode = default :root tokens
+- Dark mode = [data-theme="dark"] tokens
+- Both = include both token sets + a toggle using the data-theme attribute
+
+## Step 3: Apply SUI design rules
+Core Principles: readability, accessibility, mobile-friendly, color-blind friendly, consistency.
+
+Typography: Inter font (Google Fonts). Fallback: system-ui.
+Scale: H1 32px/700, H2 24px/600, H3 20px/600, Body 16px/400, Small 14px/400, Meta 12px/400.
+
+Layout: 8px spacing grid (--sui-space-1 through --sui-space-6). Mobile-first. Max width: 1280px. Min touch target: 44px.
+
+Components:
+- Buttons: 44px min height, 12px border-radius, visible focus states
+- Cards: 16px border-radius, border-based separation, 16-24px padding
+- Inputs: visible borders, focus ring, minimum 44px height
+- Alerts: ALWAYS include icon + text label (never color alone)
+
+Accessibility (mandatory):
+- WCAG 2.1 AA contrast ratios
+- Color must NEVER be the only indicator of status
+- Color-blind friendly: no red/green-only patterns
+- Keyboard navigation, visible focus states, ARIA labels
+- Respect prefers-reduced-motion
+
+Status patterns (always icon + text):
+- Success: ✔ + text | Warning: ⚠ + text | Error: ✕ + text | Info: ℹ + text
+
+Motion: 150-250ms ease-out. Feedback only. No decorative animations.
+
+Full docs: https://github.com/adrianspeyer/speyer-ui</pre></div>
+        </div>
+        <div class="sui-subsection">
+          <h3 class="sui-section-title">Minimal Prompt</h3><p class="sui-section-desc">For quick tasks where you just need SUI styling applied fast.</p>
+          <div class="sui-prompt-box"><div class="sui-prompt-header"><span class="sui-prompt-label">Short Prompt</span><button class="sui-btn sui-btn-primary sui-btn-sm" onclick="copyPrompt('minimal')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span id="copyBtnMinimal">Copy Prompt</span></button></div><pre class="sui-prompt-code" id="promptMinimal">Use the Speyer UI System (SUI).
+Fetch tokens from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
+Ask me if I want light mode, dark mode, or both before coding.
+Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, WCAG 2.1 AA, all status indicators must use icon + text (never color alone), mobile-first, color-blind friendly.
+Full docs: https://github.com/adrianspeyer/speyer-ui</pre></div>
+        </div>
+        <div class="sui-subsection">
+          <h3 class="sui-section-title">System Prompt</h3><p class="sui-section-desc">For developers adding SUI to custom instructions, Cursor rules, or tool configs.</p>
+          <div class="sui-prompt-box"><div class="sui-prompt-header"><span class="sui-prompt-label">Custom Instructions</span><button class="sui-btn sui-btn-primary sui-btn-sm" onclick="copyPrompt('system')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span id="copyBtnSystem">Copy Prompt</span></button></div><pre class="sui-prompt-code" id="promptSystem">When the user says "use SUI", "use the Speyer UI System", or "Speyer UI":
+
+1. Fetch the SUI design tokens from:
+   https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
+2. Ask the user: "Would you like light mode, dark mode, or both?"
+3. Apply all CSS custom properties (--sui- prefix) from the token file.
+4. Follow these design rules:
+   - Font: Inter (Google Fonts), fallback system-ui
+   - 8px spacing grid (--sui-space-1 through --sui-space-6)
+   - Min touch target: 44px, max content width: 1280px
+   - Buttons: 44px height, 12px radius | Cards: 16px radius, border separation
+   - WCAG 2.1 AA contrast | Keyboard nav | prefers-reduced-motion support
+   - CRITICAL: Never use color alone for status. Always pair with icon + text.
+   - Color-blind safe: no red/green-only patterns
+5. Reference: https://github.com/adrianspeyer/speyer-ui</pre></div>
+        </div>
+        <div class="sui-tip-box" style="margin-top:var(--sui-space-4);">
+          <p><strong>Tips for best results:</strong> Always paste the prompt first, before describing what you want built. If the AI cannot fetch the CSS file, paste the contents of <span class="sui-code">sui-tokens.css</span> directly into the conversation. SUI works with any framework — React, Vue, Tailwind, plain HTML. For follow-up prompts, just say "continue using SUI."</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="sui-footer">
+    <div class="sui-container">
+      <p>Speyer UI System v1.0 · <a href="https://github.com/adrianspeyer/speyer-ui">GitHub</a> · MIT License</p>
+      <p style="margin-top:var(--sui-space-2);">Made in Canada with love 🇨🇦</p>
+    </div>
+  </footer>
+  <script>
+    function switchTab(tabId){var tabs=document.querySelectorAll('.sui-tab');var panels=document.querySelectorAll('.sui-tab-panel');tabs.forEach(function(tab){tab.setAttribute('aria-selected',tab.id===tabId?'true':'false');});panels.forEach(function(panel){var t='tab-'+panel.id.replace('panel-','');panel.setAttribute('aria-hidden',t===tabId?'false':'true');});window.scrollTo({top:0,behavior:'smooth'});}
+    document.querySelectorAll('.sui-tab').forEach(function(tab){tab.addEventListener('click',function(){switchTab(this.id);});});
+    document.querySelector('[role="tablist"]').addEventListener('keydown',function(e){var tabs=Array.from(document.querySelectorAll('.sui-tab'));var idx=tabs.indexOf(document.activeElement);if(e.key==='ArrowRight'){tabs[(idx+1)%tabs.length].focus();tabs[(idx+1)%tabs.length].click();}if(e.key==='ArrowLeft'){tabs[(idx-1+tabs.length)%tabs.length].focus();tabs[(idx-1+tabs.length)%tabs.length].click();}});
+    (function(){var toggle=document.getElementById('themeToggle');var moon=document.getElementById('themeIconMoon');var sun=document.getElementById('themeIconSun');var html=document.documentElement;var saved=localStorage.getItem('sui-theme');if(saved==='dark'){html.setAttribute('data-theme','dark');moon.style.display='none';sun.style.display='block';}toggle.addEventListener('click',function(){var isDark=html.getAttribute('data-theme')==='dark';if(isDark){html.removeAttribute('data-theme');localStorage.setItem('sui-theme','light');moon.style.display='block';sun.style.display='none';}else{html.setAttribute('data-theme','dark');localStorage.setItem('sui-theme','dark');moon.style.display='none';sun.style.display='block';}});})();
+    function copyPrompt(id){var el=document.getElementById('prompt'+id.charAt(0).toUpperCase()+id.slice(1));var btn=document.getElementById('copyBtn'+id.charAt(0).toUpperCase()+id.slice(1));var text=el.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy Prompt';},2000);});}else{var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy Prompt';},2000);}catch(e){}document.body.removeChild(ta);}}
+  </script>
+</body>
+</html>
