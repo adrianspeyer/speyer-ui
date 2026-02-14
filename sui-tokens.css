@@ -1,0 +1,162 @@
+/*
+ * Speyer UI System (SUI) — Design Tokens
+ * Version: 1.0.0
+ * https://github.com/adrianspeyer/speyer-ui
+ *
+ * A lightweight, accessible token system for modern web applications.
+ * Made in Canada with love 🇨🇦
+ *
+ * License: MIT
+ */
+
+/* ==========================================================================
+   Light Mode (Default)
+   ========================================================================== */
+
+:root {
+  /* Brand & Actions */
+  --sui-blue-primary: #3B82F6;
+  --sui-blue-hover:   #2563EB;
+  --sui-blue-active:  #1E40AF;
+  --sui-blue-soft:    #DBEAFE;
+  --sui-blue-focus:   #93C5FD;
+
+  /* Backgrounds */
+  --sui-bg-primary:   #F9FBFD;
+  --sui-bg-card:      #FFFFFF;
+  --sui-bg-elevated:  #F1F5F9;
+  --sui-border:       #E5EDF5;
+
+  /* Text */
+  --sui-text-primary:   #0F172A;
+  --sui-text-secondary: #475569;
+  --sui-text-muted:     #94A3B8;
+  --sui-text-inverse:   #FFFFFF;
+
+  /* Status */
+  --sui-success:        #22C55E;
+  --sui-success-strong: #15803D;
+  --sui-warning:        #F59E0B;
+  --sui-error:          #EF4444;
+  --sui-error-strong:   #B91C1C;
+  --sui-info:           #06B6D4;
+
+  /* Typography */
+  --sui-font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --sui-text-h1:    32px;
+  --sui-text-h2:    24px;
+  --sui-text-h3:    20px;
+  --sui-text-body:  16px;
+  --sui-text-small: 14px;
+  --sui-text-meta:  12px;
+
+  --sui-weight-regular:  400;
+  --sui-weight-semibold: 600;
+  --sui-weight-bold:     700;
+
+  --sui-leading-body:    1.5;
+  --sui-leading-heading: 1.3;
+
+  /* Spacing (8px grid) */
+  --sui-space-1: 4px;
+  --sui-space-2: 8px;
+  --sui-space-3: 16px;
+  --sui-space-4: 24px;
+  --sui-space-5: 32px;
+  --sui-space-6: 48px;
+
+  /* Border Radius */
+  --sui-radius-sm:   8px;
+  --sui-radius-md:   12px;
+  --sui-radius-lg:   16px;
+  --sui-radius-full: 9999px;
+
+  /* Motion */
+  --sui-duration-fast:   150ms;
+  --sui-duration-normal: 250ms;
+  --sui-easing:          ease-out;
+
+  /* Layout */
+  --sui-max-width:    1280px;
+  --sui-touch-target: 44px;
+}
+
+
+/* ==========================================================================
+   Dark Mode
+   ========================================================================== */
+
+[data-theme="dark"] {
+  /* Brand & Actions */
+  --sui-blue-primary: #60A5FA;
+  --sui-blue-hover:   #3B82F6;
+  --sui-blue-active:  #2563EB;
+  --sui-blue-soft:    #1E3A8A;
+  --sui-blue-focus:   #60A5FA;
+
+  /* Backgrounds */
+  --sui-bg-primary:   #0B0F1A;
+  --sui-bg-card:      #161E2C;
+  --sui-bg-elevated:  #1E293B;
+  --sui-border:       #242F3E;
+
+  /* Text */
+  --sui-text-primary:   #F8FAFC;
+  --sui-text-secondary: #94A3B8;
+  --sui-text-muted:     #475569;
+  --sui-text-inverse:   #FFFFFF;
+
+  /* Status */
+  --sui-success:        #4ADE80;
+  --sui-success-strong: #22C55E;
+  --sui-warning:        #FBBF24;
+  --sui-error:          #F87171;
+  --sui-error-strong:   #EF4444;
+  --sui-info:           #22D3EE;
+}
+
+
+/* ==========================================================================
+   System Preference: Auto Dark Mode
+   Applied when no data-theme attribute is set and user prefers dark mode.
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --sui-blue-primary: #60A5FA;
+    --sui-blue-hover:   #3B82F6;
+    --sui-blue-active:  #2563EB;
+    --sui-blue-soft:    #1E3A8A;
+    --sui-blue-focus:   #60A5FA;
+
+    --sui-bg-primary:   #0B0F1A;
+    --sui-bg-card:      #161E2C;
+    --sui-bg-elevated:  #1E293B;
+    --sui-border:       #242F3E;
+
+    --sui-text-primary:   #F8FAFC;
+    --sui-text-secondary: #94A3B8;
+    --sui-text-muted:     #475569;
+    --sui-text-inverse:   #FFFFFF;
+
+    --sui-success:        #4ADE80;
+    --sui-success-strong: #22C55E;
+    --sui-warning:        #FBBF24;
+    --sui-error:          #F87171;
+    --sui-error-strong:   #EF4444;
+    --sui-info:           #22D3EE;
+  }
+}
+
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --sui-duration-fast:   0ms;
+    --sui-duration-normal: 0ms;
+  }
+}
