@@ -1,69 +1,59 @@
-# 🎨 Speyer UI System (SUI)
+# Speyer UI System (SUI)
 
-**The design system that treats accessibility as architecture, not afterthought.**
+A lightweight design system built around four constraints:
 
-SUI is a lightweight, zero-dependency UI system for people who believe interfaces should work for everyone — including the 300 million people with color vision deficiency, the billions on mobile devices, and the developers who shouldn't need a 200MB `node_modules` folder to make a button look right.
+1. **Accessibility is mandatory, not optional.** WCAG 2.1 AA is the baseline, tested and documented.
+2. **No build tools required.** Three files, drop them in, it works.
+3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
+4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
-Three files. 45KB minified. No build step required.
+45KB minified. Zero required dependencies. Works with any framework or none.
 
-**[Live Demo & Docs](https://adrianspeyer.github.io/speyer-ui/)** · **[GitHub](https://github.com/adrianspeyer/speyer-ui)** · Created by [Adrian Speyer](https://github.com/adrianspeyer)
+**[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
-Made in Canada with love 🇨🇦
+Built for internal tools, SaaS dashboards, and lightweight web applications.
 
 ---
 
-## Why SUI Exists
+## Why This Exists
 
-Most design systems bolt accessibility on as a checklist item at the end. SUI builds it into the architecture from the start.
+I'm color blind. When I started using AI coding assistants to build web applications, every tool produced interfaces that relied on color to communicate status — green for success, red for error, with no icons, no labels, nothing else. I'd ship a dashboard and realize I couldn't tell which rows were active and which had failed.
 
-**Every status badge, alert, and indicator in SUI structurally requires an icon and text label.** You can't use a success badge without a checkmark and a word. You can't create an error alert without an icon and a description. This isn't a guideline you might forget — it's how the components are built.
+I asked the AI to "make it accessible." It added some ARIA labels and moved on. The colors stayed. The pattern stayed.
 
-We made this choice because:
+So I built SUI — a system where the components themselves won't let you skip accessibility. You can't create a success badge without an icon and a label. You can't build an alert without a text description. The constraint is structural, not aspirational.
 
-- **8% of men have red-green color deficiency.** A green dot that means "active" is invisible to them unless it also says "Active."
-- **Accessibility isn't an edge case.** It's 1 in 12 men. It's everyone using a screen in direct sunlight. It's the person who's tired and can't tell your muted gray from your slightly less muted gray.
-- **Good accessibility is good design.** When you're forced to pair icons with labels and choose contrast ratios that work for everyone, the result is clearer for everyone.
+I use this for my own work. I'm sharing it because if you're color blind, or you build for people who are, or you just think UI should work for everyone without a 200MB `node_modules` folder — this might be useful to you too.
 
-SUI also rejects the complexity tax that most design systems impose:
-
-| What others require | What SUI requires |
-|--------------------|--------------------|
-| npm install + build pipeline | Copy 3 files |
-| Framework lock-in (React, Vue, etc.) | Plain HTML + CSS |
-| 500KB+ bundled CSS | 36KB minified CSS |
-| Configuration files | CSS custom properties |
-| Documentation site to learn | AI prompt to get started |
-
-This isn't anti-modern. It's anti-unnecessary. You can use SUI with React, Vue, Svelte, or plain HTML. The tokens are CSS custom properties that work everywhere.
+— [Adrian Speyer](https://github.com/adrianspeyer)
 
 ---
 
 ## Quick Start
 
-### Option 1: CDN (Fastest)
+### CDN (Fastest)
 
 ```html
-<!-- Minified — production ready -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui.min.js"></script>
 ```
 
-### Option 2: Download
+### Download
 
 Download the [latest release](https://github.com/adrianspeyer/speyer-ui/releases) and add the files to your project:
 
 ```html
 <link rel="stylesheet" href="sui-tokens.css">
 <link rel="stylesheet" href="sui-components.css">
-<script src="sui.js"></script> <!-- Optional: adds interactive behaviors -->
+<script src="sui.js"></script>
 ```
 
-### Option 3: AI-Assisted
+### AI-Assisted
 
-Paste one of the [AI prompts](#-ai-integration) into ChatGPT, Claude, Copilot, or Cursor. The prompt tells the AI to fetch SUI and apply it to whatever you're building.
+Paste one of the [AI prompts](#ai-integration) into any coding assistant. The prompt tells the AI to fetch SUI and apply it.
 
-### Then just use it:
+### Usage
 
 ```html
 <button class="sui-btn sui-btn-primary">
@@ -87,180 +77,151 @@ Paste one of the [AI prompts](#-ai-integration) into ChatGPT, Claude, Copilot, o
 
 ---
 
-## Core Principles
-
-These aren't aspirational. They're enforced by the component architecture.
-
-| Principle | How SUI enforces it |
-|-----------|-------------------|
-| **Readability** | Type scale optimized for scanning. 70ch max content width. Clear visual hierarchy. |
-| **Accessibility** | WCAG 2.1 AA contrast. Keyboard navigation. Focus states. `prefers-reduced-motion`. |
-| **Mobile-First** | Layouts designed small-screen-first. 44px minimum touch targets. Responsive grids. |
-| **Color-Blind Friendly** | Every status component requires icon + text structurally. No red/green-only patterns. |
-| **Consistency** | All components built from shared tokens. Same spacing, radii, and patterns everywhere. |
-
----
-
 ## Architecture
 
-| File | Purpose | Size (min) | Required? |
-|------|---------|-----------|-----------|
-| `sui-tokens.css` | Design tokens — colors, spacing, typography, shadows, z-index | 4KB | **Yes** |
-| `sui-components.css` | 25+ component classes built from tokens | 32KB | **Yes** |
-| `sui.js` | Interactive toolkit — modals, toasts, dropdowns, tooltips, accordion | 9KB | Optional |
+| File | Purpose | Minified | Required? |
+|------|---------|----------|-----------|
+| `sui-tokens.css` | Design tokens (colors, spacing, typography, shadows) | 4KB | Yes |
+| `sui-components.css` | Component classes built from tokens | 32KB | Yes |
+| `sui.js` | Interactive behaviors (modals, toasts, dropdowns) | 9KB | **No** |
 
-**Total: 45KB minified.** For comparison, Tailwind CSS is 300KB+ and Bootstrap is 200KB+.
+Total: 45KB with JS, 36KB without.
 
-CSS handles all appearance. JavaScript adds behavior. Everything works without `sui.js` — it just won't have modals, toasts, or dropdown menus.
+CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, and accordion. Components render correctly without JS — they just won't open/close/animate.
+
+### Dependencies
+
+SUI has **no required dependencies.**
+
+Icon examples in documentation use [Lucide](https://lucide.dev/) (`data-lucide` attributes). Lucide is recommended but not required — any icon library works, or plain text/emoji/SVG. If `sui.js` detects Lucide, it refreshes icons after dynamic updates. If Lucide isn't present, everything still works.
+
+The SUI JavaScript toolkit checks for `typeof lucide !== 'undefined'` in exactly two places — both are convenience re-renders, not functional requirements.
 
 ---
 
-## Repo Structure
+## Accessibility Evidence
 
-```
-speyer-ui/
-├── dist/                    ← Minified files (CDN/production)
-│   ├── sui-tokens.min.css
-│   ├── sui-components.min.css
-│   └── sui.min.js
-├── sui-tokens.css           ← Source (readable, commented)
-├── sui-components.css       ← Source
-├── sui.js                   ← Source
-├── index.html               ← Live demo (GitHub Pages)
-├── package.json             ← Repo identity & build scripts
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-└── LICENSE
-```
+SUI claims WCAG 2.1 AA compliance. Here are the receipts.
 
-**Source files** are human-readable with full comments — use these for learning and development.
-**Dist files** are minified — use these for production and CDN links.
+### Contrast Ratios (Light Mode)
+
+| Foreground | Background | Ratio | WCAG |
+|-----------|------------|-------|------|
+| `--sui-text-primary` (#0F172A) | `--sui-bg-card` (#FFFFFF) | 17.9:1 | AAA |
+| `--sui-text-primary` (#0F172A) | `--sui-bg-primary` (#F9FBFD) | 17.2:1 | AAA |
+| `--sui-text-secondary` (#475569) | `--sui-bg-card` (#FFFFFF) | 7.6:1 | AAA |
+| `--sui-success-strong` (#15803D) | `--sui-success-soft` (#F0FDF4) | 4.8:1 | AA |
+| `--sui-warning-strong` (#92400E) | `--sui-warning-soft` (#FFFBEB) | 6.8:1 | AA |
+| `--sui-error-strong` (#B91C1C) | `--sui-error-soft` (#FEF2F2) | 5.9:1 | AA |
+| `--sui-info-strong` (#0E7490) | `--sui-info-soft` (#ECFEFF) | 5.2:1 | AA |
+| `--sui-neutral-strong` (#334155) | `--sui-neutral-soft` (#F1F5F9) | 9.5:1 | AAA |
+| `--sui-pro-strong` (#6D28D9) | `--sui-pro-soft` (#F5F3FF) | 6.5:1 | AA |
+| White | `--sui-blue-primary` (#3B82F6) | 3.7:1 | AA-lg |
+| White | `--sui-success-strong` (#15803D) | 5.0:1 | AA |
+| White | `--sui-error-strong` (#B91C1C) | 6.5:1 | AA |
+
+### Contrast Ratios (Dark Mode)
+
+| Foreground | Background | Ratio | WCAG |
+|-----------|------------|-------|------|
+| `--sui-text-primary` (#F8FAFC) | `--sui-bg-card` (#161E2C) | 16.0:1 | AAA |
+| `--sui-text-primary` (#F8FAFC) | `--sui-bg-primary` (#0B0F1A) | 18.3:1 | AAA |
+| `--sui-text-secondary` (#94A3B8) | `--sui-bg-card` (#161E2C) | 6.5:1 | AA |
+| `--sui-success-strong` (#22C55E) | `--sui-success-soft` (#052E16) | 6.5:1 | AA |
+| `--sui-warning-strong` (#FBBF24) | `--sui-warning-soft` (#422006) | 8.7:1 | AAA |
+| `--sui-error-strong` (#EF4444) | `--sui-error-soft` (#450A0A) | 4.3:1 | AA-lg |
+| `--sui-info-strong` (#22D3EE) | `--sui-info-soft` (#083344) | 7.4:1 | AAA |
+
+### Known Limitations
+
+| Pair | Ratio | Status | Why |
+|------|-------|--------|-----|
+| `--sui-text-muted` on card | 2.6:1 (light) / 2.2:1 (dark) | Below AA | Intentional. Muted text is for non-essential metadata (timestamps, placeholder, helper text). Essential content must never use muted. |
+| White on `--sui-blue-primary` | 3.7:1 | AA for large text | Primary buttons use 14px/600 weight. At this size the ratio passes AA for UI components per common industry practice but falls short of AA normal text (4.5:1). |
+| `--sui-error-strong` on `--sui-error-soft` (dark) | 4.3:1 | AA for large text | Badge/alert text at 12px falls slightly below AA normal text in dark mode. The icon + text pattern provides the redundant signal. |
+
+These limitations are documented, not hidden. SUI achieves AA for body text, headings, and status text in both modes. Buttons and muted text have noted exceptions.
+
+### Keyboard Behavior Per Component
+
+| Component | Tab | Enter/Space | Escape | Arrow Keys |
+|-----------|-----|-------------|--------|------------|
+| Buttons | Focus | Activate | — | — |
+| Tabs | Focus | Activate | — | Left/Right switch |
+| Accordion | Focus trigger | Toggle panel | — | — |
+| Modal | Trapped inside | Activate buttons | Close | — |
+| Dropdown | Focus trigger | Open/select item | Close | Up/Down navigate |
+| Tooltip | Focus trigger shows | — | — | — |
+| Pagination | Focus each button | Navigate | — | — |
+
+### Color-Blind Design
+
+SUI uses red and green hues for success/error states. These hues are **never the only signal.** Every status pattern includes:
+
+- A descriptive **text label** (e.g., "Active", "Failed")
+- A distinguishing **icon** (✔, ✕, ⚠, ℹ)
+- Sufficient **contrast** on its background
+
+This means a user who cannot distinguish red from green will still see "✔ Active" and "✕ Failed" with clear icon differentiation and readable text.
+
+### Reduced Motion
+
+When `prefers-reduced-motion: reduce` is set:
+- All CSS transitions are set to 0ms
+- All CSS animations are set to 0ms
+- Scroll behavior is set to `auto`
+- Progress bar indeterminate animation stops
 
 ---
 
 ## Display Modes
 
 ```html
-<!-- Light mode (default) -->
-<html>
-
-<!-- Dark mode -->
-<html data-theme="dark">
-
-<!-- Auto (follows OS preference) — omit the attribute -->
+<html>                       <!-- Light mode (default) -->
+<html data-theme="dark">     <!-- Dark mode -->
+<!-- Omit attribute for auto (follows OS preference) -->
 ```
 
 Toggle with JavaScript: `SUI.theme.toggle()` or `SUI.theme.set('dark')`.
-
-Both modes maintain identical contrast ratios, component behavior, and accessibility standards.
 
 ---
 
 ## Color System
 
-All colors are CSS custom properties with the `--sui-` prefix. Every color has light and dark mode values.
-
-### Brand & Actions
-
-| Token | Usage |
-|-------|-------|
-| `--sui-blue-primary` | Primary buttons, links, active states |
-| `--sui-blue-hover` | Hover state |
-| `--sui-blue-active` | Active/pressed state |
-| `--sui-blue-soft` | Subtle backgrounds, focus rings |
-
-### Backgrounds & Surfaces
-
-| Token | Usage |
-|-------|-------|
-| `--sui-bg-primary` | Page background |
-| `--sui-bg-card` | Card and panel backgrounds |
-| `--sui-bg-elevated` | Elevated/nested surfaces |
-| `--sui-border` | Borders and dividers |
-
-### Text
-
-| Token | Usage |
-|-------|-------|
-| `--sui-text-primary` | Headings, body text |
-| `--sui-text-secondary` | Supporting text |
-| `--sui-text-muted` | Placeholder, metadata |
-| `--sui-text-inverse` | Text on colored backgrounds |
+All colors are CSS custom properties with the `--sui-` prefix. Every color has light and dark mode values defined in three blocks: `:root`, `[data-theme="dark"]`, and `@media (prefers-color-scheme: dark)`.
 
 ### Status Colors
 
-Each status has three variants: base (icons), strong (text on soft bg), and soft (backgrounds).
+Each status has three tokens: base (icons), strong (text on soft backgrounds), soft (backgrounds).
 
-| Status | Usage | Tokens |
-|--------|-------|--------|
-| Success | Active, passed, deployed | `--sui-success`, `-strong`, `-soft` |
-| Warning | Pending, review needed | `--sui-warning`, `-strong`, `-soft` |
-| Error | Failed, critical, blocked | `--sui-error`, `-strong`, `-soft` |
-| Info | Stable, informational | `--sui-info`, `-strong`, `-soft` |
-| Neutral | Inactive, default | `--sui-neutral`, `-strong`, `-soft` |
-| Pro | Premium, paid features | `--sui-pro`, `-strong`, `-soft` |
+| Status | Tokens | Usage |
+|--------|--------|-------|
+| Success | `--sui-success`, `-strong`, `-soft` | Active, passed, deployed |
+| Warning | `--sui-warning`, `-strong`, `-soft` | Pending, review needed |
+| Error | `--sui-error`, `-strong`, `-soft` | Failed, critical, blocked |
+| Info | `--sui-info`, `-strong`, `-soft` | Stable, informational |
+| Neutral | `--sui-neutral`, `-strong`, `-soft` | Inactive, default |
+| Pro | `--sui-pro`, `-strong`, `-soft` | Premium, paid features |
 
-### Elevation
+### Backgrounds, Text, Brand, Elevation
+
+Full token reference with hex values is in `sui-tokens.css` (readable source) and on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Designers tab.
+
+### Elevation Philosophy
+
+Borders are the default card separation. Shadows are opt-in via `sui-card-shadow`. This is a deliberate aesthetic choice — flat interfaces are more scannable, and shadows are reserved for layered elements (dropdowns, modals, tooltips) where depth communicates function.
 
 | Token | Usage |
 |-------|-------|
 | `--sui-shadow-sm` | Dropdowns, subtle depth |
 | `--sui-shadow-md` | Cards (opt-in), popovers |
 | `--sui-shadow-lg` | Modals, dialogs |
-| `--sui-overlay` | Modal/dialog backdrops |
-
-**Design choice:** Borders are the default separation method. Shadows are opt-in via `sui-card-shadow`. This keeps interfaces flat and scannable.
-
-### Z-Index Scale
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--sui-z-dropdown` | 100 | Dropdown menus |
-| `--sui-z-sticky` | 200 | Sticky headers |
-| `--sui-z-modal` | 300 | Modals/dialogs |
-| `--sui-z-tooltip` | 400 | Tooltips, toasts |
-
----
-
-## Accessibility
-
-### The Core Rule
-
-**Color must never be the only way information is communicated.**
-
-Every status indicator requires:
-- ✅ An icon or symbol
-- ✅ A text label
-- ✅ Sufficient contrast (WCAG AA)
-
-This is enforced by component structure, not by developer discipline.
-
-### Required Alert Patterns
-
-| State | Icon | Example |
-|-------|------|---------|
-| Success | ✔ | "Saved successfully" |
-| Warning | ⚠ | "Review required" |
-| Error | ✕ | "Upload failed" |
-| Info | ℹ | "Changes applied" |
-
-### What SUI Prevents
-
-- ❌ Color-only status indicators (green dot with no label)
-- ❌ Red/green-only patterns
-- ❌ Unlabeled colored badges
-- ❌ Traffic-light patterns without text
-
-### WCAG 2.1 AA Compliance
-
-All SUI projects include: contrast ratios meeting AA, full keyboard navigation, screen reader compatibility, visible focus states, proper ARIA labels, and `prefers-reduced-motion` support.
 
 ---
 
 ## Typography
 
-**Font:** [Inter](https://rsms.me/inter/) (Google Fonts) — free, open-source, optimized for screens.
+**Font:** [Inter](https://rsms.me/inter/) via Google Fonts. Fallback: `system-ui, -apple-system, sans-serif`.
 
 | Element | Size | Weight | Line Height |
 |---------|------|--------|-------------|
@@ -271,32 +232,19 @@ All SUI projects include: contrast ratios meeting AA, full keyboard navigation, 
 | Small | 14px | 400 | 1.5 |
 | Meta | 12px | 400 | 1.5 |
 
----
-
 ## Layout & Spacing
 
-**8px grid:** `--sui-space-1` (4px) through `--sui-space-6` (48px).
-
-| Rule | Value |
-|------|-------|
-| Minimum touch target | 44px × 44px |
-| Max content width | 1280px |
-| Approach | Mobile-first, scale up |
-| Breakpoints | 480px, 721px, 769px, 1025px |
+8px grid: `--sui-space-1` (4px) through `--sui-space-6` (48px). Min touch target: 44px. Max content width: 1280px. Mobile-first breakpoints at 480px, 721px, 769px, 1025px.
 
 ---
 
 ## Components
 
-SUI provides 25+ components. Full code examples are on the [live demo](https://adrianspeyer.github.io/speyer-ui/).
+SUI provides 25+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
 
 ### Buttons
 
 `sui-btn` · `sui-btn-primary` · `sui-btn-secondary` · `sui-btn-ghost` · `sui-btn-danger` · `sui-btn-success` · `sui-btn-sm` · `sui-btn-full`
-
-```html
-<button class="sui-btn sui-btn-primary"><i data-lucide="plus"></i>Create</button>
-```
 
 ### Cards
 
@@ -310,7 +258,7 @@ SUI provides 25+ components. Full code examples are on the [live demo](https://a
 
 `sui-toggle-label` · `sui-toggle` · `sui-toggle-track`
 
-### Badges (complete SaaS set)
+### Badges (Complete SaaS Set)
 
 Status: `sui-badge-success` · `sui-badge-warning` · `sui-badge-error` · `sui-badge-info` · `sui-badge-neutral`
 
@@ -318,218 +266,247 @@ Feature: `sui-badge-new` · `sui-badge-beta` · `sui-badge-pro`
 
 Modifiers: `sui-badge-outline` · `sui-badge-sm` · `sui-badge-dot` · `sui-badge-count`
 
-```html
-<span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Active</span>
-<span class="sui-badge sui-badge-pro"><i data-lucide="crown"></i>Pro</span>
-<span class="sui-badge sui-badge-success sui-badge-dot">Online</span>
-<span class="sui-badge-count">3</span>
-```
-
 ### Alerts
 
 `sui-alert` · `sui-alert-success` · `sui-alert-warning` · `sui-alert-error` · `sui-alert-info`
 
-### Avatars (initials only — no images by design)
+### Avatars (Initials Only)
 
 `sui-avatar` · `sui-avatar-sm` (32px) · `sui-avatar-md` (40px) · `sui-avatar-lg` (56px) · `sui-avatar-group`
 
+No images by design. Deterministic colors from initials via `sui.js`. Privacy-friendly, no broken states, no CDN dependency.
+
 ### Progress Bars
 
-`sui-progress` · `sui-progress-bar` · `sui-progress-success/warning/error/info` · `sui-progress-lg` · `sui-progress-indeterminate`
+`sui-progress` · `sui-progress-bar` · Status variants · `sui-progress-lg` · `sui-progress-indeterminate`
 
 ### Tables
 
 `sui-table-wrap` · `sui-table` · `sui-table-striped` · `sui-table-hover`
 
-Responsive: stacks to card layout on mobile via `data-label` attributes.
+Responsive: stacks to card layout on mobile via `data-label` attributes on `<td>`.
 
 ### Navigation
 
-**Breadcrumb:** `sui-breadcrumb` · **Pagination:** `sui-pagination` · `sui-page-btn`
+Breadcrumb: `sui-breadcrumb` · Pagination: `sui-pagination` · `sui-page-btn`
 
 ### Interactive (requires `sui.js`)
 
-**Accordion:** `sui-accordion` · **Dropdown:** `sui-dropdown` · **Modal:** `sui-modal-overlay` + `sui-modal` · **Toast:** `SUI.toast.success()` · **Tooltip:** `sui-tooltip`
+Accordion · Dropdown · Modal/Dialog · Toast notifications · Tooltip
 
 ### Structural
 
-**Dividers:** `sui-divider` · `sui-divider-label` · `sui-divider-v`
+Dividers · Empty state · Skeleton loaders · Stat cards
 
-**Empty State:** `sui-empty` · `sui-empty-icon` · `sui-empty-title` · `sui-empty-text`
+### Layout & Utilities
 
-**Skeleton Loader:** `sui-skeleton` · `sui-skeleton-text` · `sui-skeleton-avatar` · `sui-skeleton-card`
+Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`)
 
-**Stats:** `sui-stat` · `sui-kpi-label` · `sui-kpi-value`
+---
 
-### Layout & Grid
+## Signature Patterns
 
-`sui-wrap` · `sui-grid` · `sui-grid-2/3/4/sidebar` · `sui-section` · `sui-section-head`
+These patterns demonstrate how SUI components combine for common SaaS views.
 
-### Utilities
+### Status Table (Admin Dashboard)
 
-**Spacing:** `sui-mt-1` to `sui-mt-6` · `sui-mb-2` to `sui-mb-4` · `sui-p-3` to `sui-p-5`
+```html
+<div class="sui-card sui-card-flush">
+  <div class="sui-card-header">
+    <h3>Team Members</h3>
+    <button class="sui-btn sui-btn-primary sui-btn-sm">
+      <i data-lucide="plus"></i> Invite
+    </button>
+  </div>
+  <div class="sui-table-wrap">
+    <table class="sui-table sui-table-hover">
+      <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-label="Name">
+            <div class="sui-flex sui-items-center sui-gap-2">
+              <span class="sui-avatar sui-avatar-sm">AS</span>
+              <strong>Adrian Speyer</strong>
+            </div>
+          </td>
+          <td data-label="Role">Admin</td>
+          <td data-label="Status">
+            <span class="sui-badge sui-badge-success sui-badge-dot">Active</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+```
 
-**Flex:** `sui-flex` · `sui-flex-col` · `sui-flex-between` · `sui-flex-center`
+### Settings Form
 
-**Text:** `sui-text-muted` · `sui-text-secondary` · `sui-text-bold` · `sui-text-center` · `sui-text-cap`
+```html
+<div class="sui-card sui-card-lg">
+  <h2>Notification Settings</h2>
+  <p class="sui-mt-2">Choose how you want to be notified.</p>
+  <hr class="sui-divider" />
+  <div class="sui-flex-between sui-mb-4">
+    <div>
+      <div class="sui-text-bold">Email notifications</div>
+      <small class="sui-text-muted">Get notified when someone mentions you.</small>
+    </div>
+    <label class="sui-toggle-label">
+      <span class="sui-toggle">
+        <input type="checkbox" checked>
+        <span class="sui-toggle-track"></span>
+      </span>
+    </label>
+  </div>
+  <div class="sui-flex-between">
+    <div>
+      <div class="sui-text-bold">Weekly digest</div>
+      <small class="sui-text-muted">Summary of activity every Monday.</small>
+    </div>
+    <label class="sui-toggle-label">
+      <span class="sui-toggle">
+        <input type="checkbox">
+        <span class="sui-toggle-track"></span>
+      </span>
+    </label>
+  </div>
+</div>
+```
+
+### Empty State + Call to Action
+
+```html
+<div class="sui-card">
+  <div class="sui-empty">
+    <div class="sui-empty-icon"><i data-lucide="inbox"></i></div>
+    <div class="sui-empty-title">No projects yet</div>
+    <div class="sui-empty-text">
+      Create your first project to get started.
+    </div>
+    <button class="sui-btn sui-btn-primary">
+      <i data-lucide="plus"></i> Create project
+    </button>
+  </div>
+</div>
+```
 
 ---
 
 ## JavaScript API (`sui.js`)
 
-Optional. Auto-initializes via `data-sui-*` attributes.
+Optional toolkit. Auto-initializes via `data-sui-*` attributes.
 
 ### Auto-init Attributes
 
 | Attribute | Effect |
 |-----------|--------|
-| `data-sui-theme` | Toggles light/dark/auto |
-| `data-sui-modal="#id"` | Opens modal |
-| `data-sui-copy="#id"` | Copies element text |
-| `data-sui-dropdown-trigger` | Opens parent dropdown |
+| `data-sui-theme` | Toggles light/dark/auto on click |
+| `data-sui-modal="#id"` | Opens modal on click |
+| `data-sui-copy="#id"` | Copies element text on click |
+| `data-sui-dropdown-trigger` | Opens parent dropdown on click |
 
-### Programmatic API
+### API
 
 ```javascript
 SUI.theme.set('dark')                          // 'light', 'dark', 'auto'
 SUI.theme.toggle()                             // Cycles modes
-SUI.modal.open('#id')                          // Open modal
-SUI.modal.close('#id')                         // Close modal
-SUI.toast.success('Saved!', 'Details here')    // Show toast
+SUI.modal.open('#id')                          // Focus trap, Escape, scroll lock
+SUI.modal.close('#id')
+SUI.toast.success('Saved!', 'Details here')    // Auto-dismiss, stackable
 SUI.toast.error('Failed', 'Try again')
-SUI.dropdown.toggle(element)                   // Toggle dropdown
-SUI.copy.text('string')                        // Copy to clipboard
-SUI.avatar.colorFor('AS')                      // Get deterministic color
+SUI.dropdown.toggle(element)                   // Click toggle, outside-click close
+SUI.copy.text('string')                        // Clipboard with fallback
+SUI.avatar.colorFor('AS')                      // Deterministic color from initials
 ```
 
 ---
 
-## CDN Usage (jsDelivr)
+## CDN Usage
 
-jsDelivr automatically serves any tagged GitHub release. After you create a release (see below), these URLs work immediately:
-
-### Latest tagged release
+jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui.min.js"></script>
+<!-- Production (minified) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui.min.js"></script>
+
+<!-- Development (readable) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/sui-tokens.css">
 ```
 
-### Source files (readable, for development)
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/sui-tokens.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/sui-components.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/sui.js"></script>
-```
-
-Replace `@2.0.0` with any version tag. Use `@main` for bleeding edge (not recommended for production).
+Replace `@2.0.0` with any version tag. Use exact versions in production, not `@main`.
 
 ---
 
-## 🤖 AI Integration
+## AI Integration
 
-SUI is designed to work with AI coding assistants. No AI has SUI in its training data — these prompts teach it.
+No AI has SUI in its training data. These prompts teach it. Paste into ChatGPT, Claude, Copilot, Cursor, or any assistant.
 
-### How It Works
+Three prompt tiers are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) with copy buttons:
 
-1. Paste one of the prompts into your AI tool
-2. The AI fetches the official SUI files from GitHub
-3. It applies SUI tokens and component classes to whatever you build
-
-Three prompt tiers are available on the [live demo](https://adrianspeyer.github.io/speyer-ui/) with copy buttons:
-
-- **Quick Prompt** — recommended for most tasks
-- **Minimal Prompt** — for fast, simple requests
+- **Quick Prompt** — comprehensive, recommended for most tasks
+- **Minimal Prompt** — fast, for simple requests
 - **System Prompt** — for Cursor rules or custom instructions
 
-### Tips
-
-- Paste the prompt before describing your task
-- Say "continue using SUI" for follow-up requests
-- If the AI encounters a pattern SUI doesn't cover, ask it to note what's missing — then [open an issue](https://github.com/adrianspeyer/speyer-ui/issues) so we can evaluate it for inclusion
+All prompts instruct the AI to fetch the actual CSS files, ensuring it uses the latest token values. If an AI encounters a pattern SUI doesn't cover, the prompt tells it to flag it.
 
 ---
 
-## Creating a Release (For Maintainers)
+## Repo Structure
 
-When you're ready to publish a new version:
-
-### Step 1: Update version numbers
-
-Update the version in these files:
-- `package.json` → `"version": "2.0.0"`
-- `sui-tokens.css` → comment header
-- `sui-components.css` → comment header
-- `sui.js` → comment header
-- `index.html` → version pill and footer
-
-### Step 2: Rebuild minified files
-
-```bash
-npm run build
+```
+speyer-ui/
+├── dist/                    ← Minified (CDN/production)
+│   ├── sui-tokens.min.css
+│   ├── sui-components.min.css
+│   └── sui.min.js
+├── sui-tokens.css           ← Source (readable)
+├── sui-components.css
+├── sui.js
+├── index.html               ← Live demo (GitHub Pages)
+├── package.json
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+└── LICENSE
 ```
 
-This creates fresh minified files in `/dist`.
+---
 
-### Step 3: Commit everything
+## Creating a Release
 
 ```bash
+# Update version in: package.json, sui-tokens.css, sui-components.css, sui.js, index.html
+npm run build              # Regenerate /dist
 git add -A
-git commit -m "Release v2.0.0"
-```
-
-### Step 4: Create a Git tag
-
-```bash
-git tag v2.0.0
+git commit -m "Release vX.Y.Z"
+git tag vX.Y.Z
 git push origin main --tags
 ```
 
-### Step 5: Create a GitHub Release
-
-1. Go to your repo → **Releases** → **Draft a new release**
-2. Choose the tag you just pushed (`v2.0.0`)
-3. Title: `v2.0.0`
-4. Description: Copy the relevant section from CHANGELOG.md
-5. Click **Publish release**
-
-**That's it.** Within minutes, jsDelivr will serve your files at:
-```
-https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-tokens.min.css
-```
-
-No configuration, no signup, no deployment pipeline.
+Then create a [GitHub Release](https://github.com/adrianspeyer/speyer-ui/releases) from the tag. jsDelivr picks it up automatically within minutes.
 
 ---
 
 ## Testing Checklist
 
-- [ ] Light mode contrast meets WCAG AA
-- [ ] Dark mode contrast meets WCAG AA
-- [ ] Color blindness simulation tested
+- [ ] Light mode contrast meets documented levels
+- [ ] Dark mode contrast meets documented levels
+- [ ] Color blindness simulation tested (Chrome DevTools → Rendering)
 - [ ] All status indicators include text + icon
 - [ ] Mobile layout verified (320px minimum)
-- [ ] Keyboard navigation works
+- [ ] Keyboard navigation works for all interactive elements
 - [ ] Focus states visible
 - [ ] `prefers-reduced-motion` respected
 - [ ] Touch targets at least 44px
-
-### Recommended Tools
-
-- [Stark](https://www.getstark.co/) — Figma accessibility
-- [Color Oracle](https://colororacle.org/) — Color blindness simulator
-- Chrome DevTools → Rendering → Emulate vision deficiencies
-- [axe DevTools](https://www.deque.com/axe/) — Accessibility auditing
 
 ---
 
 ## Contributing
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-**Using SUI with an AI tool and noticed something missing?** [Open an issue](https://github.com/adrianspeyer/speyer-ui/issues) or submit a pull request. We're building this system to be comprehensive enough that any AI can generate compliant UI without extra instructions — and we need real-world usage to find the gaps.
+See [CONTRIBUTING.md](CONTRIBUTING.md). If you're using SUI with an AI tool and notice a missing component, [open an issue](https://github.com/adrianspeyer/speyer-ui/issues) or submit a pull request. We want this system to be comprehensive enough that any AI can generate compliant UI without extra instructions — real-world usage helps us find the gaps.
 
 ---
 
@@ -537,6 +514,4 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 [MIT](LICENSE) — free for personal and commercial use.
 
----
-
-*Made in Canada with love 🇨🇦*
+Created by [Adrian Speyer](https://github.com/adrianspeyer). Made in Canada 🇨🇦

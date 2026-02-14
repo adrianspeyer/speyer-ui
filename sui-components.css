@@ -1,6 +1,6 @@
 /*
  * Speyer UI System (SUI) — Components
- * Version: 2.0.0
+ * Version: 2.0.1
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -436,18 +436,18 @@ a:focus-visible {
 }
 
 .sui-btn-danger {
-  background: var(--sui-error);
+  background: var(--sui-error-strong);
   border-color: transparent;
   color: var(--sui-text-inverse);
 }
-.sui-btn-danger:hover { background: var(--sui-error-strong); }
+.sui-btn-danger:hover { background: #991B1B; }
 
 .sui-btn-success {
-  background: var(--sui-success);
+  background: var(--sui-success-strong);
   border-color: transparent;
   color: var(--sui-text-inverse);
 }
-.sui-btn-success:hover { background: var(--sui-success-strong); }
+.sui-btn-success:hover { background: #116932; }
 
 .sui-btn-sm {
   min-height: 36px;
@@ -459,6 +459,14 @@ a:focus-visible {
 
 .sui-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .sui-btn-sm svg { width: 16px; height: 16px; }
+
+/* Dark mode: button backgrounds stay dark enough for white text contrast */
+[data-theme="dark"] .sui-btn-primary { background: #3B82F6; }
+[data-theme="dark"] .sui-btn-primary:hover { background: #2563EB; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .sui-btn-primary { background: #3B82F6; }
+  :root:not([data-theme]) .sui-btn-primary:hover { background: #2563EB; }
+}
 
 
 /* ==========================================================================

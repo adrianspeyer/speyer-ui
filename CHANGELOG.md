@@ -4,6 +4,27 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.1] — 2026-02-14
+
+### Fixed
+- **Success button contrast failure:** was 2.3:1 (FAIL), now 5.0:1 (AA) — changed background from `--sui-success` to `--sui-success-strong`
+- **Danger button contrast:** was 3.8:1, now 6.5:1 (AA) — changed background from `--sui-error` to `--sui-error-strong`
+- **Dark mode primary button:** added explicit override to prevent white-on-light-blue contrast failure (was 2.5:1)
+- **Dark mode error-strong on error-soft:** documented as AA-lg (4.3:1) — icon + text pattern provides redundant signal
+
+### Added
+- **Accessibility Evidence section** in README: full contrast ratio tables (light + dark), keyboard behavior per component, reduced motion notes, known limitations documented honestly
+- **Origin story** in README: why SUI was built (color-blind developer, AI tools ignoring accessibility)
+- **Signature Patterns** in README: Status Table, Settings Form, Empty State — concrete SUI use cases
+- **Dependencies section** in README: explicit statement that SUI has no required dependencies, Lucide is optional
+
+### Changed
+- README rewritten with matter-of-fact tone — constraints framing replaces marketing copy
+- Demo hero text tightened to match
+- All CDN references updated to v2.0.1
+
+---
+
 ## [2.0.0] — 2026-02-14
 
 ### 🚀 Major Release — Complete Design System
@@ -104,6 +125,12 @@ This release transforms SUI from a token + component starter into a complete, pr
 
 ### Fixed
 - All inline styles eliminated from demo (except progress bar widths which require dynamic values)
+- **Success button contrast:** changed from `--sui-success` (2.3:1 FAIL) to `--sui-success-strong` (5.0:1 AA) background
+- **Danger button contrast:** changed from `--sui-error` (3.8:1) to `--sui-error-strong` (6.5:1 AA) background
+- **Dark mode primary button:** added explicit override to prevent light-on-light contrast failure (#60A5FA with white was 2.5:1)
+- **README:** replaced accessibility claims with measured contrast ratios and documented known limitations
+- **Dependency clarity:** explicitly documented that Lucide icons are optional, not required
+- **Tone:** tightened README and demo copy to be more matter-of-fact, less marketing-forward
 
 ---
 
