@@ -9,7 +9,7 @@
   <!-- Repo CSS (tokens are the contract) -->
   <link rel="stylesheet" href="./sui-tokens.css" />
 
-  <!-- Font (matches tokens default) -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -20,8 +20,8 @@
   <style>
     /* ==========================================================================
        Demo layer (components built ONLY from tokens)
-       - Intentionally small.
        - No hard-coded hex colors; use var(--sui-*)
+       - Mobile-first, touch-friendly, predictable
        ========================================================================== */
 
     html, body { height: 100%; }
@@ -41,10 +41,11 @@
     h3 { font-size: var(--sui-text-h3); font-weight: var(--sui-weight-semibold); line-height: var(--sui-leading-heading); margin: 0; }
     p  { margin: 0; color: var(--sui-text-secondary); }
     small { color: var(--sui-text-muted); }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
     /* Layout */
-    .wrap { max-width: var(--sui-max-width); margin: 0 auto; padding: var(--sui-space-5); }
-    @media (max-width: 720px) { .wrap { padding: var(--sui-space-4); } }
+    .wrap { max-width: var(--sui-max-width); margin: 0 auto; padding: var(--sui-space-4); }
+    @media (min-width: 721px) { .wrap { padding: var(--sui-space-5); } }
 
     /* Card */
     .sui-card {
@@ -103,12 +104,16 @@
       font: inherit;
       transition: border-color var(--sui-duration-fast) var(--sui-easing),
                   box-shadow var(--sui-duration-fast) var(--sui-easing);
-      min-width: 220px;
+      width: 100%;
+      min-width: 0;
     }
     .sui-input:focus {
       outline: none;
       border-color: var(--sui-blue-primary);
       box-shadow: 0 0 0 3px var(--sui-blue-soft);
+    }
+    @media (min-width: 721px) {
+      .sui-input { max-width: 320px; }
     }
 
     /* Badge (icon + label = no-color-alone) */
@@ -128,6 +133,7 @@
     }
     .sui-badge svg { width: 14px; height: 14px; }
 
+    /* Minimal variants (demo-only, token-driven) */
     .sui-badge-success { border-color: color-mix(in srgb, var(--sui-success) 35%, var(--sui-border)); color: var(--sui-success-strong); }
     .sui-badge-warning { border-color: color-mix(in srgb, var(--sui-warning) 35%, var(--sui-border)); color: var(--sui-warning); }
     .sui-badge-error   { border-color: color-mix(in srgb, var(--sui-error) 35%, var(--sui-border));   color: var(--sui-error-strong); }
@@ -145,19 +151,22 @@
     .topbar-inner {
       max-width: var(--sui-max-width);
       margin: 0 auto;
-      padding: 14px var(--sui-space-5);
+      padding: 12px var(--sui-space-4);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: var(--sui-space-3);
+      flex-wrap: wrap; /* mobile-friendly */
     }
-    @media (max-width: 720px) { .topbar-inner { padding: 14px var(--sui-space-4); } }
+    @media (min-width: 721px) {
+      .topbar-inner { padding: 14px var(--sui-space-5); flex-wrap: nowrap; }
+    }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 220px;
+      min-width: 0;
     }
     .brand-mark {
       width: 44px;
@@ -168,6 +177,7 @@
       justify-content: center;
       background: var(--sui-blue-primary);
       color: var(--sui-text-inverse);
+      flex: 0 0 auto;
     }
     .brand-mark svg { width: 22px; height: 22px; }
     .brand-title {
@@ -175,6 +185,13 @@
       align-items: center;
       gap: 10px;
       font-weight: var(--sui-weight-bold);
+      min-width: 0;
+    }
+    .brand-title span:first-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 40vw;
     }
     .version-pill {
       font-size: var(--sui-text-meta);
@@ -185,8 +202,11 @@
       color: var(--sui-text-muted);
       background: var(--sui-bg-card);
     }
+    @media (max-width: 420px) {
+      .version-pill { display: none; }
+    }
 
-    /* Tabs */
+    /* Tabs (mobile: horizontal scroll) */
     .tabs {
       display: inline-flex;
       gap: 6px;
@@ -194,7 +214,13 @@
       border-radius: var(--sui-radius-lg);
       border: 1px solid var(--sui-border);
       background: var(--sui-bg-card);
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .tabs::-webkit-scrollbar { display: none; }
+
     .tab {
       height: 36px;
       padding: 0 12px;
@@ -213,6 +239,7 @@
       transition: background var(--sui-duration-fast) var(--sui-easing),
                   border-color var(--sui-duration-fast) var(--sui-easing),
                   color var(--sui-duration-fast) var(--sui-easing);
+      flex: 0 0 auto;
     }
     .tab svg { width: 16px; height: 16px; }
     .tab[aria-selected="true"] {
@@ -222,16 +249,53 @@
     }
     .tab:focus { outline: 3px solid var(--sui-blue-soft); outline-offset: 2px; }
 
-    /* Grid helpers */
-    .grid { display: grid; gap: var(--sui-space-4); }
-    .grid-2 { grid-template-columns: 1fr 1fr; }
-    .grid-3 { grid-template-columns: 2fr 1fr; }
-    .grid-4 { grid-template-columns: repeat(4, 1fr); }
-    @media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: 1fr; } }
-    @media (max-width: 720px)  { .grid-2 { grid-template-columns: 1fr; } }
+    /* Section spacing */
+    .section { margin-top: var(--sui-space-5); }
+    @media (min-width: 721px) { .section { margin-top: var(--sui-space-6); } }
 
-    /* Table */
-    table { width: 100%; border-collapse: collapse; }
+    .section-head {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: var(--sui-space-3);
+      flex-direction: column; /* mobile default */
+    }
+    .section-actions {
+      display:flex;
+      gap: 10px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .section-actions .sui-btn { width: 100%; }
+    @media (min-width: 721px) {
+      .section-head { flex-direction: row; align-items:flex-end; }
+      .section-actions { width: auto; }
+      .section-actions .sui-btn { width: auto; }
+      .section-actions .sui-input { width: auto; }
+    }
+
+    /* Grids */
+    .grid { display: grid; gap: var(--sui-space-4); }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: 1fr; }
+    @media (min-width: 721px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1025px) {
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
+      .grid-3 { grid-template-columns: 2fr 1fr; }
+    }
+
+    /* Stat cards */
+    .stat { padding: var(--sui-space-4); min-height: 118px; display:flex; flex-direction:column; justify-content:space-between; }
+    .kpi-label { font-size: var(--sui-text-meta); letter-spacing: 0.08em; text-transform: uppercase; font-weight: var(--sui-weight-bold); color: var(--sui-text-muted); }
+    .kpi-value { font-size: 34px; font-weight: var(--sui-weight-bold); color: var(--sui-text-primary); line-height: 1; }
+
+    /* Table (mobile: stacked rows) */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 520px; }
     th, td { padding: 14px var(--sui-space-4); border-bottom: 1px solid var(--sui-border); }
     th {
       text-align: left;
@@ -243,10 +307,24 @@
     td { color: var(--sui-text-secondary); }
     td strong { color: var(--sui-text-primary); }
 
-    /* Section spacing */
-    .section { margin-top: var(--sui-space-6); }
-    .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap: var(--sui-space-3); }
-    .muted { color: var(--sui-text-secondary); }
+    /* On very small screens, allow “card rows” */
+    @media (max-width: 520px) {
+      table { min-width: 0; }
+      thead { display: none; }
+      tbody, tr, td { display: block; width: 100%; }
+      tr { border-bottom: 1px solid var(--sui-border); }
+      td { border-bottom: 0; padding: 12px var(--sui-space-4); }
+      td[data-label]::before {
+        content: attr(data-label);
+        display: block;
+        font-size: var(--sui-text-meta);
+        color: var(--sui-text-muted);
+        font-weight: var(--sui-weight-bold);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+    }
 
     /* Footer */
     footer {
@@ -266,11 +344,6 @@
     /* View toggles */
     [data-view] { display: none; }
     [data-view].is-active { display: block; }
-
-    /* Compact cards in the example usage */
-    .stat { padding: var(--sui-space-4); min-height: 118px; display:flex; flex-direction:column; justify-content:space-between; }
-    .kpi-label { font-size: var(--sui-text-meta); letter-spacing: 0.08em; text-transform: uppercase; font-weight: var(--sui-weight-bold); color: var(--sui-text-muted); }
-    .kpi-value { font-size: 34px; font-weight: var(--sui-weight-bold); color: var(--sui-text-primary); line-height: 1; }
 
     /* Accessibility: reduce motion */
     @media (prefers-reduced-motion: reduce) {
@@ -305,7 +378,7 @@
         </button>
       </nav>
 
-      <div style="display:flex; align-items:center; gap: 10px;">
+      <div style="display:flex; align-items:center; gap: 10px; width: 100%; justify-content:flex-end;">
         <button id="themeBtn" class="sui-btn sui-btn-ghost" type="button" aria-label="Toggle theme">
           <i data-lucide="moon"></i>
           <span style="font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); letter-spacing: 0.08em; text-transform: uppercase;">Theme</span>
@@ -324,7 +397,7 @@
             A strict, token-driven UI system focused on clarity, accessibility, and consistency.
           </p>
         </div>
-        <div style="display:flex; gap: 10px; align-items:center;">
+        <div class="section-actions">
           <button class="sui-btn" type="button"><i data-lucide="share-2"></i>Export</button>
           <input class="sui-input" placeholder="Quick search…" aria-label="Quick search" />
         </div>
@@ -377,7 +450,7 @@
             This page consumes your repo’s <code>sui-tokens.css</code>. Toggle theme to validate variable switching.
           </p>
 
-          <div class="section grid" style="grid-template-columns: 1fr 1fr; margin-top: var(--sui-space-5);">
+          <div class="section grid" style="grid-template-columns: 1fr; gap: var(--sui-space-3); margin-top: var(--sui-space-5);">
             <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
               <div class="kpi-label">Primary</div>
               <div style="margin-top: var(--sui-space-2); font-weight: var(--sui-weight-bold);">--sui-blue-primary</div>
@@ -403,41 +476,13 @@
             </div>
           </div>
 
-          <div class="section sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
+          <div class="section sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated); margin-top: var(--sui-space-4);">
             <div class="kpi-label" style="margin-bottom: var(--sui-space-3);">Status badges (icon + label)</div>
             <div style="display:flex; gap: 10px; flex-wrap: wrap;">
               <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Success</span>
               <span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle"></i>Warning</span>
               <span class="sui-badge sui-badge-error"><i data-lucide="x-circle"></i>Error</span>
               <span class="sui-badge sui-badge-info"><i data-lucide="activity"></i>Stable</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section sui-card" style="padding: var(--sui-space-5);">
-        <h2>Components</h2>
-        <p style="margin-top: var(--sui-space-2); max-width: 80ch;">
-          Components are intentionally simple. Avoid cleverness; prioritize readability and predictable structure.
-        </p>
-
-        <div class="section grid grid-2" style="margin-top: var(--sui-space-5);">
-          <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
-            <h3>Buttons</h3>
-            <p style="margin-top: var(--sui-space-2);">Use clear labels. Keep a single primary action.</p>
-            <div style="margin-top: var(--sui-space-3); display:flex; gap: 10px; flex-wrap: wrap;">
-              <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Primary</button>
-              <button class="sui-btn" type="button"><i data-lucide="download"></i>Secondary</button>
-              <button class="sui-btn sui-btn-ghost" type="button"><i data-lucide="settings"></i>Ghost</button>
-            </div>
-          </div>
-
-          <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
-            <h3>Inputs</h3>
-            <p style="margin-top: var(--sui-space-2);">Touch target is 44px. Focus ring uses tokens.</p>
-            <div style="margin-top: var(--sui-space-3); display:flex; gap: 10px; flex-wrap: wrap; align-items:center;">
-              <input class="sui-input" placeholder="Email address" aria-label="Email address" />
-              <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="send"></i>Submit</button>
             </div>
           </div>
         </div>
@@ -453,7 +498,7 @@
             A sample dashboard-like layout that demonstrates SUI tokens and patterns in a real UI.
           </p>
         </div>
-        <div style="display:flex; gap: 10px;">
+        <div class="section-actions">
           <button class="sui-btn" type="button"><i data-lucide="share-2"></i>Export</button>
           <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>New instance</button>
         </div>
@@ -462,7 +507,7 @@
       <div class="section grid grid-4">
         <div class="sui-card stat">
           <div class="kpi-label">Network health</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px;">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
             <div class="kpi-value">99.9%</div>
             <span class="sui-badge sui-badge-info"><i data-lucide="activity"></i>Stable</span>
           </div>
@@ -470,7 +515,7 @@
 
         <div class="sui-card stat">
           <div class="kpi-label">Active users</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px;">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
             <div class="kpi-value">1,284</div>
             <span class="sui-badge sui-badge-success"><i data-lucide="trending-up"></i>+12%</span>
           </div>
@@ -478,7 +523,7 @@
 
         <div class="sui-card stat">
           <div class="kpi-label">A11y score</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px;">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
             <div class="kpi-value">AA+</div>
             <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Passed</span>
           </div>
@@ -486,7 +531,7 @@
 
         <div class="sui-card stat">
           <div class="kpi-label">Sync rate</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px;">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
             <div class="kpi-value">2ms</div>
             <span class="sui-badge sui-badge-info"><i data-lucide="zap"></i>Fast</span>
           </div>
@@ -495,12 +540,12 @@
 
       <div class="section grid grid-3">
         <div class="sui-card" style="overflow:hidden;">
-          <div style="padding: var(--sui-space-4); border-bottom: 1px solid var(--sui-border); display:flex; align-items:center; justify-content:space-between;">
+          <div style="padding: var(--sui-space-4); border-bottom: 1px solid var(--sui-border); display:flex; align-items:center; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
             <h3>Recent deployments</h3>
             <button class="sui-btn sui-btn-ghost" type="button" style="height: 36px;"><i data-lucide="arrow-right"></i>View all</button>
           </div>
 
-          <div style="overflow-x:auto;">
+          <div class="table-wrap" aria-label="Recent deployments table container">
             <table aria-label="Recent deployments table">
               <thead>
                 <tr>
@@ -511,19 +556,19 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Nexus Alpha</strong></td>
-                  <td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Deployed</span></td>
-                  <td>Adrian Speyer</td>
+                  <td data-label="Project"><strong>Nexus Alpha</strong></td>
+                  <td data-label="Status"><span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Deployed</span></td>
+                  <td data-label="Owner">Adrian Speyer</td>
                 </tr>
                 <tr>
-                  <td><strong>Beta Horizon</strong></td>
-                  <td><span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle"></i>Pending</span></td>
-                  <td>Design Team</td>
+                  <td data-label="Project"><strong>Beta Horizon</strong></td>
+                  <td data-label="Status"><span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle"></i>Pending</span></td>
+                  <td data-label="Owner">Design Team</td>
                 </tr>
                 <tr>
-                  <td><strong>Legacy Core</strong></td>
-                  <td><span class="sui-badge sui-badge-error"><i data-lucide="x-circle"></i>Failed</span></td>
-                  <td>System Admin</td>
+                  <td data-label="Project"><strong>Legacy Core</strong></td>
+                  <td data-label="Status"><span class="sui-badge sui-badge-error"><i data-lucide="x-circle"></i>Failed</span></td>
+                  <td data-label="Owner">System Admin</td>
                 </tr>
               </tbody>
             </table>
@@ -648,27 +693,60 @@
             Use this as a system instruction so AI-generated UI stays consistent with SUI.
           </p>
         </div>
-        <div>
+        <div class="section-actions">
           <button class="sui-btn sui-btn-primary" id="copyBtn" type="button"><i data-lucide="copy"></i>Copy prompt</button>
         </div>
       </div>
 
       <div class="section sui-card" style="padding: var(--sui-space-5);">
-        <pre id="promptText" style="margin:0; white-space:pre-wrap; font-size: var(--sui-text-small); line-height: 1.55; color: var(--sui-text-secondary);">I am using the Speyer UI System (SUI). Strictly follow these constraints:
+        <pre id="promptText" style="margin:0; white-space:pre-wrap; font-size: var(--sui-text-small); line-height: 1.55; color: var(--sui-text-secondary);">I want you to use the Speyer UI System (SUI) for this project.
 
-1) Tokens: Use ONLY CSS variables from sui-tokens.css (var(--sui-*)).
-2) Theme: Dark mode is applied via [data-theme="dark"] on the html element.
-3) Typography: Inter. Weights: 400/600/700. H1 32px, H2 24px, H3 20px.
-4) No-Color-Alone: Every status MUST include icon + text label (and preferably shape).
-5) Geometry: Inputs/buttons 12px radius; cards 16px radius; use 8px spacing grid.
-6) Accessibility: Ensure readable contrast and clear focus rings. Avoid relying on red/green alone.
+## Step 1: Fetch the design tokens
+Fetch the official SUI CSS token file from this URL:
+https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
 
-Build a UI that is clean, predictable, mobile-friendly, and strictly token-driven.</pre>
+Use the CSS custom properties defined in that file as the foundation for all styling. All tokens use the --sui- prefix.
+
+## Step 2: Confirm display mode
+Before writing any code, ask me:
+"Would you like light mode only, dark mode only, or both (with a toggle)?"
+Then implement accordingly:
+- Light mode = default :root tokens
+- Dark mode = [data-theme="dark"] tokens
+- Both = include both token sets + a toggle using the data-theme attribute
+
+## Step 3: Apply SUI design rules
+Core Principles: readability, accessibility, mobile-friendly, color-blind friendly, consistency.
+
+Typography: Inter font (Google Fonts). Fallback: system-ui.
+Scale: H1 32px/700, H2 24px/600, H3 20px/600, Body 16px/400, Small 14px/400, Meta 12px/400.
+
+Layout: 8px spacing grid (--sui-space-1 through --sui-space-6). Mobile-first. Max width: 1280px. Min touch target: 44px.
+
+Components:
+- Buttons: 44px min height, 12px border-radius, visible focus states
+- Cards: 16px border-radius, border-based separation, 16-24px padding
+- Inputs: visible borders, focus ring, minimum 44px height
+- Alerts: ALWAYS include icon + text label (never color alone)
+
+Accessibility (mandatory):
+- WCAG 2.1 AA contrast ratios
+- Color must NEVER be the only indicator of status
+- Color-blind friendly: no red/green-only patterns
+- Keyboard navigation, visible focus states, ARIA labels
+- Respect prefers-reduced-motion
+
+Status patterns (always icon + text):
+- Success: ✔ + text | Warning: ⚠ + text | Error: ✕ + text | Info: ℹ + text
+
+Motion: 150-250ms ease-out. Feedback only. No decorative animations.
+
+Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       </div>
     </section>
 
     <footer>
-      <div style="display:flex; justify-content:center; gap: 14px; margin-bottom: var(--sui-space-2);">
+      <div style="display:flex; justify-content:center; gap: 14px; margin-bottom: var(--sui-space-2); flex-wrap: wrap;">
         <a class="sui-btn sui-btn-ghost" style="height:36px;" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer">
           <i data-lucide="github"></i>GitHub
         </a>
@@ -678,7 +756,6 @@ Build a UI that is clean, predictable, mobile-friendly, and strictly token-drive
   </main>
 
   <script>
-    // Icons
     lucide.createIcons();
 
     // -------------------------
@@ -690,6 +767,10 @@ Build a UI that is clean, predictable, mobile-friendly, and strictly token-drive
     function setView(key) {
       views.forEach(v => v.classList.toggle('is-active', v.getAttribute('data-view') === key));
       tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('data-tab') === key ? 'true' : 'false'));
+      // ensure icons render if view swapped
+      lucide.createIcons();
+      // move focus to top for better mobile UX
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }
     tabs.forEach(t => t.addEventListener('click', () => setView(t.getAttribute('data-tab'))));
     setView('preview');
@@ -706,7 +787,7 @@ Build a UI that is clean, predictable, mobile-friendly, and strictly token-drive
     function applyTheme(mode) {
       if (mode === 'dark') root.setAttribute('data-theme', 'dark');
       else if (mode === 'light') root.setAttribute('data-theme', 'light');
-      else root.removeAttribute('data-theme'); // auto (prefers-color-scheme)
+      else root.removeAttribute('data-theme'); // auto
       localStorage.setItem(THEME_KEY, mode);
       lucide.createIcons();
     }
@@ -721,7 +802,6 @@ Build a UI that is clean, predictable, mobile-friendly, and strictly token-drive
       applyTheme(next);
     });
 
-    // Boot
     applyTheme(currentTheme());
 
     // -------------------------
@@ -737,7 +817,7 @@ Build a UI that is clean, predictable, mobile-friendly, and strictly token-drive
         lucide.createIcons();
         setTimeout(() => { b.innerHTML = original; lucide.createIcons(); }, 1600);
       } catch (e) {
-        alert('Copy failed — your browser may block clipboard access on file://. Try on GitHub Pages.');
+        alert('Copy failed — clipboard access may be blocked. Try on GitHub Pages.');
       }
     });
   </script>
