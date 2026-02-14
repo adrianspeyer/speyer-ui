@@ -3,271 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Speyer UI System — v1.0.0 Spec Demo</title>
-  <meta name="description" content="A lightweight, accessible design system for building clear, modern web applications. Made in Canada with love.">
+  <title>Speyer UI System — Extensive v1.0.0 Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./sui-tokens.css">
   <style>
-    /* Reset & Base — Using SUI 1.0.0 Tokens */
+    /* SUI v1.0.0 GLOBAL MAPPINGS & RESET
+       Strictly using tokens from sui-tokens.css 
+    */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     
     body {
       font-family: var(--sui-font-primary);
       background: var(--sui-bg-primary);
       color: var(--sui-text-primary);
       line-height: var(--sui-leading-body);
-      transition: background var(--sui-duration-normal) var(--sui-easing), color var(--sui-duration-normal) var(--sui-easing);
+      transition: background var(--sui-duration-normal) var(--sui-easing), 
+                  color var(--sui-duration-normal) var(--sui-easing);
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Layout */
-    .sui-container { max-width: var(--sui-max-width); margin: 0 auto; padding: var(--sui-space-4); }
-    
+    /* LAYOUT: MOBILE-FIRST */
+    .sui-container { 
+      max-width: var(--sui-max-width); 
+      margin: 0 auto; 
+      padding: var(--sui-space-3); 
+    }
+    @media (min-width: 768px) { .sui-container { padding: var(--sui-space-5); } }
+
     .sui-nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-      background: color-mix(in srgb, var(--sui-bg-card) 75%, transparent);
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--sui-bg-card) 80%, transparent);
       border-bottom: 1px solid var(--sui-border);
     }
-
     .sui-nav-inner {
-      max-width: var(--sui-max-width);
-      margin: 0 auto;
-      padding: var(--sui-space-3) var(--sui-space-4);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--sui-space-3);
+      max-width: var(--sui-max-width); margin: 0 auto;
+      padding: var(--sui-space-2) var(--sui-space-3);
+      display: flex; flex-direction: column; gap: var(--sui-space-2);
+    }
+    @media (min-width: 768px) {
+      .sui-nav-inner { flex-direction: row; align-items: center; justify-content: space-between; padding: var(--sui-space-3) var(--sui-space-4); }
     }
 
-    .sui-brand { display: flex; align-items: center; gap: var(--sui-space-2); }
+    .sui-brand { display: flex; align-items: center; justify-content: space-between; gap: var(--sui-space-2); }
     .sui-logo {
-      width: 42px; height: 42px;
-      border-radius: var(--sui-radius-lg);
-      background: var(--sui-blue-soft);
-      border: 1px solid var(--sui-border);
+      width: 42px; height: 42px; border-radius: var(--sui-radius-lg);
+      background: var(--sui-blue-soft); border: 1px solid var(--sui-border);
       display: grid; place-items: center;
     }
-    .sui-brand-title { font-weight: var(--sui-weight-bold); letter-spacing: -0.01em; }
+
+    /* TABS: SCROLLABLE ON MOBILE */
+    .sui-tabs { 
+      display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      gap: var(--sui-space-1); padding: var(--sui-space-1); 
+      border-radius: var(--sui-radius-full); border: 1px solid var(--sui-border); background: var(--sui-bg-card); 
+    }
+    .sui-tabs::-webkit-scrollbar { display: none; }
     
-    .sui-version {
-      margin-left: var(--sui-space-2);
-      font-size: var(--sui-text-meta);
-      font-weight: var(--sui-weight-bold);
-      padding: 4px 10px;
-      border-radius: var(--sui-radius-full);
-      border: 1px solid var(--sui-border);
-      color: var(--sui-text-muted);
-      background: var(--sui-bg-card);
-    }
-
-    /* Tabs */
-    .sui-tabs {
-      display: flex;
-      gap: var(--sui-space-1);
-      padding: var(--sui-space-1);
-      border-radius: var(--sui-radius-full);
-      border: 1px solid var(--sui-border);
-      background: var(--sui-bg-card);
-    }
     .sui-tab {
-      border: 0;
-      background: transparent;
-      color: var(--sui-text-secondary);
-      font-weight: var(--sui-weight-bold);
-      font-size: var(--sui-text-meta);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 10px 14px;
-      border-radius: var(--sui-radius-full);
-      cursor: pointer;
-      transition: all var(--sui-duration-fast) var(--sui-easing);
+      flex: 0 0 auto; border: 0; background: transparent; color: var(--sui-text-secondary); 
+      font-weight: var(--sui-weight-bold); font-size: var(--sui-text-meta); 
+      text-transform: uppercase; padding: 10px 16px; border-radius: var(--sui-radius-full);
+      cursor: pointer; transition: all var(--sui-duration-fast) var(--sui-easing); white-space: nowrap;
     }
-    .sui-tab[aria-selected="true"] {
-      background: var(--sui-bg-primary);
-      color: var(--sui-blue-primary);
+    .sui-tab[aria-selected="true"] { background: var(--sui-bg-primary); color: var(--sui-blue-primary); }
+
+    /* TYPOGRAPHY */
+    .sui-h1 { font-size: 28px; font-weight: var(--sui-weight-bold); line-height: var(--sui-leading-heading); letter-spacing: -0.02em; }
+    @media (min-width: 768px) { .sui-h1 { font-size: var(--sui-text-h1); } }
+    .sui-h2 { font-size: var(--sui-text-h2); font-weight: var(--sui-weight-semibold); line-height: var(--sui-leading-heading); }
+    .sui-h3 { font-size: var(--sui-text-h3); font-weight: var(--sui-weight-semibold); }
+    .sui-meta { font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); text-transform: uppercase; color: var(--sui-text-secondary); letter-spacing: 0.1em; }
+    .sui-lead { color: var(--sui-text-secondary); font-size: var(--sui-text-body); margin-top: var(--sui-space-1); }
+
+    /* CARDS & GRIDS */
+    .sui-card { background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); overflow: hidden; }
+    .sui-card-body { padding: var(--sui-space-3); }
+    @media (min-width: 768px) { .sui-card-body { padding: var(--sui-space-4); } }
+    .sui-card-header { padding: var(--sui-space-3) var(--sui-space-4); border-bottom: 1px solid var(--sui-border); display: flex; align-items: center; justify-content: space-between; }
+
+    .sui-grid { display: grid; gap: var(--sui-space-3); grid-template-columns: 1fr; }
+    @media (min-width: 768px) {
+      .sui-grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .sui-grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .sui-grid-4 { grid-template-columns: repeat(4, 1fr); }
     }
 
-    /* Buttons */
-    .sui-btn {
-      height: var(--sui-touch-target);
-      padding: 0 var(--sui-space-3);
-      border-radius: var(--sui-radius-md);
-      border: 1px solid var(--sui-border);
-      background: var(--sui-bg-card);
-      color: var(--sui-text-primary);
-      font-weight: var(--sui-weight-bold);
-      display: inline-flex;
-      align-items: center;
-      gap: var(--sui-space-2);
-      cursor: pointer;
-      transition: all var(--sui-duration-fast) var(--sui-easing);
+    /* BUTTONS & INPUTS (44px TOUCH TARGET) */
+    .sui-btn, .sui-input, .sui-select {
+      height: var(--sui-touch-target); padding: 0 var(--sui-space-3); border-radius: var(--sui-radius-md);
+      border: 1px solid var(--sui-border); background: var(--sui-bg-card); color: var(--sui-text-primary);
+      font-weight: var(--sui-weight-bold); display: inline-flex; align-items: center; justify-content: center; 
+      gap: var(--sui-space-2); cursor: pointer; transition: all var(--sui-duration-fast) var(--sui-easing);
+      width: 100%; font-family: inherit; font-size: var(--sui-text-body);
     }
-    .sui-btn:hover { transform: translateY(-1px); border-color: var(--sui-blue-focus); }
-    .sui-btn-primary {
-      background: var(--sui-blue-primary);
-      border-color: var(--sui-blue-active);
-      color: var(--sui-text-inverse);
-    }
+    @media (min-width: 768px) { .sui-btn { width: auto; } }
+    
+    .sui-btn-primary { background: var(--sui-blue-primary); border-color: var(--sui-blue-active); color: var(--sui-text-inverse); }
     .sui-btn-primary:hover { background: var(--sui-blue-hover); }
     .sui-btn-ghost { background: transparent; border-color: transparent; }
+    .sui-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .sui-input:focus { outline: 2px solid var(--sui-blue-focus); border-color: var(--sui-blue-primary); }
 
-    /* Cards */
-    .sui-card {
-      background: var(--sui-bg-card);
-      border: 1px solid var(--sui-border);
-      border-radius: var(--sui-radius-lg);
-      padding: var(--sui-space-4);
+    /* STATUS & ACCESSIBILITY (ICON + LABEL) */
+    .sui-badge { 
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: var(--sui-radius-full);
+      font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); text-transform: uppercase; border: 1px solid var(--sui-border);
     }
+    .sui-badge-success { color: var(--sui-success-strong); background: color-mix(in srgb, var(--sui-success) 15%, transparent); }
+    .sui-badge-warning { color: var(--sui-warning); background: color-mix(in srgb, var(--sui-warning) 15%, transparent); }
+    .sui-badge-error { color: var(--sui-error-strong); background: color-mix(in srgb, var(--sui-error) 15%, transparent); }
 
-    /* Typography */
-    .sui-h1 { font-size: var(--sui-text-h1); font-weight: var(--sui-weight-bold); line-height: var(--sui-leading-heading); }
-    .sui-h2 { font-size: var(--sui-text-h2); font-weight: var(--sui-weight-semibold); }
-    .sui-h3 { font-size: var(--sui-text-h3); font-weight: var(--sui-weight-semibold); }
-    .sui-lead { color: var(--sui-text-secondary); font-size: var(--sui-text-body); }
-    .sui-muted { color: var(--sui-text-muted); }
-    .sui-meta { font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); text-transform: uppercase; color: var(--sui-text-secondary); letter-spacing: 0.1em;}
-
-    /* Alerts & Badges */
-    .sui-alert {
-      padding: var(--sui-space-3);
-      border-radius: var(--sui-radius-md);
-      background: var(--sui-bg-elevated);
-      border: 1px solid var(--sui-border);
-      display: flex; gap: var(--sui-space-2);
+    .sui-alert { 
+      display: flex; gap: var(--sui-space-3); padding: var(--sui-space-3); border-radius: var(--sui-radius-md); 
+      background: var(--sui-bg-elevated); border-left: 4px solid var(--sui-border); 
     }
-    .sui-badge {
-      font-size: var(--sui-text-meta);
-      font-weight: var(--sui-weight-bold);
-      padding: 4px 12px;
-      border-radius: var(--sui-radius-full);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-transform: uppercase;
-    }
-    .sui-badge-success { background: var(--sui-blue-soft); color: var(--sui-blue-active); } /* Example mapping */
+    .sui-alert-success { border-left-color: var(--sui-success); }
+    .sui-alert-error { border-left-color: var(--sui-error); }
 
-    /* Grid */
-    .sui-grid { display: grid; gap: var(--sui-space-3); }
-    .sui-grid-2 { grid-template-columns: repeat(2, 1fr); }
-    @media (max-width: 768px) { .sui-grid-2 { grid-template-columns: 1fr; } }
+    /* TABLES & PAGINATION */
+    .sui-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); }
+    .sui-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    .sui-table th { text-align: left; padding: var(--sui-space-3); background: var(--sui-bg-elevated); font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); text-transform: uppercase; color: var(--sui-text-secondary); border-bottom: 1px solid var(--sui-border); }
+    .sui-table td { padding: var(--sui-space-3); border-bottom: 1px solid var(--sui-border); font-size: var(--sui-text-small); }
+    .sui-table tr:last-child td { border-bottom: 0; }
 
-    /* Theme Toggle */
-    .sui-theme-btn { width: var(--sui-touch-target); padding: 0; justify-content: center; }
+    .sui-pagination { display: flex; align-items: center; justify-content: center; gap: var(--sui-space-1); margin-top: var(--sui-space-4); }
+    .sui-page-btn { width: 40px; height: 40px; padding: 0; }
 
-    /* Panels */
-    .sui-tab-panel { display: none; padding-top: var(--sui-space-4); }
-    .sui-tab-panel[aria-hidden="false"] { display: block; }
-
-    /* Footer */
-    .sui-footer {
-      margin-top: var(--sui-space-6);
-      padding: var(--sui-space-4) 0;
-      border-top: 1px solid var(--sui-border);
-      text-align: center;
-      font-size: var(--sui-text-meta);
-      color: var(--sui-text-muted);
-    }
+    /* PANELS */
+    .sui-panel { display: none; padding: var(--sui-space-4) 0; }
+    .sui-panel[aria-hidden="false"] { display: block; }
+    
+    /* UTILS */
+    .sui-footer { margin-top: var(--sui-space-6); padding: var(--sui-space-4) 0; border-top: 1px solid var(--sui-border); text-align: center; color: var(--sui-text-muted); font-size: var(--sui-text-meta); }
   </style>
 </head>
 <body>
-  <header class="sui-nav">
+
+  <nav class="sui-nav">
     <div class="sui-nav-inner">
       <div class="sui-brand">
-        <div class="sui-logo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sui-blue-primary)" stroke-width="2" width="22" height="22">
-            <path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="sui-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--sui-blue-primary)" stroke-width="2.5" width="24" height="24"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="sui-brand-title">Speyer UI System</span>
         </div>
-        <div class="sui-brand-title">Speyer UI <span class="sui-version">v1.0.0</span></div>
+        <button class="sui-btn" id="themeToggle" style="width:40px; height:40px; padding:0; border-radius:50%;" aria-label="Toggle Theme">🌙</button>
       </div>
 
       <div class="sui-tabs" role="tablist">
-        <button class="sui-tab" role="tab" aria-selected="true" aria-controls="panel-tokens">Tokens</button>
-        <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-demo">Usage</button>
+        <button class="sui-tab" role="tab" aria-selected="true" aria-controls="panel-dashboard">Dashboard</button>
+        <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-components">Elements</button>
+        <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-design">Designers</button>
+        <button class="sui-tab" role="tab" aria-selected="false" aria-controls="panel-ai">AI Prompt</button>
       </div>
-
-      <button class="sui-btn sui-theme-btn" id="themeToggle" aria-label="Toggle Mode">
-        <span id="themeIcon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>
-          </svg>
-        </span>
-      </button>
     </div>
-  </header>
+  </nav>
 
   <main class="sui-container">
-    <div class="sui-tab-panel" id="panel-tokens" aria-hidden="false">
-      <h1 class="sui-h1">Design Tokens</h1>
-      <p class="sui-lead">Strictly powered by <code>sui-tokens.css</code> (v1.0.0).</p>
 
-      <div class="sui-grid sui-grid-2" style="margin-top: var(--sui-space-4);">
-        <div class="sui-card">
-          <div class="sui-meta">Primary Color</div>
-          <div style="margin-top: 10px; display: flex; align-items: center; justify-content: space-between;">
-            <code>--sui-blue-primary</code>
-            <div style="width: 40px; height: 20px; border-radius: 4px; background: var(--sui-blue-primary); border: 1px solid var(--sui-border);"></div>
-          </div>
+    <section class="sui-panel" id="panel-dashboard" aria-hidden="false">
+      <div style="margin-bottom: var(--sui-space-5);">
+        <h1 class="sui-h1">Network Health</h1>
+        <p class="sui-lead">Real-time infrastructure monitoring strictly following v1.0.0 tokens.</p>
+      </div>
+
+      <div class="sui-grid sui-grid-4" style="margin-bottom: var(--sui-space-5);">
+        <article class="sui-card sui-card-body">
+          <div class="sui-meta">Uptime</div>
+          <div style="font-size: 32px; font-weight: 700; margin: 8px 0;">99.9%</div>
+          <span class="sui-badge sui-badge-success">✔ Operational</span>
+        </article>
+        <article class="sui-card sui-card-body">
+          <div class="sui-meta">Requests</div>
+          <div style="font-size: 32px; font-weight: 700; margin: 8px 0;">1.2M</div>
+          <span class="sui-badge" style="color:var(--sui-info); background:var(--sui-blue-soft);">ℹ Stable</span>
+        </article>
+        <article class="sui-card sui-card-body">
+          <div class="sui-meta">Errors</div>
+          <div style="font-size: 32px; font-weight: 700; margin: 8px 0;">04</div>
+          <span class="sui-badge sui-badge-error">✕ Critical</span>
+        </article>
+        <article class="sui-card sui-card-body">
+          <div class="sui-meta">Latency</div>
+          <div style="font-size: 32px; font-weight: 700; margin: 8px 0;">14ms</div>
+          <span class="sui-badge sui-badge-warning">⚠ Latency Spike</span>
+        </article>
+      </div>
+
+      <div class="sui-card">
+        <div class="sui-card-header">
+          <h3 class="sui-h3">Active Deployments</h3>
+          <button class="sui-btn sui-btn-ghost" style="height:32px; font-size:12px;">Export CSV</button>
         </div>
-        <div class="sui-card">
-          <div class="sui-meta">Surface Color</div>
-          <div style="margin-top: 10px; display: flex; align-items: center; justify-content: space-between;">
-            <code>--sui-bg-card</code>
-            <div style="width: 40px; height: 20px; border-radius: 4px; background: var(--sui-bg-card); border: 1px solid var(--sui-border);"></div>
-          </div>
+        <div class="sui-table-container">
+          <table class="sui-table">
+            <thead>
+              <tr><th>Project</th><th>Status</th><th>Owner</th><th>Version</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Nexus Alpha</strong></td><td><span class="sui-badge sui-badge-success">✔ Active</span></td><td>Adrian Speyer</td><td>v1.0.4</td></tr>
+              <tr><td><strong>Beta Core</strong></td><td><span class="sui-badge sui-badge-warning">⚠ Pending</span></td><td>Design Team</td><td>v0.9.2</td></tr>
+              <tr><td><strong>Legacy System</strong></td><td><span class="sui-badge sui-badge-error">✕ Offline</span></td><td>System Admin</td><td>v4.2.0</td></tr>
+              <tr><td><strong>Horizon UI</strong></td><td><span class="sui-badge sui-badge-success">✔ Active</span></td><td>Product Dev</td><td>v1.0.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sui-pagination">
+          <button class="sui-btn sui-page-btn" disabled>&lt;</button>
+          <button class="sui-btn sui-page-btn sui-btn-primary">1</button>
+          <button class="sui-btn sui-page-btn">2</button>
+          <button class="sui-btn sui-page-btn">3</button>
+          <button class="sui-btn sui-page-btn">&gt;</button>
+        </div>
+        <div style="padding: var(--sui-space-3); text-align: center;">
+            <p class="sui-meta">Showing 1-4 of 12 deployments</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="sui-tab-panel" id="panel-demo" aria-hidden="true">
-      <h2 class="sui-h2">Component Usage</h2>
-      <div class="sui-grid" style="margin-top: var(--sui-space-4);">
-        <div class="sui-alert">
-            <span>ℹ️</span>
+    <section class="sui-panel" id="panel-components" aria-hidden="true">
+      <h2 class="sui-h2" style="margin-bottom: var(--sui-space-4);">Extensive Element Library</h2>
+      
+      <div class="sui-grid sui-grid-2">
+        <div class="sui-card">
+          <div class="sui-card-header"><span class="sui-meta">Forms & Inputs</span></div>
+          <div class="sui-card-body" style="display:flex; flex-direction:column; gap: var(--sui-space-3);">
             <div>
-                <strong>A11y First:</strong> This demo validates that dark mode works without Tailwind or hardcoded hex values.
+              <label class="sui-meta" style="display:block; margin-bottom:8px;">Full Name</label>
+              <input type="text" class="sui-input" placeholder="e.g. John Doe">
             </div>
+            <div>
+              <label class="sui-meta" style="display:block; margin-bottom:8px;">Deployment Region</label>
+              <select class="sui-select">
+                <option>Canada Central (Toronto)</option>
+                <option>US East (Virginia)</option>
+              </select>
+            </div>
+            <div class="sui-alert sui-alert-error">
+                <span>✕</span>
+                <p class="sui-meta" style="text-transform:none;">Please enter a valid region.</p>
+            </div>
+          </div>
         </div>
-        <div style="display: flex; gap: var(--sui-space-2);">
-            <button class="sui-btn sui-btn-primary">Primary Action</button>
-            <button class="sui-btn">Secondary</button>
+
+        <div class="sui-card">
+          <div class="sui-card-header"><span class="sui-meta">Actions & Feedback</span></div>
+          <div class="sui-card-body" style="display:flex; flex-direction:column; gap: var(--sui-space-3);">
+            <div class="sui-grid sui-grid-2">
+              <button class="sui-btn sui-btn-primary">Primary Action</button>
+              <button class="sui-btn">Secondary</button>
+            </div>
+            <button class="sui-btn sui-btn-ghost">Ghost (Text Only)</button>
+            <div class="sui-alert sui-alert-success">
+                <span>✔</span>
+                <p class="sui-meta" style="text-transform:none;">Settings saved successfully.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="sui-panel" id="panel-design" aria-hidden="true">
+      <h1 class="sui-h1">For Designers</h1>
+      <p class="sui-lead">A practical handoff format based on SUI v1.0.0 Principles.</p>
+      
+      <div class="sui-grid sui-grid-2" style="margin-top: var(--sui-space-4);">
+        <div class="sui-card sui-card-body">
+          <h2 class="sui-h3">Core Constraints</h2>
+          <ul style="margin-top: var(--sui-space-3); padding-left: 20px; line-height: 2;">
+            <li><strong>8px Grid:</strong> All spacing uses `--sui-space-X`.</li>
+            <li><strong>Touch:</strong> Minimum tap target is 44px.</li>
+            <li><strong>Radius:</strong> Buttons (12px), Cards (16px).</li>
+          </ul>
+        </div>
+        <div class="sui-card sui-card-body">
+          <h2 class="sui-h3">A11y (Mandatory)</h2>
+          <p class="sui-help">Color is never the sole indicator. Every status must include icon + label.</p>
+          <div style="margin-top: 16px; display:flex; flex-wrap:wrap; gap:8px;">
+            <span class="sui-badge sui-badge-success">✔ Pass</span>
+            <span class="sui-badge sui-badge-error">✕ Fail</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sui-panel" id="panel-ai" aria-hidden="true">
+      <h1 class="sui-h1">AI Prompt</h1>
+      <p class="sui-lead">Paste this to build new SUI-compliant pages.</p>
+      <div class="sui-card sui-card-body" style="margin-top: var(--sui-space-4);">
+        <pre id="promptText" style="white-space: pre-wrap; font-size: 13px; background: var(--sui-bg-elevated); padding: 16px; border-radius: 8px;">Use Speyer UI System (SUI) v1.0.0.
+Tokens: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
+Rules: 
+- 8px grid spacing.
+- 44px touch targets.
+- 12px button radius / 16px card radius.
+- Color-blind safe: ALWAYS pair icon + text for status.</pre>
+        <button class="sui-btn sui-btn-primary" id="copyBtn" style="margin-top: 16px;">Copy System Prompt</button>
+      </div>
+    </section>
 
     <footer class="sui-footer">
-        Speyer UI System • v1.0.0 • Made in Canada 🇨🇦
+      Speyer UI System • v1.0.0 • Made in Canada with love 🇨🇦
     </footer>
   </main>
 
   <script>
     const root = document.documentElement;
     const themeBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
 
+    // THEME LOGIC
     function setTheme(mode) {
       if (mode === 'dark') root.setAttribute('data-theme', 'dark');
       else root.removeAttribute('data-theme');
-      
-      themeIcon.innerHTML = mode === 'dark' 
-        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
-        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>';
+      themeBtn.innerText = mode === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('sui-theme', mode);
     }
 
+    const saved = localStorage.getItem('sui-theme');
+    if (saved) setTheme(saved);
+
     themeBtn.addEventListener('click', () => {
-      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      setTheme(next);
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      setTheme(isDark ? 'light' : 'dark');
     });
 
-    // Tab Logic
+    // TAB LOGIC (MOBILE OPTIMIZED)
     const tabs = document.querySelectorAll('.sui-tab');
-    const panels = document.querySelectorAll('.sui-tab-panel');
+    const panels = document.querySelectorAll('.sui-panel');
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -275,8 +343,21 @@
         panels.forEach(p => p.setAttribute('aria-hidden', 'true'));
         
         tab.setAttribute('aria-selected', 'true');
-        document.getElementById(tab.getAttribute('aria-controls')).setAttribute('aria-hidden', 'false');
+        const target = tab.getAttribute('aria-controls');
+        document.getElementById(target).setAttribute('aria-hidden', 'false');
+        
+        // Mobile UX: Scroll active tab into center
+        tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       });
+    });
+
+    // COPY LOGIC
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.addEventListener('click', () => {
+      const text = document.getElementById('promptText').innerText;
+      navigator.clipboard.writeText(text);
+      copyBtn.innerText = 'Copied!';
+      setTimeout(() => copyBtn.innerText = 'Copy System Prompt', 2000);
     });
   </script>
 </body>
