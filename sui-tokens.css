@@ -1,6 +1,6 @@
 /*
  * Speyer UI System (SUI) — Design Tokens
- * Version: 1.0.0
+ * Version: 2.0.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * A lightweight, accessible token system for modern web applications.
@@ -36,13 +36,30 @@
   /* Status */
   --sui-success:        #22C55E;
   --sui-success-strong: #15803D;
+  --sui-success-soft:   #F0FDF4;
   --sui-warning:        #F59E0B;
+  --sui-warning-strong: #92400E;
+  --sui-warning-soft:   #FFFBEB;
   --sui-error:          #EF4444;
   --sui-error-strong:   #B91C1C;
+  --sui-error-soft:     #FEF2F2;
   --sui-info:           #06B6D4;
+  --sui-info-strong:    #0E7490;
+  --sui-info-soft:      #ECFEFF;
+
+  /* Neutral (for badges/tags without status meaning) */
+  --sui-neutral:        #64748B;
+  --sui-neutral-strong: #334155;
+  --sui-neutral-soft:   #F1F5F9;
+
+  /* Pro / Premium accent */
+  --sui-pro:        #8B5CF6;
+  --sui-pro-strong: #6D28D9;
+  --sui-pro-soft:   #F5F3FF;
 
   /* Typography */
   --sui-font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --sui-font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --sui-text-h1:    32px;
   --sui-text-h2:    24px;
@@ -71,6 +88,20 @@
   --sui-radius-md:   12px;
   --sui-radius-lg:   16px;
   --sui-radius-full: 9999px;
+
+  /* Shadows (opt-in elevation) */
+  --sui-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --sui-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --sui-shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Overlay */
+  --sui-overlay: rgba(15, 23, 42, 0.5);
+
+  /* Z-Index Scale */
+  --sui-z-dropdown: 100;
+  --sui-z-sticky:   200;
+  --sui-z-modal:    300;
+  --sui-z-tooltip:  400;
 
   /* Motion */
   --sui-duration-fast:   150ms;
@@ -110,16 +141,39 @@
   /* Status */
   --sui-success:        #4ADE80;
   --sui-success-strong: #22C55E;
+  --sui-success-soft:   #052E16;
   --sui-warning:        #FBBF24;
+  --sui-warning-strong: #FBBF24;
+  --sui-warning-soft:   #422006;
   --sui-error:          #F87171;
   --sui-error-strong:   #EF4444;
+  --sui-error-soft:     #450A0A;
   --sui-info:           #22D3EE;
+  --sui-info-strong:    #22D3EE;
+  --sui-info-soft:      #083344;
+
+  /* Neutral */
+  --sui-neutral:        #94A3B8;
+  --sui-neutral-strong: #CBD5E1;
+  --sui-neutral-soft:   #1E293B;
+
+  /* Pro */
+  --sui-pro:        #A78BFA;
+  --sui-pro-strong: #C4B5FD;
+  --sui-pro-soft:   #2E1065;
+
+  /* Shadows */
+  --sui-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --sui-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15);
+  --sui-shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.50), 0 4px 12px rgba(0, 0, 0, 0.20);
+
+  /* Overlay */
+  --sui-overlay: rgba(0, 0, 0, 0.65);
 }
 
 
 /* ==========================================================================
    System Preference: Auto Dark Mode
-   Applied when no data-theme attribute is set and user prefers dark mode.
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
@@ -142,10 +196,30 @@
 
     --sui-success:        #4ADE80;
     --sui-success-strong: #22C55E;
+    --sui-success-soft:   #052E16;
     --sui-warning:        #FBBF24;
+    --sui-warning-strong: #FBBF24;
+    --sui-warning-soft:   #422006;
     --sui-error:          #F87171;
     --sui-error-strong:   #EF4444;
+    --sui-error-soft:     #450A0A;
     --sui-info:           #22D3EE;
+    --sui-info-strong:    #22D3EE;
+    --sui-info-soft:      #083344;
+
+    --sui-neutral:        #94A3B8;
+    --sui-neutral-strong: #CBD5E1;
+    --sui-neutral-soft:   #1E293B;
+
+    --sui-pro:        #A78BFA;
+    --sui-pro-strong: #C4B5FD;
+    --sui-pro-soft:   #2E1065;
+
+    --sui-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+    --sui-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15);
+    --sui-shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.50), 0 4px 12px rgba(0, 0, 0, 0.20);
+
+    --sui-overlay: rgba(0, 0, 0, 0.65);
   }
 }
 

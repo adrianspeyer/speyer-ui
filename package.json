@@ -1,0 +1,42 @@
+{
+  "name": "speyer-ui",
+  "version": "2.0.0",
+  "description": "A lightweight, accessible design system for building clear, modern web applications. Color-blind friendly, mobile-first, AI-ready. Zero dependencies.",
+  "author": "Adrian Speyer (https://github.com/adrianspeyer)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrianspeyer/speyer-ui.git"
+  },
+  "homepage": "https://adrianspeyer.github.io/speyer-ui/",
+  "keywords": [
+    "design-system",
+    "css",
+    "accessible",
+    "color-blind",
+    "wcag",
+    "lightweight",
+    "tokens",
+    "ui",
+    "saas",
+    "mobile-first"
+  ],
+  "main": "dist/sui.min.js",
+  "style": "dist/sui-components.min.css",
+  "files": [
+    "dist/",
+    "sui-tokens.css",
+    "sui-components.css",
+    "sui.js"
+  ],
+  "scripts": {
+    "minify:css": "cleancss -o dist/sui-tokens.min.css sui-tokens.css && cleancss -o dist/sui-components.min.css sui-components.css",
+    "minify:js": "terser sui.js -o dist/sui.min.js --compress --mangle",
+    "build": "npm run minify:css && npm run minify:js",
+    "version": "npm run build && git add dist/"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.0",
+    "terser": "^5.31.0"
+  }
+}

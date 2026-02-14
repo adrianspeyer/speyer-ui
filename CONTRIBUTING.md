@@ -1,70 +1,76 @@
-# Contributing to the Speyer UI System
+# Contributing to Speyer UI System
 
-Thanks for your interest in improving SUI! Contributions of all kinds are welcome — whether it's fixing a typo, suggesting a new token, improving accessibility, or building new examples.
+Thank you for your interest in contributing to SUI! This project is built on the belief that good design should be accessible to everyone — and that includes making the system itself easy to contribute to.
 
 ## How to Contribute
 
 ### Reporting Issues
 
-If you find a bug, accessibility problem, or have a suggestion:
+If you find a bug, accessibility problem, or inconsistency, [open an issue](https://github.com/adrianspeyer/speyer-ui/issues) with:
 
-1. Check [existing issues](../../issues) to see if it's already been reported.
-2. Open a new issue with a clear description.
-3. Include screenshots or code examples if relevant.
+- A clear description of the problem
+- Steps to reproduce (if applicable)
+- Browser and device information
+- Screenshots (if visual)
 
-### Submitting Changes
+### Suggesting Components
 
-1. **Fork** the repository.
-2. **Create a branch** for your change: `git checkout -b fix/button-contrast`
-3. **Make your changes** following the guidelines below.
-4. **Test** your changes against the [Testing Checklist](README.md#testing-checklist).
-5. **Submit a pull request** with a clear description of what you changed and why.
+SUI aims to cover the components most commonly needed across SaaS, dashboards, and content-driven applications. If you're using SUI (especially with an AI coding assistant) and notice a missing component or pattern:
 
-## Guidelines
+1. **Check existing components** — it may already be covered. See the [README](README.md) or [live demo](https://adrianspeyer.github.io/speyer-ui/).
+2. **Open an issue** describing the component, its use case, and why it has broad-base need.
+3. **Include examples** of how you'd expect it to look and behave.
 
-### Design Token Changes
+We prioritize components that serve a wide range of projects over niche, application-specific patterns.
 
-- All tokens must use the `--sui-` prefix.
-- New colors must meet WCAG 2.1 AA contrast ratios in both light and dark modes.
-- Test any color changes with a color blindness simulator.
+### Pull Requests
 
-### Accessibility
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-component`)
+3. Make your changes
+4. Test against the [testing checklist](#testing-checklist)
+5. Submit a pull request with a clear description
 
-This is non-negotiable. All contributions must:
+### What We Look For
 
-- Maintain WCAG 2.1 AA compliance.
-- Never use color as the sole indicator of state or meaning.
-- Include proper focus states for interactive elements.
-- Support keyboard navigation.
+All contributions must align with the five SUI design principles:
 
-### Code Style
+- **Readability** — Is it easy to scan and understand?
+- **Accessibility** — Does it meet WCAG 2.1 AA? Is it keyboard navigable?
+- **Mobile-Friendly** — Does it work on small screens with 44px touch targets?
+- **Color-Blind Friendly** — Does it use icon + text for status (never color alone)?
+- **Consistency** — Does it follow existing SUI patterns and use tokens?
 
-- Use CSS custom properties (not preprocessor variables).
-- Follow the existing naming conventions (`--sui-category-name`).
-- Keep the demo HTML clean and well-commented.
+### Code Standards
 
-### Commit Messages
+- All colors, spacing, typography, and radii must use SUI tokens (`--sui-` custom properties)
+- No inline styles in the demo (except dynamic values like progress bar widths)
+- Component classes follow the `sui-` prefix convention
+- JavaScript behaviors go in `sui.js` and follow the existing API pattern
+- CSS components must work without JavaScript (JS adds behavior, not appearance)
+- All interactive elements need visible focus states and keyboard support
 
-Use clear, descriptive commit messages:
+## Testing Checklist
 
-```
-fix: improve error alert contrast in dark mode
-feat: add --sui-bg-elevated token for nested cards
-docs: clarify AI prompt usage section
-```
+Before submitting:
 
-## What We're Looking For
+- [ ] Light mode contrast meets WCAG AA
+- [ ] Dark mode contrast meets WCAG AA
+- [ ] Tested with color blindness simulation
+- [ ] All status indicators include text + icon
+- [ ] Mobile layout works at 320px minimum
+- [ ] Keyboard navigation works
+- [ ] Focus states are visible
+- [ ] `prefers-reduced-motion` is respected
+- [ ] Touch targets are at least 44px
 
-- Accessibility improvements
-- New component examples in the demo
-- Color blindness testing results
-- Mobile responsiveness fixes
-- Documentation improvements
-- Translations
+## AI-Generated Contributions
 
-## Code of Conduct
+If you're using an AI tool to generate SUI components, that's great — this system is designed for it. Please review the generated code against the standards above before submitting. AI tools sometimes miss accessibility details or use hardcoded values instead of tokens.
 
-Be kind, respectful, and constructive. This is a community project meant to help people build better, more accessible interfaces.
+## License
+
+By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
 
 ---
 

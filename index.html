@@ -3,709 +3,712 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Speyer UI System (SUI) — Living Specification</title>
-  <meta name="description" content="A strict, token-driven UI system focused on clarity, accessibility, and consistency." />
-
-  <!-- Repo CSS (tokens are the contract) -->
+  <title>Speyer UI System — Accessibility as Architecture</title>
+  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. 45KB minified. Made in Canada." />
   <link rel="stylesheet" href="./sui-tokens.css" />
-
-  <!-- Font -->
+  <link rel="stylesheet" href="./sui-components.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    /* ==========================================================================
-       Demo layer (components built ONLY from tokens)
-       - No hard-coded hex colors; use var(--sui-*)
-       - Mobile-first, touch-friendly, predictable
-       ========================================================================== */
-
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: var(--sui-font-primary);
-      background: var(--sui-bg-primary);
-      color: var(--sui-text-primary);
-      line-height: var(--sui-leading-body);
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    /* Typography (strict) */
-    h1 { font-size: var(--sui-text-h1); font-weight: var(--sui-weight-bold); line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
-    h2 { font-size: var(--sui-text-h2); font-weight: var(--sui-weight-semibold); line-height: var(--sui-leading-heading); letter-spacing: -0.01em; margin: 0; }
-    h3 { font-size: var(--sui-text-h3); font-weight: var(--sui-weight-semibold); line-height: var(--sui-leading-heading); margin: 0; }
-    p  { margin: 0; color: var(--sui-text-secondary); }
-    small { color: var(--sui-text-muted); }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-
-    /* Layout */
-    .wrap { max-width: var(--sui-max-width); margin: 0 auto; padding: var(--sui-space-4); }
-    @media (min-width: 721px) { .wrap { padding: var(--sui-space-5); } }
-
-    /* Card */
-    .sui-card {
-      background: var(--sui-bg-card);
-      border: 1px solid var(--sui-border);
-      border-radius: var(--sui-radius-lg);
-    }
-
-    /* Button */
-    .sui-btn {
-      height: var(--sui-touch-target);
-      padding: 0 var(--sui-space-3);
-      border-radius: var(--sui-radius-md);
-      border: 1px solid var(--sui-border);
-      background: var(--sui-bg-card);
-      color: var(--sui-text-primary);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      font-weight: var(--sui-weight-semibold);
-      transition: transform var(--sui-duration-fast) var(--sui-easing),
-                  border-color var(--sui-duration-fast) var(--sui-easing),
-                  background var(--sui-duration-fast) var(--sui-easing);
-      user-select: none;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .sui-btn:focus { outline: 3px solid var(--sui-blue-soft); outline-offset: 2px; }
-    .sui-btn:hover { border-color: var(--sui-blue-focus); transform: translateY(-1px); }
-    .sui-btn:active { transform: translateY(0); }
-
-    .sui-btn-primary {
-      background: var(--sui-blue-primary);
-      border-color: transparent;
-      color: var(--sui-text-inverse);
-    }
-    .sui-btn-primary:hover { background: var(--sui-blue-hover); }
-    .sui-btn-primary:active { background: var(--sui-blue-active); }
-
-    .sui-btn-ghost {
-      background: transparent;
-      border-color: var(--sui-border);
-      color: var(--sui-text-secondary);
-    }
-
-    /* Input */
-    .sui-input {
-      height: var(--sui-touch-target);
-      padding: 0 var(--sui-space-3);
-      border-radius: var(--sui-radius-md);
-      border: 1px solid var(--sui-border);
-      background: var(--sui-bg-card);
-      color: var(--sui-text-primary);
-      font: inherit;
-      transition: border-color var(--sui-duration-fast) var(--sui-easing),
-                  box-shadow var(--sui-duration-fast) var(--sui-easing);
-      width: 100%;
-      min-width: 0;
-    }
-    .sui-input:focus {
-      outline: none;
-      border-color: var(--sui-blue-primary);
-      box-shadow: 0 0 0 3px var(--sui-blue-soft);
-    }
-    @media (min-width: 721px) {
-      .sui-input { max-width: 320px; }
-    }
-
-    /* Badge (icon + label = no-color-alone) */
-    .sui-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: var(--sui-radius-full);
-      border: 1px solid var(--sui-border);
-      background: var(--sui-bg-elevated);
-      font-size: var(--sui-text-meta);
-      font-weight: var(--sui-weight-bold);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--sui-text-secondary);
-    }
-    .sui-badge svg { width: 14px; height: 14px; }
-
-    /* Minimal variants (demo-only, token-driven) */
-    .sui-badge-success { border-color: color-mix(in srgb, var(--sui-success) 35%, var(--sui-border)); color: var(--sui-success-strong); }
-    .sui-badge-warning { border-color: color-mix(in srgb, var(--sui-warning) 35%, var(--sui-border)); color: var(--sui-warning); }
-    .sui-badge-error   { border-color: color-mix(in srgb, var(--sui-error) 35%, var(--sui-border));   color: var(--sui-error-strong); }
-    .sui-badge-info    { border-color: color-mix(in srgb, var(--sui-info) 35%, var(--sui-border));    color: var(--sui-info); }
-
-    /* Header / Nav */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--sui-border);
-      background: color-mix(in srgb, var(--sui-bg-card) 85%, transparent);
-    }
-    .topbar-inner {
-      max-width: var(--sui-max-width);
-      margin: 0 auto;
-      padding: 12px var(--sui-space-4);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--sui-space-3);
-      flex-wrap: wrap; /* mobile-friendly */
-    }
-    @media (min-width: 721px) {
-      .topbar-inner { padding: 14px var(--sui-space-5); flex-wrap: nowrap; }
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-    .brand-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: var(--sui-radius-lg);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--sui-blue-primary);
-      color: var(--sui-text-inverse);
-      flex: 0 0 auto;
-    }
-    .brand-mark svg { width: 22px; height: 22px; }
-    .brand-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: var(--sui-weight-bold);
-      min-width: 0;
-    }
-    .brand-title span:first-child {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 40vw;
-    }
-    .version-pill {
-      font-size: var(--sui-text-meta);
-      font-weight: var(--sui-weight-bold);
-      padding: 4px 10px;
-      border-radius: var(--sui-radius-full);
-      border: 1px solid var(--sui-border);
-      color: var(--sui-text-muted);
-      background: var(--sui-bg-card);
-    }
-    @media (max-width: 420px) {
-      .version-pill { display: none; }
-    }
-
-    /* Tabs (mobile: horizontal scroll) */
-    .tabs {
-      display: inline-flex;
-      gap: 6px;
-      padding: 6px;
-      border-radius: var(--sui-radius-lg);
-      border: 1px solid var(--sui-border);
-      background: var(--sui-bg-card);
-      max-width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .tabs::-webkit-scrollbar { display: none; }
-
-    .tab {
-      height: 36px;
-      padding: 0 12px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--sui-text-secondary);
-      font-weight: var(--sui-weight-bold);
-      font-size: var(--sui-text-meta);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: background var(--sui-duration-fast) var(--sui-easing),
-                  border-color var(--sui-duration-fast) var(--sui-easing),
-                  color var(--sui-duration-fast) var(--sui-easing);
-      flex: 0 0 auto;
-    }
-    .tab svg { width: 16px; height: 16px; }
-    .tab[aria-selected="true"] {
-      background: var(--sui-bg-elevated);
-      border-color: var(--sui-border);
-      color: var(--sui-text-primary);
-    }
-    .tab:focus { outline: 3px solid var(--sui-blue-soft); outline-offset: 2px; }
-
-    /* Section spacing */
-    .section { margin-top: var(--sui-space-5); }
-    @media (min-width: 721px) { .section { margin-top: var(--sui-space-6); } }
-
-    .section-head {
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: var(--sui-space-3);
-      flex-direction: column; /* mobile default */
-    }
-    .section-actions {
-      display:flex;
-      gap: 10px;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-    .section-actions .sui-btn { width: 100%; }
-    @media (min-width: 721px) {
-      .section-head { flex-direction: row; align-items:flex-end; }
-      .section-actions { width: auto; }
-      .section-actions .sui-btn { width: auto; }
-      .section-actions .sui-input { width: auto; }
-    }
-
-    /* Grids */
-    .grid { display: grid; gap: var(--sui-space-4); }
-    .grid-2 { grid-template-columns: 1fr; }
-    .grid-3 { grid-template-columns: 1fr; }
-    .grid-4 { grid-template-columns: 1fr; }
-    @media (min-width: 721px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-      .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1025px) {
-      .grid-4 { grid-template-columns: repeat(4, 1fr); }
-      .grid-3 { grid-template-columns: 2fr 1fr; }
-    }
-
-    /* Stat cards */
-    .stat { padding: var(--sui-space-4); min-height: 118px; display:flex; flex-direction:column; justify-content:space-between; }
-    .kpi-label { font-size: var(--sui-text-meta); letter-spacing: 0.08em; text-transform: uppercase; font-weight: var(--sui-weight-bold); color: var(--sui-text-muted); }
-    .kpi-value { font-size: 34px; font-weight: var(--sui-weight-bold); color: var(--sui-text-primary); line-height: 1; }
-
-    /* Table (mobile: stacked rows) */
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 520px; }
-    th, td { padding: 14px var(--sui-space-4); border-bottom: 1px solid var(--sui-border); }
-    th {
-      text-align: left;
-      color: var(--sui-text-muted);
-      font-size: var(--sui-text-meta);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    td { color: var(--sui-text-secondary); }
-    td strong { color: var(--sui-text-primary); }
-
-    /* On very small screens, allow “card rows” */
-    @media (max-width: 520px) {
-      table { min-width: 0; }
-      thead { display: none; }
-      tbody, tr, td { display: block; width: 100%; }
-      tr { border-bottom: 1px solid var(--sui-border); }
-      td { border-bottom: 0; padding: 12px var(--sui-space-4); }
-      td[data-label]::before {
-        content: attr(data-label);
-        display: block;
-        font-size: var(--sui-text-meta);
-        color: var(--sui-text-muted);
-        font-weight: var(--sui-weight-bold);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        margin-bottom: 6px;
-      }
-    }
-
-    /* Footer */
-    footer {
-      margin-top: var(--sui-space-6);
-      padding: var(--sui-space-5) 0;
-      border-top: 1px solid var(--sui-border);
-      text-align: center;
-      color: var(--sui-text-muted);
-    }
-
-    /* Scrollbar (token-driven) */
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: var(--sui-bg-primary); }
-    ::-webkit-scrollbar-thumb { background: var(--sui-border); border-radius: var(--sui-radius-full); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--sui-text-muted); }
-
-    /* View toggles */
-    [data-view] { display: none; }
-    [data-view].is-active { display: block; }
-
-    /* Accessibility: reduce motion */
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; scroll-behavior: auto !important; }
-    }
-  </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
-        <div class="brand-title">
-          <span>Speyer UI</span>
-          <span class="version-pill">v1.0.0</span>
+  <!-- ===== HEADER ===== -->
+  <header class="sui-topbar">
+    <div class="sui-topbar-inner">
+      <div class="sui-brand">
+        <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
+        <div class="sui-brand-title">
+          <span class="sui-brand-name">Speyer UI</span>
+          <span class="sui-version-pill">v2.0</span>
         </div>
       </div>
 
-      <nav class="tabs" aria-label="Demo views">
-        <button class="tab" type="button" data-tab="preview" aria-selected="true">
-          <i data-lucide="layout"></i><span>Preview</span>
+      <nav class="sui-nav" aria-label="Demo views">
+        <button class="sui-tab" type="button" data-tab="overview" aria-selected="true">
+          <i data-lucide="layout"></i><span class="sui-tab-label">Overview</span>
         </button>
-        <button class="tab" type="button" data-tab="example">
-          <i data-lucide="flask-conical"></i><span>Example Usage</span>
+        <button class="sui-tab" type="button" data-tab="components" aria-selected="false">
+          <i data-lucide="box"></i><span class="sui-tab-label">Components</span>
         </button>
-        <button class="tab" type="button" data-tab="designers">
-          <i data-lucide="pen-tool"></i><span>For Designers</span>
+        <button class="sui-tab" type="button" data-tab="designers" aria-selected="false">
+          <i data-lucide="pen-tool"></i><span class="sui-tab-label">Designers</span>
         </button>
-        <button class="tab" type="button" data-tab="prompt">
-          <i data-lucide="bot"></i><span>AI Prompt</span>
+        <button class="sui-tab" type="button" data-tab="prompt" aria-selected="false">
+          <i data-lucide="bot"></i><span class="sui-tab-label">AI Prompt</span>
         </button>
       </nav>
 
-      <div style="display:flex; align-items:center; gap: 10px; width: 100%; justify-content:flex-end;">
-        <button id="themeBtn" class="sui-btn sui-btn-ghost" type="button" aria-label="Toggle theme">
+      <div class="sui-topbar-actions">
+        <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer" aria-label="View on GitHub">
+          <i data-lucide="github"></i>
+        </a>
+        <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" data-sui-theme aria-label="Toggle theme">
           <i data-lucide="moon"></i>
-          <span style="font-size: var(--sui-text-meta); font-weight: var(--sui-weight-bold); letter-spacing: 0.08em; text-transform: uppercase;">Theme</span>
         </button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <!-- PREVIEW (default) -->
-    <section data-view="preview" class="is-active">
-      <div class="section-head">
+  <main class="sui-wrap">
+    <!-- ================================================================
+         TAB 1: OVERVIEW
+         ================================================================ -->
+    <section data-view="overview" class="is-active">
+      <div class="sui-section-head">
         <div>
-          <h1>Living Specification</h1>
-          <p class="muted" style="margin-top: var(--sui-space-2); max-width: 70ch;">
-            A strict, token-driven UI system focused on clarity, accessibility, and consistency.
+          <h1>The design system that treats accessibility as architecture, not afterthought.</h1>
+          <p class="sui-text-cap sui-mt-2">
+            300 million people have color vision deficiency. Most design systems treat that as a checklist item.
+            SUI builds it into the component structure — every badge, alert, and indicator requires icon + text.
+            Three files. 45KB minified. Zero dependencies.
           </p>
-        </div>
-        <div class="section-actions">
-          <button class="sui-btn" type="button"><i data-lucide="share-2"></i>Export</button>
-          <input class="sui-input" placeholder="Quick search…" aria-label="Quick search" />
         </div>
       </div>
 
-      <div class="section grid grid-2">
-        <div class="sui-card" style="padding: var(--sui-space-5);">
-          <h2>Philosophy</h2>
-          <p style="margin-top: var(--sui-space-2); max-width: 70ch;">
-            Speyer UI is designed to be easy to read, mobile-first, and predictable. Tokens are the contract.
-            Components are simple, repeatable patterns.
-          </p>
+      <!-- Stats -->
+      <div class="sui-section sui-grid sui-grid-4">
+        <div class="sui-card sui-stat">
+          <div class="sui-kpi-label">Components</div>
+          <div class="sui-stat-row">
+            <div class="sui-kpi-value">25+</div>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0</span>
+          </div>
+        </div>
+        <div class="sui-card sui-stat">
+          <div class="sui-kpi-label">Dependencies</div>
+          <div class="sui-stat-row">
+            <div class="sui-kpi-value">0</div>
+            <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Zero</span>
+          </div>
+        </div>
+        <div class="sui-card sui-stat">
+          <div class="sui-kpi-label">A11y Target</div>
+          <div class="sui-stat-row">
+            <div class="sui-kpi-value">AA</div>
+            <span class="sui-badge sui-badge-info"><i data-lucide="shield-check"></i>WCAG 2.1</span>
+          </div>
+        </div>
+        <div class="sui-card sui-stat">
+          <div class="sui-kpi-label">Bundle</div>
+          <div class="sui-stat-row">
+            <div class="sui-kpi-value">45kb</div>
+            <span class="sui-badge sui-badge-success"><i data-lucide="zap"></i>Minified</span>
+          </div>
+        </div>
+      </div>
 
-          <div class="section" style="margin-top: var(--sui-space-5);">
-            <div class="sui-card" style="padding: var(--sui-space-4); margin-bottom: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="display:flex; gap: 12px; align-items:flex-start;">
-                <i data-lucide="eye" style="color: var(--sui-info); margin-top: 2px;"></i>
-                <div>
-                  <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">No Color Alone</div>
-                  <small>Status must include icon + label, not just color.</small>
-                </div>
+      <!-- Philosophy -->
+      <div class="sui-section sui-grid sui-grid-2">
+        <div class="sui-card sui-card-lg">
+          <h2>Design Philosophy</h2>
+          <p class="sui-text-cap sui-mt-2">Five principles that guide every decision in SUI.</p>
+          <div class="sui-flex-col sui-gap-3 sui-mt-4">
+            <div class="sui-card sui-card-muted">
+              <div class="sui-info-row">
+                <i data-lucide="eye" class="sui-info-row-icon sui-text-info"></i>
+                <div><div class="sui-info-row-title">Readability</div><small>Text and data must be easy to scan and understand at a glance.</small></div>
               </div>
             </div>
-
-            <div class="sui-card" style="padding: var(--sui-space-4); margin-bottom: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="display:flex; gap: 12px; align-items:flex-start;">
-                <i data-lucide="shield-check" style="color: var(--sui-success); margin-top: 2px;"></i>
-                <div>
-                  <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">Token Fidelity</div>
-                  <small>All colors come from <code>--sui-*</code> variables.</small>
-                </div>
+            <div class="sui-card sui-card-muted">
+              <div class="sui-info-row">
+                <i data-lucide="shield-check" class="sui-info-row-icon sui-text-success"></i>
+                <div><div class="sui-info-row-title">Accessibility</div><small>WCAG 2.1 AA compliance. Color is never the sole way to convey information.</small></div>
               </div>
             </div>
-
-            <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
-              <div style="display:flex; gap: 12px; align-items:flex-start;">
-                <i data-lucide="square" style="color: var(--sui-warning); margin-top: 2px;"></i>
-                <div>
-                  <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">Geometry</div>
-                  <small>Buttons/inputs: 12px radius. Cards: 16px radius. 8px grid.</small>
-                </div>
+            <div class="sui-card sui-card-muted">
+              <div class="sui-info-row">
+                <i data-lucide="smartphone" class="sui-info-row-icon sui-text-warning"></i>
+                <div><div class="sui-info-row-title">Mobile-First</div><small>Layouts designed for small screens, then scaled up. 44px touch targets.</small></div>
+              </div>
+            </div>
+            <div class="sui-card sui-card-muted">
+              <div class="sui-info-row">
+                <i data-lucide="palette" class="sui-info-row-icon sui-text-error"></i>
+                <div><div class="sui-info-row-title">Color-Blind Friendly</div><small>No red/green only patterns. Every status uses icon + text label.</small></div>
+              </div>
+            </div>
+            <div class="sui-card sui-card-muted">
+              <div class="sui-info-row">
+                <i data-lucide="copy" class="sui-info-row-icon sui-text-pro"></i>
+                <div><div class="sui-info-row-title">Consistency</div><small>Same components, same behavior, everywhere. Tokens are the contract.</small></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="sui-card" style="padding: var(--sui-space-5);">
-          <h2>Tokens Snapshot</h2>
-          <p style="margin-top: var(--sui-space-2); max-width: 70ch;">
-            This page consumes your repo’s <code>sui-tokens.css</code>. Toggle theme to validate variable switching.
-          </p>
-
-          <div class="section grid" style="grid-template-columns: 1fr; gap: var(--sui-space-3); margin-top: var(--sui-space-5);">
-            <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
-              <div class="kpi-label">Primary</div>
-              <div style="margin-top: var(--sui-space-2); font-weight: var(--sui-weight-bold);">--sui-blue-primary</div>
-              <div style="margin-top: var(--sui-space-2); height: 14px; border-radius: var(--sui-radius-full); background: var(--sui-blue-primary); border: 1px solid var(--sui-border);"></div>
+        <div class="sui-card sui-card-lg">
+          <h2>Architecture</h2>
+          <p class="sui-text-cap sui-mt-2">Three files, zero dependencies, instant deployment.</p>
+          <div class="sui-flex-col sui-gap-3 sui-mt-4">
+            <div class="sui-card sui-card-muted">
+              <div class="sui-flex-between">
+                <div>
+                  <div class="sui-info-row-title">sui-tokens.css</div>
+                  <small>Design tokens — colors, spacing, typography, shadows, z-index</small>
+                </div>
+                <span class="sui-badge sui-badge-neutral">Required</span>
+              </div>
             </div>
-
-            <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
-              <div class="kpi-label">Surface</div>
-              <div style="margin-top: var(--sui-space-2); font-weight: var(--sui-weight-bold);">--sui-bg-card</div>
-              <div style="margin-top: var(--sui-space-2); height: 14px; border-radius: var(--sui-radius-full); background: var(--sui-bg-card); border: 1px solid var(--sui-border);"></div>
+            <div class="sui-card sui-card-muted">
+              <div class="sui-flex-between">
+                <div>
+                  <div class="sui-info-row-title">sui-components.css</div>
+                  <small>All component classes — buttons, cards, badges, tables, and more</small>
+                </div>
+                <span class="sui-badge sui-badge-neutral">Required</span>
+              </div>
             </div>
-
-            <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
-              <div class="kpi-label">Border</div>
-              <div style="margin-top: var(--sui-space-2); font-weight: var(--sui-weight-bold);">--sui-border</div>
-              <div style="margin-top: var(--sui-space-2); height: 14px; border-radius: var(--sui-radius-full); background: var(--sui-border); border: 1px solid var(--sui-border);"></div>
-            </div>
-
-            <div class="sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated);">
-              <div class="kpi-label">Text</div>
-              <div style="margin-top: var(--sui-space-2); font-weight: var(--sui-weight-bold);">--sui-text-primary</div>
-              <div style="margin-top: var(--sui-space-2); height: 14px; border-radius: var(--sui-radius-full); background: var(--sui-text-primary); border: 1px solid var(--sui-border);"></div>
+            <div class="sui-card sui-card-muted">
+              <div class="sui-flex-between">
+                <div>
+                  <div class="sui-info-row-title">sui.js</div>
+                  <small>Interactive toolkit — modals, toasts, dropdowns, tooltips, accordion</small>
+                </div>
+                <span class="sui-badge sui-badge-info"><i data-lucide="info"></i>Optional</span>
+              </div>
             </div>
           </div>
-
-          <div class="section sui-card" style="padding: var(--sui-space-4); background: var(--sui-bg-elevated); margin-top: var(--sui-space-4);">
-            <div class="kpi-label" style="margin-bottom: var(--sui-space-3);">Status badges (icon + label)</div>
-            <div style="display:flex; gap: 10px; flex-wrap: wrap;">
-              <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Success</span>
-              <span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle"></i>Warning</span>
-              <span class="sui-badge sui-badge-error"><i data-lucide="x-circle"></i>Error</span>
-              <span class="sui-badge sui-badge-info"><i data-lucide="activity"></i>Stable</span>
+          <hr class="sui-divider" />
+          <div class="sui-card sui-card-muted">
+            <div class="sui-flex-between">
+              <div>
+                <div class="sui-info-row-title">CDN Ready</div>
+                <small>Minified files in <code>/dist</code> — served via jsDelivr. No signup required.</small>
+              </div>
+              <span class="sui-badge sui-badge-new"><i data-lucide="globe"></i>CDN</span>
+            </div>
+          </div>
+          <hr class="sui-divider" />
+          <div class="sui-card sui-card-muted">
+            <div class="sui-flex-between">
+              <div>
+                <div class="sui-info-row-title">AI-Ready</div>
+                <small>Paste a prompt, get SUI-compliant code. Works with any AI tool.</small>
+              </div>
+              <span class="sui-badge sui-badge-pro"><i data-lucide="sparkles"></i>AI</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- EXAMPLE USAGE -->
-    <section data-view="example">
-      <div class="section-head">
+    <!-- ================================================================
+         TAB 2: COMPONENTS
+         ================================================================ -->
+    <section data-view="components">
+      <div class="sui-section-head">
         <div>
-          <h1>Example Usage</h1>
-          <p class="muted" style="margin-top: var(--sui-space-2); max-width: 70ch;">
-            A sample dashboard-like layout that demonstrates SUI tokens and patterns in a real UI.
+          <h1>Component Library</h1>
+          <p class="sui-text-cap sui-mt-2">
+            Every SUI component, live and interactive. All built from design tokens, all accessible by default.
           </p>
         </div>
-        <div class="section-actions">
-          <button class="sui-btn" type="button"><i data-lucide="share-2"></i>Export</button>
-          <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>New instance</button>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="sui-section">
+        <h2>Buttons</h2>
+        <p class="sui-text-cap sui-mt-2">44px touch-friendly. Visible focus states. Tab through to test keyboard navigation.</p>
+        <div class="sui-flex sui-mt-4">
+          <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Primary</button>
+          <button class="sui-btn sui-btn-secondary" type="button">Secondary</button>
+          <button class="sui-btn sui-btn-ghost" type="button">Ghost</button>
+          <button class="sui-btn sui-btn-danger" type="button"><i data-lucide="trash-2"></i>Danger</button>
+          <button class="sui-btn sui-btn-success" type="button"><i data-lucide="check"></i>Success</button>
+          <button class="sui-btn" type="button" disabled>Disabled</button>
+        </div>
+        <div class="sui-flex sui-mt-3">
+          <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Small Primary</button>
+          <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="settings"></i>Settings</button>
         </div>
       </div>
 
-      <div class="section grid grid-4">
-        <div class="sui-card stat">
-          <div class="kpi-label">Network health</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
-            <div class="kpi-value">99.9%</div>
+      <!-- BADGES -->
+      <div class="sui-section">
+        <h2>Badges</h2>
+        <p class="sui-text-cap sui-mt-2">Always paired with icon or text. Covers every SaaS status and labeling need.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Status badges</div>
+          <div class="sui-flex">
+            <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Active</span>
+            <span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle"></i>Pending</span>
+            <span class="sui-badge sui-badge-error"><i data-lucide="x-circle"></i>Failed</span>
             <span class="sui-badge sui-badge-info"><i data-lucide="activity"></i>Stable</span>
+            <span class="sui-badge sui-badge-neutral"><i data-lucide="minus-circle"></i>Inactive</span>
           </div>
-        </div>
 
-        <div class="sui-card stat">
-          <div class="kpi-label">Active users</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
-            <div class="kpi-value">1,284</div>
-            <span class="sui-badge sui-badge-success"><i data-lucide="trending-up"></i>+12%</span>
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Feature badges</div>
+          <div class="sui-flex">
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>New</span>
+            <span class="sui-badge sui-badge-beta"><i data-lucide="flask-conical"></i>Beta</span>
+            <span class="sui-badge sui-badge-pro"><i data-lucide="crown"></i>Pro</span>
           </div>
-        </div>
 
-        <div class="sui-card stat">
-          <div class="kpi-label">A11y score</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
-            <div class="kpi-value">AA+</div>
-            <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Passed</span>
-          </div>
-        </div>
-
-        <div class="sui-card stat">
-          <div class="kpi-label">Sync rate</div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
-            <div class="kpi-value">2ms</div>
-            <span class="sui-badge sui-badge-info"><i data-lucide="zap"></i>Fast</span>
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Modifiers</div>
+          <div class="sui-flex sui-items-center">
+            <span class="sui-badge sui-badge-success sui-badge-outline"><i data-lucide="check-circle"></i>Outline</span>
+            <span class="sui-badge sui-badge-info sui-badge-sm">Small</span>
+            <span class="sui-badge sui-badge-success sui-badge-dot">Online</span>
+            <span class="sui-badge sui-badge-error sui-badge-dot">Offline</span>
+            <span class="sui-badge-count">3</span>
+            <span class="sui-badge-count">99+</span>
           </div>
         </div>
       </div>
 
-      <div class="section grid grid-3">
-        <div class="sui-card" style="overflow:hidden;">
-          <div style="padding: var(--sui-space-4); border-bottom: 1px solid var(--sui-border); display:flex; align-items:center; justify-content:space-between; gap: 10px; flex-wrap: wrap;">
-            <h3>Recent deployments</h3>
-            <button class="sui-btn sui-btn-ghost" type="button" style="height: 36px;"><i data-lucide="arrow-right"></i>View all</button>
+      <!-- ALERTS -->
+      <div class="sui-section">
+        <h2>Alerts</h2>
+        <p class="sui-text-cap sui-mt-2">Every alert uses icon + text. Color is never the sole indicator.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-alert sui-alert-success" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="check-circle"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Saved successfully</div><div>Your changes have been published.</div></div>
+          </div>
+          <div class="sui-alert sui-alert-warning" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="alert-triangle"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Review required</div><div>Some fields need your attention.</div></div>
+          </div>
+          <div class="sui-alert sui-alert-error" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="x-circle"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Upload failed</div><div>The file exceeds the maximum size of 10MB.</div></div>
+          </div>
+          <div class="sui-alert sui-alert-info" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Changes applied</div><div>Settings will take effect next session.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM INPUTS -->
+      <div class="sui-section">
+        <h2>Form Inputs</h2>
+        <p class="sui-text-cap sui-mt-2">Clear borders, visible focus rings, and accessible error messages.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <div class="sui-input-group sui-mb-3">
+              <label class="sui-input-label" for="demo-name">Full Name</label>
+              <input class="sui-input" type="text" id="demo-name" placeholder="Enter your name">
+              <span class="sui-input-hint">As it appears on your account.</span>
+            </div>
+            <div class="sui-input-group sui-mb-3">
+              <label class="sui-input-label" for="demo-email">Email Address</label>
+              <input class="sui-input sui-input-error" type="email" id="demo-email" value="invalid-email" aria-describedby="demo-email-err" aria-invalid="true">
+              <span class="sui-input-error-msg" id="demo-email-err"><i data-lucide="x-circle"></i> Please enter a valid email address.</span>
+            </div>
+            <div class="sui-input-group">
+              <label class="sui-input-label" for="demo-role">Role</label>
+              <select class="sui-select" id="demo-role">
+                <option>Designer</option>
+                <option>Developer</option>
+                <option>Product Manager</option>
+              </select>
+            </div>
+          </div>
+          <div class="sui-card">
+            <div class="sui-input-group sui-mb-3">
+              <label class="sui-input-label" for="demo-msg">Message</label>
+              <textarea class="sui-input" id="demo-msg" rows="3" placeholder="Type your message..."></textarea>
+            </div>
+            <label class="sui-checkbox-label sui-mb-3">
+              <input class="sui-checkbox" type="checkbox" checked> Subscribe to updates
+            </label>
+            <label class="sui-toggle-label">
+              <span class="sui-toggle">
+                <input type="checkbox" checked>
+                <span class="sui-toggle-track"></span>
+              </span>
+              Enable notifications
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVATARS -->
+      <div class="sui-section">
+        <h2>Avatars</h2>
+        <p class="sui-text-cap sui-mt-2">Initials-based, deterministic colors. Privacy-friendly, no image dependencies.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Sizes</div>
+          <div class="sui-flex sui-items-center">
+            <span class="sui-avatar sui-avatar-sm">AS</span>
+            <span class="sui-avatar sui-avatar-md">JK</span>
+            <span class="sui-avatar sui-avatar-lg">ML</span>
+            <span class="sui-avatar sui-avatar-lg">DT</span>
+            <span class="sui-avatar sui-avatar-md">RW</span>
+            <span class="sui-avatar sui-avatar-sm">BN</span>
           </div>
 
-          <div class="table-wrap" aria-label="Recent deployments table container">
-            <table aria-label="Recent deployments table">
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Avatar group</div>
+          <div class="sui-avatar-group">
+            <span class="sui-avatar sui-avatar-md">AS</span>
+            <span class="sui-avatar sui-avatar-md">JK</span>
+            <span class="sui-avatar sui-avatar-md">ML</span>
+            <span class="sui-avatar sui-avatar-md">+4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS BARS -->
+      <div class="sui-section">
+        <h2>Progress Bars</h2>
+        <p class="sui-text-cap sui-mt-2">Accessible with aria attributes. Status-colored variants and indeterminate mode.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex-col sui-gap-4">
+            <div>
+              <div class="sui-progress-label"><span>Project completion</span><span>72%</span></div>
+              <div class="sui-progress" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="Project completion">
+                <div class="sui-progress-bar" style="width:72%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="sui-progress-label"><span>Storage used</span><span>45%</span></div>
+              <div class="sui-progress sui-progress-success" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" aria-label="Storage used">
+                <div class="sui-progress-bar" style="width:45%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="sui-progress-label"><span>Disk space</span><span>89%</span></div>
+              <div class="sui-progress sui-progress-warning sui-progress-lg" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" aria-label="Disk space">
+                <div class="sui-progress-bar" style="width:89%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="sui-progress-label"><span>Uploading…</span><span></span></div>
+              <div class="sui-progress sui-progress-indeterminate sui-progress-info" role="progressbar" aria-label="Upload in progress">
+                <div class="sui-progress-bar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCORDION -->
+      <div class="sui-section">
+        <h2>Accordion</h2>
+        <p class="sui-text-cap sui-mt-2">Collapsible content sections. Keyboard accessible (Enter/Space). Multiple sections can be open.</p>
+        <div class="sui-accordion sui-mt-4">
+          <div class="sui-accordion-item">
+            <button class="sui-accordion-trigger" type="button" aria-expanded="true" aria-controls="acc-1">
+              What is Speyer UI?
+              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+            </button>
+            <div class="sui-accordion-panel" id="acc-1">
+              <p>SUI is a lightweight, accessible design system built on CSS custom properties. It provides design tokens, reusable component classes, and an optional JavaScript toolkit for interactive components — no heavy frameworks required.</p>
+            </div>
+          </div>
+          <div class="sui-accordion-item">
+            <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-2">
+              Do I need the JavaScript file?
+              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+            </button>
+            <div class="sui-accordion-panel" id="acc-2" hidden>
+              <p>No. The CSS files handle all visual styling. <code>sui.js</code> is optional and adds behavior for modals, toasts, dropdowns, tooltips, and accordion interactivity. Everything degrades gracefully without it.</p>
+            </div>
+          </div>
+          <div class="sui-accordion-item">
+            <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-3">
+              Can I use SUI with React, Vue, or other frameworks?
+              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+            </button>
+            <div class="sui-accordion-panel" id="acc-3" hidden>
+              <p>Absolutely. SUI tokens are plain CSS custom properties that work in any environment. The component classes are standard CSS and can be applied to any HTML element. Use the tokens as your design foundation and build framework-specific components on top.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BREADCRUMB + PAGINATION + DIVIDER -->
+      <div class="sui-section">
+        <h2>Navigation</h2>
+        <p class="sui-text-cap sui-mt-2">Breadcrumbs, pagination, and dividers for structured content.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Breadcrumb</div>
+          <nav aria-label="Breadcrumb">
+            <ol class="sui-breadcrumb">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Account</a></li>
+              <li><span aria-current="page">Security</span></li>
+            </ol>
+          </nav>
+
+          <div class="sui-divider-label">Pagination</div>
+
+          <nav class="sui-pagination" aria-label="Page navigation">
+            <button class="sui-page-btn" aria-label="Previous page"><i data-lucide="chevron-left"></i></button>
+            <button class="sui-page-btn" aria-label="Page 1">1</button>
+            <button class="sui-page-btn" aria-current="page" aria-label="Page 2, current">2</button>
+            <button class="sui-page-btn" aria-label="Page 3">3</button>
+            <span class="sui-page-ellipsis">…</span>
+            <button class="sui-page-btn" aria-label="Page 12">12</button>
+            <button class="sui-page-btn" aria-label="Next page"><i data-lucide="chevron-right"></i></button>
+          </nav>
+
+          <div class="sui-divider-label">Dividers</div>
+
+          <div class="sui-flex sui-items-center">
+            <span>Item A</span>
+            <span class="sui-divider-v"></span>
+            <span>Item B</span>
+            <span class="sui-divider-v"></span>
+            <span>Item C</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DROPDOWN + TOOLTIP + MODAL + TOAST -->
+      <div class="sui-section">
+        <h2>Interactive Components</h2>
+        <p class="sui-text-cap sui-mt-2">Powered by <code>sui.js</code>. Modals, toasts, dropdowns, and tooltips.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex sui-items-center">
+            <!-- Dropdown -->
+            <div class="sui-dropdown">
+              <button class="sui-btn" type="button" data-sui-dropdown-trigger><i data-lucide="more-horizontal"></i>Dropdown</button>
+              <div class="sui-dropdown-menu">
+                <button class="sui-dropdown-item"><i data-lucide="edit-3"></i>Edit</button>
+                <button class="sui-dropdown-item"><i data-lucide="copy"></i>Duplicate</button>
+                <button class="sui-dropdown-item"><i data-lucide="archive"></i>Archive</button>
+                <hr class="sui-dropdown-divider" />
+                <button class="sui-dropdown-item sui-dropdown-item-danger"><i data-lucide="trash-2"></i>Delete</button>
+              </div>
+            </div>
+
+            <!-- Tooltip -->
+            <span class="sui-tooltip">
+              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Settings"><i data-lucide="settings"></i></button>
+              <span class="sui-tooltip-content" role="tooltip">Settings</span>
+            </span>
+
+            <span class="sui-tooltip">
+              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Help"><i data-lucide="help-circle"></i></button>
+              <span class="sui-tooltip-content" role="tooltip">Help &amp; Support</span>
+            </span>
+
+            <!-- Modal trigger -->
+            <button class="sui-btn sui-btn-primary" type="button" data-sui-modal="#demoModal"><i data-lucide="external-link"></i>Open Modal</button>
+
+            <!-- Toast triggers -->
+            <button class="sui-btn sui-btn-success sui-btn-sm" type="button" onclick="SUI.toast.success('Saved!', 'Your changes have been saved.')">Toast</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLES -->
+      <div class="sui-section">
+        <h2>Tables</h2>
+        <p class="sui-text-cap sui-mt-2">Responsive tables with mobile stacking, striped and hover variants.</p>
+        <div class="sui-card sui-card-flush sui-mt-4">
+          <div class="sui-card-header">
+            <h3>Team Members</h3>
+            <button class="sui-btn sui-btn-primary sui-btn-sm" type="button"><i data-lucide="plus"></i>Invite</button>
+          </div>
+          <div class="sui-table-wrap">
+            <table class="sui-table sui-table-hover" aria-label="Team members">
               <thead>
-                <tr>
-                  <th>Project</th>
-                  <th>Status</th>
-                  <th>Owner</th>
-                </tr>
+                <tr><th>Name</th><th>Role</th><th>Status</th><th>Joined</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Project"><strong>Nexus Alpha</strong></td>
-                  <td data-label="Status"><span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Deployed</span></td>
-                  <td data-label="Owner">Adrian Speyer</td>
+                  <td data-label="Name"><div class="sui-flex sui-items-center sui-gap-2"><span class="sui-avatar sui-avatar-sm">AS</span><strong>Adrian Speyer</strong></div></td>
+                  <td data-label="Role">Admin</td>
+                  <td data-label="Status"><span class="sui-badge sui-badge-success sui-badge-dot">Active</span></td>
+                  <td data-label="Joined">Jan 2024</td>
                 </tr>
                 <tr>
-                  <td data-label="Project"><strong>Beta Horizon</strong></td>
-                  <td data-label="Status"><span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle"></i>Pending</span></td>
-                  <td data-label="Owner">Design Team</td>
+                  <td data-label="Name"><div class="sui-flex sui-items-center sui-gap-2"><span class="sui-avatar sui-avatar-sm">JK</span><strong>Jane Kim</strong></div></td>
+                  <td data-label="Role">Developer</td>
+                  <td data-label="Status"><span class="sui-badge sui-badge-success sui-badge-dot">Active</span></td>
+                  <td data-label="Joined">Mar 2024</td>
                 </tr>
                 <tr>
-                  <td data-label="Project"><strong>Legacy Core</strong></td>
-                  <td data-label="Status"><span class="sui-badge sui-badge-error"><i data-lucide="x-circle"></i>Failed</span></td>
-                  <td data-label="Owner">System Admin</td>
+                  <td data-label="Name"><div class="sui-flex sui-items-center sui-gap-2"><span class="sui-avatar sui-avatar-sm">ML</span><strong>Mike Lee</strong></div></td>
+                  <td data-label="Role">Designer</td>
+                  <td data-label="Status"><span class="sui-badge sui-badge-warning sui-badge-dot">Away</span></td>
+                  <td data-label="Joined">Jun 2024</td>
+                </tr>
+                <tr>
+                  <td data-label="Name"><div class="sui-flex sui-items-center sui-gap-2"><span class="sui-avatar sui-avatar-sm">RW</span><strong>Riya Wang</strong></div></td>
+                  <td data-label="Role">PM</td>
+                  <td data-label="Status"><span class="sui-badge sui-badge-neutral sui-badge-dot">Offline</span></td>
+                  <td data-label="Joined">Sep 2024</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+      </div>
 
-        <div class="grid" style="gap: var(--sui-space-4);">
-          <div class="sui-card" style="padding: var(--sui-space-4);">
-            <h3>System alerts</h3>
-            <div style="margin-top: var(--sui-space-3); display:grid; gap: var(--sui-space-3);">
-              <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-                <div style="display:flex; gap: 12px; align-items:flex-start;">
-                  <i data-lucide="info" style="color: var(--sui-info); margin-top: 2px;"></i>
-                  <div>
-                    <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">Security patch</div>
-                    <small>A new version of SUI Core is ready.</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-                <div style="display:flex; gap: 12px; align-items:flex-start;">
-                  <i data-lucide="alert-triangle" style="color: var(--sui-warning); margin-top: 2px;"></i>
-                  <div>
-                    <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">Contrast warning</div>
-                    <small>Footer link contrast is below 4.5:1.</small>
-                  </div>
-                </div>
+      <!-- SKELETON LOADERS -->
+      <div class="sui-section">
+        <h2>Skeleton Loaders</h2>
+        <p class="sui-text-cap sui-mt-2">Placeholder shimmer for content that's still loading.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <div class="sui-flex sui-items-center sui-gap-3 sui-mb-4">
+              <div class="sui-skeleton sui-skeleton-avatar"></div>
+              <div class="sui-flex-col sui-gap-2" style="flex:1">
+                <div class="sui-skeleton sui-skeleton-text" style="width:40%"></div>
+                <div class="sui-skeleton sui-skeleton-text" style="width:60%"></div>
               </div>
             </div>
+            <div class="sui-skeleton sui-skeleton-text"></div>
+            <div class="sui-skeleton sui-skeleton-text"></div>
+            <div class="sui-skeleton sui-skeleton-text"></div>
           </div>
+          <div class="sui-card">
+            <div class="sui-skeleton sui-skeleton-heading"></div>
+            <div class="sui-skeleton sui-skeleton-card sui-mb-3"></div>
+            <div class="sui-skeleton sui-skeleton-btn"></div>
+          </div>
+        </div>
+      </div>
 
-          <div class="sui-card" style="padding: var(--sui-space-5); background: var(--sui-bg-elevated);">
-            <h3>A11y check</h3>
-            <p style="margin-top: var(--sui-space-2);">
-              Ensure imagery has alt text and charts remain readable without color.
-            </p>
-            <button class="sui-btn sui-btn-primary" type="button" style="width:100%; margin-top: var(--sui-space-3);">
-              <i data-lucide="sparkles"></i>Run compliance test
-            </button>
+      <!-- EMPTY STATE -->
+      <div class="sui-section">
+        <h2>Empty State</h2>
+        <p class="sui-text-cap sui-mt-2">The "no data yet" pattern every table, list, and dashboard needs.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-empty">
+            <div class="sui-empty-icon"><i data-lucide="inbox"></i></div>
+            <div class="sui-empty-title">No projects yet</div>
+            <div class="sui-empty-text">Create your first project to get started. It only takes a few seconds.</div>
+            <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Create project</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARDS WITH SHADOW -->
+      <div class="sui-section">
+        <h2>Card Variants</h2>
+        <p class="sui-text-cap sui-mt-2">Default (border), elevated (shadow), muted, and flush.</p>
+        <div class="sui-grid sui-grid-4 sui-mt-4">
+          <div class="sui-card">
+            <div class="sui-kpi-label sui-mb-2">Default</div>
+            <p>Border-based separation. The standard card.</p>
+          </div>
+          <div class="sui-card sui-card-shadow">
+            <div class="sui-kpi-label sui-mb-2">Shadow</div>
+            <p>Opt-in elevation with <code>sui-card-shadow</code>.</p>
+          </div>
+          <div class="sui-card sui-card-muted">
+            <div class="sui-kpi-label sui-mb-2">Muted</div>
+            <p>Elevated background for nested cards.</p>
+          </div>
+          <div class="sui-card sui-card-lg">
+            <div class="sui-kpi-label sui-mb-2">Large</div>
+            <p>Extra padding with <code>sui-card-lg</code>.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FOR DESIGNERS -->
+    <!-- ================================================================
+         TAB 3: DESIGNERS
+         ================================================================ -->
     <section data-view="designers">
-      <div class="section-head">
+      <div class="sui-section-head">
         <div>
           <h1>For Designers</h1>
-          <p class="muted" style="margin-top: var(--sui-space-2); max-width: 72ch;">
-            How to use SUI tokens in Figma (or any design tool) to keep handoff predictable and accessible.
+          <p class="sui-text-cap sui-mt-2">
+            Token reference, geometry specs, and workflow guidance for Figma or any design tool.
           </p>
         </div>
       </div>
 
-      <div class="section grid grid-2">
-        <div class="sui-card" style="padding: var(--sui-space-5);">
+      <!-- Token-first workflow -->
+      <div class="sui-section sui-grid sui-grid-2">
+        <div class="sui-card sui-card-lg">
           <h2>Token-first workflow</h2>
-          <p style="margin-top: var(--sui-space-2); max-width: 72ch;">
-            Design in layers: background → surface/card → border → text → accents. This mirrors the token structure,
-            so implementation stays consistent.
-          </p>
-          <div style="margin-top: var(--sui-space-4); display:grid; gap: var(--sui-space-3);">
-            <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">Contrast rule</div>
-              <small>Target 4.5:1 for body text. Use token pairs: <code>--sui-text-primary</code> on <code>--sui-bg-card</code>.</small>
-            </div>
-            <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">Red/green safe</div>
-              <small>Never rely on color alone. Always pair icon + label + (optional) shape.</small>
-            </div>
-            <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="font-weight: var(--sui-weight-bold); color: var(--sui-text-primary);">Spacing system</div>
-              <small>Use the 8px grid tokens: <code>--sui-space-2</code>, <code>--sui-space-3</code>, <code>--sui-space-4</code>.</small>
-            </div>
+          <p class="sui-text-cap sui-mt-2">Design in layers: background → surface → border → text → accents.</p>
+          <div class="sui-flex-col sui-gap-3 sui-mt-4">
+            <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Contrast rule</div><small>Target 4.5:1 for body text. Use token pairs: <code>--sui-text-primary</code> on <code>--sui-bg-card</code>.</small></div>
+            <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Red/green safe</div><small>Never rely on color alone. Always pair icon + label + (optional) shape.</small></div>
+            <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Spacing system</div><small>Use the 8px grid: <code>--sui-space-2</code> (8px), <code>--sui-space-3</code> (16px), <code>--sui-space-4</code> (24px).</small></div>
+            <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Typography</div><small>Inter via Google Fonts. H1 32/700, H2 24/600, H3 20/600, Body 16/400.</small></div>
           </div>
         </div>
 
-        <div class="sui-card" style="padding: var(--sui-space-5);">
+        <div class="sui-card sui-card-lg">
           <h2>Quick reference</h2>
-          <p style="margin-top: var(--sui-space-2); max-width: 72ch;">
-            These are the most common “grab” tokens for day-to-day layouts.
-          </p>
+          <p class="sui-text-cap sui-mt-2">The most common tokens for day-to-day layouts.</p>
+          <div class="sui-flex-col sui-gap-3 sui-mt-4">
+            <div class="sui-card sui-card-muted"><div class="sui-flex-between"><strong>Background</strong><code>--sui-bg-primary</code></div></div>
+            <div class="sui-card sui-card-muted"><div class="sui-flex-between"><strong>Card</strong><code>--sui-bg-card</code></div></div>
+            <div class="sui-card sui-card-muted"><div class="sui-flex-between"><strong>Elevated</strong><code>--sui-bg-elevated</code></div></div>
+            <div class="sui-card sui-card-muted"><div class="sui-flex-between"><strong>Border</strong><code>--sui-border</code></div></div>
+            <div class="sui-card sui-card-muted"><div class="sui-flex-between"><strong>Primary action</strong><code>--sui-blue-primary</code></div></div>
+            <div class="sui-card sui-card-muted"><div class="sui-flex-between"><strong>Shadow (opt-in)</strong><code>--sui-shadow-md</code></div></div>
+          </div>
+        </div>
+      </div>
 
-          <div class="section" style="margin-top: var(--sui-space-4); display:grid; gap: var(--sui-space-3);">
-            <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="display:flex; justify-content:space-between; gap: 10px;">
-                <strong style="color: var(--sui-text-primary);">Background</strong>
-                <code>--sui-bg-primary</code>
-              </div>
-            </div>
-            <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="display:flex; justify-content:space-between; gap: 10px;">
-                <strong style="color: var(--sui-text-primary);">Card</strong>
-                <code>--sui-bg-card</code>
-              </div>
-            </div>
-            <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="display:flex; justify-content:space-between; gap: 10px;">
-                <strong style="color: var(--sui-text-primary);">Border</strong>
-                <code>--sui-border</code>
-              </div>
-            </div>
-            <div class="sui-card" style="padding: var(--sui-space-3); background: var(--sui-bg-elevated);">
-              <div style="display:flex; justify-content:space-between; gap: 10px;">
-                <strong style="color: var(--sui-text-primary);">Primary action</strong>
-                <code>--sui-blue-primary</code>
-              </div>
-            </div>
+      <!-- Geometry -->
+      <div class="sui-section">
+        <h2>Component Geometry</h2>
+        <p class="sui-text-cap sui-mt-2">Consistent border radius, sizing, and elevation from the token system.</p>
+        <div class="sui-grid sui-grid-4 sui-mt-4">
+          <div class="sui-card sui-card-muted sui-text-center">
+            <div class="sui-kpi-label">Buttons / Inputs</div>
+            <div class="sui-kpi-value sui-mt-2">12px</div>
+            <small>--sui-radius-md</small>
+          </div>
+          <div class="sui-card sui-card-muted sui-text-center">
+            <div class="sui-kpi-label">Cards / Panels</div>
+            <div class="sui-kpi-value sui-mt-2">16px</div>
+            <small>--sui-radius-lg</small>
+          </div>
+          <div class="sui-card sui-card-muted sui-text-center">
+            <div class="sui-kpi-label">Touch target</div>
+            <div class="sui-kpi-value sui-mt-2">44px</div>
+            <small>--sui-touch-target</small>
+          </div>
+          <div class="sui-card sui-card-muted sui-text-center">
+            <div class="sui-kpi-label">Max width</div>
+            <div class="sui-kpi-value sui-mt-2">1280</div>
+            <small>--sui-max-width</small>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AI PROMPT -->
+    <!-- ================================================================
+         TAB 4: AI PROMPT
+         ================================================================ -->
     <section data-view="prompt">
-      <div class="section-head">
+      <div class="sui-section-head">
         <div>
           <h1>AI Prompt</h1>
-          <p class="muted" style="margin-top: var(--sui-space-2); max-width: 70ch;">
-            Use this as a system instruction so AI-generated UI stays consistent with SUI.
+          <p class="sui-text-cap sui-mt-2">
+            Paste into any AI tool to generate SUI-compliant code. Works with ChatGPT, Claude, Copilot, Cursor, and more.
           </p>
-        </div>
-        <div class="section-actions">
-          <button class="sui-btn sui-btn-primary" id="copyBtn" type="button"><i data-lucide="copy"></i>Copy prompt</button>
         </div>
       </div>
 
-      <div class="section sui-card" style="padding: var(--sui-space-5);">
-        <pre id="promptText" style="margin:0; white-space:pre-wrap; font-size: var(--sui-text-small); line-height: 1.55; color: var(--sui-text-secondary);">I want you to use the Speyer UI System (SUI) for this project.
+      <!-- Quick prompt -->
+      <div class="sui-section">
+        <div class="sui-flex-between">
+          <div><h2>Quick Prompt</h2><p class="sui-mt-1">Recommended for most tasks.</p></div>
+          <button class="sui-btn sui-btn-primary" type="button" data-sui-copy="#promptQuick"><i data-lucide="copy"></i>Copy</button>
+        </div>
+        <div class="sui-card sui-card-lg sui-mt-4">
+          <pre id="promptQuick" class="sui-code-block">I want you to use the Speyer UI System (SUI) for this project.
 
-## Step 1: Fetch the design tokens
-Fetch the official SUI CSS token file from this URL:
-https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
+## Step 1: Fetch the design system
+Fetch the official SUI CSS and JS from CDN:
+- Tokens: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-tokens.min.css
+- Components: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-components.min.css
+- JS (optional): https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui.min.js
 
-Use the CSS custom properties defined in that file as the foundation for all styling. All tokens use the --sui- prefix.
+Or fetch the readable source files from:
+- https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
+- https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-components.css
+- https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui.js
+
+Use the CSS custom properties (--sui- prefix) and component classes as your foundation.
 
 ## Step 2: Confirm display mode
 Before writing any code, ask me:
@@ -713,7 +716,7 @@ Before writing any code, ask me:
 Then implement accordingly:
 - Light mode = default :root tokens
 - Dark mode = [data-theme="dark"] tokens
-- Both = include both token sets + a toggle using the data-theme attribute
+- Both = include both + a toggle using the data-theme attribute
 
 ## Step 3: Apply SUI design rules
 Core Principles: readability, accessibility, mobile-friendly, color-blind friendly, consistency.
@@ -723,15 +726,30 @@ Scale: H1 32px/700, H2 24px/600, H3 20px/600, Body 16px/400, Small 14px/400, Met
 
 Layout: 8px spacing grid (--sui-space-1 through --sui-space-6). Mobile-first. Max width: 1280px. Min touch target: 44px.
 
-Components:
-- Buttons: 44px min height, 12px border-radius, visible focus states
-- Cards: 16px border-radius, border-based separation, 16-24px padding
-- Inputs: visible borders, focus ring, minimum 44px height
-- Alerts: ALWAYS include icon + text label (never color alone)
+Components (use SUI classes):
+- Buttons: sui-btn, sui-btn-primary, sui-btn-secondary, sui-btn-ghost, sui-btn-danger, sui-btn-success
+- Cards: sui-card, sui-card-lg, sui-card-muted, sui-card-shadow, sui-card-flush
+- Inputs: sui-input, sui-input-group, sui-input-label, sui-select, sui-checkbox-label
+- Toggle: sui-toggle-label, sui-toggle, sui-toggle-track
+- Badges: sui-badge + sui-badge-success/warning/error/info/neutral/new/beta/pro
+- Badge modifiers: sui-badge-outline, sui-badge-sm, sui-badge-dot, sui-badge-count
+- Alerts: sui-alert + sui-alert-success/warning/error/info (always icon + text)
+- Avatars: sui-avatar + sui-avatar-sm/md/lg (initials only, no images)
+- Tables: sui-table-wrap > sui-table (use data-label on td for mobile stacking)
+- Progress: sui-progress + sui-progress-bar + status variants + sui-progress-indeterminate
+- Navigation: sui-breadcrumb, sui-pagination, sui-page-btn
+- Accordion: sui-accordion (requires sui.js for interactivity)
+- Dropdown: sui-dropdown (requires sui.js)
+- Modal: sui-modal-overlay + sui-modal (requires sui.js for focus trap/escape)
+- Toast: SUI.toast.success/error/warning/info (requires sui.js)
+- Tooltip: sui-tooltip + sui-tooltip-content
+- Empty state: sui-empty + sui-empty-icon + sui-empty-title + sui-empty-text
+- Skeleton: sui-skeleton + sui-skeleton-text/heading/avatar/card
+- Layout: sui-grid, sui-grid-2/3/4, sui-section, sui-flex, sui-flex-col
 
 Accessibility (mandatory):
 - WCAG 2.1 AA contrast ratios
-- Color must NEVER be the only indicator of status
+- Color must NEVER be the only indicator — always pair with icon + text
 - Color-blind friendly: no red/green-only patterns
 - Keyboard navigation, visible focus states, ARIA labels
 - Respect prefers-reduced-motion
@@ -739,87 +757,109 @@ Accessibility (mandatory):
 Status patterns (always icon + text):
 - Success: ✔ + text | Warning: ⚠ + text | Error: ✕ + text | Info: ℹ + text
 
+Elevation: Borders are the default card separation. Shadows are opt-in (sui-card-shadow).
 Motion: 150-250ms ease-out. Feedback only. No decorative animations.
 
+If you notice a component or pattern SUI doesn't cover yet, mention it — we welcome contributions at the GitHub repo.
+
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
+        </div>
+      </div>
+
+      <!-- Minimal prompt -->
+      <div class="sui-section">
+        <div class="sui-flex-between">
+          <div><h2>Minimal Prompt</h2><p class="sui-mt-1">For quick tasks.</p></div>
+          <button class="sui-btn sui-btn-ghost" type="button" data-sui-copy="#promptMinimal"><i data-lucide="copy"></i>Copy</button>
+        </div>
+        <div class="sui-card sui-card-lg sui-mt-4">
+          <pre id="promptMinimal" class="sui-code-block">Use the Speyer UI System (SUI).
+CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-tokens.min.css and sui-components.min.css
+Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui.min.js
+Ask me if I want light mode, dark mode, or both before coding.
+Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never color alone), mobile-first, color-blind friendly.
+Avatars are initials-only (no images). Use sui-* component classes for everything.
+If a component is missing from SUI, mention it — contributions welcome.
+Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
+        </div>
+      </div>
+
+      <!-- System prompt -->
+      <div class="sui-section">
+        <div class="sui-flex-between">
+          <div><h2>System Prompt</h2><p class="sui-mt-1">For custom instructions or Cursor rules.</p></div>
+          <button class="sui-btn sui-btn-ghost" type="button" data-sui-copy="#promptSystem"><i data-lucide="copy"></i>Copy</button>
+        </div>
+        <div class="sui-card sui-card-lg sui-mt-4">
+          <pre id="promptSystem" class="sui-code-block">When the user says "use SUI", "use the Speyer UI System", or "Speyer UI":
+
+1. Fetch the SUI design files from CDN:
+   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-tokens.min.css
+   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui-components.min.css
+   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.0/dist/sui.min.js (optional, for modals/toasts/dropdowns)
+   Or readable source from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/
+2. Ask the user: "Would you like light mode, dark mode, or both?"
+3. Apply all CSS custom properties (--sui- prefix) and component classes.
+4. Follow these design rules:
+   - Font: Inter (Google Fonts), fallback system-ui
+   - 8px spacing grid (--sui-space-1 through --sui-space-6)
+   - Min touch target: 44px, max content width: 1280px
+   - Buttons: 44px height, 12px radius | Cards: 16px radius, border separation
+   - Shadows: opt-in only (sui-card-shadow) — borders are default
+   - WCAG 2.1 AA contrast | Keyboard nav | prefers-reduced-motion support
+   - CRITICAL: Never use color alone for status. Always pair with icon + text.
+   - Color-blind safe: no red/green-only patterns
+   - Avatars: initials-only (no images)
+5. Use SUI component classes: sui-btn, sui-card, sui-badge, sui-alert, sui-avatar,
+   sui-toggle, sui-progress, sui-accordion, sui-dropdown, sui-modal, sui-tooltip,
+   sui-breadcrumb, sui-pagination, sui-empty, sui-skeleton, sui-table, etc.
+6. If a component isn't covered by SUI, mention it — contributions welcome.
+7. Reference: https://github.com/adrianspeyer/speyer-ui</pre>
+        </div>
       </div>
     </section>
 
-    <footer>
-      <div style="display:flex; justify-content:center; gap: 14px; margin-bottom: var(--sui-space-2); flex-wrap: wrap;">
-        <a class="sui-btn sui-btn-ghost" style="height:36px;" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer">
-          <i data-lucide="github"></i>GitHub
-        </a>
+    <!-- ===== FOOTER ===== -->
+    <footer class="sui-footer">
+      <div class="sui-footer-links">
+        <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer"><i data-lucide="github"></i>GitHub</a>
+        <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
-      <small>SPEYER UI SYSTEM • v1.0.0 • MIT LICENSE</small>
+      <small>SPEYER UI SYSTEM • v2.0.0 • MIT LICENSE • Made in Canada with love 🇨🇦</small>
     </footer>
   </main>
 
+  <!-- ===== MODAL (outside main for stacking context) ===== -->
+  <div class="sui-modal-overlay" id="demoModal" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="sui-modal">
+      <div class="sui-modal-header">
+        <span class="sui-modal-title" id="modalTitle">Confirm Action</span>
+        <button class="sui-modal-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="sui-modal-body">
+        <p>This is a fully accessible modal dialog with focus trapping, Escape key support, and body scroll lock. Click outside or press Escape to close.</p>
+        <div class="sui-alert sui-alert-info sui-mt-3" role="alert">
+          <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+          <div class="sui-alert-content">
+            <div class="sui-alert-title">Powered by sui.js</div>
+            <div>All interactive behavior comes from the optional toolkit.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sui-modal-footer">
+        <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.modal.close('#demoModal')">Cancel</button>
+        <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.modal.close('#demoModal'); SUI.toast.success('Confirmed!', 'Action completed successfully.')">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="./sui.js"></script>
   <script>
+    // Initialize Lucide icons
     lucide.createIcons();
-
-    // -------------------------
-    // View switching (Preview is default)
-    // -------------------------
-    const tabs = document.querySelectorAll('[data-tab]');
-    const views = document.querySelectorAll('[data-view]');
-
-    function setView(key) {
-      views.forEach(v => v.classList.toggle('is-active', v.getAttribute('data-view') === key));
-      tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('data-tab') === key ? 'true' : 'false'));
-      // ensure icons render if view swapped
-      lucide.createIcons();
-      // move focus to top for better mobile UX
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
-    tabs.forEach(t => t.addEventListener('click', () => setView(t.getAttribute('data-tab'))));
-    setView('preview');
-
-    // -------------------------
-    // Theme switching
-    // - Uses token file convention: [data-theme="dark"] on <html>
-    // - If no attribute is set, OS preference applies via sui-tokens.css
-    // -------------------------
-    const root = document.documentElement;
-    const THEME_KEY = 'sui-theme'; // 'light' | 'dark' | 'auto'
-    const btn = document.getElementById('themeBtn');
-
-    function applyTheme(mode) {
-      if (mode === 'dark') root.setAttribute('data-theme', 'dark');
-      else if (mode === 'light') root.setAttribute('data-theme', 'light');
-      else root.removeAttribute('data-theme'); // auto
-      localStorage.setItem(THEME_KEY, mode);
-      lucide.createIcons();
-    }
-
-    function currentTheme() {
-      return localStorage.getItem(THEME_KEY) || 'auto';
-    }
-
-    btn.addEventListener('click', () => {
-      const mode = currentTheme();
-      const next = mode === 'auto' ? 'dark' : (mode === 'dark' ? 'light' : 'auto');
-      applyTheme(next);
-    });
-
-    applyTheme(currentTheme());
-
-    // -------------------------
-    // Copy prompt
-    // -------------------------
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      const text = document.getElementById('promptText').innerText;
-      try {
-        await navigator.clipboard.writeText(text);
-        const b = document.getElementById('copyBtn');
-        const original = b.innerHTML;
-        b.innerHTML = '<i data-lucide="check"></i>Copied';
-        lucide.createIcons();
-        setTimeout(() => { b.innerHTML = original; lucide.createIcons(); }, 1600);
-      } catch (e) {
-        alert('Copy failed — clipboard access may be blocked. Try on GitHub Pages.');
-      }
-    });
+    // Re-init after SUI auto-init
+    setTimeout(() => lucide.createIcons(), 100);
   </script>
 </body>
 </html>
