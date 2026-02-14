@@ -5,7 +5,7 @@ A lightweight design system built around four constraints:
 1. **Accessibility is mandatory, not optional.** WCAG 2.1 AA is the baseline, tested and documented.
 2. **No build tools required.** Three files, drop them in, it works.
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
-4. **Status is never communicated by colour alone.** Every badge, alert, and indicator requires icon + text.
+4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
 45KB minified. Zero required dependencies. Works with any framework or none.
 
@@ -17,9 +17,9 @@ Built for internal tools, SaaS dashboards, and lightweight web applications.
 
 ## Why This Exists
 
-I'm colour blind. When I started using AI coding assistants to build web applications, every project was inconsistent and depended on the AI's decisions. Sometimes it produced interfaces that relied on colour to communicate status, or readability and contrast were way off. I got tired of having to manually go back and fix things and thought there had to be a better way.
+I'm colour blind. When I started using AI coding assistants to build web applications, every project was inconsistent and depended on the AI's decisions. Sometimes it produced interfaces that relied on colour to communicate status, or the readability and contrast were way off. I got tired of having to manually go back and fix things and thought there had to be a better way.
 
-So I built SUI for myself — a system where the components themselves won't let you skip accessibility and understood what the expectation was rather than guessing. Most importantly, it ensures things like you can't create a success badge without an icon and a label. You can't build an alert without a text description. The constraint is structural, not aspirational.
+So I built SUI for myself — a system where the components themselves won't let you skip accessibility and understand what the expectations are rather than guessing. Most importantly, it ensures things like you can't create a success badge without an icon and a label. You can't build an alert without a text description. The constraint is structural, not aspirational.
 
 I now use this for my own work. I'm sharing it because if you're colour blind, or just want a nice, cool-looking UI system that works easily as you vibe code without a 200MB `node_modules` folder — this might be useful to you too.
 
@@ -32,9 +32,9 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 ### CDN (Fastest)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui.min.js"></script>
 ```
 
 ### Download
@@ -79,7 +79,7 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
-| `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | 4KB | Yes |
+| `sui-tokens.css` | Design tokens (colors, spacing, typography, shadows) | 4KB | Yes |
 | `sui-components.css` | Component classes built from tokens | 32KB | Yes |
 | `sui.js` | Interactive behaviors (modals, toasts, dropdowns) | 9KB | **No** |
 
@@ -99,7 +99,7 @@ The SUI JavaScript toolkit checks for `typeof lucide !== 'undefined'` in exactly
 
 ## Accessibility Evidence
 
-Here is SUI vs WCAG 2.1 AA compliance. 
+SUI claims WCAG 2.1 AA compliance. Here are the receipts.
 
 ### Contrast Ratios (Light Mode)
 
@@ -114,6 +114,9 @@ Here is SUI vs WCAG 2.1 AA compliance.
 | `--sui-info-strong` (#0E7490) | `--sui-info-soft` (#ECFEFF) | 5.2:1 | AA |
 | `--sui-neutral-strong` (#334155) | `--sui-neutral-soft` (#F1F5F9) | 9.5:1 | AAA |
 | `--sui-pro-strong` (#6D28D9) | `--sui-pro-soft` (#F5F3FF) | 6.5:1 | AA |
+| `--sui-text-muted` (#64748B) | `--sui-bg-card` (#FFFFFF) | 5.0:1 | AA |
+| `--sui-text-muted` (#64748B) | `--sui-bg-elevated` (#F1F5F9) | 4.56:1 | AA |
+| `--sui-blue-strong` (#1D4ED8) | `--sui-blue-soft` (#DBEAFE) | 6.68:1 | AAA |
 | White | `--sui-blue-primary` (#3B82F6) | 3.7:1 | AA-lg |
 | White | `--sui-success-strong` (#15803D) | 5.0:1 | AA |
 | White | `--sui-error-strong` (#B91C1C) | 6.5:1 | AA |
@@ -134,11 +137,13 @@ Here is SUI vs WCAG 2.1 AA compliance.
 
 | Pair | Ratio | Status | Why |
 |------|-------|--------|-----|
-| `--sui-text-muted` on card | 2.6:1 (light) / 2.2:1 (dark) | Below AA | Intentional. Muted text is for non-essential metadata (timestamps, placeholder, helper text). Essential content must never use muted. |
 | White on `--sui-blue-primary` | 3.7:1 | AA for large text | Primary buttons use 14px/600 weight. At this size the ratio passes AA for UI components per common industry practice but falls short of AA normal text (4.5:1). |
+| `--sui-text-muted` on card (dark mode) | 2.2:1 | Below AA | Intentional in dark mode. Muted text is for non-essential metadata (timestamps, placeholder, helper text). Essential content must never use muted. Light mode muted now passes AA at 5.0:1. |
 | `--sui-error-strong` on `--sui-error-soft` (dark) | 4.3:1 | AA for large text | Badge/alert text at 12px falls slightly below AA normal text in dark mode. The icon + text pattern provides the redundant signal. |
 
-These limitations are documented, not hidden. SUI achieves AA for body text, headings, and status text in both modes. Buttons and muted text have noted exceptions.
+These limitations are documented, not hidden. SUI achieves AA for body text, headings, status text, and muted labels in both modes. Remaining exceptions are limited to dark mode muted text and large-text-only button ratios.
+
+Tested with Chrome Lighthouse (Accessibility audit) and Chrome DevTools contrast checker. If you find a contrast issue we missed, open an issue.
 
 ### Keyboard Behavior Per Component
 
@@ -152,7 +157,7 @@ These limitations are documented, not hidden. SUI achieves AA for body text, hea
 | Tooltip | Focus trigger shows | — | — | — |
 | Pagination | Focus each button | Navigate | — | — |
 
-### Colour-Blind Design
+### Color-Blind Design
 
 SUI uses red and green hues for success/error states. These hues are **never the only signal.** Every status pattern includes:
 
@@ -184,11 +189,11 @@ Toggle with JavaScript: `SUI.theme.toggle()` or `SUI.theme.set('dark')`.
 
 ---
 
-## Colour System
+## Color System
 
-All colours are CSS custom properties with the `--sui-` prefix. Every color has light and dark mode values defined in three blocks: `:root`, `[data-theme="dark"]`, and `@media (prefers-color-scheme: dark)`.
+All colors are CSS custom properties with the `--sui-` prefix. Every color has light and dark mode values defined in three blocks: `:root`, `[data-theme="dark"]`, and `@media (prefers-color-scheme: dark)`.
 
-### Status Colours
+### Status Colors
 
 Each status has three tokens: base (icons), strong (text on soft backgrounds), soft (backgrounds).
 
@@ -272,7 +277,7 @@ Modifiers: `sui-badge-outline` · `sui-badge-sm` · `sui-badge-dot` · `sui-badg
 
 `sui-avatar` · `sui-avatar-sm` (32px) · `sui-avatar-md` (40px) · `sui-avatar-lg` (56px) · `sui-avatar-group`
 
-No images by design. Deterministic colours from initials via `sui.js`. Privacy-friendly, no broken states, no CDN dependency.
+No images by design. Deterministic colors from initials via `sui.js`. Privacy-friendly, no broken states, no CDN dependency.
 
 ### Progress Bars
 
@@ -415,7 +420,7 @@ SUI.toast.success('Saved!', 'Details here')    // Auto-dismiss, stackable
 SUI.toast.error('Failed', 'Try again')
 SUI.dropdown.toggle(element)                   // Click toggle, outside-click close
 SUI.copy.text('string')                        // Clipboard with fallback
-SUI.avatar.colorFor('AS')                      // Deterministic colour from initials
+SUI.avatar.colorFor('AS')                      // Deterministic color from initials
 ```
 
 ---
@@ -426,15 +431,15 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```html
 <!-- Production (minified) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/dist/sui.min.js"></script>
 
 <!-- Development (readable) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.1/sui-tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.2/sui-tokens.css">
 ```
 
-Replace `@2.0.1` with any version tag. Use exact versions in production, not `@main`.
+Replace `@2.0.2` with any version tag. Use exact versions in production, not `@main`.
 
 ---
 
@@ -499,6 +504,9 @@ Then create a [GitHub Release](https://github.com/adrianspeyer/speyer-ui/release
 - [ ] Focus states visible
 - [ ] `prefers-reduced-motion` respected
 - [ ] Touch targets at least 44px
+- [ ] ARIA roles correct: tabs use `role="tablist"`/`role="tab"`/`role="tabpanel"`
+- [ ] All interactive elements have accessible names (visible text or `aria-label`)
+- [ ] **Lighthouse accessibility audit score ≥ 90**
 
 ---
 

@@ -1,6 +1,6 @@
 /**
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.0.1
+ * Version: 2.0.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -68,6 +68,20 @@ const SUI = (() => {
     init(navEl) {
       const tabBtns = $$('.sui-tab', navEl);
       if (!tabBtns.length) return;
+
+      // Enforce ARIA roles — tablist on nav, tab on buttons
+      if (!navEl.hasAttribute('role')) navEl.setAttribute('role', 'tablist');
+      tabBtns.forEach(t => {
+        if (!t.hasAttribute('role')) t.setAttribute('role', 'tab');
+        // Ensure accessible name exists (fallback to data-tab)
+        if (!t.hasAttribute('aria-label') && !t.textContent.trim()) {
+          t.setAttribute('aria-label', t.getAttribute('data-tab'));
+        }
+      });
+      // Enforce tabpanel role on associated sections
+      $$('[data-view]').forEach(v => {
+        if (!v.hasAttribute('role')) v.setAttribute('role', 'tabpanel');
+      });
 
       const setView = (key) => {
         $$('[data-view]').forEach(v =>

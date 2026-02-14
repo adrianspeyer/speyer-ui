@@ -4,6 +4,22 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.2] — 2026-02-14
+
+### Fixed (Lighthouse Accessibility Audit)
+- **Muted text contrast failure:** `--sui-text-muted` was #94A3B8 (2.56:1 on white) — changed to #64748B (5.0:1, AA pass)
+- **Badge-new contrast failure:** `.sui-badge-new` text was #3B82F6 on #DBEAFE (3.01:1) — added `--sui-blue-strong` token (#1D4ED8), now 6.68:1 (AAA)
+- **Tab ARIA mismatch:** `aria-selected` was used on `<button>` without `role="tab"` — added `role="tablist"` on nav, `role="tab"` on buttons, `role="tabpanel"` on sections
+- **Tab accessible names:** buttons lacked accessible names at mobile widths — added explicit `aria-label` to each tab
+
+### Added
+- **`--sui-blue-strong` token** in all three mode blocks (light, dark, prefers-color-scheme) for consistent accessible text on blue backgrounds
+- **Automatic ARIA enforcement** in `sui.js` tab init — roles are applied programmatically as a safety net
+- **Lighthouse testing protocol** in co-pilot guide — mandatory before any release
+- **ARIA tab pattern rules** in co-pilot guide — prevents future role mismatches
+
+---
+
 ## [2.0.1] — 2026-02-14
 
 ### Fixed

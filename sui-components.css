@@ -1,6 +1,6 @@
 /*
  * Speyer UI System (SUI) — Components
- * Version: 2.0.1
+ * Version: 2.0.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -717,7 +717,7 @@ textarea.sui-input {
 .sui-badge-new {
   background: var(--sui-blue-soft);
   border-color: var(--sui-blue-primary);
-  color: var(--sui-blue-primary);
+  color: var(--sui-blue-strong);
 }
 
 .sui-badge-beta {

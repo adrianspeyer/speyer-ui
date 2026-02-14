@@ -1,6 +1,6 @@
 /*
  * Speyer UI System (SUI) — Design Tokens
- * Version: 2.0.1
+ * Version: 2.0.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * A lightweight, accessible token system for modern web applications.
@@ -18,6 +18,7 @@
   --sui-blue-primary: #3B82F6;
   --sui-blue-hover:   #2563EB;
   --sui-blue-active:  #1E40AF;
+  --sui-blue-strong:  #1D4ED8;
   --sui-blue-soft:    #DBEAFE;
   --sui-blue-focus:   #93C5FD;
 
@@ -30,7 +31,7 @@
   /* Text */
   --sui-text-primary:   #0F172A;
   --sui-text-secondary: #475569;
-  --sui-text-muted:     #94A3B8;
+  --sui-text-muted:     #64748B;
   --sui-text-inverse:   #FFFFFF;
 
   /* Status */
@@ -123,6 +124,7 @@
   --sui-blue-primary: #60A5FA;
   --sui-blue-hover:   #3B82F6;
   --sui-blue-active:  #2563EB;
+  --sui-blue-strong:  #93C5FD;
   --sui-blue-soft:    #1E3A8A;
   --sui-blue-focus:   #60A5FA;
 
@@ -181,6 +183,7 @@
     --sui-blue-primary: #60A5FA;
     --sui-blue-hover:   #3B82F6;
     --sui-blue-active:  #2563EB;
+    --sui-blue-strong:  #93C5FD;
     --sui-blue-soft:    #1E3A8A;
     --sui-blue-focus:   #60A5FA;
 
