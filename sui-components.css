@@ -1755,3 +1755,13 @@ textarea.sui-input {
 
 .sui-text-cap { max-width: 70ch; }
 .sui-text-mono { font-family: var(--sui-font-mono); }
+
+/* ==========================================================================
+   Radius Utilities
+   ========================================================================== */
+
+.sui-round-none { border-radius: 0 !important; }
+.sui-round-sm   { border-radius: var(--sui-radius-sm) !important; }
+.sui-round-md   { border-radius: var(--sui-radius-md) !important; }
+.sui-round-lg   { border-radius: var(--sui-radius-lg) !important; }
+.sui-round-full { border-radius: var(--sui-radius-full) !important; }

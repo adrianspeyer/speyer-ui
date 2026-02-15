@@ -4,6 +4,13 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.5] — 2026-02-14
+
+### Added
+- **Radius utility classes:** `sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`. Override border-radius on any component — badges, buttons, cards, inputs. Uses existing radius tokens. Resolves [#1](https://github.com/adrianspeyer/speyer-ui/issues/1).
+
+---
+
 ## [2.0.4] — 2026-02-14
 
 ### Fixed (Lighthouse Accessibility Retest — Dark Mode)

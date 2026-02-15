@@ -32,9 +32,9 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 ### CDN (Fastest)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui.min.js"></script>
 ```
 
 ### Download
@@ -305,7 +305,25 @@ Dividers · Empty state · Skeleton loaders · Stat cards
 
 ### Layout & Utilities
 
-Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`)
+Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`)
+
+### Radius Utilities
+
+Override the border-radius on any component. Compose with badges, buttons, cards, inputs — anything.
+
+| Class | Radius | Use case |
+|-------|--------|----------|
+| `sui-round-none` | 0 | Fully square corners |
+| `sui-round-sm` | 8px | Subtle rounding |
+| `sui-round-md` | 12px | Moderate rounding |
+| `sui-round-lg` | 16px | Pronounced rounding |
+| `sui-round-full` | 9999px | Full pill shape |
+
+```html
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.5</span>
+<button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
+<div class="sui-card sui-round-sm">Sharper card</div>
+```
 
 ---
 
@@ -433,15 +451,15 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```html
 <!-- Production (minified) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui.min.js"></script>
 
 <!-- Development (readable) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.4/sui-tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/sui-tokens.css">
 ```
 
-Replace `@2.0.4` with any version tag. Use exact versions in production, not `@main`.
+Replace `@2.0.5` with any version tag. Use exact versions in production, not `@main`.
 
 ---
 
