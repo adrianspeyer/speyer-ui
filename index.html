@@ -413,6 +413,49 @@
         </div>
       </div>
 
+      <!-- PROSE & MEDIA -->
+      <div class="sui-section">
+        <h2>Prose & Media</h2>
+        <p class="sui-text-cap sui-mt-2">WordPress-ready typography and responsive embeds. No extra classes needed for standard HTML content.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <h3>Lists & Blockquote</h3>
+            <ul class="sui-mt-2">
+              <li>Accessible by default — no extra classes</li>
+              <li>Nested lists handled automatically
+                <ul>
+                  <li>Second level indented</li>
+                  <li>Consistent spacing</li>
+                </ul>
+              </li>
+              <li>Color inherits from <code>--sui-text-secondary</code></li>
+            </ul>
+            <blockquote class="sui-mt-3">
+              <p>"Accessibility is not a feature — it's architecture."</p>
+            </blockquote>
+            <figure class="sui-mt-3">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='100' fill='%23F1F5F9'%3E%3Crect width='400' height='100' rx='8'/%3E%3Ctext x='200' y='55' text-anchor='middle' fill='%2394A3B8' font-family='system-ui' font-size='14'%3EResponsive image (max-width: 100%25)%3C/text%3E%3C/svg%3E" alt="Placeholder showing responsive image scaling">
+              <figcaption>Figure 1 — Images scale automatically. No wrapper class required.</figcaption>
+            </figure>
+          </div>
+          <div class="sui-card">
+            <h3>Code, Keyboard & Embed</h3>
+            <p class="sui-mt-2">Inline code like <code>sui-tokens.css</code> gets automatic styling.</p>
+            <p class="sui-mt-2">Keyboard shortcuts: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd></p>
+            <div class="sui-mt-3">
+              <div class="sui-kpi-label sui-mb-2">Responsive video embed (16:9)</div>
+              <div style="max-width:280px;">
+                <div class="sui-embed">
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--sui-bg-elevated);">
+                    <span style="color:var(--sui-text-muted);font-size:var(--sui-text-small);">16:9 video area</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ACCORDION -->
       <div class="sui-section">
         <h2>Accordion</h2>
@@ -484,6 +527,14 @@
             <span class="sui-divider-v"></span>
             <span>Item C</span>
           </div>
+
+          <div class="sui-divider-label">Nav links</div>
+
+          <nav style="display:flex;gap:var(--sui-space-1);flex-wrap:wrap;" aria-label="Demo navigation">
+            <a href="#" class="sui-nav-link" aria-current="page" onclick="event.preventDefault()">Dashboard</a>
+            <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Settings</a>
+            <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Reports</a>
+          </nav>
         </div>
       </div>
 
@@ -653,57 +704,6 @@
         </div>
       </div>
 
-      <!-- PROSE & MEDIA -->
-      <div class="sui-section">
-        <h2>Prose & Media</h2>
-        <p class="sui-text-cap sui-mt-2">WordPress-ready typography and responsive embeds. Lists, blockquotes, code, and keyboard shortcuts.</p>
-        <div class="sui-grid sui-grid-2 sui-mt-4">
-          <div class="sui-card">
-            <h3>Rich Content</h3>
-            <p class="sui-mt-2">Ordered and unordered lists with proper spacing:</p>
-            <ul>
-              <li>Accessible by default — no extra classes needed</li>
-              <li>Nested lists handled automatically
-                <ul>
-                  <li>Second level indented</li>
-                  <li>Consistent spacing</li>
-                </ul>
-              </li>
-              <li>Color inherits from <code>--sui-text-secondary</code></li>
-            </ul>
-            <blockquote class="sui-mt-3">
-              <p>"Accessibility is not a feature — it's architecture. If you can't build it accessible, you can't build it."</p>
-            </blockquote>
-            <figure class="sui-mt-3">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='120' fill='%23F1F5F9'%3E%3Crect width='400' height='120' rx='8'/%3E%3Ctext x='200' y='65' text-anchor='middle' fill='%2394A3B8' font-family='system-ui' font-size='14'%3EResponsive image placeholder%3C/text%3E%3C/svg%3E" alt="Placeholder demonstrating responsive images">
-              <figcaption>Figure 1 — Images scale with <code>max-width: 100%</code>. No extra classes required.</figcaption>
-            </figure>
-          </div>
-          <div class="sui-card">
-            <h3>Code & Keyboard</h3>
-            <p class="sui-mt-2">Inline code like <code>sui-components.css</code> gets automatic padding and background.</p>
-            <p class="sui-mt-2">Keyboard shortcuts: Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> to open the command palette.</p>
-
-            <h3 class="sui-mt-4">Responsive Embed</h3>
-            <p class="sui-mt-2">16:9 aspect ratio container for video:</p>
-            <div style="max-width:320px;" class="sui-mt-2">
-              <div class="sui-embed">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--sui-bg-elevated);">
-                  <span style="color:var(--sui-text-muted);font-size:var(--sui-text-small);">Video embed (16:9)</span>
-                </div>
-              </div>
-            </div>
-
-            <h3 class="sui-mt-4">Navigation Links</h3>
-            <p class="sui-mt-2">Responsive nav with mobile toggle:</p>
-            <nav class="sui-mt-2" style="display:flex;gap:var(--sui-space-1);flex-wrap:wrap;" aria-label="Demo navigation">
-              <a href="#" class="sui-nav-link" aria-current="page" onclick="event.preventDefault()">Dashboard</a>
-              <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Settings</a>
-              <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Reports</a>
-            </nav>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- ================================================================
