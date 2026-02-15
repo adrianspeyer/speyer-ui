@@ -45,7 +45,8 @@
           <i data-lucide="github"></i>
         </a>
         <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" data-sui-theme aria-label="Toggle theme">
-          <i data-lucide="moon"></i>
+          <i data-lucide="moon" id="themeIconLight"></i>
+          <i data-lucide="sun" id="themeIconDark" style="display:none;"></i>
         </button>
       </div>
     </div>
@@ -911,6 +912,17 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     lucide.createIcons();
     // Re-init after SUI auto-init
     setTimeout(() => lucide.createIcons(), 100);
+
+    // Sync theme toggle icon (moon in light, sun in dark)
+    function syncThemeIcon() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+        (!document.documentElement.hasAttribute('data-theme') &&
+         window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.getElementById('themeIconLight').style.display = isDark ? 'none' : '';
+      document.getElementById('themeIconDark').style.display = isDark ? '' : 'none';
+    }
+    syncThemeIcon();
+    new MutationObserver(syncThemeIcon).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   </script>
 </body>
 </html>
