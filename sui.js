@@ -1,4 +1,4 @@
-/**
+/*!
  * Speyer UI System (SUI) — Interactive Toolkit
  * Version: 2.0.7
  * https://github.com/adrianspeyer/speyer-ui

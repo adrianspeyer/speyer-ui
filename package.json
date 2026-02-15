@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "minify:css": "cleancss -o dist/sui-tokens.min.css sui-tokens.css && cleancss -o dist/sui-components.min.css sui-components.css",
-    "minify:js": "terser sui.js -o dist/sui.min.js --compress --mangle",
+    "minify:js": "terser sui.js -o dist/sui.min.js --compress --mangle --comments '/^!/'",
     "build": "npm run minify:css && npm run minify:js",
     "version": "npm run build && git add dist/"
   },
