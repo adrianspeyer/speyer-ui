@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.0.9
+ * Version: 2.0.10
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -1377,8 +1377,6 @@ dialog.sui-dialog {
   background: var(--sui-bg-card);
   border: 1px solid var(--sui-border);
   box-shadow: var(--sui-shadow-lg);
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   color: var(--sui-text-primary);
 }
@@ -1388,6 +1386,8 @@ dialog.sui-dialog::backdrop {
 }
 
 dialog.sui-dialog[open] {
+  display: flex;
+  flex-direction: column;
   animation: sui-dialog-in var(--sui-duration-normal) var(--sui-easing);
 }
 

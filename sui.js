@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.0.9
+ * Version: 2.0.10
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -49,9 +49,11 @@ const SUI = (() => {
     },
 
     toggle() {
-      const modes = ['auto', 'dark', 'light'];
-      const idx = modes.indexOf(this.current());
-      this.set(modes[(idx + 1) % modes.length]);
+      // Detect what the user actually sees and flip it
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+        (!document.documentElement.hasAttribute('data-theme') &&
+         window.matchMedia('(prefers-color-scheme: dark)').matches);
+      this.set(isDark ? 'light' : 'dark');
       return this.current();
     },
 

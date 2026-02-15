@@ -4,6 +4,17 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.10] — 2026-02-15
+
+### Fixed
+- **Dialog visible below footer:** `display: flex` on `dialog.sui-dialog` overrode the browser's default hidden state for closed `<dialog>` elements. Moved `display: flex; flex-direction: column` to `dialog.sui-dialog[open]` so the browser controls visibility.
+- **Theme toggle required two clicks:** Three-state cycle (auto → dark → light) caused a silent no-op when system preference matched the next state (e.g. dark system + auto → dark looked identical). Toggle now detects the visual state and flips to the opposite in one click. `SUI.theme.set('auto')` still available programmatically.
+
+### Lesson
+- Test new components in context — a `<dialog>` that works in isolation can break page layout when CSS specificity fights the browser's native behaviour. And test interactive features from the user's perspective, not just the code's logic — the three-state toggle was technically correct but functionally broken.
+
+---
+
 ## [2.0.9] — 2026-02-15
 
 ### Added
@@ -16,7 +27,7 @@ All notable changes to the Speyer UI System are documented here.
 - **Legacy overlay modal deprecated:** `sui-modal-overlay` + `sui-modal` pattern still works but is marked deprecated in CSS comments. Will be removed in v3.0.
 - **README:** Updated architecture table with current sizes (~5KB + ~34KB + ~10KB). Added Icons section recommending Lucide with clear "any library works" guidance. Updated Dependencies section. Updated avatar docs. Updated modal API docs. Added "What you get" component summary.
 - **Demo:** Modal now uses native `<dialog>`. All three AI prompts updated to include Lucide CDN, icon usage rules, dialog, and avatar changes.
-- **Size claims:** Updated from "45KB" to "under 50KB" (actual: 48.5KB).
+- **Size claims:** Updated from "45KB" to "under 50KB" (actual: 48.7KB).
 
 ### Lesson
 - Use the platform. `<dialog>` eliminates ~40 lines of focus-trapping JavaScript and gives you better accessibility than any hand-rolled solution. When browsers ship a native version of something you're building by hand, adopt it.
