@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.0.10
+ * Version: 2.0.11
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -93,8 +93,6 @@ const SUI = (() => {
           t.setAttribute('aria-selected', t.getAttribute('data-tab') === key ? 'true' : 'false')
         );
         window.scrollTo({ top: 0, behavior: 'instant' });
-        // Re-init icons if Lucide is present
-        if (typeof lucide !== 'undefined') lucide.createIcons();
       };
 
       tabBtns.forEach(t => t.addEventListener('click', () => setView(t.getAttribute('data-tab'))));
@@ -409,16 +407,16 @@ const SUI = (() => {
   const avatar = {
     // SUI-safe palette — all meet 3:1 contrast on white text
     COLORS: [
-      '#3B82F6', // blue
-      '#22C55E', // green
-      '#F59E0B', // amber
-      '#EF4444', // red
-      '#06B6D4', // cyan
-      '#8B5CF6', // purple
-      '#EC4899', // pink
-      '#14B8A6', // teal
-      '#F97316', // orange
-      '#6366F1'  // indigo
+      '#2563EB', // blue    (5.17:1 on white)
+      '#15803D', // green   (5.02:1)
+      '#B45309', // amber   (5.02:1)
+      '#B91C1C', // red     (6.47:1)
+      '#0E7490', // cyan    (5.36:1)
+      '#7C3AED', // violet  (5.70:1)
+      '#DB2777', // pink    (4.60:1)
+      '#0F766E', // teal    (5.47:1)
+      '#C2410C', // orange  (5.18:1)
+      '#4F46E5'  // indigo  (6.29:1)
     ],
 
     colorFor(text) {
@@ -482,7 +480,6 @@ const SUI = (() => {
     $$('[data-sui-theme]').forEach(btn => {
       btn.addEventListener('click', () => {
         theme.toggle();
-        if (typeof lucide !== 'undefined') lucide.createIcons();
       });
     });
 
@@ -526,12 +523,84 @@ const SUI = (() => {
         const target = btn.getAttribute('data-sui-copy');
         const ok = await copy.fromElement(target);
         if (ok) {
-          const original = btn.innerHTML;
-          btn.innerHTML = btn.innerHTML.replace(/Copy/i, 'Copied!');
-          if (typeof lucide !== 'undefined') lucide.createIcons();
-          setTimeout(() => { btn.innerHTML = original; if (typeof lucide !== 'undefined') lucide.createIcons(); }, 1600);
+          // Change only the text node — leave icon elements untouched
+          const textNode = [...btn.childNodes].find(n => n.nodeType === Node.TEXT_NODE && /copy/i.test(n.textContent));
+          if (textNode) {
+            const original = textNode.textContent;
+            textNode.textContent = original.replace(/Copy/i, 'Copied!');
+            setTimeout(() => { textNode.textContent = original; }, 1600);
+          }
         }
       });
+    });
+
+    // Navigation toggle (mobile hamburger)
+    $$('[data-sui-nav-toggle]').forEach(btn => {
+      const navSelector = btn.getAttribute('data-sui-nav-toggle');
+      const nav = $(navSelector);
+      if (!nav) return;
+
+      // ARIA safety net
+      if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+      if (!btn.hasAttribute('aria-label')) btn.setAttribute('aria-label', 'Menu');
+      if (nav.id && !btn.hasAttribute('aria-controls')) {
+        btn.setAttribute('aria-controls', nav.id);
+      }
+      if (!nav.closest('nav') && nav.getAttribute('role') !== 'navigation') {
+        nav.setAttribute('role', 'navigation');
+      }
+      if (!nav.hasAttribute('aria-label') && !nav.closest('nav[aria-label]')) {
+        nav.setAttribute('aria-label', 'Primary navigation');
+      }
+
+      btn.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      // Escape key closes open nav
+      nav.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+          nav.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
+      });
+    });
+
+    // Navigation containers: ensure landmark role
+    $$('.sui-nav').forEach(nav => {
+      if (!nav.closest('nav') && nav.getAttribute('role') !== 'navigation') {
+        nav.setAttribute('role', 'navigation');
+      }
+    });
+
+    // Badge overlay: ARIA safety net
+    $$('.sui-badge-overlay').forEach(overlay => {
+      const count = overlay.querySelector('.sui-badge-count');
+      const trigger = overlay.querySelector('button, a, [role="button"]');
+      if (count && !count.hasAttribute('aria-hidden')) {
+        count.setAttribute('aria-hidden', 'true');
+      }
+      if (count && trigger && !trigger.hasAttribute('aria-label')) {
+        console.warn(
+          'SUI: .sui-badge-overlay trigger is missing aria-label.',
+          'Add aria-label describing the count (e.g., "Notifications, 3 unread").',
+          trigger
+        );
+      }
+    });
+
+    // Radio buttons: label association check
+    $$('.sui-radio').forEach(radio => {
+      const label = radio.closest('label') || (radio.id && $(`label[for="${radio.id}"]`));
+      if (!label) {
+        console.warn(
+          'SUI: .sui-radio is not associated with a <label>.',
+          'Wrap in <label class="sui-radio-label"> or use for/id.',
+          radio
+        );
+      }
     });
   }
 

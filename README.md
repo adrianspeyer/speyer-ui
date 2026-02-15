@@ -7,7 +7,7 @@ A lightweight design system built around four constraints:
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
 4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
-Under 50KB minified. Zero required dependencies. Works with any framework or none.
+Under 55KB minified. Zero required dependencies. Works with any framework or none.
 
 **What you get:** buttons, cards, badges, alerts, avatars, toggles, tables, forms, progress bars, modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, and a dark mode that works.
 
@@ -34,24 +34,43 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 ### CDN (Fastest)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My App</title>
 
-<!-- Icons — any library works. Lucide shown here. -->
-<script src="https://unpkg.com/lucide@latest"></script>
-<script>lucide.createIcons();</script>
+  <!-- SUI Styles — go in <head> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
+</head>
+<body>
+
+  <!-- Your content here -->
+
+  <!-- SUI + Icons — go before </body> so the DOM is ready -->
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js"></script>
+
+  <!-- Icons — any library works. Lucide shown here. -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
 ```
 
-> **Pin a version for production:** replace `@latest` with a tag like `@2.0.10` for stability.
+> **Pin a version for production:** replace `@latest` with a tag like `@2.0.11` for stability.
 
 ### Download
 
 Download the [latest release](https://github.com/adrianspeyer/speyer-ui/releases) and add the files to your project:
 
 ```html
+<!-- Styles in <head> -->
 <link rel="stylesheet" href="sui-tokens.css">
 <link rel="stylesheet" href="sui-components.css">
+
+<!-- Scripts before </body> -->
 <script src="sui.js"></script>
 
 <!-- Icons — bring your own. Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG. -->
@@ -90,32 +109,37 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
 | `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | ~5KB | Yes |
-| `sui-components.css` | Component classes built from tokens | ~34KB | Yes |
-| `sui.js` | Interactive behaviours (modals, toasts, dropdowns) | ~10KB | **No** |
+| `sui-components.css` | Component classes built from tokens | ~38KB | Yes |
+| `sui.js` | Interactive behaviours (modals, toasts, dropdowns) | ~12KB | **No** |
 
-**Core:** under 50KB (tokens + components + JS). Zero dependencies.
+**Core:** under 55KB (tokens + components + JS). Zero dependencies.
 
 CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, and accordion. Components render correctly without JS — they just won't open/close/animate.
 
 ### Icons
 
-SUI does not ship its own icon library — icons are bring-your-own. We recommend **[Lucide](https://lucide.dev/)** as the companion icon library:
+SUI does not ship its own icon library — icons are bring-your-own. **SUI's CSS and JS have zero icon library code.** Any icon library works:
 
-- The demo and all documentation use Lucide icons
-- `sui.js` has built-in Lucide support — it automatically refreshes icons after theme toggles, tab switches, and copy-button actions (guarded by `typeof lucide !== 'undefined'`, so it's zero-cost if Lucide isn't loaded)
-- Lucide is lightweight (~87KB), tree-shakeable, and MIT licensed
+- **[Lucide](https://lucide.dev/)** — 1,500+ icons, inline SVG, MIT licensed. The demo uses Lucide.
+- **[Heroicons](https://heroicons.com/)** — clean, Tailwind team, 300+ icons.
+- **[Phosphor](https://phosphoricons.com/)** — 6 weights per icon, very flexible.
+- **[Font Awesome](https://fontawesome.com/)** — largest library, font-based.
+- **Plain SVG** — inline or sprite sheet, no library needed.
 
-Any other icon library works too — Heroicons, Phosphor, Font Awesome, or plain SVG. SUI's CSS has zero icon dependencies. The accessibility rule (never rely on colour alone — pair icons with text labels) works with any icon system.
+SUI's accessibility rule (never rely on colour alone — pair icons with text labels) works with any icon system.
 
 ```html
-<!-- Recommended: Lucide -->
+<!-- Example: Lucide -->
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>lucide.createIcons();</script>
+
+<!-- Example: Heroicons (inline SVG, no JS needed) -->
+<svg class="..." viewBox="0 0 24 24">...</svg>
 ```
 
 ### Dependencies
 
-SUI has **no required dependencies.** Lucide is recommended for icons but not required. The Lucide `<script>` tag goes in your HTML — it is not bundled into SUI.
+SUI has **no required dependencies** — no icon library, no JavaScript framework, no build step. Add whichever icon library you prefer to your HTML.
 
 ---
 
@@ -142,7 +166,7 @@ Here is a quick review of SUI vs WCAG 2.1 AA compliance.
 | `--sui-text-muted` (#8494A9) | `--sui-bg-elevated` (#1E293B) | 4.73:1 | AA |
 | `--sui-text-muted` (#8494A9) | `--sui-bg-primary` (#0B0F1A) | 6.19:1 | AA |
 | `--sui-blue-strong` (#1D4ED8) | `--sui-blue-soft` (#DBEAFE) | 6.68:1 | AAA |
-| White | `--sui-blue-primary` (#3B82F6) | 3.7:1 | AA-lg |
+| White | `--sui-blue-primary` (#2563EB) | 5.2:1 | AA |
 | White | `--sui-success-strong` (#15803D) | 5.0:1 | AA |
 | White | `--sui-error-strong` (#B91C1C) | 6.5:1 | AA |
 
@@ -155,19 +179,17 @@ Here is a quick review of SUI vs WCAG 2.1 AA compliance.
 | `--sui-text-secondary` (#94A3B8) | `--sui-bg-card` (#161E2C) | 6.5:1 | AA |
 | `--sui-success-strong` (#22C55E) | `--sui-success-soft` (#052E16) | 6.5:1 | AA |
 | `--sui-warning-strong` (#FBBF24) | `--sui-warning-soft` (#422006) | 8.7:1 | AAA |
-| `--sui-error-strong` (#EF4444) | `--sui-error-soft` (#450A0A) | 4.3:1 | AA-lg |
+| `--sui-error` (#F87171) | `--sui-error-soft` (#450A0A) | 5.8:1 | AA |
 | `--sui-info-strong` (#22D3EE) | `--sui-info-soft` (#083344) | 7.4:1 | AAA |
+| White | Dark btn-primary (#2563EB) | 5.2:1 | AA |
+| White | Dark btn-danger (#B91C1C) | 6.5:1 | AA |
+| White | Dark btn-success (#15803D) | 5.0:1 | AA |
 
 ### Known Limitations
 
-| Pair | Ratio | Status | Why |
-|------|-------|--------|-----|
-| White on `--sui-blue-primary` | 3.7:1 | AA for large text | Primary buttons use 14px/600 weight. At this size the ratio passes AA for UI components per common industry practice but falls short of AA normal text (4.5:1). |
-| `--sui-error-strong` on `--sui-error-soft` (dark) | 4.3:1 | AA for large text | Badge/alert text at 12px falls slightly below AA normal text in dark mode. The icon + text pattern provides the redundant signal. |
+All previously documented contrast limitations have been resolved in v2.0.11. The light blue-primary token was shifted from #3B82F6 (3.68:1) to #2563EB (5.17:1). Dark mode buttons use hardcoded backgrounds that pass independently of token values. Badge-error and input-error-msg use dark overrides to switch from `error-strong` to `error` base.
 
-These limitations are documented, not hidden. SUI achieves AA for body text, headings, status text, and muted labels in both light and dark modes. Remaining exceptions are limited to large-text-only button ratios.
-
-Tested with Chrome Lighthouse (Accessibility audit) and Chrome DevTools contrast checker. If you find a contrast issue we missed, open an issue.
+Tested with Chrome Lighthouse (Accessibility audit) — 100/100 in both light and dark mode. If you find a contrast issue we missed, open an issue.
 
 ### Keyboard Behavior Per Component
 
@@ -288,7 +310,7 @@ SUI provides 25+ components. All built from design tokens. Code examples for eve
 
 ### Inputs
 
-`sui-input` · `sui-input-group` · `sui-input-label` · `sui-input-hint` · `sui-input-error` · `sui-input-error-msg` · `sui-select` · `sui-checkbox-label`
+`sui-input` · `sui-input-group` · `sui-input-label` · `sui-input-hint` · `sui-input-error` · `sui-input-error-msg` · `sui-select` · `sui-checkbox-label` · `sui-radio` · `sui-radio-label`
 
 ### Toggle / Switch
 
@@ -300,7 +322,7 @@ Status: `sui-badge-success` · `sui-badge-warning` · `sui-badge-error` · `sui-
 
 Feature: `sui-badge-new` · `sui-badge-beta` · `sui-badge-pro`
 
-Modifiers: `sui-badge-outline` · `sui-badge-sm` · `sui-badge-dot` · `sui-badge-count`
+Modifiers: `sui-badge-outline` · `sui-badge-sm` · `sui-badge-dot` · `sui-badge-count` · `sui-badge-overlay`
 
 ### Shields (Two-Segment Badges)
 
@@ -349,7 +371,7 @@ Responsive: stacks to card layout on mobile via `data-label` attributes on `<td>
 
 ### Navigation
 
-Breadcrumb: `sui-breadcrumb` · Pagination: `sui-pagination` · `sui-page-btn`
+Breadcrumb: `sui-breadcrumb` · Pagination: `sui-pagination` · `sui-page-btn` · Nav links: `sui-nav` · `sui-nav-link` · `sui-nav-toggle`
 
 ### Interactive (requires `sui.js`)
 
@@ -357,7 +379,11 @@ Accordion · Dropdown · Modal (native `<dialog>` recommended, legacy overlay su
 
 ### Structural
 
-Dividers · Empty state · Skeleton loaders · Stat cards
+Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`sui-embed`)
+
+### Prose & Typography
+
+Lists (`ul`, `ol`) · Blockquote · Figure/figcaption · Inline `code` · `kbd` keyboard input · Responsive images (`img { max-width: 100% }`)
 
 ### Layout & Utilities
 

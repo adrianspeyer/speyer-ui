@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speyer UI System — Accessibility as Architecture</title>
-  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Under 50KB minified. Made in Canada." />
+  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Under 55KB minified. Made in Canada." />
   <link rel="stylesheet" href="./sui-tokens.css" />
   <link rel="stylesheet" href="./sui-components.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +21,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.0.10</span>
+          <span class="sui-version-pill">v2.0.11</span>
         </div>
       </div>
 
@@ -57,13 +57,13 @@
          TAB 1: OVERVIEW
          ================================================================ -->
     <section data-view="overview" role="tabpanel" aria-label="Overview" class="is-active">
-      <div class="sui-section-head">
+      <div class="sui-section-head" style="margin-top: var(--sui-space-4);">
         <div>
           <h1>Speyer UI System</h1>
           <p class="sui-text-cap sui-mt-2">
             Built around four constraints: accessibility is mandatory, no build tools required,
             components work with or without JS, and status is never communicated by color alone.
-            Under 50KB minified. Zero required dependencies.
+            Under 55KB minified. Zero required dependencies.
           </p>
         </div>
       </div>
@@ -73,8 +73,8 @@
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
-            <div class="sui-kpi-value">25+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.10</span>
+            <div class="sui-kpi-value">30+</div>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.11</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -94,7 +94,7 @@
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">Bundle</div>
           <div class="sui-stat-row">
-            <div class="sui-kpi-value">&lt;50kb</div>
+            <div class="sui-kpi-value">&lt;55kb</div>
             <span class="sui-badge sui-badge-success"><i data-lucide="zap"></i>Minified</span>
           </div>
         </div>
@@ -255,6 +255,10 @@
             <span class="sui-badge sui-badge-error sui-badge-dot">Offline</span>
             <span class="sui-badge-count">3</span>
             <span class="sui-badge-count">99+</span>
+            <span class="sui-badge-overlay" aria-label="Notifications, 3 unread">
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" aria-label="Notifications, 3 unread"><i data-lucide="bell"></i></button>
+              <span class="sui-badge-count" aria-hidden="true">3</span>
+            </span>
           </div>
 
           <div class="sui-kpi-label sui-mb-3 sui-mt-4">Radius utilities</div>
@@ -271,7 +275,7 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.10</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.11</span></span>
           </div>
         </div>
       </div>
@@ -340,6 +344,12 @@
               </span>
               Enable notifications
             </label>
+            <div class="sui-mt-3">
+              <div class="sui-input-label sui-mb-2">Preferred contact</div>
+              <label class="sui-radio-label"><input class="sui-radio" type="radio" name="contact" checked> Email</label>
+              <label class="sui-radio-label"><input class="sui-radio" type="radio" name="contact"> Phone</label>
+              <label class="sui-radio-label"><input class="sui-radio" type="radio" name="contact"> Slack</label>
+            </div>
           </div>
         </div>
       </div>
@@ -642,6 +652,56 @@
           </div>
         </div>
       </div>
+
+      <!-- PROSE & MEDIA -->
+      <div class="sui-section">
+        <h2>Prose & Media</h2>
+        <p class="sui-text-cap sui-mt-2">WordPress-ready typography and responsive embeds. Lists, blockquotes, code, and keyboard shortcuts.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <h3>Rich Content</h3>
+            <p class="sui-mt-2">Ordered and unordered lists with proper spacing:</p>
+            <ul>
+              <li>Accessible by default — no extra classes needed</li>
+              <li>Nested lists handled automatically
+                <ul>
+                  <li>Second level indented</li>
+                  <li>Consistent spacing</li>
+                </ul>
+              </li>
+              <li>Color inherits from <code>--sui-text-secondary</code></li>
+            </ul>
+            <blockquote class="sui-mt-3">
+              <p>"Accessibility is not a feature — it's architecture. If you can't build it accessible, you can't build it."</p>
+            </blockquote>
+            <figure class="sui-mt-3">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='120' fill='%23F1F5F9'%3E%3Crect width='400' height='120' rx='8'/%3E%3Ctext x='200' y='65' text-anchor='middle' fill='%2394A3B8' font-family='system-ui' font-size='14'%3EResponsive image placeholder%3C/text%3E%3C/svg%3E" alt="Placeholder demonstrating responsive images">
+              <figcaption>Figure 1 — Images scale with <code>max-width: 100%</code>. No extra classes required.</figcaption>
+            </figure>
+          </div>
+          <div class="sui-card">
+            <h3>Code & Keyboard</h3>
+            <p class="sui-mt-2">Inline code like <code>sui-components.css</code> gets automatic padding and background.</p>
+            <p class="sui-mt-2">Keyboard shortcuts: Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> to open the command palette.</p>
+
+            <h3 class="sui-mt-4">Responsive Embed</h3>
+            <p class="sui-mt-2">16:9 aspect ratio container for video:</p>
+            <div class="sui-embed sui-mt-2" style="max-width:360px;">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--sui-bg-elevated);border-radius:var(--sui-radius-md);">
+                <span style="color:var(--sui-text-muted);font-size:var(--sui-text-small);">Video embed area (16:9)</span>
+              </div>
+            </div>
+
+            <h3 class="sui-mt-4">Navigation Links</h3>
+            <p class="sui-mt-2">Responsive nav with mobile toggle:</p>
+            <nav class="sui-mt-2" style="display:flex;gap:var(--sui-space-1);flex-wrap:wrap;" aria-label="Demo navigation">
+              <a href="#" class="sui-nav-link" aria-current="page" onclick="event.preventDefault()">Dashboard</a>
+              <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Settings</a>
+              <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Reports</a>
+            </nav>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ================================================================
@@ -741,7 +801,9 @@ Fetch the official SUI CSS and JS from CDN:
 - Components: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
 - JS (optional): https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
 
-Icons — SUI recommends Lucide but any icon library works:
+Place CSS &lt;link&gt; tags in &lt;head&gt;. Place all &lt;script&gt; tags before &lt;/body&gt; so the DOM is ready.
+
+Icons — SUI has no icon dependency. Add any icon library you prefer (Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG). Example with Lucide:
 &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
 &lt;script&gt;lucide.createIcons();&lt;/script&gt;
 
@@ -799,7 +861,7 @@ Accessibility (mandatory):
 - Never use aria-selected without role="tab"
 - Respect prefers-reduced-motion
 
-Icons: Use Lucide icons via &lt;i data-lucide="icon-name"&gt;&lt;/i&gt;. Always add aria-hidden="true" on decorative icons. Always pair icons with visible text labels — never use an icon alone to communicate meaning.
+Icons: SUI works with any icon library. Always add aria-hidden="true" on decorative icons. Always pair icons with visible text labels — never use an icon alone to communicate meaning.
 
 Status patterns (always icon + text):
 - Success: ✔ + text | Warning: ⚠ + text | Error: ✕ + text | Info: ℹ + text
@@ -823,7 +885,8 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <pre id="promptMinimal" class="sui-code-block">Use the Speyer UI System (SUI).
 CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css and sui-components.min.css
 Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
-Icons: &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt; then lucide.createIcons(). Use &lt;i data-lucide="icon-name"&gt;&lt;/i&gt;.
+CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt;.
+Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
 Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Use sui-* component classes for everything.
@@ -846,7 +909,8 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js (optional, for modals/toasts/dropdowns)
    Or readable source from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/
-2. Add Lucide icons (recommended): &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt; then call lucide.createIcons(). Use &lt;i data-lucide="icon-name"&gt;&lt;/i&gt; for icons. Any icon library works as an alternative.
+   CSS &lt;link&gt; tags go in &lt;head&gt;. All &lt;script&gt; tags go before &lt;/body&gt;.
+2. Icons: SUI has no icon dependency. Add any icon library the user prefers (Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG). Ask if they have a preference.
 3. Ask the user: "Would you like light mode, dark mode, or both?"
 4. Apply all CSS custom properties (--sui- prefix) and component classes.
 5. Follow these design rules:
@@ -879,7 +943,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada 🇨🇦</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.10</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.11</span></a>
     </footer>
   </main>
 

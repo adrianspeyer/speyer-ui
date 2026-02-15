@@ -4,6 +4,43 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.11] — 2026-02-15
+
+### Fixed — WCAG AA Contrast (color-contrast audit: 100/100 light + dark)
+- **Light blue too pale:** `--sui-blue-primary` shifted from `#3B82F6` (3.68:1) → `#2563EB` (5.17:1 on white). Cascaded `--sui-blue-hover` to `#1D4ED8` (6.70:1). Affects links, primary buttons, toggle tracks, secondary button borders, progress bars, blockquote accent.
+- **Dark button backgrounds:** Primary (`#2563EB`), danger (`#B91C1C`), and success (`#15803D`) now locked to hardcoded values with `[data-theme="dark"]` overrides so dark-mode token lightening can't break contrast. Includes `@media (prefers-color-scheme: dark)` fallback.
+- **Badge count too light:** Background switched from `--sui-error` to `--sui-error-strong` (`#B91C1C`, 6.47:1 on white).
+- **Page-btn active in dark:** `[data-theme="dark"] .sui-page-btn[aria-current]` locked to `#2563EB`.
+- **Badge-error text in dark:** `error-strong` (#EF4444) on `error-soft` (#450A0A) = 4.28:1. Dark override switches to `error` base (#F87171, 5.84:1).
+- **Input error message:** `.sui-input-error-msg` shifted from `--sui-error` to `--sui-error-strong` (3.76:1 → 6.47:1 on white). Dark override to `--sui-error` (#F87171, 6.04:1 on dark card).
+- **Avatar palette:** All 10 colors shifted to Tailwind -600/-700 equivalents. Minimum contrast 4.60:1 (pink), maximum 6.47:1 (red). Old: `#3B82F6, #22C55E, #F59E0B, #EF4444, #06B6D4, #8B5CF6, #EC4899, #14B8A6, #F97316, #6366F1`. New: `#2563EB, #15803D, #B45309, #B91C1C, #0E7490, #7C3AED, #DB2777, #0F766E, #C2410C, #4F46E5`.
+
+### Added — WordPress Readiness (10 CSS patterns + JS)
+- **Prose typography:** `ul`, `ol` get proper `padding-left`, `margin`, and `color`. Nested lists handled. `li + li` gap.
+- **Blockquote:** Left-border accent using `--sui-blue-primary`, elevated background, rounded right corners.
+- **Figure + figcaption:** Clean spacing with `--sui-text-meta` caption styling.
+- **Responsive image:** `img { max-width: 100%; height: auto; }` base rule.
+- **Inline code:** `<code>` gets padding, background, and radius. Pre/code-block nested code exempt.
+- **Keyboard input:** `<kbd>` styled with border, background, box-shadow to look like a physical key.
+- **Radio button:** `.sui-radio` + `.sui-radio-label` mirroring the checkbox pattern. ARIA label association safety net in JS.
+- **Responsive video embed:** `.sui-embed` with `aspect-ratio: 16/9`, absolute-positioned iframe/video.
+- **Navigation:** `.sui-nav` + `.sui-nav-link` with `[aria-current="page"]` active state. Mobile-responsive with `.sui-nav-toggle` hamburger. JS handles toggle, Escape-to-close, and ARIA safety nets (`aria-expanded`, `aria-label`, `aria-controls`, `role="navigation"`).
+- **Badge overlay:** `.sui-badge-overlay` positions `.sui-badge-count` absolutely at top-right of parent. JS sets `aria-hidden="true"` on count and warns if trigger lacks `aria-label`.
+
+### Fixed — Existing
+- **Copy button destroyed icons:** Text-node manipulation instead of `innerHTML` replacement. Icons stay untouched.
+
+### Changed — Existing
+- **Truly icon-agnostic:** Removed all `lucide.createIcons()` calls from `sui.js`. Zero icon library code.
+- **Quick Start shows full HTML skeleton:** CSS in `<head>`, scripts before `</body>`. Resolves [#4](https://github.com/adrianspeyer/speyer-ui/issues/4).
+- **README & AI prompts:** Icons presented as bring-your-own with no default recommendation.
+- **Demo h1 spacing:** Added `margin-top: var(--sui-space-4)` to first section-head for breathing room below topbar.
+
+### Lesson
+- Mid-tone brand colors are a contrast trap. A color at ~50% luminance fails white text in light mode and fails on dark backgrounds in dark mode — it's too bright for one and too dim for the other. The fix is tokens for light mode, hardcoded overrides for dark mode, because dark-mode tokens lighten values that were already failing. Test every foreground/background pairing, not just the component in isolation.
+
+---
+
 ## [2.0.10] — 2026-02-15
 
 ### Fixed

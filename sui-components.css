@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.0.10
+ * Version: 2.0.11
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -82,6 +82,61 @@ a:focus-visible {
 ::-webkit-scrollbar-track { background: var(--sui-bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--sui-border); border-radius: var(--sui-radius-full); }
 ::-webkit-scrollbar-thumb:hover { background: var(--sui-text-muted); }
+
+/* Responsive image base */
+img { max-width: 100%; height: auto; }
+
+/* Prose lists */
+ul, ol {
+  padding-left: var(--sui-space-4);
+  margin: var(--sui-space-2) 0;
+  color: var(--sui-text-secondary);
+}
+li + li { margin-top: var(--sui-space-1); }
+li > ul, li > ol { margin-top: var(--sui-space-1); margin-bottom: 0; }
+
+/* Blockquote */
+blockquote {
+  margin: var(--sui-space-3) 0;
+  padding: var(--sui-space-3) var(--sui-space-4);
+  border-left: 4px solid var(--sui-blue-primary);
+  background: var(--sui-bg-elevated);
+  border-radius: 0 var(--sui-radius-sm) var(--sui-radius-sm) 0;
+}
+blockquote p { color: var(--sui-text-secondary); }
+
+/* Figure + caption */
+figure { margin: var(--sui-space-3) 0; }
+figcaption {
+  margin-top: var(--sui-space-1);
+  font-size: var(--sui-text-meta);
+  color: var(--sui-text-muted);
+}
+
+/* Inline code (augments the base code rule above) */
+code {
+  padding: 2px 6px;
+  border-radius: var(--sui-radius-sm);
+  background: var(--sui-bg-elevated);
+}
+/* Don't double-style code blocks */
+.sui-code-block code,
+pre code {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Keyboard input */
+kbd {
+  font-family: var(--sui-font-mono);
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: var(--sui-radius-sm);
+  border: 1px solid var(--sui-border);
+  background: var(--sui-bg-card);
+  box-shadow: 0 1px 0 var(--sui-border);
+}
 
 
 /* ==========================================================================
@@ -460,12 +515,20 @@ a:focus-visible {
 .sui-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .sui-btn-sm svg { width: 16px; height: 16px; }
 
-/* Dark mode: button backgrounds stay dark enough for white text contrast */
-[data-theme="dark"] .sui-btn-primary { background: #3B82F6; }
-[data-theme="dark"] .sui-btn-primary:hover { background: #2563EB; }
+/* Dark mode: button backgrounds locked to WCAG AA-passing values (≥4.5:1 on white) */
+[data-theme="dark"] .sui-btn-primary { background: #2563EB; }
+[data-theme="dark"] .sui-btn-primary:hover { background: #1D4ED8; }
+[data-theme="dark"] .sui-btn-danger { background: #B91C1C; }
+[data-theme="dark"] .sui-btn-danger:hover { background: #991B1B; }
+[data-theme="dark"] .sui-btn-success { background: #15803D; }
+[data-theme="dark"] .sui-btn-success:hover { background: #116932; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .sui-btn-primary { background: #3B82F6; }
-  :root:not([data-theme]) .sui-btn-primary:hover { background: #2563EB; }
+  :root:not([data-theme]) .sui-btn-primary { background: #2563EB; }
+  :root:not([data-theme]) .sui-btn-primary:hover { background: #1D4ED8; }
+  :root:not([data-theme]) .sui-btn-danger { background: #B91C1C; }
+  :root:not([data-theme]) .sui-btn-danger:hover { background: #991B1B; }
+  :root:not([data-theme]) .sui-btn-success { background: #15803D; }
+  :root:not([data-theme]) .sui-btn-success:hover { background: #116932; }
 }
 
 
@@ -527,7 +590,7 @@ a:focus-visible {
   gap: var(--sui-space-1);
   font-size: var(--sui-text-meta);
   font-weight: var(--sui-weight-semibold);
-  color: var(--sui-error);
+  color: var(--sui-error-strong);
 }
 
 .sui-input-error-msg svg { width: 14px; height: 14px; flex-shrink: 0; }
@@ -655,6 +718,28 @@ textarea.sui-input {
 
 
 /* ==========================================================================
+   Radio Button (mirrors checkbox pattern)
+   ========================================================================== */
+
+.sui-radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sui-space-2);
+  cursor: pointer;
+  font-size: var(--sui-text-small);
+  min-height: var(--sui-touch-target);
+}
+
+.sui-radio {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--sui-blue-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+
+/* ==========================================================================
    Badges (icon + text, never color alone)
    ========================================================================== */
 
@@ -742,13 +827,13 @@ textarea.sui-input {
   flex-shrink: 0;
 }
 
-/* Count badge (notification number) */
+/* Count badge (notification number) — uses error-strong for WCAG AA on white */
 .sui-badge-count {
   min-width: 22px;
   height: 22px;
   padding: 0 6px;
   border-radius: var(--sui-radius-full);
-  background: var(--sui-error);
+  background: var(--sui-error-strong);
   color: var(--sui-text-inverse);
   font-size: 11px;
   font-weight: var(--sui-weight-bold);
@@ -758,6 +843,27 @@ textarea.sui-input {
   border: none;
   letter-spacing: 0;
   text-transform: none;
+}
+
+/* Badge overlay (positions count on a parent element) */
+.sui-badge-overlay {
+  position: relative;
+  display: inline-flex;
+}
+.sui-badge-overlay .sui-badge-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+
+/* Dark mode badge/input contrast fixes
+   error-strong resolves to #EF4444 in dark — fails on dark soft backgrounds.
+   Use error base (#F87171) instead for text-on-background pairings. */
+[data-theme="dark"] .sui-badge-error { color: var(--sui-error); }
+[data-theme="dark"] .sui-input-error-msg { color: var(--sui-error); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .sui-badge-error { color: var(--sui-error); }
+  :root:not([data-theme]) .sui-input-error-msg { color: var(--sui-error); }
 }
 
 
@@ -1168,6 +1274,12 @@ textarea.sui-input {
   justify-content: center;
   color: var(--sui-text-muted);
   font-weight: var(--sui-weight-semibold);
+}
+
+/* Dark mode: page-btn active — lock to passing blue */
+[data-theme="dark"] .sui-page-btn[aria-current="page"] { background: #2563EB; border-color: #2563EB; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .sui-page-btn[aria-current="page"] { background: #2563EB; border-color: #2563EB; }
 }
 
 
@@ -1751,6 +1863,94 @@ dialog.sui-dialog-wide { max-width: 720px; }
   gap: 14px;
   margin-bottom: var(--sui-space-2);
   flex-wrap: wrap;
+}
+
+
+/* ==========================================================================
+   Navigation (responsive nav links + mobile toggle)
+   Usage:
+     <nav class="sui-nav" aria-label="Primary navigation">
+       <a href="/" class="sui-nav-link" aria-current="page">Home</a>
+       <a href="/blog" class="sui-nav-link">Blog</a>
+     </nav>
+   Mobile toggle:
+     <button class="sui-btn sui-btn-sm sui-btn-ghost sui-nav-toggle"
+             data-sui-nav-toggle=".sui-nav" aria-label="Menu">☰</button>
+   ========================================================================== */
+
+.sui-nav {
+  grid-area: nav;
+  display: flex;
+  align-items: center;
+  gap: var(--sui-space-1);
+}
+
+.sui-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sui-space-1);
+  padding: var(--sui-space-2) var(--sui-space-3);
+  border-radius: var(--sui-radius-md);
+  font-size: var(--sui-text-small);
+  font-weight: var(--sui-weight-semibold);
+  color: var(--sui-text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: var(--sui-touch-target);
+  transition: background var(--sui-duration-fast) var(--sui-easing),
+              color var(--sui-duration-fast) var(--sui-easing);
+}
+.sui-nav-link:hover {
+  background: var(--sui-bg-elevated);
+  color: var(--sui-text-primary);
+  text-decoration: none;
+}
+.sui-nav-link:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 2px;
+}
+.sui-nav-link[aria-current="page"] {
+  background: var(--sui-bg-elevated);
+  color: var(--sui-text-primary);
+}
+
+/* Mobile hamburger button — hidden on desktop */
+.sui-nav-toggle { display: none; }
+
+@media (max-width: 768px) {
+  .sui-nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding: var(--sui-space-2) 0;
+  }
+  .sui-nav.is-open { display: flex; }
+  .sui-nav-toggle { display: inline-flex; }
+}
+
+
+/* ==========================================================================
+   Responsive Video Embed
+   Usage:
+     <div class="sui-embed">
+       <iframe src="https://www.youtube.com/embed/..." allowfullscreen></iframe>
+     </div>
+   ========================================================================== */
+
+.sui-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--sui-radius-md);
+}
+.sui-embed iframe,
+.sui-embed video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 
