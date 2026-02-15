@@ -4,6 +4,29 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.8] — 2026-02-15
+
+### Added
+- **Hidden utility:** `sui-hidden` — `display: none !important`. Removes elements from layout and accessibility tree. Completes the two-tier visibility system alongside `sui-visually-hidden`. Resolves [#3](https://github.com/adrianspeyer/speyer-ui/issues/3).
+
+### Changed
+- **CDN URLs default to `@latest`** — README, index.html prompts, and copilot guide now use `@latest` instead of pinned version tags. Keeps AI-generated markup current. Pinning note included for production use.
+
+### Lesson
+- AI coding assistants assume common utility classes exist. When `sui-hidden` was missing, AI-generated markup silently failed — panels stayed visible with no error. Ship the utilities AI expects.
+
+---
+
+## [2.0.7] — 2026-02-15
+
+### Fixed
+- **Shield value contrast:** Shield backgrounds now use hardcoded contrast-safe colours instead of theme tokens. Theme tokens get lighter in dark mode, causing white text to fail WCAG contrast (e.g. blue: 3.67:1 light / 2.54:1 dark). All six variants now pass 4.5:1 in both modes.
+
+### Lesson
+- Components with fixed text colour (e.g. white) must not use theme tokens for backgrounds. Tokens designed for dark-mode text get lighter and invert the contrast relationship when used as backgrounds for white text.
+
+---
+
 ## [2.0.6] — 2026-02-15
 
 ### Added
@@ -16,16 +39,6 @@ All notable changes to the Speyer UI System are documented here.
 
 ### Lesson
 - Colour-blind accessibility goes beyond "icon + text." Border weight changes, pattern differences, and high contrast support are additional layers that help users who cannot reliably distinguish red from green.
-
----
-
-## [2.0.7] — 2026-02-15
-
-### Fixed
-- **Shield value contrast:** Shield backgrounds now use hardcoded contrast-safe colours instead of theme tokens. Theme tokens get lighter in dark mode, causing white text to fail WCAG contrast (e.g. blue: 3.67:1 light / 2.54:1 dark). All six variants now pass 4.5:1 in both modes.
-
-### Lesson
-- Components with fixed text colour (e.g. white) must not use theme tokens for backgrounds. Tokens designed for dark-mode text get lighter and invert the contrast relationship when used as backgrounds for white text.
 
 ---
 

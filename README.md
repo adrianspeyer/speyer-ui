@@ -32,10 +32,12 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 ### CDN (Fastest)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js"></script>
 ```
+
+> **Pin a version for production:** replace `@latest` with a tag like `@2.0.8` for stability.
 
 ### Download
 
@@ -332,7 +334,7 @@ Dividers · Empty state · Skeleton loaders · Stat cards
 
 ### Layout & Utilities
 
-Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`) · Accessibility (`sui-visually-hidden`)
+Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`) · Visibility (`sui-hidden`, `sui-visually-hidden`)
 
 ### Radius Utilities
 
@@ -347,16 +349,25 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.7</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.8</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
 
-### Visually Hidden
+### Visibility Utilities
 
-Hide content visually while keeping it accessible to screen readers. Focusable elements become visible on focus.
+Two-tier visibility system for toggling content.
+
+| Class | Effect | Accessibility tree | Use case |
+|-------|--------|--------------------|----------|
+| `sui-hidden` | `display: none !important` | Removed | Toggling panels, tabs, conditional content |
+| `sui-visually-hidden` | Clipped to 1px | Preserved | Skip links, icon-only button labels |
 
 ```html
+<!-- Completely hidden (layout + screen readers) -->
+<div class="sui-hidden">This panel is toggled off.</div>
+
+<!-- Visually hidden (screen readers still see it) -->
 <button>
   <svg aria-hidden="true"><!-- icon --></svg>
   <span class="sui-visually-hidden">Close menu</span>
@@ -492,16 +503,16 @@ SUI.avatar.colorFor('AS')                      // Deterministic color from initi
 jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```html
-<!-- Production (minified) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui.min.js"></script>
+<!-- Production (minified, always latest) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js"></script>
 
 <!-- Development (readable) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/sui-tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-Replace `@2.0.7` with any version tag. Use exact versions in production, not `@main`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.8`.
 
 ---
 

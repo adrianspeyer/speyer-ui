@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.0.7
+ * Version: 2.0.8
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -1815,6 +1815,14 @@ textarea.sui-input {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+/* ==========================================================================
+   Hidden (removed from layout AND accessibility tree)
+   ========================================================================== */
+
+.sui-hidden {
+  display: none !important;
 }
 
 /* ==========================================================================

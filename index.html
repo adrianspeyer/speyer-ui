@@ -21,7 +21,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.0.7</span>
+          <span class="sui-version-pill">v2.0.8</span>
         </div>
       </div>
 
@@ -73,7 +73,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">25+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.7</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.8</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -270,7 +270,7 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.7</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.8</span></span>
           </div>
         </div>
       </div>
@@ -621,6 +621,26 @@
           </div>
         </div>
       </div>
+
+      <!-- VISIBILITY UTILITIES -->
+      <div class="sui-section">
+        <h2>Visibility Utilities</h2>
+        <p class="sui-text-cap sui-mt-2">Two-tier visibility: completely hidden vs. screen-reader only.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <div class="sui-kpi-label sui-mb-2">sui-hidden</div>
+            <p>Removes from layout <strong>and</strong> accessibility tree. Use for toggling panels, tabs, and conditional content.</p>
+            <code class="sui-mt-2" style="display:block;">display: none !important</code>
+            <div class="sui-hidden">You cannot see this.</div>
+          </div>
+          <div class="sui-card">
+            <div class="sui-kpi-label sui-mb-2">sui-visually-hidden</div>
+            <p>Hidden visually but <strong>remains accessible</strong> to screen readers. Use for skip links and descriptive labels.</p>
+            <code class="sui-mt-2" style="display:block;">clip-path: inset(50%)</code>
+            <span class="sui-visually-hidden">Screen readers can see this.</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ================================================================
@@ -716,9 +736,9 @@
 
 ## Step 1: Fetch the design system
 Fetch the official SUI CSS and JS from CDN:
-- Tokens: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-tokens.min.css
-- Components: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-components.min.css
-- JS (optional): https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui.min.js
+- Tokens: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css
+- Components: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
+- JS (optional): https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
 
 Or fetch the readable source files from:
 - https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
@@ -794,8 +814,8 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
         <div class="sui-card sui-card-lg sui-mt-4">
           <pre id="promptMinimal" class="sui-code-block">Use the Speyer UI System (SUI).
-CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-tokens.min.css and sui-components.min.css
-Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui.min.js
+CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css and sui-components.min.css
+Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
 Avatars are initials-only (no images). Use sui-* component classes for everything.
@@ -814,9 +834,9 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <pre id="promptSystem" class="sui-code-block">When the user says "use SUI", "use the Speyer UI System", or "Speyer UI":
 
 1. Fetch the SUI design files from CDN:
-   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-tokens.min.css
-   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui-components.min.css
-   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.7/dist/sui.min.js (optional, for modals/toasts/dropdowns)
+   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css
+   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
+   https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js (optional, for modals/toasts/dropdowns)
    Or readable source from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/
 2. Ask the user: "Would you like light mode, dark mode, or both?"
 3. Apply all CSS custom properties (--sui- prefix) and component classes.
@@ -848,7 +868,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada 🇨🇦</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.7</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.8</span></a>
     </footer>
   </main>
 
