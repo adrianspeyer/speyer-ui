@@ -402,7 +402,7 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.10</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.11</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
@@ -565,7 +565,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.10`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.11`.
 
 ---
 
@@ -601,39 +601,6 @@ speyer-ui/
 ├── CONTRIBUTING.md
 └── LICENSE
 ```
-
----
-
-## Creating a Release
-
-```bash
-# Update version in: package.json, sui-tokens.css, sui-components.css, sui.js, index.html
-npm run build              # Regenerate /dist
-git add -A
-git commit -m "Release vX.Y.Z"
-git tag vX.Y.Z
-git push origin main --tags
-```
-
-Then create a [GitHub Release](https://github.com/adrianspeyer/speyer-ui/releases) from the tag. jsDelivr picks it up automatically within minutes.
-
----
-
-## Testing Checklist
-
-- [ ] Light mode contrast meets documented levels
-- [ ] Dark mode contrast meets documented levels
-- [ ] Colour blindness simulation tested (Chrome DevTools → Rendering)
-- [ ] All status indicators include text + icon
-- [ ] Mobile layout verified (320px minimum)
-- [ ] Keyboard navigation works for all interactive elements
-- [ ] Focus states visible
-- [ ] `prefers-reduced-motion` respected
-- [ ] `prefers-contrast: more` respected
-- [ ] Touch targets at least 44px
-- [ ] ARIA roles correct: tabs use `role="tablist"`/`role="tab"`/`role="tabpanel"`
-- [ ] All interactive elements have accessible names (visible text or `aria-label`)
-- [ ] **Lighthouse accessibility audit score ≥ 90**
 
 ---
 
