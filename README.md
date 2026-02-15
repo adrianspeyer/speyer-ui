@@ -7,7 +7,9 @@ A lightweight design system built around four constraints:
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
 4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
-45KB minified. Zero required dependencies. Works with any framework or none.
+Under 50KB minified. Zero required dependencies. Works with any framework or none.
+
+**What you get:** buttons, cards, badges, alerts, avatars, toggles, tables, forms, progress bars, modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, and a dark mode that works.
 
 **[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
@@ -35,9 +37,13 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
 <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js"></script>
+
+<!-- Icons — any library works. Lucide shown here. -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
 ```
 
-> **Pin a version for production:** replace `@latest` with a tag like `@2.0.8` for stability.
+> **Pin a version for production:** replace `@latest` with a tag like `@2.0.9` for stability.
 
 ### Download
 
@@ -47,6 +53,8 @@ Download the [latest release](https://github.com/adrianspeyer/speyer-ui/releases
 <link rel="stylesheet" href="sui-tokens.css">
 <link rel="stylesheet" href="sui-components.css">
 <script src="sui.js"></script>
+
+<!-- Icons — bring your own. Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG. -->
 ```
 
 ### AI-Assisted
@@ -81,21 +89,33 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
-| `sui-tokens.css` | Design tokens (colors, spacing, typography, shadows) | 4KB | Yes |
-| `sui-components.css` | Component classes built from tokens | 32KB | Yes |
-| `sui.js` | Interactive behaviors (modals, toasts, dropdowns) | 9KB | **No** |
+| `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | ~5KB | Yes |
+| `sui-components.css` | Component classes built from tokens | ~34KB | Yes |
+| `sui.js` | Interactive behaviours (modals, toasts, dropdowns) | ~10KB | **No** |
 
-Total: 45KB with JS, 36KB without.
+**Core:** under 50KB (tokens + components + JS). Zero dependencies.
 
 CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, and accordion. Components render correctly without JS — they just won't open/close/animate.
 
+### Icons
+
+SUI does not ship its own icon library — icons are bring-your-own. We recommend **[Lucide](https://lucide.dev/)** as the companion icon library:
+
+- The demo and all documentation use Lucide icons
+- `sui.js` has built-in Lucide support — it automatically refreshes icons after theme toggles, tab switches, and copy-button actions (guarded by `typeof lucide !== 'undefined'`, so it's zero-cost if Lucide isn't loaded)
+- Lucide is lightweight (~87KB), tree-shakeable, and MIT licensed
+
+Any other icon library works too — Heroicons, Phosphor, Font Awesome, or plain SVG. SUI's CSS has zero icon dependencies. The accessibility rule (never rely on colour alone — pair icons with text labels) works with any icon system.
+
+```html
+<!-- Recommended: Lucide -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+```
+
 ### Dependencies
 
-SUI has **no required dependencies.**
-
-Icon examples in documentation use [Lucide](https://lucide.dev/) (`data-lucide` attributes). Lucide is recommended but not required — any icon library works, or plain text/emoji/SVG. If `sui.js` detects Lucide, it refreshes icons after dynamic updates. If Lucide isn't present, everything still works.
-
-The SUI JavaScript toolkit checks for `typeof lucide !== 'undefined'` in exactly two places — both are convenience re-renders, not functional requirements.
+SUI has **no required dependencies.** Lucide is recommended for icons but not required. The Lucide `<script>` tag goes in your HTML — it is not bundled into SUI.
 
 ---
 
@@ -304,11 +324,18 @@ Shields.io-style two-tone badges — no external dependency. Dark mode aware.
 
 `sui-alert` · `sui-alert-success` · `sui-alert-warning` · `sui-alert-error` · `sui-alert-info`
 
-### Avatars (Initials Only)
+### Avatars (Initials-First)
 
 `sui-avatar` · `sui-avatar-sm` (32px) · `sui-avatar-md` (40px) · `sui-avatar-lg` (56px) · `sui-avatar-group`
 
-No images by design. Deterministic colors from initials via `sui.js`. Privacy-friendly, no broken states, no CDN dependency.
+Initials by default with deterministic colours from `sui.js`. Optional photo support — add an `<img>` inside the avatar and initials show as automatic fallback when the image fails:
+
+```html
+<div class="sui-avatar sui-avatar-md">
+  <img src="photo.jpg" alt="Jane Smith" onerror="this.hidden=true">
+  JS
+</div>
+```
 
 ### Progress Bars
 
@@ -326,7 +353,7 @@ Breadcrumb: `sui-breadcrumb` · Pagination: `sui-pagination` · `sui-page-btn`
 
 ### Interactive (requires `sui.js`)
 
-Accordion · Dropdown · Modal/Dialog · Toast notifications · Tooltip
+Accordion · Dropdown · Modal (native `<dialog>` recommended, legacy overlay supported) · Toast notifications · Tooltip
 
 ### Structural
 
@@ -349,7 +376,7 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.8</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.9</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
@@ -487,8 +514,8 @@ Optional toolkit. Auto-initializes via `data-sui-*` attributes.
 ```javascript
 SUI.theme.set('dark')                          // 'light', 'dark', 'auto'
 SUI.theme.toggle()                             // Cycles modes
-SUI.modal.open('#id')                          // Focus trap, Escape, scroll lock
-SUI.modal.close('#id')
+SUI.modal.open('#id')                          // Native <dialog> or legacy overlay
+SUI.modal.close('#id')                         // Works with both patterns
 SUI.toast.success('Saved!', 'Details here')    // Auto-dismiss, stackable
 SUI.toast.error('Failed', 'Try again')
 SUI.dropdown.toggle(element)                   // Click toggle, outside-click close
@@ -512,7 +539,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.8`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.9`.
 
 ---
 

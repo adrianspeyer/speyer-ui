@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.0.8
+ * Version: 2.0.9
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -818,7 +818,13 @@ textarea.sui-input {
 
 
 /* ==========================================================================
-   Avatar (initials-based, no images)
+   Avatar (initials-first — optional photo with automatic fallback)
+   Usage:  <div class="sui-avatar">JS</div>              — initials only
+           <div class="sui-avatar">                       — photo + fallback
+             <img src="photo.jpg" alt="Jane Smith"
+                  onerror="this.hidden=true">
+             JS
+           </div>
    ========================================================================== */
 
 .sui-avatar {
@@ -832,8 +838,20 @@ textarea.sui-input {
   user-select: none;
   flex-shrink: 0;
   color: var(--sui-text-inverse);
-  /* Default color — JS can override per-user */
+  position: relative;
+  overflow: hidden;
+  /* Default colour — JS can override per-user */
   background: var(--sui-blue-primary);
+}
+
+/* Photo layer — covers initials when loaded, initials show on error */
+.sui-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .sui-avatar-sm { width: 32px; height: 32px; font-size: 12px; }
@@ -1293,7 +1311,8 @@ textarea.sui-input {
 
 
 /* ==========================================================================
-   Modal / Dialog
+   Modal / Dialog (legacy overlay pattern)
+   DEPRECATED — Use native <dialog> below instead. Will be removed in v3.0.
    ========================================================================== */
 
 .sui-modal-overlay {
@@ -1334,6 +1353,53 @@ textarea.sui-input {
 .sui-modal-overlay.is-open .sui-modal {
   transform: scale(1) translateY(0);
 }
+
+
+/* ==========================================================================
+   Native Dialog Modal (recommended)
+   Usage:  <dialog class="sui-dialog" id="my-dialog">
+             <div class="sui-modal-header">...</div>
+             <div class="sui-modal-body">...</div>
+             <div class="sui-modal-footer">...</div>
+           </dialog>
+   Open:   SUI.modal.open('#my-dialog')
+   Close:  SUI.modal.close('#my-dialog') — or Escape key (browser-native)
+   Browser handles: focus trapping, scroll lock, Escape to close, backdrop.
+   ========================================================================== */
+
+dialog.sui-dialog {
+  border: none;
+  padding: 0;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  border-radius: var(--sui-radius-lg);
+  background: var(--sui-bg-card);
+  border: 1px solid var(--sui-border);
+  box-shadow: var(--sui-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--sui-text-primary);
+}
+
+dialog.sui-dialog::backdrop {
+  background: var(--sui-overlay);
+}
+
+dialog.sui-dialog[open] {
+  animation: sui-dialog-in var(--sui-duration-normal) var(--sui-easing);
+}
+
+@keyframes sui-dialog-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+dialog.sui-dialog-wide { max-width: 720px; }
+
+
+/* Shared inner parts — work inside both <dialog> and legacy overlay */
 
 .sui-modal-header {
   display: flex;
@@ -1384,7 +1450,7 @@ textarea.sui-input {
   border-top: 1px solid var(--sui-border);
 }
 
-/* Wide variant */
+/* Wide variant — works with both patterns */
 .sui-modal-wide { max-width: 720px; }
 
 

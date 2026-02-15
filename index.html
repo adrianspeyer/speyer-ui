@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speyer UI System — Accessibility as Architecture</title>
-  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. 45KB minified. Made in Canada." />
+  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Under 50KB minified. Made in Canada." />
   <link rel="stylesheet" href="./sui-tokens.css" />
   <link rel="stylesheet" href="./sui-components.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +21,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.0.8</span>
+          <span class="sui-version-pill">v2.0.9</span>
         </div>
       </div>
 
@@ -62,7 +62,7 @@
           <p class="sui-text-cap sui-mt-2">
             Built around four constraints: accessibility is mandatory, no build tools required,
             components work with or without JS, and status is never communicated by color alone.
-            45KB minified. Zero required dependencies.
+            Under 50KB minified. Zero required dependencies.
           </p>
         </div>
       </div>
@@ -73,7 +73,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">25+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.8</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.9</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -270,7 +270,7 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.8</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.9</span></span>
           </div>
         </div>
       </div>
@@ -740,6 +740,10 @@ Fetch the official SUI CSS and JS from CDN:
 - Components: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
 - JS (optional): https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
 
+Icons — SUI recommends Lucide but any icon library works:
+&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+&lt;script&gt;lucide.createIcons();&lt;/script&gt;
+
 Or fetch the readable source files from:
 - https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
 - https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-components.css
@@ -771,13 +775,13 @@ Components (use SUI classes):
 - Badges: sui-badge + sui-badge-success/warning/error/info/neutral/new/beta/pro
 - Badge modifiers: sui-badge-outline, sui-badge-sm, sui-badge-dot, sui-badge-count
 - Alerts: sui-alert + sui-alert-success/warning/error/info (always icon + text)
-- Avatars: sui-avatar + sui-avatar-sm/md/lg (initials only, no images)
+- Avatars: sui-avatar + sui-avatar-sm/md/lg (initials-first, optional photo with onerror fallback)
 - Tables: sui-table-wrap > sui-table (use data-label on td for mobile stacking)
 - Progress: sui-progress + sui-progress-bar + status variants + sui-progress-indeterminate
 - Navigation: sui-breadcrumb, sui-pagination, sui-page-btn
 - Accordion: sui-accordion (requires sui.js for interactivity)
 - Dropdown: sui-dropdown (requires sui.js)
-- Modal: sui-modal-overlay + sui-modal (requires sui.js for focus trap/escape)
+- Modal: dialog.sui-dialog (recommended, native) — or legacy sui-modal-overlay + sui-modal. Both work with SUI.modal.open/close.
 - Toast: SUI.toast.success/error/warning/info (requires sui.js)
 - Tooltip: sui-tooltip + sui-tooltip-content
 - Empty state: sui-empty + sui-empty-icon + sui-empty-title + sui-empty-text
@@ -793,6 +797,8 @@ Accessibility (mandatory):
 - Any text hidden via display:none at any breakpoint needs aria-label backup on its parent
 - Never use aria-selected without role="tab"
 - Respect prefers-reduced-motion
+
+Icons: Use Lucide icons via &lt;i data-lucide="icon-name"&gt;&lt;/i&gt;. Always add aria-hidden="true" on decorative icons. Always pair icons with visible text labels — never use an icon alone to communicate meaning.
 
 Status patterns (always icon + text):
 - Success: ✔ + text | Warning: ⚠ + text | Error: ✕ + text | Info: ℹ + text
@@ -816,9 +822,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <pre id="promptMinimal" class="sui-code-block">Use the Speyer UI System (SUI).
 CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css and sui-components.min.css
 Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
+Icons: &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt; then lucide.createIcons(). Use &lt;i data-lucide="icon-name"&gt;&lt;/i&gt;.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
-Avatars are initials-only (no images). Use sui-* component classes for everything.
+Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Use sui-* component classes for everything.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
@@ -838,9 +845,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js (optional, for modals/toasts/dropdowns)
    Or readable source from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/
-2. Ask the user: "Would you like light mode, dark mode, or both?"
-3. Apply all CSS custom properties (--sui- prefix) and component classes.
-4. Follow these design rules:
+2. Add Lucide icons (recommended): &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt; then call lucide.createIcons(). Use &lt;i data-lucide="icon-name"&gt;&lt;/i&gt; for icons. Any icon library works as an alternative.
+3. Ask the user: "Would you like light mode, dark mode, or both?"
+4. Apply all CSS custom properties (--sui- prefix) and component classes.
+5. Follow these design rules:
    - Font: Inter (Google Fonts), fallback system-ui
    - 8px spacing grid (--sui-space-1 through --sui-space-6)
    - Min touch target: 44px, max content width: 1280px
@@ -851,12 +859,14 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    - Colour-blind safe: no red/green-only patterns
    - Tabs: role="tablist" on container, role="tab" on buttons, role="tabpanel" on panels
    - Never use aria-selected without role="tab"
-   - Avatars: initials-only (no images)
-5. Use SUI component classes: sui-btn, sui-card, sui-badge, sui-alert, sui-avatar,
-   sui-toggle, sui-progress, sui-accordion, sui-dropdown, sui-modal, sui-tooltip,
-   sui-breadcrumb, sui-pagination, sui-empty, sui-skeleton, sui-table, etc.
-6. If a component isn't covered by SUI, mention it — contributions welcome.
-7. Reference: https://github.com/adrianspeyer/speyer-ui</pre>
+   - Avatars: initials-first (optional photo with onerror fallback)
+   - Icons: use aria-hidden="true" on decorative icons. Never use an icon alone without a text label.
+6. Use SUI component classes: sui-btn, sui-card, sui-badge, sui-alert, sui-avatar,
+   sui-toggle, sui-progress, sui-accordion, sui-dropdown, sui-dialog (native modal),
+   sui-modal (legacy), sui-tooltip, sui-breadcrumb, sui-pagination, sui-empty,
+   sui-skeleton, sui-table, etc.
+7. If a component isn't covered by SUI, mention it — contributions welcome.
+8. Reference: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
     </section>
@@ -868,33 +878,31 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada 🇨🇦</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.8</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.9</span></a>
     </footer>
   </main>
 
   <!-- ===== MODAL (outside main for stacking context) ===== -->
-  <div class="sui-modal-overlay" id="demoModal" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
-    <div class="sui-modal">
-      <div class="sui-modal-header">
-        <span class="sui-modal-title" id="modalTitle">Confirm Action</span>
-        <button class="sui-modal-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
-      </div>
-      <div class="sui-modal-body">
-        <p>This is a fully accessible modal dialog with focus trapping, Escape key support, and body scroll lock. Click outside or press Escape to close.</p>
-        <div class="sui-alert sui-alert-info sui-mt-3" role="alert">
-          <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
-          <div class="sui-alert-content">
-            <div class="sui-alert-title">Powered by sui.js</div>
-            <div>All interactive behavior comes from the optional toolkit.</div>
-          </div>
+  <dialog class="sui-dialog" id="demoModal" aria-labelledby="modalTitle">
+    <div class="sui-modal-header">
+      <span class="sui-modal-title" id="modalTitle">Confirm Action</span>
+      <button class="sui-modal-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sui-modal-body">
+      <p>This is a native <code>&lt;dialog&gt;</code> modal. The browser handles focus trapping, scroll lock, Escape key, and backdrop — no custom JavaScript needed for accessibility.</p>
+      <div class="sui-alert sui-alert-info sui-mt-3" role="alert">
+        <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+        <div class="sui-alert-content">
+          <div class="sui-alert-title">Powered by the browser</div>
+          <div>SUI styles the dialog. The browser does the heavy lifting.</div>
         </div>
       </div>
-      <div class="sui-modal-footer">
-        <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.modal.close('#demoModal')">Cancel</button>
-        <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.modal.close('#demoModal'); SUI.toast.success('Confirmed!', 'Action completed successfully.')">Confirm</button>
-      </div>
     </div>
-  </div>
+    <div class="sui-modal-footer">
+      <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.modal.close('#demoModal')">Cancel</button>
+      <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.modal.close('#demoModal'); SUI.toast.success('Confirmed!', 'Action completed successfully.')">Confirm</button>
+    </div>
+  </dialog>
 
   <!-- ===== SCRIPTS ===== -->
   <script src="./sui.js"></script>

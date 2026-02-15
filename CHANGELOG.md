@@ -4,6 +4,25 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.9] — 2026-02-15
+
+### Added
+- **Native `<dialog>` modal:** New recommended modal pattern using `<dialog class="sui-dialog">`. Browser handles focus trapping, scroll lock, Escape key, and backdrop natively. `SUI.modal.open()` and `SUI.modal.close()` work with both native dialog and legacy overlay. Includes entrance animation and wide variant (`sui-dialog-wide`).
+- **Avatar photo support:** Avatars are now "initials-first" — add an optional `<img>` inside `.sui-avatar` and initials show as automatic fallback when the image fails (`onerror="this.hidden=true"`). No breaking change — existing initials-only markup still works.
+- **"What you get" one-liner** in README intro — single line listing all component categories for scanners.
+- **Lucide Quick Start clarity:** CDN Quick Start now includes Lucide `<script>` tag with comment noting any icon library works. New "Icons" section in README explains SUI is icon-library-agnostic.
+
+### Changed
+- **Legacy overlay modal deprecated:** `sui-modal-overlay` + `sui-modal` pattern still works but is marked deprecated in CSS comments. Will be removed in v3.0.
+- **README:** Updated architecture table with current sizes (~5KB + ~34KB + ~10KB). Added Icons section recommending Lucide with clear "any library works" guidance. Updated Dependencies section. Updated avatar docs. Updated modal API docs. Added "What you get" component summary.
+- **Demo:** Modal now uses native `<dialog>`. All three AI prompts updated to include Lucide CDN, icon usage rules, dialog, and avatar changes.
+- **Size claims:** Updated from "45KB" to "under 50KB" (actual: 48.5KB).
+
+### Lesson
+- Use the platform. `<dialog>` eliminates ~40 lines of focus-trapping JavaScript and gives you better accessibility than any hand-rolled solution. When browsers ship a native version of something you're building by hand, adopt it.
+
+---
+
 ## [2.0.8] — 2026-02-15
 
 ### Added

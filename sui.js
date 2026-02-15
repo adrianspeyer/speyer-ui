@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.0.8
+ * Version: 2.0.9
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -205,16 +205,29 @@ const SUI = (() => {
     _previousFocus: null,
 
     open(selector) {
-      const overlay = typeof selector === 'string' ? $(selector) : selector;
-      if (!overlay) return;
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
 
       this._previousFocus = document.activeElement;
-      overlay.classList.add('is-open');
-      overlay.setAttribute('aria-hidden', 'false');
+
+      // Native <dialog> path — browser handles focus trap, scroll lock, Escape
+      if (el.tagName === 'DIALOG') {
+        el.showModal();
+        // Close on backdrop click
+        el.addEventListener('click', el._suiBackdrop = (e) => {
+          if (e.target === el) this.close(el);
+        });
+        this._stack.push(el);
+        return;
+      }
+
+      // Legacy overlay path (deprecated — will be removed in v3.0)
+      el.classList.add('is-open');
+      el.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
 
       // Focus trap
-      const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', overlay);
+      const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', el);
       if (focusable.length) focusable[0].focus();
 
       const trapFocus = (e) => {
@@ -227,27 +240,40 @@ const SUI = (() => {
             if (document.activeElement === last) { e.preventDefault(); first.focus(); }
           }
         }
-        if (e.key === 'Escape') this.close(overlay);
+        if (e.key === 'Escape') this.close(el);
       };
 
-      overlay._suiTrap = trapFocus;
-      overlay.addEventListener('keydown', trapFocus);
-      this._stack.push(overlay);
+      el._suiTrap = trapFocus;
+      el.addEventListener('keydown', trapFocus);
+      this._stack.push(el);
     },
 
     close(selector) {
-      const overlay = typeof selector === 'string' ? $(selector) : selector;
-      if (!overlay) return;
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
 
-      overlay.classList.remove('is-open');
-      overlay.setAttribute('aria-hidden', 'true');
-
-      if (overlay._suiTrap) {
-        overlay.removeEventListener('keydown', overlay._suiTrap);
-        delete overlay._suiTrap;
+      // Native <dialog> path
+      if (el.tagName === 'DIALOG') {
+        el.close();
+        if (el._suiBackdrop) {
+          el.removeEventListener('click', el._suiBackdrop);
+          delete el._suiBackdrop;
+        }
+        this._stack = this._stack.filter(m => m !== el);
+        if (this._previousFocus) this._previousFocus.focus();
+        return;
       }
 
-      this._stack = this._stack.filter(m => m !== overlay);
+      // Legacy overlay path
+      el.classList.remove('is-open');
+      el.setAttribute('aria-hidden', 'true');
+
+      if (el._suiTrap) {
+        el.removeEventListener('keydown', el._suiTrap);
+        delete el._suiTrap;
+      }
+
+      this._stack = this._stack.filter(m => m !== el);
       if (this._stack.length === 0) document.body.style.overflow = '';
       if (this._previousFocus) this._previousFocus.focus();
     }
@@ -453,7 +479,7 @@ const SUI = (() => {
     // Theme toggle buttons
     $$('[data-sui-theme]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const mode = theme.toggle();
+        theme.toggle();
         if (typeof lucide !== 'undefined') lucide.createIcons();
       });
     });
@@ -464,20 +490,22 @@ const SUI = (() => {
     // Dropdowns
     $$('.sui-dropdown').forEach(el => dropdown.init(el));
 
-    // Modals — open triggers
+    // Modals — open triggers (works with both <dialog> and legacy overlay)
     $$('[data-sui-modal]').forEach(btn => {
       btn.addEventListener('click', () => modal.open(btn.getAttribute('data-sui-modal')));
     });
 
-    // Modal close buttons
+    // Modal close buttons (works with both patterns)
     $$('.sui-modal-close').forEach(btn => {
       btn.addEventListener('click', () => {
+        const dialog = btn.closest('dialog.sui-dialog');
+        if (dialog) { modal.close(dialog); return; }
         const overlay = btn.closest('.sui-modal-overlay');
         if (overlay) modal.close(overlay);
       });
     });
 
-    // Modal overlay click-to-close
+    // Legacy modal overlay click-to-close
     $$('.sui-modal-overlay').forEach(overlay => {
       overlay.addEventListener('click', e => {
         if (e.target === overlay) modal.close(overlay);
