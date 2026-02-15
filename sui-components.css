@@ -1,6 +1,6 @@
 /*
  * Speyer UI System (SUI) — Components
- * Version: 2.0.6
+ * Version: 2.0.7
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -1790,16 +1790,19 @@ textarea.sui-input {
 
 .sui-shield-value {
   padding: 4px 6px;
-  background: var(--sui-blue-primary);
+  /* Hardcoded backgrounds — shields always use white text, so backgrounds
+     must stay dark enough for 4.5:1 contrast in both light and dark mode.
+     Theme tokens get lighter in dark mode and break contrast. */
+  background: #2563EB;
   color: #fff;
 }
 
-/* Colour variants */
-.sui-shield-success .sui-shield-value { background: var(--sui-success-strong); }
-.sui-shield-error   .sui-shield-value { background: var(--sui-error-strong); color: #fff; }
-.sui-shield-warning .sui-shield-value { background: var(--sui-warning-strong); color: #fff; }
-.sui-shield-info    .sui-shield-value { background: var(--sui-info-strong); color: #fff; }
-.sui-shield-neutral .sui-shield-value { background: var(--sui-neutral); color: #fff; }
+/* Colour variants (fixed backgrounds, not theme tokens — see note above) */
+.sui-shield-success .sui-shield-value { background: #15803D; }
+.sui-shield-error   .sui-shield-value { background: #B91C1C; }
+.sui-shield-warning .sui-shield-value { background: #92400E; }
+.sui-shield-info    .sui-shield-value { background: #0E7490; }
+.sui-shield-neutral .sui-shield-value { background: #475569; }
 
 /* ==========================================================================
    Visually Hidden (screen-reader accessible, visually invisible)

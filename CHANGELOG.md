@@ -19,6 +19,16 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.7] — 2026-02-15
+
+### Fixed
+- **Shield value contrast:** Shield backgrounds now use hardcoded contrast-safe colours instead of theme tokens. Theme tokens get lighter in dark mode, causing white text to fail WCAG contrast (e.g. blue: 3.67:1 light / 2.54:1 dark). All six variants now pass 4.5:1 in both modes.
+
+### Lesson
+- Components with fixed text colour (e.g. white) must not use theme tokens for backgrounds. Tokens designed for dark-mode text get lighter and invert the contrast relationship when used as backgrounds for white text.
+
+---
+
 ## [2.0.5] — 2026-02-14
 
 ### Added
