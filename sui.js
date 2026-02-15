@@ -1,6 +1,6 @@
 /**
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.0.2
+ * Version: 2.0.6
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.

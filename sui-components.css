@@ -1,6 +1,6 @@
 /*
  * Speyer UI System (SUI) — Components
- * Version: 2.0.2
+ * Version: 2.0.6
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -513,7 +513,7 @@ a:focus-visible {
   cursor: not-allowed;
 }
 
-.sui-input-error { border-color: var(--sui-error); }
+.sui-input-error { border-color: var(--sui-error); border-width: 2px; }
 .sui-input-error:focus { box-shadow: 0 0 0 3px var(--sui-error-soft); }
 
 .sui-input-hint {
@@ -1765,3 +1765,71 @@ textarea.sui-input {
 .sui-round-md   { border-radius: var(--sui-radius-md) !important; }
 .sui-round-lg   { border-radius: var(--sui-radius-lg) !important; }
 .sui-round-full { border-radius: var(--sui-radius-full) !important; }
+
+/* ==========================================================================
+   Shield (two-segment badge)
+   ========================================================================== */
+
+.sui-shield {
+  display: inline-flex;
+  font-family: var(--sui-font-primary);
+  font-size: 11px;
+  font-weight: var(--sui-weight-semibold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.sui-shield-label {
+  padding: 4px 6px;
+  background: var(--sui-neutral-strong);
+  color: var(--sui-bg-primary);
+}
+
+.sui-shield-value {
+  padding: 4px 6px;
+  background: var(--sui-blue-primary);
+  color: #fff;
+}
+
+/* Colour variants */
+.sui-shield-success .sui-shield-value { background: var(--sui-success-strong); }
+.sui-shield-error   .sui-shield-value { background: var(--sui-error-strong); color: #fff; }
+.sui-shield-warning .sui-shield-value { background: var(--sui-warning-strong); color: #fff; }
+.sui-shield-info    .sui-shield-value { background: var(--sui-info-strong); color: #fff; }
+.sui-shield-neutral .sui-shield-value { background: var(--sui-neutral); color: #fff; }
+
+/* ==========================================================================
+   Visually Hidden (screen-reader accessible, visually invisible)
+   ========================================================================== */
+
+.sui-visually-hidden:not(:focus):not(:active) {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* ==========================================================================
+   High Contrast Overrides
+   ========================================================================== */
+
+@media (prefers-contrast: more) {
+  .sui-card,
+  .sui-card-lg,
+  .sui-card-muted { border-width: 2px; }
+
+  .sui-input,
+  .sui-select { border-width: 2px; }
+
+  .sui-btn-outline,
+  .sui-btn-ghost { border-width: 2px; }
+
+  a:focus-visible,
+  .sui-btn:focus-visible,
+  .sui-tab:focus-visible { outline-width: 4px; }
+}

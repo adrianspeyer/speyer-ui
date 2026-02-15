@@ -32,9 +32,9 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 ### CDN (Fastest)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.6/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.6/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.6/dist/sui.min.js"></script>
 ```
 
 ### Download
@@ -177,6 +177,15 @@ When `prefers-reduced-motion: reduce` is set:
 - Scroll behavior is set to `auto`
 - Progress bar indeterminate animation stops
 
+### High Contrast
+
+When `prefers-contrast: more` is set at the OS level:
+- Muted and secondary text colours darken for increased readability
+- Borders on cards, inputs, and outline buttons thicken to 2px
+- Focus ring outlines thicken to 4px
+- Focus ring colours intensify
+- Works in both light and dark modes
+
 ---
 
 ## Display Modes
@@ -271,6 +280,24 @@ Feature: `sui-badge-new` · `sui-badge-beta` · `sui-badge-pro`
 
 Modifiers: `sui-badge-outline` · `sui-badge-sm` · `sui-badge-dot` · `sui-badge-count`
 
+### Shields (Two-Segment Badges)
+
+Shields.io-style two-tone badges — no external dependency. Dark mode aware.
+
+`sui-shield` · `sui-shield-success` · `sui-shield-error` · `sui-shield-warning` · `sui-shield-info` · `sui-shield-neutral`
+
+```html
+<span class="sui-shield">
+  <span class="sui-shield-label">built with</span>
+  <span class="sui-shield-value">SUI</span>
+</span>
+
+<a class="sui-shield sui-shield-success" href="#">
+  <span class="sui-shield-label">build</span>
+  <span class="sui-shield-value">passing</span>
+</a>
+```
+
 ### Alerts
 
 `sui-alert` · `sui-alert-success` · `sui-alert-warning` · `sui-alert-error` · `sui-alert-info`
@@ -305,7 +332,7 @@ Dividers · Empty state · Skeleton loaders · Stat cards
 
 ### Layout & Utilities
 
-Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`)
+Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`) · Accessibility (`sui-visually-hidden`)
 
 ### Radius Utilities
 
@@ -320,10 +347,25 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.5</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.6</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
+
+### Visually Hidden
+
+Hide content visually while keeping it accessible to screen readers. Focusable elements become visible on focus.
+
+```html
+<button>
+  <svg aria-hidden="true"><!-- icon --></svg>
+  <span class="sui-visually-hidden">Close menu</span>
+</button>
+```
+
+### High Contrast Support
+
+SUI responds to `prefers-contrast: more` — when enabled at the OS level, borders thicken, muted text darkens, and focus rings strengthen. No configuration needed.
 
 ---
 
@@ -451,15 +493,15 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```html
 <!-- Production (minified) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/dist/sui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.6/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.6/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.6/dist/sui.min.js"></script>
 
 <!-- Development (readable) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.5/sui-tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.0.6/sui-tokens.css">
 ```
 
-Replace `@2.0.5` with any version tag. Use exact versions in production, not `@main`.
+Replace `@2.0.6` with any version tag. Use exact versions in production, not `@main`.
 
 ---
 
@@ -523,6 +565,7 @@ Then create a [GitHub Release](https://github.com/adrianspeyer/speyer-ui/release
 - [ ] Keyboard navigation works for all interactive elements
 - [ ] Focus states visible
 - [ ] `prefers-reduced-motion` respected
+- [ ] `prefers-contrast: more` respected
 - [ ] Touch targets at least 44px
 - [ ] ARIA roles correct: tabs use `role="tablist"`/`role="tab"`/`role="tabpanel"`
 - [ ] All interactive elements have accessible names (visible text or `aria-label`)
