@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.0.13
+ * Version: 2.1.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -570,6 +570,7 @@ kbd {
   :root:not([data-theme]) .sui-progress-error.sui-progress-labeled   .sui-progress-bar     { background: #B91C1C; }
   :root:not([data-theme]) .sui-progress-info.sui-progress-labeled    .sui-progress-bar     { background: #0E7490; }
 }
+
 
 
 /* ==========================================================================
@@ -2428,6 +2429,316 @@ dialog.sui-dialog-wide { max-width: 720px; }
 @container (min-width: 401px) {
   .sui-cq-row       { flex-direction: row; }
   .sui-cq-show      { display: initial; }
+}
+
+
+/* ==========================================================================
+   Prose — Long-Form Typography (scoped to .sui-prose container)
+   ========================================================================== */
+
+.sui-prose {
+  --sui-prose-font: var(--sui-font-primary);
+  --sui-prose-size: 18px;
+  --sui-prose-leading: 1.7;
+  --sui-prose-max-width: none;
+  --sui-prose-heading-font: var(--sui-font-primary);
+
+  font-family: var(--sui-prose-font);
+  font-size: var(--sui-prose-size);
+  line-height: var(--sui-prose-leading);
+  color: var(--sui-text-primary);
+  max-width: var(--sui-prose-max-width);
+}
+
+/* Size variants */
+.sui-prose-sm  { --sui-prose-size: 15px; --sui-prose-leading: 1.6; }
+.sui-prose-lg  { --sui-prose-size: 20px; --sui-prose-leading: 1.8; }
+
+/* Width constraints */
+.sui-prose-narrow { --sui-prose-max-width: 680px; margin-left: auto; margin-right: auto; }
+.sui-prose-wide   { --sui-prose-max-width: 900px; margin-left: auto; margin-right: auto; }
+
+/* Headings */
+.sui-prose h1 {
+  font-family: var(--sui-prose-heading-font);
+  font-size: 1.8em;
+  font-weight: var(--sui-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 1.5em 0 0.6em;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid var(--sui-border);
+  scroll-margin-top: 70px;
+}
+.sui-prose h1:first-child { margin-top: 0; }
+
+.sui-prose h2 {
+  font-family: var(--sui-prose-heading-font);
+  font-size: 1.4em;
+  font-weight: var(--sui-weight-bold);
+  line-height: 1.3;
+  margin: 1.4em 0 0.5em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid var(--sui-border);
+  scroll-margin-top: 70px;
+}
+
+.sui-prose h3 {
+  font-family: var(--sui-prose-heading-font);
+  font-size: 1.2em;
+  font-weight: var(--sui-weight-semibold);
+  line-height: 1.35;
+  margin: 1.3em 0 0.4em;
+  scroll-margin-top: 70px;
+}
+
+.sui-prose h4, .sui-prose h5, .sui-prose h6 {
+  font-family: var(--sui-prose-heading-font);
+  font-weight: var(--sui-weight-semibold);
+  line-height: 1.4;
+  margin: 1.2em 0 0.3em;
+  scroll-margin-top: 70px;
+}
+.sui-prose h4 { font-size: 1.05em; }
+.sui-prose h5 { font-size: 0.95em; }
+.sui-prose h6 { font-size: 0.9em; color: var(--sui-text-secondary); }
+
+/* Paragraphs */
+.sui-prose p {
+  margin: 0 0 1em;
+}
+
+/* Links */
+.sui-prose a {
+  color: var(--sui-blue-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.sui-prose a:hover {
+  color: var(--sui-blue-hover);
+}
+
+/* Strong — semibold to avoid "black blob" */
+.sui-prose strong {
+  font-weight: var(--sui-weight-semibold);
+}
+
+/* Lists */
+.sui-prose ul, .sui-prose ol {
+  padding-left: 1.5em;
+  margin: 0 0 1em;
+}
+.sui-prose li + li {
+  margin-top: 0.35em;
+}
+.sui-prose li::marker {
+  color: var(--sui-text-muted);
+}
+.sui-prose li > ul, .sui-prose li > ol {
+  margin-top: 0.35em;
+  margin-bottom: 0;
+}
+
+/* Blockquote */
+.sui-prose blockquote {
+  margin: 1em 0;
+  padding: var(--sui-space-3) var(--sui-space-4);
+  border-left: 3px solid var(--sui-blue-primary);
+  background: var(--sui-bg-elevated);
+  border-radius: 0 var(--sui-radius-sm) var(--sui-radius-sm) 0;
+  font-style: italic;
+}
+.sui-prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Inline code */
+.sui-prose code {
+  font-family: var(--sui-font-mono);
+  font-size: 0.875em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--sui-bg-elevated);
+}
+
+/* Code blocks */
+.sui-prose pre {
+  margin: 1em 0;
+  padding: var(--sui-space-3);
+  background: var(--sui-bg-elevated);
+  border: 1px solid var(--sui-border);
+  border-radius: var(--sui-radius-md);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sui-prose pre code {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Horizontal rule */
+.sui-prose hr {
+  border: none;
+  border-top: 1px solid var(--sui-border);
+  margin: 2em 0;
+}
+
+/* Images */
+.sui-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--sui-radius-md);
+  margin: 1em 0;
+}
+
+/* Tables */
+.sui-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  border-radius: var(--sui-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--sui-border);
+}
+.sui-prose th {
+  background: var(--sui-bg-elevated);
+  font-weight: var(--sui-weight-semibold);
+  font-size: var(--sui-text-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--sui-border);
+}
+.sui-prose td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--sui-border);
+}
+.sui-prose tr:last-child td {
+  border-bottom: none;
+}
+
+/* Task list checkboxes (GFM) */
+.sui-prose input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: var(--sui-blue-primary);
+}
+
+
+/* ==========================================================================
+   Mark — Text Highlighting (search matches, annotations)
+   ========================================================================== */
+
+.sui-mark {
+  background: var(--sui-warning-soft);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.sui-mark-current {
+  background: var(--sui-warning);
+  color: #000;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* Dark mode mark overrides */
+[data-theme="dark"] .sui-mark { background: rgba(245, 158, 11, 0.2); }
+[data-theme="dark"] .sui-mark-current { background: rgba(245, 158, 11, 0.5); color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .sui-mark { background: rgba(245, 158, 11, 0.2); }
+  :root:not([data-theme]) .sui-mark-current { background: rgba(245, 158, 11, 0.5); color: #fff; }
+}
+
+/* Don't print highlights */
+@media print {
+  .sui-mark, .sui-mark-current { background: none !important; color: inherit !important; }
+}
+
+
+/* ==========================================================================
+   Meta — Metadata Separator Line
+   ========================================================================== */
+
+.sui-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sui-space-1);
+  font-size: var(--sui-text-meta);
+  color: var(--sui-text-muted);
+  line-height: 1.4;
+}
+.sui-meta > *:not(:first-child)::before {
+  content: '\00B7';
+  margin-right: var(--sui-space-1);
+}
+
+
+/* ==========================================================================
+   Toolbar — Horizontal Scrolling Action Bar
+   ========================================================================== */
+
+.sui-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: var(--sui-space-1) var(--sui-space-2);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+}
+.sui-toolbar::-webkit-scrollbar { display: none; }
+
+.sui-toolbar-bordered {
+  background: var(--sui-bg-card);
+  border-bottom: 1px solid var(--sui-border);
+}
+
+.sui-toolbar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--sui-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--sui-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--sui-duration-fast) var(--sui-easing);
+  font-family: var(--sui-font-primary);
+}
+.sui-toolbar-btn:hover {
+  background: var(--sui-bg-elevated);
+  color: var(--sui-text-primary);
+}
+.sui-toolbar-btn:active {
+  transform: scale(0.92);
+}
+.sui-toolbar-btn[aria-pressed="true"] {
+  background: var(--sui-blue-soft);
+  color: var(--sui-blue-primary);
+}
+.sui-toolbar-btn:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 1px;
+}
+
+.sui-toolbar-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--sui-border);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+.sui-toolbar-compact .sui-toolbar-btn {
+  width: 32px;
+  height: 32px;
 }
 
 

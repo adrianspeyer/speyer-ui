@@ -7,9 +7,9 @@ A lightweight design system built around four constraints:
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
 4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
-Under 70KB minified. Zero required dependencies. Works with any framework or none.
+Under 75KB minified. Zero required dependencies. Works with any framework or none.
 
-**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, and a dark mode that works.
+**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, prose (long-form typography), mark (search highlights), meta (metadata lines), toolbars, and a dark mode that works.
 
 **[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
@@ -59,7 +59,7 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 </html>
 ```
 
-> **Pin a version for production:** replace `@latest` with a tag like `@2.0.13` for stability.
+> **Pin a version for production:** replace `@latest` with a tag like `@2.1.0` for stability.
 
 ### Download
 
@@ -109,10 +109,10 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
 | `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | ~5KB | Yes |
-| `sui-components.css` | Component classes built from tokens | ~47KB | Yes |
+| `sui-components.css` | Component classes built from tokens | ~52KB | Yes |
 | `sui.js` | Interactive behaviours (modals, toasts, dropdowns, sheets) | ~14KB | **No** |
 
-**Core:** under 70KB (tokens + components + JS). Zero dependencies.
+**Core:** under 75KB (tokens + components + JS). Zero dependencies.
 
 CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, and accordion. Components render correctly without JS — they just won't open/close/animate.
 
@@ -166,6 +166,22 @@ SUI has **no required dependencies** — no icon library, no JavaScript framewor
 ### Scoped Tabs
 
 Wrap in `data-sui-tabs` to isolate multiple tab sets on one page. Pages without it work as before.
+
+### Prose
+
+`sui-prose` — long-form typography for articles, docs, and rendered Markdown. Covers headings (h1–h6 with scroll-margin-top), paragraphs, links, lists, blockquotes, code blocks, tables, images, horizontal rules, and task list checkboxes. Size variants: `sui-prose-sm` (15px), default (18px), `sui-prose-lg` (20px). Width: `sui-prose-narrow` (680px), `sui-prose-wide` (900px). Overridable via CSS custom properties (`--sui-prose-font`, `--sui-prose-size`, `--sui-prose-leading`).
+
+### Mark
+
+`sui-mark` — search result highlighting. `sui-mark-current` for the active match. Automatic dark mode adaptation and print suppression.
+
+### Meta
+
+`sui-meta` — dot-separated metadata line. Separator added via CSS `::before` — HTML stays semantic.
+
+### Toolbar
+
+`sui-toolbar` — horizontal scrolling action bar with hidden scrollbar. `sui-toolbar-btn` for buttons, `sui-toolbar-sep` for separators, `aria-pressed="true"` for active state. Variants: `sui-toolbar-bordered`, `sui-toolbar-compact`.
 
 ---
 
@@ -344,7 +360,7 @@ Borders are the default card separation. Shadows are opt-in via `sui-card-shadow
 
 ## Components
 
-SUI provides 40+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
+SUI provides 45+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
 
 ### Buttons
 
@@ -534,7 +550,7 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.13</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.1.0</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
@@ -700,7 +716,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.13`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.1.0`.
 
 ---
 

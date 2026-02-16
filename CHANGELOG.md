@@ -4,6 +4,27 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.1.0] — 2026-02-16
+
+### Added — The Content & Polish Release
+
+SUI now has an opinion about content, not just interface.
+
+**New Components:**
+- **Prose** (`sui-prose`) — Long-form typography container. One class covers headings (h1–h6 with scroll-margin-top), paragraphs, links, lists, blockquotes, code blocks, tables, images, horizontal rules, and task list checkboxes. Size variants: `sui-prose-sm` (15px), default (18px), `sui-prose-lg` (20px). Width constraints: `sui-prose-narrow` (680px), `sui-prose-wide` (900px). Overridable via CSS custom properties. Inspired by Tailwind Typography but built on SUI tokens.
+- **Mark** (`sui-mark`, `sui-mark-current`) — Search result highlighting with automatic dark mode adaptation and print suppression. 8 lines of CSS that every search feature needs.
+- **Meta** (`sui-meta`) — Dot-separated metadata line. "1,234 words · 5 min read · Updated 3h ago" — separator via CSS `::before`, HTML stays semantic.
+- **Toolbar** (`sui-toolbar`, `sui-toolbar-btn`, `sui-toolbar-sep`) — Horizontal scrolling action bar with hidden scrollbar. `aria-pressed="true"` toggle state. Variants: `sui-toolbar-bordered`, `sui-toolbar-compact`.
+
+### Why v2.1.0
+
+`sui-prose` represents a new content philosophy — SUI now handles long-form reading typography, not just interface components. That's a minor version bump by semver standards.
+
+### Lesson
+The gap between "design system" and "app framework" is content. Interface components (buttons, cards, modals) are the easy part — every design system has them. But the moment your users render Markdown, write articles, display documentation, or show rich text, you need typography opinions. `sui-prose` fills that gap without crossing into application logic.
+
+---
+
 ## [2.0.13] — 2026-02-15
 
 ### Added — New Components

@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Design Tokens
- * Version: 2.0.13
+ * Version: 2.1.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * A lightweight, accessible token system for modern web applications.
@@ -120,27 +120,16 @@
    ========================================================================== */
 
 [data-theme="dark"] {
-  /* Brand & Actions */
   --sui-blue-primary: #60A5FA;
   --sui-blue-hover:   #3B82F6;
   --sui-blue-active:  #2563EB;
   --sui-blue-strong:  #93C5FD;
   --sui-blue-soft:    #1E3A8A;
   --sui-blue-focus:   #60A5FA;
-
-  /* Backgrounds */
-  --sui-bg-primary:   #0B0F1A;
-  --sui-bg-card:      #161E2C;
-  --sui-bg-elevated:  #1E293B;
-  --sui-border:       #242F3E;
-
-  /* Text */
   --sui-text-primary:   #F8FAFC;
   --sui-text-secondary: #94A3B8;
   --sui-text-muted:     #8494A9;
   --sui-text-inverse:   #FFFFFF;
-
-  /* Status */
   --sui-success:        #4ADE80;
   --sui-success-strong: #22C55E;
   --sui-success-soft:   #052E16;
@@ -153,25 +142,24 @@
   --sui-info:           #22D3EE;
   --sui-info-strong:    #22D3EE;
   --sui-info-soft:      #083344;
-
-  /* Neutral */
   --sui-neutral:        #94A3B8;
   --sui-neutral-strong: #CBD5E1;
   --sui-neutral-soft:   #1E293B;
-
-  /* Pro */
   --sui-pro:        #A78BFA;
   --sui-pro-strong: #C4B5FD;
   --sui-pro-soft:   #2E1065;
 
-  /* Shadows */
+  /* Backgrounds */
+  --sui-bg-primary:   #0B0F1A;
+  --sui-bg-card:      #161E2C;
+  --sui-bg-elevated:  #1E293B;
+  --sui-border:       #242F3E;
   --sui-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
   --sui-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15);
   --sui-shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.50), 0 4px 12px rgba(0, 0, 0, 0.20);
-
-  /* Overlay */
   --sui-overlay: rgba(0, 0, 0, 0.65);
 }
+
 
 
 /* ==========================================================================
@@ -225,6 +213,7 @@
     --sui-overlay: rgba(0, 0, 0, 0.65);
   }
 }
+
 
 
 /* ==========================================================================

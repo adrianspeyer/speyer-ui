@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speyer UI System — Accessibility as Architecture</title>
-  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Under 70KB minified. Made in Canada." />
+  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Made in Canada." />
   <link rel="stylesheet" href="./sui-tokens.css" />
   <link rel="stylesheet" href="./sui-components.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +21,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.0.13</span>
+          <span class="sui-version-pill">v2.1.0</span>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
           <p class="sui-text-cap sui-mt-2">
             Built around four constraints: accessibility is mandatory, no build tools required,
             components work with or without JS, and status is never communicated by color alone.
-            Under 70KB minified. Zero required dependencies.
+            Lightweight and zero-dependency. Scores 100 on Lighthouse accessibility.
           </p>
         </div>
       </div>
@@ -76,8 +76,8 @@
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
-            <div class="sui-kpi-value">30+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.13</span>
+            <div class="sui-kpi-value">45+</div>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.1.0</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -95,10 +95,10 @@
           </div>
         </div>
         <div class="sui-card sui-stat">
-          <div class="sui-kpi-label">Bundle</div>
+          <div class="sui-kpi-label">Lighthouse</div>
           <div class="sui-stat-row">
-            <div class="sui-kpi-value">&lt;70kb</div>
-            <span class="sui-badge sui-badge-success"><i data-lucide="zap"></i>Minified</span>
+            <div class="sui-kpi-value">100</div>
+            <span class="sui-badge sui-badge-success"><i data-lucide="shield-check"></i>A11y</span>
           </div>
         </div>
       </div>
@@ -278,7 +278,7 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.13</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.1.0</span></span>
           </div>
         </div>
       </div>
@@ -447,43 +447,132 @@
 
       <!-- PROSE & MEDIA -->
       <div class="sui-section">
-        <h2>Prose & Media</h2>
-        <p class="sui-text-cap sui-mt-2">WordPress-ready typography and responsive embeds. No extra classes needed for standard HTML content.</p>
+        <h2>Prose</h2>
+        <p class="sui-text-cap sui-mt-2">Long-form typography for articles, docs, and rendered Markdown. One class, it works. Size variants and width constraints available.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">sui-prose (default — 18px base)</div>
+          <div class="sui-prose">
+            <h1>The Human Advantage</h1>
+            <p>In a world where AI automates everything else, <strong>human connection</strong> becomes the last competitive advantage. This is not a metaphor — it's a <a href="#">measurable business outcome</a>.</p>
+            <h2>Why Connection Wins</h2>
+            <p>The companies that thrive in the next decade will be the ones that invest in meaningful relationships — with customers, partners, and communities.</p>
+            <blockquote><p>The best technology disappears. What remains is the relationship it enabled.</p></blockquote>
+            <h3>Key Metrics</h3>
+            <ul>
+              <li>Customer retention increases 23% with community investment</li>
+              <li>NPS scores correlate with <strong>depth</strong> of connection, not frequency</li>
+              <li>Enterprise deals close 40% faster when champions exist</li>
+            </ul>
+            <pre><code>const roi = connections.map(c => c.lifetime_value)
+  .reduce((sum, v) => sum + v, 0);</code></pre>
+            <hr>
+            <table>
+              <thead><tr><th>Strategy</th><th>Investment</th><th>Return</th></tr></thead>
+              <tbody>
+                <tr><td>Community</td><td>$50K/yr</td><td>3.2x</td></tr>
+                <tr><td>Events</td><td>$120K/yr</td><td>4.1x</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="sui-grid sui-grid-2 sui-mt-4">
           <div class="sui-card">
-            <h3>Lists & Blockquote</h3>
-            <ul class="sui-mt-2">
-              <li>Accessible by default — no extra classes</li>
-              <li>Nested lists handled automatically
-                <ul>
-                  <li>Second level indented</li>
-                  <li>Consistent spacing</li>
-                </ul>
-              </li>
-              <li>Color inherits from <code>--sui-text-secondary</code></li>
-            </ul>
-            <blockquote class="sui-mt-3">
-              <p>"Accessibility is not a feature — it's architecture."</p>
-            </blockquote>
-            <figure class="sui-mt-3">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='100' fill='%23F1F5F9'%3E%3Crect width='400' height='100' rx='8'/%3E%3Ctext x='200' y='55' text-anchor='middle' fill='%2394A3B8' font-family='system-ui' font-size='14'%3EResponsive image (max-width: 100%25)%3C/text%3E%3C/svg%3E" alt="Placeholder showing responsive image scaling">
-              <figcaption>Figure 1 — Images scale automatically. No wrapper class required.</figcaption>
-            </figure>
+            <div class="sui-kpi-label sui-mb-2">sui-prose sui-prose-sm</div>
+            <div class="sui-prose sui-prose-sm">
+              <p>Compact prose at 15px. Tighter line height for dense content like sidebars, footnotes, or auxiliary text panels.</p>
+              <ul><li>Smaller base size</li><li>Tighter leading</li></ul>
+            </div>
           </div>
           <div class="sui-card">
-            <h3>Code, Keyboard & Embed</h3>
-            <p class="sui-mt-2">Inline code like <code>sui-tokens.css</code> gets automatic styling.</p>
-            <p class="sui-mt-2">Keyboard shortcuts: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd></p>
-            <div class="sui-mt-3">
-              <div class="sui-kpi-label sui-mb-2">Responsive video embed (16:9)</div>
-              <div style="max-width:280px;">
-                <div class="sui-embed">
-                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--sui-bg-elevated);">
-                    <span style="color:var(--sui-text-muted);font-size:var(--sui-text-small);">16:9 video area</span>
-                  </div>
+            <div class="sui-kpi-label sui-mb-2">sui-prose sui-prose-lg</div>
+            <div class="sui-prose sui-prose-lg">
+              <p>Generous prose at 20px. Wider line height for immersive reading — book chapters, long articles.</p>
+              <ul><li>Larger base size</li><li>Relaxed leading</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MARK / HIGHLIGHT -->
+      <div class="sui-section">
+        <h2>Mark / Highlight</h2>
+        <p class="sui-text-cap sui-mt-2">Search result highlighting. Automatic dark mode and print handling.</p>
+        <div class="sui-card sui-mt-4">
+          <p>Search results: The <mark class="sui-mark">quick brown fox</mark> jumped over the <mark class="sui-mark sui-mark-current">lazy dog</mark> while the <mark class="sui-mark">quick</mark> cat watched.</p>
+          <p class="sui-text-muted sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-mark</code> = all matches (soft yellow) · <code>sui-mark-current</code> = current match (strong amber)</p>
+        </div>
+      </div>
+
+      <!-- META -->
+      <div class="sui-section">
+        <h2>Metadata Line</h2>
+        <p class="sui-text-cap sui-mt-2">Compact metadata with automatic dot separators. No separator markup needed — CSS handles it.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-meta">
+            <span>1,234 words</span>
+            <span>5 min read</span>
+            <span>Updated 3h ago</span>
+          </div>
+          <div class="sui-meta sui-mt-3">
+            <span>Adrian Speyer</span>
+            <span>Draft</span>
+            <span>12 comments</span>
+            <span>v2.1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="sui-section">
+        <h2>Toolbar</h2>
+        <p class="sui-text-cap sui-mt-2">Horizontal scrolling action bar for formatting, filters, or controls. Hidden scrollbar, touch-friendly.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-2">Default</div>
+          <div class="sui-toolbar">
+            <button class="sui-toolbar-btn" type="button" title="Bold" aria-label="Bold" aria-pressed="true"><i data-lucide="bold"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Italic" aria-label="Italic"><i data-lucide="italic"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Underline" aria-label="Underline"><i data-lucide="underline"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Heading" aria-label="Heading"><i data-lucide="heading"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="List" aria-label="List"><i data-lucide="list"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Quote" aria-label="Quote"><i data-lucide="quote"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Link" aria-label="Link"><i data-lucide="link"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Image" aria-label="Image"><i data-lucide="image"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Code" aria-label="Code"><i data-lucide="code"></i></button>
+          </div>
+          <div class="sui-kpi-label sui-mb-2 sui-mt-4">Bordered + Compact</div>
+          <div class="sui-toolbar sui-toolbar-bordered sui-toolbar-compact">
+            <button class="sui-toolbar-btn" type="button" title="Align left" aria-label="Align left"><i data-lucide="align-left"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Align centre" aria-label="Align centre" aria-pressed="true"><i data-lucide="align-center"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Align right" aria-label="Align right"><i data-lucide="align-right"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Undo" aria-label="Undo"><i data-lucide="undo"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Redo" aria-label="Redo"><i data-lucide="redo"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMBED & KEYBOARD -->
+      <div class="sui-section">
+        <h2>Embed & Keyboard</h2>
+        <p class="sui-text-cap sui-mt-2">Responsive video embeds and keyboard shortcut styling.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <h3>Responsive video embed (16:9)</h3>
+            <div class="sui-mt-3" style="max-width:280px;">
+              <div class="sui-embed">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--sui-bg-elevated);">
+                  <span style="color:var(--sui-text-muted);font-size:var(--sui-text-small);">16:9 video area</span>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="sui-card">
+            <h3>Keyboard shortcuts</h3>
+            <p class="sui-mt-2">Toggle theme: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>T</kbd></p>
+            <p class="sui-mt-2">Search: <kbd>Ctrl</kbd> + <kbd>K</kbd></p>
+            <p class="sui-mt-2">Save: <kbd>Ctrl</kbd> + <kbd>S</kbd></p>
           </div>
         </div>
       </div>
@@ -1113,6 +1202,10 @@ Components (use SUI classes):
 - Interactive card: sui-card-interactive (clickable card with hover shadow elevation)
 - Tables: sui-table-interactive (clickable rows), sui-table-sortable (th[data-sort] visual indicators)
 - Progress labeled: sui-progress-labeled + sui-progress-text (text inside bar, contrast-safe in both themes)
+- Prose: sui-prose (long-form typography container), sui-prose-sm/lg (size), sui-prose-narrow/wide (width)
+- Mark: sui-mark (search highlight), sui-mark-current (active match)
+- Meta: sui-meta (dot-separated metadata line)
+- Toolbar: sui-toolbar + sui-toolbar-btn + sui-toolbar-sep, sui-toolbar-bordered, sui-toolbar-compact
 - Dropzone: sui-dropzone (CSS only, .is-dragover state, behaviour is bring-your-own JS)
 - Timeline: sui-timeline + sui-timeline-item + sui-timeline-content (activity feed, role="feed", optimised for sui-avatar-sm)
 - Avatars: sui-avatar + sui-avatar-sm/md/lg/xl (initials-first, optional photo with onerror fallback)
@@ -1159,7 +1252,7 @@ CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt;.
 Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
-Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Scoped tabs: wrap in data-sui-tabs. Use sui-* component classes for everything.
+Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Use sui-* component classes for everything.
 Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -1202,8 +1295,11 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    sui-modal (legacy), sui-tooltip, sui-breadcrumb, sui-pagination, sui-empty,
    sui-skeleton, sui-table, sui-sheet (bottom sheet), sui-segmented (segmented control),
    sui-chip (tag/chip), sui-card-interactive, sui-table-interactive, sui-table-sortable,
-   sui-progress-labeled, sui-dropzone, sui-timeline, sui-grid-auto, sui-scroll-x, sui-flex-nowrap,
+   sui-progress-labeled, sui-dropzone, sui-timeline, sui-prose (long-form typography),
+   sui-mark (search highlight), sui-meta (metadata line), sui-toolbar (action bar),
+   sui-grid-auto, sui-scroll-x, sui-flex-nowrap,
    sui-container (container queries, opt-in), sui-avatar-xl, etc.
+   Themes: light, dark, auto.
 7. Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;. Add id="main" to &lt;main&gt;.
 8. If a component isn't covered by SUI, mention it — contributions welcome.
 9. Reference: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -1249,10 +1345,15 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         .recipe-split-detail { padding: var(--sui-space-4); }
         .recipe-settings-row { display: flex; justify-content: space-between; align-items: center; padding: var(--sui-space-3) 0; gap: var(--sui-space-3); }
         .recipe-settings-row:not(:last-child) { border-bottom: 1px solid var(--sui-border); }
+        .recipe-doc-list-item { padding: var(--sui-space-3); border-bottom: 1px solid var(--sui-border); cursor: pointer; transition: background var(--sui-duration-fast) var(--sui-easing); }
+        .recipe-doc-list-item:hover { background: var(--sui-bg-elevated); }
+        .recipe-doc-list-item:last-child { border-bottom: none; }
+        .recipe-profile-header { display: flex; gap: var(--sui-space-4); align-items: flex-start; padding: var(--sui-space-4); }
         @media (max-width: 640px) {
           .recipe-split { grid-template-columns: 1fr; }
           .recipe-split-list { border-right: none; border-bottom: 1px solid var(--sui-border); max-height: 200px; }
           .recipe-stepper-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+          .recipe-profile-header { flex-direction: column; align-items: center; text-align: center; }
         }
       </style>
 
@@ -1617,6 +1718,257 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
 
+      <!-- RECIPE: BLOG POST / ARTICLE -->
+      <div class="sui-section" id="recipe-blog-post">
+        <h2>Blog Post / Article</h2>
+        <p class="sui-text-cap sui-mt-2">Full article layout with metadata, prose content, and find-in-page highlighting. Composes from: <code>sui-prose</code>, <code>sui-meta</code>, <code>sui-mark</code>, <code>sui-avatar</code>. Custom CSS: 0 lines.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex sui-items-center sui-gap-3 sui-mb-3">
+            <span class="sui-avatar sui-avatar-md">AS</span>
+            <div>
+              <strong>Adrian Speyer</strong>
+              <div class="sui-meta">
+                <span>Feb 16, 2026</span>
+                <span>842 words</span>
+                <span>4 min read</span>
+              </div>
+            </div>
+          </div>
+          <div class="sui-flex sui-gap-2 sui-mb-3">
+            <span class="sui-chip sui-chip-info">Strategy</span>
+            <span class="sui-chip">Leadership</span>
+          </div>
+          <hr class="sui-divider">
+          <div class="sui-prose sui-mt-3">
+            <h2>Why Connection Wins When AI Automates Everything Else</h2>
+            <p>In a world where <mark class="sui-mark">AI</mark> can write your emails, generate your reports, and schedule your meetings, <strong>what's left that only humans can do?</strong> The answer is deceptively simple: build <mark class="sui-mark sui-mark-current">relationships</mark>.</p>
+            <blockquote><p>The companies that thrive in the next decade won't be the ones with the best algorithms — they'll be the ones with the deepest <mark class="sui-mark">relationships</mark>.</p></blockquote>
+            <p>Consider the data: customer retention increases 23% with community investment. NPS scores correlate with depth of connection, not frequency. Enterprise deals close 40% faster when internal champions exist.</p>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Author + metadata --&gt;
+&lt;div class="sui-flex sui-items-center sui-gap-3"&gt;
+  &lt;span class="sui-avatar sui-avatar-md"&gt;AS&lt;/span&gt;
+  &lt;div&gt;
+    &lt;strong&gt;Adrian Speyer&lt;/strong&gt;
+    &lt;div class="sui-meta"&gt;
+      &lt;span&gt;Feb 16, 2026&lt;/span&gt;
+      &lt;span&gt;842 words&lt;/span&gt;
+      &lt;span&gt;4 min read&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Article body — zero custom CSS --&gt;
+&lt;div class="sui-prose"&gt;
+  &lt;h2&gt;Title&lt;/h2&gt;
+  &lt;p&gt;Paragraph with &lt;mark class="sui-mark"&gt;search matches&lt;/mark&gt;
+  and &lt;mark class="sui-mark sui-mark-current"&gt;current match&lt;/mark&gt;.&lt;/p&gt;
+  &lt;blockquote&gt;&lt;p&gt;A quote.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS: 0 lines. All SUI classes. --&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: DOCUMENT LIBRARY -->
+      <div class="sui-section" id="recipe-document-library">
+        <h2>Document Library</h2>
+        <p class="sui-text-cap sui-mt-2">Searchable file list with toolbar, metadata, and status indicators. Composes from: <code>sui-toolbar</code>, <code>sui-meta</code>, <code>sui-badge</code>, <code>sui-card</code>, <code>sui-input</code>. Custom CSS: ~3 lines.</p>
+        <div class="sui-card sui-card-flush sui-mt-4">
+          <div class="sui-toolbar sui-toolbar-bordered">
+            <button class="sui-toolbar-btn" type="button" title="List view" aria-label="List view" aria-pressed="true"><i data-lucide="list"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Grid view" aria-label="Grid view"><i data-lucide="layout-grid"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Sort" aria-label="Sort"><i data-lucide="arrow-up-down"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Filter" aria-label="Filter"><i data-lucide="filter"></i></button>
+            <div style="flex:1;"></div>
+            <div style="min-width:200px;padding-right:var(--sui-space-2);">
+              <input class="sui-input" type="search" placeholder="Search documents..." style="height:32px;font-size:var(--sui-text-small);">
+            </div>
+          </div>
+          <div class="recipe-doc-list-item">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <i data-lucide="file-text" style="color:var(--sui-blue-primary);flex-shrink:0;"></i>
+              <div style="flex:1;min-width:0;">
+                <strong>Q4 Strategy Deck.md</strong>
+                <div class="sui-meta sui-mt-1">
+                  <span>12,340 words</span>
+                  <span>Updated 2h ago</span>
+                  <span>Adrian</span>
+                </div>
+              </div>
+              <span class="sui-badge sui-badge-success sui-badge-sm">Published</span>
+            </div>
+          </div>
+          <div class="recipe-doc-list-item">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <i data-lucide="file-text" style="color:var(--sui-warning);flex-shrink:0;"></i>
+              <div style="flex:1;min-width:0;">
+                <strong>The Human Advantage — Chapter 3.md</strong>
+                <div class="sui-meta sui-mt-1">
+                  <span>4,821 words</span>
+                  <span>Updated yesterday</span>
+                  <span>Adrian</span>
+                </div>
+              </div>
+              <span class="sui-badge sui-badge-warning sui-badge-sm">Draft</span>
+            </div>
+          </div>
+          <div class="recipe-doc-list-item">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <i data-lucide="file-code" style="color:var(--sui-text-muted);flex-shrink:0;"></i>
+              <div style="flex:1;min-width:0;">
+                <strong>SUI-COMPONENT-PROPOSALS.md</strong>
+                <div class="sui-meta sui-mt-1">
+                  <span>2,100 words</span>
+                  <span>Updated 3 days ago</span>
+                  <span>Claude</span>
+                </div>
+              </div>
+              <span class="sui-badge sui-badge-info sui-badge-sm">RFC</span>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-card sui-card-flush"&gt;
+  &lt;div class="sui-toolbar sui-toolbar-bordered"&gt;
+    &lt;button class="sui-toolbar-btn" aria-pressed="true"&gt;...&lt;/button&gt;
+    &lt;div class="sui-toolbar-sep"&gt;&lt;/div&gt;
+    &lt;input class="sui-input" type="search" placeholder="Search..."&gt;
+  &lt;/div&gt;
+  &lt;div class="recipe-doc-list-item"&gt;
+    &lt;div class="sui-flex sui-items-center sui-gap-3"&gt;
+      &lt;i data-lucide="file-text"&gt;&lt;/i&gt;
+      &lt;div&gt;
+        &lt;strong&gt;Document Name.md&lt;/strong&gt;
+        &lt;div class="sui-meta"&gt;
+          &lt;span&gt;12,340 words&lt;/span&gt;
+          &lt;span&gt;Updated 2h ago&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class="sui-badge sui-badge-success sui-badge-sm"&gt;Published&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~3 lines) --&gt;
+&lt;style&gt;
+.recipe-doc-list-item { padding: var(--sui-space-3); border-bottom: 1px solid var(--sui-border); cursor: pointer; }
+.recipe-doc-list-item:hover { background: var(--sui-bg-elevated); }
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: PROFILE PAGE -->
+      <div class="sui-section" id="recipe-profile-page">
+        <h2>Profile Page</h2>
+        <p class="sui-text-cap sui-mt-2">User profile with avatar, metadata, stats, and activity feed. Composes from: <code>sui-avatar-xl</code>, <code>sui-meta</code>, <code>sui-timeline</code>, <code>sui-badge</code>, <code>sui-card</code>. Custom CSS: ~3 lines.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="recipe-profile-header">
+            <span class="sui-avatar sui-avatar-xl">AS</span>
+            <div>
+              <div style="font-size:var(--sui-text-h2);font-weight:var(--sui-weight-bold);">Adrian Speyer</div>
+              <div class="sui-text-muted" style="font-size:var(--sui-text-body);">VP Marketing & Technology</div>
+              <div class="sui-meta sui-mt-2">
+                <span>Montreal, QC</span>
+                <span>25+ years experience</span>
+                <span>Joined 2023</span>
+              </div>
+              <div class="sui-flex sui-gap-2 sui-mt-3">
+                <span class="sui-chip sui-chip-info">SaaS</span>
+                <span class="sui-chip">Community</span>
+                <span class="sui-chip sui-chip-success">AI</span>
+                <span class="sui-chip sui-chip-warning">Events</span>
+              </div>
+            </div>
+          </div>
+          <hr class="sui-divider">
+          <div class="sui-grid sui-grid-3 sui-gap-3" style="padding:var(--sui-space-4);">
+            <div class="sui-text-center">
+              <div class="sui-kpi-value">142</div>
+              <div class="sui-kpi-label">Connections</div>
+            </div>
+            <div class="sui-text-center">
+              <div class="sui-kpi-value">38</div>
+              <div class="sui-kpi-label">Events</div>
+            </div>
+            <div class="sui-text-center">
+              <div class="sui-kpi-value">4.9</div>
+              <div class="sui-kpi-label">Rating</div>
+            </div>
+          </div>
+          <hr class="sui-divider">
+          <div style="padding:var(--sui-space-4);">
+            <h3 class="sui-mb-3">Recent Activity</h3>
+            <div class="sui-timeline" role="feed">
+              <div class="sui-timeline-item" role="article" aria-label="Attended AI Summit">
+                <span class="sui-avatar sui-avatar-sm">AS</span>
+                <div class="sui-timeline-content">
+                  <strong>Attended AI Summit 2026</strong>
+                  <div class="sui-meta sui-mt-1"><span>2 days ago</span><span>Montreal</span></div>
+                </div>
+              </div>
+              <div class="sui-timeline-item" role="article" aria-label="Published article">
+                <span class="sui-avatar sui-avatar-sm">AS</span>
+                <div class="sui-timeline-content">
+                  <strong>Published "Why Connection Wins"</strong>
+                  <div class="sui-meta sui-mt-1"><span>1 week ago</span><span>842 words</span></div>
+                </div>
+              </div>
+              <div class="sui-timeline-item" role="article" aria-label="Connected with Elena">
+                <span class="sui-avatar sui-avatar-sm">EV</span>
+                <div class="sui-timeline-content">
+                  <strong>Connected with Elena Vasquez</strong>
+                  <div class="sui-meta sui-mt-1"><span>2 weeks ago</span><span>via SpeedMatch</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="recipe-profile-header"&gt;
+  &lt;span class="sui-avatar sui-avatar-xl"&gt;AS&lt;/span&gt;
+  &lt;div&gt;
+    &lt;h2&gt;Name&lt;/h2&gt;
+    &lt;div class="sui-meta"&gt;
+      &lt;span&gt;Location&lt;/span&gt;
+      &lt;span&gt;Experience&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="sui-flex sui-gap-2"&gt;
+      &lt;span class="sui-chip sui-chip-info"&gt;Skill&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="sui-timeline" role="feed"&gt;
+  &lt;div class="sui-timeline-item" role="article"&gt;
+    &lt;span class="sui-avatar sui-avatar-sm"&gt;AS&lt;/span&gt;
+    &lt;div class="sui-timeline-content"&gt;
+      &lt;strong&gt;Event title&lt;/strong&gt;
+      &lt;div class="sui-meta"&gt;&lt;span&gt;2 days ago&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~3 lines) --&gt;
+&lt;style&gt;
+.recipe-profile-header { display: flex; gap: var(--sui-space-4); align-items: flex-start; }
+@media (max-width: 640px) { .recipe-profile-header { flex-direction: column; align-items: center; } }
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ===== FOOTER ===== -->
@@ -1626,7 +1978,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada 🇨🇦</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.13</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.1.0</span></a>
     </footer>
   </main>
 
