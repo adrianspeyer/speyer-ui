@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.0.12
+ * Version: 2.0.13
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -71,6 +71,9 @@ const SUI = (() => {
       const tabBtns = $$('.sui-tab', navEl);
       if (!tabBtns.length) return;
 
+      // Determine scope: if inside a [data-sui-tabs] wrapper, scope panels to that wrapper
+      const scope = navEl.closest('[data-sui-tabs]') || document;
+
       // Enforce ARIA roles — tablist on nav, tab on buttons
       if (!navEl.hasAttribute('role')) navEl.setAttribute('role', 'tablist');
       tabBtns.forEach(t => {
@@ -80,19 +83,20 @@ const SUI = (() => {
           t.setAttribute('aria-label', t.getAttribute('data-tab'));
         }
       });
-      // Enforce tabpanel role on associated sections
-      $$('[data-view]').forEach(v => {
+      // Enforce tabpanel role on associated sections within scope
+      $$('[data-view]', scope).forEach(v => {
         if (!v.hasAttribute('role')) v.setAttribute('role', 'tabpanel');
       });
 
       const setView = (key) => {
-        $$('[data-view]').forEach(v =>
+        $$('[data-view]', scope).forEach(v =>
           v.classList.toggle('is-active', v.getAttribute('data-view') === key)
         );
         tabBtns.forEach(t =>
           t.setAttribute('aria-selected', t.getAttribute('data-tab') === key ? 'true' : 'false')
         );
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        // Only scroll to top for unscoped (global) tabs
+        if (scope === document) window.scrollTo({ top: 0, behavior: 'instant' });
       };
 
       tabBtns.forEach(t => t.addEventListener('click', () => setView(t.getAttribute('data-tab'))));

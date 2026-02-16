@@ -4,6 +4,29 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.13] — 2026-02-15
+
+### Added — New Components
+- **Scoped Tabs:** `data-sui-tabs` wrapper scopes tab discovery by container. Multiple independent tab sets on one page no longer conflict. Pages without the wrapper work as before (backward compatible).
+- **Avatar XL:** `sui-avatar-xl` at 80px for profile pages and account headers.
+- **Table Interactive:** `sui-table-interactive` — clickable rows with `cursor: pointer` and focus ring. Composes with `sui-table-hover`. Developer adds `tabindex="0"`, `role="link"`, and handler.
+- **Table Sortable:** `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Three states: neutral (⇅), ascending (↑), descending (↓). Developer toggles attribute value. No JS needed.
+- **Progress Labeled:** `sui-progress-labeled` + `sui-progress-text` — text inside the progress bar fill. Uses `-strong` backgrounds in light mode and hardcoded dark-mode overrides for WCAG AA white-text contrast on all five colour variants.
+- **Dropzone:** `sui-dropzone` — file upload area with dashed border, hover state, `.is-dragover` state. CSS only — drag-and-drop behaviour is bring-your-own JS.
+- **Timeline:** `sui-timeline` + `sui-timeline-item` + `sui-timeline-content` — activity feed layout with avatar-left, content-right, and vertical connector. Optimised for `sui-avatar-sm`. `role="feed"` + `role="article"` for accessibility.
+
+### Fixed
+- **Card muted + interactive composability:** Combined modifiers now produce a subtler hover (`shadow-sm`, `translateY(-1px)`) instead of the full interactive lift, maintaining visual hierarchy.
+
+### Added — Demo
+- **Recipes tab:** Five documented application patterns composed from SUI primitives — Inline Edit, Kanban Board, Stepper/Wizard, Split Pane, and Settings/Preferences. Each with live example, collapsible code block, components-used list, and custom CSS clearly separated. Recipe CSS is demo-only — not in the SUI bundle.
+- **README Recipes section** with table linking to each recipe's demo anchor.
+
+### Lesson
+- A design system's job is to ship primitives that compose into application patterns — not to ship the application patterns themselves. When you find yourself asking "but what about step 3's validation state?", you've crossed from component into application logic. Ship the building blocks, document the recipe, let the builder cook.
+
+---
+
 ## [2.0.12] — 2026-02-15
 
 ### Added — New Components

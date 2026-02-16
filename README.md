@@ -7,9 +7,9 @@ A lightweight design system built around four constraints:
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
 4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
-Under 65KB minified. Zero required dependencies. Works with any framework or none.
+Under 70KB minified. Zero required dependencies. Works with any framework or none.
 
-**What you get:** buttons, cards, badges, alerts, avatars, toggles, tables, forms, progress bars, modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, and a dark mode that works.
+**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, and a dark mode that works.
 
 **[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
@@ -59,7 +59,7 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 </html>
 ```
 
-> **Pin a version for production:** replace `@latest` with a tag like `@2.0.12` for stability.
+> **Pin a version for production:** replace `@latest` with a tag like `@2.0.13` for stability.
 
 ### Download
 
@@ -109,10 +109,10 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
 | `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | ~5KB | Yes |
-| `sui-components.css` | Component classes built from tokens | ~42KB | Yes |
+| `sui-components.css` | Component classes built from tokens | ~47KB | Yes |
 | `sui.js` | Interactive behaviours (modals, toasts, dropdowns, sheets) | ~14KB | **No** |
 
-**Core:** under 65KB (tokens + components + JS). Zero dependencies.
+**Core:** under 70KB (tokens + components + JS). Zero dependencies.
 
 CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, and accordion. Components render correctly without JS — they just won't open/close/animate.
 
@@ -140,6 +140,48 @@ SUI's accessibility rule (never rely on colour alone — pair icons with text la
 ### Dependencies
 
 SUI has **no required dependencies** — no icon library, no JavaScript framework, no build step. Add whichever icon library you prefer to your HTML.
+
+---
+
+### Avatar XL
+
+`sui-avatar-xl` — 80px avatar for profile pages, account settings, and user headers.
+
+### Table Interactive + Sortable
+
+`sui-table-interactive` — clickable rows with `cursor: pointer` and focus ring. Developer adds `tabindex="0"`, `role="link"`, `aria-label`, and click handler. `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Developer toggles `data-sort` attribute value on click.
+
+### Progress Labeled
+
+`sui-progress-labeled` + `sui-progress-text` — text inside the bar. Contrast-safe in both themes.
+
+### Dropzone
+
+`sui-dropzone` — file upload area. CSS only — drag-and-drop JS is bring-your-own.
+
+### Timeline
+
+`sui-timeline` + `sui-timeline-item` + `sui-timeline-content` — activity feed. Optimised for `sui-avatar-sm`. Container: `role="feed"`, items: `role="article"`.
+
+### Scoped Tabs
+
+Wrap in `data-sui-tabs` to isolate multiple tab sets on one page. Pages without it work as before.
+
+---
+
+## Recipes
+
+SUI ships components. You build patterns. These recipes show common application layouts composed from SUI primitives with minimal custom CSS.
+
+| Recipe | What It Is | Custom CSS | Demo |
+|--------|-----------|-----------|------|
+| Inline Edit | Click-to-edit fields with ARIA | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-inline-edit) |
+| Kanban Board | Horizontal scrolling card columns | ~6 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-kanban) |
+| Stepper / Wizard | Multi-step progress indicator | ~15 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-stepper) |
+| Split Pane | Master-detail list + panel layout | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-split-pane) |
+| Settings | Preferences page with toggles + controls | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-settings) |
+
+> **Components vs Recipes:** Components ship in the SUI bundle. Recipes are documented patterns that compose those components with minimal custom CSS. Recipes are starting points — modify to fit your app.
 
 ---
 
@@ -204,6 +246,8 @@ Tested with Chrome Lighthouse (Accessibility audit) — 100/100 in both light an
 | Segmented | Focus active | Select | — | Left/Right/Up/Down switch |
 | Tooltip | Focus trigger shows | — | — | — |
 | Pagination | Focus each button | Navigate | — | — |
+| Table Interactive | Focus each row | Activate row | — | — |
+| Timeline | Focus per item | — | — | — |
 
 ### Color-Blind Design
 
@@ -300,7 +344,7 @@ Borders are the default card separation. Shadows are opt-in via `sui-card-shadow
 
 ## Components
 
-SUI provides 30+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
+SUI provides 40+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
 
 ### Buttons
 
@@ -490,7 +534,7 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.12</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.13</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
@@ -656,7 +700,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.12`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.13`.
 
 ---
 

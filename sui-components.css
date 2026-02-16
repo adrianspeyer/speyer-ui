@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.0.12
+ * Version: 2.0.13
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -425,6 +425,12 @@ kbd {
   outline-offset: 2px;
 }
 
+/* Muted + interactive: subtler hover to maintain visual hierarchy */
+.sui-card-muted.sui-card-interactive:hover {
+  box-shadow: var(--sui-shadow-sm);
+  transform: translateY(-1px);
+}
+
 .sui-card-header {
   padding: var(--sui-space-4);
   border-bottom: 1px solid var(--sui-border);
@@ -541,6 +547,14 @@ kbd {
 [data-theme="dark"] .sui-btn-danger:hover { background: #991B1B; }
 [data-theme="dark"] .sui-btn-success { background: #15803D; }
 [data-theme="dark"] .sui-btn-success:hover { background: #116932; }
+
+/* Dark mode: progress-labeled backgrounds locked for white text (≥4.5:1) */
+[data-theme="dark"] .sui-progress-labeled .sui-progress-bar                          { background: #2563EB; }
+[data-theme="dark"] .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: #15803D; }
+[data-theme="dark"] .sui-progress-warning.sui-progress-labeled .sui-progress-bar     { background: #92400E; }
+[data-theme="dark"] .sui-progress-error.sui-progress-labeled   .sui-progress-bar     { background: #B91C1C; }
+[data-theme="dark"] .sui-progress-info.sui-progress-labeled    .sui-progress-bar     { background: #0E7490; }
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .sui-btn-primary { background: #2563EB; }
   :root:not([data-theme]) .sui-btn-primary:hover { background: #1D4ED8; }
@@ -548,6 +562,13 @@ kbd {
   :root:not([data-theme]) .sui-btn-danger:hover { background: #991B1B; }
   :root:not([data-theme]) .sui-btn-success { background: #15803D; }
   :root:not([data-theme]) .sui-btn-success:hover { background: #116932; }
+
+  /* Progress-labeled backgrounds */
+  :root:not([data-theme]) .sui-progress-labeled .sui-progress-bar                          { background: #2563EB; }
+  :root:not([data-theme]) .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: #15803D; }
+  :root:not([data-theme]) .sui-progress-warning.sui-progress-labeled .sui-progress-bar     { background: #92400E; }
+  :root:not([data-theme]) .sui-progress-error.sui-progress-labeled   .sui-progress-bar     { background: #B91C1C; }
+  :root:not([data-theme]) .sui-progress-info.sui-progress-labeled    .sui-progress-bar     { background: #0E7490; }
 }
 
 
@@ -983,6 +1004,8 @@ textarea.sui-input {
 .sui-avatar-md { width: 40px; height: 40px; font-size: var(--sui-text-small); }
 .sui-avatar-lg { width: 56px; height: 56px; font-size: var(--sui-text-h3); }
 
+.sui-avatar-xl { width: 80px; height: 80px; font-size: var(--sui-text-h2); }
+
 /* Avatar group — overlapping */
 .sui-avatar-group {
   display: flex;
@@ -1046,6 +1069,33 @@ textarea.sui-input {
   font-weight: var(--sui-weight-semibold);
   color: var(--sui-text-secondary);
 }
+
+/* Label inside progress bar */
+.sui-progress-labeled {
+  position: relative;
+  min-height: 24px;
+  border-radius: var(--sui-radius-sm);
+}
+.sui-progress-labeled .sui-progress-bar {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sui-radius-sm);
+}
+.sui-progress-labeled .sui-progress-text {
+  font-size: var(--sui-text-meta);
+  font-weight: var(--sui-weight-semibold);
+  color: #FFFFFF;
+  padding: 0 var(--sui-space-2);
+  white-space: nowrap;
+}
+/* Labeled progress: use -strong backgrounds for white-text contrast (light mode) */
+.sui-progress-labeled .sui-progress-bar                 { background: var(--sui-blue-primary); }
+.sui-progress-success.sui-progress-labeled .sui-progress-bar { background: var(--sui-success-strong); }
+.sui-progress-warning.sui-progress-labeled .sui-progress-bar { background: var(--sui-warning-strong); }
+.sui-progress-error.sui-progress-labeled   .sui-progress-bar { background: var(--sui-error-strong); }
+.sui-progress-info.sui-progress-labeled    .sui-progress-bar { background: var(--sui-info-strong); }
 
 
 /* ==========================================================================
@@ -1830,6 +1880,46 @@ dialog.sui-dialog-wide { max-width: 720px; }
   background: var(--sui-bg-elevated);
 }
 
+/* Interactive rows (clickable) */
+.sui-table-interactive tbody tr {
+  cursor: pointer;
+}
+.sui-table-interactive tbody tr:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: -3px;
+}
+
+/* Sortable columns */
+.sui-table-sortable th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: calc(var(--sui-space-3) + 16px);
+}
+.sui-table-sortable th[data-sort]:hover {
+  color: var(--sui-text-primary);
+}
+.sui-table-sortable th[data-sort]::after {
+  content: '\21C5';
+  position: absolute;
+  right: var(--sui-space-2);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--sui-text-meta);
+  color: var(--sui-text-muted);
+  opacity: 0.5;
+}
+.sui-table-sortable th[data-sort="asc"]::after {
+  content: '\2191';
+  opacity: 1;
+  color: var(--sui-blue-primary);
+}
+.sui-table-sortable th[data-sort="desc"]::after {
+  content: '\2193';
+  opacity: 1;
+  color: var(--sui-blue-primary);
+}
+
 @media (max-width: 520px) {
   .sui-table { min-width: 0; }
   .sui-table thead { display: none; }
@@ -2338,6 +2428,86 @@ dialog.sui-dialog-wide { max-width: 720px; }
 @container (min-width: 401px) {
   .sui-cq-row       { flex-direction: row; }
   .sui-cq-show      { display: initial; }
+}
+
+
+/* ==========================================================================
+   Dropzone (file upload area — CSS only, behaviour is BYOJS)
+   ========================================================================== */
+
+.sui-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sui-space-2);
+  padding: var(--sui-space-5) var(--sui-space-4);
+  border: 2px dashed var(--sui-border);
+  border-radius: var(--sui-radius-lg);
+  background: var(--sui-bg-primary);
+  color: var(--sui-text-muted);
+  font-size: var(--sui-text-small);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--sui-duration-fast) var(--sui-easing),
+              background var(--sui-duration-fast) var(--sui-easing);
+}
+.sui-dropzone:hover {
+  border-color: var(--sui-blue-primary);
+  color: var(--sui-text-secondary);
+}
+.sui-dropzone.is-dragover {
+  border-color: var(--sui-blue-primary);
+  border-style: solid;
+  background: var(--sui-blue-soft);
+  color: var(--sui-text-primary);
+}
+.sui-dropzone:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 2px;
+}
+.sui-dropzone svg {
+  width: 32px;
+  height: 32px;
+  color: var(--sui-text-muted);
+}
+.sui-dropzone:hover svg,
+.sui-dropzone.is-dragover svg {
+  color: var(--sui-blue-primary);
+}
+
+
+/* ==========================================================================
+   Timeline (activity feed — CSS only, content is BYOJS)
+   ========================================================================== */
+
+.sui-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.sui-timeline-item {
+  display: flex;
+  gap: var(--sui-space-3);
+  padding: var(--sui-space-3) 0;
+  position: relative;
+}
+.sui-timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--sui-space-3) / 2 + 14px);
+  top: calc(var(--sui-space-3) + 28px + var(--sui-space-1));
+  bottom: 0;
+  width: 2px;
+  background: var(--sui-border);
+}
+.sui-timeline-item > :first-child {
+  flex-shrink: 0;
+  z-index: 1;
+}
+.sui-timeline-content {
+  flex: 1;
+  min-width: 0;
 }
 
 
