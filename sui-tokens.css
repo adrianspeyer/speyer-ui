@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Design Tokens
- * Version: 2.1.1
+ * Version: 2.1.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * A lightweight, accessible token system for modern web applications.
@@ -112,6 +112,14 @@
   /* Layout */
   --sui-max-width:    1280px;
   --sui-touch-target: 44px;
+
+  /* Interactive — button/component backgrounds (overridable for brand theming) */
+  --sui-btn-primary-bg:       var(--sui-blue-primary);
+  --sui-btn-primary-bg-hover: var(--sui-blue-hover);
+  --sui-btn-danger-bg:        var(--sui-error-strong);
+  --sui-btn-danger-bg-hover:  #991B1B;
+  --sui-btn-success-bg:       var(--sui-success-strong);
+  --sui-btn-success-bg-hover: #116932;
 }
 
 
@@ -138,7 +146,7 @@
   --sui-warning-soft:   #422006;
   --sui-error:          #F87171;
   --sui-error-strong:   #EF4444;
-  --sui-error-soft:     #450A0A;
+  --sui-error-soft:     #380808;
   --sui-info:           #22D3EE;
   --sui-info-strong:    #22D3EE;
   --sui-info-soft:      #083344;
@@ -158,6 +166,14 @@
   --sui-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15);
   --sui-shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.50), 0 4px 12px rgba(0, 0, 0, 0.20);
   --sui-overlay: rgba(0, 0, 0, 0.65);
+
+  /* Interactive — contrast-safe overrides for dark backgrounds */
+  --sui-btn-primary-bg:       #2563EB;
+  --sui-btn-primary-bg-hover: #1D4ED8;
+  --sui-btn-danger-bg:        #B91C1C;
+  --sui-btn-danger-bg-hover:  #991B1B;
+  --sui-btn-success-bg:       #15803D;
+  --sui-btn-success-bg-hover: #116932;
 }
 
 
@@ -193,7 +209,7 @@
     --sui-warning-soft:   #422006;
     --sui-error:          #F87171;
     --sui-error-strong:   #EF4444;
-    --sui-error-soft:     #450A0A;
+    --sui-error-soft:     #380808;
     --sui-info:           #22D3EE;
     --sui-info-strong:    #22D3EE;
     --sui-info-soft:      #083344;
@@ -211,6 +227,14 @@
     --sui-shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.50), 0 4px 12px rgba(0, 0, 0, 0.20);
 
     --sui-overlay: rgba(0, 0, 0, 0.65);
+
+    /* Interactive — contrast-safe overrides for dark backgrounds */
+    --sui-btn-primary-bg:       #2563EB;
+    --sui-btn-primary-bg-hover: #1D4ED8;
+    --sui-btn-danger-bg:        #B91C1C;
+    --sui-btn-danger-bg-hover:  #991B1B;
+    --sui-btn-success-bg:       #15803D;
+    --sui-btn-success-bg-hover: #116932;
   }
 }
 

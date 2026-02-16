@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.1.1
+ * Version: 2.1.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -152,6 +152,54 @@ kbd {
 @media (min-width: 721px) {
   .sui-wrap { padding: 0 var(--sui-space-5); }
 }
+
+
+/* ==========================================================================
+   Screen Layout (mobile-first app shells)
+   ========================================================================== */
+
+/* Full-viewport flex column — the app shell skeleton */
+.sui-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh; /* dynamic viewport for iOS Safari */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sticky header with safe area inset */
+.sui-screen-header {
+  flex-shrink: 0;
+  padding: var(--sui-space-3) var(--sui-space-4);
+  padding-top: calc(var(--sui-space-3) + env(safe-area-inset-top, 0px));
+  background: var(--sui-bg-card);
+  border-bottom: 1px solid var(--sui-border);
+  z-index: 10;
+}
+
+/* Scrollable body — fills remaining space */
+.sui-screen-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Pinned footer with safe area inset */
+.sui-screen-footer {
+  flex-shrink: 0;
+  padding: var(--sui-space-3) var(--sui-space-4);
+  padding-bottom: calc(var(--sui-space-3) + env(safe-area-inset-bottom, 0px));
+  background: var(--sui-bg-card);
+  border-top: 1px solid var(--sui-border);
+}
+
+/* Multi-view screen switching (hidden by default, show with .is-active) */
+.sui-screen[hidden] { display: none; }
+.sui-screen:not(.is-active) { display: none; }
+.sui-screen.is-active { display: flex; }
+
+/* Escape hatch: standalone screen that doesn't need .is-active toggling */
+.sui-screen-solo { display: flex; }
 
 
 /* ==========================================================================
@@ -491,11 +539,11 @@ kbd {
 }
 
 .sui-btn-primary {
-  background: var(--sui-blue-primary);
+  background: var(--sui-btn-primary-bg);
   border-color: transparent;
   color: var(--sui-text-inverse);
 }
-.sui-btn-primary:hover { background: var(--sui-blue-hover); }
+.sui-btn-primary:hover { background: var(--sui-btn-primary-bg-hover); }
 .sui-btn-primary:active { background: var(--sui-blue-active); }
 
 .sui-btn-secondary {
@@ -516,18 +564,18 @@ kbd {
 }
 
 .sui-btn-danger {
-  background: var(--sui-error-strong);
+  background: var(--sui-btn-danger-bg);
   border-color: transparent;
   color: var(--sui-text-inverse);
 }
-.sui-btn-danger:hover { background: #991B1B; }
+.sui-btn-danger:hover { background: var(--sui-btn-danger-bg-hover); }
 
 .sui-btn-success {
-  background: var(--sui-success-strong);
+  background: var(--sui-btn-success-bg);
   border-color: transparent;
   color: var(--sui-text-inverse);
 }
-.sui-btn-success:hover { background: #116932; }
+.sui-btn-success:hover { background: var(--sui-btn-success-bg-hover); }
 
 .sui-btn-sm {
   min-height: 36px;
@@ -540,34 +588,19 @@ kbd {
 .sui-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .sui-btn-sm svg { width: 16px; height: 16px; }
 
-/* Dark mode: button backgrounds locked to WCAG AA-passing values (≥4.5:1 on white) */
-[data-theme="dark"] .sui-btn-primary { background: #2563EB; }
-[data-theme="dark"] .sui-btn-primary:hover { background: #1D4ED8; }
-[data-theme="dark"] .sui-btn-danger { background: #B91C1C; }
-[data-theme="dark"] .sui-btn-danger:hover { background: #991B1B; }
-[data-theme="dark"] .sui-btn-success { background: #15803D; }
-[data-theme="dark"] .sui-btn-success:hover { background: #116932; }
-
-/* Dark mode: progress-labeled backgrounds locked for white text (≥4.5:1) */
-[data-theme="dark"] .sui-progress-labeled .sui-progress-bar                          { background: #2563EB; }
-[data-theme="dark"] .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: #15803D; }
+/* Dark mode: progress-labeled backgrounds use brand tokens for white text (≥4.5:1) */
+[data-theme="dark"] .sui-progress-labeled .sui-progress-bar                          { background: var(--sui-btn-primary-bg); }
+[data-theme="dark"] .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: var(--sui-btn-success-bg); }
 [data-theme="dark"] .sui-progress-warning.sui-progress-labeled .sui-progress-bar     { background: #92400E; }
-[data-theme="dark"] .sui-progress-error.sui-progress-labeled   .sui-progress-bar     { background: #B91C1C; }
+[data-theme="dark"] .sui-progress-error.sui-progress-labeled   .sui-progress-bar     { background: var(--sui-btn-danger-bg); }
 [data-theme="dark"] .sui-progress-info.sui-progress-labeled    .sui-progress-bar     { background: #0E7490; }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .sui-btn-primary { background: #2563EB; }
-  :root:not([data-theme]) .sui-btn-primary:hover { background: #1D4ED8; }
-  :root:not([data-theme]) .sui-btn-danger { background: #B91C1C; }
-  :root:not([data-theme]) .sui-btn-danger:hover { background: #991B1B; }
-  :root:not([data-theme]) .sui-btn-success { background: #15803D; }
-  :root:not([data-theme]) .sui-btn-success:hover { background: #116932; }
-
   /* Progress-labeled backgrounds */
-  :root:not([data-theme]) .sui-progress-labeled .sui-progress-bar                          { background: #2563EB; }
-  :root:not([data-theme]) .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: #15803D; }
+  :root:not([data-theme]) .sui-progress-labeled .sui-progress-bar                          { background: var(--sui-btn-primary-bg); }
+  :root:not([data-theme]) .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: var(--sui-btn-success-bg); }
   :root:not([data-theme]) .sui-progress-warning.sui-progress-labeled .sui-progress-bar     { background: #92400E; }
-  :root:not([data-theme]) .sui-progress-error.sui-progress-labeled   .sui-progress-bar     { background: #B91C1C; }
+  :root:not([data-theme]) .sui-progress-error.sui-progress-labeled   .sui-progress-bar     { background: var(--sui-btn-danger-bg); }
   :root:not([data-theme]) .sui-progress-info.sui-progress-labeled    .sui-progress-bar     { background: #0E7490; }
 }
 
@@ -1323,8 +1356,8 @@ textarea.sui-input {
 }
 
 .sui-page-btn[aria-current="page"] {
-  background: var(--sui-blue-primary);
-  border-color: var(--sui-blue-primary);
+  background: var(--sui-btn-primary-bg);
+  border-color: var(--sui-btn-primary-bg);
   color: var(--sui-text-inverse);
 }
 
@@ -1346,11 +1379,6 @@ textarea.sui-input {
   font-weight: var(--sui-weight-semibold);
 }
 
-/* Dark mode: page-btn active — lock to passing blue */
-[data-theme="dark"] .sui-page-btn[aria-current="page"] { background: #2563EB; border-color: #2563EB; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .sui-page-btn[aria-current="page"] { background: #2563EB; border-color: #2563EB; }
-}
 
 
 /* ==========================================================================

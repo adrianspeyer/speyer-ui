@@ -9,7 +9,7 @@ A lightweight design system built around four constraints:
 
 Under 75KB minified. Zero required dependencies. Works with any framework or none.
 
-**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, prose (long-form typography), mark (search highlights), meta (metadata lines), toolbars, and a dark mode that works.
+**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, prose (long-form typography), mark (search highlights), meta (metadata lines), toolbars, screen layout (app shells), and a dark mode that works.
 
 **[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
@@ -59,7 +59,7 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 </html>
 ```
 
-> **Pin a version for production:** replace `@latest` with a tag like `@2.1.1` for stability.
+> **Pin a version for production:** replace `@latest` with a tag like `@2.1.2` for stability.
 
 ### Download
 
@@ -182,6 +182,10 @@ Wrap in `data-sui-tabs` to isolate multiple tab sets on one page. Pages without 
 ### Toolbar
 
 `sui-toolbar` — horizontal scrolling action bar with hidden scrollbar. `sui-toolbar-btn` for buttons, `sui-toolbar-sep` for separators, `aria-pressed="true"` for active state. Variants: `sui-toolbar-bordered`, `sui-toolbar-compact`.
+
+### Screen Layout
+
+`sui-screen` — full-viewport flex column (`100dvh`) for mobile-first app shells. `sui-screen-header` (sticky top with safe area inset), `sui-screen-body` (scrollable `flex:1`), `sui-screen-footer` (pinned bottom with safe area inset). Multi-view switching: inactive screens hidden by default, toggle with `.is-active`. Use `sui-screen-solo` for single-screen apps.
 
 ---
 
@@ -337,6 +341,18 @@ Borders are the default card separation. Shadows are opt-in via `sui-card-shadow
 | `--sui-shadow-md` | Cards (opt-in), popovers |
 | `--sui-shadow-lg` | Modals, dialogs |
 
+### Brand / Interactive Tokens
+
+Button and pagination backgrounds use overridable tokens. In light mode, they default to the blue/status color tokens. In dark mode, they lock to contrast-safe values (≥4.5:1 with white text). Override these to change your brand color while the contrast validator catches unsafe values.
+
+| Token | Light Default | Dark Default |
+|-------|--------------|-------------|
+| `--sui-btn-primary-bg` | `var(--sui-blue-primary)` | `#2563EB` |
+| `--sui-btn-danger-bg` | `var(--sui-error-strong)` | `#B91C1C` |
+| `--sui-btn-success-bg` | `var(--sui-success-strong)` | `#15803D` |
+
+Hover variants follow the same pattern (`--sui-btn-primary-bg-hover`, etc.).
+
 ---
 
 ## Typography
@@ -360,7 +376,7 @@ Borders are the default card separation. Shadows are opt-in via `sui-card-shadow
 
 ## Components
 
-SUI provides 45+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
+SUI provides 50+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
 
 ### Buttons
 
@@ -550,7 +566,7 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.1.1</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.1.2</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
@@ -716,7 +732,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.1.1`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.1.2`.
 
 ---
 
@@ -742,6 +758,8 @@ speyer-ui/
 │   ├── sui-tokens.min.css
 │   ├── sui-components.min.css
 │   └── sui.min.js
+├── scripts/
+│   └── preflight.js         ← Build-time accessibility validator
 ├── sui-tokens.css           ← Source (readable)
 ├── sui-components.css
 ├── sui.js
@@ -752,6 +770,17 @@ speyer-ui/
 ├── CONTRIBUTING.md
 └── LICENSE
 ```
+
+### Preflight Validator
+
+`scripts/preflight.js` runs automatically before every build (`npm run build`). It catches accessibility and quality regressions before they ship — 58 checks, zero dependencies:
+
+- **WCAG AA contrast** — 40+ foreground/background token pairs tested in both light and dark themes
+- **HTML/ARIA** — 12 rules mapped to axe-core audit IDs (button-name, image-alt, heading-order, link-name, duplicate-id, aria-hidden-focus, and more)
+- **Version consistency** — source file headers match package.json
+- **Dist hygiene** — only expected file types in dist/
+
+Run it standalone: `npm run preflight`
 
 ---
 

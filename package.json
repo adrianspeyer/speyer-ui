@@ -1,6 +1,6 @@
 {
   "name": "speyer-ui",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A lightweight, accessible design system for building clear, modern web applications. Color-blind friendly, mobile-first, AI-ready. Zero dependencies.",
   "author": "Adrian Speyer (https://github.com/adrianspeyer)",
   "license": "MIT",
@@ -32,7 +32,8 @@
   "scripts": {
     "minify:css": "cleancss -o dist/sui-tokens.min.css sui-tokens.css && cleancss -o dist/sui-components.min.css sui-components.css",
     "minify:js": "terser sui.js -o dist/sui.min.js --compress --mangle --comments '/^!/'",
-    "build": "npm run minify:css && npm run minify:js",
+    "preflight": "node scripts/preflight.js",
+    "build": "npm run preflight && npm run minify:css && npm run minify:js",
     "version": "npm run build && git add dist/"
   },
   "devDependencies": {

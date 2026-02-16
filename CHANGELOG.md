@@ -4,6 +4,26 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.1.2] — 2026-02-16
+
+### Added
+
+- **Screen Layout** (`sui-screen`, `sui-screen-header`, `sui-screen-body`, `sui-screen-footer`) — Full-viewport app shell for mobile-first apps. Flex column with `100dvh`, sticky header/footer with `env(safe-area-inset-*)`, scrollable body. Multi-view switching via `.is-active` / `hidden`. `sui-screen-solo` for single-screen apps.
+- **Preflight Validator** — Build-time script (`npm run preflight`) runs before every build. 58 checks across 5 categories: WCAG AA contrast (40+ token pairs, both themes), hardcoded overrides, HTML/ARIA (12 axe-core rules including button-name, image-alt, heading-order, link-name, duplicate-id, aria-hidden-focus), version consistency, and dist hygiene. Zero dependencies. Focus ring contrast tracked as advisory (AAA, not AA).
+- **Brand Tokens** (`--sui-btn-primary-bg`, `--sui-btn-danger-bg`, `--sui-btn-success-bg` + hover variants) — Overridable button/component background tokens. In light mode, defaults resolve to existing colors (`var(--sui-blue-primary)`, etc.). In dark mode, locked to contrast-safe hex values. Fixes the broken theming chain from v2.0.11 where hardcoded dark overrides bypassed `--sui-blue-primary`. Developers can now override brand colors and the preflight validator catches unsafe values.
+
+### Changed
+
+- Button, pagination, and progress-labeled components now use brand tokens instead of hardcoded hex values in dark mode. 18 dark override lines removed. Zero visual change for existing users.
+
+### Fixed
+
+- **Dark `--sui-error-soft`** token (#450A0A → #380808) — `--sui-error-strong` on `--sui-error-soft` now passes WCAG AA at 4.63:1 (was 4.29:1).
+- **ARIA labels** on icon-only buttons in Mobile App Shell recipe (bell button, segmented nav).
+- **Autocomplete** attribute on email inputs in demo page.
+
+---
+
 ## [2.1.1] — 2026-02-16
 
 ### Fixed — Accessibility Hardening (JS)
@@ -157,7 +177,7 @@ The gap between "design system" and "app framework" is content. Interface compon
 - **Hidden utility:** `sui-hidden` — `display: none !important`. Removes elements from layout and accessibility tree. Completes the two-tier visibility system alongside `sui-visually-hidden`. Resolves [#3](https://github.com/adrianspeyer/speyer-ui/issues/3).
 
 ### Changed
-- **CDN URLs default to `@latest`** — README, index.html prompts, and copilot guide now use `@latest` instead of pinned version tags. Keeps AI-generated markup current. Pinning note included for production use.
+- **CDN URLs default to `@latest`** — README, index.html prompts, and AI system prompts now use `@latest` instead of pinned version tags. Keeps AI-generated markup current. Pinning note included for production use.
 
 ### Lesson
 - AI coding assistants assume common utility classes exist. When `sui-hidden` was missing, AI-generated markup silently failed — panels stayed visible with no error. Ship the utilities AI expects.

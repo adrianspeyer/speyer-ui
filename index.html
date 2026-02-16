@@ -21,7 +21,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.1.1</span>
+          <span class="sui-version-pill">v2.1.2</span>
         </div>
       </div>
 
@@ -76,8 +76,8 @@
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
-            <div class="sui-kpi-value">45+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.1.1</span>
+            <div class="sui-kpi-value">50+</div>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.1.2</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -278,7 +278,7 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.1.1</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.1.2</span></span>
           </div>
         </div>
       </div>
@@ -320,7 +320,7 @@
             </div>
             <div class="sui-input-group sui-mb-3">
               <label class="sui-input-label" for="demo-email">Email Address</label>
-              <input class="sui-input sui-input-error" type="email" id="demo-email" value="invalid-email" aria-describedby="demo-email-err" aria-invalid="true">
+              <input class="sui-input sui-input-error" type="email" id="demo-email" autocomplete="email" value="invalid-email" aria-describedby="demo-email-err" aria-invalid="true">
               <span class="sui-input-error-msg" id="demo-email-err"><i data-lucide="x-circle"></i> Please enter a valid email address.</span>
             </div>
             <div class="sui-input-group">
@@ -549,6 +549,51 @@
             <div class="sui-toolbar-sep"></div>
             <button class="sui-toolbar-btn" type="button" title="Undo" aria-label="Undo"><i data-lucide="undo"></i></button>
             <button class="sui-toolbar-btn" type="button" title="Redo" aria-label="Redo"><i data-lucide="redo"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN LAYOUT -->
+      <div class="sui-section">
+        <h2>Screen Layout</h2>
+        <p class="sui-text-cap sui-mt-2">Full-viewport app shell for mobile-first apps. Sticky header, scrollable body, pinned footer with safe area insets.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card sui-card-flush" style="height:360px;overflow:hidden;display:flex;flex-direction:column;">
+            <div class="sui-kpi-label" style="padding:var(--sui-space-2) var(--sui-space-3);font-size:10px;">sui-screen mock</div>
+            <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-3);background:var(--sui-bg-card);border-bottom:1px solid var(--sui-border);">
+              <div class="sui-flex sui-items-center sui-gap-2">
+                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+                <strong style="font-size:var(--sui-text-small);">My App</strong>
+                <div style="flex:1;"></div>
+                <i data-lucide="settings" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
+              </div>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:var(--sui-space-3);background:var(--sui-bg-primary);">
+              <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 1</div>
+              <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 2</div>
+              <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 3</div>
+              <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 4</div>
+              <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 5</div>
+              <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 6</div>
+              <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 7</div>
+            </div>
+            <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-3);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
+              <div class="sui-flex sui-justify-around">
+                <i data-lucide="home" style="width:16px;height:16px;color:var(--sui-blue-primary);"></i>
+                <i data-lucide="search" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
+                <i data-lucide="user" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
+              </div>
+            </div>
+          </div>
+          <div class="sui-card">
+            <h3>Classes</h3>
+            <p class="sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-screen</code> — full-viewport flex column (<code>100dvh</code>)</p>
+            <p class="sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-screen-header</code> — sticky top with <code>safe-area-inset-top</code></p>
+            <p class="sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-screen-body</code> — scrollable area (<code>flex:1</code>)</p>
+            <p class="sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-screen-footer</code> — pinned bottom with <code>safe-area-inset-bottom</code></p>
+            <hr class="sui-divider sui-mt-3 sui-mb-3">
+            <h3>Multi-view</h3>
+            <p class="sui-mt-2" style="font-size:var(--sui-text-small);">Toggle screens with <code>.is-active</code>. Inactive screens are hidden. Use <code>sui-screen-solo</code> for single-screen apps.</p>
           </div>
         </div>
       </div>
@@ -1206,6 +1251,7 @@ Components (use SUI classes):
 - Mark: sui-mark (search highlight), sui-mark-current (active match)
 - Meta: sui-meta (dot-separated metadata line)
 - Toolbar: sui-toolbar + sui-toolbar-btn + sui-toolbar-sep, sui-toolbar-bordered, sui-toolbar-compact
+- Screen: sui-screen (100dvh app shell), sui-screen-header, sui-screen-body, sui-screen-footer, sui-screen-solo
 - Dropzone: sui-dropzone (CSS only, .is-dragover state, behaviour is bring-your-own JS)
 - Timeline: sui-timeline + sui-timeline-item + sui-timeline-content (activity feed, role="feed", optimised for sui-avatar-sm)
 - Avatars: sui-avatar + sui-avatar-sm/md/lg/xl (initials-first, optional photo with onerror fallback)
@@ -1252,7 +1298,7 @@ CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt;.
 Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
-Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Use sui-* component classes for everything.
+Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Use sui-* component classes for everything.
 Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -1298,7 +1344,8 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    sui-progress-labeled, sui-dropzone, sui-timeline, sui-prose (long-form typography),
    sui-mark (search highlight), sui-meta (metadata line), sui-toolbar (action bar),
    sui-grid-auto, sui-scroll-x, sui-flex-nowrap,
-   sui-container (container queries, opt-in), sui-avatar-xl, etc.
+   sui-container (container queries, opt-in), sui-avatar-xl,
+   sui-screen/sui-screen-header/sui-screen-body/sui-screen-footer (app shells), etc.
    Themes: light, dark, auto.
 7. Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;. Add id="main" to &lt;main&gt;.
 8. If a component isn't covered by SUI, mention it — contributions welcome.
@@ -1385,7 +1432,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
                 <div class="sui-input-group">
                   <label class="sui-input-label" for="recipe-contact">Contact</label>
                   <div class="sui-flex sui-gap-2">
-                    <input class="sui-input" type="email" id="recipe-contact" value="jane@acme.com">
+                    <input class="sui-input" type="email" id="recipe-contact" autocomplete="email" value="jane@acme.com">
                     <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Save</button>
                     <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Cancel</button>
                   </div>
@@ -1652,14 +1699,14 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
               <strong>Email notifications</strong>
               <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Receive updates about your account activity.</div>
             </div>
-            <label class="sui-toggle"><input type="checkbox" checked><span class="sui-toggle-slider"></span></label>
+            <label class="sui-toggle"><input type="checkbox" checked aria-label="Email notifications"><span class="sui-toggle-slider"></span></label>
           </div>
           <div class="recipe-settings-row">
             <div>
               <strong>Marketing emails</strong>
               <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Product announcements and feature updates.</div>
             </div>
-            <label class="sui-toggle"><input type="checkbox"><span class="sui-toggle-slider"></span></label>
+            <label class="sui-toggle"><input type="checkbox" aria-label="Marketing emails"><span class="sui-toggle-slider"></span></label>
           </div>
           <hr class="sui-divider">
           <h3>Appearance</h3>
@@ -1823,7 +1870,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
             <div class="sui-flex sui-items-center sui-gap-3">
               <i data-lucide="file-code" style="color:var(--sui-text-muted);flex-shrink:0;"></i>
               <div style="flex:1;min-width:0;">
-                <strong>SUI-COMPONENT-PROPOSALS.md</strong>
+                <strong>COMPONENT-ROADMAP.md</strong>
                 <div class="sui-meta sui-mt-1">
                   <span>2,100 words</span>
                   <span>Updated 3 days ago</span>
@@ -1863,6 +1910,94 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
 .recipe-doc-list-item { padding: var(--sui-space-3); border-bottom: 1px solid var(--sui-border); cursor: pointer; }
 .recipe-doc-list-item:hover { background: var(--sui-bg-elevated); }
 &lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: MOBILE APP SHELL -->
+      <div class="sui-section" id="recipe-app-shell">
+        <h2>Mobile App Shell</h2>
+        <p class="sui-text-cap sui-mt-2">Complete multi-screen mobile app skeleton with tab navigation. Composes from: <code>sui-screen</code>, <code>sui-screen-header</code>, <code>sui-screen-body</code>, <code>sui-screen-footer</code>, <code>sui-segmented</code>. Custom CSS: 0 lines.</p>
+        <div class="sui-card sui-card-flush sui-mt-4" style="height:400px;overflow:hidden;display:flex;flex-direction:column;border-radius:var(--sui-radius-lg);">
+          <div style="flex-shrink:0;padding:var(--sui-space-3) var(--sui-space-4);background:var(--sui-bg-card);border-bottom:1px solid var(--sui-border);">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <span class="sui-avatar sui-avatar-sm">MP</span>
+              <div>
+                <strong>MatchPoint</strong>
+                <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">AI Summit 2026</div>
+              </div>
+              <div style="flex:1;"></div>
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><i data-lucide="bell"></i></button>
+            </div>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:var(--sui-space-3);background:var(--sui-bg-primary);">
+            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
+              <div class="sui-flex sui-items-center sui-gap-3">
+                <span class="sui-avatar sui-avatar-md">EV</span>
+                <div style="flex:1;">
+                  <strong>Elena Vasquez</strong>
+                  <div class="sui-meta"><span>VP Sales</span><span>Acme Corp</span></div>
+                </div>
+                <span class="sui-badge sui-badge-success sui-badge-sm">92%</span>
+              </div>
+            </div>
+            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
+              <div class="sui-flex sui-items-center sui-gap-3">
+                <span class="sui-avatar sui-avatar-md">MJ</span>
+                <div style="flex:1;">
+                  <strong>Marcus Johnson</strong>
+                  <div class="sui-meta"><span>CTO</span><span>Globex</span></div>
+                </div>
+                <span class="sui-badge sui-badge-info sui-badge-sm">87%</span>
+              </div>
+            </div>
+            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
+              <div class="sui-flex sui-items-center sui-gap-3">
+                <span class="sui-avatar sui-avatar-md">LW</span>
+                <div style="flex:1;">
+                  <strong>Lin Wei</strong>
+                  <div class="sui-meta"><span>Director</span><span>Initech</span></div>
+                </div>
+                <span class="sui-badge sui-badge-neutral sui-badge-sm">74%</span>
+              </div>
+            </div>
+          </div>
+          <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-4);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
+            <div class="sui-segmented" role="radiogroup" aria-label="Navigation" data-sui-tabs style="width:100%;">
+              <button class="sui-segment" type="button" role="radio" aria-checked="true" aria-label="People" style="flex:1;"><i data-lucide="users" style="width:16px;height:16px;"></i></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Schedule" style="flex:1;"><i data-lucide="calendar" style="width:16px;height:16px;"></i></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Messages" style="flex:1;"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Profile" style="flex:1;"><i data-lucide="user" style="width:16px;height:16px;"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Each screen is a full-viewport flex column --&gt;
+&lt;div class="sui-screen is-active" data-screen="matches"&gt;
+  &lt;div class="sui-screen-header"&gt;
+    &lt;!-- Safe area inset handled automatically --&gt;
+    &lt;strong&gt;MatchPoint&lt;/strong&gt;
+  &lt;/div&gt;
+  &lt;div class="sui-screen-body"&gt;
+    &lt;!-- Scrollable content --&gt;
+    &lt;div class="sui-card sui-card-interactive"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="sui-screen-footer"&gt;
+    &lt;!-- Safe area inset handled automatically --&gt;
+    &lt;div class="sui-segmented"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Switch screens by toggling .is-active --&gt;
+&lt;div class="sui-screen" data-screen="schedule"&gt;...&lt;/div&gt;
+&lt;div class="sui-screen" data-screen="messages"&gt;...&lt;/div&gt;
+
+&lt;!-- For single-screen apps, use sui-screen-solo --&gt;
+&lt;div class="sui-screen sui-screen-solo"&gt;...&lt;/div&gt;
+
+&lt;!-- Custom CSS: 0 lines. All SUI classes. --&gt;</pre>
           </div>
         </div>
       </div>
@@ -1978,7 +2113,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada 🇨🇦</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.1.1</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.1.2</span></a>
     </footer>
   </main>
 
@@ -2016,7 +2151,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <p>This is a bottom sheet — a mobile-first slide-up drawer that handles safe areas and scroll trapping. Try pressing <kbd>Escape</kbd> or clicking the backdrop to close.</p>
         <div class="sui-input-group sui-mt-3">
           <label class="sui-input-label" for="sheet-email">Email address</label>
-          <input class="sui-input" type="email" id="sheet-email" placeholder="colleague@company.com">
+          <input class="sui-input" type="email" id="sheet-email" autocomplete="email" placeholder="colleague@company.com">
         </div>
         <div class="sui-alert sui-alert-info sui-mt-3" role="alert">
           <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
