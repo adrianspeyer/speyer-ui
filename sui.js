@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.0.11
+ * Version: 2.0.12
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -466,6 +466,108 @@ const SUI = (() => {
   };
 
   /* ====================================================================
+     Bottom Sheet
+     ==================================================================== */
+
+  const sheet = {
+    _active: null,
+    _previousFocus: null,
+
+    open(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+
+      this._previousFocus = document.activeElement;
+      el.classList.add('is-open');
+      el.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      this._active = el;
+
+      // Focus first focusable element in panel
+      const panel = el.querySelector('.sui-sheet-panel');
+      if (panel) {
+        const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', panel);
+        if (focusable.length) setTimeout(() => focusable[0].focus(), 50);
+      }
+
+      // Escape key handler
+      el._suiEscape = (e) => {
+        if (e.key === 'Escape') this.close(el);
+      };
+      el.addEventListener('keydown', el._suiEscape);
+    },
+
+    close(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+
+      el.classList.remove('is-open');
+      el.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      if (el._suiEscape) {
+        el.removeEventListener('keydown', el._suiEscape);
+        delete el._suiEscape;
+      }
+
+      if (this._active === el) this._active = null;
+      if (this._previousFocus) this._previousFocus.focus();
+    },
+
+    toggle(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+      el.classList.contains('is-open') ? this.close(el) : this.open(el);
+    }
+  };
+
+  /* ====================================================================
+     Segmented Control
+     ==================================================================== */
+
+  const segmented = {
+    init(container) {
+      const segments = $$('.sui-segment', container);
+      if (!segments.length) return;
+
+      // Enforce ARIA roles
+      if (!container.hasAttribute('role')) container.setAttribute('role', 'radiogroup');
+      segments.forEach(seg => {
+        if (!seg.hasAttribute('role')) seg.setAttribute('role', 'radio');
+        if (!seg.hasAttribute('tabindex')) {
+          seg.setAttribute('tabindex', seg.getAttribute('aria-checked') === 'true' ? '0' : '-1');
+        }
+      });
+
+      const select = (target) => {
+        segments.forEach(s => {
+          s.setAttribute('aria-checked', 'false');
+          s.setAttribute('tabindex', '-1');
+        });
+        target.setAttribute('aria-checked', 'true');
+        target.setAttribute('tabindex', '0');
+        target.focus();
+      };
+
+      segments.forEach(seg => seg.addEventListener('click', () => select(seg)));
+
+      // Arrow key navigation
+      container.addEventListener('keydown', e => {
+        const idx = segments.indexOf(document.activeElement);
+        if (idx < 0) return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          select(segments[(idx + 1) % segments.length]);
+        }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          select(segments[(idx - 1 + segments.length) % segments.length]);
+        }
+      });
+    }
+  };
+
+  /* ====================================================================
      Auto-init: scan for data-sui-* attributes
      ==================================================================== */
 
@@ -602,6 +704,31 @@ const SUI = (() => {
         );
       }
     });
+
+    // Bottom sheet triggers
+    $$('[data-sui-sheet]').forEach(btn => {
+      btn.addEventListener('click', () => sheet.open(btn.getAttribute('data-sui-sheet')));
+    });
+
+    // Bottom sheet close buttons
+    $$('.sui-sheet-close').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const s = btn.closest('.sui-sheet');
+        if (s) sheet.close(s);
+      });
+    });
+
+    // Bottom sheet backdrop click-to-close
+    $$('.sui-sheet').forEach(el => {
+      el.addEventListener('click', e => {
+        if (e.target === el) sheet.close(el);
+      });
+      // Set initial ARIA
+      if (!el.hasAttribute('aria-hidden')) el.setAttribute('aria-hidden', 'true');
+    });
+
+    // Segmented controls
+    $$('.sui-segmented').forEach(el => segmented.init(el));
   }
 
   // Run on DOM ready
@@ -625,6 +752,8 @@ const SUI = (() => {
     tooltip,
     avatar,
     copy,
+    sheet,
+    segmented,
     init
   };
 })();

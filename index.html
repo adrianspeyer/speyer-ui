@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speyer UI System — Accessibility as Architecture</title>
-  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Under 55KB minified. Made in Canada." />
+  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Under 65KB minified. Made in Canada." />
   <link rel="stylesheet" href="./sui-tokens.css" />
   <link rel="stylesheet" href="./sui-components.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +21,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.0.11</span>
+          <span class="sui-version-pill">v2.0.12</span>
         </div>
       </div>
 
@@ -63,7 +63,7 @@
           <p class="sui-text-cap sui-mt-2">
             Built around four constraints: accessibility is mandatory, no build tools required,
             components work with or without JS, and status is never communicated by color alone.
-            Under 55KB minified. Zero required dependencies.
+            Under 65KB minified. Zero required dependencies.
           </p>
         </div>
       </div>
@@ -74,7 +74,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">30+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.11</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.0.12</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -94,7 +94,7 @@
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">Bundle</div>
           <div class="sui-stat-row">
-            <div class="sui-kpi-value">&lt;55kb</div>
+            <div class="sui-kpi-value">&lt;65kb</div>
             <span class="sui-badge sui-badge-success"><i data-lucide="zap"></i>Minified</span>
           </div>
         </div>
@@ -275,7 +275,7 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.11</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.0.12</span></span>
           </div>
         </div>
       </div>
@@ -452,6 +452,57 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM SHEET -->
+      <div class="sui-section">
+        <h2>Bottom Sheet</h2>
+        <p class="sui-text-cap sui-mt-2">Mobile-first slide-up drawer. Handles safe areas, scroll trapping, and Escape key.</p>
+        <div class="sui-card sui-mt-4">
+          <button class="sui-btn sui-btn-primary" type="button" data-sui-sheet="#demoSheet"><i data-lucide="panel-bottom-open"></i>Open Bottom Sheet</button>
+        </div>
+      </div>
+
+      <!-- SEGMENTED CONTROL -->
+      <div class="sui-section">
+        <h2>Segmented Control</h2>
+        <p class="sui-text-cap sui-mt-2">Value picker with radio semantics. Arrow keys navigate. Not tabs — semantically distinct.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">View mode</div>
+          <div class="sui-segmented" role="radiogroup" aria-label="View mode">
+            <button class="sui-segment" type="button" role="radio" aria-checked="true"><i data-lucide="layout-grid"></i>Grid</button>
+            <button class="sui-segment" type="button" role="radio" aria-checked="false"><i data-lucide="list"></i>List</button>
+            <button class="sui-segment" type="button" role="radio" aria-checked="false"><i data-lucide="kanban"></i>Board</button>
+          </div>
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Billing period</div>
+          <div class="sui-segmented" role="radiogroup" aria-label="Billing period">
+            <button class="sui-segment" type="button" role="radio" aria-checked="true">Monthly</button>
+            <button class="sui-segment" type="button" role="radio" aria-checked="false">Annual</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHIP / TAG -->
+      <div class="sui-section">
+        <h2>Chips / Tags</h2>
+        <p class="sui-text-cap sui-mt-2">Visual pill component. Behaviour (add, remove, keyboard) is bring-your-own JS — same as icons.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Default chips</div>
+          <div class="sui-flex">
+            <span class="sui-chip"><i data-lucide="tag"></i>Design</span>
+            <span class="sui-chip">Frontend</span>
+            <span class="sui-chip">Accessibility<button class="sui-chip-remove" aria-label="Remove Accessibility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
+            <span class="sui-chip">React<button class="sui-chip-remove" aria-label="Remove React"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
+          </div>
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Colour variants</div>
+          <div class="sui-flex">
+            <span class="sui-chip sui-chip-success"><i data-lucide="check"></i>Approved</span>
+            <span class="sui-chip sui-chip-warning"><i data-lucide="clock"></i>Pending</span>
+            <span class="sui-chip sui-chip-error"><i data-lucide="x"></i>Rejected</span>
+            <span class="sui-chip sui-chip-info"><i data-lucide="info"></i>Review</span>
+            <span class="sui-chip sui-chip-pro"><i data-lucide="crown"></i>Premium</span>
           </div>
         </div>
       </div>
@@ -704,6 +755,80 @@
         </div>
       </div>
 
+      <!-- INTERACTIVE CARDS + LAYOUT UTILITIES -->
+      <div class="sui-section">
+        <h2>Layout Utilities</h2>
+        <p class="sui-text-cap sui-mt-2">Grid auto-fit, horizontal scroll, flex-nowrap, interactive cards, and container queries.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Interactive card (hover for elevation)</div>
+          <div class="sui-grid sui-grid-3">
+            <div class="sui-card sui-card-interactive" tabindex="0">
+              <div class="sui-info-row-title">Project Alpha</div>
+              <small>Click or tap to navigate. Hover reveals shadow.</small>
+            </div>
+            <div class="sui-card sui-card-interactive" tabindex="0">
+              <div class="sui-info-row-title">Project Beta</div>
+              <small>Keyboard-accessible with focus ring.</small>
+            </div>
+            <div class="sui-card sui-card-interactive" tabindex="0">
+              <div class="sui-info-row-title">Project Gamma</div>
+              <small>Composes with any card variant.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Grid auto-fit (flexible column count)</div>
+          <div class="sui-grid sui-grid-auto">
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Horizontal scroll (<code>sui-scroll-x</code>)</div>
+          <div class="sui-flex sui-flex-nowrap sui-scroll-x sui-gap-3">
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 1</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 2</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 3</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 4</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 5</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 6</small></div>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Container queries (<code>sui-container</code> opt-in)</div>
+          <div class="sui-grid sui-grid-2">
+            <div class="sui-container">
+              <div class="sui-card sui-card-muted">
+                <div class="sui-flex sui-cq-stack sui-gap-2 sui-items-center">
+                  <span class="sui-avatar sui-avatar-sm">CQ</span>
+                  <div>
+                    <div class="sui-info-row-title">Responsive to container</div>
+                    <small class="sui-cq-hide">This text hides in narrow containers.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sui-container">
+              <div class="sui-card sui-card-muted">
+                <div class="sui-flex sui-cq-stack sui-gap-2 sui-items-center">
+                  <span class="sui-avatar sui-avatar-sm">CQ</span>
+                  <div>
+                    <div class="sui-info-row-title">Same component</div>
+                    <small class="sui-cq-hide">Adapts to its container, not the viewport.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ================================================================
@@ -851,7 +976,12 @@ Components (use SUI classes):
 - Tooltip: sui-tooltip + sui-tooltip-content
 - Empty state: sui-empty + sui-empty-icon + sui-empty-title + sui-empty-text
 - Skeleton: sui-skeleton + sui-skeleton-text/heading/avatar/card
-- Layout: sui-grid, sui-grid-2/3/4, sui-section, sui-flex, sui-flex-col
+- Bottom sheet: sui-sheet + sui-sheet-panel/handle/header/body/footer (requires sui.js). SUI.sheet.open/close.
+- Segmented control: sui-segmented + sui-segment (role="radiogroup" + role="radio", requires sui.js)
+- Chip/Tag: sui-chip + sui-chip-remove (CSS only, behaviour is bring-your-own JS)
+- Interactive card: sui-card-interactive (clickable card with hover shadow elevation)
+- Layout: sui-grid, sui-grid-2/3/4, sui-grid-auto, sui-section, sui-flex, sui-flex-col, sui-flex-nowrap, sui-scroll-x
+- Container queries: sui-container (opt-in), sui-cq-stack, sui-cq-full, sui-cq-hide
 
 Accessibility (mandatory):
 - WCAG 2.1 AA contrast ratios
@@ -862,6 +992,7 @@ Accessibility (mandatory):
 - Any text hidden via display:none at any breakpoint needs aria-label backup on its parent
 - Never use aria-selected without role="tab"
 - Respect prefers-reduced-motion
+- Skip link pattern: add a skip link as the first child of &lt;body&gt;: &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; and add id="main" to your &lt;main&gt; element
 
 Icons: SUI works with any icon library. Always add aria-hidden="true" on decorative icons. Always pair icons with visible text labels — never use an icon alone to communicate meaning.
 
@@ -891,7 +1022,8 @@ CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt;.
 Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
-Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Use sui-* component classes for everything.
+Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Use sui-* component classes for everything.
+Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
@@ -931,9 +1063,12 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
 6. Use SUI component classes: sui-btn, sui-card, sui-badge, sui-alert, sui-avatar,
    sui-toggle, sui-progress, sui-accordion, sui-dropdown, sui-dialog (native modal),
    sui-modal (legacy), sui-tooltip, sui-breadcrumb, sui-pagination, sui-empty,
-   sui-skeleton, sui-table, etc.
-7. If a component isn't covered by SUI, mention it — contributions welcome.
-8. Reference: https://github.com/adrianspeyer/speyer-ui</pre>
+   sui-skeleton, sui-table, sui-sheet (bottom sheet), sui-segmented (segmented control),
+   sui-chip (tag/chip), sui-card-interactive, sui-grid-auto, sui-scroll-x, sui-flex-nowrap,
+   sui-container (container queries, opt-in), etc.
+7. Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;. Add id="main" to &lt;main&gt;.
+8. If a component isn't covered by SUI, mention it — contributions welcome.
+9. Reference: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
     </section>
@@ -945,7 +1080,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada 🇨🇦</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.11</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.0.12</span></a>
     </footer>
   </main>
 
@@ -970,6 +1105,35 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.modal.close('#demoModal'); SUI.toast.success('Confirmed!', 'Action completed successfully.')">Confirm</button>
     </div>
   </dialog>
+
+  <!-- ===== BOTTOM SHEET (outside main for stacking context) ===== -->
+  <div class="sui-sheet" id="demoSheet" aria-hidden="true" aria-label="Demo bottom sheet">
+    <div class="sui-sheet-panel">
+      <div class="sui-sheet-handle"></div>
+      <div class="sui-sheet-header">
+        <span class="sui-sheet-title">Share Project</span>
+        <button class="sui-sheet-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="sui-sheet-body">
+        <p>This is a bottom sheet — a mobile-first slide-up drawer that handles safe areas and scroll trapping. Try pressing <kbd>Escape</kbd> or clicking the backdrop to close.</p>
+        <div class="sui-input-group sui-mt-3">
+          <label class="sui-input-label" for="sheet-email">Email address</label>
+          <input class="sui-input" type="email" id="sheet-email" placeholder="colleague@company.com">
+        </div>
+        <div class="sui-alert sui-alert-info sui-mt-3" role="alert">
+          <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+          <div class="sui-alert-content">
+            <div class="sui-alert-title">Safe area aware</div>
+            <div>Padding respects <code>env(safe-area-inset-bottom)</code> for iOS notch devices.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sui-sheet-footer">
+        <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.sheet.close('#demoSheet')">Cancel</button>
+        <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.sheet.close('#demoSheet'); SUI.toast.success('Shared!', 'Invitation sent successfully.')">Share</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== SCRIPTS ===== -->
   <script src="./sui.js"></script>

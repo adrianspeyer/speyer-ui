@@ -4,6 +4,29 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.0.12] — 2026-02-15
+
+### Added — New Components
+- **Bottom Sheet / Drawer:** `sui-sheet` — mobile-first slide-up modal with handle bar. Handles `env(safe-area-inset-bottom)` for iOS safe areas, `overscroll-behavior: contain` for scroll trapping, Escape key to close, backdrop click to close. JS: `SUI.sheet.open()` / `SUI.sheet.close()`. Auto-init via `data-sui-sheet="#id"`.
+- **Segmented Control:** `sui-segmented` + `sui-segment` — value picker with `role="radiogroup"` + `role="radio"` semantics. Arrow key navigation (Left/Right/Up/Down). Not tabs — semantically distinct. JS handles ARIA state and keyboard nav.
+- **Chip / Tag:** `sui-chip` + `sui-chip-remove` — visual pill component with optional × remove button. Colour variants: `sui-chip-success`, `sui-chip-warning`, `sui-chip-error`, `sui-chip-info`, `sui-chip-pro`. CSS only — behaviour (keyboard add/remove, deduplication) is bring-your-own JS.
+- **Interactive Card:** `sui-card-interactive` — clickable card modifier with `cursor: pointer`, hover shadow elevation, and focus ring. Composes with any card variant.
+
+### Added — Layout Utilities
+- **Grid auto-fit:** `sui-grid-auto` — `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))`. Flexible column count without predefined 2/3/4 variants.
+- **Horizontal scroll:** `sui-scroll-x` — `overflow-x: auto; -webkit-overflow-scrolling: touch`. For kanban boards, horizontal card lists, and wide content.
+- **Flex no-wrap:** `sui-flex-nowrap` — modifier for `sui-flex` to prevent wrapping. Pairs with `sui-scroll-x` for scrollable rows.
+- **Container queries (opt-in):** `sui-container` enables `container-type: inline-size`. `@container` variants: `sui-cq-stack`, `sui-cq-full`, `sui-cq-hide`, `sui-cq-row`, `sui-cq-show`, `sui-cq-text-sm`. Additive — nothing existing changes.
+
+### Added — Documentation
+- **Badge-count usage guidance (README):** Documented `aria-label` requirement — `sui-badge-count` must be paired with a parent element providing context. Count element should have `aria-hidden="true"`.
+- **Skip link pattern (README + AI prompts):** Documented `sui-visually-hidden` skip link pattern. Added to all three AI prompts in index.html so AI-generated pages include it.
+
+### Lesson
+- Container queries are the right abstraction for component-level responsiveness, but must be opt-in. Forcing `container-type` on existing components would break any layout that depends on viewport-relative sizing. The `sui-container` class lets developers choose where to apply it — additive, nothing breaks.
+
+---
+
 ## [2.0.11] — 2026-02-15
 
 ### Fixed — WCAG AA Contrast (color-contrast audit: 100/100 light + dark)

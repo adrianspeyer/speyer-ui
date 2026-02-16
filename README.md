@@ -7,9 +7,9 @@ A lightweight design system built around four constraints:
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
 4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
-Under 55KB minified. Zero required dependencies. Works with any framework or none.
+Under 65KB minified. Zero required dependencies. Works with any framework or none.
 
-**What you get:** buttons, cards, badges, alerts, avatars, toggles, tables, forms, progress bars, modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, and a dark mode that works.
+**What you get:** buttons, cards, badges, alerts, avatars, toggles, tables, forms, progress bars, modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, and a dark mode that works.
 
 **[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
@@ -59,7 +59,7 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 </html>
 ```
 
-> **Pin a version for production:** replace `@latest` with a tag like `@2.0.11` for stability.
+> **Pin a version for production:** replace `@latest` with a tag like `@2.0.12` for stability.
 
 ### Download
 
@@ -109,10 +109,10 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
 | `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | ~5KB | Yes |
-| `sui-components.css` | Component classes built from tokens | ~38KB | Yes |
-| `sui.js` | Interactive behaviours (modals, toasts, dropdowns) | ~12KB | **No** |
+| `sui-components.css` | Component classes built from tokens | ~42KB | Yes |
+| `sui.js` | Interactive behaviours (modals, toasts, dropdowns, sheets) | ~14KB | **No** |
 
-**Core:** under 55KB (tokens + components + JS). Zero dependencies.
+**Core:** under 65KB (tokens + components + JS). Zero dependencies.
 
 CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, and accordion. Components render correctly without JS — they just won't open/close/animate.
 
@@ -199,7 +199,9 @@ Tested with Chrome Lighthouse (Accessibility audit) — 100/100 in both light an
 | Tabs | Focus | Activate | — | Left/Right switch |
 | Accordion | Focus trigger | Toggle panel | — | — |
 | Modal | Trapped inside | Activate buttons | Close | — |
+| Bottom Sheet | Focus inside | Activate buttons | Close | — |
 | Dropdown | Focus trigger | Open/select item | Close | Up/Down navigate |
+| Segmented | Focus active | Select | — | Left/Right/Up/Down switch |
 | Tooltip | Focus trigger shows | — | — | — |
 | Pagination | Focus each button | Navigate | — | — |
 
@@ -298,7 +300,7 @@ Borders are the default card separation. Shadows are opt-in via `sui-card-shadow
 
 ## Components
 
-SUI provides 25+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
+SUI provides 30+ components. All built from design tokens. Code examples for every component are on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Components tab.
 
 ### Buttons
 
@@ -381,13 +383,99 @@ Accordion · Dropdown · Modal (native `<dialog>` recommended, legacy overlay su
 
 Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`sui-embed`)
 
+### Bottom Sheet / Drawer
+
+`sui-sheet` · `sui-sheet-panel` · `sui-sheet-handle` · `sui-sheet-header` · `sui-sheet-title` · `sui-sheet-body` · `sui-sheet-footer` · `sui-sheet-close`
+
+Mobile-first slide-up drawer. Handles `env(safe-area-inset-bottom)` for iOS notch, `overscroll-behavior: contain` for scroll trapping, Escape key to close, backdrop click to close. Requires `sui.js`.
+
+```html
+<div class="sui-sheet" id="mySheet" aria-hidden="true" aria-label="Share project">
+  <div class="sui-sheet-panel">
+    <div class="sui-sheet-handle"></div>
+    <div class="sui-sheet-header">
+      <span class="sui-sheet-title">Share Project</span>
+      <button class="sui-sheet-close sui-btn sui-btn-ghost sui-btn-sm" aria-label="Close">✕</button>
+    </div>
+    <div class="sui-sheet-body">
+      <p>Sheet content goes here.</p>
+    </div>
+    <div class="sui-sheet-footer">
+      <button class="sui-btn sui-btn-ghost" onclick="SUI.sheet.close('#mySheet')">Cancel</button>
+      <button class="sui-btn sui-btn-primary">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Trigger -->
+<button data-sui-sheet="#mySheet">Open Sheet</button>
+```
+
+### Segmented Control
+
+`sui-segmented` · `sui-segment`
+
+Value picker with `role="radiogroup"` + `role="radio"` semantics. Arrow keys navigate between segments. Not tabs — semantically distinct. Requires `sui.js` for keyboard navigation and ARIA state management.
+
+```html
+<div class="sui-segmented" role="radiogroup" aria-label="View mode">
+  <button class="sui-segment" role="radio" aria-checked="true">Grid</button>
+  <button class="sui-segment" role="radio" aria-checked="false">List</button>
+  <button class="sui-segment" role="radio" aria-checked="false">Board</button>
+</div>
+```
+
+### Chip / Tag
+
+`sui-chip` · `sui-chip-remove` · Status variants: `sui-chip-success` · `sui-chip-warning` · `sui-chip-error` · `sui-chip-info` · `sui-chip-pro`
+
+Visual pill component. CSS only — behaviour (keyboard add/remove, deduplication) is bring-your-own JS, same philosophy as icons.
+
+```html
+<span class="sui-chip">Design</span>
+<span class="sui-chip sui-chip-success">Approved</span>
+<span class="sui-chip">
+  React
+  <button class="sui-chip-remove" aria-label="Remove React">✕</button>
+</span>
+```
+
+### Interactive Card
+
+`sui-card-interactive` — modifier that adds `cursor: pointer` and hover shadow elevation. Compose with any card variant. Add `tabindex="0"` for keyboard accessibility when the card isn't wrapped in a link.
+
+### Badge Count Usage
+
+When using `sui-badge-count`, always pair with a parent element that provides context via `aria-label`. The count element should have `aria-hidden="true"` since the parent's label conveys the full meaning.
+
+```html
+<span class="sui-badge-overlay">
+  <button aria-label="Notifications, 3 unread">🔔</button>
+  <span class="sui-badge-count" aria-hidden="true">3</span>
+</span>
+```
+
+### Skip Link Pattern
+
+Add a skip link as the first child of `<body>` using `sui-visually-hidden`. The link becomes visible when focused (keyboard users tabbing into the page).
+
+```html
+<body>
+  <a href="#main" class="sui-visually-hidden">Skip to main content</a>
+  <!-- header, nav, etc. -->
+  <main id="main">
+    <!-- page content -->
+  </main>
+</body>
+```
+
 ### Prose & Typography
 
 Lists (`ul`, `ol`) · Blockquote · Figure/figcaption · Inline `code` · `kbd` keyboard input · Responsive images (`img { max-width: 100% }`)
 
 ### Layout & Utilities
 
-Grid (`sui-grid-2/3/4/sidebar`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`) · Visibility (`sui-hidden`, `sui-visually-hidden`)
+Grid (`sui-grid-2/3/4/sidebar/auto`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`, `sui-flex-nowrap`) · Scroll (`sui-scroll-x`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`) · Visibility (`sui-hidden`, `sui-visually-hidden`) · Container queries (`sui-container`, `sui-cq-stack`, `sui-cq-full`, `sui-cq-hide`, `sui-cq-row`, `sui-cq-show`)
 
 ### Radius Utilities
 
@@ -402,7 +490,7 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.11</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.0.12</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
@@ -532,6 +620,7 @@ Optional toolkit. Auto-initializes via `data-sui-*` attributes.
 |-----------|--------|
 | `data-sui-theme` | Toggles light/dark/auto on click |
 | `data-sui-modal="#id"` | Opens modal on click |
+| `data-sui-sheet="#id"` | Opens bottom sheet on click |
 | `data-sui-copy="#id"` | Copies element text on click |
 | `data-sui-dropdown-trigger` | Opens parent dropdown on click |
 
@@ -542,6 +631,8 @@ SUI.theme.set('dark')                          // 'light', 'dark', 'auto'
 SUI.theme.toggle()                             // Cycles modes
 SUI.modal.open('#id')                          // Native <dialog> or legacy overlay
 SUI.modal.close('#id')                         // Works with both patterns
+SUI.sheet.open('#id')                          // Bottom sheet
+SUI.sheet.close('#id')                         // Close bottom sheet
 SUI.toast.success('Saved!', 'Details here')    // Auto-dismiss, stackable
 SUI.toast.error('Failed', 'Try again')
 SUI.dropdown.toggle(element)                   // Click toggle, outside-click close
@@ -565,7 +656,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.11`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.0.12`.
 
 ---
 

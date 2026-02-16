@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.0.11
+ * Version: 2.0.12
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -167,6 +167,10 @@ kbd {
 .sui-grid-3 { grid-template-columns: 1fr; }
 .sui-grid-4 { grid-template-columns: 1fr; }
 .sui-grid-sidebar { grid-template-columns: 1fr; }
+
+.sui-grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
 
 @media (min-width: 721px) {
   .sui-grid-2 { grid-template-columns: 1fr 1fr; }
@@ -405,6 +409,21 @@ kbd {
 .sui-card-flush { padding: 0; }
 .sui-card-muted { background: var(--sui-bg-elevated); }
 .sui-card-shadow { box-shadow: var(--sui-shadow-md); }
+
+.sui-card-interactive {
+  cursor: pointer;
+  transition: box-shadow var(--sui-duration-fast) var(--sui-easing),
+              transform var(--sui-duration-fast) var(--sui-easing);
+}
+.sui-card-interactive:hover {
+  box-shadow: var(--sui-shadow-md);
+  transform: translateY(-2px);
+}
+.sui-card-interactive:active { transform: translateY(0); }
+.sui-card-interactive:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 2px;
+}
 
 .sui-card-header {
   padding: var(--sui-space-4);
@@ -1992,9 +2011,15 @@ dialog.sui-dialog-wide { max-width: 720px; }
    ========================================================================== */
 
 .sui-flex { display: flex; flex-wrap: wrap; gap: 10px; }
+.sui-flex-nowrap { flex-wrap: nowrap; }
 .sui-flex-col { display: flex; flex-direction: column; }
 .sui-flex-between { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .sui-flex-center { display: flex; justify-content: center; }
+
+.sui-scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
 .sui-items-start  { align-items: flex-start; }
 .sui-items-center { align-items: center; }
@@ -2090,6 +2115,231 @@ dialog.sui-dialog-wide { max-width: 720px; }
 .sui-hidden {
   display: none !important;
 }
+
+/* ==========================================================================
+   Bottom Sheet / Drawer
+   ========================================================================== */
+
+.sui-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: var(--sui-z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--sui-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--sui-duration-normal) var(--sui-easing),
+              visibility var(--sui-duration-normal) var(--sui-easing);
+}
+
+.sui-sheet.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sui-sheet-panel {
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  background: var(--sui-bg-card);
+  border-radius: var(--sui-radius-lg) var(--sui-radius-lg) 0 0;
+  border: 1px solid var(--sui-border);
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  transform: translateY(100%);
+  transition: transform var(--sui-duration-normal) var(--sui-easing);
+}
+
+.sui-sheet.is-open .sui-sheet-panel {
+  transform: translateY(0);
+}
+
+.sui-sheet-handle {
+  display: flex;
+  justify-content: center;
+  padding: var(--sui-space-2) 0;
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.sui-sheet-handle::before {
+  content: '';
+  width: 36px;
+  height: 4px;
+  border-radius: var(--sui-radius-full);
+  background: var(--sui-border);
+}
+
+.sui-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sui-space-4) var(--sui-space-3);
+  gap: var(--sui-space-2);
+  flex-shrink: 0;
+}
+
+.sui-sheet-title {
+  font-size: var(--sui-text-h3);
+  font-weight: var(--sui-weight-semibold);
+  line-height: var(--sui-leading-heading);
+}
+
+.sui-sheet-body {
+  padding: 0 var(--sui-space-4) var(--sui-space-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.sui-sheet-footer {
+  padding: var(--sui-space-3) var(--sui-space-4);
+  padding-bottom: calc(var(--sui-space-3) + env(safe-area-inset-bottom, 0));
+  border-top: 1px solid var(--sui-border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+
+/* ==========================================================================
+   Segmented Control
+   ========================================================================== */
+
+.sui-segmented {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: var(--sui-radius-md);
+  border: 1px solid var(--sui-border);
+  background: var(--sui-bg-elevated);
+  gap: 2px;
+}
+
+.sui-segment {
+  min-height: 36px;
+  padding: 0 var(--sui-space-3);
+  border-radius: 9px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--sui-text-secondary);
+  font-family: var(--sui-font-primary);
+  font-size: var(--sui-text-small);
+  font-weight: var(--sui-weight-semibold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sui-space-2);
+  cursor: pointer;
+  transition: background var(--sui-duration-fast) var(--sui-easing),
+              color var(--sui-duration-fast) var(--sui-easing),
+              border-color var(--sui-duration-fast) var(--sui-easing);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.sui-segment:hover { color: var(--sui-text-primary); }
+
+.sui-segment[aria-checked="true"] {
+  background: var(--sui-bg-card);
+  border-color: var(--sui-border);
+  color: var(--sui-text-primary);
+  box-shadow: var(--sui-shadow-sm);
+}
+
+.sui-segment:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 2px;
+}
+
+.sui-segment svg { width: 16px; height: 16px; }
+
+
+/* ==========================================================================
+   Chip / Tag
+   ========================================================================== */
+
+.sui-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sui-space-1);
+  padding: var(--sui-space-1) var(--sui-space-2);
+  border-radius: var(--sui-radius-full);
+  border: 1px solid var(--sui-border);
+  background: var(--sui-bg-elevated);
+  color: var(--sui-text-primary);
+  font-family: var(--sui-font-primary);
+  font-size: var(--sui-text-small);
+  font-weight: var(--sui-weight-regular);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.sui-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.sui-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--sui-radius-full);
+  border: none;
+  background: transparent;
+  color: var(--sui-text-muted);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background var(--sui-duration-fast) var(--sui-easing),
+              color var(--sui-duration-fast) var(--sui-easing);
+}
+
+.sui-chip-remove:hover {
+  background: var(--sui-error-soft);
+  color: var(--sui-error);
+}
+
+.sui-chip-remove:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 1px;
+}
+
+.sui-chip-remove svg { width: 12px; height: 12px; }
+
+/* Chip colour variants */
+.sui-chip-success { background: var(--sui-success-soft); border-color: var(--sui-success); color: var(--sui-success-strong); }
+.sui-chip-warning { background: var(--sui-warning-soft); border-color: var(--sui-warning); color: var(--sui-warning-strong); }
+.sui-chip-error   { background: var(--sui-error-soft);   border-color: var(--sui-error);   color: var(--sui-error-strong); }
+.sui-chip-info    { background: var(--sui-info-soft);     border-color: var(--sui-info);    color: var(--sui-info-strong); }
+.sui-chip-pro     { background: var(--sui-pro-soft);      border-color: var(--sui-pro);     color: var(--sui-pro-strong); }
+
+
+/* ==========================================================================
+   Container Queries (opt-in)
+   ========================================================================== */
+
+.sui-container { container-type: inline-size; }
+
+@container (max-width: 400px) {
+  .sui-cq-stack     { flex-direction: column; }
+  .sui-cq-full      { width: 100%; }
+  .sui-cq-hide      { display: none; }
+  .sui-cq-text-sm   { font-size: var(--sui-text-small); }
+}
+
+@container (min-width: 401px) {
+  .sui-cq-row       { flex-direction: row; }
+  .sui-cq-show      { display: initial; }
+}
+
 
 /* ==========================================================================
    High Contrast Overrides
