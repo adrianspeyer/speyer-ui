@@ -1191,9 +1191,9 @@
 Fetch the official SUI CSS and JS from CDN:
 - Tokens: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css
 - Components: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
-- JS (optional): https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
+- JS (optional, defer): https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
 
-Place CSS &lt;link&gt; tags in &lt;head&gt;. Place all &lt;script&gt; tags before &lt;/body&gt; so the DOM is ready.
+Place CSS &lt;link&gt; tags in &lt;head&gt;. Place &lt;script&gt; tags before &lt;/body&gt; with the defer attribute.
 
 Icons — SUI has no icon dependency. Add any icon library you prefer (Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG). Example with Lucide:
 &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
@@ -1294,7 +1294,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <pre id="promptMinimal" class="sui-code-block">Use the Speyer UI System (SUI).
 CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css and sui-components.min.css
 Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
-CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt;.
+CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt; with defer.
 Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
@@ -1319,7 +1319,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js (optional, for modals/toasts/dropdowns)
    Or readable source from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/
-   CSS &lt;link&gt; tags go in &lt;head&gt;. All &lt;script&gt; tags go before &lt;/body&gt;.
+   CSS &lt;link&gt; tags go in &lt;head&gt;. &lt;script&gt; tags go before &lt;/body&gt; with defer.
 2. Icons: SUI has no icon dependency. Add any icon library the user prefers (Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG). Ask if they have a preference.
 3. Ask the user: "Would you like light mode, dark mode, or both?"
 4. Apply all CSS custom properties (--sui- prefix) and component classes.

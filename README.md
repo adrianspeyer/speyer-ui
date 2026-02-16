@@ -17,6 +17,23 @@ Built for internal tools, SaaS dashboards, and lightweight web applications.
 
 ---
 
+## Table of Contents
+
+- [Why This Exists](#why-this-exists)
+- [Quick Start](#quick-start)
+- [Architecture](#architecture)
+- [Components](#components)
+- [Design Tokens](#design-tokens)
+- [Recipes](#recipes)
+- [JavaScript API](#javascript-api-suijs)
+- [Accessibility](#accessibility)
+- [AI Integration](#ai-integration)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
 ## Why This Exists
 
 I'm colour blind. When I started using AI coding assistants to build web applications, every project was inconsistent and depended on the AI's decisions. Sometimes it produced interfaces that relied on colour to communicate status, or the readability and contrast were way off. I got tired of having to manually go back and fix things and thought there had to be a better way.
@@ -50,7 +67,7 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
   <!-- Your content here -->
 
   <!-- SUI + Icons — go before </body> so the DOM is ready -->
-  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
 
   <!-- Icons — any library works. Lucide shown here. -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -71,7 +88,7 @@ Download the [latest release](https://github.com/adrianspeyer/speyer-ui/releases
 <link rel="stylesheet" href="sui-components.css">
 
 <!-- Scripts before </body> -->
-<script src="sui.js"></script>
+<script src="sui.js" defer></script>
 
 <!-- Icons — bring your own. Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG. -->
 ```
@@ -137,241 +154,6 @@ SUI's accessibility rule (never rely on colour alone — pair icons with text la
 <svg class="..." viewBox="0 0 24 24">...</svg>
 ```
 
-### Dependencies
-
-SUI has **no required dependencies** — no icon library, no JavaScript framework, no build step. Add whichever icon library you prefer to your HTML.
-
----
-
-### Avatar XL
-
-`sui-avatar-xl` — 80px avatar for profile pages, account settings, and user headers.
-
-### Table Interactive + Sortable
-
-`sui-table-interactive` — clickable rows with `cursor: pointer` and focus ring. Developer adds `tabindex="0"`, `role="link"`, `aria-label`, and click handler. `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Developer toggles `data-sort` attribute value on click.
-
-### Progress Labeled
-
-`sui-progress-labeled` + `sui-progress-text` — text inside the bar. Contrast-safe in both themes.
-
-### Dropzone
-
-`sui-dropzone` — file upload area. CSS only — drag-and-drop JS is bring-your-own.
-
-### Timeline
-
-`sui-timeline` + `sui-timeline-item` + `sui-timeline-content` — activity feed. Optimised for `sui-avatar-sm`. Container: `role="feed"`, items: `role="article"`.
-
-### Scoped Tabs
-
-Wrap in `data-sui-tabs` to isolate multiple tab sets on one page. Pages without it work as before.
-
-### Prose
-
-`sui-prose` — long-form typography for articles, docs, and rendered Markdown. Covers headings (h1–h6 with scroll-margin-top), paragraphs, links, lists, blockquotes, code blocks, tables, images, horizontal rules, and task list checkboxes. Size variants: `sui-prose-sm` (15px), default (18px), `sui-prose-lg` (20px). Width: `sui-prose-narrow` (680px), `sui-prose-wide` (900px). Overridable via CSS custom properties (`--sui-prose-font`, `--sui-prose-size`, `--sui-prose-leading`).
-
-### Mark
-
-`sui-mark` — search result highlighting. `sui-mark-current` for the active match. Automatic dark mode adaptation and print suppression.
-
-### Meta
-
-`sui-meta` — dot-separated metadata line. Separator added via CSS `::before` — HTML stays semantic.
-
-### Toolbar
-
-`sui-toolbar` — horizontal scrolling action bar with hidden scrollbar. `sui-toolbar-btn` for buttons, `sui-toolbar-sep` for separators, `aria-pressed="true"` for active state. Variants: `sui-toolbar-bordered`, `sui-toolbar-compact`.
-
-### Screen Layout
-
-`sui-screen` — full-viewport flex column (`100dvh`) for mobile-first app shells. `sui-screen-header` (sticky top with safe area inset), `sui-screen-body` (scrollable `flex:1`), `sui-screen-footer` (pinned bottom with safe area inset). Multi-view switching: inactive screens hidden by default, toggle with `.is-active`. Use `sui-screen-solo` for single-screen apps.
-
----
-
-## Recipes
-
-SUI ships components. You build patterns. These recipes show common application layouts composed from SUI primitives with minimal custom CSS.
-
-| Recipe | What It Is | Custom CSS | Demo |
-|--------|-----------|-----------|------|
-| Inline Edit | Click-to-edit fields with ARIA | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-inline-edit) |
-| Kanban Board | Horizontal scrolling card columns | ~6 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-kanban) |
-| Stepper / Wizard | Multi-step progress indicator | ~15 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-stepper) |
-| Split Pane | Master-detail list + panel layout | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-split-pane) |
-| Settings | Preferences page with toggles + controls | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-settings) |
-
-> **Components vs Recipes:** Components ship in the SUI bundle. Recipes are documented patterns that compose those components with minimal custom CSS. Recipes are starting points — modify to fit your app.
-
----
-
-## Accessibility Evidence
-
-Here is a quick review of SUI vs WCAG 2.1 AA compliance.
-
-### Contrast Ratios (Light Mode)
-
-| Foreground | Background | Ratio | WCAG |
-|-----------|------------|-------|------|
-| `--sui-text-primary` (#0F172A) | `--sui-bg-card` (#FFFFFF) | 17.9:1 | AAA |
-| `--sui-text-primary` (#0F172A) | `--sui-bg-primary` (#F9FBFD) | 17.2:1 | AAA |
-| `--sui-text-secondary` (#475569) | `--sui-bg-card` (#FFFFFF) | 7.6:1 | AAA |
-| `--sui-success-strong` (#15803D) | `--sui-success-soft` (#F0FDF4) | 4.8:1 | AA |
-| `--sui-warning-strong` (#92400E) | `--sui-warning-soft` (#FFFBEB) | 6.8:1 | AA |
-| `--sui-error-strong` (#B91C1C) | `--sui-error-soft` (#FEF2F2) | 5.9:1 | AA |
-| `--sui-info-strong` (#0E7490) | `--sui-info-soft` (#ECFEFF) | 5.2:1 | AA |
-| `--sui-neutral-strong` (#334155) | `--sui-neutral-soft` (#F1F5F9) | 9.5:1 | AAA |
-| `--sui-pro-strong` (#6D28D9) | `--sui-pro-soft` (#F5F3FF) | 6.5:1 | AA |
-| `--sui-text-muted` (#5C6C80) | `--sui-bg-card` (#FFFFFF) | 5.37:1 | AA |
-| `--sui-text-muted` (#5C6C80) | `--sui-bg-elevated` (#F1F5F9) | 4.90:1 | AA |
-| `--sui-text-muted` (#8494A9) | `--sui-bg-card` (#161E2C) | 5.41:1 | AA |
-| `--sui-text-muted` (#8494A9) | `--sui-bg-elevated` (#1E293B) | 4.73:1 | AA |
-| `--sui-text-muted` (#8494A9) | `--sui-bg-primary` (#0B0F1A) | 6.19:1 | AA |
-| `--sui-blue-strong` (#1D4ED8) | `--sui-blue-soft` (#DBEAFE) | 6.68:1 | AAA |
-| White | `--sui-blue-primary` (#2563EB) | 5.2:1 | AA |
-| White | `--sui-success-strong` (#15803D) | 5.0:1 | AA |
-| White | `--sui-error-strong` (#B91C1C) | 6.5:1 | AA |
-
-### Contrast Ratios (Dark Mode)
-
-| Foreground | Background | Ratio | WCAG |
-|-----------|------------|-------|------|
-| `--sui-text-primary` (#F8FAFC) | `--sui-bg-card` (#161E2C) | 16.0:1 | AAA |
-| `--sui-text-primary` (#F8FAFC) | `--sui-bg-primary` (#0B0F1A) | 18.3:1 | AAA |
-| `--sui-text-secondary` (#94A3B8) | `--sui-bg-card` (#161E2C) | 6.5:1 | AA |
-| `--sui-success-strong` (#22C55E) | `--sui-success-soft` (#052E16) | 6.5:1 | AA |
-| `--sui-warning-strong` (#FBBF24) | `--sui-warning-soft` (#422006) | 8.7:1 | AAA |
-| `--sui-error` (#F87171) | `--sui-error-soft` (#450A0A) | 5.8:1 | AA |
-| `--sui-info-strong` (#22D3EE) | `--sui-info-soft` (#083344) | 7.4:1 | AAA |
-| White | Dark btn-primary (#2563EB) | 5.2:1 | AA |
-| White | Dark btn-danger (#B91C1C) | 6.5:1 | AA |
-| White | Dark btn-success (#15803D) | 5.0:1 | AA |
-
-### Known Limitations
-
-All previously documented contrast limitations have been resolved in v2.0.11. The light blue-primary token was shifted from #3B82F6 (3.68:1) to #2563EB (5.17:1). Dark mode buttons use hardcoded backgrounds that pass independently of token values. Badge-error and input-error-msg use dark overrides to switch from `error-strong` to `error` base.
-
-Tested with Chrome Lighthouse (Accessibility audit) — 100/100 in both light and dark mode. If you find a contrast issue we missed, open an issue.
-
-### Keyboard Behavior Per Component
-
-| Component | Tab | Enter/Space | Escape | Arrow Keys |
-|-----------|-----|-------------|--------|------------|
-| Buttons | Focus | Activate | — | — |
-| Tabs | Focus | Activate | — | Left/Right switch |
-| Accordion | Focus trigger | Toggle panel | — | — |
-| Modal | Trapped inside | Activate buttons | Close | — |
-| Bottom Sheet | Focus inside | Activate buttons | Close | — |
-| Dropdown | Focus trigger | Open/select item | Close | Up/Down navigate |
-| Segmented | Focus active | Select | — | Left/Right/Up/Down switch |
-| Tooltip | Focus trigger shows | — | — | — |
-| Pagination | Focus each button | Navigate | — | — |
-| Table Interactive | Focus each row | Activate row | — | — |
-| Timeline | Focus per item | — | — | — |
-
-### Color-Blind Design
-
-SUI uses red and green hues for success/error states. These hues are **never the only signal.** Every status pattern includes:
-
-- A descriptive **text label** (e.g., "Active", "Failed")
-- A distinguishing **icon** (✔, ✕, ⚠, ℹ)
-- Sufficient **contrast** on its background
-
-This means a user who cannot distinguish red from green will still see "✔ Active" and "✕ Failed" with clear icon differentiation and readable text.
-
-### Reduced Motion
-
-When `prefers-reduced-motion: reduce` is set:
-- All CSS transitions are set to 0ms
-- All CSS animations are set to 0ms
-- Scroll behavior is set to `auto`
-- Progress bar indeterminate animation stops
-
-### High Contrast
-
-When `prefers-contrast: more` is set at the OS level:
-- Muted and secondary text colours darken for increased readability
-- Borders on cards, inputs, and outline buttons thicken to 2px
-- Focus ring outlines thicken to 4px
-- Focus ring colours intensify
-- Works in both light and dark modes
-
----
-
-## Display Modes
-
-```html
-<html>                       <!-- Light mode (default) -->
-<html data-theme="dark">     <!-- Dark mode -->
-<!-- Omit attribute for auto (follows OS preference) -->
-```
-
-Toggle with JavaScript: `SUI.theme.toggle()` or `SUI.theme.set('dark')`.
-
----
-
-## Color System
-
-All colors are CSS custom properties with the `--sui-` prefix. Every color has light and dark mode values defined in three blocks: `:root`, `[data-theme="dark"]`, and `@media (prefers-color-scheme: dark)`.
-
-### Status Colors
-
-Each status has three tokens: base (icons), strong (text on soft backgrounds), soft (backgrounds).
-
-| Status | Tokens | Usage |
-|--------|--------|-------|
-| Success | `--sui-success`, `-strong`, `-soft` | Active, passed, deployed |
-| Warning | `--sui-warning`, `-strong`, `-soft` | Pending, review needed |
-| Error | `--sui-error`, `-strong`, `-soft` | Failed, critical, blocked |
-| Info | `--sui-info`, `-strong`, `-soft` | Stable, informational |
-| Neutral | `--sui-neutral`, `-strong`, `-soft` | Inactive, default |
-| Pro | `--sui-pro`, `-strong`, `-soft` | Premium, paid features |
-
-### Backgrounds, Text, Brand, Elevation
-
-Full token reference with hex values is in `sui-tokens.css` (readable source) and on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Designers tab.
-
-### Elevation Philosophy
-
-Borders are the default card separation. Shadows are opt-in via `sui-card-shadow`. This is a deliberate aesthetic choice — flat interfaces are more scannable, and shadows are reserved for layered elements (dropdowns, modals, tooltips) where depth communicates function.
-
-| Token | Usage |
-|-------|-------|
-| `--sui-shadow-sm` | Dropdowns, subtle depth |
-| `--sui-shadow-md` | Cards (opt-in), popovers |
-| `--sui-shadow-lg` | Modals, dialogs |
-
-### Brand / Interactive Tokens
-
-Button and pagination backgrounds use overridable tokens. In light mode, they default to the blue/status color tokens. In dark mode, they lock to contrast-safe values (≥4.5:1 with white text). Override these to change your brand color while the contrast validator catches unsafe values.
-
-| Token | Light Default | Dark Default |
-|-------|--------------|-------------|
-| `--sui-btn-primary-bg` | `var(--sui-blue-primary)` | `#2563EB` |
-| `--sui-btn-danger-bg` | `var(--sui-error-strong)` | `#B91C1C` |
-| `--sui-btn-success-bg` | `var(--sui-success-strong)` | `#15803D` |
-
-Hover variants follow the same pattern (`--sui-btn-primary-bg-hover`, etc.).
-
----
-
-## Typography
-
-**Font:** [Inter](https://rsms.me/inter/) via Google Fonts. Fallback: `system-ui, -apple-system, sans-serif`.
-
-| Element | Size | Weight | Line Height |
-|---------|------|--------|-------------|
-| H1 | 32px | 700 | 1.3 |
-| H2 | 24px | 600 | 1.3 |
-| H3 | 20px | 600 | 1.3 |
-| Body | 16px | 400 | 1.5 |
-| Small | 14px | 400 | 1.5 |
-| Meta | 12px | 400 | 1.5 |
-
-## Layout & Spacing
-
-8px grid: `--sui-space-1` (4px) through `--sui-space-6` (48px). Min touch target: 44px. Max content width: 1280px. Mobile-first breakpoints at 480px, 721px, 769px, 1025px.
-
 ---
 
 ## Components
@@ -380,36 +162,43 @@ SUI provides 50+ components. All built from design tokens. Code examples for eve
 
 ### Buttons
 
-`sui-btn` · `sui-btn-primary` · `sui-btn-secondary` · `sui-btn-ghost` · `sui-btn-danger` · `sui-btn-success` · `sui-btn-sm` · `sui-btn-full`
+`sui-btn` · `sui-btn-primary` · `sui-btn-secondary` · `sui-btn-ghost` · `sui-btn-danger` · `sui-btn-success` · `sui-btn-sm`
 
 ### Cards
 
-`sui-card` · `sui-card-lg` · `sui-card-flush` · `sui-card-muted` · `sui-card-shadow` · `sui-card-header` · `sui-card-body`
+`sui-card` · `sui-card-lg` · `sui-card-flush` · `sui-card-shadow` · `sui-card-header` · `sui-card-body` · `sui-card-interactive`
+
+`sui-card-interactive` adds `cursor: pointer` and hover shadow elevation. Compose with any card variant. Add `tabindex="0"` for keyboard accessibility when the card isn't wrapped in a link.
 
 ### Inputs
 
-`sui-input` · `sui-input-group` · `sui-input-label` · `sui-input-hint` · `sui-input-error` · `sui-input-error-msg` · `sui-select` · `sui-checkbox-label` · `sui-radio` · `sui-radio-label`
+`sui-input` · `sui-input-error` · `sui-input-label` · `sui-input-group` · `sui-input-help` · `sui-checkbox` · `sui-radio` · `sui-checkbox-label` · `sui-radio-label`
 
 ### Toggle / Switch
 
-`sui-toggle-label` · `sui-toggle` · `sui-toggle-track`
+`sui-toggle` · `sui-toggle-track` · `sui-toggle-label`
 
-### Badges (Complete SaaS Set)
+### Badges
 
-Status: `sui-badge-success` · `sui-badge-warning` · `sui-badge-error` · `sui-badge-info` · `sui-badge-neutral`
+`sui-badge` · `sui-badge-success` · `sui-badge-warning` · `sui-badge-error` · `sui-badge-info` · `sui-badge-neutral` · `sui-badge-pro` · `sui-badge-dot` · `sui-badge-sm`
 
-Feature: `sui-badge-new` · `sui-badge-beta` · `sui-badge-pro`
+When using `sui-badge-count`, always pair with a parent element that provides context via `aria-label`. The count element should have `aria-hidden="true"` since the parent's label conveys the full meaning.
 
-Modifiers: `sui-badge-outline` · `sui-badge-sm` · `sui-badge-dot` · `sui-badge-count` · `sui-badge-overlay`
+```html
+<span class="sui-badge-overlay">
+  <button aria-label="Notifications, 3 unread">🔔</button>
+  <span class="sui-badge-count" aria-hidden="true">3</span>
+</span>
+```
 
 ### Shields (Two-Segment Badges)
 
-Shields.io-style two-tone badges — no external dependency. Dark mode aware.
+`sui-shield` · `sui-shield-label` · `sui-shield-value` · Status variants
 
-`sui-shield` · `sui-shield-success` · `sui-shield-error` · `sui-shield-warning` · `sui-shield-info` · `sui-shield-neutral`
+GitHub-style status badges for dashboards. Can be links or static.
 
 ```html
-<span class="sui-shield">
+<span class="sui-shield sui-shield-info">
   <span class="sui-shield-label">built with</span>
   <span class="sui-shield-value">SUI</span>
 </span>
@@ -424,9 +213,9 @@ Shields.io-style two-tone badges — no external dependency. Dark mode aware.
 
 `sui-alert` · `sui-alert-success` · `sui-alert-warning` · `sui-alert-error` · `sui-alert-info`
 
-### Avatars (Initials-First)
+### Avatars
 
-`sui-avatar` · `sui-avatar-sm` (32px) · `sui-avatar-md` (40px) · `sui-avatar-lg` (56px) · `sui-avatar-group`
+`sui-avatar` · `sui-avatar-sm` (32px) · `sui-avatar-md` (40px) · `sui-avatar-lg` (56px) · `sui-avatar-xl` (80px) · `sui-avatar-group`
 
 Initials by default with deterministic colours from `sui.js`. Optional photo support — add an `<img>` inside the avatar and initials show as automatic fallback when the image fails:
 
@@ -439,25 +228,19 @@ Initials by default with deterministic colours from `sui.js`. Optional photo sup
 
 ### Progress Bars
 
-`sui-progress` · `sui-progress-bar` · Status variants · `sui-progress-lg` · `sui-progress-indeterminate`
+`sui-progress` · `sui-progress-bar` · Status variants · `sui-progress-lg` · `sui-progress-indeterminate` · `sui-progress-labeled` · `sui-progress-text`
+
+`sui-progress-labeled` puts text inside the bar. Contrast-safe in both themes.
 
 ### Tables
 
-`sui-table-wrap` · `sui-table` · `sui-table-striped` · `sui-table-hover`
+`sui-table-wrap` · `sui-table` · `sui-table-striped` · `sui-table-hover` · `sui-table-interactive` · `sui-table-sortable`
 
-Responsive: stacks to card layout on mobile via `data-label` attributes on `<td>`.
+Responsive: stacks to card layout on mobile via `data-label` attributes on `<td>`. `sui-table-interactive` adds clickable rows with cursor and focus ring — developer adds `tabindex="0"`, `role="link"`, `aria-label`, and click handler. `sui-table-sortable` adds visual sort indicators on `<th data-sort>`.
 
 ### Navigation
 
 Breadcrumb: `sui-breadcrumb` · Pagination: `sui-pagination` · `sui-page-btn` · Nav links: `sui-nav` · `sui-nav-link` · `sui-nav-toggle`
-
-### Interactive (requires `sui.js`)
-
-Accordion · Dropdown · Modal (native `<dialog>` recommended, legacy overlay supported) · Toast notifications · Tooltip
-
-### Structural
-
-Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`sui-embed`)
 
 ### Bottom Sheet / Drawer
 
@@ -516,92 +299,143 @@ Visual pill component. CSS only — behaviour (keyboard add/remove, deduplicatio
 </span>
 ```
 
-### Interactive Card
+### Interactive Components (require `sui.js`)
 
-`sui-card-interactive` — modifier that adds `cursor: pointer` and hover shadow elevation. Compose with any card variant. Add `tabindex="0"` for keyboard accessibility when the card isn't wrapped in a link.
+Accordion · Dropdown · Modal (native `<dialog>` recommended, legacy overlay supported) · Toast notifications · Tooltip
 
-### Badge Count Usage
+Scoped tabs: wrap in `data-sui-tabs` to isolate multiple tab sets on one page.
 
-When using `sui-badge-count`, always pair with a parent element that provides context via `aria-label`. The count element should have `aria-hidden="true"` since the parent's label conveys the full meaning.
+### Structural
 
-```html
-<span class="sui-badge-overlay">
-  <button aria-label="Notifications, 3 unread">🔔</button>
-  <span class="sui-badge-count" aria-hidden="true">3</span>
-</span>
-```
+Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`sui-embed`)
 
-### Skip Link Pattern
+### Content
 
-Add a skip link as the first child of `<body>` using `sui-visually-hidden`. The link becomes visible when focused (keyboard users tabbing into the page).
+**Prose** — `sui-prose` for long-form typography (articles, docs, rendered Markdown). Covers headings (h1–h6 with scroll-margin-top), paragraphs, links, lists, blockquotes, code blocks, tables, images, horizontal rules, and task list checkboxes. Size variants: `sui-prose-sm` (15px), default (18px), `sui-prose-lg` (20px). Width: `sui-prose-narrow` (680px), `sui-prose-wide` (900px). Overridable via CSS custom properties (`--sui-prose-font`, `--sui-prose-size`, `--sui-prose-leading`).
 
-```html
-<body>
-  <a href="#main" class="sui-visually-hidden">Skip to main content</a>
-  <!-- header, nav, etc. -->
-  <main id="main">
-    <!-- page content -->
-  </main>
-</body>
-```
+**Mark** — `sui-mark` for search result highlighting. `sui-mark-current` for the active match. Automatic dark mode adaptation and print suppression.
 
-### Prose & Typography
+**Meta** — `sui-meta` for dot-separated metadata lines. Separator added via CSS `::before` — HTML stays semantic.
 
-Lists (`ul`, `ol`) · Blockquote · Figure/figcaption · Inline `code` · `kbd` keyboard input · Responsive images (`img { max-width: 100% }`)
+### Toolbar
 
-### Layout & Utilities
+`sui-toolbar` — horizontal scrolling action bar with hidden scrollbar. `sui-toolbar-btn` for buttons, `sui-toolbar-sep` for separators, `aria-pressed="true"` for active state. Variants: `sui-toolbar-bordered`, `sui-toolbar-compact`.
 
-Grid (`sui-grid-2/3/4/sidebar/auto`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`, `sui-flex-nowrap`) · Scroll (`sui-scroll-x`) · Text (`sui-text-muted`, `sui-text-bold`, `sui-text-cap`) · Radius (`sui-round-none`, `sui-round-sm`, `sui-round-md`, `sui-round-lg`, `sui-round-full`) · Visibility (`sui-hidden`, `sui-visually-hidden`) · Container queries (`sui-container`, `sui-cq-stack`, `sui-cq-full`, `sui-cq-hide`, `sui-cq-row`, `sui-cq-show`)
+### Screen Layout
 
-### Radius Utilities
+`sui-screen` — full-viewport flex column (`100dvh`) for mobile-first app shells. `sui-screen-header` (sticky top with safe area inset), `sui-screen-body` (scrollable `flex:1`), `sui-screen-footer` (pinned bottom with safe area inset). Multi-view switching: inactive screens hidden by default, toggle with `.is-active`. Use `sui-screen-solo` for single-screen apps.
 
-Override the border-radius on any component. Compose with badges, buttons, cards, inputs — anything.
+### File Upload
 
-| Class | Radius | Use case |
-|-------|--------|----------|
-| `sui-round-none` | 0 | Fully square corners |
-| `sui-round-sm` | 8px | Subtle rounding |
-| `sui-round-md` | 12px | Moderate rounding |
-| `sui-round-lg` | 16px | Pronounced rounding |
-| `sui-round-full` | 9999px | Full pill shape |
+`sui-dropzone` — file upload area. CSS only — drag-and-drop JS is bring-your-own.
 
-```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.1.2</span>
-<button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
-<div class="sui-card sui-round-sm">Sharper card</div>
-```
+### Timeline
 
-### Visibility Utilities
+`sui-timeline` · `sui-timeline-item` · `sui-timeline-content` — activity feed. Optimised for `sui-avatar-sm`. Container: `role="feed"`, items: `role="article"`.
 
-Two-tier visibility system for toggling content.
+### Utilities
 
-| Class | Effect | Accessibility tree | Use case |
-|-------|--------|--------------------|----------|
-| `sui-hidden` | `display: none !important` | Removed | Toggling panels, tabs, conditional content |
-| `sui-visually-hidden` | Clipped to 1px | Preserved | Skip links, icon-only button labels |
+**Layout** — Grid (`sui-grid-2/3/4/sidebar/auto`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`, `sui-flex-nowrap`) · Scroll (`sui-scroll-x`) · Container queries (`sui-container`, `sui-cq-stack`, `sui-cq-full`, `sui-cq-hide`, `sui-cq-row`, `sui-cq-show`)
 
-```html
-<!-- Completely hidden (layout + screen readers) -->
-<div class="sui-hidden">This panel is toggled off.</div>
+**Text** — `sui-text-muted` · `sui-text-bold` · `sui-text-cap`
 
-<!-- Visually hidden (screen readers still see it) -->
-<button>
-  <svg aria-hidden="true"><!-- icon --></svg>
-  <span class="sui-visually-hidden">Close menu</span>
-</button>
-```
+**Radius** — Override border-radius on any component: `sui-round-none` (0) · `sui-round-sm` (8px) · `sui-round-md` (12px) · `sui-round-lg` (16px) · `sui-round-full` (pill)
 
-### High Contrast Support
+**Visibility** — Two-tier system: `sui-hidden` (display: none, removed from accessibility tree) · `sui-visually-hidden` (clipped to 1px, preserved for screen readers)
 
-SUI responds to `prefers-contrast: more` — when enabled at the OS level, borders thicken, muted text darkens, and focus rings strengthen. No configuration needed.
+**Skip Link** — Add `<a href="#main" class="sui-visually-hidden">Skip to main content</a>` as first child of `<body>`. Visible when focused.
 
 ---
 
-## Signature Patterns
+## Design Tokens
 
-These patterns demonstrate how SUI components combine for common SaaS views.
+All colours are CSS custom properties with the `--sui-` prefix. Every colour has light and dark mode values defined in three blocks: `:root`, `[data-theme="dark"]`, and `@media (prefers-color-scheme: dark)`.
 
-### Status Table (Admin Dashboard)
+### Display Modes
+
+```html
+<html>                       <!-- Light mode (default) -->
+<html data-theme="dark">     <!-- Dark mode -->
+<!-- Omit attribute for auto (follows OS preference) -->
+```
+
+Toggle with JavaScript: `SUI.theme.toggle()` or `SUI.theme.set('dark')`.
+
+### Status Colors
+
+Each status has three tokens: base (icons), strong (text on soft backgrounds), soft (backgrounds).
+
+| Status | Tokens | Usage |
+|--------|--------|-------|
+| Success | `--sui-success`, `-strong`, `-soft` | Active, passed, deployed |
+| Warning | `--sui-warning`, `-strong`, `-soft` | Pending, review needed |
+| Error | `--sui-error`, `-strong`, `-soft` | Failed, critical, blocked |
+| Info | `--sui-info`, `-strong`, `-soft` | Stable, informational |
+| Neutral | `--sui-neutral`, `-strong`, `-soft` | Inactive, default |
+| Pro | `--sui-pro`, `-strong`, `-soft` | Premium, paid features |
+
+### Backgrounds, Text, Elevation
+
+Full token reference with hex values is in `sui-tokens.css` (readable source) and on the [live demo](https://adrianspeyer.github.io/speyer-ui/) Designers tab.
+
+Borders are the default card separation. Shadows are opt-in via `sui-card-shadow`. Flat interfaces are more scannable — shadows are reserved for layered elements (dropdowns, modals, tooltips) where depth communicates function.
+
+| Token | Usage |
+|-------|-------|
+| `--sui-shadow-sm` | Dropdowns, subtle depth |
+| `--sui-shadow-md` | Cards (opt-in), popovers |
+| `--sui-shadow-lg` | Modals, dialogs |
+
+### Brand / Interactive Tokens
+
+Button and pagination backgrounds use overridable tokens. In light mode, they default to the blue/status colour tokens. In dark mode, they lock to contrast-safe values (≥4.5:1 with white text). Override these to change your brand colour while the preflight validator catches unsafe values.
+
+| Token | Light Default | Dark Default |
+|-------|--------------|-------------|
+| `--sui-btn-primary-bg` | `var(--sui-blue-primary)` | `#2563EB` |
+| `--sui-btn-danger-bg` | `var(--sui-error-strong)` | `#B91C1C` |
+| `--sui-btn-success-bg` | `var(--sui-success-strong)` | `#15803D` |
+
+Hover variants follow the same pattern (`--sui-btn-primary-bg-hover`, etc.).
+
+### Typography
+
+**Font:** [Inter](https://rsms.me/inter/) via Google Fonts. Fallback: `system-ui, -apple-system, sans-serif`.
+
+| Element | Size | Weight | Line Height |
+|---------|------|--------|-------------|
+| H1 | 32px | 700 | 1.3 |
+| H2 | 24px | 600 | 1.3 |
+| H3 | 20px | 600 | 1.3 |
+| Body | 16px | 400 | 1.5 |
+| Small | 14px | 400 | 1.5 |
+| Meta | 12px | 400 | 1.5 |
+
+### Layout & Spacing
+
+8px grid: `--sui-space-1` (4px) through `--sui-space-6` (48px). Min touch target: 44px. Max content width: 1280px. Mobile-first breakpoints at 480px, 721px, 769px, 1025px.
+
+---
+
+## Recipes
+
+SUI ships components. You build patterns. These recipes show common application layouts composed from SUI primitives with minimal custom CSS.
+
+| Recipe | What It Is | Custom CSS | Demo |
+|--------|-----------|-----------|------|
+| Inline Edit | Click-to-edit fields with ARIA | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-inline-edit) |
+| Kanban Board | Horizontal scrolling card columns | ~6 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-kanban) |
+| Stepper / Wizard | Multi-step progress indicator | ~15 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-stepper) |
+| Split Pane | Master-detail list + panel layout | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-split-pane) |
+| Settings | Preferences page with toggles + controls | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-settings) |
+
+> **Components vs Recipes:** Components ship in the SUI bundle. Recipes are documented patterns that compose those components with minimal custom CSS. Recipes are starting points — modify to fit your app.
+
+### Signature Patterns
+
+These code examples show how SUI components combine for common SaaS views.
+
+**Status Table (Admin Dashboard)**
 
 ```html
 <div class="sui-card sui-card-flush">
@@ -633,7 +467,7 @@ These patterns demonstrate how SUI components combine for common SaaS views.
 </div>
 ```
 
-### Settings Form
+**Settings Form**
 
 ```html
 <div class="sui-card sui-card-lg">
@@ -667,7 +501,7 @@ These patterns demonstrate how SUI components combine for common SaaS views.
 </div>
 ```
 
-### Empty State + Call to Action
+**Empty State + Call to Action**
 
 ```html
 <div class="sui-card">
@@ -718,21 +552,76 @@ SUI.avatar.colorFor('AS')                      // Deterministic color from initi
 
 ---
 
-## CDN Usage
+## Accessibility
 
-jsDelivr serves any tagged GitHub release automatically. No signup required.
+### Evidence
 
-```html
-<!-- Production (minified, always latest) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js"></script>
+Here is a quick review of SUI vs WCAG 2.1 AA compliance.
 
-<!-- Development (readable) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
-```
+**Contrast Ratios (Light Mode)**
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.1.2`.
+| Foreground | Background | Ratio | WCAG |
+|-----------|------------|-------|------|
+| `--sui-text-primary` (#0F172A) | `--sui-bg-card` (#FFFFFF) | 17.9:1 | AAA |
+| `--sui-text-primary` (#0F172A) | `--sui-bg-primary` (#F9FBFD) | 17.2:1 | AAA |
+| `--sui-text-secondary` (#475569) | `--sui-bg-card` (#FFFFFF) | 7.6:1 | AAA |
+| `--sui-success-strong` (#15803D) | `--sui-success-soft` (#F0FDF4) | 4.8:1 | AA |
+| `--sui-warning-strong` (#92400E) | `--sui-warning-soft` (#FFFBEB) | 6.8:1 | AA |
+| `--sui-error-strong` (#B91C1C) | `--sui-error-soft` (#FEF2F2) | 5.9:1 | AA |
+| `--sui-info-strong` (#0E7490) | `--sui-info-soft` (#ECFEFF) | 5.2:1 | AA |
+| `--sui-neutral-strong` (#334155) | `--sui-neutral-soft` (#F1F5F9) | 9.5:1 | AAA |
+| `--sui-pro-strong` (#6D28D9) | `--sui-pro-soft` (#F5F3FF) | 6.5:1 | AA |
+| `--sui-text-muted` (#5C6C80) | `--sui-bg-card` (#FFFFFF) | 5.37:1 | AA |
+| `--sui-text-muted` (#8494A9) | `--sui-bg-card` (#161E2C) | 5.41:1 | AA |
+| `--sui-blue-strong` (#1D4ED8) | `--sui-blue-soft` (#DBEAFE) | 6.68:1 | AAA |
+| White | `--sui-blue-primary` (#2563EB) | 5.2:1 | AA |
+| White | `--sui-success-strong` (#15803D) | 5.0:1 | AA |
+| White | `--sui-error-strong` (#B91C1C) | 6.5:1 | AA |
+
+**Contrast Ratios (Dark Mode)**
+
+| Foreground | Background | Ratio | WCAG |
+|-----------|------------|-------|------|
+| `--sui-text-primary` (#F8FAFC) | `--sui-bg-card` (#161E2C) | 16.0:1 | AAA |
+| `--sui-text-primary` (#F8FAFC) | `--sui-bg-primary` (#0B0F1A) | 18.3:1 | AAA |
+| `--sui-text-secondary` (#94A3B8) | `--sui-bg-card` (#161E2C) | 6.5:1 | AA |
+| `--sui-success-strong` (#22C55E) | `--sui-success-soft` (#052E16) | 6.5:1 | AA |
+| `--sui-warning-strong` (#FBBF24) | `--sui-warning-soft` (#422006) | 8.7:1 | AAA |
+| `--sui-error` (#F87171) | `--sui-error-soft` (#450A0A) | 5.8:1 | AA |
+| `--sui-info-strong` (#22D3EE) | `--sui-info-soft` (#083344) | 7.4:1 | AAA |
+| White | Dark btn-primary (#2563EB) | 5.2:1 | AA |
+| White | Dark btn-danger (#B91C1C) | 6.5:1 | AA |
+| White | Dark btn-success (#15803D) | 5.0:1 | AA |
+
+All previously documented contrast limitations have been resolved in v2.0.11. Tested with Chrome Lighthouse (Accessibility audit) — 100/100 in both themes. The preflight validator now checks 40+ token pairs automatically before every build. If you find a contrast issue we missed, [open an issue](https://github.com/adrianspeyer/speyer-ui/issues).
+
+### Keyboard Behavior
+
+| Component | Tab | Enter/Space | Escape | Arrow Keys |
+|-----------|-----|-------------|--------|------------|
+| Buttons | Focus | Activate | — | — |
+| Tabs | Focus | Activate | — | Left/Right switch |
+| Accordion | Focus trigger | Toggle panel | — | — |
+| Modal | Trapped inside | Activate buttons | Close | — |
+| Bottom Sheet | Focus inside | Activate buttons | Close | — |
+| Dropdown | Focus trigger | Open/select item | Close | Up/Down navigate |
+| Segmented | Focus active | Select | — | Left/Right/Up/Down switch |
+| Tooltip | Focus trigger shows | — | — | — |
+| Pagination | Focus each button | Navigate | — | — |
+| Table Interactive | Focus each row | Activate row | — | — |
+| Timeline | Focus per item | — | — | — |
+
+### Color-Blind Design
+
+SUI uses red and green hues for success/error states. These hues are **never the only signal.** Every status pattern includes a descriptive **text label** (e.g., "Active", "Failed"), a distinguishing **icon** (✔, ✕, ⚠, ℹ), and sufficient **contrast** on its background. A user who cannot distinguish red from green will still see "✔ Active" and "✕ Failed" with clear icon differentiation and readable text.
+
+### Reduced Motion
+
+When `prefers-reduced-motion: reduce` is set, all CSS transitions and animations are set to 0ms, scroll behaviour is set to `auto`, and the progress bar indeterminate animation stops.
+
+### High Contrast
+
+When `prefers-contrast: more` is set at the OS level, muted and secondary text colours darken for increased readability, borders on cards, inputs, and outline buttons thicken to 2px, focus ring outlines thicken to 4px, and focus ring colours intensify. Works in both light and dark modes. No configuration needed.
 
 ---
 
@@ -750,7 +639,25 @@ All prompts instruct the AI to fetch the actual CSS files, ensuring it uses the 
 
 ---
 
-## Repo Structure
+## Development
+
+### CDN Usage
+
+jsDelivr serves any tagged GitHub release automatically. No signup required.
+
+```html
+<!-- Production (minified, always latest) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
+
+<!-- Development (readable) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
+```
+
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.1.2`.
+
+### Repo Structure
 
 ```
 speyer-ui/
