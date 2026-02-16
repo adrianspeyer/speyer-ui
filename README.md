@@ -59,7 +59,7 @@ I now use this for my own work. I'm sharing it because if you're colour blind, o
 </html>
 ```
 
-> **Pin a version for production:** replace `@latest` with a tag like `@2.1.0` for stability.
+> **Pin a version for production:** replace `@latest` with a tag like `@2.1.1` for stability.
 
 ### Download
 
@@ -550,7 +550,7 @@ Override the border-radius on any component. Compose with badges, buttons, cards
 | `sui-round-full` | 9999px | Full pill shape |
 
 ```html
-<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.1.0</span>
+<span class="sui-badge sui-badge-neutral sui-round-sm">SUI v2.1.1</span>
 <button class="sui-btn sui-btn-primary sui-round-none">Submit</button>
 <div class="sui-card sui-round-sm">Sharper card</div>
 ```
@@ -716,7 +716,7 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/sui-tokens.css">
 ```
 
-`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.1.0`.
+`@latest` always pulls the newest release. To pin a specific version, replace with a tag like `@2.1.1`.
 
 ---
 

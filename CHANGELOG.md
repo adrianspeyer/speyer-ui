@@ -4,6 +4,19 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.1.1] — 2026-02-16
+
+### Fixed — Accessibility Hardening (JS)
+
+Four keyboard/screen-reader gaps closed with zero API changes:
+
+- **Dropdown** — Trigger now announces `aria-haspopup="true"` and `aria-expanded` (toggled on open/close). Menu gets `role="menu"`, items get `role="menuitem"`. Screen reader users now know a button opens a menu.
+- **Bottom Sheet** — Focus trap added (Tab cycles within panel, matching modal behaviour). Previously keyboard users could Tab into background content.
+- **Tabs** — Roving tabindex implemented. Only the active tab has `tabindex="0"`, inactive tabs get `tabindex="-1"`. Keyboard users skip past tab bar with a single Tab instead of arrowing through every tab.
+- **Tooltip** — Escape key dismisses tooltip when trigger is focused. Previously no keyboard dismissal existed.
+
+---
+
 ## [2.1.0] — 2026-02-16
 
 ### Added — The Content & Polish Release

@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.1.0
+ * Version: 2.1.1
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -92,9 +92,11 @@ const SUI = (() => {
         $$('[data-view]', scope).forEach(v =>
           v.classList.toggle('is-active', v.getAttribute('data-view') === key)
         );
-        tabBtns.forEach(t =>
-          t.setAttribute('aria-selected', t.getAttribute('data-tab') === key ? 'true' : 'false')
-        );
+        tabBtns.forEach(t => {
+          const isActive = t.getAttribute('data-tab') === key;
+          t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          t.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
         // Only scroll to top for unscoped (global) tabs
         if (scope === document) window.scrollTo({ top: 0, behavior: 'instant' });
       };
@@ -157,6 +159,14 @@ const SUI = (() => {
       const menu = el.querySelector('.sui-dropdown-menu');
       if (!trigger || !menu) return;
 
+      // Enforce ARIA roles
+      trigger.setAttribute('aria-haspopup', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (!menu.hasAttribute('role')) menu.setAttribute('role', 'menu');
+      $$('.sui-dropdown-item', menu).forEach(item => {
+        if (!item.hasAttribute('role')) item.setAttribute('role', 'menuitem');
+      });
+
       trigger.addEventListener('click', e => {
         e.stopPropagation();
         this.toggle(el);
@@ -177,6 +187,8 @@ const SUI = (() => {
       if (this._active && this._active !== el) this.close(this._active);
       el.classList.add('is-open');
       this._active = el;
+      const trigger = el.querySelector('[data-sui-dropdown-trigger]') || el.querySelector('.sui-btn');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
       // Focus first item
       const first = el.querySelector('.sui-dropdown-item');
       if (first) setTimeout(() => first.focus(), 50);
@@ -186,6 +198,8 @@ const SUI = (() => {
       if (typeof el === 'string') el = $(el);
       if (!el) return;
       el.classList.remove('is-open');
+      const trigger = el.querySelector('[data-sui-dropdown-trigger]') || el.querySelector('.sui-btn');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
       if (this._active === el) this._active = null;
     },
 
@@ -401,6 +415,11 @@ const SUI = (() => {
 
       el.addEventListener('mouseenter', reposition);
       el.addEventListener('focusin', reposition);
+
+      // Escape key dismisses tooltip when focused
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Escape') el.blur();
+      });
     }
   };
 
@@ -494,11 +513,22 @@ const SUI = (() => {
         if (focusable.length) setTimeout(() => focusable[0].focus(), 50);
       }
 
-      // Escape key handler
-      el._suiEscape = (e) => {
-        if (e.key === 'Escape') this.close(el);
+      // Keyboard handler: Escape + focus trap
+      el._suiKeyHandler = (e) => {
+        if (e.key === 'Escape') { this.close(el); return; }
+        if (e.key === 'Tab' && panel) {
+          const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', panel);
+          if (!focusable.length) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+          } else {
+            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+          }
+        }
       };
-      el.addEventListener('keydown', el._suiEscape);
+      el.addEventListener('keydown', el._suiKeyHandler);
     },
 
     close(selector) {
@@ -509,9 +539,9 @@ const SUI = (() => {
       el.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
 
-      if (el._suiEscape) {
-        el.removeEventListener('keydown', el._suiEscape);
-        delete el._suiEscape;
+      if (el._suiKeyHandler) {
+        el.removeEventListener('keydown', el._suiKeyHandler);
+        delete el._suiKeyHandler;
       }
 
       if (this._active === el) this._active = null;
