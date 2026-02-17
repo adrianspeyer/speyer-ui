@@ -2433,12 +2433,23 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       // Tabs that have sidenav sections
       const sidenavTabs = new Set(['components', 'recipes']);
 
-      // ── Tab awareness: show/hide sidenav + toggle per tab ──
+      // ── Tab awareness: show/hide sidenav + auto-collapse groups ──
       function updateSidenavForTab(tabName) {
         const show = sidenavTabs.has(tabName);
         layout.classList.toggle('demo-no-sidenav', !show);
-        // Hide hamburger on tabs with no sidenav
         toggle.style.display = show ? '' : 'none';
+
+        // Auto-collapse non-active group, expand active group
+        if (show) {
+          groups.forEach(group => {
+            const groupName = group.getAttribute('data-group');
+            const btn = group.querySelector('.demo-sidenav-group-toggle');
+            const container = group.querySelector('.demo-sidenav-group-links');
+            const shouldExpand = groupName === tabName;
+            btn.setAttribute('aria-expanded', String(shouldExpand));
+            container.hidden = !shouldExpand;
+          });
+        }
       }
 
       document.querySelectorAll('[role="tab"]').forEach(tab => {
