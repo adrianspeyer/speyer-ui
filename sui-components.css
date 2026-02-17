@@ -3226,7 +3226,8 @@ dialog.sui-dialog-wide { max-width: 720px; }
   font-size: 10px;
   font-weight: 400;
   color: var(--sui-text-muted);
-  margin-left: var(--sui-space-1);
+  margin-left: auto;
+  padding-right: var(--sui-space-2);
 }
 
 /* Scroll target offset — utility for anchor navigation */
