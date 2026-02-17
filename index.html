@@ -56,7 +56,8 @@
     }
     /* Scrollable link area — search stays pinned, groups scroll */
     .demo-sidenav-scroll {
-      flex: 1; min-height: 0; overflow-y: auto;
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
     }
     /* Filtered-out links */
     .sui-sidenav-link.demo-filter-hidden { display: none; }
@@ -2455,6 +2456,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       document.querySelectorAll('[role="tab"]').forEach(tab => {
         tab.addEventListener('click', () => {
           updateSidenavForTab(tab.getAttribute('data-tab'));
+          // Clear hash when switching tabs — prevents stale anchors
+          if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname);
+          }
         });
       });
 
