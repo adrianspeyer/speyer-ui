@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.4.0
+ * Version: 2.4.1
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -724,10 +724,14 @@ const SUI = (() => {
       const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', el);
       if (focusable.length) setTimeout(() => focusable[0].focus(), 50);
 
-      // Keyboard handler
+      // Document-level Escape handler — works even when focus is in main content
+      el._suiDocKeyHandler = (e) => {
+        if (e.key === 'Escape') this.close(el);
+      };
+      document.addEventListener('keydown', el._suiDocKeyHandler);
+
+      // Focus trap only on mobile (panel element listener)
       el._suiKeyHandler = (e) => {
-        if (e.key === 'Escape') { this.close(el); return; }
-        // Focus trap only on mobile
         if (e.key === 'Tab' && !this._mediaQuery.matches) {
           const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', el);
           if (!focusable.length) return;
@@ -765,6 +769,10 @@ const SUI = (() => {
       const id = el.id ? `#${el.id}` : null;
       if (id) $$(`[data-sui-panel="${id}"]`).forEach(t => t.setAttribute('aria-expanded', 'false'));
 
+      if (el._suiDocKeyHandler) {
+        document.removeEventListener('keydown', el._suiDocKeyHandler);
+        delete el._suiDocKeyHandler;
+      }
       if (el._suiKeyHandler) {
         el.removeEventListener('keydown', el._suiKeyHandler);
         delete el._suiKeyHandler;

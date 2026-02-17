@@ -4,6 +4,19 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.4.1] — 2026-02-17
+
+### Fixed
+
+- **Panel Escape key (a11y):** Escape now closes panels even when focus is in the main content area. Previously, the keydown listener was attached to the panel element only — on desktop, the dual focus model meant Escape was ignored when focus was outside the panel. Now uses a document-level listener.
+- **Sidenav count badge alignment:** Group count badges (e.g. "28", "16") now right-align consistently regardless of label width. Changed from `margin-left: var(--sui-space-1)` to `margin-left: auto`.
+
+### Improved
+
+- **Recipe demos:** Sidenav Search, Sidenav Context, Panel Push Mode, Master-Detail, and Notification Centre recipes now include live interactive demos and collapsible "View code" accordions, matching the pattern used by all other recipes.
+- **Sidenav alphabetical order:** Component links (28) and Recipe links (16) are now sorted A–Z. Added missing Panel link to Components group.
+- **Scroll lock fix:** Clicking a sidenav anchor link no longer locks scroll position. The URL hash is cleared after smooth scroll completes.
+
 ## [2.4.0] — 2026-02-17
 
 ### Added
