@@ -21,7 +21,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.1.2</span>
+          <span class="sui-version-pill">v2.2.0</span>
         </div>
       </div>
 
@@ -77,7 +77,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.1.2</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.2.0</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -219,6 +219,7 @@
           <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Primary</button>
           <button class="sui-btn sui-btn-secondary" type="button">Secondary</button>
           <button class="sui-btn sui-btn-ghost" type="button">Ghost</button>
+          <button class="sui-btn sui-btn-dashed" type="button"><i data-lucide="plus"></i>Dashed</button>
           <button class="sui-btn sui-btn-danger" type="button"><i data-lucide="trash-2"></i>Danger</button>
           <button class="sui-btn sui-btn-success" type="button"><i data-lucide="check"></i>Success</button>
           <button class="sui-btn" type="button" disabled>Disabled</button>
@@ -226,6 +227,7 @@
         <div class="sui-flex sui-mt-3">
           <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Small Primary</button>
           <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="settings"></i>Settings</button>
+          <button class="sui-btn sui-btn-dashed sui-btn-sm" type="button"><i data-lucide="plus"></i>Add Item</button>
         </div>
       </div>
 
@@ -278,7 +280,7 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.1.2</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.2.0</span></span>
           </div>
         </div>
       </div>
@@ -738,6 +740,65 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- ACCORDION -->
+
+      <!-- STEPPER -->
+      <div class="sui-section">
+        <h2>Stepper</h2>
+        <p class="sui-text-cap sui-mt-2">Multi-step workflows. CSS-only. Horizontal on desktop, vertical on mobile. States communicated by shape + colour — never colour alone.</p>
+
+        <div class="sui-kpi-label sui-mt-4 sui-mb-2">3 steps — step 2 active</div>
+        <ol class="sui-stepper">
+          <li class="sui-step is-complete">
+            <span class="sui-step-indicator">&#10003;</span>
+            <span>Account</span>
+          </li>
+          <li class="sui-step is-active" aria-current="step">
+            <span class="sui-step-indicator">2</span>
+            <span>Details</span>
+          </li>
+          <li class="sui-step is-pending">
+            <span class="sui-step-indicator">3</span>
+            <span>Review</span>
+          </li>
+        </ol>
+
+        <div class="sui-kpi-label sui-mt-4 sui-mb-2">5 steps — step 3 active</div>
+        <ol class="sui-stepper">
+          <li class="sui-step is-complete">
+            <span class="sui-step-indicator">&#10003;</span>
+            <span>Cart</span>
+          </li>
+          <li class="sui-step is-complete">
+            <span class="sui-step-indicator">&#10003;</span>
+            <span>Shipping</span>
+          </li>
+          <li class="sui-step is-active" aria-current="step">
+            <span class="sui-step-indicator">3</span>
+            <span>Payment</span>
+          </li>
+          <li class="sui-step is-pending">
+            <span class="sui-step-indicator">4</span>
+            <span>Review</span>
+          </li>
+          <li class="sui-step is-pending">
+            <span class="sui-step-indicator">5</span>
+            <span>Confirm</span>
+          </li>
+        </ol>
+
+        <div class="sui-kpi-label sui-mt-4 sui-mb-2">7 steps — all complete</div>
+        <ol class="sui-stepper">
+          <li class="sui-step is-complete"><span class="sui-step-indicator">&#10003;</span><span>Register</span></li>
+          <li class="sui-step is-complete"><span class="sui-step-indicator">&#10003;</span><span>Verify</span></li>
+          <li class="sui-step is-complete"><span class="sui-step-indicator">&#10003;</span><span>Profile</span></li>
+          <li class="sui-step is-complete"><span class="sui-step-indicator">&#10003;</span><span>Settings</span></li>
+          <li class="sui-step is-complete"><span class="sui-step-indicator">&#10003;</span><span>Import</span></li>
+          <li class="sui-step is-complete"><span class="sui-step-indicator">&#10003;</span><span>Review</span></li>
+          <li class="sui-step is-complete"><span class="sui-step-indicator">&#10003;</span><span>Launch</span></li>
+        </ol>
       </div>
 
       <!-- ACCORDION -->
@@ -1223,7 +1284,7 @@ Scale: H1 32px/700, H2 24px/600, H3 20px/600, Body 16px/400, Small 14px/400, Met
 Layout: 8px spacing grid (--sui-space-1 through --sui-space-6). Mobile-first. Max width: 1280px. Min touch target: 44px.
 
 Components (use SUI classes):
-- Buttons: sui-btn, sui-btn-primary, sui-btn-secondary, sui-btn-ghost, sui-btn-danger, sui-btn-success
+- Buttons: sui-btn, sui-btn-primary, sui-btn-secondary, sui-btn-ghost, sui-btn-dashed, sui-btn-danger, sui-btn-success
 - Cards: sui-card, sui-card-lg, sui-card-muted, sui-card-shadow, sui-card-flush
 - Inputs: sui-input, sui-input-group, sui-input-label, sui-select, sui-checkbox-label
 - Toggle: sui-toggle-label, sui-toggle, sui-toggle-track
@@ -1254,6 +1315,8 @@ Components (use SUI classes):
 - Screen: sui-screen (100dvh app shell), sui-screen-header, sui-screen-body, sui-screen-footer, sui-screen-solo
 - Dropzone: sui-dropzone (CSS only, .is-dragover state, behaviour is bring-your-own JS)
 - Timeline: sui-timeline + sui-timeline-item + sui-timeline-content (activity feed, role="feed", optimised for sui-avatar-sm)
+- Stepper: sui-stepper + sui-step + sui-step-indicator (states: is-complete, is-active, is-pending; aria-current="step" on active)
+- Topbar aligned: sui-topbar-aligned modifier (flex alternative to grid, brand left, nav+actions right)
 - Avatars: sui-avatar + sui-avatar-sm/md/lg/xl (initials-first, optional photo with onerror fallback)
 - Scoped tabs: wrap in data-sui-tabs to isolate multiple tab sets on one page
 - Layout: sui-grid, sui-grid-2/3/4, sui-grid-auto, sui-section, sui-flex, sui-flex-col, sui-flex-nowrap, sui-scroll-x
@@ -1277,6 +1340,7 @@ Status patterns (always icon + text):
 
 Elevation: Borders are the default card separation. Shadows are opt-in (sui-card-shadow).
 Motion: 150-250ms ease-out. Feedback only. No decorative animations.
+Brand colours: SUI semantic tokens (--sui-blue-primary, etc.) shift between themes. Do NOT use them for logos or brand marks — hardcode brand colours or use a custom property instead.
 
 If you notice a component or pattern SUI doesn't cover yet, mention it — we welcome contributions at the GitHub repo.
 
@@ -1298,7 +1362,7 @@ CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt; with defer.
 Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
-Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Use sui-* component classes for everything.
+Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
 Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -1336,15 +1400,17 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    - Never use aria-selected without role="tab"
    - Avatars: initials-first (optional photo with onerror fallback)
    - Icons: use aria-hidden="true" on decorative icons. Never use an icon alone without a text label.
-6. Use SUI component classes: sui-btn, sui-card, sui-badge, sui-alert, sui-avatar,
-   sui-toggle, sui-progress, sui-accordion, sui-dropdown, sui-dialog (native modal),
-   sui-modal (legacy), sui-tooltip, sui-breadcrumb, sui-pagination, sui-empty,
-   sui-skeleton, sui-table, sui-sheet (bottom sheet), sui-segmented (segmented control),
-   sui-chip (tag/chip), sui-card-interactive, sui-table-interactive, sui-table-sortable,
-   sui-progress-labeled, sui-dropzone, sui-timeline, sui-prose (long-form typography),
-   sui-mark (search highlight), sui-meta (metadata line), sui-toolbar (action bar),
-   sui-grid-auto, sui-scroll-x, sui-flex-nowrap,
+6. Use SUI component classes: sui-btn (+ sui-btn-primary/secondary/ghost/dashed/danger/success),
+   sui-card, sui-badge, sui-alert, sui-avatar, sui-toggle, sui-progress, sui-accordion,
+   sui-dropdown, sui-dialog (native modal), sui-modal (legacy), sui-tooltip, sui-breadcrumb,
+   sui-pagination, sui-empty, sui-skeleton, sui-table, sui-sheet (bottom sheet),
+   sui-segmented (segmented control), sui-chip (tag/chip), sui-card-interactive,
+   sui-table-interactive, sui-table-sortable, sui-progress-labeled, sui-dropzone,
+   sui-timeline, sui-stepper (multi-step wizard, CSS-only),
+   sui-prose (long-form typography), sui-mark (search highlight), sui-meta (metadata line),
+   sui-toolbar (action bar), sui-grid-auto, sui-scroll-x, sui-flex-nowrap,
    sui-container (container queries, opt-in), sui-avatar-xl,
+   sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right),
    sui-screen/sui-screen-header/sui-screen-body/sui-screen-footer (app shells), etc.
    Themes: light, dark, auto.
 7. Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;. Add id="main" to &lt;main&gt;.
@@ -1374,13 +1440,6 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         .recipe-inline-display { cursor: pointer; border-bottom: 1px dashed var(--sui-border); padding: 2px 0; }
         .recipe-inline-display:hover { border-color: var(--sui-blue-primary); }
         .recipe-kanban-col { min-width: 260px; flex-shrink: 0; }
-        .recipe-stepper { counter-reset: step; }
-        .recipe-step { display: flex; align-items: center; gap: var(--sui-space-2); flex: 1; position: relative; }
-        .recipe-step:not(:last-child)::after { content: ''; flex: 1; height: 2px; background: var(--sui-border); margin: 0 var(--sui-space-2); }
-        .recipe-step-done:not(:last-child)::after { background: var(--sui-success); }
-        .recipe-step-circle { width: 32px; height: 32px; border-radius: var(--sui-radius-full); display: flex; align-items: center; justify-content: center; font-size: var(--sui-text-small); font-weight: var(--sui-weight-semibold); flex-shrink: 0; border: 2px solid var(--sui-border); background: var(--sui-bg-card); color: var(--sui-text-muted); }
-        .recipe-step-done .recipe-step-circle { background: var(--sui-success-strong); border-color: var(--sui-success-strong); color: #FFF; }
-        .recipe-step-active .recipe-step-circle { border-color: var(--sui-blue-primary); color: var(--sui-blue-primary); background: var(--sui-blue-soft); }
         .recipe-split { display: grid; gap: 0; border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); overflow: hidden; min-height: 320px; }
         .recipe-split-40-60 { grid-template-columns: 2fr 3fr; }
         .recipe-split-50-50 { grid-template-columns: 1fr 1fr; }
@@ -1396,10 +1455,13 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         .recipe-doc-list-item:hover { background: var(--sui-bg-elevated); }
         .recipe-doc-list-item:last-child { border-bottom: none; }
         .recipe-profile-header { display: flex; gap: var(--sui-space-4); align-items: flex-start; padding: var(--sui-space-4); }
+        .recipe-btn-group-option.is-selected { border-color: var(--sui-blue-primary); background: var(--sui-blue-soft); color: var(--sui-blue-primary); font-weight: var(--sui-weight-semibold); }
+        .recipe-action-sheet { display: flex; flex-direction: column; }
+        .recipe-action-sheet-btn { justify-content: flex-start; border-radius: var(--sui-radius-md); }
+        .recipe-action-sheet .sui-divider { margin: var(--sui-space-1) 0; }
         @media (max-width: 640px) {
           .recipe-split { grid-template-columns: 1fr; }
           .recipe-split-list { border-right: none; border-bottom: 1px solid var(--sui-border); max-height: 200px; }
-          .recipe-stepper-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
           .recipe-profile-header { flex-direction: column; align-items: center; text-align: center; }
         }
       </style>
@@ -1414,7 +1476,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
               <div class="sui-kpi-label sui-mb-2">Display mode</div>
               <div class="sui-flex-col sui-gap-3">
                 <div><span class="sui-text-muted" style="font-size:var(--sui-text-meta);">Company</span><br><span class="recipe-inline-display">Acme Corporation</span></div>
-                <div><span class="sui-text-muted" style="font-size:var(--sui-text-meta);">Contact</span><br><span class="recipe-inline-display">jane@acme.com</span></div>
+                <div><span class="sui-text-muted" style="font-size:var(--sui-text-meta);">Contact</span><br><span class="recipe-inline-display"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ff5fef1fadffefcf2fab1fcf0f2">[email&#160;protected]</a></span></div>
                 <div><span class="sui-text-muted" style="font-size:var(--sui-text-meta);">Revenue</span><br><span class="recipe-inline-display">$120,000</span></div>
               </div>
             </div>
@@ -1552,56 +1614,9 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       <!-- RECIPE: STEPPER / WIZARD -->
       <div class="sui-section" id="recipe-stepper">
         <h2>Stepper / Wizard</h2>
-        <p class="sui-text-cap sui-mt-2">Multi-step progress indicator. Composes from: <code>sui-badge</code>, <code>sui-flex</code>. Custom CSS: ~15 lines. <em>This is a recipe because connector positioning is finicky across step counts and screen sizes. If this pattern stabilises, it may be promoted to a component.</em></p>
-        <div class="sui-card sui-mt-4">
-          <div class="recipe-stepper-wrap">
-            <div class="sui-flex recipe-stepper">
-              <div class="recipe-step recipe-step-done">
-                <div class="recipe-step-circle">✓</div>
-                <span style="font-size:var(--sui-text-small);font-weight:var(--sui-weight-semibold);white-space:nowrap;">Account</span>
-              </div>
-              <div class="recipe-step recipe-step-active">
-                <div class="recipe-step-circle">2</div>
-                <span style="font-size:var(--sui-text-small);font-weight:var(--sui-weight-semibold);white-space:nowrap;">Details</span>
-              </div>
-              <div class="recipe-step">
-                <div class="recipe-step-circle">3</div>
-                <span style="font-size:var(--sui-text-small);font-weight:var(--sui-weight-semibold);white-space:nowrap;">Confirm</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-flex recipe-stepper"&gt;
-  &lt;div class="recipe-step recipe-step-done"&gt;
-    &lt;div class="recipe-step-circle"&gt;✓&lt;/div&gt;
-    &lt;span&gt;Account&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div class="recipe-step recipe-step-active"&gt;
-    &lt;div class="recipe-step-circle"&gt;2&lt;/div&gt;
-    &lt;span&gt;Details&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div class="recipe-step"&gt;
-    &lt;div class="recipe-step-circle"&gt;3&lt;/div&gt;
-    &lt;span&gt;Confirm&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS (~15 lines) --&gt;
-&lt;style&gt;
-.recipe-stepper { counter-reset: step; }
-.recipe-step { display: flex; align-items: center; gap: var(--sui-space-2); flex: 1; position: relative; }
-.recipe-step:not(:last-child)::after { content: ''; flex: 1; height: 2px; background: var(--sui-border); margin: 0 var(--sui-space-2); }
-.recipe-step-done:not(:last-child)::after { background: var(--sui-success); }
-.recipe-step-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center;
-  justify-content: center; font-size: var(--sui-text-small); font-weight: 600; border: 2px solid var(--sui-border);
-  background: var(--sui-bg-card); color: var(--sui-text-muted); flex-shrink: 0; }
-.recipe-step-done .recipe-step-circle { background: var(--sui-success-strong); border-color: var(--sui-success-strong); color: #FFF; }
-.recipe-step-active .recipe-step-circle { border-color: var(--sui-blue-primary); color: var(--sui-blue-primary); background: var(--sui-blue-soft); }
-&lt;/style&gt;</pre>
-          </div>
+        <div class="sui-alert sui-alert-info sui-mt-3">
+          <i data-lucide="arrow-up-circle"></i>
+          <div><strong>Promoted to component.</strong> The stepper pattern has been promoted from recipe to a first-class component in v2.2.0. See <code>sui-stepper</code> in the Components tab above.</div>
         </div>
       </div>
 
@@ -2104,16 +2119,101 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
 
-    </section>
+      <!-- RECIPE: BUTTON GROUP -->
+      <div class="sui-section" id="recipe-button-group">
+        <h2>Button Group</h2>
+        <p class="sui-text-cap sui-mt-2">Single-select option picker. Composes from: <code>sui-grid</code>, <code>sui-btn</code>. Custom CSS: ~10 lines. ARIA <code>radiogroup</code> pattern is the key value here.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Select your plan</div>
+          <div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan">
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="zap"></i>Starter</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="rocket"></i>Pro</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="building-2"></i>Team</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="crown"></i>Enterprise</button>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan"&gt;
+  &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false"&gt;
+    &lt;i data-lucide="zap"&gt;&lt;/i&gt;Starter
+  &lt;/button&gt;
+  &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true"&gt;
+    &lt;i data-lucide="rocket"&gt;&lt;/i&gt;Pro
+  &lt;/button&gt;
+  &lt;!-- More options... --&gt;
+&lt;/div&gt;
 
-    <!-- ===== FOOTER ===== -->
+&lt;!-- Custom CSS (~10 lines) --&gt;
+&lt;style&gt;
+.recipe-btn-group-option.is-selected {
+  border-color: var(--sui-blue-primary);
+  background: var(--sui-blue-soft);
+  color: var(--sui-blue-primary);
+  font-weight: var(--sui-weight-semibold);
+}
+&lt;/style&gt;
+
+&lt;!-- JS: toggle is-selected + aria-checked on click --&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: ACTION SHEET -->
+      <div class="sui-section" id="recipe-action-sheet">
+        <h2>Action Sheet</h2>
+        <p class="sui-text-cap sui-mt-2">Mobile action menu. Composes from: <code>sui-sheet</code>, <code>sui-btn</code>, <code>sui-btn-ghost</code>, <code>sui-divider</code>. Custom CSS: ~15 lines. Inherits sheet's focus trap, Escape, and backdrop.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Action sheet preview</div>
+          <div style="background: var(--sui-bg-elevated); border-radius: var(--sui-radius-lg); padding: var(--sui-space-3); max-width: 360px;">
+            <div class="recipe-action-sheet">
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="edit-3"></i>Edit</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="copy"></i>Duplicate</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="share-2"></i>Share</button>
+              <hr class="sui-divider">
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button" style="color: var(--sui-error);"><i data-lucide="trash-2"></i>Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Trigger --&gt;
+&lt;button class="sui-btn" data-sui-sheet="#actionSheet"&gt;More Actions&lt;/button&gt;
+
+&lt;!-- Sheet --&gt;
+&lt;div id="actionSheet" class="sui-sheet" aria-modal="true" role="dialog" aria-label="Actions"&gt;
+  &lt;div class="sui-sheet-panel"&gt;
+    &lt;div class="sui-sheet-handle"&gt;&lt;/div&gt;
+    &lt;div class="recipe-action-sheet"&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Edit&lt;/button&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Duplicate&lt;/button&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Share&lt;/button&gt;
+      &lt;hr class="sui-divider"&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" style="color: var(--sui-error);"&gt;Delete&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~15 lines) --&gt;
+&lt;style&gt;
+.recipe-action-sheet { display: flex; flex-direction: column; }
+.recipe-action-sheet-btn { justify-content: flex-start; border-radius: var(--sui-radius-md); }
+.recipe-action-sheet .sui-divider { margin: var(--sui-space-1) 0; }
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
     <footer class="sui-footer">
       <div class="sui-footer-links">
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer"><i data-lucide="github"></i>GitHub</a>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
-      <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada 🇨🇦</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.1.2</span></a>
+      <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada</small>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.2.0</span></a>
     </footer>
   </main>
 
@@ -2169,7 +2269,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
   </div>
 
   <!-- ===== SCRIPTS ===== -->
-  <script src="./sui.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="./sui.js"></script>
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
@@ -2185,7 +2285,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       document.getElementById('themeIconDark').style.display = isDark ? '' : 'none';
     }
     syncThemeIcon();
-    new MutationObserver(syncThemeIcon).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    // Watch for theme changes
+    const observer = new MutationObserver(syncThemeIcon);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   </script>
 </body>
 </html>

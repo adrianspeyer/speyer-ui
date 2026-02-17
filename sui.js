@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.1.2
+ * Version: 2.2.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -11,7 +11,7 @@
  *   — Auto-initializes via data-sui-* attributes
  *   — Or call SUI.modal.open('#id'), SUI.toast.success('msg'), etc.
  *
- * Made in Canada with love 🇨🇦
+ * Made in Canada with love ðŸ‡¨ðŸ‡¦
  * License: MIT
  */
 

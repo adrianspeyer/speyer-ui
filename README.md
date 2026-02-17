@@ -9,7 +9,7 @@ A lightweight design system built around four constraints:
 
 Under 75KB minified. Zero required dependencies. Works with any framework or none.
 
-**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, prose (long-form typography), mark (search highlights), meta (metadata lines), toolbars, screen layout (app shells), and a dark mode that works.
+**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, steppers, prose (long-form typography), mark (search highlights), meta (metadata lines), toolbars, screen layout (app shells), and a dark mode that works.
 
 **[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
@@ -162,7 +162,7 @@ SUI provides 50+ components. All built from design tokens. Code examples for eve
 
 ### Buttons
 
-`sui-btn` · `sui-btn-primary` · `sui-btn-secondary` · `sui-btn-ghost` · `sui-btn-danger` · `sui-btn-success` · `sui-btn-sm`
+`sui-btn` · `sui-btn-primary` · `sui-btn-secondary` · `sui-btn-ghost` · `sui-btn-dashed` · `sui-btn-danger` · `sui-btn-success` · `sui-btn-sm`
 
 ### Cards
 
@@ -321,6 +321,12 @@ Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`
 
 `sui-toolbar` — horizontal scrolling action bar with hidden scrollbar. `sui-toolbar-btn` for buttons, `sui-toolbar-sep` for separators, `aria-pressed="true"` for active state. Variants: `sui-toolbar-bordered`, `sui-toolbar-compact`.
 
+### Top Bar
+
+`sui-topbar` uses a 3-column CSS grid by default (brand | nav | actions). Add `sui-topbar-aligned` as a modifier to switch to flex layout — brand stays left, nav and actions push right. Useful when you have fewer nav items that look lost in the centre column.
+
+**Brand colours:** SUI semantic tokens (like `--sui-blue-primary`) shift between light and dark themes. Do not use them for logos or brand marks — hardcode brand colours or use a custom property (e.g. `--app-brand: #1a1a2e`).
+
 ### Screen Layout
 
 `sui-screen` — full-viewport flex column (`100dvh`) for mobile-first app shells. `sui-screen-header` (sticky top with safe area inset), `sui-screen-body` (scrollable `flex:1`), `sui-screen-footer` (pinned bottom with safe area inset). Multi-view switching: inactive screens hidden by default, toggle with `.is-active`. Use `sui-screen-solo` for single-screen apps.
@@ -332,6 +338,10 @@ Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`
 ### Timeline
 
 `sui-timeline` · `sui-timeline-item` · `sui-timeline-content` — activity feed. Optimised for `sui-avatar-sm`. Container: `role="feed"`, items: `role="article"`.
+
+### Stepper
+
+`sui-stepper` · `sui-step` · `sui-step-indicator` — multi-step wizard. CSS-only, horizontal on desktop, vertical on mobile. Use `<ol>` for list semantics. States: `.is-complete` (checkmark, green fill), `.is-active` (blue ring, `aria-current="step"`), `.is-pending` (hollow circle). Connectors stretch with `flex: 1` — works with any step count.
 
 ### Utilities
 
@@ -425,9 +435,14 @@ SUI ships components. You build patterns. These recipes show common application 
 |--------|-----------|-----------|------|
 | Inline Edit | Click-to-edit fields with ARIA | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-inline-edit) |
 | Kanban Board | Horizontal scrolling card columns | ~6 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-kanban) |
-| Stepper / Wizard | Multi-step progress indicator | ~15 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-stepper) |
 | Split Pane | Master-detail list + panel layout | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-split-pane) |
 | Settings | Preferences page with toggles + controls | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-settings) |
+| Blog Post | Article layout with prose, meta, avatar | ~4 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-blog-post) |
+| Document Library | File list with badges and avatars | ~6 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-doc-library) |
+| App Shell | Multi-screen mobile app with tab nav | 0 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-app-shell) |
+| Profile Page | User profile with stats and activity | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-profile-page) |
+| Button Group | Single-select option grid with radiogroup ARIA | ~10 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-button-group) |
+| Action Sheet | Mobile action menu via bottom sheet | ~15 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-action-sheet) |
 
 > **Components vs Recipes:** Components ship in the SUI bundle. Recipes are documented patterns that compose those components with minimal custom CSS. Recipes are starting points — modify to fit your app.
 
@@ -701,4 +716,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). If you're using SUI with an AI tool and 
 
 [MIT](LICENSE) — free for personal and commercial use.
 
-Created by [Adrian Speyer](https://github.com/adrianspeyer). Made in Canada 🇨🇦
+Created by [Adrian Speyer](https://github.com/adrianspeyer). Made in Canada.

@@ -24,7 +24,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 
-// ── Colour math (WCAG 2.1 relative luminance) ─────────────────────
+// â”€â”€ Colour math (WCAG 2.1 relative luminance) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function hexToRGB(hex) {
   hex = hex.replace('#', '');
@@ -51,7 +51,7 @@ function contrastRatio(a, b) {
 }
 
 
-// ── Token parser ───────────────────────────────────────────────────
+// â”€â”€ Token parser â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function parseTokens(css, blockStart) {
   const idx = css.indexOf(blockStart);
@@ -72,15 +72,15 @@ function parseTokens(css, blockStart) {
 }
 
 
-// ── Result tracking ────────────────────────────────────────────────
+// â”€â”€ Result tracking â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 let totalPass = 0;
 let totalFail = 0;
 let totalWarn = 0;
 
 function pass()     { totalPass++; }
-function fail(msg)  { totalFail++; console.log(`    ✗ ${msg}`); }
-function warn(msg)  { totalWarn++; console.log(`    ⚠ ${msg}`); }
+function fail(msg)  { totalFail++; console.log(`    âœ— ${msg}`); }
+function warn(msg)  { totalWarn++; console.log(`    âš  ${msg}`); }
 
 function testPair(fg, bg, label, threshold, theme, level = 'error') {
   const ratio = contrastRatio(fg, bg);
@@ -117,11 +117,11 @@ function lineAt(str, pos) {
 }
 
 
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  1. WCAG AA CONTRAST — Token pairs
 //     Tests every documented foreground/background combination in
 //     both light and dark themes. Grouped by regression likelihood.
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function checkContrast() {
   const css = readFile('sui-tokens.css');
@@ -130,7 +130,7 @@ function checkContrast() {
   const light = parseTokens(css, ':root {');
   const dark  = parseTokens(css, '[data-theme="dark"]');
 
-  console.log('  ── Contrast: Token Pairs ──');
+  console.log('  â”€â”€ Contrast: Token Pairs â”€â”€');
 
   // P1: Soft backgrounds — tightest ratios, most likely to regress
   const SOFT = [
@@ -164,6 +164,7 @@ function checkContrast() {
     ['--sui-text-inverse',   '--sui-btn-primary-bg-hover','btn-primary:hover',  4.5],
     ['--sui-text-inverse',   '--sui-btn-danger-bg-hover', 'btn-danger:hover',   4.5],
     ['--sui-text-inverse',   '--sui-btn-success-bg-hover','btn-success:hover',  4.5],
+    ['--sui-text-inverse',   '--sui-btn-success-bg',      'stepper complete',   4.5],
   ];
 
   // Advisory: Focus ring visibility — 3:1 is WCAG 2.4.11 (AAA), not 2.4.7 (AA).
@@ -194,15 +195,15 @@ function checkContrast() {
 }
 
 
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  2. HARDCODED COLOUR OVERRIDES
 //     Component-level hex values that don't resolve from tokens.
 //     These must be tested separately since the token parser can't
 //     reach them.
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function checkHardcodedContrast() {
-  console.log('  ── Contrast: Hardcoded Overrides ──');
+  console.log('  â”€â”€ Contrast: Hardcoded Overrides â”€â”€');
   const PAIRS = [
     ['#FFFFFF', '#92400E', 'progress-labeled warning', 4.5],
     ['#FFFFFF', '#0E7490', 'progress-labeled info',    4.5],
@@ -213,32 +214,32 @@ function checkHardcodedContrast() {
 }
 
 
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  3. HTML / ARIA ACCESSIBILITY
 //     Static analysis of index.html targeting axe-core rule IDs and
 //     Lighthouse audit IDs. Catches issues before they reach a
 //     browser. Code examples (<pre>, <code>, <script>) are stripped
 //     to avoid false positives from documentation.
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function checkHTML() {
   const raw = readFile('index.html');
   if (!raw) return;
   const html = stripCodeBlocks(raw);
 
-  console.log('  ── HTML/ARIA ──');
+  console.log('  â”€â”€ HTML/ARIA â”€â”€');
 
-  // ─── document-lang (axe: html-has-lang) ───
+  // â”€â”€â”€ document-lang (axe: html-has-lang) â”€â”€â”€
   console.log('     Language');
   if (/<html[^>]*\slang="[^"]+"/i.test(raw)) pass();
   else fail('<html> missing lang attribute');
 
-  // ─── document-title (axe: document-title) ───
+  // â”€â”€â”€ document-title (axe: document-title) â”€â”€â”€
   console.log('     Document title');
   if (/<title>[^<]+<\/title>/i.test(raw)) pass();
   else fail('Missing or empty <title>');
 
-  // ─── button-name (axe: button-name) ───
+  // â”€â”€â”€ button-name (axe: button-name) â”€â”€â”€
   console.log('     Button names');
   const btnRe = /<button([^>]*)>([\s\S]*?)<\/button>/gi;
   let m, unlabeled = 0;
@@ -255,7 +256,7 @@ function checkHTML() {
   }
   if (unlabeled === 0) pass();
 
-  // ─── link-name (axe: link-name) ───
+  // â”€â”€â”€ link-name (axe: link-name) â”€â”€â”€
   console.log('     Link names');
   const linkRe = /<a\s([^>]*)>([\s\S]*?)<\/a>/gi;
   let emptyLinks = 0;
@@ -272,7 +273,7 @@ function checkHTML() {
   }
   if (emptyLinks === 0) pass();
 
-  // ─── image-alt (axe: image-alt) ───
+  // â”€â”€â”€ image-alt (axe: image-alt) â”€â”€â”€
   console.log('     Image alt text');
   const imgRe = /<img([^>]*)\/?\s*>/gi;
   let noAlt = 0;
@@ -284,7 +285,7 @@ function checkHTML() {
   }
   if (noAlt === 0) pass();
 
-  // ─── duplicate-id (axe: duplicate-id-active) ───
+  // â”€â”€â”€ duplicate-id (axe: duplicate-id-active) â”€â”€â”€
   console.log('     Unique IDs');
   const idRe = /\sid="([^"]+)"/g;
   const ids = {};
@@ -295,7 +296,7 @@ function checkHTML() {
   }
   if (dupes === 0) pass();
 
-  // ─── heading-order (axe: heading-order) ───
+  // â”€â”€â”€ heading-order (axe: heading-order) â”€â”€â”€
   console.log('     Heading hierarchy');
   const hRe = /<h(\d)/g;
   let prev = 0, skips = 0;
@@ -309,7 +310,7 @@ function checkHTML() {
   }
   if (skips === 0) pass();
 
-  // ─── tabindex (axe: tabindex) ───
+  // â”€â”€â”€ tabindex (axe: tabindex) â”€â”€â”€
   console.log('     Tab order');
   const tabRe = /tabindex="(\d+)"/g;
   let badTab = 0;
@@ -322,7 +323,7 @@ function checkHTML() {
   }
   if (badTab === 0) pass();
 
-  // ─── meta-viewport (axe: meta-viewport) ───
+  // â”€â”€â”€ meta-viewport (axe: meta-viewport) â”€â”€â”€
   console.log('     Viewport');
   const vpMatch = raw.match(/<meta[^>]*name="viewport"[^>]*content="([^"]+)"/i);
   if (!vpMatch) {
@@ -338,7 +339,7 @@ function checkHTML() {
     }
   }
 
-  // ─── list structure (axe: listitem) ───
+  // â”€â”€â”€ list structure (axe: listitem) â”€â”€â”€
   // <li> must be direct child of <ul>, <ol>, or <menu>.
   // We check that every <li> has a <ul>/<ol>/<menu> ancestor in the
   // surrounding markup. Simplified: look for opening tag before it.
@@ -363,7 +364,7 @@ function checkHTML() {
   }
   if (orphanLi === 0) pass();
 
-  // ─── autocomplete (axe: autocomplete-valid) — advisory ───
+  // â”€â”€â”€ autocomplete (axe: autocomplete-valid) — advisory â”€â”€â”€
   console.log('     Autocomplete');
   const acRe = /<input[^>]*type="(password|email)"[^>]*>/gi;
   let missingAC = 0;
@@ -375,7 +376,7 @@ function checkHTML() {
   }
   if (missingAC === 0) pass();
 
-  // ─── aria-hidden-focus (axe: aria-hidden-focus) ───
+  // â”€â”€â”€ aria-hidden-focus (axe: aria-hidden-focus) â”€â”€â”€
   // Focusable elements must not live inside aria-hidden="true"
   console.log('     Focus inside aria-hidden');
   const ahRe = /aria-hidden="true"[^>]*>([\s\S]*?)<\/(?:div|span|section|nav)>/gi;
@@ -389,16 +390,40 @@ function checkHTML() {
     }
   }
   if (hiddenFocus === 0) pass();
+
+  // ——— stepper aria-current (v2.2.0) ———
+  console.log('     Stepper active state');
+  const activeSteps = (html.match(/is-active/g) || []).length;
+  const ariaCurrent = (html.match(/aria-current="step"/g) || []).length;
+  if (activeSteps > 0 && ariaCurrent === 0) {
+    fail('Stepper .is-active found but no aria-current="step"');
+  } else if (activeSteps > 0) {
+    pass();
+  } else {
+    pass(); // No stepper in demo is fine
+  }
+
+  // ——— radiogroup aria-label (v2.2.0) ———
+  console.log('     Radiogroup labels');
+  const rgRe = /role="radiogroup"([^>]*)/gi;
+  let unlabeledRG = 0;
+  while ((m = rgRe.exec(html))) {
+    if (!/aria-label\s*=/.test(m[1]) && !/aria-labelledby\s*=/.test(m[1])) {
+      fail(`role="radiogroup" without aria-label at line ~${lineAt(raw, m.index)}`);
+      unlabeledRG++;
+    }
+  }
+  if (unlabeledRG === 0) pass();
 }
 
 
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  4. VERSION CONSISTENCY
 //     Every source file's Version: header must match package.json.
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function checkVersions() {
-  console.log('  ── Version Consistency ──');
+  console.log('  â”€â”€ Version Consistency â”€â”€');
   const pkg = JSON.parse(readFile('package.json') || '{}');
   const expected = pkg.version;
   if (!expected) { fail('No version in package.json'); return; }
@@ -413,14 +438,14 @@ function checkVersions() {
 }
 
 
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  5. DIST HYGIENE
 //     Only expected file types should be in dist/. Catches accidental
 //     inclusion of source files, documentation, or other artifacts.
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function checkDistHygiene() {
-  console.log('  ── Dist Hygiene ──');
+  console.log('  â”€â”€ Dist Hygiene â”€â”€');
   const distDir = path.join(ROOT, 'dist');
   if (!fs.existsSync(distDir)) { pass(); return; }
 
@@ -437,33 +462,62 @@ function checkDistHygiene() {
   if (unexpected === 0) pass();
 }
 
+function checkEncoding() {
+  console.log('  \u2500\u2500 Encoding Hygiene \u2500\u2500');
+  const SOURCE_FILES = [
+    'sui-tokens.css', 'sui-components.css', 'sui.js',
+    'index.html', 'README.md', 'CHANGELOG.md',
+    'scripts/preflight.js',
+  ];
+  const BAD = [
+    ['\u00e2\u20ac\u201d', 'em dash'],
+    ['\u00e2\u20ac\u201c', 'en dash'],
+    ['\u00e2\u2020\u2019', 'arrow'],
+    ['\u00c3\u2014', 'multiply'],
+    ['\u00e2\u2030\u00a0', 'not-equal'],
+  ];
+  let dirty = 0;
+  for (const file of SOURCE_FILES) {
+    const content = readFile(file);
+    if (!content) continue;
+    for (const [seq, label] of BAD) {
+      if (content.includes(seq)) {
+        fail(`${file} contains mojibake (${label})`);
+        dirty++;
+      }
+    }
+  }
+  if (dirty === 0) pass();
+}
 
-// ════════════════════════════════════════════════════════════════════
+
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  Runner
-// ════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 console.log('');
 console.log('  SUI Preflight Validator');
-console.log('  ═══════════════════════════════════════════════');
+console.log('  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
 
 checkContrast();
 checkHardcodedContrast();
 checkHTML();
 checkVersions();
 checkDistHygiene();
+checkEncoding();
 
 console.log('');
 const parts = [`${totalPass} passed`, `${totalFail} failed`];
 if (totalWarn > 0) parts.push(`${totalWarn} advisory`);
 console.log(`  ${parts.join(', ')}`);
-console.log('  ═══════════════════════════════════════════════');
+console.log('  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
 
 if (totalFail > 0) {
-  console.log('  ✗ Preflight FAILED — fix issues before shipping.');
+  console.log('  âœ— Preflight FAILED — fix issues before shipping.');
   console.log('');
   process.exit(1);
 } else {
-  console.log('  ✓ All checks passed.');
+  console.log('  âœ“ All checks passed.');
   console.log('');
   process.exit(0);
 }

@@ -1,13 +1,13 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.1.2
+ * Version: 2.2.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
  * Requires: sui-tokens.css
  * Optional: sui.js (for interactive components)
  *
- * Made in Canada with love 🇨🇦
+ * Made in Canada with love ðŸ‡¨ðŸ‡¦
  * License: MIT
  */
 
@@ -441,6 +441,25 @@ kbd {
   justify-self: end;
 }
 
+/* Topbar Aligned — flex alternative to 3-column grid.
+   Brand stays left, nav + actions push right. */
+@media (min-width: 769px) {
+  .sui-topbar-aligned .sui-topbar-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--sui-space-4);
+  }
+  .sui-topbar-aligned .sui-brand {
+    margin-right: auto;
+  }
+  .sui-topbar-aligned .sui-nav {
+    justify-self: auto;
+  }
+  .sui-topbar-aligned .sui-topbar-actions {
+    justify-self: auto;
+  }
+}
+
 
 /* ==========================================================================
    Cards
@@ -563,6 +582,16 @@ kbd {
   color: var(--sui-text-primary);
 }
 
+.sui-btn-dashed {
+  background: transparent;
+  border: 1px dashed var(--sui-border);
+  color: var(--sui-text-muted);
+}
+.sui-btn-dashed:hover {
+  background: var(--sui-bg-elevated);
+  color: var(--sui-text-secondary);
+}
+
 .sui-btn-danger {
   background: var(--sui-btn-danger-bg);
   border-color: transparent;
@@ -588,7 +617,7 @@ kbd {
 .sui-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .sui-btn-sm svg { width: 16px; height: 16px; }
 
-/* Dark mode: progress-labeled backgrounds use brand tokens for white text (≥4.5:1) */
+/* Dark mode: progress-labeled backgrounds use brand tokens for white text (â‰¥4.5:1) */
 [data-theme="dark"] .sui-progress-labeled .sui-progress-bar                          { background: var(--sui-btn-primary-bg); }
 [data-theme="dark"] .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: var(--sui-btn-success-bg); }
 [data-theme="dark"] .sui-progress-warning.sui-progress-labeled .sui-progress-bar     { background: #92400E; }
@@ -2013,7 +2042,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
      </nav>
    Mobile toggle:
      <button class="sui-btn sui-btn-sm sui-btn-ghost sui-nav-toggle"
-             data-sui-nav-toggle=".sui-nav" aria-label="Menu">☰</button>
+             data-sui-nav-toggle=".sui-nav" aria-label="Menu">â˜°</button>
    ========================================================================== */
 
 .sui-nav {
@@ -2847,6 +2876,103 @@ dialog.sui-dialog-wide { max-width: 720px; }
 .sui-timeline-content {
   flex: 1;
   min-width: 0;
+}
+
+
+/* ==========================================================================
+   Stepper / Wizard
+   ========================================================================== */
+
+.sui-stepper {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sui-step {
+  display: flex;
+  align-items: center;
+  gap: var(--sui-space-2);
+  font-size: var(--sui-text-small);
+  color: var(--sui-text-muted);
+}
+
+/* Each step except last stretches to fill — connector rides the extra space */
+.sui-step:not(:last-child) { flex: 1; }
+
+/* Connector line between steps */
+.sui-step:not(:last-child)::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  min-width: 16px;
+  background: var(--sui-border);
+  margin-inline: var(--sui-space-2);
+}
+
+/* Step indicator — shared base */
+.sui-step-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--sui-radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--sui-text-meta);
+  font-weight: var(--sui-weight-bold);
+  flex-shrink: 0;
+  border: 2px solid var(--sui-border);
+  background: transparent;
+  color: var(--sui-text-muted);
+}
+
+/* Pending — hollow circle (default state) */
+
+/* Active — ring with blue highlight */
+.sui-step.is-active .sui-step-indicator {
+  border-color: var(--sui-blue-primary);
+  background: var(--sui-blue-soft);
+  color: var(--sui-blue-primary);
+}
+.sui-step.is-active {
+  color: var(--sui-text-primary);
+  font-weight: var(--sui-weight-semibold);
+}
+
+/* Complete — filled success with checkmark */
+.sui-step.is-complete .sui-step-indicator {
+  border-color: transparent;
+  background: var(--sui-btn-success-bg);
+  color: var(--sui-text-inverse);
+}
+.sui-step.is-complete::after {
+  background: var(--sui-btn-success-bg);
+}
+
+/* Vertical layout on mobile */
+@media (max-width: 600px) {
+  .sui-stepper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .sui-step {
+    position: relative;
+    padding-bottom: var(--sui-space-3);
+  }
+  .sui-step:last-child { padding-bottom: 0; }
+  .sui-step:not(:last-child)::after {
+    position: absolute;
+    left: 13px;
+    top: 32px;
+    bottom: 0;
+    width: 2px;
+    height: auto;
+    min-width: 0;
+    margin: 0;
+  }
 }
 
 

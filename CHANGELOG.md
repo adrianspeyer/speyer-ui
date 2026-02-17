@@ -4,6 +4,27 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.2.0] — 2026-02-17
+
+### Added
+
+- **Stepper** (`sui-stepper`, `sui-step`, `sui-step-indicator`) — CSS-only multi-step wizard promoted from recipe. Flexbox + `::after` connectors, states (`.is-complete`, `.is-active`, `.is-pending`) with shape + colour distinction (not colour alone). `<ol>` semantics, `aria-current="step"` on active. Responsive: horizontal desktop, vertical mobile. Works with any step count.
+- **Dashed Button** (`sui-btn-dashed`) — Tertiary button variant with dashed border, muted text, transparent background. Hover fills with `--sui-bg-elevated`. For de-emphasised actions ("Skip", "Add item", dropzone triggers). Composes with `sui-btn` + `sui-btn-sm`.
+- **Topbar Aligned** (`sui-topbar-aligned`) — Flex layout modifier for `sui-topbar`. Brand stays left, nav + actions push right. Solves the problem where 2 nav items float awkwardly in a 3-column grid centre. Default topbar unchanged.
+- **Button Group recipe** — Single-select option grid with `role="radiogroup"` + `role="radio"` + `aria-checked` ARIA pattern. Demo on Recipes tab.
+- **Action Sheet recipe** — Mobile action menu composing `sui-sheet` + stacked `sui-btn-ghost` + dividers. Destructive action at bottom. Demo on Recipes tab.
+- **AI context files** (`.cursor/rules`, `.claude/instructions.md`) — Comprehensive reference for AI coding assistants. Includes: all 50+ components with exact class names, design tokens, ARIA requirements per component, recipe list, brand colour guidance, common AI mistakes, namespace protection (`sui-*` prefix contract). Zero private file references.
+- **Brand colour guidance** — Documented in README, AI prompts, and AI context files. Semantic tokens shift between themes — do not use for logos or brand marks. Hardcode brand colours or use custom properties.
+
+### Changed
+
+- **Stepper recipe** on Recipes tab now redirects to the Stepper component on the Components tab (promoted from recipe to first-class component).
+- **README recipe table** expanded from 5 to 10 entries (added Blog Post, Document Library, App Shell, Profile Page, Button Group, Action Sheet; removed Stepper).
+- **AI prompts** (Quick, Minimal, System) updated with stepper, btn-dashed, topbar-aligned, and brand colour guidance.
+- **"What you get" one-liner** updated to include steppers.
+
+---
+
 ## [2.1.2] — 2026-02-16
 
 ### Added
@@ -46,7 +67,7 @@ SUI now has an opinion about content, not just interface.
 **New Components:**
 - **Prose** (`sui-prose`) — Long-form typography container. One class covers headings (h1–h6 with scroll-margin-top), paragraphs, links, lists, blockquotes, code blocks, tables, images, horizontal rules, and task list checkboxes. Size variants: `sui-prose-sm` (15px), default (18px), `sui-prose-lg` (20px). Width constraints: `sui-prose-narrow` (680px), `sui-prose-wide` (900px). Overridable via CSS custom properties. Inspired by Tailwind Typography but built on SUI tokens.
 - **Mark** (`sui-mark`, `sui-mark-current`) — Search result highlighting with automatic dark mode adaptation and print suppression. 8 lines of CSS that every search feature needs.
-- **Meta** (`sui-meta`) — Dot-separated metadata line. "1,234 words · 5 min read · Updated 3h ago" — separator via CSS `::before`, HTML stays semantic.
+- **Meta** (`sui-meta`) — Dot-separated metadata line. "1,234 words Â· 5 min read Â· Updated 3h ago" — separator via CSS `::before`, HTML stays semantic.
 - **Toolbar** (`sui-toolbar`, `sui-toolbar-btn`, `sui-toolbar-sep`) — Horizontal scrolling action bar with hidden scrollbar. `aria-pressed="true"` toggle state. Variants: `sui-toolbar-bordered`, `sui-toolbar-compact`.
 
 ### Why v2.1.0
@@ -64,7 +85,7 @@ The gap between "design system" and "app framework" is content. Interface compon
 - **Scoped Tabs:** `data-sui-tabs` wrapper scopes tab discovery by container. Multiple independent tab sets on one page no longer conflict. Pages without the wrapper work as before (backward compatible).
 - **Avatar XL:** `sui-avatar-xl` at 80px for profile pages and account headers.
 - **Table Interactive:** `sui-table-interactive` — clickable rows with `cursor: pointer` and focus ring. Composes with `sui-table-hover`. Developer adds `tabindex="0"`, `role="link"`, and handler.
-- **Table Sortable:** `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Three states: neutral (⇅), ascending (↑), descending (↓). Developer toggles attribute value. No JS needed.
+- **Table Sortable:** `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Three states: neutral (â‡…), ascending (â†‘), descending (â†“). Developer toggles attribute value. No JS needed.
 - **Progress Labeled:** `sui-progress-labeled` + `sui-progress-text` — text inside the progress bar fill. Uses `-strong` backgrounds in light mode and hardcoded dark-mode overrides for WCAG AA white-text contrast on all five colour variants.
 - **Dropzone:** `sui-dropzone` — file upload area with dashed border, hover state, `.is-dragover` state. CSS only — drag-and-drop behaviour is bring-your-own JS.
 - **Timeline:** `sui-timeline` + `sui-timeline-item` + `sui-timeline-content` — activity feed layout with avatar-left, content-right, and vertical connector. Optimised for `sui-avatar-sm`. `role="feed"` + `role="article"` for accessibility.
@@ -275,7 +296,7 @@ The gap between "design system" and "app framework" is content. Interface compon
 
 ## [2.0.0] — 2026-02-14
 
-### 🚀 Major Release — Complete Design System
+### ðŸš€ Major Release — Complete Design System
 
 This release transforms SUI from a token + component starter into a complete, production-ready design system with 25+ components, an optional JavaScript toolkit, and comprehensive AI integration prompts.
 
