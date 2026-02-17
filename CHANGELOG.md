@@ -4,6 +4,32 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.4.0] — 2026-02-17
+
+### Added
+
+- **Sidenav collapsible groups** (`sui-sidenav-group`, `sui-sidenav-group-toggle`, `sui-sidenav-group-links`, `sui-sidenav-group-count`) — Expand/collapse groups within sidenav. Chevron via CSS `::after` pseudo-element (zero icon dependency). `aria-expanded` + `aria-controls` pairing. Works without JS (groups expanded by default). JS API: `SUI.sidenav.collapseAll(nav)` / `.expandAll(nav)`. Auto-init on `.sui-sidenav-group-toggle` buttons. Both themes, high contrast, reduced motion. ~45 lines CSS + ~25 lines JS.
+- **Panel** (`sui-panel`, `sui-panel-header`, `sui-panel-title`, `sui-panel-close`, `sui-panel-body`, `sui-panel-footer`) — Side panel / slide-over, the third overlay type. Dialog blocks, sheet slides up, panel slides from right. Desktop: coexists with main content, no focus trap. Mobile: full-screen blocking overlay with focus trap. Dual focus model toggles automatically on breakpoint resize. `--sui-panel-width` custom property for configurable width. `.sui-panel-no-backdrop` modifier. Escape closes, backdrop click closes. JS API: `SUI.panel.open()` / `.close()` / `.toggle()`. Auto-init via `data-sui-panel`. Both themes, high contrast (2px border), reduced motion. ~100 lines CSS + ~60 lines JS.
+- **5 new recipes** — Sidenav search/filter, sidenav context-switching, panel push mode (content resize), master-detail (table + panel), notification centre (panel + cards). All on demo Recipes tab.
+- **Preflight: sidenav group ARIA check** — Validates `aria-expanded` + `aria-controls` on `.sui-sidenav-group-toggle`.
+- **Preflight: panel ARIA checks** — Validates `aria-label` on `.sui-panel` and `aria-label` on `.sui-panel-close`.
+
+### Fixed
+
+- **Sidenav panel scroll** — `max-height` + `overflow-y` moved from `.sui-sidenav` to `.sui-sidenav-panel` on desktop (was on `main` since v2.3.0, now tagged).
+- **README stale claims** — "Zero dependencies" updated to "zero runtime dependencies" (SUI has dev dependencies for minification). Bundle size claims updated from "under 75KB" to "under 90KB" (accurate since v2.1.2). Preflight check count updated 58 → 66. "What you get" list updated with sidenav and panel. File size table updated with current numbers. (Planned for v2.4.1, folded into v2.4.0.)
+- **Encoding cleanup** — Mojibake characters fixed across all source files inherited from project library transfer.
+
+### Changed
+
+- **Demo sidenav groups** migrated from `demo-*` classes to `sui-*` component classes. Group expand/collapse now handled by SUI auto-init instead of demo-only JS.
+- **`.gitignore` added** — Ignores `node_modules/`, `package-lock.json`, `.DS_Store`. `package-lock.json` removed from tracking (dev-only lockfile, misleading for a zero-runtime-dependency project).
+- **Preflight validator** — 63 → 66 checks (+3: sidenav group ARIA, panel labels, panel close buttons).
+- **AI context files** updated with panel component, sidenav groups, and 5 new recipes.
+- **README recipe table** updated with 5 new entries (16 total).
+
+---
+
 ## [2.3.0] — 2026-02-17
 
 ### Added

@@ -7,11 +7,11 @@ A lightweight design system built around four constraints:
 3. **Components work with or without JavaScript.** CSS handles appearance, JS adds behavior.
 4. **Status is never communicated by color alone.** Every badge, alert, and indicator requires icon + text.
 
-Under 75KB minified. Zero required dependencies. Works with any framework or none.
+Under 90KB minified. Zero runtime dependencies. Works with any framework or none.
 
-**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, steppers, prose (long-form typography), mark (search highlights), meta (metadata lines), toolbars, screen layout (app shells), and a dark mode that works.
+**What you get:** buttons, cards, badges, alerts, avatars (sm/md/lg/xl), toggles, tables (interactive rows, sortable columns), forms, progress bars (including labelled), modals, toasts, dropdowns, tooltips, accordions, breadcrumbs, pagination, empty states, skeletons, bottom sheets, segmented controls, chips/tags, dropzones, timelines, steppers, sidenav (collapsible groups), side panels (slide-over), prose (long-form typography), mark (search highlights), meta (metadata lines), toolbars, screen layout (app shells), and a dark mode that works.
 
-**[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** · [GitHub](https://github.com/adrianspeyer/speyer-ui)
+**[Live Demo](https://adrianspeyer.github.io/speyer-ui/)** Â· [GitHub](https://github.com/adrianspeyer/speyer-ui)
 
 Built for internal tools, SaaS dashboards, and lightweight web applications.
 
@@ -125,13 +125,13 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 
 | File | Purpose | Minified | Required? |
 |------|---------|----------|-----------|
-| `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | ~5KB | Yes |
-| `sui-components.css` | Component classes built from tokens | ~52KB | Yes |
-| `sui.js` | Interactive behaviours (modals, toasts, dropdowns, sheets) | ~14KB | **No** |
+| `sui-tokens.css` | Design tokens (colours, spacing, typography, shadows) | ~6KB | Yes |
+| `sui-components.css` | Component classes built from tokens | ~60KB | Yes |
+| `sui.js` | Interactive behaviours (modals, toasts, dropdowns, sheets, panels) | ~23KB | **No** |
 
-**Core:** under 75KB (tokens + components + JS). Zero dependencies.
+**Core:** under 90KB (tokens + components + JS). Zero runtime dependencies.
 
-CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, and accordion. Components render correctly without JS — they just won't open/close/animate.
+CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, accordion, sheets, sidenav, and panels. Components render correctly without JS — they just won't open/close/animate.
 
 ### Icons
 
@@ -162,38 +162,38 @@ SUI provides 50+ components. All built from design tokens. Code examples for eve
 
 ### Buttons
 
-`sui-btn` · `sui-btn-primary` · `sui-btn-secondary` · `sui-btn-ghost` · `sui-btn-dashed` · `sui-btn-danger` · `sui-btn-success` · `sui-btn-sm`
+`sui-btn` Â· `sui-btn-primary` Â· `sui-btn-secondary` Â· `sui-btn-ghost` Â· `sui-btn-dashed` Â· `sui-btn-danger` Â· `sui-btn-success` Â· `sui-btn-sm`
 
 ### Cards
 
-`sui-card` · `sui-card-lg` · `sui-card-flush` · `sui-card-shadow` · `sui-card-header` · `sui-card-body` · `sui-card-interactive`
+`sui-card` Â· `sui-card-lg` Â· `sui-card-flush` Â· `sui-card-shadow` Â· `sui-card-header` Â· `sui-card-body` Â· `sui-card-interactive`
 
 `sui-card-interactive` adds `cursor: pointer` and hover shadow elevation. Compose with any card variant. Add `tabindex="0"` for keyboard accessibility when the card isn't wrapped in a link.
 
 ### Inputs
 
-`sui-input` · `sui-input-error` · `sui-input-label` · `sui-input-group` · `sui-input-help` · `sui-checkbox` · `sui-radio` · `sui-checkbox-label` · `sui-radio-label`
+`sui-input` Â· `sui-input-error` Â· `sui-input-label` Â· `sui-input-group` Â· `sui-input-help` Â· `sui-checkbox` Â· `sui-radio` Â· `sui-checkbox-label` Â· `sui-radio-label`
 
 ### Toggle / Switch
 
-`sui-toggle` · `sui-toggle-track` · `sui-toggle-label`
+`sui-toggle` Â· `sui-toggle-track` Â· `sui-toggle-label`
 
 ### Badges
 
-`sui-badge` · `sui-badge-success` · `sui-badge-warning` · `sui-badge-error` · `sui-badge-info` · `sui-badge-neutral` · `sui-badge-pro` · `sui-badge-dot` · `sui-badge-sm`
+`sui-badge` Â· `sui-badge-success` Â· `sui-badge-warning` Â· `sui-badge-error` Â· `sui-badge-info` Â· `sui-badge-neutral` Â· `sui-badge-pro` Â· `sui-badge-dot` Â· `sui-badge-sm`
 
 When using `sui-badge-count`, always pair with a parent element that provides context via `aria-label`. The count element should have `aria-hidden="true"` since the parent's label conveys the full meaning.
 
 ```html
 <span class="sui-badge-overlay">
-  <button aria-label="Notifications, 3 unread">🔔</button>
+  <button aria-label="Notifications, 3 unread">ðŸ””</button>
   <span class="sui-badge-count" aria-hidden="true">3</span>
 </span>
 ```
 
 ### Shields (Two-Segment Badges)
 
-`sui-shield` · `sui-shield-label` · `sui-shield-value` · Status variants
+`sui-shield` Â· `sui-shield-label` Â· `sui-shield-value` Â· Status variants
 
 GitHub-style status badges for dashboards. Can be links or static.
 
@@ -211,11 +211,11 @@ GitHub-style status badges for dashboards. Can be links or static.
 
 ### Alerts
 
-`sui-alert` · `sui-alert-success` · `sui-alert-warning` · `sui-alert-error` · `sui-alert-info`
+`sui-alert` Â· `sui-alert-success` Â· `sui-alert-warning` Â· `sui-alert-error` Â· `sui-alert-info`
 
 ### Avatars
 
-`sui-avatar` · `sui-avatar-sm` (32px) · `sui-avatar-md` (40px) · `sui-avatar-lg` (56px) · `sui-avatar-xl` (80px) · `sui-avatar-group`
+`sui-avatar` Â· `sui-avatar-sm` (32px) Â· `sui-avatar-md` (40px) Â· `sui-avatar-lg` (56px) Â· `sui-avatar-xl` (80px) Â· `sui-avatar-group`
 
 Initials by default with deterministic colours from `sui.js`. Optional photo support — add an `<img>` inside the avatar and initials show as automatic fallback when the image fails:
 
@@ -228,29 +228,29 @@ Initials by default with deterministic colours from `sui.js`. Optional photo sup
 
 ### Progress Bars
 
-`sui-progress` · `sui-progress-bar` · Status variants · `sui-progress-lg` · `sui-progress-indeterminate` · `sui-progress-labeled` · `sui-progress-text`
+`sui-progress` Â· `sui-progress-bar` Â· Status variants Â· `sui-progress-lg` Â· `sui-progress-indeterminate` Â· `sui-progress-labeled` Â· `sui-progress-text`
 
 `sui-progress-labeled` puts text inside the bar. Contrast-safe in both themes.
 
 ### Tables
 
-`sui-table-wrap` · `sui-table` · `sui-table-striped` · `sui-table-hover` · `sui-table-interactive` · `sui-table-sortable`
+`sui-table-wrap` Â· `sui-table` Â· `sui-table-striped` Â· `sui-table-hover` Â· `sui-table-interactive` Â· `sui-table-sortable`
 
 Responsive: stacks to card layout on mobile via `data-label` attributes on `<td>`. `sui-table-interactive` adds clickable rows with cursor and focus ring — developer adds `tabindex="0"`, `role="link"`, `aria-label`, and click handler. `sui-table-sortable` adds visual sort indicators on `<th data-sort>`.
 
 ### Navigation
 
-Breadcrumb: `sui-breadcrumb` · Pagination: `sui-pagination` · `sui-page-btn` · Nav links: `sui-nav` · `sui-nav-link` · `sui-nav-toggle`
+Breadcrumb: `sui-breadcrumb` Â· Pagination: `sui-pagination` Â· `sui-page-btn` Â· Nav links: `sui-nav` Â· `sui-nav-link` Â· `sui-nav-toggle`
 
 ### Bottom Sheet / Drawer
 
-`sui-sheet` · `sui-sheet-panel` · `sui-sheet-handle` · `sui-sheet-header` · `sui-sheet-title` · `sui-sheet-body` · `sui-sheet-footer` · `sui-sheet-close`
+`sui-sheet` Â· `sui-sheet-panel` Â· `sui-sheet-handle` Â· `sui-sheet-header` Â· `sui-sheet-title` Â· `sui-sheet-body` Â· `sui-sheet-footer` Â· `sui-sheet-close`
 
 ### Sidenav
 
-`sui-sidenav` · `sui-sidenav-panel` · `sui-sidenav-link` · `sui-sidenav-heading` · `sui-sidenav-toggle` · `sui-sidenav-close`
+`sui-sidenav` Â· `sui-sidenav-panel` Â· `sui-sidenav-link` Â· `sui-sidenav-heading` Â· `sui-sidenav-toggle` Â· `sui-sidenav-close`
 
-Responsive section navigation. Sticky sidebar on desktop (≥769px), off-canvas slide-in on mobile with focus trap and Escape-to-close. Active state via `.is-active` or `aria-current="page"`.
+Responsive section navigation. Sticky sidebar on desktop (â‰¥769px), off-canvas slide-in on mobile with focus trap and Escape-to-close. Active state via `.is-active` or `aria-current="page"`.
 
 ```html
 <nav class="sui-sidenav" aria-label="Section navigation" aria-hidden="true">
@@ -261,10 +261,56 @@ Responsive section navigation. Sticky sidebar on desktop (≥769px), off-canvas 
   </div>
 </nav>
 <button class="sui-sidenav-toggle" data-sui-sidenav=".sui-sidenav"
-        aria-label="Open navigation" type="button">☰</button>
+        aria-label="Open navigation" type="button">â˜°</button>
 ```
 
-JS API: `SUI.sidenav.open('.sui-sidenav')` · `SUI.sidenav.close('.sui-sidenav')` · `SUI.sidenav.toggle('.sui-sidenav')`
+JS API: `SUI.sidenav.open('.sui-sidenav')` Â· `SUI.sidenav.close('.sui-sidenav')` Â· `SUI.sidenav.toggle('.sui-sidenav')`
+
+**Collapsible groups:** Wrap links in `.sui-sidenav-group` with a toggle button. Groups work without JS (expanded by default). JS adds expand/collapse behaviour.
+
+```html
+<div class="sui-sidenav-group">
+  <button class="sui-sidenav-group-toggle" type="button"
+          aria-expanded="true" aria-controls="group-nav">
+    Navigation <span class="sui-sidenav-group-count">5</span>
+  </button>
+  <div class="sui-sidenav-group-links" id="group-nav">
+    <a href="#" class="sui-sidenav-link">Link 1</a>
+    <a href="#" class="sui-sidenav-link">Link 2</a>
+  </div>
+</div>
+```
+
+Group API: `SUI.sidenav.collapseAll(nav)` · `SUI.sidenav.expandAll(nav)`
+
+### Panel
+
+`sui-panel` · `sui-panel-header` · `sui-panel-title` · `sui-panel-close` · `sui-panel-body` · `sui-panel-footer`
+
+Side panel / slide-over — the third overlay type. Dialog blocks, sheet slides up, panel slides from right. Desktop: coexists with main content (no focus trap). Mobile: full-screen with focus trap. Width configurable via `--sui-panel-width`. Optional backdrop via `.sui-panel-no-backdrop`.
+
+```html
+<div class="sui-panel" id="myPanel" aria-label="Detail" aria-hidden="true">
+  <div>
+    <div class="sui-panel-header">
+      <span class="sui-panel-title">Title</span>
+      <button class="sui-panel-close" type="button" aria-label="Close panel">&times;</button>
+    </div>
+    <div class="sui-panel-body">Content</div>
+    <div class="sui-panel-footer">
+      <button class="sui-btn sui-btn-ghost" onclick="SUI.panel.close('#myPanel')">Cancel</button>
+      <button class="sui-btn sui-btn-primary">Save</button>
+    </div>
+  </div>
+</div>
+<button data-sui-panel="#myPanel" aria-expanded="false">Open Panel</button>
+```
+
+JS API: `SUI.panel.open('#id')` · `SUI.panel.close('#id')` · `SUI.panel.toggle('#id')`
+
+Custom width: `style="--sui-panel-width: 50vw"`. No backdrop on desktop: add `.sui-panel-no-backdrop`.
+
+### Bottom Sheet
 
 Mobile-first slide-up drawer. Handles `env(safe-area-inset-bottom)` for iOS notch, `overscroll-behavior: contain` for scroll trapping, Escape key to close, backdrop click to close. Requires `sui.js`.
 
@@ -274,7 +320,7 @@ Mobile-first slide-up drawer. Handles `env(safe-area-inset-bottom)` for iOS notc
     <div class="sui-sheet-handle"></div>
     <div class="sui-sheet-header">
       <span class="sui-sheet-title">Share Project</span>
-      <button class="sui-sheet-close sui-btn sui-btn-ghost sui-btn-sm" aria-label="Close">✕</button>
+      <button class="sui-sheet-close sui-btn sui-btn-ghost sui-btn-sm" aria-label="Close">âœ•</button>
     </div>
     <div class="sui-sheet-body">
       <p>Sheet content goes here.</p>
@@ -292,7 +338,7 @@ Mobile-first slide-up drawer. Handles `env(safe-area-inset-bottom)` for iOS notc
 
 ### Segmented Control
 
-`sui-segmented` · `sui-segment`
+`sui-segmented` Â· `sui-segment`
 
 Value picker with `role="radiogroup"` + `role="radio"` semantics. Arrow keys navigate between segments. Not tabs — semantically distinct. Requires `sui.js` for keyboard navigation and ARIA state management.
 
@@ -306,7 +352,7 @@ Value picker with `role="radiogroup"` + `role="radio"` semantics. Arrow keys nav
 
 ### Chip / Tag
 
-`sui-chip` · `sui-chip-remove` · Status variants: `sui-chip-success` · `sui-chip-warning` · `sui-chip-error` · `sui-chip-info` · `sui-chip-pro`
+`sui-chip` Â· `sui-chip-remove` Â· Status variants: `sui-chip-success` Â· `sui-chip-warning` Â· `sui-chip-error` Â· `sui-chip-info` Â· `sui-chip-pro`
 
 Visual pill component. CSS only — behaviour (keyboard add/remove, deduplication) is bring-your-own JS, same philosophy as icons.
 
@@ -315,19 +361,19 @@ Visual pill component. CSS only — behaviour (keyboard add/remove, deduplicatio
 <span class="sui-chip sui-chip-success">Approved</span>
 <span class="sui-chip">
   React
-  <button class="sui-chip-remove" aria-label="Remove React">✕</button>
+  <button class="sui-chip-remove" aria-label="Remove React">âœ•</button>
 </span>
 ```
 
 ### Interactive Components (require `sui.js`)
 
-Accordion · Dropdown · Modal (native `<dialog>` recommended, legacy overlay supported) · Toast notifications · Tooltip
+Accordion Â· Dropdown Â· Modal (native `<dialog>` recommended, legacy overlay supported) Â· Toast notifications Â· Tooltip
 
 Scoped tabs: wrap in `data-sui-tabs` to isolate multiple tab sets on one page.
 
 ### Structural
 
-Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`sui-embed`)
+Dividers Â· Empty state Â· Skeleton loaders Â· Stat cards Â· Responsive embed (`sui-embed`)
 
 ### Content
 
@@ -357,21 +403,21 @@ Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`
 
 ### Timeline
 
-`sui-timeline` · `sui-timeline-item` · `sui-timeline-content` — activity feed. Optimised for `sui-avatar-sm`. Container: `role="feed"`, items: `role="article"`.
+`sui-timeline` Â· `sui-timeline-item` Â· `sui-timeline-content` — activity feed. Optimised for `sui-avatar-sm`. Container: `role="feed"`, items: `role="article"`.
 
 ### Stepper
 
-`sui-stepper` · `sui-step` · `sui-step-indicator` — multi-step wizard. CSS-only, horizontal on desktop, vertical on mobile. Use `<ol>` for list semantics. States: `.is-complete` (checkmark, green fill), `.is-active` (blue ring, `aria-current="step"`), `.is-pending` (hollow circle). Connectors stretch with `flex: 1` — works with any step count.
+`sui-stepper` Â· `sui-step` Â· `sui-step-indicator` — multi-step wizard. CSS-only, horizontal on desktop, vertical on mobile. Use `<ol>` for list semantics. States: `.is-complete` (checkmark, green fill), `.is-active` (blue ring, `aria-current="step"`), `.is-pending` (hollow circle). Connectors stretch with `flex: 1` — works with any step count.
 
 ### Utilities
 
-**Layout** — Grid (`sui-grid-2/3/4/sidebar/auto`) · Spacing (`sui-mt-*`, `sui-gap-*`) · Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`, `sui-flex-nowrap`) · Scroll (`sui-scroll-x`) · Container queries (`sui-container`, `sui-cq-stack`, `sui-cq-full`, `sui-cq-hide`, `sui-cq-row`, `sui-cq-show`)
+**Layout** — Grid (`sui-grid-2/3/4/sidebar/auto`) Â· Spacing (`sui-mt-*`, `sui-gap-*`) Â· Flex (`sui-flex`, `sui-flex-col`, `sui-flex-between`, `sui-flex-nowrap`) Â· Scroll (`sui-scroll-x`) Â· Container queries (`sui-container`, `sui-cq-stack`, `sui-cq-full`, `sui-cq-hide`, `sui-cq-row`, `sui-cq-show`)
 
-**Text** — `sui-text-muted` · `sui-text-bold` · `sui-text-cap`
+**Text** — `sui-text-muted` Â· `sui-text-bold` Â· `sui-text-cap`
 
-**Radius** — Override border-radius on any component: `sui-round-none` (0) · `sui-round-sm` (8px) · `sui-round-md` (12px) · `sui-round-lg` (16px) · `sui-round-full` (pill)
+**Radius** — Override border-radius on any component: `sui-round-none` (0) Â· `sui-round-sm` (8px) Â· `sui-round-md` (12px) Â· `sui-round-lg` (16px) Â· `sui-round-full` (pill)
 
-**Visibility** — Two-tier system: `sui-hidden` (display: none, removed from accessibility tree) · `sui-visually-hidden` (clipped to 1px, preserved for screen readers)
+**Visibility** — Two-tier system: `sui-hidden` (display: none, removed from accessibility tree) Â· `sui-visually-hidden` (clipped to 1px, preserved for screen readers)
 
 **Skip Link** — Add `<a href="#main" class="sui-visually-hidden">Skip to main content</a>` as first child of `<body>`. Visible when focused.
 
@@ -418,7 +464,7 @@ Borders are the default card separation. Shadows are opt-in via `sui-card-shadow
 
 ### Brand / Interactive Tokens
 
-Button and pagination backgrounds use overridable tokens. In light mode, they default to the blue/status colour tokens. In dark mode, they lock to contrast-safe values (≥4.5:1 with white text). Override these to change your brand colour while the preflight validator catches unsafe values.
+Button and pagination backgrounds use overridable tokens. In light mode, they default to the blue/status colour tokens. In dark mode, they lock to contrast-safe values (â‰¥4.5:1 with white text). Override these to change your brand colour while the preflight validator catches unsafe values.
 
 | Token | Light Default | Dark Default |
 |-------|--------------|-------------|
@@ -463,6 +509,11 @@ SUI ships components. You build patterns. These recipes show common application 
 | Profile Page | User profile with stats and activity | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-profile-page) |
 | Button Group | Single-select option grid with radiogroup ARIA | ~10 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-button-group) |
 | Action Sheet | Mobile action menu via bottom sheet | ~15 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-action-sheet) |
+| Sidenav Search | Real-time filter for sidenav links with group counts | ~20 lines JS | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-sidenav-search) |
+| Sidenav Context | Auto-collapse inactive groups on context switch | ~15 lines JS | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-sidenav-context) |
+| Panel Push Mode | Content resize instead of overlay | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-push-mode) |
+| Master-Detail | Table row → panel detail (CRM/help desk) | ~10 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-master-detail) |
+| Notification Centre | Bell icon → panel with notification cards | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-notification-centre) |
 
 > **Components vs Recipes:** Components ship in the SUI bundle. Recipes are documented patterns that compose those components with minimal custom CSS. Recipes are starting points — modify to fit your app.
 
@@ -648,7 +699,7 @@ All previously documented contrast limitations have been resolved in v2.0.11. Te
 
 ### Color-Blind Design
 
-SUI uses red and green hues for success/error states. These hues are **never the only signal.** Every status pattern includes a descriptive **text label** (e.g., "Active", "Failed"), a distinguishing **icon** (✔, ✕, ⚠, ℹ), and sufficient **contrast** on its background. A user who cannot distinguish red from green will still see "✔ Active" and "✕ Failed" with clear icon differentiation and readable text.
+SUI uses red and green hues for success/error states. These hues are **never the only signal.** Every status pattern includes a descriptive **text label** (e.g., "Active", "Failed"), a distinguishing **icon** (âœ”, âœ•, âš , â„¹), and sufficient **contrast** on its background. A user who cannot distinguish red from green will still see "âœ” Active" and "âœ• Failed" with clear icon differentiation and readable text.
 
 ### Reduced Motion
 
@@ -696,26 +747,26 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```
 speyer-ui/
-├── dist/                    ← Minified (CDN/production)
-│   ├── sui-tokens.min.css
-│   ├── sui-components.min.css
-│   └── sui.min.js
-├── scripts/
-│   └── preflight.js         ← Build-time accessibility validator
-├── sui-tokens.css           ← Source (readable)
-├── sui-components.css
-├── sui.js
-├── index.html               ← Live demo (GitHub Pages)
-├── package.json
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-└── LICENSE
+â”œâ”€â”€ dist/                    â† Minified (CDN/production)
+â”‚   â”œâ”€â”€ sui-tokens.min.css
+â”‚   â”œâ”€â”€ sui-components.min.css
+â”‚   â””â”€â”€ sui.min.js
+â”œâ”€â”€ scripts/
+â”‚   â””â”€â”€ preflight.js         â† Build-time accessibility validator
+â”œâ”€â”€ sui-tokens.css           â† Source (readable)
+â”œâ”€â”€ sui-components.css
+â”œâ”€â”€ sui.js
+â”œâ”€â”€ index.html               â† Live demo (GitHub Pages)
+â”œâ”€â”€ package.json
+â”œâ”€â”€ README.md
+â”œâ”€â”€ CHANGELOG.md
+â”œâ”€â”€ CONTRIBUTING.md
+â””â”€â”€ LICENSE
 ```
 
 ### Preflight Validator
 
-`scripts/preflight.js` runs automatically before every build (`npm run build`). It catches accessibility and quality regressions before they ship — 58 checks, zero dependencies:
+`scripts/preflight.js` runs automatically before every build (`npm run build`). It catches accessibility and quality regressions before they ship — 66 checks, zero npm dependencies:
 
 - **WCAG AA contrast** — 40+ foreground/background token pairs tested in both light and dark themes
 - **HTML/ARIA** — 12 rules mapped to axe-core audit IDs (button-name, image-alt, heading-order, link-name, duplicate-id, aria-hidden-focus, and more)

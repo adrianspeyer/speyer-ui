@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.3.0
+ * Version: 2.4.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -669,6 +669,119 @@ const SUI = (() => {
       const el = typeof selector === 'string' ? $(selector) : selector;
       if (!el) return;
       el.classList.contains('is-open') ? this.close(el) : this.open(el);
+    },
+
+    /** Collapse all sidenav groups within a container */
+    collapseAll(navSelector) {
+      const ctx = typeof navSelector === 'string' ? $(navSelector) : navSelector || document;
+      if (!ctx) return;
+      $$('.sui-sidenav-group-toggle', ctx).forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        const id = btn.getAttribute('aria-controls');
+        if (id) { const target = document.getElementById(id); if (target) target.hidden = true; }
+      });
+    },
+
+    /** Expand all sidenav groups within a container */
+    expandAll(navSelector) {
+      const ctx = typeof navSelector === 'string' ? $(navSelector) : navSelector || document;
+      if (!ctx) return;
+      $$('.sui-sidenav-group-toggle', ctx).forEach(btn => {
+        btn.setAttribute('aria-expanded', 'true');
+        const id = btn.getAttribute('aria-controls');
+        if (id) { const target = document.getElementById(id); if (target) target.hidden = false; }
+      });
+    }
+  };
+
+  /* ====================================================================
+     Panel — Side panel / slide-over
+     Desktop: focus moves, no trap (both regions interactive).
+     Mobile: focus trap (panel is full-screen blocking overlay).
+     ==================================================================== */
+
+  const panel = {
+    _active: null,
+    _previousFocus: null,
+    _mediaQuery: window.matchMedia('(min-width: 769px)'),
+
+    open(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+
+      this._previousFocus = document.activeElement;
+      el.classList.add('is-open');
+      el.setAttribute('aria-hidden', 'false');
+      this._active = el;
+
+      // Update trigger aria-expanded
+      $$(`[data-sui-panel="${selector}"]`).forEach(t => t.setAttribute('aria-expanded', 'true'));
+
+      // Mobile: lock body scroll (full-screen blocking)
+      if (!this._mediaQuery.matches) document.body.style.overflow = 'hidden';
+
+      // Focus first focusable element inside panel
+      const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', el);
+      if (focusable.length) setTimeout(() => focusable[0].focus(), 50);
+
+      // Keyboard handler
+      el._suiKeyHandler = (e) => {
+        if (e.key === 'Escape') { this.close(el); return; }
+        // Focus trap only on mobile
+        if (e.key === 'Tab' && !this._mediaQuery.matches) {
+          const focusable = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', el);
+          if (!focusable.length) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+          } else {
+            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+          }
+        }
+      };
+      el.addEventListener('keydown', el._suiKeyHandler);
+
+      // Breakpoint change while open: toggle trap + body scroll
+      el._suiMqHandler = (mq) => {
+        if (mq.matches) {
+          document.body.style.overflow = '';
+        } else {
+          document.body.style.overflow = 'hidden';
+        }
+      };
+      this._mediaQuery.addEventListener('change', el._suiMqHandler);
+    },
+
+    close(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+
+      el.classList.remove('is-open');
+      el.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      // Update trigger aria-expanded
+      const id = el.id ? `#${el.id}` : null;
+      if (id) $$(`[data-sui-panel="${id}"]`).forEach(t => t.setAttribute('aria-expanded', 'false'));
+
+      if (el._suiKeyHandler) {
+        el.removeEventListener('keydown', el._suiKeyHandler);
+        delete el._suiKeyHandler;
+      }
+      if (el._suiMqHandler) {
+        this._mediaQuery.removeEventListener('change', el._suiMqHandler);
+        delete el._suiMqHandler;
+      }
+
+      if (this._active === el) this._active = null;
+      if (this._previousFocus) this._previousFocus.focus();
+    },
+
+    toggle(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+      el.classList.contains('is-open') ? this.close(el) : this.open(el);
     }
   };
 
@@ -874,6 +987,38 @@ const SUI = (() => {
         }
       });
     });
+
+    // Sidenav group toggles — expand/collapse
+    $$('.sui-sidenav-group-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        const id = btn.getAttribute('aria-controls');
+        if (id) { const target = document.getElementById(id); if (target) target.hidden = expanded; }
+      });
+    });
+
+    // Panel triggers
+    $$('[data-sui-panel]').forEach(btn => {
+      btn.addEventListener('click', () => panel.toggle(btn.getAttribute('data-sui-panel')));
+    });
+
+    // Panel close buttons
+    $$('.sui-panel-close').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = btn.closest('.sui-panel');
+        if (p) panel.close(p);
+      });
+    });
+
+    // Panel backdrop click-to-close + initial ARIA
+    $$('.sui-panel').forEach(el => {
+      el.addEventListener('click', e => {
+        // Close on backdrop click (not if no-backdrop modifier)
+        if (e.target === el && !el.classList.contains('sui-panel-no-backdrop')) panel.close(el);
+      });
+      if (!el.hasAttribute('aria-hidden')) el.setAttribute('aria-hidden', 'true');
+    });
   }
 
   // Run on DOM ready
@@ -900,6 +1045,7 @@ const SUI = (() => {
     sheet,
     segmented,
     sidenav,
+    panel,
     init
   };
 })();

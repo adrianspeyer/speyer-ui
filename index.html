@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speyer UI System — Accessibility as Architecture</title>
-  <meta name="description" content="A lightweight, zero-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Made in Canada." />
+  <meta name="description" content="A lightweight, zero-runtime-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Made in Canada." />
   <link rel="stylesheet" href="./sui-tokens.css" />
   <link rel="stylesheet" href="./sui-components.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,28 +27,7 @@
     .demo-sidenav-search { padding: var(--sui-space-2) var(--sui-space-3); }
     .demo-sidenav-search .sui-input { font-size: var(--sui-text-sm); padding: 6px 10px; }
 
-    /* Collapsible groups */
-    .demo-sidenav-group-toggle {
-      display: flex; align-items: center; justify-content: space-between;
-      width: 100%; padding: var(--sui-space-2) var(--sui-space-4);
-      font-size: var(--sui-text-xs); font-weight: var(--sui-weight-semibold);
-      color: var(--sui-text-muted); text-transform: uppercase; letter-spacing: 0.05em;
-      background: none; border: none; cursor: pointer;
-      transition: color var(--sui-duration-fast) var(--sui-easing);
-    }
-    .demo-sidenav-group-toggle:hover { color: var(--sui-text-primary); }
-    .demo-sidenav-group-toggle::after {
-      content: ''; width: 0; height: 0;
-      border-left: 4px solid transparent; border-right: 4px solid transparent;
-      border-top: 5px solid currentColor;
-      transition: transform var(--sui-duration-fast) var(--sui-easing);
-    }
-    .demo-sidenav-group-toggle[aria-expanded="false"]::after { transform: rotate(-90deg); }
-    .demo-sidenav-group-links[hidden] { display: none; }
-    .demo-sidenav-count {
-      font-size: 10px; font-weight: 400;
-      color: var(--sui-text-muted); margin-left: var(--sui-space-1);
-    }
+      // Group counts (SUI handles expand/collapse via auto-init)
     .demo-sidenav-empty {
       padding: var(--sui-space-3) var(--sui-space-4);
       font-size: var(--sui-text-sm); color: var(--sui-text-muted);
@@ -72,7 +51,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.3.0</span>
+          <span class="sui-version-pill">v2.4.0</span>
         </div>
       </div>
 
@@ -117,19 +96,19 @@
         <div class="sui-sidenav-header">
           <span class="sui-sidenav-title">Sections</span>
           <button class="sui-sidenav-close sui-btn sui-btn-ghost sui-btn-sm"
-                  aria-label="Close navigation" type="button">✕</button>
+                  aria-label="Close navigation" type="button">âœ•</button>
         </div>
         <div class="demo-sidenav-search">
           <input type="search" class="sui-input" id="sidenavSearch"
-                 placeholder="Filter…" aria-label="Filter sections" autocomplete="off">
+                 placeholder="Filterâ€¦" aria-label="Filter sections" autocomplete="off">
         </div>
         <div class="demo-sidenav-scroll">
-        <div class="demo-sidenav-group" data-group="components">
-          <button class="demo-sidenav-group-toggle" type="button"
+        <div class="sui-sidenav-group" data-group="components">
+          <button class="sui-sidenav-group-toggle" type="button"
                   aria-expanded="true" aria-controls="group-components">
-            Components <span class="demo-sidenav-count"></span>
+            Components <span class="sui-sidenav-group-count"></span>
           </button>
-          <div class="demo-sidenav-group-links" id="group-components">
+          <div class="sui-sidenav-group-links" id="group-components">
             <a href="#comp-buttons" class="sui-sidenav-link" data-sidenav-tab="components">Buttons</a>
             <a href="#comp-badges" class="sui-sidenav-link" data-sidenav-tab="components">Badges</a>
             <a href="#comp-alerts" class="sui-sidenav-link" data-sidenav-tab="components">Alerts</a>
@@ -159,12 +138,12 @@
             <a href="#comp-layout" class="sui-sidenav-link" data-sidenav-tab="components">Layout Utilities</a>
           </div>
         </div>
-        <div class="demo-sidenav-group" data-group="recipes">
-          <button class="demo-sidenav-group-toggle" type="button"
+        <div class="sui-sidenav-group" data-group="recipes">
+          <button class="sui-sidenav-group-toggle" type="button"
                   aria-expanded="true" aria-controls="group-recipes">
-            Recipes <span class="demo-sidenav-count"></span>
+            Recipes <span class="sui-sidenav-group-count"></span>
           </button>
-          <div class="demo-sidenav-group-links" id="group-recipes">
+          <div class="sui-sidenav-group-links" id="group-recipes">
             <a href="#recipe-inline-edit" class="sui-sidenav-link" data-sidenav-tab="recipes">Inline Edit</a>
             <a href="#recipe-kanban" class="sui-sidenav-link" data-sidenav-tab="recipes">Kanban Board</a>
             <a href="#recipe-stepper" class="sui-sidenav-link" data-sidenav-tab="recipes">Stepper / Wizard</a>
@@ -176,6 +155,11 @@
             <a href="#recipe-profile-page" class="sui-sidenav-link" data-sidenav-tab="recipes">Profile Page</a>
             <a href="#recipe-button-group" class="sui-sidenav-link" data-sidenav-tab="recipes">Button Group</a>
             <a href="#recipe-action-sheet" class="sui-sidenav-link" data-sidenav-tab="recipes">Action Sheet</a>
+            <a href="#recipe-sidenav-search" class="sui-sidenav-link" data-sidenav-tab="recipes">Sidenav Search</a>
+            <a href="#recipe-sidenav-context" class="sui-sidenav-link" data-sidenav-tab="recipes">Sidenav Context</a>
+            <a href="#recipe-push-mode" class="sui-sidenav-link" data-sidenav-tab="recipes">Panel Push Mode</a>
+            <a href="#recipe-master-detail" class="sui-sidenav-link" data-sidenav-tab="recipes">Master-Detail</a>
+            <a href="#recipe-notification-centre" class="sui-sidenav-link" data-sidenav-tab="recipes">Notification Centre</a>
           </div>
         </div>
         <p class="demo-sidenav-empty" hidden>No matches.</p>
@@ -194,7 +178,7 @@
           <p class="sui-text-cap sui-mt-2">
             Built around four constraints: accessibility is mandatory, no build tools required,
             components work with or without JS, and status is never communicated by color alone.
-            Lightweight and zero-dependency. Scores 100 on Lighthouse accessibility.
+            Lightweight and zero runtime dependencies. Scores 100 on Lighthouse accessibility.
           </p>
         </div>
       </div>
@@ -205,7 +189,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.3.0</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.4.0</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -272,7 +256,7 @@
 
         <div class="sui-card sui-card-lg">
           <h2>Architecture</h2>
-          <p class="sui-text-cap sui-mt-2">Three files, zero dependencies, instant deployment.</p>
+          <p class="sui-text-cap sui-mt-2">Three files, zero runtime dependencies, instant deployment.</p>
           <div class="sui-flex-col sui-gap-3 sui-mt-4">
             <div class="sui-card sui-card-muted">
               <div class="sui-flex-between">
@@ -546,7 +530,7 @@
               </div>
             </div>
             <div>
-              <div class="sui-progress-label"><span>Uploading…</span><span></span></div>
+              <div class="sui-progress-label"><span>Uploadingâ€¦</span><span></span></div>
               <div class="sui-progress sui-progress-indeterminate sui-progress-info" role="progressbar" aria-label="Upload in progress">
                 <div class="sui-progress-bar"></div>
               </div>
@@ -629,7 +613,7 @@
         <p class="sui-text-cap sui-mt-2">Search result highlighting. Automatic dark mode and print handling.</p>
         <div class="sui-card sui-mt-4">
           <p>Search results: The <mark class="sui-mark">quick brown fox</mark> jumped over the <mark class="sui-mark sui-mark-current">lazy dog</mark> while the <mark class="sui-mark">quick</mark> cat watched.</p>
-          <p class="sui-text-muted sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-mark</code> = all matches (soft yellow) · <code>sui-mark-current</code> = current match (strong amber)</p>
+          <p class="sui-text-muted sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-mark</code> = all matches (soft yellow) Â· <code>sui-mark-current</code> = current match (strong amber)</p>
         </div>
       </div>
 
@@ -986,7 +970,7 @@
             <button class="sui-page-btn" aria-label="Page 1">1</button>
             <button class="sui-page-btn" aria-current="page" aria-label="Page 2, current">2</button>
             <button class="sui-page-btn" aria-label="Page 3">3</button>
-            <span class="sui-page-ellipsis">…</span>
+            <span class="sui-page-ellipsis">â€¦</span>
             <button class="sui-page-btn" aria-label="Page 12">12</button>
             <button class="sui-page-btn" aria-label="Next page"><i data-lucide="chevron-right"></i></button>
           </nav>
@@ -1206,6 +1190,59 @@
             <code class="sui-mt-2" style="display:block;">clip-path: inset(50%)</code>
             <span class="sui-visually-hidden">Screen readers can see this.</span>
           </div>
+        </div>
+      </div>
+
+      <!-- PANEL -->
+      <div class="sui-section" id="comp-panel">
+        <h2>Panel</h2>
+        <p class="sui-text-cap sui-mt-2">Side panel / slide-over — the third overlay type. Dialog blocks, sheet slides up, panel slides from the right. Desktop: coexists with main content. Mobile: full-screen.</p>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">CRM Contact Detail</div>
+          <p class="sui-mb-3">Click to open a panel with contact details. Desktop: panel appears alongside this content. Mobile: full-screen overlay.</p>
+          <div style="display: flex; gap: var(--sui-space-2); flex-wrap: wrap;">
+            <button class="sui-btn sui-btn-primary" data-sui-panel="#demoPanel" aria-expanded="false" type="button"><i data-lucide="user"></i>View Contact</button>
+            <button class="sui-btn sui-btn-outline" data-sui-panel="#demoPanelNoBg" aria-expanded="false" type="button"><i data-lucide="layout-sidebar-right"></i>No Backdrop</button>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Dual focus model</div>
+          <p><strong>Desktop (≥769px):</strong> Focus moves to the panel but is <strong>not trapped</strong>. Both the panel and main content remain interactive — panels are parallel content, not blocking content. Trapping focus would prevent keyboard users from referencing the main view.</p>
+          <p class="sui-mt-2"><strong>Mobile (&lt;769px):</strong> Panel goes full-screen. The user can no longer see main content, so the interaction model changes to a blocking overlay with <strong>focus trap enabled</strong>.</p>
+          <p class="sui-mt-2">If the viewport resizes while the panel is open, the trap toggles automatically.</p>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Usage</div>
+          <pre class="sui-code"><code>&lt;!-- Trigger --&gt;
+&lt;button data-sui-panel="#my-panel" aria-expanded="false"&gt;Open&lt;/button&gt;
+
+&lt;!-- Panel (outside main for stacking context) --&gt;
+&lt;div class="sui-panel" id="my-panel" aria-label="Detail" aria-hidden="true"&gt;
+  &lt;div class="sui-panel-header"&gt;
+    &lt;span class="sui-panel-title"&gt;Title&lt;/span&gt;
+    &lt;button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button"
+            aria-label="Close panel"&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="sui-panel-body"&gt;Content&lt;/div&gt;
+  &lt;div class="sui-panel-footer"&gt;
+    &lt;button class="sui-btn sui-btn-ghost"&gt;Cancel&lt;/button&gt;
+    &lt;button class="sui-btn sui-btn-primary"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom width --&gt;
+&lt;div class="sui-panel" style="--sui-panel-width: 50vw"&gt;...&lt;/div&gt;
+
+&lt;!-- No backdrop (desktop) --&gt;
+&lt;div class="sui-panel sui-panel-no-backdrop"&gt;...&lt;/div&gt;</code></pre>
+
+          <div class="sui-kpi-label sui-mt-4 sui-mb-2">JavaScript API</div>
+          <pre class="sui-code"><code>SUI.panel.open('#my-panel');
+SUI.panel.close('#my-panel');
+SUI.panel.toggle('#my-panel');</code></pre>
         </div>
       </div>
 
@@ -1432,6 +1469,8 @@ Components (use SUI classes):
 - Skeleton: sui-skeleton + sui-skeleton-text/heading/avatar/card
 - Bottom sheet: sui-sheet + sui-sheet-panel/handle/header/body/footer (requires sui.js). SUI.sheet.open/close.
 - Sidenav: sui-sidenav + sui-sidenav-panel/link/heading/toggle/close (requires sui.js). Sticky sidebar desktop, slide-in mobile. SUI.sidenav.open/close/toggle.
+  - Collapsible groups: sui-sidenav-group + sui-sidenav-group-toggle (aria-expanded + aria-controls) + sui-sidenav-group-links. SUI.sidenav.collapseAll/expandAll.
+- Panel: sui-panel + sui-panel-header/title/close/body/footer (requires sui.js). Slides from right. Desktop: no focus trap (parallel content). Mobile: full-screen with trap. Width: --sui-panel-width. No backdrop: sui-panel-no-backdrop. SUI.panel.open/close/toggle.
 - Segmented control: sui-segmented + sui-segment (role="radiogroup" + role="radio", requires sui.js)
 - Chip/Tag: sui-chip + sui-chip-remove (CSS only, behaviour is bring-your-own JS)
 - Interactive card: sui-card-interactive (clickable card with hover shadow elevation)
@@ -1465,7 +1504,7 @@ Accessibility (mandatory):
 Icons: SUI works with any icon library. Always add aria-hidden="true" on decorative icons. Always pair icons with visible text labels — never use an icon alone to communicate meaning.
 
 Status patterns (always icon + text):
-- Success: ✔ + text | Warning: ⚠ + text | Error: ✕ + text | Info: ℹ + text
+- Success: âœ” + text | Warning: âš  + text | Error: âœ• + text | Info: â„¹ + text
 
 Elevation: Borders are the default card separation. Shadows are opt-in (sui-card-shadow).
 Motion: 150-250ms ease-out. Feedback only. No decorative animations.
@@ -1491,7 +1530,7 @@ CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt; with defer.
 Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
-Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
+Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Sidenav: sui-sidenav with collapsible groups (sui-sidenav-group-toggle + aria-expanded + aria-controls). Panel: sui-panel (slides from right, --sui-panel-width, sui-panel-no-backdrop). SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators). Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
 Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -1540,7 +1579,9 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    sui-toolbar (action bar), sui-grid-auto, sui-scroll-x, sui-flex-nowrap,
    sui-container (container queries, opt-in), sui-avatar-xl,
    sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right),
-   sui-screen/sui-screen-header/sui-screen-body/sui-screen-footer (app shells), etc.
+   sui-screen/sui-screen-header/sui-screen-body/sui-screen-footer (app shells),
+   sui-sidenav + sui-sidenav-group/toggle/links (collapsible groups, SUI.sidenav.collapseAll/expandAll),
+   sui-panel (side panel, slides from right, --sui-panel-width, sui-panel-no-backdrop, SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap.), etc.
    Themes: light, dark, auto.
 7. Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;. Add id="main" to &lt;main&gt;.
 8. If a component isn't covered by SUI, mention it — contributions welcome.
@@ -1762,7 +1803,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
                   <span class="sui-avatar sui-avatar-sm">EV</span>
                   <div>
                     <strong>Elena Vasquez</strong>
-                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Acme Corp · $120K</div>
+                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Acme Corp Â· $120K</div>
                   </div>
                 </div>
               </div>
@@ -1771,7 +1812,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
                   <span class="sui-avatar sui-avatar-sm">MJ</span>
                   <div>
                     <strong>Marcus Johnson</strong>
-                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Globex · $85K</div>
+                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Globex Â· $85K</div>
                   </div>
                 </div>
               </div>
@@ -1780,7 +1821,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
                   <span class="sui-avatar sui-avatar-sm">LW</span>
                   <div>
                     <strong>Lin Wei</strong>
-                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Initech · $45K</div>
+                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Initech Â· $45K</div>
                   </div>
                 </div>
               </div>
@@ -1790,7 +1831,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
                 <span class="sui-avatar sui-avatar-lg">EV</span>
                 <div>
                   <div style="font-size:var(--sui-text-h3);font-weight:var(--sui-weight-semibold);">Elena Vasquez</div>
-                  <span class="sui-text-muted">VP Sales · Acme Corp</span>
+                  <span class="sui-text-muted">VP Sales Â· Acme Corp</span>
                 </div>
               </div>
               <div class="sui-flex sui-gap-2 sui-mb-3">
@@ -1872,7 +1913,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
             </div>
             <select class="sui-select" style="width:auto;" aria-label="Language">
               <option>English (CA)</option>
-              <option>Français</option>
+              <option>FranÃ§ais</option>
             </select>
           </div>
         </div>
@@ -2335,14 +2376,200 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
 
+      <!-- RECIPE: Sidenav Search / Filter -->
+      <div class="sui-section" id="recipe-sidenav-search">
+        <h2>Sidenav Search / Filter</h2>
+        <p class="sui-text-cap sui-mt-2">Add a search input that filters sidenav links in real time, updates group counts, and shows a fallback. Search logic is app-specific — this recipe shows the pattern.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Pattern (app JS, not in SUI)</div>
+          <pre class="sui-code"><code>&lt;!-- Add search inside .sui-sidenav-panel, before groups --&gt;
+&lt;div class="app-sidenav-search"&gt;
+  &lt;input type="search" class="sui-input" placeholder="Filter…"
+         aria-label="Filter sections" autocomplete="off"&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const search = document.querySelector('.app-sidenav-search input');
+const groups = document.querySelectorAll('.sui-sidenav-group');
+const links  = document.querySelectorAll('.sui-sidenav-link');
+
+search.addEventListener('input', () =&gt; {
+  const q = search.value.toLowerCase().trim();
+  links.forEach(link =&gt; {
+    const match = !q || link.textContent.toLowerCase().includes(q);
+    link.style.display = match ? '' : 'none';
+  });
+  groups.forEach(group =&gt; {
+    const visible = group.querySelectorAll(
+      '.sui-sidenav-link:not([style*="display: none"])'
+    );
+    const count = group.querySelector('.sui-sidenav-group-count');
+    if (count) count.textContent = visible.length;
+    if (q) {
+      const btn = group.querySelector('.sui-sidenav-group-toggle');
+      const container = group.querySelector('.sui-sidenav-group-links');
+      btn.setAttribute('aria-expanded', 'true');
+      container.hidden = false;
+    }
+    group.style.display = visible.length === 0 ? 'none' : '';
+  });
+});
+&lt;/script&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- RECIPE: Sidenav Context Switching -->
+      <div class="sui-section" id="recipe-sidenav-context">
+        <h2>Sidenav Context Switching</h2>
+        <p class="sui-text-cap sui-mt-2">Auto-collapse inactive groups when switching context. Composes <code>SUI.sidenav.collapseAll()</code> with app routing logic.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Pattern</div>
+          <pre class="sui-code"><code>&lt;script&gt;
+function onContextSwitch(activeGroupName) {
+  const nav = document.querySelector('.sui-sidenav');
+  SUI.sidenav.collapseAll(nav);  // collapse everything
+
+  // Expand the active group
+  const group = nav.querySelector('[data-group="' + activeGroupName + '"]');
+  if (group) {
+    const btn = group.querySelector('.sui-sidenav-group-toggle');
+    const links = group.querySelector('.sui-sidenav-group-links');
+    btn.setAttribute('aria-expanded', 'true');
+    links.hidden = false;
+  }
+
+  // Clear stale URL hash
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname);
+  }
+}
+&lt;/script&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- RECIPE: Panel Push Mode -->
+      <div class="sui-section" id="recipe-push-mode">
+        <h2>Panel Push Mode (Content Resize)</h2>
+        <p class="sui-text-cap sui-mt-2">Instead of overlaying, the panel resizes main content. Toggle a CSS class on a wrapper to switch <code>grid-template-columns</code>.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Pattern (~8 lines of custom CSS)</div>
+          <pre class="sui-code"><code>&lt;div class="app-layout" id="pushLayout"&gt;
+  &lt;main class="app-main"&gt;Main content&lt;/main&gt;
+  &lt;aside class="app-push-panel"&gt;Panel content&lt;/aside&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: grid-template-columns 250ms ease-out;
+}
+.app-layout.app-panel-open {
+  grid-template-columns: 1fr 400px;
+}
+.app-push-panel {
+  display: none;
+  border-left: 1px solid var(--sui-border);
+  overflow-y: auto;
+}
+.app-layout.app-panel-open .app-push-panel {
+  display: block;
+}
+&lt;/style&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- RECIPE: Master-Detail (Table + Panel) -->
+      <div class="sui-section" id="recipe-master-detail">
+        <h2>Master-Detail (Table + Panel)</h2>
+        <p class="sui-text-cap sui-mt-2">CRM / help desk pattern — clickable table row opens <code>sui-panel</code> with detail content. Composes <code>sui-table-interactive</code> + <code>sui-panel</code>.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Pattern (~10 lines of custom CSS)</div>
+          <pre class="sui-code"><code>&lt;table class="sui-table sui-table-interactive"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Stage&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr onclick="showDetail('jane')" style="cursor: pointer"&gt;
+      &lt;td&gt;Jane Cooper&lt;/td&gt;
+      &lt;td&gt;jane@acme.com&lt;/td&gt;
+      &lt;td&gt;&lt;span class="sui-badge sui-badge-info"&gt;
+        &lt;span class="sui-badge-icon" aria-hidden="true"&gt;●&lt;/span&gt;Qualified
+      &lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class="sui-panel" id="detailPanel"
+     aria-label="Contact detail" aria-hidden="true"&gt;
+  &lt;div&gt;
+    &lt;div class="sui-panel-header"&gt;
+      &lt;span class="sui-panel-title"&gt;Jane Cooper&lt;/span&gt;
+      &lt;button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button"
+              aria-label="Close panel"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="sui-panel-body" id="detailBody"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function showDetail(id) {
+  document.getElementById('detailBody').innerHTML = '...';
+  SUI.panel.open('#detailPanel');
+}
+&lt;/script&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- RECIPE: Notification Centre -->
+      <div class="sui-section" id="recipe-notification-centre">
+        <h2>Notification Centre (Panel + Cards)</h2>
+        <p class="sui-text-cap sui-mt-2">Bell icon triggers a panel with a scrollable list of notification cards. Composes <code>sui-panel</code> + <code>sui-card</code> + <code>sui-badge</code>.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Pattern (~8 lines of custom CSS)</div>
+          <pre class="sui-code"><code>&lt;div class="sui-badge-overlay"&gt;
+  &lt;button data-sui-panel="#notifPanel"
+          aria-label="Notifications, 3 unread"
+          aria-expanded="false"&gt;
+    &lt;i data-lucide="bell"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+  &lt;span class="sui-badge-count" aria-hidden="true"&gt;3&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class="sui-panel sui-panel-no-backdrop" id="notifPanel"
+     aria-label="Notifications" aria-hidden="true"
+     style="--sui-panel-width: 360px"&gt;
+  &lt;div&gt;
+    &lt;div class="sui-panel-header"&gt;
+      &lt;span class="sui-panel-title"&gt;Notifications&lt;/span&gt;
+      &lt;button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button"
+              aria-label="Close"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="sui-panel-body" style="padding: 0"&gt;
+      &lt;div class="sui-card" style="border-radius:0; border-left:0;
+           border-right:0; border-top:0"&gt;
+        &lt;div style="display:flex; gap:var(--sui-space-2)"&gt;
+          &lt;div class="sui-avatar" data-initials="AB"
+               style="width:32px; height:32px; font-size:12px"&gt;&lt;/div&gt;
+          &lt;div&gt;
+            &lt;strong&gt;Alice B.&lt;/strong&gt; commented on your task
+            &lt;div class="sui-meta sui-mt-1"&gt;2 min ago&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- Repeat for each notification --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
     </section>
     <footer class="sui-footer">
       <div class="sui-footer-links">
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer"><i data-lucide="github"></i>GitHub</a>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
-      <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.3.0</span></a>
+      <small>SPEYER UI SYSTEM â€¢ MIT LICENSE â€¢ Made in Canada</small>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.4.0</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->
@@ -2399,6 +2626,66 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     </div>
   </div>
 
+  <!-- ===== PANEL — default with backdrop ===== -->
+  <div class="sui-panel" id="demoPanel" aria-label="Contact detail" aria-hidden="true">
+    <div>
+      <div class="sui-panel-header">
+        <span class="sui-panel-title">Jane Cooper</span>
+        <button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><i data-lucide="x"></i></button>
+      </div>
+      <div class="sui-panel-body">
+        <div style="display: flex; align-items: center; gap: var(--sui-space-3); margin-bottom: var(--sui-space-4);">
+          <div class="sui-avatar" data-initials="JC" style="width: 48px; height: 48px; font-size: var(--sui-text-lg);"></div>
+          <div>
+            <div style="font-weight: var(--sui-weight-semibold);">Jane Cooper</div>
+            <div style="font-size: var(--sui-text-sm); color: var(--sui-text-secondary);">VP of Sales</div>
+          </div>
+        </div>
+        <div class="sui-divider sui-mb-3"></div>
+        <dl style="display: grid; grid-template-columns: auto 1fr; gap: var(--sui-space-2) var(--sui-space-3); font-size: var(--sui-text-sm);">
+          <dt style="color: var(--sui-text-muted);">Email</dt>
+          <dd style="margin: 0;">jane.cooper@example.com</dd>
+          <dt style="color: var(--sui-text-muted);">Phone</dt>
+          <dd style="margin: 0;">+1 (555) 012-3456</dd>
+          <dt style="color: var(--sui-text-muted);">Company</dt>
+          <dd style="margin: 0;">Acme Corp</dd>
+          <dt style="color: var(--sui-text-muted);">Stage</dt>
+          <dd style="margin: 0;"><span class="sui-badge sui-badge-info"><span class="sui-badge-icon" aria-hidden="true"><i data-lucide="target"></i></span>Qualified</span></dd>
+          <dt style="color: var(--sui-text-muted);">Value</dt>
+          <dd style="margin: 0;">$48,000</dd>
+        </dl>
+        <div class="sui-alert sui-alert-info sui-mt-4" role="alert">
+          <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+          <div class="sui-alert-content">
+            <div class="sui-alert-title">Desktop: no focus trap</div>
+            <div>Both the panel and main content are interactive. Tab freely between them. Mobile: full-screen with focus trap.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sui-panel-footer">
+        <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.panel.close('#demoPanel')">Close</button>
+        <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.panel.close('#demoPanel'); SUI.toast.success('Saved!', 'Contact updated.')"><i data-lucide="check"></i>Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PANEL — no backdrop variant ===== -->
+  <div class="sui-panel sui-panel-no-backdrop" id="demoPanelNoBg" aria-label="Quick view" aria-hidden="true">
+    <div>
+      <div class="sui-panel-header">
+        <span class="sui-panel-title">Quick View</span>
+        <button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><i data-lucide="x"></i></button>
+      </div>
+      <div class="sui-panel-body">
+        <p>This panel has no backdrop on desktop — it floats over the content with a shadow for depth. Main content remains fully interactive.</p>
+        <p class="sui-mt-3" style="font-size: var(--sui-text-sm); color: var(--sui-text-muted);">On mobile, the backdrop always appears because the panel goes full-screen.</p>
+      </div>
+      <div class="sui-panel-footer">
+        <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.panel.close('#demoPanelNoBg')">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== SCRIPTS ===== -->
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="./sui.js"></script>
   <script>
@@ -2421,7 +2708,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     const observer = new MutationObserver(syncThemeIcon);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    // ── SIDENAV DEMO LOGIC ──────────────────────────────────
+    // â”€â”€ SIDENAV DEMO LOGIC â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     (function() {
       const nav = document.getElementById('demoSidenav');
       const layout = document.querySelector('.demo-layout');
@@ -2429,12 +2716,12 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       const toggle = document.getElementById('sidenavToggle');
       const emptyMsg = nav.querySelector('.demo-sidenav-empty');
       const allLinks = nav.querySelectorAll('.sui-sidenav-link');
-      const groups = nav.querySelectorAll('.demo-sidenav-group');
+      const groups = nav.querySelectorAll('.sui-sidenav-group');
 
       // Tabs that have sidenav sections
       const sidenavTabs = new Set(['components', 'recipes']);
 
-      // ── Tab awareness: show/hide sidenav + auto-collapse groups ──
+      // â”€â”€ Tab awareness: show/hide sidenav + auto-collapse groups â”€â”€
       function updateSidenavForTab(tabName) {
         const show = sidenavTabs.has(tabName);
         layout.classList.toggle('demo-no-sidenav', !show);
@@ -2444,8 +2731,8 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         if (show) {
           groups.forEach(group => {
             const groupName = group.getAttribute('data-group');
-            const btn = group.querySelector('.demo-sidenav-group-toggle');
-            const container = group.querySelector('.demo-sidenav-group-links');
+            const btn = group.querySelector('.sui-sidenav-group-toggle');
+            const container = group.querySelector('.sui-sidenav-group-links');
             const shouldExpand = groupName === tabName;
             btn.setAttribute('aria-expanded', String(shouldExpand));
             container.hidden = !shouldExpand;
@@ -2467,22 +2754,14 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       const activeTab = document.querySelector('[role="tab"][aria-selected="true"]');
       if (activeTab) updateSidenavForTab(activeTab.getAttribute('data-tab'));
 
-      // ── Collapsible groups ──
+      // â”€â”€ Collapsible groups â”€â”€
       groups.forEach(group => {
-        const btn = group.querySelector('.demo-sidenav-group-toggle');
-        const links = group.querySelector('.demo-sidenav-group-links');
-        const count = group.querySelector('.demo-sidenav-count');
-
+        const links = group.querySelector('.sui-sidenav-group-links');
+        const count = group.querySelector('.sui-sidenav-group-count');
         count.textContent = links.querySelectorAll('.sui-sidenav-link').length;
-
-        btn.addEventListener('click', () => {
-          const expanded = btn.getAttribute('aria-expanded') === 'true';
-          btn.setAttribute('aria-expanded', String(!expanded));
-          links.hidden = expanded;
-        });
       });
 
-      // ── Search / filter ──
+      // â”€â”€ Search / filter â”€â”€
       search.addEventListener('input', () => {
         const q = search.value.toLowerCase().trim();
         let totalVisible = 0;
@@ -2495,9 +2774,9 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
 
         groups.forEach(group => {
           const visible = group.querySelectorAll('.sui-sidenav-link:not(.demo-filter-hidden)');
-          const count = group.querySelector('.demo-sidenav-count');
-          const btn = group.querySelector('.demo-sidenav-group-toggle');
-          const container = group.querySelector('.demo-sidenav-group-links');
+          const count = group.querySelector('.sui-sidenav-group-count');
+          const btn = group.querySelector('.sui-sidenav-group-toggle');
+          const container = group.querySelector('.sui-sidenav-group-links');
           count.textContent = visible.length;
           if (q) { btn.setAttribute('aria-expanded', 'true'); container.hidden = false; }
           group.style.display = visible.length === 0 ? 'none' : '';
@@ -2506,7 +2785,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         emptyMsg.hidden = totalVisible > 0;
       });
 
-      // ── Cross-tab link navigation ──
+      // â”€â”€ Cross-tab link navigation â”€â”€
       allLinks.forEach(link => {
         link.addEventListener('click', () => {
           const targetTab = link.getAttribute('data-sidenav-tab');

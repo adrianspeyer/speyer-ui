@@ -134,6 +134,8 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - `sui-dialog` — Native `<dialog>` modal (`SUI.modal.open/close`)
 - `sui-sheet` — Bottom sheet (`SUI.sheet.open/close`)
 - `sui-sidenav` — Responsive sidebar nav, sticky desktop, slide-in mobile (`SUI.sidenav.open/close/toggle`)
+  - `sui-sidenav-group` / `sui-sidenav-group-toggle` / `sui-sidenav-group-links` — Collapsible groups (`SUI.sidenav.collapseAll/expandAll`)
+- `sui-panel` — Side panel / slide-over, slides from right. Desktop: no focus trap (parallel content). Mobile: focus trap (full-screen). Width via `--sui-panel-width`. (`SUI.panel.open/close/toggle`)
 - `sui-segmented` + `sui-segment` — Segmented control (`role="radiogroup"`)
 - `sui-tooltip` + `sui-tooltip-content` — Tooltip (Escape to dismiss)
 - Toast — `SUI.toast.success/error/warning/info(title, message)`
@@ -193,6 +195,8 @@ Semantic tokens like `--sui-blue-primary` **shift between themes** (light: #2563
 | Dropdown | `aria-haspopup`, `aria-expanded`, `role="menu"`, `role="menuitem"` |
 | Modal | `<dialog>` with `aria-label` or `aria-labelledby` |
 | Sheet | `aria-modal="true"`, `role="dialog"`, `aria-label` |
+| Panel | `aria-label` on panel, `aria-hidden` managed by JS, `aria-expanded` on trigger, `aria-label` on close button |
+| Sidenav groups | `aria-expanded` + `aria-controls` on toggle, `id` on links container |
 | Segmented | `role="radiogroup"`, `role="radio"`, `aria-checked` |
 | Accordion | `aria-expanded` on trigger, `hidden` on collapsed panel |
 | Stepper | `<ol>`+`<li>`, `aria-current="step"` on active |
@@ -218,6 +222,11 @@ Check these before building custom patterns:
 | Profile Page | `sui-avatar-xl`, `sui-badge`, `sui-card` |
 | Button Group | `sui-grid`, `sui-btn`, `role="radiogroup"` |
 | Action Sheet | `sui-sheet`, `sui-btn-ghost`, `sui-divider` |
+| Sidenav Search | `sui-input` + filter JS hiding `sui-sidenav-link` elements |
+| Sidenav Context | `SUI.sidenav.collapseAll()` + expand active group |
+| Panel Push Mode | CSS grid toggle resizing main content |
+| Master-Detail | `sui-table-interactive` row click → `sui-panel` detail |
+| Notification Centre | `sui-panel` + stacked `sui-card` + `sui-badge` |
 
 ---
 

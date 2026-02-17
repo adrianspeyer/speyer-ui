@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.3.0
+ * Version: 2.4.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -3167,6 +3167,68 @@ dialog.sui-dialog-wide { max-width: 720px; }
   }
 }
 
+/* Sidenav — Collapsible Groups
+   Wrapper + toggle + link container for grouping sidenav links.
+   Works without JS (groups expanded by default, toggle is inert).
+   JS adds expand/collapse via aria-expanded + hidden attribute. */
+
+.sui-sidenav-group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--sui-space-2) var(--sui-space-4);
+  font-size: var(--sui-text-xs);
+  font-weight: var(--sui-weight-semibold);
+  color: var(--sui-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--sui-duration-fast) var(--sui-easing);
+}
+
+.sui-sidenav-group-toggle:hover {
+  color: var(--sui-text-primary);
+}
+
+.sui-sidenav-group-toggle:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: -3px;
+  border-radius: var(--sui-radius-sm);
+}
+
+/* Chevron indicator — CSS triangle, zero icon dependency */
+.sui-sidenav-group-toggle::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform var(--sui-duration-fast) var(--sui-easing);
+  flex-shrink: 0;
+}
+
+/* Collapsed state: chevron points right */
+.sui-sidenav-group-toggle[aria-expanded="false"]::after {
+  transform: rotate(-90deg);
+}
+
+/* Hidden group links — respects native hidden attribute */
+.sui-sidenav-group-links[hidden] {
+  display: none;
+}
+
+/* Optional count badge inline with toggle label */
+.sui-sidenav-group-count {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--sui-text-muted);
+  margin-left: var(--sui-space-1);
+}
+
 /* Scroll target offset — utility for anchor navigation */
 .sui-scroll-target {
   scroll-margin-top: 80px;
@@ -3176,6 +3238,146 @@ dialog.sui-dialog-wide { max-width: 720px; }
 @media (prefers-reduced-motion: reduce) {
   .sui-sidenav,
   .sui-sidenav-panel { transition: none; }
+  .sui-sidenav-group-toggle::after { transition: none; }
+}
+
+
+/* ==========================================================================
+   Panel — Side Panel / Slide-Over
+   Third member of the overlay family: dialog (blocks), sheet (slides up),
+   panel (slides from right, coexists with main content).
+
+   Desktop (≥769px): fixed right overlay, configurable width.
+   Mobile (<769px): full-screen slide from right (blocking overlay).
+
+   Focus model:
+     Desktop — focus moves to panel, NO trap. Both regions interactive.
+     Mobile  — focus trap enabled (panel is full-screen, main hidden).
+   Panels are parallel content, not blocking content. Trapping focus on
+   desktop would break the UX for keyboard users who need to reference
+   the main content. At mobile, the panel goes full-screen — the user can
+   no longer see the main content, so the interaction model changes.
+
+   Usage:
+     <div class="sui-panel" id="myPanel" aria-label="Detail" aria-hidden="true">
+       <div class="sui-panel-header">
+         <span class="sui-panel-title">Contact</span>
+         <button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm"
+                 aria-label="Close panel" type="button">✕</button>
+       </div>
+       <div class="sui-panel-body">…</div>
+       <div class="sui-panel-footer">…</div>
+     </div>
+     <button data-sui-panel="#myPanel">Open Panel</button>
+   ========================================================================== */
+
+/* Mobile-first: full-screen overlay from right */
+.sui-panel {
+  position: fixed;
+  inset: 0;
+  z-index: var(--sui-z-modal);
+  background: var(--sui-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--sui-duration-normal) var(--sui-easing),
+              visibility var(--sui-duration-normal) var(--sui-easing);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sui-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Panel container — slides from right */
+.sui-panel > :first-child {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  height: 100%;
+  background: var(--sui-bg-card);
+  border-left: 1px solid var(--sui-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateX(100%);
+  transition: transform var(--sui-duration-normal) var(--sui-easing);
+}
+
+.sui-panel.is-open > :first-child {
+  transform: translateX(0);
+}
+
+.sui-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sui-space-3) var(--sui-space-4);
+  border-bottom: 1px solid var(--sui-border);
+  gap: var(--sui-space-2);
+  flex-shrink: 0;
+}
+
+.sui-panel-title {
+  font-size: var(--sui-text-h3);
+  font-weight: var(--sui-weight-semibold);
+  line-height: var(--sui-leading-heading);
+}
+
+.sui-panel-close { display: inline-flex; }
+
+.sui-panel-body {
+  padding: var(--sui-space-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.sui-panel-footer {
+  padding: var(--sui-space-3) var(--sui-space-4);
+  border-top: 1px solid var(--sui-border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+/* No-backdrop modifier — desktop only, panel floats with shadow */
+.sui-panel-no-backdrop {
+  background: none;
+  pointer-events: none;
+}
+
+.sui-panel-no-backdrop > :first-child {
+  pointer-events: auto;
+  box-shadow: var(--sui-shadow-lg, -4px 0 16px rgba(0, 0, 0, 0.1));
+}
+
+/* Mobile: always show backdrop (full-screen = blocking overlay) */
+@media (max-width: 768px) {
+  .sui-panel-no-backdrop {
+    background: var(--sui-overlay);
+    pointer-events: auto;
+  }
+  .sui-panel-no-backdrop > :first-child {
+    box-shadow: none;
+  }
+}
+
+/* Desktop: fixed right, configurable width */
+@media (min-width: 769px) {
+  .sui-panel > :first-child {
+    width: var(--sui-panel-width, 400px);
+    max-width: 90vw;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sui-panel,
+  .sui-panel > :first-child { transition: none; }
 }
 
 
@@ -3201,4 +3403,6 @@ dialog.sui-dialog-wide { max-width: 720px; }
   .sui-sidenav-panel { border-width: 2px; }
   .sui-sidenav-link.is-active,
   .sui-sidenav-link[aria-current="page"] { border-left-width: 4px; }
+
+  .sui-panel > :first-child { border-width: 2px; }
 }
