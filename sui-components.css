@@ -3139,8 +3139,6 @@ dialog.sui-dialog-wide { max-width: 720px; }
     width: 220px;
     flex-shrink: 0;
     align-self: flex-start;
-    max-height: calc(100vh - var(--sui-space-8));
-    overflow-y: auto;
   }
 
   .sui-sidenav-panel {
@@ -3154,7 +3152,8 @@ dialog.sui-dialog-wide { max-width: 720px; }
     transform: none;
     transition: none;
     padding: var(--sui-space-2) 0;
-    overflow-y: visible;
+    max-height: calc(100vh - var(--sui-space-8));
+    overflow-y: auto;
   }
 
   .sui-sidenav-close { display: none; }

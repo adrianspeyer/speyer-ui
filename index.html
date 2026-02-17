@@ -16,10 +16,50 @@
     @media (min-width: 769px) {
       .demo-layout { display: flex; gap: var(--sui-space-5); align-items: flex-start; }
       .demo-content { flex: 1; min-width: 0; }
+      /* Hide sidenav on tabs with no sections */
+      .demo-layout.demo-no-sidenav .sui-sidenav { display: none; }
     }
     [id^="comp-"],
     [id^="recipe-"] { scroll-margin-top: 80px; }
     html { scroll-behavior: smooth; }
+
+    /* Sidenav search */
+    .demo-sidenav-search { padding: var(--sui-space-2) var(--sui-space-3); }
+    .demo-sidenav-search .sui-input { font-size: var(--sui-text-sm); padding: 6px 10px; }
+
+    /* Collapsible groups */
+    .demo-sidenav-group-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: var(--sui-space-2) var(--sui-space-4);
+      font-size: var(--sui-text-xs); font-weight: var(--sui-weight-semibold);
+      color: var(--sui-text-muted); text-transform: uppercase; letter-spacing: 0.05em;
+      background: none; border: none; cursor: pointer;
+      transition: color var(--sui-duration-fast) var(--sui-easing);
+    }
+    .demo-sidenav-group-toggle:hover { color: var(--sui-text-primary); }
+    .demo-sidenav-group-toggle::after {
+      content: ''; width: 0; height: 0;
+      border-left: 4px solid transparent; border-right: 4px solid transparent;
+      border-top: 5px solid currentColor;
+      transition: transform var(--sui-duration-fast) var(--sui-easing);
+    }
+    .demo-sidenav-group-toggle[aria-expanded="false"]::after { transform: rotate(-90deg); }
+    .demo-sidenav-group-links[hidden] { display: none; }
+    .demo-sidenav-count {
+      font-size: 10px; font-weight: 400;
+      color: var(--sui-text-muted); margin-left: var(--sui-space-1);
+    }
+    .demo-sidenav-empty {
+      padding: var(--sui-space-3) var(--sui-space-4);
+      font-size: var(--sui-text-sm); color: var(--sui-text-muted);
+      text-align: center;
+    }
+    /* Filtered-out links */
+    .sui-sidenav-link.demo-filter-hidden { display: none; }
+    /* Desktop toggle override — show the sidebar toggle on desktop too */
+    @media (min-width: 769px) {
+      #sidenavToggle { display: inline-flex; }
+    }
   </style>
 </head>
 
@@ -54,8 +94,8 @@
       </nav>
 
       <div class="sui-topbar-actions">
-        <button class="sui-sidenav-toggle" data-sui-sidenav="#demoSidenav"
-                aria-label="Open section navigation" type="button"><i data-lucide="menu"></i></button>
+        <button class="sui-sidenav-toggle" id="sidenavToggle" data-sui-sidenav="#demoSidenav"
+                aria-label="Toggle section navigation" type="button"><i data-lucide="panel-left"></i></button>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer" aria-label="View on GitHub">
           <i data-lucide="github"></i>
         </a>
@@ -78,46 +118,65 @@
           <button class="sui-sidenav-close sui-btn sui-btn-ghost sui-btn-sm"
                   aria-label="Close navigation" type="button">✕</button>
         </div>
-        <span class="sui-sidenav-heading">Components</span>
-        <a href="#comp-buttons" class="sui-sidenav-link" data-sidenav-tab="components">Buttons</a>
-        <a href="#comp-badges" class="sui-sidenav-link" data-sidenav-tab="components">Badges</a>
-        <a href="#comp-alerts" class="sui-sidenav-link" data-sidenav-tab="components">Alerts</a>
-        <a href="#comp-forms" class="sui-sidenav-link" data-sidenav-tab="components">Form Inputs</a>
-        <a href="#comp-avatars" class="sui-sidenav-link" data-sidenav-tab="components">Avatars</a>
-        <a href="#comp-progress" class="sui-sidenav-link" data-sidenav-tab="components">Progress Bars</a>
-        <a href="#comp-prose" class="sui-sidenav-link" data-sidenav-tab="components">Prose</a>
-        <a href="#comp-mark" class="sui-sidenav-link" data-sidenav-tab="components">Mark / Highlight</a>
-        <a href="#comp-meta" class="sui-sidenav-link" data-sidenav-tab="components">Metadata</a>
-        <a href="#comp-toolbar" class="sui-sidenav-link" data-sidenav-tab="components">Toolbar</a>
-        <a href="#comp-screen" class="sui-sidenav-link" data-sidenav-tab="components">Screen Layout</a>
-        <a href="#comp-embed" class="sui-sidenav-link" data-sidenav-tab="components">Embed &amp; Keyboard</a>
-        <a href="#comp-sheet" class="sui-sidenav-link" data-sidenav-tab="components">Bottom Sheet</a>
-        <a href="#comp-segmented" class="sui-sidenav-link" data-sidenav-tab="components">Segmented Control</a>
-        <a href="#comp-chips" class="sui-sidenav-link" data-sidenav-tab="components">Chips / Tags</a>
-        <a href="#comp-dropzone" class="sui-sidenav-link" data-sidenav-tab="components">Dropzone</a>
-        <a href="#comp-timeline" class="sui-sidenav-link" data-sidenav-tab="components">Timeline</a>
-        <a href="#comp-stepper" class="sui-sidenav-link" data-sidenav-tab="components">Stepper</a>
-        <a href="#comp-accordion" class="sui-sidenav-link" data-sidenav-tab="components">Accordion</a>
-        <a href="#comp-nav" class="sui-sidenav-link" data-sidenav-tab="components">Navigation</a>
-        <a href="#comp-interactive" class="sui-sidenav-link" data-sidenav-tab="components">Interactive</a>
-        <a href="#comp-tables" class="sui-sidenav-link" data-sidenav-tab="components">Tables</a>
-        <a href="#comp-skeleton" class="sui-sidenav-link" data-sidenav-tab="components">Skeleton Loaders</a>
-        <a href="#comp-empty" class="sui-sidenav-link" data-sidenav-tab="components">Empty State</a>
-        <a href="#comp-cards" class="sui-sidenav-link" data-sidenav-tab="components">Card Variants</a>
-        <a href="#comp-visibility" class="sui-sidenav-link" data-sidenav-tab="components">Visibility</a>
-        <a href="#comp-layout" class="sui-sidenav-link" data-sidenav-tab="components">Layout Utilities</a>
-        <span class="sui-sidenav-heading">Recipes</span>
-        <a href="#recipe-inline-edit" class="sui-sidenav-link" data-sidenav-tab="recipes">Inline Edit</a>
-        <a href="#recipe-kanban" class="sui-sidenav-link" data-sidenav-tab="recipes">Kanban Board</a>
-        <a href="#recipe-stepper" class="sui-sidenav-link" data-sidenav-tab="recipes">Stepper / Wizard</a>
-        <a href="#recipe-split-pane" class="sui-sidenav-link" data-sidenav-tab="recipes">Split Pane</a>
-        <a href="#recipe-settings" class="sui-sidenav-link" data-sidenav-tab="recipes">Settings</a>
-        <a href="#recipe-blog-post" class="sui-sidenav-link" data-sidenav-tab="recipes">Blog Post</a>
-        <a href="#recipe-document-library" class="sui-sidenav-link" data-sidenav-tab="recipes">Document Library</a>
-        <a href="#recipe-app-shell" class="sui-sidenav-link" data-sidenav-tab="recipes">App Shell</a>
-        <a href="#recipe-profile-page" class="sui-sidenav-link" data-sidenav-tab="recipes">Profile Page</a>
-        <a href="#recipe-button-group" class="sui-sidenav-link" data-sidenav-tab="recipes">Button Group</a>
-        <a href="#recipe-action-sheet" class="sui-sidenav-link" data-sidenav-tab="recipes">Action Sheet</a>
+        <div class="demo-sidenav-search">
+          <input type="search" class="sui-input" id="sidenavSearch"
+                 placeholder="Filter…" aria-label="Filter sections" autocomplete="off">
+        </div>
+        <div class="demo-sidenav-group" data-group="components">
+          <button class="demo-sidenav-group-toggle" type="button"
+                  aria-expanded="true" aria-controls="group-components">
+            Components <span class="demo-sidenav-count"></span>
+          </button>
+          <div class="demo-sidenav-group-links" id="group-components">
+            <a href="#comp-buttons" class="sui-sidenav-link" data-sidenav-tab="components">Buttons</a>
+            <a href="#comp-badges" class="sui-sidenav-link" data-sidenav-tab="components">Badges</a>
+            <a href="#comp-alerts" class="sui-sidenav-link" data-sidenav-tab="components">Alerts</a>
+            <a href="#comp-forms" class="sui-sidenav-link" data-sidenav-tab="components">Form Inputs</a>
+            <a href="#comp-avatars" class="sui-sidenav-link" data-sidenav-tab="components">Avatars</a>
+            <a href="#comp-progress" class="sui-sidenav-link" data-sidenav-tab="components">Progress Bars</a>
+            <a href="#comp-prose" class="sui-sidenav-link" data-sidenav-tab="components">Prose</a>
+            <a href="#comp-mark" class="sui-sidenav-link" data-sidenav-tab="components">Mark / Highlight</a>
+            <a href="#comp-meta" class="sui-sidenav-link" data-sidenav-tab="components">Metadata</a>
+            <a href="#comp-toolbar" class="sui-sidenav-link" data-sidenav-tab="components">Toolbar</a>
+            <a href="#comp-screen" class="sui-sidenav-link" data-sidenav-tab="components">Screen Layout</a>
+            <a href="#comp-embed" class="sui-sidenav-link" data-sidenav-tab="components">Embed &amp; Keyboard</a>
+            <a href="#comp-sheet" class="sui-sidenav-link" data-sidenav-tab="components">Bottom Sheet</a>
+            <a href="#comp-segmented" class="sui-sidenav-link" data-sidenav-tab="components">Segmented Control</a>
+            <a href="#comp-chips" class="sui-sidenav-link" data-sidenav-tab="components">Chips / Tags</a>
+            <a href="#comp-dropzone" class="sui-sidenav-link" data-sidenav-tab="components">Dropzone</a>
+            <a href="#comp-timeline" class="sui-sidenav-link" data-sidenav-tab="components">Timeline</a>
+            <a href="#comp-stepper" class="sui-sidenav-link" data-sidenav-tab="components">Stepper</a>
+            <a href="#comp-accordion" class="sui-sidenav-link" data-sidenav-tab="components">Accordion</a>
+            <a href="#comp-nav" class="sui-sidenav-link" data-sidenav-tab="components">Navigation</a>
+            <a href="#comp-interactive" class="sui-sidenav-link" data-sidenav-tab="components">Interactive</a>
+            <a href="#comp-tables" class="sui-sidenav-link" data-sidenav-tab="components">Tables</a>
+            <a href="#comp-skeleton" class="sui-sidenav-link" data-sidenav-tab="components">Skeleton Loaders</a>
+            <a href="#comp-empty" class="sui-sidenav-link" data-sidenav-tab="components">Empty State</a>
+            <a href="#comp-cards" class="sui-sidenav-link" data-sidenav-tab="components">Card Variants</a>
+            <a href="#comp-visibility" class="sui-sidenav-link" data-sidenav-tab="components">Visibility</a>
+            <a href="#comp-layout" class="sui-sidenav-link" data-sidenav-tab="components">Layout Utilities</a>
+          </div>
+        </div>
+        <div class="demo-sidenav-group" data-group="recipes">
+          <button class="demo-sidenav-group-toggle" type="button"
+                  aria-expanded="true" aria-controls="group-recipes">
+            Recipes <span class="demo-sidenav-count"></span>
+          </button>
+          <div class="demo-sidenav-group-links" id="group-recipes">
+            <a href="#recipe-inline-edit" class="sui-sidenav-link" data-sidenav-tab="recipes">Inline Edit</a>
+            <a href="#recipe-kanban" class="sui-sidenav-link" data-sidenav-tab="recipes">Kanban Board</a>
+            <a href="#recipe-stepper" class="sui-sidenav-link" data-sidenav-tab="recipes">Stepper / Wizard</a>
+            <a href="#recipe-split-pane" class="sui-sidenav-link" data-sidenav-tab="recipes">Split Pane</a>
+            <a href="#recipe-settings" class="sui-sidenav-link" data-sidenav-tab="recipes">Settings</a>
+            <a href="#recipe-blog-post" class="sui-sidenav-link" data-sidenav-tab="recipes">Blog Post</a>
+            <a href="#recipe-document-library" class="sui-sidenav-link" data-sidenav-tab="recipes">Document Library</a>
+            <a href="#recipe-app-shell" class="sui-sidenav-link" data-sidenav-tab="recipes">App Shell</a>
+            <a href="#recipe-profile-page" class="sui-sidenav-link" data-sidenav-tab="recipes">Profile Page</a>
+            <a href="#recipe-button-group" class="sui-sidenav-link" data-sidenav-tab="recipes">Button Group</a>
+            <a href="#recipe-action-sheet" class="sui-sidenav-link" data-sidenav-tab="recipes">Action Sheet</a>
+          </div>
+        </div>
+        <p class="demo-sidenav-empty" hidden>No matches.</p>
       </div>
     </nav>
 
@@ -2359,21 +2418,114 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     const observer = new MutationObserver(syncThemeIcon);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    // Sidenav: switch tabs when clicking cross-tab links
-    document.querySelectorAll('.sui-sidenav-link[data-sidenav-tab]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const targetTab = link.getAttribute('data-sidenav-tab');
-        const currentTab = document.querySelector('[role="tab"][aria-selected="true"]');
-        if (currentTab && currentTab.getAttribute('data-tab') !== targetTab) {
-          // Switch tab
-          const newTab = document.querySelector(`[role="tab"][data-tab="${targetTab}"]`);
-          if (newTab) newTab.click();
+    // ── SIDENAV DEMO LOGIC ──────────────────────────────────
+    (function() {
+      const nav = document.getElementById('demoSidenav');
+      const layout = document.querySelector('.demo-layout');
+      const search = document.getElementById('sidenavSearch');
+      const toggle = document.getElementById('sidenavToggle');
+      const emptyMsg = nav.querySelector('.demo-sidenav-empty');
+      const allLinks = nav.querySelectorAll('.sui-sidenav-link');
+      const groups = nav.querySelectorAll('.demo-sidenav-group');
+      const isDesktop = () => window.matchMedia('(min-width: 769px)').matches;
+
+      // Tabs that have sidenav sections
+      const sidenavTabs = new Set(['components', 'recipes']);
+
+      // ── Tab awareness: show/hide sidenav per tab ──
+      function updateSidenavForTab(tabName) {
+        if (sidenavTabs.has(tabName)) {
+          layout.classList.remove('demo-no-sidenav');
+        } else {
+          layout.classList.add('demo-no-sidenav');
         }
-        // Update active state
-        document.querySelectorAll('.sui-sidenav-link').forEach(l => l.classList.remove('is-active'));
-        link.classList.add('is-active');
+      }
+
+      // Listen for tab changes
+      document.querySelectorAll('[role="tab"]').forEach(tab => {
+        tab.addEventListener('click', () => {
+          updateSidenavForTab(tab.getAttribute('data-tab'));
+        });
       });
-    });
+
+      // Set initial state
+      const activeTab = document.querySelector('[role="tab"][aria-selected="true"]');
+      if (activeTab) updateSidenavForTab(activeTab.getAttribute('data-tab'));
+
+      // ── Desktop toggle: show/hide sidebar ──
+      let desktopHidden = false;
+      toggle.addEventListener('click', () => {
+        if (isDesktop()) {
+          desktopHidden = !desktopHidden;
+          nav.style.display = desktopHidden ? 'none' : '';
+        }
+        // Mobile: handled by SUI.sidenav auto-init
+      });
+
+      // ── Collapsible groups ──
+      groups.forEach(group => {
+        const btn = group.querySelector('.demo-sidenav-group-toggle');
+        const links = group.querySelector('.demo-sidenav-group-links');
+        const count = group.querySelector('.demo-sidenav-count');
+
+        // Set initial count
+        const linkCount = links.querySelectorAll('.sui-sidenav-link').length;
+        count.textContent = linkCount;
+
+        btn.addEventListener('click', () => {
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          links.hidden = expanded;
+        });
+      });
+
+      // ── Search / filter ──
+      search.addEventListener('input', () => {
+        const q = search.value.toLowerCase().trim();
+        let totalVisible = 0;
+
+        allLinks.forEach(link => {
+          const text = link.textContent.toLowerCase();
+          const match = !q || text.includes(q);
+          link.classList.toggle('demo-filter-hidden', !match);
+          if (match) totalVisible++;
+        });
+
+        // Update group counts and auto-expand when filtering
+        groups.forEach(group => {
+          const links = group.querySelectorAll('.sui-sidenav-link:not(.demo-filter-hidden)');
+          const count = group.querySelector('.demo-sidenav-count');
+          const btn = group.querySelector('.demo-sidenav-group-toggle');
+          const linksContainer = group.querySelector('.demo-sidenav-group-links');
+          count.textContent = links.length;
+          // Auto-expand groups when searching
+          if (q) {
+            btn.setAttribute('aria-expanded', 'true');
+            linksContainer.hidden = false;
+          }
+          // Hide entire group if no matches
+          group.style.display = links.length === 0 ? 'none' : '';
+        });
+
+        // Show "no matches" message
+        emptyMsg.hidden = totalVisible > 0;
+      });
+
+      // ── Cross-tab link navigation ──
+      allLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          const targetTab = link.getAttribute('data-sidenav-tab');
+          const currentTab = document.querySelector('[role="tab"][aria-selected="true"]');
+          if (currentTab && currentTab.getAttribute('data-tab') !== targetTab) {
+            const newTab = document.querySelector('[role="tab"][data-tab="' + targetTab + '"]');
+            if (newTab) newTab.click();
+          }
+          // Active state
+          allLinks.forEach(l => l.classList.remove('is-active'));
+          link.classList.add('is-active');
+        });
+      });
+    })();
   </script>
 </body>
 </html>
