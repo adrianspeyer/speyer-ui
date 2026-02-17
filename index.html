@@ -54,12 +54,12 @@
       font-size: var(--sui-text-sm); color: var(--sui-text-muted);
       text-align: center;
     }
+    /* Scrollable link area — search stays pinned, groups scroll */
+    .demo-sidenav-scroll {
+      flex: 1; min-height: 0; overflow-y: auto;
+    }
     /* Filtered-out links */
     .sui-sidenav-link.demo-filter-hidden { display: none; }
-    /* Desktop toggle override — show the sidebar toggle on desktop too */
-    @media (min-width: 769px) {
-      #sidenavToggle { display: inline-flex; }
-    }
   </style>
 </head>
 
@@ -95,7 +95,7 @@
 
       <div class="sui-topbar-actions">
         <button class="sui-sidenav-toggle" id="sidenavToggle" data-sui-sidenav="#demoSidenav"
-                aria-label="Toggle section navigation" type="button"><i data-lucide="panel-left"></i></button>
+                aria-label="Open section navigation" type="button"><i data-lucide="menu"></i></button>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer" aria-label="View on GitHub">
           <i data-lucide="github"></i>
         </a>
@@ -122,6 +122,7 @@
           <input type="search" class="sui-input" id="sidenavSearch"
                  placeholder="Filter…" aria-label="Filter sections" autocomplete="off">
         </div>
+        <div class="demo-sidenav-scroll">
         <div class="demo-sidenav-group" data-group="components">
           <button class="demo-sidenav-group-toggle" type="button"
                   aria-expanded="true" aria-controls="group-components">
@@ -177,6 +178,7 @@
           </div>
         </div>
         <p class="demo-sidenav-empty" hidden>No matches.</p>
+        </div><!-- .demo-sidenav-scroll -->
       </div>
     </nav>
 
@@ -2427,21 +2429,18 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       const emptyMsg = nav.querySelector('.demo-sidenav-empty');
       const allLinks = nav.querySelectorAll('.sui-sidenav-link');
       const groups = nav.querySelectorAll('.demo-sidenav-group');
-      const isDesktop = () => window.matchMedia('(min-width: 769px)').matches;
 
       // Tabs that have sidenav sections
       const sidenavTabs = new Set(['components', 'recipes']);
 
-      // ── Tab awareness: show/hide sidenav per tab ──
+      // ── Tab awareness: show/hide sidenav + toggle per tab ──
       function updateSidenavForTab(tabName) {
-        if (sidenavTabs.has(tabName)) {
-          layout.classList.remove('demo-no-sidenav');
-        } else {
-          layout.classList.add('demo-no-sidenav');
-        }
+        const show = sidenavTabs.has(tabName);
+        layout.classList.toggle('demo-no-sidenav', !show);
+        // Hide hamburger on tabs with no sidenav
+        toggle.style.display = show ? '' : 'none';
       }
 
-      // Listen for tab changes
       document.querySelectorAll('[role="tab"]').forEach(tab => {
         tab.addEventListener('click', () => {
           updateSidenavForTab(tab.getAttribute('data-tab'));
@@ -2452,25 +2451,13 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       const activeTab = document.querySelector('[role="tab"][aria-selected="true"]');
       if (activeTab) updateSidenavForTab(activeTab.getAttribute('data-tab'));
 
-      // ── Desktop toggle: show/hide sidebar ──
-      let desktopHidden = false;
-      toggle.addEventListener('click', () => {
-        if (isDesktop()) {
-          desktopHidden = !desktopHidden;
-          nav.style.display = desktopHidden ? 'none' : '';
-        }
-        // Mobile: handled by SUI.sidenav auto-init
-      });
-
       // ── Collapsible groups ──
       groups.forEach(group => {
         const btn = group.querySelector('.demo-sidenav-group-toggle');
         const links = group.querySelector('.demo-sidenav-group-links');
         const count = group.querySelector('.demo-sidenav-count');
 
-        // Set initial count
-        const linkCount = links.querySelectorAll('.sui-sidenav-link').length;
-        count.textContent = linkCount;
+        count.textContent = links.querySelectorAll('.sui-sidenav-link').length;
 
         btn.addEventListener('click', () => {
           const expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -2485,29 +2472,21 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         let totalVisible = 0;
 
         allLinks.forEach(link => {
-          const text = link.textContent.toLowerCase();
-          const match = !q || text.includes(q);
+          const match = !q || link.textContent.toLowerCase().includes(q);
           link.classList.toggle('demo-filter-hidden', !match);
           if (match) totalVisible++;
         });
 
-        // Update group counts and auto-expand when filtering
         groups.forEach(group => {
-          const links = group.querySelectorAll('.sui-sidenav-link:not(.demo-filter-hidden)');
+          const visible = group.querySelectorAll('.sui-sidenav-link:not(.demo-filter-hidden)');
           const count = group.querySelector('.demo-sidenav-count');
           const btn = group.querySelector('.demo-sidenav-group-toggle');
-          const linksContainer = group.querySelector('.demo-sidenav-group-links');
-          count.textContent = links.length;
-          // Auto-expand groups when searching
-          if (q) {
-            btn.setAttribute('aria-expanded', 'true');
-            linksContainer.hidden = false;
-          }
-          // Hide entire group if no matches
-          group.style.display = links.length === 0 ? 'none' : '';
+          const container = group.querySelector('.demo-sidenav-group-links');
+          count.textContent = visible.length;
+          if (q) { btn.setAttribute('aria-expanded', 'true'); container.hidden = false; }
+          group.style.display = visible.length === 0 ? 'none' : '';
         });
 
-        // Show "no matches" message
         emptyMsg.hidden = totalVisible > 0;
       });
 
@@ -2520,7 +2499,6 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
             const newTab = document.querySelector('[role="tab"][data-tab="' + targetTab + '"]');
             if (newTab) newTab.click();
           }
-          // Active state
           allLinks.forEach(l => l.classList.remove('is-active'));
           link.classList.add('is-active');
         });
