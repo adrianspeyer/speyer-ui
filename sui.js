@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.2.0
+ * Version: 2.3.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -602,6 +602,77 @@ const SUI = (() => {
   };
 
   /* ====================================================================
+     Sidenav — Responsive section navigation
+     ==================================================================== */
+
+  const sidenav = {
+    _active: null,
+    _previousFocus: null,
+    _mediaQuery: window.matchMedia('(min-width: 769px)'),
+
+    open(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+
+      // Desktop: sidenav is always visible, no overlay
+      if (this._mediaQuery.matches) return;
+
+      this._previousFocus = document.activeElement;
+      el.classList.add('is-open');
+      el.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      this._active = el;
+
+      // Focus first link in panel
+      const panel = el.querySelector('.sui-sidenav-panel');
+      if (panel) {
+        const focusable = $$('a[href], button, [tabindex]:not([tabindex="-1"])', panel);
+        if (focusable.length) setTimeout(() => focusable[0].focus(), 50);
+      }
+
+      // Keyboard: Escape + focus trap
+      el._suiKeyHandler = (e) => {
+        if (e.key === 'Escape') { this.close(el); return; }
+        if (e.key === 'Tab' && panel) {
+          const focusable = $$('a[href], button, [tabindex]:not([tabindex="-1"])', panel);
+          if (!focusable.length) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+          } else {
+            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+          }
+        }
+      };
+      el.addEventListener('keydown', el._suiKeyHandler);
+    },
+
+    close(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+
+      el.classList.remove('is-open');
+      el.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      if (el._suiKeyHandler) {
+        el.removeEventListener('keydown', el._suiKeyHandler);
+        delete el._suiKeyHandler;
+      }
+
+      if (this._active === el) this._active = null;
+      if (this._previousFocus) this._previousFocus.focus();
+    },
+
+    toggle(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      if (!el) return;
+      el.classList.contains('is-open') ? this.close(el) : this.open(el);
+    }
+  };
+
+  /* ====================================================================
      Auto-init: scan for data-sui-* attributes
      ==================================================================== */
 
@@ -763,6 +834,46 @@ const SUI = (() => {
 
     // Segmented controls
     $$('.sui-segmented').forEach(el => segmented.init(el));
+
+    // Sidenav triggers
+    $$('[data-sui-sidenav]').forEach(btn => {
+      btn.addEventListener('click', () => sidenav.open(btn.getAttribute('data-sui-sidenav')));
+    });
+
+    // Sidenav close buttons
+    $$('.sui-sidenav-close').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nav = btn.closest('.sui-sidenav');
+        if (nav) sidenav.close(nav);
+      });
+    });
+
+    // Sidenav: set aria-hidden based on viewport
+    $$('.sui-sidenav').forEach(el => {
+      el.addEventListener('click', e => {
+        if (e.target === el) sidenav.close(el);
+      });
+      // Desktop: always visible, remove aria-hidden
+      const updateAria = () => {
+        if (sidenav._mediaQuery.matches) {
+          el.setAttribute('aria-hidden', 'false');
+        } else if (!el.classList.contains('is-open')) {
+          el.setAttribute('aria-hidden', 'true');
+        }
+      };
+      updateAria();
+      sidenav._mediaQuery.addEventListener('change', updateAria);
+    });
+
+    // Sidenav links: close on mobile after click, smooth scroll
+    $$('.sui-sidenav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const nav = link.closest('.sui-sidenav');
+        if (nav && !sidenav._mediaQuery.matches) {
+          sidenav.close(nav);
+        }
+      });
+    });
   }
 
   // Run on DOM ready
@@ -788,6 +899,7 @@ const SUI = (() => {
     copy,
     sheet,
     segmented,
+    sidenav,
     init
   };
 })();

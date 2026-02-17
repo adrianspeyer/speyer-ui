@@ -213,6 +213,42 @@ function checkHardcodedContrast() {
   }
 }
 
+function checkRgbaComposites() {
+  console.log('  ── Contrast: RGBA Composites ──');
+  const tokens = readFile('sui-tokens.css');
+  if (!tokens) return;
+  const dark = parseTokens(tokens, '[data-theme="dark"]');
+  const bgCard = dark['--sui-bg-card'] || '#1E293B';
+  const bgRGB = hexToRGB(bgCard);
+
+  function blendToHex(baseHex, alpha) {
+    const fg = hexToRGB(baseHex);
+    const r = Math.round(alpha * fg[0] + (1 - alpha) * bgRGB[0]);
+    const g = Math.round(alpha * fg[1] + (1 - alpha) * bgRGB[1]);
+    const b = Math.round(alpha * fg[2] + (1 - alpha) * bgRGB[2]);
+    return '#' + [r,g,b].map(c => c.toString(16).padStart(2,'0')).join('');
+  }
+
+  // Known rgba composites: [base, alpha, textHex, label, threshold]
+  const COMPOSITES = [
+    ['#F59E0B', 0.25, '#F1F5F9', 'mark on dark bg',         4.5],
+    ['#F59E0B', 0.6,  '#000000', 'mark-current on dark bg',  4.5],
+  ];
+
+  let issues = 0;
+  for (const [base, alpha, textHex, label, threshold] of COMPOSITES) {
+    const effective = blendToHex(base, alpha);
+    const ratio = contrastRatio(textHex, effective);
+    if (ratio < threshold) {
+      fail('dark   ' + label);
+      console.log('             ' + textHex + ' on ' + effective + ' = ' + ratio.toFixed(2) + ':1 (need ' + threshold + ':1)');
+      issues++;
+    }
+  }
+  if (issues === 0) pass();
+}
+
+
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  3. HTML / ARIA ACCESSIBILITY
@@ -501,6 +537,7 @@ console.log('  â•â•â•â•â•â•â•â•â•â
 
 checkContrast();
 checkHardcodedContrast();
+checkRgbaComposites();
 checkHTML();
 checkVersions();
 checkDistHygiene();

@@ -4,6 +4,31 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.3.0] — 2026-02-17
+
+### Added
+
+- **Sidenav** (`sui-sidenav`, `sui-sidenav-panel`, `sui-sidenav-link`, `sui-sidenav-heading`, `sui-sidenav-toggle`, `sui-sidenav-close`) — Responsive section navigation. Desktop (≥769px): sticky sidebar with vertical link list, always visible, no overlay. Mobile (<769px): off-canvas left panel with backdrop, focus trap, Escape-to-close. JS module: `SUI.sidenav.open()` / `.close()` / `.toggle()`. Auto-init via `data-sui-sidenav`. Includes: active state (`.is-active` or `aria-current="page"`), group headings, reduced motion, high contrast support. ~130 lines CSS + ~80 lines JS.
+- **Scroll target utility** (`sui-scroll-target`) — Adds `scroll-margin-top: 80px` to anchor targets. Prevents sticky headers from covering scrolled-to content.
+- **Demo section navigation** — Sidenav integrated into demo page with links to all 27 component sections and 10 recipe sections. Tab-switching on cross-tab links. Flex layout (sticky sidebar on desktop, hamburger on mobile).
+- **Preflight: RGBA composite contrast check** — New check blends rgba() overlays against `--sui-bg-card` dark value, tests composited text contrast. Catches issues Lighthouse cannot see (Lighthouse skips rgba backgrounds). 1 new check.
+- **Preflight: encoding hygiene** — Checks 7 source files for mojibake patterns (double-encoded em dashes, arrows, symbols). Prevents corrupted characters from shipping. 1 new check.
+
+### Fixed
+
+- **Mark/Highlight dark mode contrast** — Dark `sui-mark` opacity bumped 0.2 → 0.25 (clearer highlight). Dark `sui-mark-current` opacity bumped 0.5 → 0.6, text switched from white to black (contrast improved from 5.35:1 to 6.9:1). Light mode unchanged.
+- **Stepper complete indicator dark contrast** — `--sui-success-strong` → `--sui-btn-success-bg` (contrast improved from 2.28:1 to 5.02:1).
+- **Encoding cleanup** — 200+ mojibake characters fixed across all source files (em dashes, arrows, multiply symbols). Added preflight gate to prevent recurrence.
+- **Decorative emoji removed** — Flag emoji removed from footer (index.html, README.md). Functional emoji (status indicators ✔ ⚠ ✕) retained.
+
+### Changed
+
+- **Preflight validator** — 58 → 63 checks (+5: stepper aria-current, radiogroup labels, stepper contrast pair, RGBA composites, encoding hygiene). 6 categories: contrast token pairs, hardcoded overrides, RGBA composites, HTML/ARIA, version consistency, dist hygiene, encoding hygiene.
+- **Demo page version** references updated to v2.3.0.
+- **Bundle size** — 78.3KB → 82.3KB (tokens 5.6KB + components 57.3KB + JS 19.6KB).
+
+---
+
 ## [2.2.0] — 2026-02-17
 
 ### Added

@@ -133,6 +133,7 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - `sui-dropdown` — Dropdown menu (`aria-haspopup`, `aria-expanded`)
 - `sui-dialog` — Native `<dialog>` modal (`SUI.modal.open/close`)
 - `sui-sheet` — Bottom sheet (`SUI.sheet.open/close`)
+- `sui-sidenav` — Responsive sidebar nav, sticky desktop, slide-in mobile (`SUI.sidenav.open/close/toggle`)
 - `sui-segmented` + `sui-segment` — Segmented control (`role="radiogroup"`)
 - `sui-tooltip` + `sui-tooltip-content` — Tooltip (Escape to dismiss)
 - Toast — `SUI.toast.success/error/warning/info(title, message)`

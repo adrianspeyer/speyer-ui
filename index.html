@@ -11,6 +11,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Demo-only layout — NOT part of sui-components.css */
+    @media (min-width: 769px) {
+      .demo-layout { display: flex; gap: var(--sui-space-5); align-items: flex-start; }
+      .demo-content { flex: 1; min-width: 0; }
+    }
+    [id^="comp-"],
+    [id^="recipe-"] { scroll-margin-top: 80px; }
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
 
 <body>
@@ -21,7 +31,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.2.0</span>
+          <span class="sui-version-pill">v2.3.0</span>
         </div>
       </div>
 
@@ -44,6 +54,8 @@
       </nav>
 
       <div class="sui-topbar-actions">
+        <button class="sui-sidenav-toggle" data-sui-sidenav="#demoSidenav"
+                aria-label="Open section navigation" type="button"><i data-lucide="menu"></i></button>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer" aria-label="View on GitHub">
           <i data-lucide="github"></i>
         </a>
@@ -56,6 +68,60 @@
   </header>
 
   <main class="sui-wrap">
+    <div class="demo-layout">
+
+    <!-- SIDENAV — Section navigation -->
+    <nav class="sui-sidenav" id="demoSidenav" aria-label="Section navigation" aria-hidden="true">
+      <div class="sui-sidenav-panel">
+        <div class="sui-sidenav-header">
+          <span class="sui-sidenav-title">Sections</span>
+          <button class="sui-sidenav-close sui-btn sui-btn-ghost sui-btn-sm"
+                  aria-label="Close navigation" type="button">✕</button>
+        </div>
+        <span class="sui-sidenav-heading">Components</span>
+        <a href="#comp-buttons" class="sui-sidenav-link" data-sidenav-tab="components">Buttons</a>
+        <a href="#comp-badges" class="sui-sidenav-link" data-sidenav-tab="components">Badges</a>
+        <a href="#comp-alerts" class="sui-sidenav-link" data-sidenav-tab="components">Alerts</a>
+        <a href="#comp-forms" class="sui-sidenav-link" data-sidenav-tab="components">Form Inputs</a>
+        <a href="#comp-avatars" class="sui-sidenav-link" data-sidenav-tab="components">Avatars</a>
+        <a href="#comp-progress" class="sui-sidenav-link" data-sidenav-tab="components">Progress Bars</a>
+        <a href="#comp-prose" class="sui-sidenav-link" data-sidenav-tab="components">Prose</a>
+        <a href="#comp-mark" class="sui-sidenav-link" data-sidenav-tab="components">Mark / Highlight</a>
+        <a href="#comp-meta" class="sui-sidenav-link" data-sidenav-tab="components">Metadata</a>
+        <a href="#comp-toolbar" class="sui-sidenav-link" data-sidenav-tab="components">Toolbar</a>
+        <a href="#comp-screen" class="sui-sidenav-link" data-sidenav-tab="components">Screen Layout</a>
+        <a href="#comp-embed" class="sui-sidenav-link" data-sidenav-tab="components">Embed &amp; Keyboard</a>
+        <a href="#comp-sheet" class="sui-sidenav-link" data-sidenav-tab="components">Bottom Sheet</a>
+        <a href="#comp-segmented" class="sui-sidenav-link" data-sidenav-tab="components">Segmented Control</a>
+        <a href="#comp-chips" class="sui-sidenav-link" data-sidenav-tab="components">Chips / Tags</a>
+        <a href="#comp-dropzone" class="sui-sidenav-link" data-sidenav-tab="components">Dropzone</a>
+        <a href="#comp-timeline" class="sui-sidenav-link" data-sidenav-tab="components">Timeline</a>
+        <a href="#comp-stepper" class="sui-sidenav-link" data-sidenav-tab="components">Stepper</a>
+        <a href="#comp-accordion" class="sui-sidenav-link" data-sidenav-tab="components">Accordion</a>
+        <a href="#comp-nav" class="sui-sidenav-link" data-sidenav-tab="components">Navigation</a>
+        <a href="#comp-interactive" class="sui-sidenav-link" data-sidenav-tab="components">Interactive</a>
+        <a href="#comp-tables" class="sui-sidenav-link" data-sidenav-tab="components">Tables</a>
+        <a href="#comp-skeleton" class="sui-sidenav-link" data-sidenav-tab="components">Skeleton Loaders</a>
+        <a href="#comp-empty" class="sui-sidenav-link" data-sidenav-tab="components">Empty State</a>
+        <a href="#comp-cards" class="sui-sidenav-link" data-sidenav-tab="components">Card Variants</a>
+        <a href="#comp-visibility" class="sui-sidenav-link" data-sidenav-tab="components">Visibility</a>
+        <a href="#comp-layout" class="sui-sidenav-link" data-sidenav-tab="components">Layout Utilities</a>
+        <span class="sui-sidenav-heading">Recipes</span>
+        <a href="#recipe-inline-edit" class="sui-sidenav-link" data-sidenav-tab="recipes">Inline Edit</a>
+        <a href="#recipe-kanban" class="sui-sidenav-link" data-sidenav-tab="recipes">Kanban Board</a>
+        <a href="#recipe-stepper" class="sui-sidenav-link" data-sidenav-tab="recipes">Stepper / Wizard</a>
+        <a href="#recipe-split-pane" class="sui-sidenav-link" data-sidenav-tab="recipes">Split Pane</a>
+        <a href="#recipe-settings" class="sui-sidenav-link" data-sidenav-tab="recipes">Settings</a>
+        <a href="#recipe-blog-post" class="sui-sidenav-link" data-sidenav-tab="recipes">Blog Post</a>
+        <a href="#recipe-document-library" class="sui-sidenav-link" data-sidenav-tab="recipes">Document Library</a>
+        <a href="#recipe-app-shell" class="sui-sidenav-link" data-sidenav-tab="recipes">App Shell</a>
+        <a href="#recipe-profile-page" class="sui-sidenav-link" data-sidenav-tab="recipes">Profile Page</a>
+        <a href="#recipe-button-group" class="sui-sidenav-link" data-sidenav-tab="recipes">Button Group</a>
+        <a href="#recipe-action-sheet" class="sui-sidenav-link" data-sidenav-tab="recipes">Action Sheet</a>
+      </div>
+    </nav>
+
+    <div class="demo-content">
     <!-- ================================================================
          TAB 1: OVERVIEW
          ================================================================ -->
@@ -77,7 +143,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.2.0</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.3.0</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -212,7 +278,7 @@
       </div>
 
       <!-- BUTTONS -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-buttons">
         <h2>Buttons</h2>
         <p class="sui-text-cap sui-mt-2">44px touch-friendly. Visible focus states. Tab through to test keyboard navigation.</p>
         <div class="sui-flex sui-mt-4">
@@ -232,7 +298,7 @@
       </div>
 
       <!-- BADGES -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-badges">
         <h2>Badges</h2>
         <p class="sui-text-cap sui-mt-2">Always paired with icon or text. Covers every SaaS status and labeling need.</p>
         <div class="sui-card sui-mt-4">
@@ -280,13 +346,13 @@
             <span class="sui-shield sui-shield-success"><span class="sui-shield-label">build</span><span class="sui-shield-value">passing</span></span>
             <span class="sui-shield sui-shield-error"><span class="sui-shield-label">coverage</span><span class="sui-shield-value">47%</span></span>
             <span class="sui-shield sui-shield-info"><span class="sui-shield-label">license</span><span class="sui-shield-value">MIT</span></span>
-            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.2.0</span></span>
+            <span class="sui-shield sui-shield-neutral"><span class="sui-shield-label">version</span><span class="sui-shield-value">2.3.0</span></span>
           </div>
         </div>
       </div>
 
       <!-- ALERTS -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-alerts">
         <h2>Alerts</h2>
         <p class="sui-text-cap sui-mt-2">Every alert uses icon + text. Color is never the sole indicator.</p>
         <div class="sui-grid sui-grid-2 sui-mt-4">
@@ -310,7 +376,7 @@
       </div>
 
       <!-- FORM INPUTS -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-forms">
         <h2>Form Inputs</h2>
         <p class="sui-text-cap sui-mt-2">Clear borders, visible focus rings, and accessible error messages.</p>
         <div class="sui-grid sui-grid-2 sui-mt-4">
@@ -360,7 +426,7 @@
       </div>
 
       <!-- AVATARS -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-avatars">
         <h2>Avatars</h2>
         <p class="sui-text-cap sui-mt-2">Initials-based, deterministic colors. Privacy-friendly, no image dependencies.</p>
         <div class="sui-card sui-mt-4">
@@ -394,7 +460,7 @@
       </div>
 
       <!-- PROGRESS BARS -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-progress">
         <h2>Progress Bars</h2>
         <p class="sui-text-cap sui-mt-2">Accessible with aria attributes. Status-colored variants and indeterminate mode.</p>
         <div class="sui-card sui-mt-4">
@@ -448,7 +514,7 @@
       </div>
 
       <!-- PROSE & MEDIA -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-prose">
         <h2>Prose</h2>
         <p class="sui-text-cap sui-mt-2">Long-form typography for articles, docs, and rendered Markdown. One class, it works. Size variants and width constraints available.</p>
         <div class="sui-card sui-mt-4">
@@ -496,7 +562,7 @@
       </div>
 
       <!-- MARK / HIGHLIGHT -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-mark">
         <h2>Mark / Highlight</h2>
         <p class="sui-text-cap sui-mt-2">Search result highlighting. Automatic dark mode and print handling.</p>
         <div class="sui-card sui-mt-4">
@@ -506,7 +572,7 @@
       </div>
 
       <!-- META -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-meta">
         <h2>Metadata Line</h2>
         <p class="sui-text-cap sui-mt-2">Compact metadata with automatic dot separators. No separator markup needed — CSS handles it.</p>
         <div class="sui-card sui-mt-4">
@@ -525,7 +591,7 @@
       </div>
 
       <!-- TOOLBAR -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-toolbar">
         <h2>Toolbar</h2>
         <p class="sui-text-cap sui-mt-2">Horizontal scrolling action bar for formatting, filters, or controls. Hidden scrollbar, touch-friendly.</p>
         <div class="sui-card sui-mt-4">
@@ -556,7 +622,7 @@
       </div>
 
       <!-- SCREEN LAYOUT -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-screen">
         <h2>Screen Layout</h2>
         <p class="sui-text-cap sui-mt-2">Full-viewport app shell for mobile-first apps. Sticky header, scrollable body, pinned footer with safe area insets.</p>
         <div class="sui-grid sui-grid-2 sui-mt-4">
@@ -601,7 +667,7 @@
       </div>
 
       <!-- EMBED & KEYBOARD -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-embed">
         <h2>Embed & Keyboard</h2>
         <p class="sui-text-cap sui-mt-2">Responsive video embeds and keyboard shortcut styling.</p>
         <div class="sui-grid sui-grid-2 sui-mt-4">
@@ -625,7 +691,7 @@
       </div>
 
       <!-- BOTTOM SHEET -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-sheet">
         <h2>Bottom Sheet</h2>
         <p class="sui-text-cap sui-mt-2">Mobile-first slide-up drawer. Handles safe areas, scroll trapping, and Escape key.</p>
         <div class="sui-card sui-mt-4">
@@ -634,7 +700,7 @@
       </div>
 
       <!-- SEGMENTED CONTROL -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-segmented">
         <h2>Segmented Control</h2>
         <p class="sui-text-cap sui-mt-2">Value picker with radio semantics. Arrow keys navigate. Not tabs — semantically distinct.</p>
         <div class="sui-card sui-mt-4">
@@ -653,7 +719,7 @@
       </div>
 
       <!-- CHIP / TAG -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-chips">
         <h2>Chips / Tags</h2>
         <p class="sui-text-cap sui-mt-2">Visual pill component. Behaviour (add, remove, keyboard) is bring-your-own JS — same as icons.</p>
         <div class="sui-card sui-mt-4">
@@ -676,7 +742,7 @@
       </div>
 
       <!-- DROPZONE -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-dropzone">
         <h2>Dropzone</h2>
         <p class="sui-text-cap sui-mt-2">File upload area. CSS only — drag-and-drop behaviour is bring-your-own JS.</p>
         <div class="sui-card sui-mt-4">
@@ -689,7 +755,7 @@
       </div>
 
       <!-- TIMELINE -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-timeline">
         <h2>Timeline</h2>
         <p class="sui-text-cap sui-mt-2">Activity feed layout. Avatar left, content right, vertical connector. Content is flexible — badges, text, timestamps all compose inside.</p>
         <div class="sui-card sui-mt-4">
@@ -745,7 +811,7 @@
       <!-- ACCORDION -->
 
       <!-- STEPPER -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-stepper">
         <h2>Stepper</h2>
         <p class="sui-text-cap sui-mt-2">Multi-step workflows. CSS-only. Horizontal on desktop, vertical on mobile. States communicated by shape + colour — never colour alone.</p>
 
@@ -802,7 +868,7 @@
       </div>
 
       <!-- ACCORDION -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-accordion">
         <h2>Accordion</h2>
         <p class="sui-text-cap sui-mt-2">Collapsible content sections. Keyboard accessible (Enter/Space). Multiple sections can be open.</p>
         <div class="sui-accordion sui-mt-4">
@@ -837,7 +903,7 @@
       </div>
 
       <!-- BREADCRUMB + PAGINATION + DIVIDER -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-nav">
         <h2>Navigation</h2>
         <p class="sui-text-cap sui-mt-2">Breadcrumbs, pagination, and dividers for structured content.</p>
         <div class="sui-card sui-mt-4">
@@ -884,7 +950,7 @@
       </div>
 
       <!-- DROPDOWN + TOOLTIP + MODAL + TOAST -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-interactive">
         <h2>Interactive Components</h2>
         <p class="sui-text-cap sui-mt-2">Powered by <code>sui.js</code>. Modals, toasts, dropdowns, and tooltips.</p>
         <div class="sui-card sui-mt-4">
@@ -922,7 +988,7 @@
       </div>
 
       <!-- TABLES -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-tables">
         <h2>Tables</h2>
         <p class="sui-text-cap sui-mt-2">Responsive tables with mobile stacking, striped and hover variants.</p>
         <div class="sui-card sui-card-flush sui-mt-4">
@@ -999,7 +1065,7 @@
       </div>
 
       <!-- SKELETON LOADERS -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-skeleton">
         <h2>Skeleton Loaders</h2>
         <p class="sui-text-cap sui-mt-2">Placeholder shimmer for content that's still loading.</p>
         <div class="sui-grid sui-grid-2 sui-mt-4">
@@ -1024,7 +1090,7 @@
       </div>
 
       <!-- EMPTY STATE -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-empty">
         <h2>Empty State</h2>
         <p class="sui-text-cap sui-mt-2">The "no data yet" pattern every table, list, and dashboard needs.</p>
         <div class="sui-card sui-mt-4">
@@ -1038,7 +1104,7 @@
       </div>
 
       <!-- CARDS WITH SHADOW -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-cards">
         <h2>Card Variants</h2>
         <p class="sui-text-cap sui-mt-2">Default (border), elevated (shadow), muted, and flush.</p>
         <div class="sui-grid sui-grid-4 sui-mt-4">
@@ -1062,7 +1128,7 @@
       </div>
 
       <!-- VISIBILITY UTILITIES -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-visibility">
         <h2>Visibility Utilities</h2>
         <p class="sui-text-cap sui-mt-2">Two-tier visibility: completely hidden vs. screen-reader only.</p>
         <div class="sui-grid sui-grid-2 sui-mt-4">
@@ -1082,7 +1148,7 @@
       </div>
 
       <!-- INTERACTIVE CARDS + LAYOUT UTILITIES -->
-      <div class="sui-section">
+      <div class="sui-section" id="comp-layout">
         <h2>Layout Utilities</h2>
         <p class="sui-text-cap sui-mt-2">Grid auto-fit, horizontal scroll, flex-nowrap, interactive cards, and container queries.</p>
         <div class="sui-card sui-mt-4">
@@ -1303,6 +1369,7 @@ Components (use SUI classes):
 - Empty state: sui-empty + sui-empty-icon + sui-empty-title + sui-empty-text
 - Skeleton: sui-skeleton + sui-skeleton-text/heading/avatar/card
 - Bottom sheet: sui-sheet + sui-sheet-panel/handle/header/body/footer (requires sui.js). SUI.sheet.open/close.
+- Sidenav: sui-sidenav + sui-sidenav-panel/link/heading/toggle/close (requires sui.js). Sticky sidebar desktop, slide-in mobile. SUI.sidenav.open/close/toggle.
 - Segmented control: sui-segmented + sui-segment (role="radiogroup" + role="radio", requires sui.js)
 - Chip/Tag: sui-chip + sui-chip-remove (CSS only, behaviour is bring-your-own JS)
 - Interactive card: sui-card-interactive (clickable card with hover shadow elevation)
@@ -2213,8 +2280,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.2.0</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.3.0</span></a>
     </footer>
+    </div><!-- .demo-content -->
+    </div><!-- .demo-layout -->
   </main>
 
   <!-- ===== MODAL (outside main for stacking context) ===== -->
@@ -2289,6 +2358,22 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     // Watch for theme changes
     const observer = new MutationObserver(syncThemeIcon);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    // Sidenav: switch tabs when clicking cross-tab links
+    document.querySelectorAll('.sui-sidenav-link[data-sidenav-tab]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetTab = link.getAttribute('data-sidenav-tab');
+        const currentTab = document.querySelector('[role="tab"][aria-selected="true"]');
+        if (currentTab && currentTab.getAttribute('data-tab') !== targetTab) {
+          // Switch tab
+          const newTab = document.querySelector(`[role="tab"][data-tab="${targetTab}"]`);
+          if (newTab) newTab.click();
+        }
+        // Update active state
+        document.querySelectorAll('.sui-sidenav-link').forEach(l => l.classList.remove('is-active'));
+        link.classList.add('is-active');
+      });
+    });
   </script>
 </body>
 </html>

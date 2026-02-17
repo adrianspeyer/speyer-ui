@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.2.0
+ * Version: 2.3.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -2702,11 +2702,11 @@ dialog.sui-dialog-wide { max-width: 720px; }
 }
 
 /* Dark mode mark overrides */
-[data-theme="dark"] .sui-mark { background: rgba(245, 158, 11, 0.2); }
-[data-theme="dark"] .sui-mark-current { background: rgba(245, 158, 11, 0.5); color: #fff; }
+[data-theme="dark"] .sui-mark { background: rgba(245, 158, 11, 0.25); }
+[data-theme="dark"] .sui-mark-current { background: rgba(245, 158, 11, 0.6); color: #000; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .sui-mark { background: rgba(245, 158, 11, 0.2); }
-  :root:not([data-theme]) .sui-mark-current { background: rgba(245, 158, 11, 0.5); color: #fff; }
+  :root:not([data-theme]) .sui-mark { background: rgba(245, 158, 11, 0.25); }
+  :root:not([data-theme]) .sui-mark-current { background: rgba(245, 158, 11, 0.6); color: #000; }
 }
 
 /* Don't print highlights */
@@ -2977,6 +2977,210 @@ dialog.sui-dialog-wide { max-width: 720px; }
 
 
 /* ==========================================================================
+   Sidenav — Responsive Section Navigation
+   Desktop (≥768px): sticky sidebar with vertical link list
+   Mobile (<768px): off-canvas left panel with backdrop overlay
+
+   Usage:
+     <nav class="sui-sidenav" aria-label="Section navigation" aria-hidden="true">
+       <div class="sui-sidenav-panel">
+         <div class="sui-sidenav-header">
+           <span class="sui-sidenav-title">Sections</span>
+           <button class="sui-sidenav-close sui-btn sui-btn-ghost sui-btn-sm"
+                   aria-label="Close navigation" type="button">✕</button>
+         </div>
+         <a href="#section1" class="sui-sidenav-link">Section 1</a>
+         <span class="sui-sidenav-heading">Group</span>
+         <a href="#section2" class="sui-sidenav-link is-active">Section 2</a>
+       </div>
+     </nav>
+     <button class="sui-sidenav-toggle" data-sui-sidenav=".sui-sidenav"
+             aria-label="Open navigation" type="button">☰</button>
+   ========================================================================== */
+
+/* Mobile-first: off-canvas overlay */
+.sui-sidenav {
+  position: fixed;
+  inset: 0;
+  z-index: var(--sui-z-modal);
+  background: var(--sui-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--sui-duration-normal) var(--sui-easing),
+              visibility var(--sui-duration-normal) var(--sui-easing);
+}
+
+.sui-sidenav.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sui-sidenav-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  background: var(--sui-bg-card);
+  border-right: 1px solid var(--sui-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translateX(-100%);
+  transition: transform var(--sui-duration-normal) var(--sui-easing);
+  padding: var(--sui-space-2) 0;
+}
+
+.sui-sidenav.is-open .sui-sidenav-panel {
+  transform: translateX(0);
+}
+
+.sui-sidenav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sui-space-2) var(--sui-space-4) var(--sui-space-3);
+  border-bottom: 1px solid var(--sui-border);
+  margin-bottom: var(--sui-space-2);
+  flex-shrink: 0;
+}
+
+.sui-sidenav-title {
+  font-size: var(--sui-text-sm);
+  font-weight: var(--sui-weight-semibold);
+  color: var(--sui-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Hide close button on desktop — panel is always visible */
+.sui-sidenav-close { display: inline-flex; }
+
+.sui-sidenav-heading {
+  display: block;
+  font-size: var(--sui-text-xs);
+  font-weight: var(--sui-weight-semibold);
+  color: var(--sui-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--sui-space-3) var(--sui-space-4) var(--sui-space-1);
+}
+
+.sui-sidenav-link {
+  display: block;
+  padding: var(--sui-space-2) var(--sui-space-4);
+  font-size: var(--sui-text-sm);
+  color: var(--sui-text-secondary);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: color var(--sui-duration-fast) var(--sui-easing),
+              background var(--sui-duration-fast) var(--sui-easing),
+              border-color var(--sui-duration-fast) var(--sui-easing);
+}
+
+.sui-sidenav-link:hover {
+  color: var(--sui-text-primary);
+  background: var(--sui-bg-elevated);
+}
+
+.sui-sidenav-link:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: -3px;
+  border-radius: var(--sui-radius-sm);
+}
+
+.sui-sidenav-link.is-active,
+.sui-sidenav-link[aria-current="page"],
+.sui-sidenav-link[aria-current="true"] {
+  color: var(--sui-blue-primary);
+  border-left-color: var(--sui-blue-primary);
+  background: var(--sui-bg-elevated);
+  font-weight: var(--sui-weight-medium);
+}
+
+/* Toggle button — visible on mobile only */
+.sui-sidenav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--sui-space-2);
+  font-size: var(--sui-text-lg);
+  background: var(--sui-bg-card);
+  border: 1px solid var(--sui-border);
+  border-radius: var(--sui-radius-md);
+  color: var(--sui-text-primary);
+  cursor: pointer;
+  transition: background var(--sui-duration-fast) var(--sui-easing);
+}
+
+.sui-sidenav-toggle:hover {
+  background: var(--sui-bg-elevated);
+}
+
+.sui-sidenav-toggle:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 2px;
+}
+
+/* Desktop: sticky sidebar, no overlay */
+@media (min-width: 769px) {
+  .sui-sidenav {
+    position: sticky;
+    top: var(--sui-space-4);
+    z-index: auto;
+    background: none;
+    opacity: 1;
+    visibility: visible;
+    transition: none;
+    width: 220px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    max-height: calc(100vh - var(--sui-space-8));
+    overflow-y: auto;
+  }
+
+  .sui-sidenav-panel {
+    position: static;
+    width: 100%;
+    max-width: none;
+    background: none;
+    border-right: none;
+    border: 1px solid var(--sui-border);
+    border-radius: var(--sui-radius-lg);
+    transform: none;
+    transition: none;
+    padding: var(--sui-space-2) 0;
+    overflow-y: visible;
+  }
+
+  .sui-sidenav-close { display: none; }
+  .sui-sidenav-toggle { display: none; }
+
+  /* Remove header border on desktop — cleaner look */
+  .sui-sidenav-header {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: var(--sui-space-1);
+  }
+}
+
+/* Scroll target offset — utility for anchor navigation */
+.sui-scroll-target {
+  scroll-margin-top: 80px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sui-sidenav,
+  .sui-sidenav-panel { transition: none; }
+}
+
+
+/* ==========================================================================
    High Contrast Overrides
    ========================================================================== */
 
@@ -2994,4 +3198,8 @@ dialog.sui-dialog-wide { max-width: 720px; }
   a:focus-visible,
   .sui-btn:focus-visible,
   .sui-tab:focus-visible { outline-width: 4px; }
+
+  .sui-sidenav-panel { border-width: 2px; }
+  .sui-sidenav-link.is-active,
+  .sui-sidenav-link[aria-current="page"] { border-left-width: 4px; }
 }
