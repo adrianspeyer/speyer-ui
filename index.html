@@ -4,7 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speyer UI System — Accessibility as Architecture</title>
-  <meta name="description" content="A lightweight, zero-runtime-dependency design system that treats accessibility as architecture, not afterthought. Color-blind friendly, mobile-first, AI-ready. Made in Canada." />
+  <meta name="description" content="A lightweight, zero-runtime-dependency design system that treats accessibility as architecture, not afterthought. Colour-blind friendly, mobile-first, AI-ready. Made in Canada." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Speyer UI System — Accessibility as Architecture" />
+  <meta property="og:description" content="A lightweight, accessible design system. Three files, under 95 KB, zero dependencies. WCAG 2.1 AA baseline. Made in Canada." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://adrianspeyer.github.io/speyer-ui/" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://adrianspeyer.github.io/speyer-ui/" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Speyer UI",
+    "description": "A lightweight, zero-dependency design system that treats accessibility as architecture. WCAG 2.1 AA baseline, colour-blind safe, mobile-first.",
+    "url": "https://adrianspeyer.github.io/speyer-ui/",
+    "codeRepository": "https://github.com/adrianspeyer/speyer-ui",
+    "programmingLanguage": ["CSS", "JavaScript"],
+    "runtimePlatform": "Browser",
+    "license": "https://opensource.org/licenses/MIT",
+    "version": "2.5.0",
+    "author": {
+      "@type": "Person",
+      "name": "Adrian Speyer",
+      "url": "https://github.com/adrianspeyer"
+    }
+  }
+  </script>
+
   <link rel="stylesheet" href="./sui-tokens.css" />
   <link rel="stylesheet" href="./sui-components.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,6 +43,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    /* Tab section headings demoted to H2 for SEO (single H1 per page) but keep H1 visual size */
+    .sui-section-head h2 { font-size: 2em; margin-block: 0.67em; }
     /* Demo-only layout — NOT part of sui-components.css */
     @media (min-width: 769px) {
       .demo-layout { display: flex; gap: var(--sui-space-5); align-items: flex-start; }
@@ -318,7 +351,7 @@
     <section data-view="components" role="tabpanel" aria-label="Components">
       <div class="sui-section-head" style="margin-top: var(--sui-space-4);">
         <div>
-          <h1>Component Library</h1>
+          <h2 class="sui-h1">Component Library</h2>
           <p class="sui-text-cap sui-mt-2">
             Every SUI component, live and interactive. All built from design tokens, all accessible by default.
           </p>
@@ -326,26 +359,99 @@
       </div>
 
       <!-- BUTTONS -->
-      <div class="sui-section" id="comp-buttons">
-        <h2>Buttons</h2>
-        <p class="sui-text-cap sui-mt-2">44px touch-friendly. Visible focus states. Tab through to test keyboard navigation.</p>
-        <div class="sui-flex sui-mt-4">
-          <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Primary</button>
-          <button class="sui-btn sui-btn-secondary" type="button">Secondary</button>
-          <button class="sui-btn sui-btn-ghost" type="button">Ghost</button>
-          <button class="sui-btn sui-btn-dashed" type="button"><i data-lucide="plus"></i>Dashed</button>
-          <button class="sui-btn sui-btn-danger" type="button"><i data-lucide="trash-2"></i>Danger</button>
-          <button class="sui-btn sui-btn-success" type="button"><i data-lucide="check"></i>Success</button>
-          <button class="sui-btn" type="button" disabled>Disabled</button>
-        </div>
-        <div class="sui-flex sui-mt-3">
-          <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Small Primary</button>
-          <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="settings"></i>Settings</button>
-          <button class="sui-btn sui-btn-dashed sui-btn-sm" type="button"><i data-lucide="plus"></i>Add Item</button>
+      <div class="sui-section" id="comp-accordion">
+        <h2>Accordion</h2>
+        <p class="sui-text-cap sui-mt-2">Collapsible content sections. Keyboard accessible (Enter/Space). Multiple sections can be open.</p>
+        <div class="sui-accordion sui-mt-4">
+          <div class="sui-accordion-item">
+            <button class="sui-accordion-trigger" type="button" aria-expanded="true" aria-controls="acc-1">
+              What is Speyer UI?
+              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+            </button>
+            <div class="sui-accordion-panel" id="acc-1">
+              <p>SUI is a lightweight, accessible design system built on CSS custom properties. It provides design tokens, reusable component classes, and an optional JavaScript toolkit for interactive components — no heavy frameworks required.</p>
+            </div>
+          </div>
+          <div class="sui-accordion-item">
+            <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-2">
+              Do I need the JavaScript file?
+              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+            </button>
+            <div class="sui-accordion-panel" id="acc-2" hidden>
+              <p>No. The CSS files handle all visual styling. <code>sui.js</code> is optional and adds behavior for modals, toasts, dropdowns, tooltips, and accordion interactivity. Everything degrades gracefully without it.</p>
+            </div>
+          </div>
+          <div class="sui-accordion-item">
+            <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-3">
+              Can I use SUI with React, Vue, or other frameworks?
+              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+            </button>
+            <div class="sui-accordion-panel" id="acc-3" hidden>
+              <p>Absolutely. SUI tokens are plain CSS custom properties that work in any environment. The component classes are standard CSS and can be applied to any HTML element. Use the tokens as your design foundation and build framework-specific components on top.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- BADGES -->
+      <!-- BREADCRUMB + PAGINATION + DIVIDER -->
+      <div class="sui-section" id="comp-alerts">
+        <h2>Alerts</h2>
+        <p class="sui-text-cap sui-mt-2">Every alert uses icon + text. Color is never the sole indicator.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-alert sui-alert-success" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="check-circle"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Saved successfully</div><div>Your changes have been published.</div></div>
+          </div>
+          <div class="sui-alert sui-alert-warning" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="alert-triangle"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Review required</div><div>Some fields need your attention.</div></div>
+          </div>
+          <div class="sui-alert sui-alert-error" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="x-circle"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Upload failed</div><div>The file exceeds the maximum size of 10MB.</div></div>
+          </div>
+          <div class="sui-alert sui-alert-info" role="alert">
+            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+            <div class="sui-alert-content"><div class="sui-alert-title">Changes applied</div><div>Settings will take effect next session.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM INPUTS -->
+      <div class="sui-section" id="comp-avatars">
+        <h2>Avatars</h2>
+        <p class="sui-text-cap sui-mt-2">Initials-based, deterministic colors. Privacy-friendly, no image dependencies.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Sizes</div>
+          <div class="sui-flex sui-items-center">
+            <span class="sui-avatar sui-avatar-sm">AS</span>
+            <span class="sui-avatar sui-avatar-md">JK</span>
+            <span class="sui-avatar sui-avatar-lg">ML</span>
+            <span class="sui-avatar sui-avatar-xl">DT</span>
+            <span class="sui-avatar sui-avatar-lg">RW</span>
+            <span class="sui-avatar sui-avatar-md">BN</span>
+          </div>
+
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Profile header pattern (XL)</div>
+          <div class="sui-flex sui-items-center sui-gap-3">
+            <span class="sui-avatar sui-avatar-xl">AS</span>
+            <div>
+              <div style="font-size:var(--sui-text-h3);font-weight:var(--sui-weight-semibold);">Adrian Speyer</div>
+              <span class="sui-text-muted">VP Marketing & Technology</span>
+            </div>
+          </div>
+
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Avatar group</div>
+          <div class="sui-avatar-group">
+            <span class="sui-avatar sui-avatar-md">AS</span>
+            <span class="sui-avatar sui-avatar-md">JK</span>
+            <span class="sui-avatar sui-avatar-md">ML</span>
+            <span class="sui-avatar sui-avatar-md">+4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS BARS -->
       <div class="sui-section" id="comp-badges">
         <h2>Badges</h2>
         <p class="sui-text-cap sui-mt-2">Always paired with icon or text. Covers every SaaS status and labeling need.</p>
@@ -400,30 +506,133 @@
       </div>
 
       <!-- ALERTS -->
-      <div class="sui-section" id="comp-alerts">
-        <h2>Alerts</h2>
-        <p class="sui-text-cap sui-mt-2">Every alert uses icon + text. Color is never the sole indicator.</p>
-        <div class="sui-grid sui-grid-2 sui-mt-4">
-          <div class="sui-alert sui-alert-success" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="check-circle"></i></span>
-            <div class="sui-alert-content"><div class="sui-alert-title">Saved successfully</div><div>Your changes have been published.</div></div>
+      <div class="sui-section" id="comp-sheet">
+        <h2>Bottom Sheet</h2>
+        <p class="sui-text-cap sui-mt-2">Mobile-first slide-up drawer. Handles safe areas, scroll trapping, and Escape key.</p>
+        <div class="sui-card sui-mt-4">
+          <button class="sui-btn sui-btn-primary" type="button" data-sui-sheet="#demoSheet"><i data-lucide="panel-bottom-open"></i>Open Bottom Sheet</button>
+        </div>
+      </div>
+
+      <!-- SEGMENTED CONTROL -->
+      <div class="sui-section" id="comp-buttons">
+        <h2>Buttons</h2>
+        <p class="sui-text-cap sui-mt-2">44px touch-friendly. Visible focus states. Tab through to test keyboard navigation.</p>
+        <div class="sui-flex sui-mt-4">
+          <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Primary</button>
+          <button class="sui-btn sui-btn-secondary" type="button">Secondary</button>
+          <button class="sui-btn sui-btn-ghost" type="button">Ghost</button>
+          <button class="sui-btn sui-btn-dashed" type="button"><i data-lucide="plus"></i>Dashed</button>
+          <button class="sui-btn sui-btn-danger" type="button"><i data-lucide="trash-2"></i>Danger</button>
+          <button class="sui-btn sui-btn-success" type="button"><i data-lucide="check"></i>Success</button>
+          <button class="sui-btn" type="button" disabled>Disabled</button>
+        </div>
+        <div class="sui-flex sui-mt-3">
+          <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Small Primary</button>
+          <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="settings"></i>Settings</button>
+          <button class="sui-btn sui-btn-dashed sui-btn-sm" type="button"><i data-lucide="plus"></i>Add Item</button>
+        </div>
+      </div>
+
+      <!-- BADGES -->
+      <div class="sui-section" id="comp-cards">
+        <h2>Card Variants</h2>
+        <p class="sui-text-cap sui-mt-2">Default (border), elevated (shadow), muted, and flush.</p>
+        <div class="sui-grid sui-grid-4 sui-mt-4">
+          <div class="sui-card">
+            <div class="sui-kpi-label sui-mb-2">Default</div>
+            <p>Border-based separation. The standard card.</p>
           </div>
-          <div class="sui-alert sui-alert-warning" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="alert-triangle"></i></span>
-            <div class="sui-alert-content"><div class="sui-alert-title">Review required</div><div>Some fields need your attention.</div></div>
+          <div class="sui-card sui-card-shadow">
+            <div class="sui-kpi-label sui-mb-2">Shadow</div>
+            <p>Opt-in elevation with <code>sui-card-shadow</code>.</p>
           </div>
-          <div class="sui-alert sui-alert-error" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="x-circle"></i></span>
-            <div class="sui-alert-content"><div class="sui-alert-title">Upload failed</div><div>The file exceeds the maximum size of 10MB.</div></div>
+          <div class="sui-card sui-card-muted">
+            <div class="sui-kpi-label sui-mb-2">Muted</div>
+            <p>Elevated background for nested cards.</p>
           </div>
-          <div class="sui-alert sui-alert-info" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
-            <div class="sui-alert-content"><div class="sui-alert-title">Changes applied</div><div>Settings will take effect next session.</div></div>
+          <div class="sui-card sui-card-muted sui-card-interactive" tabindex="0">
+            <div class="sui-kpi-label sui-mb-2">Muted + Interactive</div>
+            <p>Subtle hover lift. Lower visual weight than regular interactive.</p>
           </div>
         </div>
       </div>
 
-      <!-- FORM INPUTS -->
+      <!-- VISIBILITY UTILITIES -->
+      <div class="sui-section" id="comp-chips">
+        <h2>Chips / Tags</h2>
+        <p class="sui-text-cap sui-mt-2">Visual pill component. Behaviour (add, remove, keyboard) is bring-your-own JS — same as icons.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Default chips</div>
+          <div class="sui-flex">
+            <span class="sui-chip"><i data-lucide="tag"></i>Design</span>
+            <span class="sui-chip">Frontend</span>
+            <span class="sui-chip">Accessibility<button class="sui-chip-remove" aria-label="Remove Accessibility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
+            <span class="sui-chip">React<button class="sui-chip-remove" aria-label="Remove React"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
+          </div>
+          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Colour variants</div>
+          <div class="sui-flex">
+            <span class="sui-chip sui-chip-success"><i data-lucide="check"></i>Approved</span>
+            <span class="sui-chip sui-chip-warning"><i data-lucide="clock"></i>Pending</span>
+            <span class="sui-chip sui-chip-error"><i data-lucide="x"></i>Rejected</span>
+            <span class="sui-chip sui-chip-info"><i data-lucide="info"></i>Review</span>
+            <span class="sui-chip sui-chip-pro"><i data-lucide="crown"></i>Premium</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DROPZONE -->
+      <div class="sui-section" id="comp-dropzone">
+        <h2>Dropzone</h2>
+        <p class="sui-text-cap sui-mt-2">File upload area. CSS only — drag-and-drop behaviour is bring-your-own JS.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-dropzone" role="button" tabindex="0" aria-label="Upload files">
+            <i data-lucide="upload-cloud"></i>
+            <p><strong>Drop files here</strong> or click to browse</p>
+            <p class="sui-text-muted">PNG, JPG, PDF up to 10MB</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="sui-section" id="comp-embed">
+        <h2>Embed & Keyboard</h2>
+        <p class="sui-text-cap sui-mt-2">Responsive video embeds and keyboard shortcut styling.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <h3>Responsive video embed (16:9)</h3>
+            <div class="sui-mt-3" style="max-width:280px;">
+              <div class="sui-embed">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--sui-bg-elevated);">
+                  <span style="color:var(--sui-text-muted);font-size:var(--sui-text-small);">16:9 video area</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sui-card">
+            <h3>Keyboard shortcuts</h3>
+            <p class="sui-mt-2">Toggle theme: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>T</kbd></p>
+            <p class="sui-mt-2">Search: <kbd>Ctrl</kbd> + <kbd>K</kbd></p>
+            <p class="sui-mt-2">Save: <kbd>Ctrl</kbd> + <kbd>S</kbd></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM SHEET -->
+      <div class="sui-section" id="comp-empty">
+        <h2>Empty State</h2>
+        <p class="sui-text-cap sui-mt-2">The "no data yet" pattern every table, list, and dashboard needs.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-empty">
+            <div class="sui-empty-icon"><i data-lucide="inbox"></i></div>
+            <div class="sui-empty-title">No projects yet</div>
+            <div class="sui-empty-text">Create your first project to get started. It only takes a few seconds.</div>
+            <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Create project</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARDS WITH SHADOW -->
       <div class="sui-section" id="comp-forms">
         <h2>Form Inputs</h2>
         <p class="sui-text-cap sui-mt-2">Clear borders, visible focus rings, and accessible error messages.</p>
@@ -504,40 +713,246 @@
       </div>
 
       <!-- AVATARS -->
-      <div class="sui-section" id="comp-avatars">
-        <h2>Avatars</h2>
-        <p class="sui-text-cap sui-mt-2">Initials-based, deterministic colors. Privacy-friendly, no image dependencies.</p>
+      <div class="sui-section" id="comp-interactive">
+        <h2>Interactive Components</h2>
+        <p class="sui-text-cap sui-mt-2">Powered by <code>sui.js</code>. Modals, toasts, dropdowns, and tooltips.</p>
         <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Sizes</div>
           <div class="sui-flex sui-items-center">
-            <span class="sui-avatar sui-avatar-sm">AS</span>
-            <span class="sui-avatar sui-avatar-md">JK</span>
-            <span class="sui-avatar sui-avatar-lg">ML</span>
-            <span class="sui-avatar sui-avatar-xl">DT</span>
-            <span class="sui-avatar sui-avatar-lg">RW</span>
-            <span class="sui-avatar sui-avatar-md">BN</span>
-          </div>
-
-          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Profile header pattern (XL)</div>
-          <div class="sui-flex sui-items-center sui-gap-3">
-            <span class="sui-avatar sui-avatar-xl">AS</span>
-            <div>
-              <div style="font-size:var(--sui-text-h3);font-weight:var(--sui-weight-semibold);">Adrian Speyer</div>
-              <span class="sui-text-muted">VP Marketing & Technology</span>
+            <!-- Dropdown -->
+            <div class="sui-dropdown">
+              <button class="sui-btn" type="button" data-sui-dropdown-trigger><i data-lucide="more-horizontal"></i>Dropdown</button>
+              <div class="sui-dropdown-menu">
+                <button class="sui-dropdown-item"><i data-lucide="edit-3"></i>Edit</button>
+                <button class="sui-dropdown-item"><i data-lucide="copy"></i>Duplicate</button>
+                <button class="sui-dropdown-item"><i data-lucide="archive"></i>Archive</button>
+                <hr class="sui-dropdown-divider" />
+                <button class="sui-dropdown-item sui-dropdown-item-danger"><i data-lucide="trash-2"></i>Delete</button>
+              </div>
             </div>
-          </div>
 
-          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Avatar group</div>
-          <div class="sui-avatar-group">
-            <span class="sui-avatar sui-avatar-md">AS</span>
-            <span class="sui-avatar sui-avatar-md">JK</span>
-            <span class="sui-avatar sui-avatar-md">ML</span>
-            <span class="sui-avatar sui-avatar-md">+4</span>
+            <!-- Tooltip -->
+            <span class="sui-tooltip">
+              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Settings"><i data-lucide="settings"></i></button>
+              <span class="sui-tooltip-content" role="tooltip">Settings</span>
+            </span>
+
+            <span class="sui-tooltip">
+              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Help"><i data-lucide="help-circle"></i></button>
+              <span class="sui-tooltip-content" role="tooltip">Help &amp; Support</span>
+            </span>
+
+            <!-- Modal trigger -->
+            <button class="sui-btn sui-btn-primary" type="button" data-sui-modal="#demoModal"><i data-lucide="external-link"></i>Open Modal</button>
+
+            <!-- Toast triggers -->
+            <button class="sui-btn sui-btn-success sui-btn-sm" type="button" onclick="SUI.toast.success('Saved!', 'Your changes have been saved.')">Toast</button>
           </div>
         </div>
       </div>
 
-      <!-- PROGRESS BARS -->
+      <!-- TABLES -->
+      <div class="sui-section" id="comp-layout">
+        <h2>Layout Utilities</h2>
+        <p class="sui-text-cap sui-mt-2">Grid auto-fit, horizontal scroll, flex-nowrap, interactive cards, and container queries.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Interactive card (hover for elevation)</div>
+          <div class="sui-grid sui-grid-3">
+            <div class="sui-card sui-card-interactive" tabindex="0">
+              <div class="sui-info-row-title">Project Alpha</div>
+              <small>Click or tap to navigate. Hover reveals shadow.</small>
+            </div>
+            <div class="sui-card sui-card-interactive" tabindex="0">
+              <div class="sui-info-row-title">Project Beta</div>
+              <small>Keyboard-accessible with focus ring.</small>
+            </div>
+            <div class="sui-card sui-card-interactive" tabindex="0">
+              <div class="sui-info-row-title">Project Gamma</div>
+              <small>Composes with any card variant.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Grid auto-fit (flexible column count)</div>
+          <div class="sui-grid sui-grid-auto">
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Horizontal scroll (<code>sui-scroll-x</code>)</div>
+          <div class="sui-flex sui-flex-nowrap sui-scroll-x sui-gap-3">
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 1</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 2</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 3</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 4</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 5</small></div>
+            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 6</small></div>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Container queries (<code>sui-container</code> opt-in)</div>
+          <div class="sui-grid sui-grid-2">
+            <div class="sui-container">
+              <div class="sui-card sui-card-muted">
+                <div class="sui-flex sui-cq-stack sui-gap-2 sui-items-center">
+                  <span class="sui-avatar sui-avatar-sm">CQ</span>
+                  <div>
+                    <div class="sui-info-row-title">Responsive to container</div>
+                    <small class="sui-cq-hide">This text hides in narrow containers.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sui-container">
+              <div class="sui-card sui-card-muted">
+                <div class="sui-flex sui-cq-stack sui-gap-2 sui-items-center">
+                  <span class="sui-avatar sui-avatar-sm">CQ</span>
+                  <div>
+                    <div class="sui-info-row-title">Same component</div>
+                    <small class="sui-cq-hide">Adapts to its container, not the viewport.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sui-section" id="comp-mark">
+        <h2>Mark / Highlight</h2>
+        <p class="sui-text-cap sui-mt-2">Search result highlighting. Automatic dark mode and print handling.</p>
+        <div class="sui-card sui-mt-4">
+          <p>Search results: The <mark class="sui-mark">quick brown fox</mark> jumped over the <mark class="sui-mark sui-mark-current">lazy dog</mark> while the <mark class="sui-mark">quick</mark> cat watched.</p>
+          <p class="sui-text-muted sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-mark</code> = all matches (soft yellow) · <code>sui-mark-current</code> = current match (strong amber)</p>
+        </div>
+      </div>
+
+      <!-- META -->
+      <div class="sui-section" id="comp-meta">
+        <h2>Metadata Line</h2>
+        <p class="sui-text-cap sui-mt-2">Compact metadata with automatic dot separators. No separator markup needed — CSS handles it.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-meta">
+            <span>1,234 words</span>
+            <span>5 min read</span>
+            <span>Updated 3h ago</span>
+          </div>
+          <div class="sui-meta sui-mt-3">
+            <span>Adrian Speyer</span>
+            <span>Draft</span>
+            <span>12 comments</span>
+            <span>v2.1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="sui-section" id="comp-nav">
+        <h2>Navigation</h2>
+        <p class="sui-text-cap sui-mt-2">Breadcrumbs, pagination, and dividers for structured content.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Breadcrumb</div>
+          <nav aria-label="Breadcrumb">
+            <ol class="sui-breadcrumb">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Account</a></li>
+              <li><span aria-current="page">Security</span></li>
+            </ol>
+          </nav>
+
+          <div class="sui-divider-label">Pagination</div>
+
+          <nav class="sui-pagination" aria-label="Page navigation">
+            <button class="sui-page-btn" aria-label="Previous page"><i data-lucide="chevron-left"></i></button>
+            <button class="sui-page-btn" aria-label="Page 1">1</button>
+            <button class="sui-page-btn" aria-current="page" aria-label="Page 2, current">2</button>
+            <button class="sui-page-btn" aria-label="Page 3">3</button>
+            <span class="sui-page-ellipsis">…</span>
+            <button class="sui-page-btn" aria-label="Page 12">12</button>
+            <button class="sui-page-btn" aria-label="Next page"><i data-lucide="chevron-right"></i></button>
+          </nav>
+
+          <div class="sui-divider-label">Dividers</div>
+
+          <div class="sui-flex sui-items-center">
+            <span>Item A</span>
+            <span class="sui-divider-v"></span>
+            <span>Item B</span>
+            <span class="sui-divider-v"></span>
+            <span>Item C</span>
+          </div>
+
+          <div class="sui-divider-label">Nav links</div>
+
+          <nav style="display:flex;gap:var(--sui-space-1);flex-wrap:wrap;" aria-label="Demo navigation">
+            <a href="#" class="sui-nav-link" aria-current="page" onclick="event.preventDefault()">Dashboard</a>
+            <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Settings</a>
+            <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Reports</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- DROPDOWN + TOOLTIP + MODAL + TOAST -->
+      <div class="sui-section" id="comp-panel">
+        <h2>Panel</h2>
+        <p class="sui-text-cap sui-mt-2">Side panel / slide-over — the third overlay type. Dialog blocks, sheet slides up, panel slides from the right. Desktop: coexists with main content. Mobile: full-screen.</p>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">CRM Contact Detail</div>
+          <p class="sui-mb-3">Click to open a panel with contact details. Desktop: panel appears alongside this content. Mobile: full-screen overlay.</p>
+          <div style="display: flex; gap: var(--sui-space-2); flex-wrap: wrap;">
+            <button class="sui-btn sui-btn-primary" data-sui-panel="#demoPanel" aria-expanded="false" type="button"><i data-lucide="user"></i>View Contact</button>
+            <button class="sui-btn sui-btn-outline" data-sui-panel="#demoPanelNoBg" aria-expanded="false" type="button"><i data-lucide="layout-sidebar-right"></i>No Backdrop</button>
+          </div>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Dual focus model</div>
+          <p><strong>Desktop (≥769px):</strong> Focus moves to the panel but is <strong>not trapped</strong>. Both the panel and main content remain interactive — panels are parallel content, not blocking content. Trapping focus would prevent keyboard users from referencing the main view.</p>
+          <p class="sui-mt-2"><strong>Mobile (&lt;769px):</strong> Panel goes full-screen. The user can no longer see main content, so the interaction model changes to a blocking overlay with <strong>focus trap enabled</strong>.</p>
+          <p class="sui-mt-2">If the viewport resizes while the panel is open, the trap toggles automatically.</p>
+        </div>
+
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Usage</div>
+          <pre class="sui-code"><code>&lt;!-- Trigger --&gt;
+&lt;button data-sui-panel="#my-panel" aria-expanded="false"&gt;Open&lt;/button&gt;
+
+&lt;!-- Panel (outside main for stacking context) --&gt;
+&lt;div class="sui-panel" id="my-panel" aria-label="Detail" aria-hidden="true"&gt;
+  &lt;div class="sui-panel-header"&gt;
+    &lt;span class="sui-panel-title"&gt;Title&lt;/span&gt;
+    &lt;button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button"
+            aria-label="Close panel"&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="sui-panel-body"&gt;Content&lt;/div&gt;
+  &lt;div class="sui-panel-footer"&gt;
+    &lt;button class="sui-btn sui-btn-ghost"&gt;Cancel&lt;/button&gt;
+    &lt;button class="sui-btn sui-btn-primary"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom width --&gt;
+&lt;div class="sui-panel" style="--sui-panel-width: 50vw"&gt;...&lt;/div&gt;
+
+&lt;!-- No backdrop (desktop) --&gt;
+&lt;div class="sui-panel sui-panel-no-backdrop"&gt;...&lt;/div&gt;</code></pre>
+
+          <div class="sui-kpi-label sui-mt-4 sui-mb-2">JavaScript API</div>
+          <pre class="sui-code"><code>SUI.panel.open('#my-panel');
+SUI.panel.close('#my-panel');
+SUI.panel.toggle('#my-panel');</code></pre>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE CARDS + LAYOUT UTILITIES -->
       <div class="sui-section" id="comp-progress">
         <h2>Progress Bars</h2>
         <p class="sui-text-cap sui-mt-2">Accessible with aria attributes. Status-colored variants and indeterminate mode.</p>
@@ -640,66 +1055,6 @@
       </div>
 
       <!-- MARK / HIGHLIGHT -->
-      <div class="sui-section" id="comp-mark">
-        <h2>Mark / Highlight</h2>
-        <p class="sui-text-cap sui-mt-2">Search result highlighting. Automatic dark mode and print handling.</p>
-        <div class="sui-card sui-mt-4">
-          <p>Search results: The <mark class="sui-mark">quick brown fox</mark> jumped over the <mark class="sui-mark sui-mark-current">lazy dog</mark> while the <mark class="sui-mark">quick</mark> cat watched.</p>
-          <p class="sui-text-muted sui-mt-2" style="font-size:var(--sui-text-small);"><code>sui-mark</code> = all matches (soft yellow) · <code>sui-mark-current</code> = current match (strong amber)</p>
-        </div>
-      </div>
-
-      <!-- META -->
-      <div class="sui-section" id="comp-meta">
-        <h2>Metadata Line</h2>
-        <p class="sui-text-cap sui-mt-2">Compact metadata with automatic dot separators. No separator markup needed — CSS handles it.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-meta">
-            <span>1,234 words</span>
-            <span>5 min read</span>
-            <span>Updated 3h ago</span>
-          </div>
-          <div class="sui-meta sui-mt-3">
-            <span>Adrian Speyer</span>
-            <span>Draft</span>
-            <span>12 comments</span>
-            <span>v2.1</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOOLBAR -->
-      <div class="sui-section" id="comp-toolbar">
-        <h2>Toolbar</h2>
-        <p class="sui-text-cap sui-mt-2">Horizontal scrolling action bar for formatting, filters, or controls. Hidden scrollbar, touch-friendly.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-2">Default</div>
-          <div class="sui-toolbar">
-            <button class="sui-toolbar-btn" type="button" title="Bold" aria-label="Bold" aria-pressed="true"><i data-lucide="bold"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Italic" aria-label="Italic"><i data-lucide="italic"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Underline" aria-label="Underline"><i data-lucide="underline"></i></button>
-            <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Heading" aria-label="Heading"><i data-lucide="heading"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="List" aria-label="List"><i data-lucide="list"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Quote" aria-label="Quote"><i data-lucide="quote"></i></button>
-            <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Link" aria-label="Link"><i data-lucide="link"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Image" aria-label="Image"><i data-lucide="image"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Code" aria-label="Code"><i data-lucide="code"></i></button>
-          </div>
-          <div class="sui-kpi-label sui-mb-2 sui-mt-4">Bordered + Compact</div>
-          <div class="sui-toolbar sui-toolbar-bordered sui-toolbar-compact">
-            <button class="sui-toolbar-btn" type="button" title="Align left" aria-label="Align left"><i data-lucide="align-left"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Align centre" aria-label="Align centre" aria-pressed="true"><i data-lucide="align-center"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Align right" aria-label="Align right"><i data-lucide="align-right"></i></button>
-            <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Undo" aria-label="Undo"><i data-lucide="undo"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Redo" aria-label="Redo"><i data-lucide="redo"></i></button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SCREEN LAYOUT -->
       <div class="sui-section" id="comp-screen">
         <h2>Screen Layout</h2>
         <p class="sui-text-cap sui-mt-2">Full-viewport app shell for mobile-first apps. Sticky header, scrollable body, pinned footer with safe area insets.</p>
@@ -745,39 +1100,6 @@
       </div>
 
       <!-- EMBED & KEYBOARD -->
-      <div class="sui-section" id="comp-embed">
-        <h2>Embed & Keyboard</h2>
-        <p class="sui-text-cap sui-mt-2">Responsive video embeds and keyboard shortcut styling.</p>
-        <div class="sui-grid sui-grid-2 sui-mt-4">
-          <div class="sui-card">
-            <h3>Responsive video embed (16:9)</h3>
-            <div class="sui-mt-3" style="max-width:280px;">
-              <div class="sui-embed">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--sui-bg-elevated);">
-                  <span style="color:var(--sui-text-muted);font-size:var(--sui-text-small);">16:9 video area</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sui-card">
-            <h3>Keyboard shortcuts</h3>
-            <p class="sui-mt-2">Toggle theme: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>T</kbd></p>
-            <p class="sui-mt-2">Search: <kbd>Ctrl</kbd> + <kbd>K</kbd></p>
-            <p class="sui-mt-2">Save: <kbd>Ctrl</kbd> + <kbd>S</kbd></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- BOTTOM SHEET -->
-      <div class="sui-section" id="comp-sheet">
-        <h2>Bottom Sheet</h2>
-        <p class="sui-text-cap sui-mt-2">Mobile-first slide-up drawer. Handles safe areas, scroll trapping, and Escape key.</p>
-        <div class="sui-card sui-mt-4">
-          <button class="sui-btn sui-btn-primary" type="button" data-sui-sheet="#demoSheet"><i data-lucide="panel-bottom-open"></i>Open Bottom Sheet</button>
-        </div>
-      </div>
-
-      <!-- SEGMENTED CONTROL -->
       <div class="sui-section" id="comp-segmented">
         <h2>Segmented Control</h2>
         <p class="sui-text-cap sui-mt-2">Value picker with radio semantics. Arrow keys navigate. Not tabs — semantically distinct.</p>
@@ -797,98 +1119,31 @@
       </div>
 
       <!-- CHIP / TAG -->
-      <div class="sui-section" id="comp-chips">
-        <h2>Chips / Tags</h2>
-        <p class="sui-text-cap sui-mt-2">Visual pill component. Behaviour (add, remove, keyboard) is bring-your-own JS — same as icons.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Default chips</div>
-          <div class="sui-flex">
-            <span class="sui-chip"><i data-lucide="tag"></i>Design</span>
-            <span class="sui-chip">Frontend</span>
-            <span class="sui-chip">Accessibility<button class="sui-chip-remove" aria-label="Remove Accessibility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
-            <span class="sui-chip">React<button class="sui-chip-remove" aria-label="Remove React"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
+      <div class="sui-section" id="comp-skeleton">
+        <h2>Skeleton Loaders</h2>
+        <p class="sui-text-cap sui-mt-2">Placeholder shimmer for content that's still loading.</p>
+        <div class="sui-grid sui-grid-2 sui-mt-4">
+          <div class="sui-card">
+            <div class="sui-flex sui-items-center sui-gap-3 sui-mb-4">
+              <div class="sui-skeleton sui-skeleton-avatar"></div>
+              <div class="sui-flex-col sui-gap-2" style="flex:1">
+                <div class="sui-skeleton sui-skeleton-text" style="width:40%"></div>
+                <div class="sui-skeleton sui-skeleton-text" style="width:60%"></div>
+              </div>
+            </div>
+            <div class="sui-skeleton sui-skeleton-text"></div>
+            <div class="sui-skeleton sui-skeleton-text"></div>
+            <div class="sui-skeleton sui-skeleton-text"></div>
           </div>
-          <div class="sui-kpi-label sui-mb-3 sui-mt-4">Colour variants</div>
-          <div class="sui-flex">
-            <span class="sui-chip sui-chip-success"><i data-lucide="check"></i>Approved</span>
-            <span class="sui-chip sui-chip-warning"><i data-lucide="clock"></i>Pending</span>
-            <span class="sui-chip sui-chip-error"><i data-lucide="x"></i>Rejected</span>
-            <span class="sui-chip sui-chip-info"><i data-lucide="info"></i>Review</span>
-            <span class="sui-chip sui-chip-pro"><i data-lucide="crown"></i>Premium</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- DROPZONE -->
-      <div class="sui-section" id="comp-dropzone">
-        <h2>Dropzone</h2>
-        <p class="sui-text-cap sui-mt-2">File upload area. CSS only — drag-and-drop behaviour is bring-your-own JS.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-dropzone" role="button" tabindex="0" aria-label="Upload files">
-            <i data-lucide="upload-cloud"></i>
-            <p><strong>Drop files here</strong> or click to browse</p>
-            <p class="sui-text-muted">PNG, JPG, PDF up to 10MB</p>
+          <div class="sui-card">
+            <div class="sui-skeleton sui-skeleton-heading"></div>
+            <div class="sui-skeleton sui-skeleton-card sui-mb-3"></div>
+            <div class="sui-skeleton sui-skeleton-btn"></div>
           </div>
         </div>
       </div>
 
-      <!-- TIMELINE -->
-      <div class="sui-section" id="comp-timeline">
-        <h2>Timeline</h2>
-        <p class="sui-text-cap sui-mt-2">Activity feed layout. Avatar left, content right, vertical connector. Content is flexible — badges, text, timestamps all compose inside.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-timeline" role="feed" aria-label="Activity timeline">
-            <div class="sui-timeline-item" role="article" aria-label="Email from David Kim, 2 hours ago">
-              <span class="sui-avatar sui-avatar-sm">DK</span>
-              <div class="sui-timeline-content">
-                <div class="sui-flex-between">
-                  <strong>David Kim</strong>
-                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">2h ago</span>
-                </div>
-                <span class="sui-badge sui-badge-info sui-badge-sm"><i data-lucide="mail"></i> Email</span>
-                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Updated proposal attached — ready for review.</p>
-              </div>
-            </div>
-            <div class="sui-timeline-item" role="article" aria-label="Call with Sarah Chen, yesterday">
-              <span class="sui-avatar sui-avatar-sm">SC</span>
-              <div class="sui-timeline-content">
-                <div class="sui-flex-between">
-                  <strong>Sarah Chen</strong>
-                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">Yesterday</span>
-                </div>
-                <span class="sui-badge sui-badge-success sui-badge-sm"><i data-lucide="phone"></i> Call</span>
-                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">30 min discovery call. Interested in Enterprise tier.</p>
-              </div>
-            </div>
-            <div class="sui-timeline-item" role="article" aria-label="Meeting with Alex Rivera, 2 days ago">
-              <span class="sui-avatar sui-avatar-sm">AR</span>
-              <div class="sui-timeline-content">
-                <div class="sui-flex-between">
-                  <strong>Alex Rivera</strong>
-                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">2 days ago</span>
-                </div>
-                <span class="sui-badge sui-badge-warning sui-badge-sm"><i data-lucide="calendar"></i> Meeting</span>
-                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Quarterly review. Action items assigned.</p>
-              </div>
-            </div>
-            <div class="sui-timeline-item" role="article" aria-label="Note by Jordan Lee, 3 days ago">
-              <span class="sui-avatar sui-avatar-sm">JL</span>
-              <div class="sui-timeline-content">
-                <div class="sui-flex-between">
-                  <strong>Jordan Lee</strong>
-                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">3 days ago</span>
-                </div>
-                <span class="sui-badge sui-badge-neutral sui-badge-sm"><i data-lucide="sticky-note"></i> Note</span>
-                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Contract renewal due next month. Flag for follow-up.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ACCORDION -->
-
-      <!-- STEPPER -->
+      <!-- EMPTY STATE -->
       <div class="sui-section" id="comp-stepper">
         <h2>Stepper</h2>
         <p class="sui-text-cap sui-mt-2">Multi-step workflows. CSS-only. Horizontal on desktop, vertical on mobile. States communicated by shape + colour — never colour alone.</p>
@@ -946,126 +1201,6 @@
       </div>
 
       <!-- ACCORDION -->
-      <div class="sui-section" id="comp-accordion">
-        <h2>Accordion</h2>
-        <p class="sui-text-cap sui-mt-2">Collapsible content sections. Keyboard accessible (Enter/Space). Multiple sections can be open.</p>
-        <div class="sui-accordion sui-mt-4">
-          <div class="sui-accordion-item">
-            <button class="sui-accordion-trigger" type="button" aria-expanded="true" aria-controls="acc-1">
-              What is Speyer UI?
-              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
-            </button>
-            <div class="sui-accordion-panel" id="acc-1">
-              <p>SUI is a lightweight, accessible design system built on CSS custom properties. It provides design tokens, reusable component classes, and an optional JavaScript toolkit for interactive components — no heavy frameworks required.</p>
-            </div>
-          </div>
-          <div class="sui-accordion-item">
-            <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-2">
-              Do I need the JavaScript file?
-              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
-            </button>
-            <div class="sui-accordion-panel" id="acc-2" hidden>
-              <p>No. The CSS files handle all visual styling. <code>sui.js</code> is optional and adds behavior for modals, toasts, dropdowns, tooltips, and accordion interactivity. Everything degrades gracefully without it.</p>
-            </div>
-          </div>
-          <div class="sui-accordion-item">
-            <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-3">
-              Can I use SUI with React, Vue, or other frameworks?
-              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
-            </button>
-            <div class="sui-accordion-panel" id="acc-3" hidden>
-              <p>Absolutely. SUI tokens are plain CSS custom properties that work in any environment. The component classes are standard CSS and can be applied to any HTML element. Use the tokens as your design foundation and build framework-specific components on top.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BREADCRUMB + PAGINATION + DIVIDER -->
-      <div class="sui-section" id="comp-nav">
-        <h2>Navigation</h2>
-        <p class="sui-text-cap sui-mt-2">Breadcrumbs, pagination, and dividers for structured content.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Breadcrumb</div>
-          <nav aria-label="Breadcrumb">
-            <ol class="sui-breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Account</a></li>
-              <li><span aria-current="page">Security</span></li>
-            </ol>
-          </nav>
-
-          <div class="sui-divider-label">Pagination</div>
-
-          <nav class="sui-pagination" aria-label="Page navigation">
-            <button class="sui-page-btn" aria-label="Previous page"><i data-lucide="chevron-left"></i></button>
-            <button class="sui-page-btn" aria-label="Page 1">1</button>
-            <button class="sui-page-btn" aria-current="page" aria-label="Page 2, current">2</button>
-            <button class="sui-page-btn" aria-label="Page 3">3</button>
-            <span class="sui-page-ellipsis">…</span>
-            <button class="sui-page-btn" aria-label="Page 12">12</button>
-            <button class="sui-page-btn" aria-label="Next page"><i data-lucide="chevron-right"></i></button>
-          </nav>
-
-          <div class="sui-divider-label">Dividers</div>
-
-          <div class="sui-flex sui-items-center">
-            <span>Item A</span>
-            <span class="sui-divider-v"></span>
-            <span>Item B</span>
-            <span class="sui-divider-v"></span>
-            <span>Item C</span>
-          </div>
-
-          <div class="sui-divider-label">Nav links</div>
-
-          <nav style="display:flex;gap:var(--sui-space-1);flex-wrap:wrap;" aria-label="Demo navigation">
-            <a href="#" class="sui-nav-link" aria-current="page" onclick="event.preventDefault()">Dashboard</a>
-            <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Settings</a>
-            <a href="#" class="sui-nav-link" onclick="event.preventDefault()">Reports</a>
-          </nav>
-        </div>
-      </div>
-
-      <!-- DROPDOWN + TOOLTIP + MODAL + TOAST -->
-      <div class="sui-section" id="comp-interactive">
-        <h2>Interactive Components</h2>
-        <p class="sui-text-cap sui-mt-2">Powered by <code>sui.js</code>. Modals, toasts, dropdowns, and tooltips.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-flex sui-items-center">
-            <!-- Dropdown -->
-            <div class="sui-dropdown">
-              <button class="sui-btn" type="button" data-sui-dropdown-trigger><i data-lucide="more-horizontal"></i>Dropdown</button>
-              <div class="sui-dropdown-menu">
-                <button class="sui-dropdown-item"><i data-lucide="edit-3"></i>Edit</button>
-                <button class="sui-dropdown-item"><i data-lucide="copy"></i>Duplicate</button>
-                <button class="sui-dropdown-item"><i data-lucide="archive"></i>Archive</button>
-                <hr class="sui-dropdown-divider" />
-                <button class="sui-dropdown-item sui-dropdown-item-danger"><i data-lucide="trash-2"></i>Delete</button>
-              </div>
-            </div>
-
-            <!-- Tooltip -->
-            <span class="sui-tooltip">
-              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Settings"><i data-lucide="settings"></i></button>
-              <span class="sui-tooltip-content" role="tooltip">Settings</span>
-            </span>
-
-            <span class="sui-tooltip">
-              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Help"><i data-lucide="help-circle"></i></button>
-              <span class="sui-tooltip-content" role="tooltip">Help &amp; Support</span>
-            </span>
-
-            <!-- Modal trigger -->
-            <button class="sui-btn sui-btn-primary" type="button" data-sui-modal="#demoModal"><i data-lucide="external-link"></i>Open Modal</button>
-
-            <!-- Toast triggers -->
-            <button class="sui-btn sui-btn-success sui-btn-sm" type="button" onclick="SUI.toast.success('Saved!', 'Your changes have been saved.')">Toast</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- TABLES -->
       <div class="sui-section" id="comp-tables">
         <h2>Tables</h2>
         <p class="sui-text-cap sui-mt-2">Responsive tables with mobile stacking, striped and hover variants.</p>
@@ -1176,69 +1311,93 @@
       </div>
 
       <!-- SKELETON LOADERS -->
-      <div class="sui-section" id="comp-skeleton">
-        <h2>Skeleton Loaders</h2>
-        <p class="sui-text-cap sui-mt-2">Placeholder shimmer for content that's still loading.</p>
-        <div class="sui-grid sui-grid-2 sui-mt-4">
-          <div class="sui-card">
-            <div class="sui-flex sui-items-center sui-gap-3 sui-mb-4">
-              <div class="sui-skeleton sui-skeleton-avatar"></div>
-              <div class="sui-flex-col sui-gap-2" style="flex:1">
-                <div class="sui-skeleton sui-skeleton-text" style="width:40%"></div>
-                <div class="sui-skeleton sui-skeleton-text" style="width:60%"></div>
+      <div class="sui-section" id="comp-timeline">
+        <h2>Timeline</h2>
+        <p class="sui-text-cap sui-mt-2">Activity feed layout. Avatar left, content right, vertical connector. Content is flexible — badges, text, timestamps all compose inside.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-timeline" role="feed" aria-label="Activity timeline">
+            <div class="sui-timeline-item" role="article" aria-label="Email from David Kim, 2 hours ago">
+              <span class="sui-avatar sui-avatar-sm">DK</span>
+              <div class="sui-timeline-content">
+                <div class="sui-flex-between">
+                  <strong>David Kim</strong>
+                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">2h ago</span>
+                </div>
+                <span class="sui-badge sui-badge-info sui-badge-sm"><i data-lucide="mail"></i> Email</span>
+                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Updated proposal attached — ready for review.</p>
               </div>
             </div>
-            <div class="sui-skeleton sui-skeleton-text"></div>
-            <div class="sui-skeleton sui-skeleton-text"></div>
-            <div class="sui-skeleton sui-skeleton-text"></div>
-          </div>
-          <div class="sui-card">
-            <div class="sui-skeleton sui-skeleton-heading"></div>
-            <div class="sui-skeleton sui-skeleton-card sui-mb-3"></div>
-            <div class="sui-skeleton sui-skeleton-btn"></div>
+            <div class="sui-timeline-item" role="article" aria-label="Call with Sarah Chen, yesterday">
+              <span class="sui-avatar sui-avatar-sm">SC</span>
+              <div class="sui-timeline-content">
+                <div class="sui-flex-between">
+                  <strong>Sarah Chen</strong>
+                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">Yesterday</span>
+                </div>
+                <span class="sui-badge sui-badge-success sui-badge-sm"><i data-lucide="phone"></i> Call</span>
+                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">30 min discovery call. Interested in Enterprise tier.</p>
+              </div>
+            </div>
+            <div class="sui-timeline-item" role="article" aria-label="Meeting with Alex Rivera, 2 days ago">
+              <span class="sui-avatar sui-avatar-sm">AR</span>
+              <div class="sui-timeline-content">
+                <div class="sui-flex-between">
+                  <strong>Alex Rivera</strong>
+                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">2 days ago</span>
+                </div>
+                <span class="sui-badge sui-badge-warning sui-badge-sm"><i data-lucide="calendar"></i> Meeting</span>
+                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Quarterly review. Action items assigned.</p>
+              </div>
+            </div>
+            <div class="sui-timeline-item" role="article" aria-label="Note by Jordan Lee, 3 days ago">
+              <span class="sui-avatar sui-avatar-sm">JL</span>
+              <div class="sui-timeline-content">
+                <div class="sui-flex-between">
+                  <strong>Jordan Lee</strong>
+                  <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">3 days ago</span>
+                </div>
+                <span class="sui-badge sui-badge-neutral sui-badge-sm"><i data-lucide="sticky-note"></i> Note</span>
+                <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Contract renewal due next month. Flag for follow-up.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- EMPTY STATE -->
-      <div class="sui-section" id="comp-empty">
-        <h2>Empty State</h2>
-        <p class="sui-text-cap sui-mt-2">The "no data yet" pattern every table, list, and dashboard needs.</p>
+      <!-- ACCORDION -->
+
+      <!-- STEPPER -->
+      <div class="sui-section" id="comp-toolbar">
+        <h2>Toolbar</h2>
+        <p class="sui-text-cap sui-mt-2">Horizontal scrolling action bar for formatting, filters, or controls. Hidden scrollbar, touch-friendly.</p>
         <div class="sui-card sui-mt-4">
-          <div class="sui-empty">
-            <div class="sui-empty-icon"><i data-lucide="inbox"></i></div>
-            <div class="sui-empty-title">No projects yet</div>
-            <div class="sui-empty-text">Create your first project to get started. It only takes a few seconds.</div>
-            <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Create project</button>
+          <div class="sui-kpi-label sui-mb-2">Default</div>
+          <div class="sui-toolbar">
+            <button class="sui-toolbar-btn" type="button" title="Bold" aria-label="Bold" aria-pressed="true"><i data-lucide="bold"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Italic" aria-label="Italic"><i data-lucide="italic"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Underline" aria-label="Underline"><i data-lucide="underline"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Heading" aria-label="Heading"><i data-lucide="heading"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="List" aria-label="List"><i data-lucide="list"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Quote" aria-label="Quote"><i data-lucide="quote"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Link" aria-label="Link"><i data-lucide="link"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Image" aria-label="Image"><i data-lucide="image"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Code" aria-label="Code"><i data-lucide="code"></i></button>
+          </div>
+          <div class="sui-kpi-label sui-mb-2 sui-mt-4">Bordered + Compact</div>
+          <div class="sui-toolbar sui-toolbar-bordered sui-toolbar-compact">
+            <button class="sui-toolbar-btn" type="button" title="Align left" aria-label="Align left"><i data-lucide="align-left"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Align centre" aria-label="Align centre" aria-pressed="true"><i data-lucide="align-center"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Align right" aria-label="Align right"><i data-lucide="align-right"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Undo" aria-label="Undo"><i data-lucide="undo"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Redo" aria-label="Redo"><i data-lucide="redo"></i></button>
           </div>
         </div>
       </div>
 
-      <!-- CARDS WITH SHADOW -->
-      <div class="sui-section" id="comp-cards">
-        <h2>Card Variants</h2>
-        <p class="sui-text-cap sui-mt-2">Default (border), elevated (shadow), muted, and flush.</p>
-        <div class="sui-grid sui-grid-4 sui-mt-4">
-          <div class="sui-card">
-            <div class="sui-kpi-label sui-mb-2">Default</div>
-            <p>Border-based separation. The standard card.</p>
-          </div>
-          <div class="sui-card sui-card-shadow">
-            <div class="sui-kpi-label sui-mb-2">Shadow</div>
-            <p>Opt-in elevation with <code>sui-card-shadow</code>.</p>
-          </div>
-          <div class="sui-card sui-card-muted">
-            <div class="sui-kpi-label sui-mb-2">Muted</div>
-            <p>Elevated background for nested cards.</p>
-          </div>
-          <div class="sui-card sui-card-muted sui-card-interactive" tabindex="0">
-            <div class="sui-kpi-label sui-mb-2">Muted + Interactive</div>
-            <p>Subtle hover lift. Lower visual weight than regular interactive.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- VISIBILITY UTILITIES -->
+      <!-- SCREEN LAYOUT -->
       <div class="sui-section" id="comp-visibility">
         <h2>Visibility Utilities</h2>
         <p class="sui-text-cap sui-mt-2">Two-tier visibility: completely hidden vs. screen-reader only.</p>
@@ -1259,132 +1418,6 @@
       </div>
 
       <!-- PANEL -->
-      <div class="sui-section" id="comp-panel">
-        <h2>Panel</h2>
-        <p class="sui-text-cap sui-mt-2">Side panel / slide-over — the third overlay type. Dialog blocks, sheet slides up, panel slides from the right. Desktop: coexists with main content. Mobile: full-screen.</p>
-
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">CRM Contact Detail</div>
-          <p class="sui-mb-3">Click to open a panel with contact details. Desktop: panel appears alongside this content. Mobile: full-screen overlay.</p>
-          <div style="display: flex; gap: var(--sui-space-2); flex-wrap: wrap;">
-            <button class="sui-btn sui-btn-primary" data-sui-panel="#demoPanel" aria-expanded="false" type="button"><i data-lucide="user"></i>View Contact</button>
-            <button class="sui-btn sui-btn-outline" data-sui-panel="#demoPanelNoBg" aria-expanded="false" type="button"><i data-lucide="layout-sidebar-right"></i>No Backdrop</button>
-          </div>
-        </div>
-
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Dual focus model</div>
-          <p><strong>Desktop (≥769px):</strong> Focus moves to the panel but is <strong>not trapped</strong>. Both the panel and main content remain interactive — panels are parallel content, not blocking content. Trapping focus would prevent keyboard users from referencing the main view.</p>
-          <p class="sui-mt-2"><strong>Mobile (&lt;769px):</strong> Panel goes full-screen. The user can no longer see main content, so the interaction model changes to a blocking overlay with <strong>focus trap enabled</strong>.</p>
-          <p class="sui-mt-2">If the viewport resizes while the panel is open, the trap toggles automatically.</p>
-        </div>
-
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Usage</div>
-          <pre class="sui-code"><code>&lt;!-- Trigger --&gt;
-&lt;button data-sui-panel="#my-panel" aria-expanded="false"&gt;Open&lt;/button&gt;
-
-&lt;!-- Panel (outside main for stacking context) --&gt;
-&lt;div class="sui-panel" id="my-panel" aria-label="Detail" aria-hidden="true"&gt;
-  &lt;div class="sui-panel-header"&gt;
-    &lt;span class="sui-panel-title"&gt;Title&lt;/span&gt;
-    &lt;button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button"
-            aria-label="Close panel"&gt;&amp;times;&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="sui-panel-body"&gt;Content&lt;/div&gt;
-  &lt;div class="sui-panel-footer"&gt;
-    &lt;button class="sui-btn sui-btn-ghost"&gt;Cancel&lt;/button&gt;
-    &lt;button class="sui-btn sui-btn-primary"&gt;Save&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom width --&gt;
-&lt;div class="sui-panel" style="--sui-panel-width: 50vw"&gt;...&lt;/div&gt;
-
-&lt;!-- No backdrop (desktop) --&gt;
-&lt;div class="sui-panel sui-panel-no-backdrop"&gt;...&lt;/div&gt;</code></pre>
-
-          <div class="sui-kpi-label sui-mt-4 sui-mb-2">JavaScript API</div>
-          <pre class="sui-code"><code>SUI.panel.open('#my-panel');
-SUI.panel.close('#my-panel');
-SUI.panel.toggle('#my-panel');</code></pre>
-        </div>
-      </div>
-
-      <!-- INTERACTIVE CARDS + LAYOUT UTILITIES -->
-      <div class="sui-section" id="comp-layout">
-        <h2>Layout Utilities</h2>
-        <p class="sui-text-cap sui-mt-2">Grid auto-fit, horizontal scroll, flex-nowrap, interactive cards, and container queries.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Interactive card (hover for elevation)</div>
-          <div class="sui-grid sui-grid-3">
-            <div class="sui-card sui-card-interactive" tabindex="0">
-              <div class="sui-info-row-title">Project Alpha</div>
-              <small>Click or tap to navigate. Hover reveals shadow.</small>
-            </div>
-            <div class="sui-card sui-card-interactive" tabindex="0">
-              <div class="sui-info-row-title">Project Beta</div>
-              <small>Keyboard-accessible with focus ring.</small>
-            </div>
-            <div class="sui-card sui-card-interactive" tabindex="0">
-              <div class="sui-info-row-title">Project Gamma</div>
-              <small>Composes with any card variant.</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Grid auto-fit (flexible column count)</div>
-          <div class="sui-grid sui-grid-auto">
-            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
-            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
-            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
-            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
-            <div class="sui-card sui-card-muted sui-text-center"><small>Auto</small></div>
-          </div>
-        </div>
-
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Horizontal scroll (<code>sui-scroll-x</code>)</div>
-          <div class="sui-flex sui-flex-nowrap sui-scroll-x sui-gap-3">
-            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 1</small></div>
-            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 2</small></div>
-            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 3</small></div>
-            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 4</small></div>
-            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 5</small></div>
-            <div class="sui-card sui-card-muted" style="min-width:200px;flex-shrink:0;"><small>Card 6</small></div>
-          </div>
-        </div>
-
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Container queries (<code>sui-container</code> opt-in)</div>
-          <div class="sui-grid sui-grid-2">
-            <div class="sui-container">
-              <div class="sui-card sui-card-muted">
-                <div class="sui-flex sui-cq-stack sui-gap-2 sui-items-center">
-                  <span class="sui-avatar sui-avatar-sm">CQ</span>
-                  <div>
-                    <div class="sui-info-row-title">Responsive to container</div>
-                    <small class="sui-cq-hide">This text hides in narrow containers.</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="sui-container">
-              <div class="sui-card sui-card-muted">
-                <div class="sui-flex sui-cq-stack sui-gap-2 sui-items-center">
-                  <span class="sui-avatar sui-avatar-sm">CQ</span>
-                  <div>
-                    <div class="sui-info-row-title">Same component</div>
-                    <small class="sui-cq-hide">Adapts to its container, not the viewport.</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </section>
 
     <!-- ================================================================
@@ -1393,7 +1426,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
     <section data-view="designers" role="tabpanel" aria-label="Designers">
       <div class="sui-section-head" style="margin-top: var(--sui-space-4);">
         <div>
-          <h1>For Designers</h1>
+          <h2>For Designers</h2>
           <p class="sui-text-cap sui-mt-2">
             Token reference, geometry specs, and workflow guidance for Figma or any design tool.
           </p>
@@ -1462,7 +1495,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
     <section data-view="prompt" role="tabpanel" aria-label="AI Prompt">
       <div class="sui-section-head" style="margin-top: var(--sui-space-4);">
         <div>
-          <h1>AI Prompt</h1>
+          <h2>AI Prompt</h2>
           <p class="sui-text-cap sui-mt-2">
             Paste into any AI tool to generate SUI-compliant code. Works with ChatGPT, Claude, Copilot, Cursor, and more.
           </p>
@@ -1717,7 +1750,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     <section data-view="recipes" role="tabpanel" aria-label="Recipes">
       <div class="sui-section-head" style="margin-top: var(--sui-space-4);">
         <div>
-          <h1>Recipes</h1>
+          <h2>Recipes</h2>
           <p class="sui-text-cap sui-mt-2">
             SUI ships components. You build patterns. These recipes show common application
             layouts composed from SUI primitives — with minimal custom CSS clearly documented.
@@ -1758,6 +1791,414 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       </style>
 
       <!-- RECIPE: INLINE EDIT -->
+      <div class="sui-section" id="recipe-action-sheet">
+        <h2>Action Sheet</h2>
+        <p class="sui-text-cap sui-mt-2">Mobile action menu. Composes from: <code>sui-sheet</code>, <code>sui-btn</code>, <code>sui-btn-ghost</code>, <code>sui-divider</code>. Custom CSS: ~15 lines. Inherits sheet's focus trap, Escape, and backdrop.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Action sheet preview</div>
+          <div style="background: var(--sui-bg-elevated); border-radius: var(--sui-radius-lg); padding: var(--sui-space-3); max-width: 360px;">
+            <div class="recipe-action-sheet">
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="edit-3"></i>Edit</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="copy"></i>Duplicate</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="share-2"></i>Share</button>
+              <hr class="sui-divider">
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button" style="color: var(--sui-error);"><i data-lucide="trash-2"></i>Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Trigger --&gt;
+&lt;button class="sui-btn" data-sui-sheet="#actionSheet"&gt;More Actions&lt;/button&gt;
+
+&lt;!-- Sheet --&gt;
+&lt;div id="actionSheet" class="sui-sheet" aria-modal="true" role="dialog" aria-label="Actions"&gt;
+  &lt;div class="sui-sheet-panel"&gt;
+    &lt;div class="sui-sheet-handle"&gt;&lt;/div&gt;
+    &lt;div class="recipe-action-sheet"&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Edit&lt;/button&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Duplicate&lt;/button&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Share&lt;/button&gt;
+      &lt;hr class="sui-divider"&gt;
+      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" style="color: var(--sui-error);"&gt;Delete&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~15 lines) --&gt;
+&lt;style&gt;
+.recipe-action-sheet { display: flex; flex-direction: column; }
+.recipe-action-sheet-btn { justify-content: flex-start; border-radius: var(--sui-radius-md); }
+.recipe-action-sheet .sui-divider { margin: var(--sui-space-1) 0; }
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: Sidenav Search / Filter -->
+      <div class="sui-section" id="recipe-app-shell">
+        <h2>Mobile App Shell</h2>
+        <p class="sui-text-cap sui-mt-2">Complete multi-screen mobile app skeleton with tab navigation. Composes from: <code>sui-screen</code>, <code>sui-screen-header</code>, <code>sui-screen-body</code>, <code>sui-screen-footer</code>, <code>sui-segmented</code>. Custom CSS: 0 lines.</p>
+        <div class="sui-card sui-card-flush sui-mt-4" style="height:400px;overflow:hidden;display:flex;flex-direction:column;border-radius:var(--sui-radius-lg);">
+          <div style="flex-shrink:0;padding:var(--sui-space-3) var(--sui-space-4);background:var(--sui-bg-card);border-bottom:1px solid var(--sui-border);">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <span class="sui-avatar sui-avatar-sm">MP</span>
+              <div>
+                <strong>MatchPoint</strong>
+                <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">AI Summit 2026</div>
+              </div>
+              <div style="flex:1;"></div>
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><i data-lucide="bell"></i></button>
+            </div>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:var(--sui-space-3);background:var(--sui-bg-primary);">
+            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
+              <div class="sui-flex sui-items-center sui-gap-3">
+                <span class="sui-avatar sui-avatar-md">EV</span>
+                <div style="flex:1;">
+                  <strong>Elena Vasquez</strong>
+                  <div class="sui-meta"><span>VP Sales</span><span>Acme Corp</span></div>
+                </div>
+                <span class="sui-badge sui-badge-success sui-badge-sm">92%</span>
+              </div>
+            </div>
+            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
+              <div class="sui-flex sui-items-center sui-gap-3">
+                <span class="sui-avatar sui-avatar-md">MJ</span>
+                <div style="flex:1;">
+                  <strong>Marcus Johnson</strong>
+                  <div class="sui-meta"><span>CTO</span><span>Globex</span></div>
+                </div>
+                <span class="sui-badge sui-badge-info sui-badge-sm">87%</span>
+              </div>
+            </div>
+            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
+              <div class="sui-flex sui-items-center sui-gap-3">
+                <span class="sui-avatar sui-avatar-md">LW</span>
+                <div style="flex:1;">
+                  <strong>Lin Wei</strong>
+                  <div class="sui-meta"><span>Director</span><span>Initech</span></div>
+                </div>
+                <span class="sui-badge sui-badge-neutral sui-badge-sm">74%</span>
+              </div>
+            </div>
+          </div>
+          <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-4);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
+            <div class="sui-segmented" role="radiogroup" aria-label="Navigation" data-sui-tabs style="width:100%;">
+              <button class="sui-segment" type="button" role="radio" aria-checked="true" aria-label="People" style="flex:1;"><i data-lucide="users" style="width:16px;height:16px;"></i></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Schedule" style="flex:1;"><i data-lucide="calendar" style="width:16px;height:16px;"></i></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Messages" style="flex:1;"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Profile" style="flex:1;"><i data-lucide="user" style="width:16px;height:16px;"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Each screen is a full-viewport flex column --&gt;
+&lt;div class="sui-screen is-active" data-screen="matches"&gt;
+  &lt;div class="sui-screen-header"&gt;
+    &lt;!-- Safe area inset handled automatically --&gt;
+    &lt;strong&gt;MatchPoint&lt;/strong&gt;
+  &lt;/div&gt;
+  &lt;div class="sui-screen-body"&gt;
+    &lt;!-- Scrollable content --&gt;
+    &lt;div class="sui-card sui-card-interactive"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="sui-screen-footer"&gt;
+    &lt;!-- Safe area inset handled automatically --&gt;
+    &lt;div class="sui-segmented"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Switch screens by toggling .is-active --&gt;
+&lt;div class="sui-screen" data-screen="schedule"&gt;...&lt;/div&gt;
+&lt;div class="sui-screen" data-screen="messages"&gt;...&lt;/div&gt;
+
+&lt;!-- For single-screen apps, use sui-screen-solo --&gt;
+&lt;div class="sui-screen sui-screen-solo"&gt;...&lt;/div&gt;
+
+&lt;!-- Custom CSS: 0 lines. All SUI classes. --&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: PROFILE PAGE -->
+      <div class="sui-section" id="recipe-blog-post">
+        <h2>Blog Post / Article</h2>
+        <p class="sui-text-cap sui-mt-2">Full article layout with metadata, prose content, and find-in-page highlighting. Composes from: <code>sui-prose</code>, <code>sui-meta</code>, <code>sui-mark</code>, <code>sui-avatar</code>. Custom CSS: 0 lines.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex sui-items-center sui-gap-3 sui-mb-3">
+            <span class="sui-avatar sui-avatar-md">AS</span>
+            <div>
+              <strong>Adrian Speyer</strong>
+              <div class="sui-meta">
+                <span>Feb 16, 2026</span>
+                <span>842 words</span>
+                <span>4 min read</span>
+              </div>
+            </div>
+          </div>
+          <div class="sui-flex sui-gap-2 sui-mb-3">
+            <span class="sui-chip sui-chip-info">Strategy</span>
+            <span class="sui-chip">Leadership</span>
+          </div>
+          <hr class="sui-divider">
+          <div class="sui-prose sui-mt-3">
+            <h2>Why Connection Wins When AI Automates Everything Else</h2>
+            <p>In a world where <mark class="sui-mark">AI</mark> can write your emails, generate your reports, and schedule your meetings, <strong>what's left that only humans can do?</strong> The answer is deceptively simple: build <mark class="sui-mark sui-mark-current">relationships</mark>.</p>
+            <blockquote><p>The companies that thrive in the next decade won't be the ones with the best algorithms — they'll be the ones with the deepest <mark class="sui-mark">relationships</mark>.</p></blockquote>
+            <p>Consider the data: customer retention increases 23% with community investment. NPS scores correlate with depth of connection, not frequency. Enterprise deals close 40% faster when internal champions exist.</p>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Author + metadata --&gt;
+&lt;div class="sui-flex sui-items-center sui-gap-3"&gt;
+  &lt;span class="sui-avatar sui-avatar-md"&gt;AS&lt;/span&gt;
+  &lt;div&gt;
+    &lt;strong&gt;Adrian Speyer&lt;/strong&gt;
+    &lt;div class="sui-meta"&gt;
+      &lt;span&gt;Feb 16, 2026&lt;/span&gt;
+      &lt;span&gt;842 words&lt;/span&gt;
+      &lt;span&gt;4 min read&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Article body — zero custom CSS --&gt;
+&lt;div class="sui-prose"&gt;
+  &lt;h2&gt;Title&lt;/h2&gt;
+  &lt;p&gt;Paragraph with &lt;mark class="sui-mark"&gt;search matches&lt;/mark&gt;
+  and &lt;mark class="sui-mark sui-mark-current"&gt;current match&lt;/mark&gt;.&lt;/p&gt;
+  &lt;blockquote&gt;&lt;p&gt;A quote.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS: 0 lines. All SUI classes. --&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: DOCUMENT LIBRARY -->
+      <div class="sui-section" id="recipe-button-group">
+        <h2>Button Group</h2>
+        <p class="sui-text-cap sui-mt-2">Single-select option picker. Composes from: <code>sui-grid</code>, <code>sui-btn</code>. Custom CSS: ~10 lines. ARIA <code>radiogroup</code> pattern is the key value here.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Select your plan</div>
+          <div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan">
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="zap"></i>Starter</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="rocket"></i>Pro</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="building-2"></i>Team</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="crown"></i>Enterprise</button>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan"&gt;
+  &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false"&gt;
+    &lt;i data-lucide="zap"&gt;&lt;/i&gt;Starter
+  &lt;/button&gt;
+  &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true"&gt;
+    &lt;i data-lucide="rocket"&gt;&lt;/i&gt;Pro
+  &lt;/button&gt;
+  &lt;!-- More options... --&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~10 lines) --&gt;
+&lt;style&gt;
+.recipe-btn-group-option.is-selected {
+  border-color: var(--sui-blue-primary);
+  background: var(--sui-blue-soft);
+  color: var(--sui-blue-primary);
+  font-weight: var(--sui-weight-semibold);
+}
+&lt;/style&gt;
+
+&lt;!-- JS: toggle is-selected + aria-checked on click --&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: ACTION SHEET -->
+      <div class="sui-section" id="recipe-document-library">
+        <h2>Document Library</h2>
+        <p class="sui-text-cap sui-mt-2">Searchable file list with toolbar, metadata, and status indicators. Composes from: <code>sui-toolbar</code>, <code>sui-meta</code>, <code>sui-badge</code>, <code>sui-card</code>, <code>sui-input</code>. Custom CSS: ~3 lines.</p>
+        <div class="sui-card sui-card-flush sui-mt-4">
+          <div class="sui-toolbar sui-toolbar-bordered">
+            <button class="sui-toolbar-btn" type="button" title="List view" aria-label="List view" aria-pressed="true"><i data-lucide="list"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Grid view" aria-label="Grid view"><i data-lucide="layout-grid"></i></button>
+            <div class="sui-toolbar-sep"></div>
+            <button class="sui-toolbar-btn" type="button" title="Sort" aria-label="Sort"><i data-lucide="arrow-up-down"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Filter" aria-label="Filter"><i data-lucide="filter"></i></button>
+            <div style="flex:1;"></div>
+            <div style="min-width:200px;padding-right:var(--sui-space-2);">
+              <input class="sui-input" type="search" placeholder="Search documents..." style="height:32px;font-size:var(--sui-text-small);">
+            </div>
+          </div>
+          <div class="recipe-doc-list-item">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <i data-lucide="file-text" style="color:var(--sui-blue-primary);flex-shrink:0;"></i>
+              <div style="flex:1;min-width:0;">
+                <strong>Q4 Strategy Deck.md</strong>
+                <div class="sui-meta sui-mt-1">
+                  <span>12,340 words</span>
+                  <span>Updated 2h ago</span>
+                  <span>Adrian</span>
+                </div>
+              </div>
+              <span class="sui-badge sui-badge-success sui-badge-sm">Published</span>
+            </div>
+          </div>
+          <div class="recipe-doc-list-item">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <i data-lucide="file-text" style="color:var(--sui-warning);flex-shrink:0;"></i>
+              <div style="flex:1;min-width:0;">
+                <strong>The Human Advantage — Chapter 3.md</strong>
+                <div class="sui-meta sui-mt-1">
+                  <span>4,821 words</span>
+                  <span>Updated yesterday</span>
+                  <span>Adrian</span>
+                </div>
+              </div>
+              <span class="sui-badge sui-badge-warning sui-badge-sm">Draft</span>
+            </div>
+          </div>
+          <div class="recipe-doc-list-item">
+            <div class="sui-flex sui-items-center sui-gap-3">
+              <i data-lucide="file-code" style="color:var(--sui-text-muted);flex-shrink:0;"></i>
+              <div style="flex:1;min-width:0;">
+                <strong>COMPONENT-ROADMAP.md</strong>
+                <div class="sui-meta sui-mt-1">
+                  <span>2,100 words</span>
+                  <span>Updated 3 days ago</span>
+                  <span>Claude</span>
+                </div>
+              </div>
+              <span class="sui-badge sui-badge-info sui-badge-sm">RFC</span>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-card sui-card-flush"&gt;
+  &lt;div class="sui-toolbar sui-toolbar-bordered"&gt;
+    &lt;button class="sui-toolbar-btn" aria-pressed="true"&gt;...&lt;/button&gt;
+    &lt;div class="sui-toolbar-sep"&gt;&lt;/div&gt;
+    &lt;input class="sui-input" type="search" placeholder="Search..."&gt;
+  &lt;/div&gt;
+  &lt;div class="recipe-doc-list-item"&gt;
+    &lt;div class="sui-flex sui-items-center sui-gap-3"&gt;
+      &lt;i data-lucide="file-text"&gt;&lt;/i&gt;
+      &lt;div&gt;
+        &lt;strong&gt;Document Name.md&lt;/strong&gt;
+        &lt;div class="sui-meta"&gt;
+          &lt;span&gt;12,340 words&lt;/span&gt;
+          &lt;span&gt;Updated 2h ago&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class="sui-badge sui-badge-success sui-badge-sm"&gt;Published&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~3 lines) --&gt;
+&lt;style&gt;
+.recipe-doc-list-item { padding: var(--sui-space-3); border-bottom: 1px solid var(--sui-border); cursor: pointer; }
+.recipe-doc-list-item:hover { background: var(--sui-bg-elevated); }
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: MOBILE APP SHELL -->
+      <div class="sui-section" id="recipe-fab">
+        <h2>Floating Action Bar</h2>
+        <p class="sui-text-cap sui-mt-2">A fixed-position bar that appears when items are selected, showing bulk actions. Composes from: <code>sui-card-shadow</code>, <code>sui-btn</code>, <code>sui-badge</code>, <code>position: fixed</code>. Custom CSS: ~8 lines.</p>
+        <div class="sui-card sui-mt-4" style="position:relative;min-height:200px;overflow:hidden;">
+          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Select items to see the floating bar appear.</p>
+          <div class="sui-flex-col sui-gap-2 sui-mt-3">
+            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1042</label>
+            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1043</label>
+            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1044</label>
+          </div>
+          <div id="recipeFab" class="sui-card sui-card-shadow" role="toolbar" aria-label="Bulk actions"
+               style="display:none;position:absolute;bottom:var(--sui-space-3);left:50%;transform:translateX(-50%);padding:var(--sui-space-2) var(--sui-space-3);z-index:10;white-space:nowrap;">
+            <div class="sui-flex sui-gap-2" style="align-items:center;">
+              <span class="sui-badge sui-badge-info" id="recipeFabCount">0 selected</span>
+              <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"><i data-lucide="download"></i> Export</button>
+              <button class="sui-btn sui-btn-sm sui-btn-ghost" type="button"><i data-lucide="archive"></i> Archive</button>
+              <button class="sui-btn sui-btn-sm sui-btn-danger" type="button"><i data-lucide="trash-2"></i> Delete</button>
+            </div>
+          </div>
+        </div>
+        <script>
+          function recipeFabUpdate() {
+            const checks = document.querySelectorAll('#recipe-fab .sui-checkbox:checked');
+            const bar = document.getElementById('recipeFab');
+            const count = document.getElementById('recipeFabCount');
+            if (checks.length > 0) {
+              bar.style.display = '';
+              count.textContent = checks.length + ' selected';
+            } else {
+              bar.style.display = 'none';
+            }
+          }
+        </script>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Floating Action Bar — appears when items are selected --&gt;
+&lt;!-- Custom CSS (not part of sui-components.css): --&gt;
+&lt;style&gt;
+  .fab-bar {
+    position: fixed;
+    bottom: var(--sui-space-4);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    padding: var(--sui-space-2) var(--sui-space-3);
+    white-space: nowrap;
+    transition: opacity var(--sui-duration-fast) var(--sui-easing),
+                transform var(--sui-duration-fast) var(--sui-easing);
+  }
+  .fab-bar[hidden] {
+    display: block;
+    opacity: 0;
+    transform: translateX(-50%) translateY(1rem);
+    pointer-events: none;
+  }
+&lt;/style&gt;
+
+&lt;div class="sui-card sui-card-shadow fab-bar" id="bulkBar"
+     role="toolbar" aria-label="Bulk actions" hidden&gt;
+  &lt;div class="sui-flex sui-gap-2" style="align-items:center"&gt;
+    &lt;span class="sui-badge sui-badge-info" id="bulkCount"&gt;0 selected&lt;/span&gt;
+    &lt;button class="sui-btn sui-btn-sm sui-btn-primary"&gt;
+      &lt;i data-lucide="download" aria-hidden="true"&gt;&lt;/i&gt; Export
+    &lt;/button&gt;
+    &lt;button class="sui-btn sui-btn-sm sui-btn-danger"&gt;
+      &lt;i data-lucide="trash-2" aria-hidden="true"&gt;&lt;/i&gt; Delete
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Wire up your selection logic:
+  function updateFab(selectedCount) {
+    const bar = document.getElementById('bulkBar');
+    const count = document.getElementById('bulkCount');
+    bar.hidden = selectedCount === 0;
+    count.textContent = selectedCount + ' selected';
+  }
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+      </div>
+
       <div class="sui-section" id="recipe-inline-edit">
         <h2>Inline Edit</h2>
         <p class="sui-text-cap sui-mt-2">Click-to-edit fields with save/cancel actions. Composes from: <code>sui-input</code>, <code>sui-btn-sm</code>, <code>sui-flex</code>. Custom CSS: ~4 lines.</p>
@@ -1903,758 +2344,6 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       </div>
 
       <!-- RECIPE: STEPPER / WIZARD -->
-      <div class="sui-section" id="recipe-stepper">
-        <h2>Stepper / Wizard</h2>
-        <div class="sui-alert sui-alert-info sui-mt-3">
-          <i data-lucide="arrow-up-circle"></i>
-          <div><strong>Promoted to component.</strong> The stepper pattern has been promoted from recipe to a first-class component in v2.2.0. See <code>sui-stepper</code> in the Components tab above.</div>
-        </div>
-      </div>
-
-      <!-- RECIPE: SPLIT PANE / MASTER-DETAIL -->
-      <div class="sui-section" id="recipe-split-pane">
-        <h2>Split Pane / Master-Detail</h2>
-        <p class="sui-text-cap sui-mt-2">Two-column list + detail layout. Collapses to stacked on mobile. Composes from: CSS grid, <code>sui-card</code>, <code>sui-avatar</code>, <code>sui-badge</code>. Custom CSS: ~8 lines per variant.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">40/60 — CRM reading pane</div>
-          <div class="recipe-split recipe-split-40-60">
-            <div class="recipe-split-list">
-              <div class="recipe-split-list-item is-active">
-                <div class="sui-flex sui-items-center sui-gap-2">
-                  <span class="sui-avatar sui-avatar-sm">EV</span>
-                  <div>
-                    <strong>Elena Vasquez</strong>
-                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Acme Corp · $120K</div>
-                  </div>
-                </div>
-              </div>
-              <div class="recipe-split-list-item">
-                <div class="sui-flex sui-items-center sui-gap-2">
-                  <span class="sui-avatar sui-avatar-sm">MJ</span>
-                  <div>
-                    <strong>Marcus Johnson</strong>
-                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Globex · $85K</div>
-                  </div>
-                </div>
-              </div>
-              <div class="recipe-split-list-item">
-                <div class="sui-flex sui-items-center sui-gap-2">
-                  <span class="sui-avatar sui-avatar-sm">LW</span>
-                  <div>
-                    <strong>Lin Wei</strong>
-                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Initech · $45K</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="recipe-split-detail">
-              <div class="sui-flex sui-items-center sui-gap-3 sui-mb-3">
-                <span class="sui-avatar sui-avatar-lg">EV</span>
-                <div>
-                  <div style="font-size:var(--sui-text-h3);font-weight:var(--sui-weight-semibold);">Elena Vasquez</div>
-                  <span class="sui-text-muted">VP Sales · Acme Corp</span>
-                </div>
-              </div>
-              <div class="sui-flex sui-gap-2 sui-mb-3">
-                <span class="sui-badge sui-badge-success sui-badge-sm">Closed Won</span>
-                <span class="sui-badge sui-badge-neutral sui-badge-sm">$120,000</span>
-              </div>
-              <p style="font-size:var(--sui-text-small);">Enterprise licence renewal. Multi-year contract signed Q4. Expansion opportunity for Analytics add-on.</p>
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="recipe-split recipe-split-40-60"&gt;
-  &lt;div class="recipe-split-list"&gt;
-    &lt;div class="recipe-split-list-item is-active"&gt;...&lt;/div&gt;
-    &lt;div class="recipe-split-list-item"&gt;...&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="recipe-split-detail"&gt;...&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS (~8 lines) --&gt;
-&lt;style&gt;
-.recipe-split { display: grid; gap: 0; border: 1px solid var(--sui-border);
-  border-radius: var(--sui-radius-lg); overflow: hidden; min-height: 320px; }
-.recipe-split-40-60 { grid-template-columns: 2fr 3fr; }
-.recipe-split-list { border-right: 1px solid var(--sui-border); overflow-y: auto; }
-.recipe-split-list-item { padding: var(--sui-space-3) var(--sui-space-4);
-  border-bottom: 1px solid var(--sui-border); cursor: pointer; }
-.recipe-split-list-item:hover { background: var(--sui-bg-elevated); }
-.recipe-split-list-item.is-active { background: var(--sui-blue-soft); }
-.recipe-split-detail { padding: var(--sui-space-4); }
-@media (max-width: 640px) {
-  .recipe-split { grid-template-columns: 1fr; }
-  .recipe-split-list { border-right: none; max-height: 200px; }
-}
-&lt;/style&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: SETTINGS / PREFERENCES -->
-      <div class="sui-section" id="recipe-settings">
-        <h2>Settings / Preferences</h2>
-        <p class="sui-text-cap sui-mt-2">Vertical stack of labelled sections with controls. Composes from: <code>sui-card</code>, <code>sui-toggle</code>, <code>sui-segmented</code>, <code>sui-input</code>, <code>sui-divider</code>. Custom CSS: ~4 lines.</p>
-        <div class="sui-card sui-mt-4">
-          <h3>Notifications</h3>
-          <div class="recipe-settings-row">
-            <div>
-              <strong>Email notifications</strong>
-              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Receive updates about your account activity.</div>
-            </div>
-            <label class="sui-toggle"><input type="checkbox" checked aria-label="Email notifications"><span class="sui-toggle-slider"></span></label>
-          </div>
-          <div class="recipe-settings-row">
-            <div>
-              <strong>Marketing emails</strong>
-              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Product announcements and feature updates.</div>
-            </div>
-            <label class="sui-toggle"><input type="checkbox" aria-label="Marketing emails"><span class="sui-toggle-slider"></span></label>
-          </div>
-          <hr class="sui-divider">
-          <h3>Appearance</h3>
-          <div class="recipe-settings-row">
-            <div>
-              <strong>Theme</strong>
-              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Choose your preferred colour scheme.</div>
-            </div>
-            <div class="sui-segmented" role="radiogroup" aria-label="Theme preference" data-sui-tabs>
-              <button class="sui-segment" type="button" role="radio" aria-checked="true">Light</button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false">Dark</button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false">Auto</button>
-            </div>
-          </div>
-          <div class="recipe-settings-row">
-            <div>
-              <strong>Language</strong>
-              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Select your display language.</div>
-            </div>
-            <select class="sui-select" style="width:auto;" aria-label="Language">
-              <option>English (CA)</option>
-              <option>FranÃ§ais</option>
-            </select>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-card"&gt;
-  &lt;h3&gt;Notifications&lt;/h3&gt;
-  &lt;div class="recipe-settings-row"&gt;
-    &lt;div&gt;
-      &lt;strong&gt;Email notifications&lt;/strong&gt;
-      &lt;div class="sui-text-muted"&gt;Description text&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;label class="sui-toggle"&gt;&lt;input type="checkbox" checked&gt;&lt;span class="sui-toggle-slider"&gt;&lt;/span&gt;&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;hr class="sui-divider"&gt;
-  &lt;h3&gt;Appearance&lt;/h3&gt;
-  &lt;div class="recipe-settings-row"&gt;
-    &lt;div&gt;&lt;strong&gt;Theme&lt;/strong&gt;&lt;/div&gt;
-    &lt;div class="sui-segmented" role="radiogroup"&gt;
-      &lt;button class="sui-segment" role="radio" aria-checked="true"&gt;Light&lt;/button&gt;
-      &lt;button class="sui-segment" role="radio" aria-checked="false"&gt;Dark&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS (~4 lines) --&gt;
-&lt;style&gt;
-.recipe-settings-row { display: flex; justify-content: space-between; align-items: center;
-  padding: var(--sui-space-3) 0; gap: var(--sui-space-3); }
-.recipe-settings-row:not(:last-child) { border-bottom: 1px solid var(--sui-border); }
-&lt;/style&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: BLOG POST / ARTICLE -->
-      <div class="sui-section" id="recipe-blog-post">
-        <h2>Blog Post / Article</h2>
-        <p class="sui-text-cap sui-mt-2">Full article layout with metadata, prose content, and find-in-page highlighting. Composes from: <code>sui-prose</code>, <code>sui-meta</code>, <code>sui-mark</code>, <code>sui-avatar</code>. Custom CSS: 0 lines.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-flex sui-items-center sui-gap-3 sui-mb-3">
-            <span class="sui-avatar sui-avatar-md">AS</span>
-            <div>
-              <strong>Adrian Speyer</strong>
-              <div class="sui-meta">
-                <span>Feb 16, 2026</span>
-                <span>842 words</span>
-                <span>4 min read</span>
-              </div>
-            </div>
-          </div>
-          <div class="sui-flex sui-gap-2 sui-mb-3">
-            <span class="sui-chip sui-chip-info">Strategy</span>
-            <span class="sui-chip">Leadership</span>
-          </div>
-          <hr class="sui-divider">
-          <div class="sui-prose sui-mt-3">
-            <h2>Why Connection Wins When AI Automates Everything Else</h2>
-            <p>In a world where <mark class="sui-mark">AI</mark> can write your emails, generate your reports, and schedule your meetings, <strong>what's left that only humans can do?</strong> The answer is deceptively simple: build <mark class="sui-mark sui-mark-current">relationships</mark>.</p>
-            <blockquote><p>The companies that thrive in the next decade won't be the ones with the best algorithms — they'll be the ones with the deepest <mark class="sui-mark">relationships</mark>.</p></blockquote>
-            <p>Consider the data: customer retention increases 23% with community investment. NPS scores correlate with depth of connection, not frequency. Enterprise deals close 40% faster when internal champions exist.</p>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Author + metadata --&gt;
-&lt;div class="sui-flex sui-items-center sui-gap-3"&gt;
-  &lt;span class="sui-avatar sui-avatar-md"&gt;AS&lt;/span&gt;
-  &lt;div&gt;
-    &lt;strong&gt;Adrian Speyer&lt;/strong&gt;
-    &lt;div class="sui-meta"&gt;
-      &lt;span&gt;Feb 16, 2026&lt;/span&gt;
-      &lt;span&gt;842 words&lt;/span&gt;
-      &lt;span&gt;4 min read&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Article body — zero custom CSS --&gt;
-&lt;div class="sui-prose"&gt;
-  &lt;h2&gt;Title&lt;/h2&gt;
-  &lt;p&gt;Paragraph with &lt;mark class="sui-mark"&gt;search matches&lt;/mark&gt;
-  and &lt;mark class="sui-mark sui-mark-current"&gt;current match&lt;/mark&gt;.&lt;/p&gt;
-  &lt;blockquote&gt;&lt;p&gt;A quote.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS: 0 lines. All SUI classes. --&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: DOCUMENT LIBRARY -->
-      <div class="sui-section" id="recipe-document-library">
-        <h2>Document Library</h2>
-        <p class="sui-text-cap sui-mt-2">Searchable file list with toolbar, metadata, and status indicators. Composes from: <code>sui-toolbar</code>, <code>sui-meta</code>, <code>sui-badge</code>, <code>sui-card</code>, <code>sui-input</code>. Custom CSS: ~3 lines.</p>
-        <div class="sui-card sui-card-flush sui-mt-4">
-          <div class="sui-toolbar sui-toolbar-bordered">
-            <button class="sui-toolbar-btn" type="button" title="List view" aria-label="List view" aria-pressed="true"><i data-lucide="list"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Grid view" aria-label="Grid view"><i data-lucide="layout-grid"></i></button>
-            <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Sort" aria-label="Sort"><i data-lucide="arrow-up-down"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Filter" aria-label="Filter"><i data-lucide="filter"></i></button>
-            <div style="flex:1;"></div>
-            <div style="min-width:200px;padding-right:var(--sui-space-2);">
-              <input class="sui-input" type="search" placeholder="Search documents..." style="height:32px;font-size:var(--sui-text-small);">
-            </div>
-          </div>
-          <div class="recipe-doc-list-item">
-            <div class="sui-flex sui-items-center sui-gap-3">
-              <i data-lucide="file-text" style="color:var(--sui-blue-primary);flex-shrink:0;"></i>
-              <div style="flex:1;min-width:0;">
-                <strong>Q4 Strategy Deck.md</strong>
-                <div class="sui-meta sui-mt-1">
-                  <span>12,340 words</span>
-                  <span>Updated 2h ago</span>
-                  <span>Adrian</span>
-                </div>
-              </div>
-              <span class="sui-badge sui-badge-success sui-badge-sm">Published</span>
-            </div>
-          </div>
-          <div class="recipe-doc-list-item">
-            <div class="sui-flex sui-items-center sui-gap-3">
-              <i data-lucide="file-text" style="color:var(--sui-warning);flex-shrink:0;"></i>
-              <div style="flex:1;min-width:0;">
-                <strong>The Human Advantage — Chapter 3.md</strong>
-                <div class="sui-meta sui-mt-1">
-                  <span>4,821 words</span>
-                  <span>Updated yesterday</span>
-                  <span>Adrian</span>
-                </div>
-              </div>
-              <span class="sui-badge sui-badge-warning sui-badge-sm">Draft</span>
-            </div>
-          </div>
-          <div class="recipe-doc-list-item">
-            <div class="sui-flex sui-items-center sui-gap-3">
-              <i data-lucide="file-code" style="color:var(--sui-text-muted);flex-shrink:0;"></i>
-              <div style="flex:1;min-width:0;">
-                <strong>COMPONENT-ROADMAP.md</strong>
-                <div class="sui-meta sui-mt-1">
-                  <span>2,100 words</span>
-                  <span>Updated 3 days ago</span>
-                  <span>Claude</span>
-                </div>
-              </div>
-              <span class="sui-badge sui-badge-info sui-badge-sm">RFC</span>
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-card sui-card-flush"&gt;
-  &lt;div class="sui-toolbar sui-toolbar-bordered"&gt;
-    &lt;button class="sui-toolbar-btn" aria-pressed="true"&gt;...&lt;/button&gt;
-    &lt;div class="sui-toolbar-sep"&gt;&lt;/div&gt;
-    &lt;input class="sui-input" type="search" placeholder="Search..."&gt;
-  &lt;/div&gt;
-  &lt;div class="recipe-doc-list-item"&gt;
-    &lt;div class="sui-flex sui-items-center sui-gap-3"&gt;
-      &lt;i data-lucide="file-text"&gt;&lt;/i&gt;
-      &lt;div&gt;
-        &lt;strong&gt;Document Name.md&lt;/strong&gt;
-        &lt;div class="sui-meta"&gt;
-          &lt;span&gt;12,340 words&lt;/span&gt;
-          &lt;span&gt;Updated 2h ago&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;span class="sui-badge sui-badge-success sui-badge-sm"&gt;Published&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS (~3 lines) --&gt;
-&lt;style&gt;
-.recipe-doc-list-item { padding: var(--sui-space-3); border-bottom: 1px solid var(--sui-border); cursor: pointer; }
-.recipe-doc-list-item:hover { background: var(--sui-bg-elevated); }
-&lt;/style&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: MOBILE APP SHELL -->
-      <div class="sui-section" id="recipe-app-shell">
-        <h2>Mobile App Shell</h2>
-        <p class="sui-text-cap sui-mt-2">Complete multi-screen mobile app skeleton with tab navigation. Composes from: <code>sui-screen</code>, <code>sui-screen-header</code>, <code>sui-screen-body</code>, <code>sui-screen-footer</code>, <code>sui-segmented</code>. Custom CSS: 0 lines.</p>
-        <div class="sui-card sui-card-flush sui-mt-4" style="height:400px;overflow:hidden;display:flex;flex-direction:column;border-radius:var(--sui-radius-lg);">
-          <div style="flex-shrink:0;padding:var(--sui-space-3) var(--sui-space-4);background:var(--sui-bg-card);border-bottom:1px solid var(--sui-border);">
-            <div class="sui-flex sui-items-center sui-gap-3">
-              <span class="sui-avatar sui-avatar-sm">MP</span>
-              <div>
-                <strong>MatchPoint</strong>
-                <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">AI Summit 2026</div>
-              </div>
-              <div style="flex:1;"></div>
-              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><i data-lucide="bell"></i></button>
-            </div>
-          </div>
-          <div style="flex:1;overflow-y:auto;padding:var(--sui-space-3);background:var(--sui-bg-primary);">
-            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
-              <div class="sui-flex sui-items-center sui-gap-3">
-                <span class="sui-avatar sui-avatar-md">EV</span>
-                <div style="flex:1;">
-                  <strong>Elena Vasquez</strong>
-                  <div class="sui-meta"><span>VP Sales</span><span>Acme Corp</span></div>
-                </div>
-                <span class="sui-badge sui-badge-success sui-badge-sm">92%</span>
-              </div>
-            </div>
-            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
-              <div class="sui-flex sui-items-center sui-gap-3">
-                <span class="sui-avatar sui-avatar-md">MJ</span>
-                <div style="flex:1;">
-                  <strong>Marcus Johnson</strong>
-                  <div class="sui-meta"><span>CTO</span><span>Globex</span></div>
-                </div>
-                <span class="sui-badge sui-badge-info sui-badge-sm">87%</span>
-              </div>
-            </div>
-            <div class="sui-card sui-card-interactive sui-mb-2" tabindex="0">
-              <div class="sui-flex sui-items-center sui-gap-3">
-                <span class="sui-avatar sui-avatar-md">LW</span>
-                <div style="flex:1;">
-                  <strong>Lin Wei</strong>
-                  <div class="sui-meta"><span>Director</span><span>Initech</span></div>
-                </div>
-                <span class="sui-badge sui-badge-neutral sui-badge-sm">74%</span>
-              </div>
-            </div>
-          </div>
-          <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-4);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
-            <div class="sui-segmented" role="radiogroup" aria-label="Navigation" data-sui-tabs style="width:100%;">
-              <button class="sui-segment" type="button" role="radio" aria-checked="true" aria-label="People" style="flex:1;"><i data-lucide="users" style="width:16px;height:16px;"></i></button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Schedule" style="flex:1;"><i data-lucide="calendar" style="width:16px;height:16px;"></i></button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Messages" style="flex:1;"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Profile" style="flex:1;"><i data-lucide="user" style="width:16px;height:16px;"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Each screen is a full-viewport flex column --&gt;
-&lt;div class="sui-screen is-active" data-screen="matches"&gt;
-  &lt;div class="sui-screen-header"&gt;
-    &lt;!-- Safe area inset handled automatically --&gt;
-    &lt;strong&gt;MatchPoint&lt;/strong&gt;
-  &lt;/div&gt;
-  &lt;div class="sui-screen-body"&gt;
-    &lt;!-- Scrollable content --&gt;
-    &lt;div class="sui-card sui-card-interactive"&gt;...&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="sui-screen-footer"&gt;
-    &lt;!-- Safe area inset handled automatically --&gt;
-    &lt;div class="sui-segmented"&gt;...&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Switch screens by toggling .is-active --&gt;
-&lt;div class="sui-screen" data-screen="schedule"&gt;...&lt;/div&gt;
-&lt;div class="sui-screen" data-screen="messages"&gt;...&lt;/div&gt;
-
-&lt;!-- For single-screen apps, use sui-screen-solo --&gt;
-&lt;div class="sui-screen sui-screen-solo"&gt;...&lt;/div&gt;
-
-&lt;!-- Custom CSS: 0 lines. All SUI classes. --&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: PROFILE PAGE -->
-      <div class="sui-section" id="recipe-profile-page">
-        <h2>Profile Page</h2>
-        <p class="sui-text-cap sui-mt-2">User profile with avatar, metadata, stats, and activity feed. Composes from: <code>sui-avatar-xl</code>, <code>sui-meta</code>, <code>sui-timeline</code>, <code>sui-badge</code>, <code>sui-card</code>. Custom CSS: ~3 lines.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="recipe-profile-header">
-            <span class="sui-avatar sui-avatar-xl">AS</span>
-            <div>
-              <div style="font-size:var(--sui-text-h2);font-weight:var(--sui-weight-bold);">Adrian Speyer</div>
-              <div class="sui-text-muted" style="font-size:var(--sui-text-body);">VP Marketing & Technology</div>
-              <div class="sui-meta sui-mt-2">
-                <span>Montreal, QC</span>
-                <span>25+ years experience</span>
-                <span>Joined 2023</span>
-              </div>
-              <div class="sui-flex sui-gap-2 sui-mt-3">
-                <span class="sui-chip sui-chip-info">SaaS</span>
-                <span class="sui-chip">Community</span>
-                <span class="sui-chip sui-chip-success">AI</span>
-                <span class="sui-chip sui-chip-warning">Events</span>
-              </div>
-            </div>
-          </div>
-          <hr class="sui-divider">
-          <div class="sui-grid sui-grid-3 sui-gap-3" style="padding:var(--sui-space-4);">
-            <div class="sui-text-center">
-              <div class="sui-kpi-value">142</div>
-              <div class="sui-kpi-label">Connections</div>
-            </div>
-            <div class="sui-text-center">
-              <div class="sui-kpi-value">38</div>
-              <div class="sui-kpi-label">Events</div>
-            </div>
-            <div class="sui-text-center">
-              <div class="sui-kpi-value">4.9</div>
-              <div class="sui-kpi-label">Rating</div>
-            </div>
-          </div>
-          <hr class="sui-divider">
-          <div style="padding:var(--sui-space-4);">
-            <h3 class="sui-mb-3">Recent Activity</h3>
-            <div class="sui-timeline" role="feed">
-              <div class="sui-timeline-item" role="article" aria-label="Attended AI Summit">
-                <span class="sui-avatar sui-avatar-sm">AS</span>
-                <div class="sui-timeline-content">
-                  <strong>Attended AI Summit 2026</strong>
-                  <div class="sui-meta sui-mt-1"><span>2 days ago</span><span>Montreal</span></div>
-                </div>
-              </div>
-              <div class="sui-timeline-item" role="article" aria-label="Published article">
-                <span class="sui-avatar sui-avatar-sm">AS</span>
-                <div class="sui-timeline-content">
-                  <strong>Published "Why Connection Wins"</strong>
-                  <div class="sui-meta sui-mt-1"><span>1 week ago</span><span>842 words</span></div>
-                </div>
-              </div>
-              <div class="sui-timeline-item" role="article" aria-label="Connected with Elena">
-                <span class="sui-avatar sui-avatar-sm">EV</span>
-                <div class="sui-timeline-content">
-                  <strong>Connected with Elena Vasquez</strong>
-                  <div class="sui-meta sui-mt-1"><span>2 weeks ago</span><span>via SpeedMatch</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="recipe-profile-header"&gt;
-  &lt;span class="sui-avatar sui-avatar-xl"&gt;AS&lt;/span&gt;
-  &lt;div&gt;
-    &lt;h2&gt;Name&lt;/h2&gt;
-    &lt;div class="sui-meta"&gt;
-      &lt;span&gt;Location&lt;/span&gt;
-      &lt;span&gt;Experience&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="sui-flex sui-gap-2"&gt;
-      &lt;span class="sui-chip sui-chip-info"&gt;Skill&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="sui-timeline" role="feed"&gt;
-  &lt;div class="sui-timeline-item" role="article"&gt;
-    &lt;span class="sui-avatar sui-avatar-sm"&gt;AS&lt;/span&gt;
-    &lt;div class="sui-timeline-content"&gt;
-      &lt;strong&gt;Event title&lt;/strong&gt;
-      &lt;div class="sui-meta"&gt;&lt;span&gt;2 days ago&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS (~3 lines) --&gt;
-&lt;style&gt;
-.recipe-profile-header { display: flex; gap: var(--sui-space-4); align-items: flex-start; }
-@media (max-width: 640px) { .recipe-profile-header { flex-direction: column; align-items: center; } }
-&lt;/style&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: BUTTON GROUP -->
-      <div class="sui-section" id="recipe-button-group">
-        <h2>Button Group</h2>
-        <p class="sui-text-cap sui-mt-2">Single-select option picker. Composes from: <code>sui-grid</code>, <code>sui-btn</code>. Custom CSS: ~10 lines. ARIA <code>radiogroup</code> pattern is the key value here.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Select your plan</div>
-          <div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan">
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="zap"></i>Starter</button>
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="rocket"></i>Pro</button>
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="building-2"></i>Team</button>
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="crown"></i>Enterprise</button>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan"&gt;
-  &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false"&gt;
-    &lt;i data-lucide="zap"&gt;&lt;/i&gt;Starter
-  &lt;/button&gt;
-  &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true"&gt;
-    &lt;i data-lucide="rocket"&gt;&lt;/i&gt;Pro
-  &lt;/button&gt;
-  &lt;!-- More options... --&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS (~10 lines) --&gt;
-&lt;style&gt;
-.recipe-btn-group-option.is-selected {
-  border-color: var(--sui-blue-primary);
-  background: var(--sui-blue-soft);
-  color: var(--sui-blue-primary);
-  font-weight: var(--sui-weight-semibold);
-}
-&lt;/style&gt;
-
-&lt;!-- JS: toggle is-selected + aria-checked on click --&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: ACTION SHEET -->
-      <div class="sui-section" id="recipe-action-sheet">
-        <h2>Action Sheet</h2>
-        <p class="sui-text-cap sui-mt-2">Mobile action menu. Composes from: <code>sui-sheet</code>, <code>sui-btn</code>, <code>sui-btn-ghost</code>, <code>sui-divider</code>. Custom CSS: ~15 lines. Inherits sheet's focus trap, Escape, and backdrop.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Action sheet preview</div>
-          <div style="background: var(--sui-bg-elevated); border-radius: var(--sui-radius-lg); padding: var(--sui-space-3); max-width: 360px;">
-            <div class="recipe-action-sheet">
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="edit-3"></i>Edit</button>
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="copy"></i>Duplicate</button>
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="share-2"></i>Share</button>
-              <hr class="sui-divider">
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button" style="color: var(--sui-error);"><i data-lucide="trash-2"></i>Delete</button>
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Trigger --&gt;
-&lt;button class="sui-btn" data-sui-sheet="#actionSheet"&gt;More Actions&lt;/button&gt;
-
-&lt;!-- Sheet --&gt;
-&lt;div id="actionSheet" class="sui-sheet" aria-modal="true" role="dialog" aria-label="Actions"&gt;
-  &lt;div class="sui-sheet-panel"&gt;
-    &lt;div class="sui-sheet-handle"&gt;&lt;/div&gt;
-    &lt;div class="recipe-action-sheet"&gt;
-      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Edit&lt;/button&gt;
-      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Duplicate&lt;/button&gt;
-      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn"&gt;Share&lt;/button&gt;
-      &lt;hr class="sui-divider"&gt;
-      &lt;button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" style="color: var(--sui-error);"&gt;Delete&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom CSS (~15 lines) --&gt;
-&lt;style&gt;
-.recipe-action-sheet { display: flex; flex-direction: column; }
-.recipe-action-sheet-btn { justify-content: flex-start; border-radius: var(--sui-radius-md); }
-.recipe-action-sheet .sui-divider { margin: var(--sui-space-1) 0; }
-&lt;/style&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: Sidenav Search / Filter -->
-      <div class="sui-section" id="recipe-sidenav-search">
-        <h2>Sidenav Search / Filter</h2>
-        <p class="sui-text-cap sui-mt-2">Add a search input that filters sidenav links in real time, updates group counts, and shows a fallback. Search logic is app-specific — this recipe shows the pattern.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-flex sui-gap-3" style="align-items: flex-start;">
-            <span style="font-size: 1.25rem;" aria-hidden="true">&#9432;</span>
-            <div>
-              <strong>Live demo:</strong> The sidenav on this page uses this exact pattern. Try the "Filter…" search input in the sidebar to see it working — links filter in real time, group counts update, and a "No matches" fallback appears when nothing matches.
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Add search inside .sui-sidenav-panel, before groups --&gt;
-&lt;div class="app-sidenav-search"&gt;
-  &lt;input type="search" class="sui-input" placeholder="Filter…"
-         aria-label="Filter sections" autocomplete="off"&gt;
-&lt;/div&gt;
-
-&lt;script&gt;
-const search = document.querySelector('.app-sidenav-search input');
-const groups = document.querySelectorAll('.sui-sidenav-group');
-const links  = document.querySelectorAll('.sui-sidenav-link');
-
-search.addEventListener('input', () =&gt; {
-  const q = search.value.toLowerCase().trim();
-  links.forEach(link =&gt; {
-    const match = !q || link.textContent.toLowerCase().includes(q);
-    link.style.display = match ? '' : 'none';
-  });
-  groups.forEach(group =&gt; {
-    const visible = group.querySelectorAll(
-      '.sui-sidenav-link:not([style*="display: none"])'
-    );
-    const count = group.querySelector('.sui-sidenav-group-count');
-    if (count) count.textContent = visible.length;
-    if (q) {
-      const btn = group.querySelector('.sui-sidenav-group-toggle');
-      const container = group.querySelector('.sui-sidenav-group-links');
-      btn.setAttribute('aria-expanded', 'true');
-      container.hidden = false;
-    }
-    group.style.display = visible.length === 0 ? 'none' : '';
-  });
-});
-&lt;/script&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: Sidenav Context Switching -->
-      <div class="sui-section" id="recipe-sidenav-context">
-        <h2>Sidenav Context Switching</h2>
-        <p class="sui-text-cap sui-mt-2">Auto-collapse inactive groups when switching context. Composes <code>SUI.sidenav.collapseAll()</code> with app routing logic.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-flex sui-gap-3" style="align-items: flex-start;">
-            <span style="font-size: 1.25rem;" aria-hidden="true">&#9432;</span>
-            <div>
-              <strong>Live demo:</strong> This page uses this pattern. Click between the <strong>Components</strong> and <strong>Recipes</strong> tabs — the sidenav automatically collapses the inactive group and expands the one matching the current tab.
-            </div>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;script&gt;
-function onContextSwitch(activeGroupName) {
-  const nav = document.querySelector('.sui-sidenav');
-  SUI.sidenav.collapseAll(nav);  // collapse everything
-
-  // Expand the active group
-  const group = nav.querySelector('[data-group="' + activeGroupName + '"]');
-  if (group) {
-    const btn = group.querySelector('.sui-sidenav-group-toggle');
-    const links = group.querySelector('.sui-sidenav-group-links');
-    btn.setAttribute('aria-expanded', 'true');
-    links.hidden = false;
-  }
-
-  // Clear stale URL hash
-  if (window.location.hash) {
-    history.replaceState(null, '', window.location.pathname);
-  }
-}
-&lt;/script&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: Panel Push Mode -->
-      <div class="sui-section" id="recipe-push-mode">
-        <h2>Panel Push Mode (Content Resize)</h2>
-        <p class="sui-text-cap sui-mt-2">Instead of overlaying, the panel resizes main content. Toggle a CSS class on a wrapper to switch <code>grid-template-columns</code>. Custom CSS: ~8 lines.</p>
-        <div class="sui-card sui-mt-4">
-          <div class="sui-kpi-label sui-mb-3">Push mode — click toggle to slide panel in</div>
-          <style>
-            .recipe-push-layout { display: grid; grid-template-columns: 1fr; transition: grid-template-columns 250ms ease-out; border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); overflow: hidden; min-height: 180px; }
-            .recipe-push-layout.recipe-push-open { grid-template-columns: 1fr 260px; }
-            .recipe-push-main { padding: var(--sui-space-4); }
-            .recipe-push-aside { display: none; border-left: 1px solid var(--sui-border); padding: var(--sui-space-3); background: var(--sui-bg-elevated); overflow-y: auto; }
-            .recipe-push-layout.recipe-push-open .recipe-push-aside { display: block; }
-          </style>
-          <div class="recipe-push-layout" id="recipePushLayout">
-            <div class="recipe-push-main">
-              <div class="sui-flex" style="justify-content: space-between; align-items: center;">
-                <strong>Main Content</strong>
-                <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"
-                        onclick="document.getElementById('recipePushLayout').classList.toggle('recipe-push-open')">
-                  Toggle Panel
-                </button>
-              </div>
-              <p class="sui-text-muted sui-mt-3" style="font-size: var(--sui-text-small);">This area resizes when the panel opens. Content reflows instead of being covered by an overlay.</p>
-            </div>
-            <aside class="recipe-push-aside">
-              <strong style="font-size: var(--sui-text-small);">Detail Panel</strong>
-              <p class="sui-text-muted sui-mt-2" style="font-size: var(--sui-text-meta);">Panel content lives here. The main area shrinks to make room — no overlay, no backdrop.</p>
-            </aside>
-          </div>
-        </div>
-        <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
-          <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="app-layout" id="pushLayout"&gt;
-  &lt;main class="app-main"&gt;Main content&lt;/main&gt;
-  &lt;aside class="app-push-panel"&gt;Panel content&lt;/aside&gt;
-&lt;/div&gt;
-
-&lt;style&gt;
-.app-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  transition: grid-template-columns 250ms ease-out;
-}
-.app-layout.app-panel-open {
-  grid-template-columns: 1fr 400px;
-}
-.app-push-panel {
-  display: none;
-  border-left: 1px solid var(--sui-border);
-  overflow-y: auto;
-}
-.app-layout.app-panel-open .app-push-panel {
-  display: block;
-}
-&lt;/style&gt;
-
-&lt;script&gt;
-document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
-  document.getElementById('pushLayout').classList.toggle('app-panel-open');
-});
-&lt;/script&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- RECIPE: Master-Detail (Table + Panel) -->
       <div class="sui-section" id="recipe-master-detail">
         <h2>Master-Detail (Table + Panel)</h2>
         <p class="sui-text-cap sui-mt-2">CRM / help desk pattern — clickable table row opens <code>sui-panel</code> with detail content. Composes <code>sui-table-interactive</code> + <code>sui-panel</code>.</p>
@@ -2856,90 +2545,434 @@ function showDetail(id) {
       </div>
 
       <!-- RECIPE: Floating Action Bar -->
-      <div class="sui-section" id="recipe-fab">
-        <h2>Floating Action Bar</h2>
-        <p class="sui-text-cap sui-mt-2">A fixed-position bar that appears when items are selected, showing bulk actions. Composes from: <code>sui-card-shadow</code>, <code>sui-btn</code>, <code>sui-badge</code>, <code>position: fixed</code>. Custom CSS: ~8 lines.</p>
-        <div class="sui-card sui-mt-4" style="position:relative;min-height:200px;overflow:hidden;">
-          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Select items to see the floating bar appear.</p>
-          <div class="sui-flex-col sui-gap-2 sui-mt-3">
-            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1042</label>
-            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1043</label>
-            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1044</label>
-          </div>
-          <div id="recipeFab" class="sui-card sui-card-shadow" role="toolbar" aria-label="Bulk actions"
-               style="display:none;position:absolute;bottom:var(--sui-space-3);left:50%;transform:translateX(-50%);padding:var(--sui-space-2) var(--sui-space-3);z-index:10;white-space:nowrap;">
-            <div class="sui-flex sui-gap-2" style="align-items:center;">
-              <span class="sui-badge sui-badge-info" id="recipeFabCount">0 selected</span>
-              <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"><i data-lucide="download"></i> Export</button>
-              <button class="sui-btn sui-btn-sm sui-btn-ghost" type="button"><i data-lucide="archive"></i> Archive</button>
-              <button class="sui-btn sui-btn-sm sui-btn-danger" type="button"><i data-lucide="trash-2"></i> Delete</button>
+      <div class="sui-section" id="recipe-push-mode">
+        <h2>Panel Push Mode (Content Resize)</h2>
+        <p class="sui-text-cap sui-mt-2">Instead of overlaying, the panel resizes main content. Toggle a CSS class on a wrapper to switch <code>grid-template-columns</code>. Custom CSS: ~8 lines.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">Push mode — click toggle to slide panel in</div>
+          <style>
+            .recipe-push-layout { display: grid; grid-template-columns: 1fr; transition: grid-template-columns 250ms ease-out; border: 1px solid var(--sui-border); border-radius: var(--sui-radius-lg); overflow: hidden; min-height: 180px; }
+            .recipe-push-layout.recipe-push-open { grid-template-columns: 1fr 260px; }
+            .recipe-push-main { padding: var(--sui-space-4); }
+            .recipe-push-aside { display: none; border-left: 1px solid var(--sui-border); padding: var(--sui-space-3); background: var(--sui-bg-elevated); overflow-y: auto; }
+            .recipe-push-layout.recipe-push-open .recipe-push-aside { display: block; }
+          </style>
+          <div class="recipe-push-layout" id="recipePushLayout">
+            <div class="recipe-push-main">
+              <div class="sui-flex" style="justify-content: space-between; align-items: center;">
+                <strong>Main Content</strong>
+                <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"
+                        onclick="document.getElementById('recipePushLayout').classList.toggle('recipe-push-open')">
+                  Toggle Panel
+                </button>
+              </div>
+              <p class="sui-text-muted sui-mt-3" style="font-size: var(--sui-text-small);">This area resizes when the panel opens. Content reflows instead of being covered by an overlay.</p>
             </div>
+            <aside class="recipe-push-aside">
+              <strong style="font-size: var(--sui-text-small);">Detail Panel</strong>
+              <p class="sui-text-muted sui-mt-2" style="font-size: var(--sui-text-meta);">Panel content lives here. The main area shrinks to make room — no overlay, no backdrop.</p>
+            </aside>
           </div>
         </div>
-        <script>
-          function recipeFabUpdate() {
-            const checks = document.querySelectorAll('#recipe-fab .sui-checkbox:checked');
-            const bar = document.getElementById('recipeFab');
-            const count = document.getElementById('recipeFabCount');
-            if (checks.length > 0) {
-              bar.style.display = '';
-              count.textContent = checks.length + ' selected';
-            } else {
-              bar.style.display = 'none';
-            }
-          }
-        </script>
         <div class="sui-accordion sui-mt-3">
           <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
           <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Floating Action Bar — appears when items are selected --&gt;
-&lt;!-- Custom CSS (not part of sui-components.css): --&gt;
-&lt;style&gt;
-  .fab-bar {
-    position: fixed;
-    bottom: var(--sui-space-4);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
-    padding: var(--sui-space-2) var(--sui-space-3);
-    white-space: nowrap;
-    transition: opacity var(--sui-duration-fast) var(--sui-easing),
-                transform var(--sui-duration-fast) var(--sui-easing);
-  }
-  .fab-bar[hidden] {
-    display: block;
-    opacity: 0;
-    transform: translateX(-50%) translateY(1rem);
-    pointer-events: none;
-  }
-&lt;/style&gt;
-
-&lt;div class="sui-card sui-card-shadow fab-bar" id="bulkBar"
-     role="toolbar" aria-label="Bulk actions" hidden&gt;
-  &lt;div class="sui-flex sui-gap-2" style="align-items:center"&gt;
-    &lt;span class="sui-badge sui-badge-info" id="bulkCount"&gt;0 selected&lt;/span&gt;
-    &lt;button class="sui-btn sui-btn-sm sui-btn-primary"&gt;
-      &lt;i data-lucide="download" aria-hidden="true"&gt;&lt;/i&gt; Export
-    &lt;/button&gt;
-    &lt;button class="sui-btn sui-btn-sm sui-btn-danger"&gt;
-      &lt;i data-lucide="trash-2" aria-hidden="true"&gt;&lt;/i&gt; Delete
-    &lt;/button&gt;
-  &lt;/div&gt;
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="app-layout" id="pushLayout"&gt;
+  &lt;main class="app-main"&gt;Main content&lt;/main&gt;
+  &lt;aside class="app-push-panel"&gt;Panel content&lt;/aside&gt;
 &lt;/div&gt;
 
+&lt;style&gt;
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: grid-template-columns 250ms ease-out;
+}
+.app-layout.app-panel-open {
+  grid-template-columns: 1fr 400px;
+}
+.app-push-panel {
+  display: none;
+  border-left: 1px solid var(--sui-border);
+  overflow-y: auto;
+}
+.app-layout.app-panel-open .app-push-panel {
+  display: block;
+}
+&lt;/style&gt;
+
 &lt;script&gt;
-  // Wire up your selection logic:
-  function updateFab(selectedCount) {
-    const bar = document.getElementById('bulkBar');
-    const count = document.getElementById('bulkCount');
-    bar.hidden = selectedCount === 0;
-    count.textContent = selectedCount + ' selected';
-  }
+document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
+  document.getElementById('pushLayout').classList.toggle('app-panel-open');
+});
 &lt;/script&gt;</pre>
           </div>
         </div>
       </div>
 
+      <!-- RECIPE: Master-Detail (Table + Panel) -->
+      <div class="sui-section" id="recipe-profile-page">
+        <h2>Profile Page</h2>
+        <p class="sui-text-cap sui-mt-2">User profile with avatar, metadata, stats, and activity feed. Composes from: <code>sui-avatar-xl</code>, <code>sui-meta</code>, <code>sui-timeline</code>, <code>sui-badge</code>, <code>sui-card</code>. Custom CSS: ~3 lines.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="recipe-profile-header">
+            <span class="sui-avatar sui-avatar-xl">AS</span>
+            <div>
+              <div style="font-size:var(--sui-text-h2);font-weight:var(--sui-weight-bold);">Adrian Speyer</div>
+              <div class="sui-text-muted" style="font-size:var(--sui-text-body);">VP Marketing & Technology</div>
+              <div class="sui-meta sui-mt-2">
+                <span>Montreal, QC</span>
+                <span>25+ years experience</span>
+                <span>Joined 2023</span>
+              </div>
+              <div class="sui-flex sui-gap-2 sui-mt-3">
+                <span class="sui-chip sui-chip-info">SaaS</span>
+                <span class="sui-chip">Community</span>
+                <span class="sui-chip sui-chip-success">AI</span>
+                <span class="sui-chip sui-chip-warning">Events</span>
+              </div>
+            </div>
+          </div>
+          <hr class="sui-divider">
+          <div class="sui-grid sui-grid-3 sui-gap-3" style="padding:var(--sui-space-4);">
+            <div class="sui-text-center">
+              <div class="sui-kpi-value">142</div>
+              <div class="sui-kpi-label">Connections</div>
+            </div>
+            <div class="sui-text-center">
+              <div class="sui-kpi-value">38</div>
+              <div class="sui-kpi-label">Events</div>
+            </div>
+            <div class="sui-text-center">
+              <div class="sui-kpi-value">4.9</div>
+              <div class="sui-kpi-label">Rating</div>
+            </div>
+          </div>
+          <hr class="sui-divider">
+          <div style="padding:var(--sui-space-4);">
+            <h3 class="sui-mb-3">Recent Activity</h3>
+            <div class="sui-timeline" role="feed">
+              <div class="sui-timeline-item" role="article" aria-label="Attended AI Summit">
+                <span class="sui-avatar sui-avatar-sm">AS</span>
+                <div class="sui-timeline-content">
+                  <strong>Attended AI Summit 2026</strong>
+                  <div class="sui-meta sui-mt-1"><span>2 days ago</span><span>Montreal</span></div>
+                </div>
+              </div>
+              <div class="sui-timeline-item" role="article" aria-label="Published article">
+                <span class="sui-avatar sui-avatar-sm">AS</span>
+                <div class="sui-timeline-content">
+                  <strong>Published "Why Connection Wins"</strong>
+                  <div class="sui-meta sui-mt-1"><span>1 week ago</span><span>842 words</span></div>
+                </div>
+              </div>
+              <div class="sui-timeline-item" role="article" aria-label="Connected with Elena">
+                <span class="sui-avatar sui-avatar-sm">EV</span>
+                <div class="sui-timeline-content">
+                  <strong>Connected with Elena Vasquez</strong>
+                  <div class="sui-meta sui-mt-1"><span>2 weeks ago</span><span>via SpeedMatch</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="recipe-profile-header"&gt;
+  &lt;span class="sui-avatar sui-avatar-xl"&gt;AS&lt;/span&gt;
+  &lt;div&gt;
+    &lt;h2&gt;Name&lt;/h2&gt;
+    &lt;div class="sui-meta"&gt;
+      &lt;span&gt;Location&lt;/span&gt;
+      &lt;span&gt;Experience&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="sui-flex sui-gap-2"&gt;
+      &lt;span class="sui-chip sui-chip-info"&gt;Skill&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="sui-timeline" role="feed"&gt;
+  &lt;div class="sui-timeline-item" role="article"&gt;
+    &lt;span class="sui-avatar sui-avatar-sm"&gt;AS&lt;/span&gt;
+    &lt;div class="sui-timeline-content"&gt;
+      &lt;strong&gt;Event title&lt;/strong&gt;
+      &lt;div class="sui-meta"&gt;&lt;span&gt;2 days ago&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~3 lines) --&gt;
+&lt;style&gt;
+.recipe-profile-header { display: flex; gap: var(--sui-space-4); align-items: flex-start; }
+@media (max-width: 640px) { .recipe-profile-header { flex-direction: column; align-items: center; } }
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: BUTTON GROUP -->
+      <div class="sui-section" id="recipe-settings">
+        <h2>Settings / Preferences</h2>
+        <p class="sui-text-cap sui-mt-2">Vertical stack of labelled sections with controls. Composes from: <code>sui-card</code>, <code>sui-toggle</code>, <code>sui-segmented</code>, <code>sui-input</code>, <code>sui-divider</code>. Custom CSS: ~4 lines.</p>
+        <div class="sui-card sui-mt-4">
+          <h3>Notifications</h3>
+          <div class="recipe-settings-row">
+            <div>
+              <strong>Email notifications</strong>
+              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Receive updates about your account activity.</div>
+            </div>
+            <label class="sui-toggle"><input type="checkbox" checked aria-label="Email notifications"><span class="sui-toggle-slider"></span></label>
+          </div>
+          <div class="recipe-settings-row">
+            <div>
+              <strong>Marketing emails</strong>
+              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Product announcements and feature updates.</div>
+            </div>
+            <label class="sui-toggle"><input type="checkbox" aria-label="Marketing emails"><span class="sui-toggle-slider"></span></label>
+          </div>
+          <hr class="sui-divider">
+          <h3>Appearance</h3>
+          <div class="recipe-settings-row">
+            <div>
+              <strong>Theme</strong>
+              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Choose your preferred colour scheme.</div>
+            </div>
+            <div class="sui-segmented" role="radiogroup" aria-label="Theme preference" data-sui-tabs>
+              <button class="sui-segment" type="button" role="radio" aria-checked="true">Light</button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false">Dark</button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false">Auto</button>
+            </div>
+          </div>
+          <div class="recipe-settings-row">
+            <div>
+              <strong>Language</strong>
+              <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Select your display language.</div>
+            </div>
+            <select class="sui-select" style="width:auto;" aria-label="Language">
+              <option>English (CA)</option>
+              <option>Français</option>
+            </select>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-card"&gt;
+  &lt;h3&gt;Notifications&lt;/h3&gt;
+  &lt;div class="recipe-settings-row"&gt;
+    &lt;div&gt;
+      &lt;strong&gt;Email notifications&lt;/strong&gt;
+      &lt;div class="sui-text-muted"&gt;Description text&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;label class="sui-toggle"&gt;&lt;input type="checkbox" checked&gt;&lt;span class="sui-toggle-slider"&gt;&lt;/span&gt;&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;hr class="sui-divider"&gt;
+  &lt;h3&gt;Appearance&lt;/h3&gt;
+  &lt;div class="recipe-settings-row"&gt;
+    &lt;div&gt;&lt;strong&gt;Theme&lt;/strong&gt;&lt;/div&gt;
+    &lt;div class="sui-segmented" role="radiogroup"&gt;
+      &lt;button class="sui-segment" role="radio" aria-checked="true"&gt;Light&lt;/button&gt;
+      &lt;button class="sui-segment" role="radio" aria-checked="false"&gt;Dark&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~4 lines) --&gt;
+&lt;style&gt;
+.recipe-settings-row { display: flex; justify-content: space-between; align-items: center;
+  padding: var(--sui-space-3) 0; gap: var(--sui-space-3); }
+.recipe-settings-row:not(:last-child) { border-bottom: 1px solid var(--sui-border); }
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: BLOG POST / ARTICLE -->
+      <div class="sui-section" id="recipe-sidenav-context">
+        <h2>Sidenav Context Switching</h2>
+        <p class="sui-text-cap sui-mt-2">Auto-collapse inactive groups when switching context. Composes <code>SUI.sidenav.collapseAll()</code> with app routing logic.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex sui-gap-3" style="align-items: flex-start;">
+            <span style="font-size: 1.25rem;" aria-hidden="true">&#9432;</span>
+            <div>
+              <strong>Live demo:</strong> This page uses this pattern. Click between the <strong>Components</strong> and <strong>Recipes</strong> tabs — the sidenav automatically collapses the inactive group and expands the one matching the current tab.
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;script&gt;
+function onContextSwitch(activeGroupName) {
+  const nav = document.querySelector('.sui-sidenav');
+  SUI.sidenav.collapseAll(nav);  // collapse everything
+
+  // Expand the active group
+  const group = nav.querySelector('[data-group="' + activeGroupName + '"]');
+  if (group) {
+    const btn = group.querySelector('.sui-sidenav-group-toggle');
+    const links = group.querySelector('.sui-sidenav-group-links');
+    btn.setAttribute('aria-expanded', 'true');
+    links.hidden = false;
+  }
+
+  // Clear stale URL hash
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname);
+  }
+}
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: Panel Push Mode -->
+      <div class="sui-section" id="recipe-sidenav-search">
+        <h2>Sidenav Search / Filter</h2>
+        <p class="sui-text-cap sui-mt-2">Add a search input that filters sidenav links in real time, updates group counts, and shows a fallback. Search logic is app-specific — this recipe shows the pattern.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex sui-gap-3" style="align-items: flex-start;">
+            <span style="font-size: 1.25rem;" aria-hidden="true">&#9432;</span>
+            <div>
+              <strong>Live demo:</strong> The sidenav on this page uses this exact pattern. Try the "Filter…" search input in the sidebar to see it working — links filter in real time, group counts update, and a "No matches" fallback appears when nothing matches.
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Add search inside .sui-sidenav-panel, before groups --&gt;
+&lt;div class="app-sidenav-search"&gt;
+  &lt;input type="search" class="sui-input" placeholder="Filter…"
+         aria-label="Filter sections" autocomplete="off"&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const search = document.querySelector('.app-sidenav-search input');
+const groups = document.querySelectorAll('.sui-sidenav-group');
+const links  = document.querySelectorAll('.sui-sidenav-link');
+
+search.addEventListener('input', () =&gt; {
+  const q = search.value.toLowerCase().trim();
+  links.forEach(link =&gt; {
+    const match = !q || link.textContent.toLowerCase().includes(q);
+    link.style.display = match ? '' : 'none';
+  });
+  groups.forEach(group =&gt; {
+    const visible = group.querySelectorAll(
+      '.sui-sidenav-link:not([style*="display: none"])'
+    );
+    const count = group.querySelector('.sui-sidenav-group-count');
+    if (count) count.textContent = visible.length;
+    if (q) {
+      const btn = group.querySelector('.sui-sidenav-group-toggle');
+      const container = group.querySelector('.sui-sidenav-group-links');
+      btn.setAttribute('aria-expanded', 'true');
+      container.hidden = false;
+    }
+    group.style.display = visible.length === 0 ? 'none' : '';
+  });
+});
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: Sidenav Context Switching -->
+      <div class="sui-section" id="recipe-split-pane">
+        <h2>Split Pane / Master-Detail</h2>
+        <p class="sui-text-cap sui-mt-2">Two-column list + detail layout. Collapses to stacked on mobile. Composes from: CSS grid, <code>sui-card</code>, <code>sui-avatar</code>, <code>sui-badge</code>. Custom CSS: ~8 lines per variant.</p>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-kpi-label sui-mb-3">40/60 — CRM reading pane</div>
+          <div class="recipe-split recipe-split-40-60">
+            <div class="recipe-split-list">
+              <div class="recipe-split-list-item is-active">
+                <div class="sui-flex sui-items-center sui-gap-2">
+                  <span class="sui-avatar sui-avatar-sm">EV</span>
+                  <div>
+                    <strong>Elena Vasquez</strong>
+                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Acme Corp · $120K</div>
+                  </div>
+                </div>
+              </div>
+              <div class="recipe-split-list-item">
+                <div class="sui-flex sui-items-center sui-gap-2">
+                  <span class="sui-avatar sui-avatar-sm">MJ</span>
+                  <div>
+                    <strong>Marcus Johnson</strong>
+                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Globex · $85K</div>
+                  </div>
+                </div>
+              </div>
+              <div class="recipe-split-list-item">
+                <div class="sui-flex sui-items-center sui-gap-2">
+                  <span class="sui-avatar sui-avatar-sm">LW</span>
+                  <div>
+                    <strong>Lin Wei</strong>
+                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Initech · $45K</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="recipe-split-detail">
+              <div class="sui-flex sui-items-center sui-gap-3 sui-mb-3">
+                <span class="sui-avatar sui-avatar-lg">EV</span>
+                <div>
+                  <div style="font-size:var(--sui-text-h3);font-weight:var(--sui-weight-semibold);">Elena Vasquez</div>
+                  <span class="sui-text-muted">VP Sales · Acme Corp</span>
+                </div>
+              </div>
+              <div class="sui-flex sui-gap-2 sui-mb-3">
+                <span class="sui-badge sui-badge-success sui-badge-sm">Closed Won</span>
+                <span class="sui-badge sui-badge-neutral sui-badge-sm">$120,000</span>
+              </div>
+              <p style="font-size:var(--sui-text-small);">Enterprise licence renewal. Multi-year contract signed Q4. Expansion opportunity for Analytics add-on.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="recipe-split recipe-split-40-60"&gt;
+  &lt;div class="recipe-split-list"&gt;
+    &lt;div class="recipe-split-list-item is-active"&gt;...&lt;/div&gt;
+    &lt;div class="recipe-split-list-item"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="recipe-split-detail"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom CSS (~8 lines) --&gt;
+&lt;style&gt;
+.recipe-split { display: grid; gap: 0; border: 1px solid var(--sui-border);
+  border-radius: var(--sui-radius-lg); overflow: hidden; min-height: 320px; }
+.recipe-split-40-60 { grid-template-columns: 2fr 3fr; }
+.recipe-split-list { border-right: 1px solid var(--sui-border); overflow-y: auto; }
+.recipe-split-list-item { padding: var(--sui-space-3) var(--sui-space-4);
+  border-bottom: 1px solid var(--sui-border); cursor: pointer; }
+.recipe-split-list-item:hover { background: var(--sui-bg-elevated); }
+.recipe-split-list-item.is-active { background: var(--sui-blue-soft); }
+.recipe-split-detail { padding: var(--sui-space-4); }
+@media (max-width: 640px) {
+  .recipe-split { grid-template-columns: 1fr; }
+  .recipe-split-list { border-right: none; max-height: 200px; }
+}
+&lt;/style&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: SETTINGS / PREFERENCES -->
+      <div class="sui-section" id="recipe-stepper">
+        <h2>Stepper / Wizard</h2>
+        <div class="sui-alert sui-alert-info sui-mt-3">
+          <i data-lucide="arrow-up-circle"></i>
+          <div><strong>Promoted to component.</strong> The stepper pattern has been promoted from recipe to a first-class component in v2.2.0. See <code>sui-stepper</code> in the Components tab above.</div>
+        </div>
+      </div>
+
+      <!-- RECIPE: SPLIT PANE / MASTER-DETAIL -->
     </section>
     <footer class="sui-footer">
       <div class="sui-footer-links">
