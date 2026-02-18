@@ -21,7 +21,7 @@
 If you are an AI assistant building with SUI, fetch the comprehensive reference file above before generating code. It contains:
 - Complete class list with every component and modifier
 - ARIA requirements table
-- Recipe table (18 pre-built SaaS patterns including integration recipes)
+- Recipe table (22 pre-built SaaS patterns including 5 integration recipes for third-party widgets)
 - Common name alias table (Sidebar → sui-sidenav, Modal → sui-dialog, etc.)
 - Design token reference
 - Namespace rules (never invent sui-* classes)

@@ -528,6 +528,20 @@ SUI ships components. You build patterns. These recipes show common application 
 | Panel Push Mode | Content resize instead of overlay | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-push-mode) |
 | Master-Detail | Table row → panel detail (CRM/help desk) | ~10 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-master-detail) |
 | Notification Centre | Bell icon → panel with notification cards | ~8 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-notification-centre) |
+| Floating Action Bar | Sticky toolbar for bulk/batch actions | ~6 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-fab) |
+| Stepper / Wizard | Multi-step form with progress indicators | ~10 lines | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-stepper) |
+
+#### Integration Recipes
+
+Integration recipes make third-party widgets SUI-native using token-based CSS overrides. SUI provides the tokens; you bring the library.
+
+| Library | What It Does | Tested Version | Demo |
+|---------|-------------|----------------|------|
+| Chart.js | Bar, line, pie charts with SUI token colours | v4.x | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-chartjs) |
+| FilePond | File upload with drag-and-drop | v4.32.11 | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-filepond) |
+| Flatpickr | Date picker, range, datetime | v4.6.13 | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-flatpickr) |
+| Quill | Rich text editor (Snow theme) | v2.0.3 | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-quill) |
+| Tom Select | Enhanced select, autocomplete, tagging | v2.5.1 | [View →](https://adrianspeyer.github.io/speyer-ui/index.html#recipe-tom-select) |
 
 > **Components vs Recipes:** Components ship in the SUI bundle. Recipes are documented patterns that compose those components with minimal custom CSS. Recipes are starting points — modify to fit your app.
 

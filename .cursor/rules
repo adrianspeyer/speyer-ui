@@ -25,7 +25,7 @@ SUI is the **shell** — containers, chrome, interactive primitives, typography,
 - Script tags use `defer`
 - Borders are the default card separation. Shadows are opt-in (`sui-card-shadow`)
 
-**SUI does NOT ship:** icons, charts, data visualisation, drag-and-drop, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent. For date pickers, see the Flatpickr integration recipe — SUI provides token overrides, you bring the library.
+**SUI does NOT ship:** icons, charts, data visualisation, drag-and-drop, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
 
 ---
 
@@ -244,7 +244,12 @@ Check these before building custom patterns:
 | Master-Detail | `sui-table-interactive` row click → `sui-panel` detail |
 | Notification Centre | `sui-panel` + stacked `sui-card` + `sui-badge` |
 | Floating Action Bar | `sui-card-shadow` + `sui-btn` + `sui-badge` + `position: fixed` |
+| Stepper / Wizard | `sui-card` + `sui-badge` + numbered steps + JS state |
 | Flatpickr Integration | SUI token overrides for Flatpickr datepicker (light/dark). You bring Flatpickr CDN |
+| Chart.js Integration | SUI token helper reads `--sui-*` at runtime, passes to Chart.js config. MutationObserver for theme toggle |
+| FilePond Integration | SUI token overrides for FilePond file upload (background, border, status colours). Complements `sui-dropzone` |
+| Quill Integration | SUI token overrides for Quill Snow theme (toolbar, editor, picker dropdowns). CDN-first choice; TipTap/Lexical for bundler setups |
+| Tom Select Integration | SUI token overrides for Tom Select (control, dropdown, tags, focus ring). Enhanced select/autocomplete/tagging |
 
 ### Common Names → SUI Solutions
 
@@ -271,6 +276,10 @@ Check these before building custom patterns:
 | Notification panel | `sui-panel` + stacked `sui-card` + `sui-badge` | Recipe |
 | Inline edit | `sui-input` + click-to-edit | Recipe |
 | Floating action bar | `sui-card-shadow` + `sui-btn` + fixed positioning | Recipe |
+| Chart / Graph / Data viz | Chart.js integration recipe — SUI token helper for colours/fonts | Recipe |
+| File upload / Drag-drop | FilePond integration recipe — SUI token overrides. Also see `sui-dropzone` for CSS-only | Recipe |
+| Rich text / WYSIWYG editor | Quill integration recipe — SUI token overrides (CDN-first). TipTap/Lexical for bundlers | Recipe |
+| Enhanced select / Autocomplete / Tagging | Tom Select integration recipe — SUI token overrides for control + dropdown | Recipe |
 
 ---
 

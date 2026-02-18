@@ -45,6 +45,17 @@
   <!-- Flatpickr — loaded for integration recipe demo only (not part of SUI) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+  <!-- Tom Select — loaded for integration recipe demo only (not part of SUI) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.5.1/dist/css/tom-select.css" />
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.5.1/dist/js/tom-select.complete.min.js" defer></script>
+  <!-- FilePond — loaded for integration recipe demo only (not part of SUI) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.js" defer></script>
+  <!-- Quill — loaded for integration recipe demo only (not part of SUI) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js" defer></script>
+  <!-- Chart.js — loaded for integration recipe demo only (not part of SUI) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
   <style>
     /* Tab section headings demoted to H2 for SEO (single H1 per page) but keep H1 visual size */
     .sui-section-head h2 { font-size: 2em; margin-block: 0.67em; }
@@ -185,20 +196,24 @@
             <a href="#recipe-app-shell" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="spa layout viewport scaffold">App Shell</a>
             <a href="#recipe-blog-post" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="article content writing">Blog Post</a>
             <a href="#recipe-button-group" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="radio options select toggle">Button Group</a>
+            <a href="#recipe-chartjs" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="chart graph bar line pie doughnut data visualisation chartjs integration third-party">Chart.js</a>
             <a href="#recipe-document-library" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="file list table download">Document Library</a>
+            <a href="#recipe-filepond" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="file upload drag drop browse filepond integration third-party">FilePond</a>
+            <a href="#recipe-flatpickr" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="datepicker date picker calendar date range time flatpickr integration third-party">Flatpickr</a>
             <a href="#recipe-fab" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="floating action bar bulk toolbar fixed selection">Floating Action Bar</a>
-            <a href="#recipe-flatpickr" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="datepicker date picker calendar date range time flatpickr integration third-party"><i data-lucide="calendar" style="width:14px;height:14px;margin-right:4px;vertical-align:-2px;opacity:.5"></i>Flatpickr</a>
             <a href="#recipe-inline-edit" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="click edit save cancel field">Inline Edit</a>
             <a href="#recipe-kanban" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="board pipeline columns drag trello">Kanban Board</a>
             <a href="#recipe-master-detail" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="inbox preview crm email helpdesk">Master-Detail</a>
             <a href="#recipe-notification-centre" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="alerts messages inbox bell">Notification Centre</a>
             <a href="#recipe-push-mode" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="panel resize content layout grid">Panel Push Mode</a>
             <a href="#recipe-profile-page" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="user account settings avatar">Profile Page</a>
+            <a href="#recipe-quill" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="rich text editor wysiwyg quill formatting bold italic integration third-party">Quill</a>
             <a href="#recipe-settings" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="preferences options toggles configuration">Settings</a>
             <a href="#recipe-sidenav-context" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="collapse switch workspace project">Sidenav Context</a>
             <a href="#recipe-sidenav-search" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="filter find navigation links">Sidenav Search</a>
             <a href="#recipe-split-pane" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="two-column grid sidebar detail list">Split Pane</a>
             <a href="#recipe-stepper" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="wizard steps multi-step progress">Stepper / Wizard</a>
+            <a href="#recipe-tom-select" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="select dropdown autocomplete tagging multi-select tom-select integration third-party">Tom Select</a>
           </div>
         </div>
         <p class="demo-sidenav-empty" hidden>No matches.</p>
@@ -1676,7 +1691,7 @@ Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Aw
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
 Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Sidenav: sui-sidenav with collapsible groups (sui-sidenav-group-toggle + aria-expanded + aria-controls). Panel: sui-panel (slides from right, --sui-panel-width, sui-panel-no-backdrop). SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators), sui-table-stack (card stacking at tablet), sui-table-sticky (sticky thead), sui-table-dense (compact). Input with button: sui-input-action. Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. SUI.tabs.activate(tabElement) for programmatic switching. Accordion: SUI.accordion.toggle(trigger), .expandAll(container), .collapseAll(container). Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
-CRITICAL: Before building custom CSS, check if a recipe exists. SUI composes patterns like Kanban (flex-nowrap + scroll-x + card), Master-Detail (table-interactive + panel), Notification Panel (panel + card + badge), Floating Action Bar (card-shadow + btn + fixed position), Flatpickr Integration (SUI token overrides for date pickers), and 13+ more. Full recipe list and comprehensive AI reference: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
+CRITICAL: Before building custom CSS, check if a recipe exists. SUI composes patterns like Kanban (flex-nowrap + scroll-x + card), Master-Detail (table-interactive + panel), Notification Panel (panel + card + badge), Floating Action Bar (card-shadow + btn + fixed position), and 5 integration recipes (Flatpickr, Tom Select, FilePond, Quill, Chart.js) with SUI token overrides. 22 recipes total. Full recipe list and comprehensive AI reference: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
 Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -2027,6 +2042,177 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       </div>
 
       <!-- RECIPE: ACTION SHEET -->
+
+      <!-- Integration recipe links: underline prose links for WCAG colour-alone criterion -->
+      <style>
+        #recipe-chartjs p a,
+        #recipe-filepond p a,
+        #recipe-flatpickr p a,
+        #recipe-quill p a,
+        #recipe-tom-select p a,
+        #recipe-chartjs .sui-alert a,
+        #recipe-filepond .sui-alert a,
+        #recipe-flatpickr .sui-alert a,
+        #recipe-quill .sui-alert a,
+        #recipe-tom-select .sui-alert a {
+          text-decoration: underline;
+        }
+      </style>
+
+      <div class="sui-section" id="recipe-chartjs">
+        <h2>Chart.js Integration</h2>
+        <p class="sui-text-cap sui-mt-2">SUI-native charts using <a href="https://www.chartjs.org" target="_blank" rel="noreferrer">Chart.js</a>. Token-based colours for light/dark mode, SUI font family, responsive by default. This is an <strong>integration recipe</strong> — Chart.js is not part of SUI. You bring the library; SUI makes it match.</p>
+
+        <div class="sui-card sui-mt-4">
+          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — toggle the theme to see dark mode. Charts re-render with SUI token colours.</p>
+          <div class="sui-grid sui-grid-2 sui-mt-3" style="gap:var(--sui-space-4);">
+            <div><canvas id="recipeChartBar"></canvas></div>
+            <div><canvas id="recipeChartLine"></canvas></div>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            if (typeof Chart === 'undefined') return;
+
+            function getSUIToken(name) {
+              return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+            }
+            function suiChartDefaults() {
+              var text = getSUIToken('--sui-text-primary');
+              var muted = getSUIToken('--sui-text-muted');
+              var border = getSUIToken('--sui-border');
+              var font = getSUIToken('--sui-font') || 'Inter, system-ui, sans-serif';
+              Chart.defaults.color = muted;
+              Chart.defaults.borderColor = border;
+              Chart.defaults.font.family = font;
+              return {
+                blue: getSUIToken('--sui-blue-primary'),
+                green: getSUIToken('--sui-success-strong'),
+                red: getSUIToken('--sui-error-strong'),
+                amber: getSUIToken('--sui-warning-strong'),
+                purple: getSUIToken('--sui-pro-strong'),
+                blueSoft: getSUIToken('--sui-blue-soft'),
+                greenSoft: getSUIToken('--sui-success-soft'),
+                text: text, muted: muted, border: border
+              };
+            }
+
+            var t = suiChartDefaults();
+            var barCtx = document.getElementById('recipeChartBar');
+            var lineCtx = document.getElementById('recipeChartLine');
+            window._suiChartBar = new Chart(barCtx, {
+              type: 'bar',
+              data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                  label: 'Revenue',
+                  data: [12, 19, 8, 15, 22, 17],
+                  backgroundColor: t.blue,
+                  borderRadius: 4
+                }]
+              },
+              options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+            });
+            window._suiChartLine = new Chart(lineCtx, {
+              type: 'line',
+              data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [
+                  { label: 'Users', data: [65, 78, 90, 81, 96, 105], borderColor: t.blue, backgroundColor: t.blueSoft, fill: true, tension: 0.3 },
+                  { label: 'Sessions', data: [28, 48, 40, 52, 67, 58], borderColor: t.green, backgroundColor: t.greenSoft, fill: true, tension: 0.3 }
+                ]
+              },
+              options: { responsive: true, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true } } }
+            });
+
+            /* Re-render on theme change */
+            var obs = new MutationObserver(function() {
+              var t2 = suiChartDefaults();
+              var bar = window._suiChartBar;
+              bar.data.datasets[0].backgroundColor = t2.blue;
+              bar.update();
+              var line = window._suiChartLine;
+              line.data.datasets[0].borderColor = t2.blue;
+              line.data.datasets[0].backgroundColor = t2.blueSoft;
+              line.data.datasets[1].borderColor = t2.green;
+              line.data.datasets[1].backgroundColor = t2.greenSoft;
+              line.update();
+            });
+            obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+          });
+        </script>
+
+        <div class="sui-mt-3">
+          <p style="font-size:var(--sui-text-small);"><strong>What this recipe provides:</strong> a helper function that reads SUI tokens at runtime and applies them to Chart.js defaults (colours, font, grid lines). Theme-reactive via MutationObserver. <strong>What you bring:</strong> Chart.js from CDN, your chart configurations.</p>
+        </div>
+
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Chart.js Integration Recipe — copy into your project --&gt;
+
+&lt;!-- 1. Load Chart.js (CDN) --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/chart.js" defer&gt;&lt;/script&gt;
+
+&lt;!-- 2. SUI token helper (paste in your JS) --&gt;
+&lt;script&gt;
+  function getSUIToken(name) {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(name).trim();
+  }
+  function suiChartDefaults() {
+    Chart.defaults.color = getSUIToken('--sui-text-muted');
+    Chart.defaults.borderColor = getSUIToken('--sui-border');
+    Chart.defaults.font.family =
+      getSUIToken('--sui-font') || 'Inter, system-ui, sans-serif';
+    return {
+      blue:    getSUIToken('--sui-blue-primary'),
+      green:   getSUIToken('--sui-success-strong'),
+      red:     getSUIToken('--sui-error-strong'),
+      amber:   getSUIToken('--sui-warning-strong'),
+      purple:  getSUIToken('--sui-pro-strong'),
+      blueSoft:  getSUIToken('--sui-blue-soft'),
+      greenSoft: getSUIToken('--sui-success-soft'),
+    };
+  }
+  var t = suiChartDefaults();
+&lt;/script&gt;
+
+&lt;!-- 3. Use token colours in your charts --&gt;
+&lt;canvas id="myChart"&gt;&lt;/canvas&gt;
+&lt;script&gt;
+  new Chart(document.getElementById('myChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar'],
+      datasets: [{
+        label: 'Revenue',
+        data: [12, 19, 8],
+        backgroundColor: t.blue,
+        borderRadius: 4
+      }]
+    }
+  });
+&lt;/script&gt;
+
+&lt;!-- 4. Optional: re-render on theme toggle --&gt;
+&lt;script&gt;
+  new MutationObserver(function() {
+    var t = suiChartDefaults();
+    // Update your chart datasets with new colours, then chart.update()
+  }).observe(document.documentElement,
+    { attributes: true, attributeFilter: ['data-theme'] });
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+
+        <div class="sui-alert sui-alert-info sui-mt-3" role="note">
+          <div class="sui-alert-body">
+            <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Chart.js is not bundled, versioned, or maintained as part of SUI. Chart.js is canvas-based — no CSS overrides needed, just token values passed to the JS config.
+          </div>
+        </div>
+      </div>
+
       <div class="sui-section" id="recipe-document-library">
         <h2>Document Library</h2>
         <p class="sui-text-cap sui-mt-2">Searchable file list with toolbar, metadata, and status indicators. Composes from: <code>sui-toolbar</code>, <code>sui-meta</code>, <code>sui-badge</code>, <code>sui-card</code>, <code>sui-input</code>. Custom CSS: ~3 lines.</p>
@@ -2119,86 +2305,129 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       </div>
 
       <!-- RECIPE: MOBILE APP SHELL -->
-      <div class="sui-section" id="recipe-fab">
-        <h2>Floating Action Bar</h2>
-        <p class="sui-text-cap sui-mt-2">A fixed-position bar that appears when items are selected, showing bulk actions. Composes from: <code>sui-card-shadow</code>, <code>sui-btn</code>, <code>sui-badge</code>, <code>position: fixed</code>. Custom CSS: ~8 lines.</p>
-        <div class="sui-card sui-mt-4" style="position:relative;min-height:200px;overflow:hidden;">
-          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Select items to see the floating bar appear.</p>
-          <div class="sui-flex-col sui-gap-2 sui-mt-3">
-            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1042</label>
-            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1043</label>
-            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1044</label>
-          </div>
-          <div id="recipeFab" class="sui-card sui-card-shadow" role="toolbar" aria-label="Bulk actions"
-               style="display:none;position:absolute;bottom:var(--sui-space-3);left:50%;transform:translateX(-50%);padding:var(--sui-space-2) var(--sui-space-3);z-index:10;white-space:nowrap;">
-            <div class="sui-flex sui-gap-2" style="align-items:center;">
-              <span class="sui-badge sui-badge-info" id="recipeFabCount">0 selected</span>
-              <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"><i data-lucide="download"></i> Export</button>
-              <button class="sui-btn sui-btn-sm sui-btn-ghost" type="button"><i data-lucide="archive"></i> Archive</button>
-              <button class="sui-btn sui-btn-sm sui-btn-danger" type="button"><i data-lucide="trash-2"></i> Delete</button>
-            </div>
+
+      <div class="sui-section" id="recipe-filepond">
+        <h2>FilePond Integration</h2>
+        <p class="sui-text-cap sui-mt-2">SUI-native file uploads using <a href="https://pqina.nl/filepond/" target="_blank" rel="noreferrer">FilePond</a>. Token-based overrides for light/dark mode, complements <code>sui-dropzone</code> with real upload behaviour. This is an <strong>integration recipe</strong> — FilePond is not part of SUI. You bring the library; SUI makes it match.</p>
+
+        <!-- SUI token overrides for FilePond -->
+        <style>
+          /* ── FilePond SUI Integration ──────────────────────────
+             Token-based overrides. Copy this block into your project.
+             Requires: sui-tokens.css + filepond.min.css loaded first.
+          */
+          .filepond--root { font-family: var(--sui-font); }
+          .filepond--panel-root {
+            background-color: var(--sui-bg-elevated);
+            border-radius: var(--sui-radius);
+          }
+          .filepond--drop-label {
+            color: var(--sui-text-secondary);
+            font-size: var(--sui-text-small);
+          }
+          .filepond--label-action {
+            color: var(--sui-blue-primary);
+            text-decoration-color: var(--sui-blue-primary);
+          }
+          .filepond--item-panel {
+            border-radius: var(--sui-radius-sm);
+          }
+          /* Focus ring for keyboard nav */
+          .filepond--root:focus-within .filepond--panel-root {
+            outline: 3px solid var(--sui-blue-soft);
+            outline-offset: 2px;
+          }
+          /* File status colours */
+          [data-filepond-item-state="processing-complete"]
+            .filepond--item-panel {
+            background-color: var(--sui-success-strong);
+          }
+          [data-filepond-item-state*="error"]
+            .filepond--item-panel,
+          [data-filepond-item-state="processing-error"]
+            .filepond--item-panel {
+            background-color: var(--sui-error-strong);
+          }
+        </style>
+
+        <div class="sui-card sui-mt-4">
+          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — drop files or click to browse. Files are not actually uploaded (demo only).</p>
+          <div class="sui-mt-3">
+            <input type="file" class="filepond" id="recipeFilePond" multiple />
           </div>
         </div>
         <script>
-          function recipeFabUpdate() {
-            const checks = document.querySelectorAll('#recipe-fab .sui-checkbox:checked');
-            const bar = document.getElementById('recipeFab');
-            const count = document.getElementById('recipeFabCount');
-            if (checks.length > 0) {
-              bar.style.display = '';
-              count.textContent = checks.length + ' selected';
-            } else {
-              bar.style.display = 'none';
-            }
-          }
+          document.addEventListener('DOMContentLoaded', function() {
+            if (typeof FilePond === 'undefined') return;
+            FilePond.create(document.getElementById('recipeFilePond'), {
+              allowMultiple: true,
+              labelIdle: 'Drag &amp; drop files or <span class="filepond--label-action">Browse</span>',
+              credits: false
+            });
+          });
         </script>
+
+        <div class="sui-mt-3">
+          <p style="font-size:var(--sui-text-small);"><strong>What this recipe provides:</strong> token-based colour overrides (light + dark), SUI border-radius, font family, focus ring, and status colours using SUI semantic tokens. Complements <code>sui-dropzone</code> — use dropzone for CSS-only styling, FilePond when you need real upload behaviour. <strong>What you bring:</strong> FilePond CSS + JS from CDN, your upload endpoint configuration.</p>
+        </div>
+
         <div class="sui-accordion sui-mt-3">
           <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
           <div class="sui-accordion-panel" hidden>
-            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Floating Action Bar — appears when items are selected --&gt;
-&lt;!-- Custom CSS (not part of sui-components.css): --&gt;
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- FilePond Integration Recipe — copy into your project --&gt;
+
+&lt;!-- 1. Load FilePond (CDN) --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.css" /&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.js" defer&gt;&lt;/script&gt;
+
+&lt;!-- 2. SUI token overrides --&gt;
 &lt;style&gt;
-  .fab-bar {
-    position: fixed;
-    bottom: var(--sui-space-4);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
-    padding: var(--sui-space-2) var(--sui-space-3);
-    white-space: nowrap;
-    transition: opacity var(--sui-duration-fast) var(--sui-easing),
-                transform var(--sui-duration-fast) var(--sui-easing);
+  .filepond--root { font-family: var(--sui-font); }
+  .filepond--panel-root {
+    background-color: var(--sui-bg-elevated);
+    border-radius: var(--sui-radius);
   }
-  .fab-bar[hidden] {
-    display: block;
-    opacity: 0;
-    transform: translateX(-50%) translateY(1rem);
-    pointer-events: none;
+  .filepond--drop-label {
+    color: var(--sui-text-secondary);
+    font-size: var(--sui-text-small);
+  }
+  .filepond--label-action {
+    color: var(--sui-blue-primary);
+    text-decoration-color: var(--sui-blue-primary);
+  }
+  .filepond--item-panel {
+    border-radius: var(--sui-radius-sm);
+  }
+  .filepond--root:focus-within .filepond--panel-root {
+    outline: 3px solid var(--sui-blue-soft);
+    outline-offset: 2px;
+  }
+  [data-filepond-item-state="processing-complete"]
+    .filepond--item-panel {
+    background-color: var(--sui-success-strong);
+  }
+  [data-filepond-item-state*="error"]
+    .filepond--item-panel {
+    background-color: var(--sui-error-strong);
   }
 &lt;/style&gt;
 
-&lt;div class="sui-card sui-card-shadow fab-bar" id="bulkBar"
-     role="toolbar" aria-label="Bulk actions" hidden&gt;
-  &lt;div class="sui-flex sui-gap-2" style="align-items:center"&gt;
-    &lt;span class="sui-badge sui-badge-info" id="bulkCount"&gt;0 selected&lt;/span&gt;
-    &lt;button class="sui-btn sui-btn-sm sui-btn-primary"&gt;
-      &lt;i data-lucide="download" aria-hidden="true"&gt;&lt;/i&gt; Export
-    &lt;/button&gt;
-    &lt;button class="sui-btn sui-btn-sm sui-btn-danger"&gt;
-      &lt;i data-lucide="trash-2" aria-hidden="true"&gt;&lt;/i&gt; Delete
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+&lt;!-- 3. Use with a file input --&gt;
+&lt;input type="file" class="filepond" id="myUpload" multiple /&gt;
 
 &lt;script&gt;
-  // Wire up your selection logic:
-  function updateFab(selectedCount) {
-    const bar = document.getElementById('bulkBar');
-    const count = document.getElementById('bulkCount');
-    bar.hidden = selectedCount === 0;
-    count.textContent = selectedCount + ' selected';
-  }
+  FilePond.create(document.getElementById('myUpload'), {
+    allowMultiple: true,
+    server: '/api/upload', // your endpoint
+    credits: false
+  });
 &lt;/script&gt;</pre>
+          </div>
+        </div>
+
+        <div class="sui-alert sui-alert-info sui-mt-3" role="note">
+          <div class="sui-alert-body">
+            <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. FilePond is not bundled, versioned, or maintained as part of SUI. Tested with FilePond v4.32.11.
           </div>
         </div>
       </div>
@@ -2223,6 +2452,11 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           }
           .flatpickr-calendar::before,
           .flatpickr-calendar::after { display: none; }
+
+          /* Hide browser-injected calendar picker icons on Flatpickr inputs */
+          .flatpickr-input::-webkit-calendar-picker-indicator,
+          input.flatpickr-input::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
+          .flatpickr-input::-webkit-inner-spin-button { display: none; }
 
           .flatpickr-months .flatpickr-month,
           .flatpickr-current-month .flatpickr-monthDropdown-months {
@@ -2317,15 +2551,15 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <div class="sui-flex sui-gap-4 sui-mt-3" style="flex-wrap:wrap;align-items:end;">
             <div>
               <label class="sui-label">Select date</label>
-              <input type="text" class="sui-input" id="recipeFlatpickrDate" placeholder="Pick a date…" style="width:220px;" />
+              <input type="text" class="sui-input" id="recipeFlatpickrDate" placeholder="Pick a date…" autocomplete="off" style="width:220px;" />
             </div>
             <div>
               <label class="sui-label">Date range</label>
-              <input type="text" class="sui-input" id="recipeFlatpickrRange" placeholder="Start → End" style="width:260px;" />
+              <input type="text" class="sui-input" id="recipeFlatpickrRange" placeholder="Start → End" autocomplete="off" style="width:260px;" />
             </div>
             <div>
               <label class="sui-label">Date + time</label>
-              <input type="text" class="sui-input" id="recipeFlatpickrTime" placeholder="Pick date and time…" style="width:260px;" />
+              <input type="text" class="sui-input" id="recipeFlatpickrTime" placeholder="Pick date and time…" autocomplete="off" style="width:260px;" />
             </div>
           </div>
         </div>
@@ -2363,6 +2597,8 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
   }
   .flatpickr-calendar::before,
   .flatpickr-calendar::after { display: none; }
+  /* Hide browser calendar picker icons */
+  .flatpickr-input::-webkit-calendar-picker-indicator { display: none; }
   .flatpickr-months .flatpickr-month,
   .flatpickr-current-month .flatpickr-monthDropdown-months {
     background: transparent;
@@ -2457,6 +2693,90 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
           <div class="sui-alert-body">
             <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Flatpickr is not bundled, versioned, or maintained as part of SUI. Tested with Flatpickr v4.6.13.
+          </div>
+        </div>
+      </div>
+
+      <div class="sui-section" id="recipe-fab">
+        <h2>Floating Action Bar</h2>
+        <p class="sui-text-cap sui-mt-2">A fixed-position bar that appears when items are selected, showing bulk actions. Composes from: <code>sui-card-shadow</code>, <code>sui-btn</code>, <code>sui-badge</code>, <code>position: fixed</code>. Custom CSS: ~8 lines.</p>
+        <div class="sui-card sui-mt-4" style="position:relative;min-height:200px;overflow:hidden;">
+          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Select items to see the floating bar appear.</p>
+          <div class="sui-flex-col sui-gap-2 sui-mt-3">
+            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1042</label>
+            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1043</label>
+            <label class="sui-checkbox-label"><input type="checkbox" class="sui-checkbox" onchange="recipeFabUpdate()"> Invoice #1044</label>
+          </div>
+          <div id="recipeFab" class="sui-card sui-card-shadow" role="toolbar" aria-label="Bulk actions"
+               style="display:none;position:absolute;bottom:var(--sui-space-3);left:50%;transform:translateX(-50%);padding:var(--sui-space-2) var(--sui-space-3);z-index:10;white-space:nowrap;">
+            <div class="sui-flex sui-gap-2" style="align-items:center;">
+              <span class="sui-badge sui-badge-info" id="recipeFabCount">0 selected</span>
+              <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"><i data-lucide="download"></i> Export</button>
+              <button class="sui-btn sui-btn-sm sui-btn-ghost" type="button"><i data-lucide="archive"></i> Archive</button>
+              <button class="sui-btn sui-btn-sm sui-btn-danger" type="button"><i data-lucide="trash-2"></i> Delete</button>
+            </div>
+          </div>
+        </div>
+        <script>
+          function recipeFabUpdate() {
+            const checks = document.querySelectorAll('#recipe-fab .sui-checkbox:checked');
+            const bar = document.getElementById('recipeFab');
+            const count = document.getElementById('recipeFabCount');
+            if (checks.length > 0) {
+              bar.style.display = '';
+              count.textContent = checks.length + ' selected';
+            } else {
+              bar.style.display = 'none';
+            }
+          }
+        </script>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Floating Action Bar — appears when items are selected --&gt;
+&lt;!-- Custom CSS (not part of sui-components.css): --&gt;
+&lt;style&gt;
+  .fab-bar {
+    position: fixed;
+    bottom: var(--sui-space-4);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    padding: var(--sui-space-2) var(--sui-space-3);
+    white-space: nowrap;
+    transition: opacity var(--sui-duration-fast) var(--sui-easing),
+                transform var(--sui-duration-fast) var(--sui-easing);
+  }
+  .fab-bar[hidden] {
+    display: block;
+    opacity: 0;
+    transform: translateX(-50%) translateY(1rem);
+    pointer-events: none;
+  }
+&lt;/style&gt;
+
+&lt;div class="sui-card sui-card-shadow fab-bar" id="bulkBar"
+     role="toolbar" aria-label="Bulk actions" hidden&gt;
+  &lt;div class="sui-flex sui-gap-2" style="align-items:center"&gt;
+    &lt;span class="sui-badge sui-badge-info" id="bulkCount"&gt;0 selected&lt;/span&gt;
+    &lt;button class="sui-btn sui-btn-sm sui-btn-primary"&gt;
+      &lt;i data-lucide="download" aria-hidden="true"&gt;&lt;/i&gt; Export
+    &lt;/button&gt;
+    &lt;button class="sui-btn sui-btn-sm sui-btn-danger"&gt;
+      &lt;i data-lucide="trash-2" aria-hidden="true"&gt;&lt;/i&gt; Delete
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Wire up your selection logic:
+  function updateFab(selectedCount) {
+    const bar = document.getElementById('bulkBar');
+    const count = document.getElementById('bulkCount');
+    bar.hidden = selectedCount === 0;
+    count.textContent = selectedCount + ' selected';
+  }
+&lt;/script&gt;</pre>
           </div>
         </div>
       </div>
@@ -2975,6 +3295,186 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
       </div>
 
       <!-- RECIPE: BUTTON GROUP -->
+
+      <div class="sui-section" id="recipe-quill">
+        <h2>Quill Integration</h2>
+        <p class="sui-text-cap sui-mt-2">SUI-native rich text editing using <a href="https://quilljs.com" target="_blank" rel="noreferrer">Quill</a> (Snow theme). Token-based overrides for light/dark mode, focus ring, SUI font family. This is an <strong>integration recipe</strong> — Quill is not part of SUI. You bring the library; SUI makes it match.</p>
+
+        <!-- SUI token overrides for Quill -->
+        <style>
+          /* ── Quill SUI Integration ────────────────────────────
+             Token-based overrides. Copy this block into your project.
+             Requires: sui-tokens.css + quill.snow.css loaded first.
+          */
+          .ql-toolbar.ql-snow {
+            border: 1px solid var(--sui-border);
+            border-radius: var(--sui-radius) var(--sui-radius) 0 0;
+            background: var(--sui-bg-elevated);
+            font-family: var(--sui-font);
+          }
+          .ql-container.ql-snow {
+            border: 1px solid var(--sui-border);
+            border-top: none;
+            border-radius: 0 0 var(--sui-radius) var(--sui-radius);
+            font-family: var(--sui-font);
+            font-size: var(--sui-text-body);
+            color: var(--sui-text-primary);
+            background: var(--sui-bg-card);
+          }
+          .ql-editor {
+            min-height: 120px;
+            color: var(--sui-text-primary);
+          }
+          .ql-editor.ql-blank::before {
+            color: var(--sui-text-muted);
+            font-style: normal;
+          }
+          .ql-snow .ql-stroke {
+            stroke: var(--sui-text-secondary);
+          }
+          .ql-snow .ql-fill,
+          .ql-snow .ql-stroke.ql-fill {
+            fill: var(--sui-text-secondary);
+          }
+          .ql-snow .ql-picker {
+            color: var(--sui-text-secondary);
+          }
+          .ql-snow .ql-picker-options {
+            background: var(--sui-bg-card);
+            border-color: var(--sui-border);
+            border-radius: var(--sui-radius-sm);
+            box-shadow: var(--sui-shadow-lg);
+          }
+          .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label,
+          .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+            border-color: var(--sui-border);
+          }
+          .ql-snow.ql-toolbar button:hover,
+          .ql-snow.ql-toolbar button:focus,
+          .ql-snow.ql-toolbar .ql-picker-label:hover,
+          .ql-snow.ql-toolbar button.ql-active,
+          .ql-snow.ql-toolbar .ql-picker-label.ql-active {
+            color: var(--sui-blue-primary);
+          }
+          .ql-snow.ql-toolbar button:hover .ql-stroke,
+          .ql-snow.ql-toolbar button:focus .ql-stroke,
+          .ql-snow.ql-toolbar button.ql-active .ql-stroke {
+            stroke: var(--sui-blue-primary);
+          }
+          .ql-snow.ql-toolbar button:hover .ql-fill,
+          .ql-snow.ql-toolbar button:focus .ql-fill,
+          .ql-snow.ql-toolbar button.ql-active .ql-fill {
+            fill: var(--sui-blue-primary);
+          }
+          /* Focus ring — matches SUI's canonical pattern */
+          .ql-container.ql-snow:focus-within {
+            outline: 3px solid var(--sui-blue-soft);
+            outline-offset: 2px;
+            border-radius: 0 0 var(--sui-radius) var(--sui-radius);
+          }
+        </style>
+
+        <div class="sui-card sui-mt-4">
+          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — toggle the theme to see dark mode. Full toolbar with formatting options.</p>
+          <div class="sui-mt-3" id="recipeQuillEditor">
+            <p>Start typing here — this is a <strong>Quill</strong> rich text editor styled with SUI tokens.</p>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            if (typeof Quill === 'undefined') return;
+            new Quill('#recipeQuillEditor', {
+              theme: 'snow',
+              placeholder: 'Write something…',
+              modules: {
+                toolbar: [
+                  [{ header: [2, 3, false] }],
+                  ['bold', 'italic', 'underline', 'strike'],
+                  [{ list: 'ordered' }, { list: 'bullet' }],
+                  ['link', 'blockquote', 'code-block'],
+                  ['clean']
+                ]
+              }
+            });
+          });
+        </script>
+
+        <div class="sui-mt-3">
+          <p style="font-size:var(--sui-text-small);"><strong>What this recipe provides:</strong> token-based overrides for toolbar, editor surface, picker dropdowns, active states, and focus ring. Both themes. <strong>What you bring:</strong> Quill CSS + JS from CDN, your editor configuration.</p>
+        </div>
+
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Quill Integration Recipe — copy into your project --&gt;
+
+&lt;!-- 1. Load Quill (CDN) --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css"
+      rel="stylesheet" /&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"
+        defer&gt;&lt;/script&gt;
+
+&lt;!-- 2. SUI token overrides --&gt;
+&lt;style&gt;
+  .ql-toolbar.ql-snow {
+    border: 1px solid var(--sui-border);
+    border-radius: var(--sui-radius) var(--sui-radius) 0 0;
+    background: var(--sui-bg-elevated);
+    font-family: var(--sui-font);
+  }
+  .ql-container.ql-snow {
+    border: 1px solid var(--sui-border);
+    border-top: none;
+    border-radius: 0 0 var(--sui-radius) var(--sui-radius);
+    font-family: var(--sui-font);
+    color: var(--sui-text-primary);
+    background: var(--sui-bg-card);
+  }
+  .ql-editor { min-height: 120px; color: var(--sui-text-primary); }
+  .ql-editor.ql-blank::before {
+    color: var(--sui-text-muted);
+    font-style: normal;
+  }
+  .ql-snow .ql-stroke { stroke: var(--sui-text-secondary); }
+  .ql-snow .ql-fill { fill: var(--sui-text-secondary); }
+  .ql-snow .ql-picker { color: var(--sui-text-secondary); }
+  .ql-snow .ql-picker-options {
+    background: var(--sui-bg-card);
+    border-color: var(--sui-border);
+    border-radius: var(--sui-radius-sm);
+    box-shadow: var(--sui-shadow-lg);
+  }
+  .ql-snow.ql-toolbar button:hover .ql-stroke,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke {
+    stroke: var(--sui-blue-primary);
+  }
+  .ql-snow.ql-toolbar button:hover .ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-fill {
+    fill: var(--sui-blue-primary);
+  }
+  .ql-container.ql-snow:focus-within {
+    outline: 3px solid var(--sui-blue-soft);
+    outline-offset: 2px;
+  }
+&lt;/style&gt;
+
+&lt;!-- 3. Create the editor --&gt;
+&lt;div id="myEditor"&gt;
+  &lt;p&gt;Start typing…&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  new Quill('#myEditor', { theme: 'snow' });
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+
+        <div class="sui-alert sui-alert-info sui-mt-3" role="note">
+          <div class="sui-alert-body">
+            <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Quill is not bundled, versioned, or maintained as part of SUI. Tested with Quill v2.0.3. <strong>Note:</strong> Quill is chosen for CDN-first / zero-build compatibility. If you are in a bundler or React ecosystem, <a href="https://tiptap.dev" target="_blank" rel="noreferrer">TipTap</a> or <a href="https://lexical.dev" target="_blank" rel="noreferrer">Lexical</a> are stronger choices.
+          </div>
+        </div>
+      </div>
+
       <div class="sui-section" id="recipe-settings">
         <h2>Settings / Preferences</h2>
         <p class="sui-text-cap sui-mt-2">Vertical stack of labelled sections with controls. Composes from: <code>sui-card</code>, <code>sui-toggle</code>, <code>sui-segmented</code>, <code>sui-input</code>, <code>sui-divider</code>. Custom CSS: ~4 lines.</p>
@@ -3235,6 +3735,190 @@ search.addEventListener('input', () =&gt; {
       </div>
 
       <!-- RECIPE: SPLIT PANE / MASTER-DETAIL -->
+
+      <div class="sui-section" id="recipe-tom-select">
+        <h2>Tom Select Integration</h2>
+        <p class="sui-text-cap sui-mt-2">SUI-native enhanced selects using <a href="https://tom-select.js.org" target="_blank" rel="noreferrer">Tom Select</a>. Token-based overrides for light/dark mode, tagging, autocomplete. This is an <strong>integration recipe</strong> — Tom Select is not part of SUI. You bring the library; SUI makes it match.</p>
+
+        <!-- SUI token overrides for Tom Select -->
+        <style>
+          /* ── Tom Select SUI Integration ──────────────────────
+             Token-based overrides. Copy this block into your project.
+             Requires: sui-tokens.css + tom-select.css loaded first.
+          */
+          .ts-control {
+            border: 1px solid var(--sui-border);
+            border-radius: var(--sui-radius-sm);
+            background: var(--sui-bg-card);
+            color: var(--sui-text-primary);
+            font-family: var(--sui-font);
+            padding: 6px 8px;
+            min-height: 38px;
+          }
+          .full .ts-control { background: var(--sui-bg-card); }
+          .ts-control > input { color: var(--sui-text-primary); }
+          .ts-control > input::placeholder { color: var(--sui-text-muted); }
+          .ts-control .item { color: var(--sui-text-primary); }
+          .disabled .ts-control { background: var(--sui-bg-elevated); }
+          .focus .ts-control {
+            border-color: var(--sui-blue-primary);
+            box-shadow: 0 0 0 3px var(--sui-blue-soft);
+          }
+          .ts-wrapper.multi .ts-control > div {
+            background: var(--sui-blue-soft);
+            color: var(--sui-text-primary);
+            border-radius: var(--sui-radius-sm);
+            font-size: var(--sui-text-meta);
+            padding: 2px 8px;
+          }
+          .ts-wrapper.multi .ts-control > div.active {
+            background: var(--sui-blue-primary);
+            color: #fff;
+          }
+
+          .ts-dropdown {
+            border: 1px solid var(--sui-border);
+            border-radius: 0 0 var(--sui-radius-sm) var(--sui-radius-sm);
+            background: var(--sui-bg-card);
+            box-shadow: var(--sui-shadow-lg);
+            color: var(--sui-text-primary);
+            z-index: 9999;
+          }
+          .ts-dropdown .active {
+            background: var(--sui-bg-elevated);
+            color: var(--sui-text-primary);
+          }
+          .ts-dropdown .option {
+            padding: 8px 12px;
+          }
+          .ts-dropdown [data-selectable] .highlight {
+            background: var(--sui-blue-soft);
+          }
+          .ts-dropdown .optgroup-header {
+            color: var(--sui-text-muted);
+            font-size: var(--sui-text-meta);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 8px 12px 4px;
+          }
+
+          /* Caret */
+          .ts-control::after {
+            border-color: var(--sui-text-muted) transparent transparent;
+          }
+        </style>
+
+        <div class="sui-card sui-mt-4">
+          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — toggle the theme to see dark mode. Try keyboard navigation and typing to filter.</p>
+          <div class="sui-flex sui-gap-4 sui-mt-3" style="flex-wrap:wrap;align-items:start;">
+            <div style="flex:1;min-width:220px;">
+              <label class="sui-label" for="recipeTomSingle">Single select</label>
+              <select id="recipeTomSingle" aria-label="Single select">
+                <option value="">Choose a department…</option>
+                <option value="eng">Engineering</option>
+                <option value="des">Design</option>
+                <option value="mkt">Marketing</option>
+                <option value="sal">Sales</option>
+                <option value="sup">Support</option>
+              </select>
+            </div>
+            <div style="flex:1;min-width:220px;">
+              <label class="sui-label" for="recipeTomMulti">Multi-select with tagging</label>
+              <select id="recipeTomMulti" multiple aria-label="Multi-select with tagging">
+                <option value="js" selected>JavaScript</option>
+                <option value="py">Python</option>
+                <option value="rs">Rust</option>
+                <option value="go">Go</option>
+                <option value="ts" selected>TypeScript</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            if (typeof TomSelect === 'undefined') return;
+            new TomSelect('#recipeTomSingle', { allowEmptyOption: true });
+            new TomSelect('#recipeTomMulti', { plugins: ['remove_button'], create: true });
+            /* Accessibility: label the generated search inputs */
+            var tsInputs = document.querySelectorAll('#recipeTomSingle-ts-control input, #recipeTomMulti-ts-control input');
+            tsInputs.forEach(function(inp) {
+              if (!inp.getAttribute('aria-label')) inp.setAttribute('aria-label', 'Type to search');
+            });
+          });
+        </script>
+
+        <div class="sui-mt-3">
+          <p style="font-size:var(--sui-text-small);"><strong>What this recipe provides:</strong> token-based overrides for the control, dropdown, tags, active/hover states, option group headers, and focus ring. Both themes. <strong>What you bring:</strong> Tom Select CSS + JS from CDN, your select configuration.</p>
+        </div>
+
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Tom Select Integration Recipe — copy into your project --&gt;
+
+&lt;!-- 1. Load Tom Select (CDN) --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/tom-select@2.5.1/dist/css/tom-select.css"
+      rel="stylesheet" /&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/tom-select@2.5.1/dist/js/tom-select.complete.min.js"
+        defer&gt;&lt;/script&gt;
+
+&lt;!-- 2. SUI token overrides --&gt;
+&lt;style&gt;
+  .ts-control {
+    border: 1px solid var(--sui-border);
+    border-radius: var(--sui-radius-sm);
+    background: var(--sui-bg-card);
+    color: var(--sui-text-primary);
+    font-family: var(--sui-font);
+    min-height: 38px;
+  }
+  .full .ts-control { background: var(--sui-bg-card); }
+  .ts-control .item { color: var(--sui-text-primary); }
+  .focus .ts-control {
+    border-color: var(--sui-blue-primary);
+    box-shadow: 0 0 0 3px var(--sui-blue-soft);
+  }
+  .ts-wrapper.multi .ts-control > div {
+    background: var(--sui-blue-soft);
+    color: var(--sui-text-primary);
+    border-radius: var(--sui-radius-sm);
+  }
+  .ts-dropdown {
+    border: 1px solid var(--sui-border);
+    background: var(--sui-bg-card);
+    box-shadow: var(--sui-shadow-lg);
+    color: var(--sui-text-primary);
+    z-index: 9999;
+  }
+  .ts-dropdown .active {
+    background: var(--sui-bg-elevated);
+    color: var(--sui-text-primary);
+  }
+  .ts-dropdown [data-selectable] .highlight {
+    background: var(--sui-blue-soft);
+  }
+&lt;/style&gt;
+
+&lt;!-- 3. Use with a native select --&gt;
+&lt;label class="sui-label"&gt;Choose a department&lt;/label&gt;
+&lt;select id="mySelect"&gt;
+  &lt;option value=""&gt;Select…&lt;/option&gt;
+  &lt;option value="eng"&gt;Engineering&lt;/option&gt;
+  &lt;option value="des"&gt;Design&lt;/option&gt;
+&lt;/select&gt;
+&lt;script&gt;
+  new TomSelect('#mySelect');
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+
+        <div class="sui-alert sui-alert-info sui-mt-3" role="note">
+          <div class="sui-alert-body">
+            <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Tom Select is not bundled, versioned, or maintained as part of SUI. Tested with Tom Select v2.5.1.
+          </div>
+        </div>
+      </div>
     </section>
     <footer class="sui-footer">
       <div class="sui-footer-links">
@@ -3246,6 +3930,7 @@ search.addEventListener('input', () =&gt; {
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->
+
   </main>
 
   <!-- ===== MODAL (outside main for stacking context) ===== -->
