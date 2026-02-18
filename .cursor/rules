@@ -25,7 +25,7 @@ SUI is the **shell** — containers, chrome, interactive primitives, typography,
 - Script tags use `defer`
 - Borders are the default card separation. Shadows are opt-in (`sui-card-shadow`)
 
-**SUI does NOT ship:** icons, charts, data visualisation, drag-and-drop, date pickers, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent.
+**SUI does NOT ship:** icons, charts, data visualisation, drag-and-drop, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent. For date pickers, see the Flatpickr integration recipe — SUI provides token overrides, you bring the library.
 
 ---
 
@@ -151,8 +151,8 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - `SUI.sidenav.open(selectorOrEl)` / `SUI.sidenav.close(selectorOrEl)` / `SUI.sidenav.toggle(selectorOrEl)`
 - `SUI.sidenav.collapseAll(selectorOrEl)` / `SUI.sidenav.expandAll(selectorOrEl)`
 - `SUI.toast.success(title, message)` / `SUI.toast.error(title, message)` / `SUI.toast.warning(title, message)` / `SUI.toast.info(title, message)`
-- `SUI.tabs.init()` — Auto-wires `data-tab`/`data-view` buttons. No public imperative API (v2.5.1 planned).
-- `SUI.accordion.init()` — Auto-wires accordion triggers. No public imperative API (v2.5.1 planned).
+- `SUI.tabs.init()` — Auto-wires `data-tab`/`data-view` buttons. `SUI.tabs.activate(tabElement)` for programmatic switching.
+- `SUI.accordion.init()` — Auto-wires accordion triggers. `SUI.accordion.toggle(trigger)`, `.expandAll(container)`, `.collapseAll(container)`.
 - `SUI.tooltip.init()` — Hover/focus positioning. CSS-driven, no imperative show/hide.
 - `SUI.segmented.init()` — Auto-wires segment selection. No public imperative API.
 
@@ -244,6 +244,7 @@ Check these before building custom patterns:
 | Master-Detail | `sui-table-interactive` row click → `sui-panel` detail |
 | Notification Centre | `sui-panel` + stacked `sui-card` + `sui-badge` |
 | Floating Action Bar | `sui-card-shadow` + `sui-btn` + `sui-badge` + `position: fixed` |
+| Flatpickr Integration | SUI token overrides for Flatpickr datepicker (light/dark). You bring Flatpickr CDN |
 
 ### Common Names → SUI Solutions
 
@@ -253,7 +254,7 @@ Check these before building custom patterns:
 | Modal / Popup / Dialog | `sui-dialog` with native `<dialog>` | Component |
 | Drawer / Slide-over | `sui-panel` (right) or `sui-sheet` (bottom) | Component |
 | Toast / Snackbar | `SUI.toast.success/error/warning/info()` | JS API |
-| Tabs / Tab bar | `sui-nav` + `[role="tablist"]` + `data-tab`/`data-view` — auto-init via `SUI.tabs.init()` | Component |
+| Tabs / Tab bar | `sui-nav` + `[role="tablist"]` + `data-tab`/`data-view` — `SUI.tabs.activate(el)` for programmatic switching | Component |
 | Wizard / Steps | `sui-stepper` + `sui-step` + `sui-step-indicator` | Component |
 | Activity feed / Log | `sui-timeline` + `sui-timeline-item` | Component |
 | Search highlight | `sui-mark` + `sui-mark-current` | Component |
@@ -263,6 +264,7 @@ Check these before building custom patterns:
 | Empty state | `sui-empty` + `sui-empty-icon/title/text` | Component |
 | File upload area | `sui-dropzone` | Component |
 | App shell / SPA layout | `sui-screen` + `sui-screen-header/body/footer` | Component |
+| Date picker / Calendar | Flatpickr integration recipe — SUI token overrides, not a native component | Recipe |
 | Kanban / Board | `sui-flex-nowrap` + `sui-scroll-x` + `sui-card` | Recipe |
 | Master-Detail / Inbox | `sui-table-interactive` row click → `sui-panel` detail | Recipe |
 | Push layout | CSS grid toggle resizing main content | Recipe |

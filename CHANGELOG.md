@@ -4,6 +4,23 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.5.1] — 2026-02-18
+
+### Added
+
+- **`SUI.tabs.activate(tabElement)`** — Programmatic tab switching. Pass a `.sui-tab` button element to activate its tab and show its associated panel. Works with scoped tabs (`data-sui-tabs`). Closes the last API gap: every interactive component now has a public imperative API.
+- **`SUI.accordion.toggle(trigger)`** — Programmatic accordion toggle. Also adds `expandAll(container)` and `collapseAll(container)` for bulk operations, matching the sidenav groups pattern.
+- **`window.SUI` global exposure** — `const SUI` at top-level script scope creates a lexical binding but not a `window` property (ES6 spec). Added `window.SUI = SUI;` after the IIFE so defensive checks (`if (window.SUI)`), test frameworks (Selenium/Playwright), and AI-generated code all work. Identified by ChatGPT, confirmed by Gemini.
+- **Flatpickr integration recipe** — First "integration recipe": token-based CSS overrides that make Flatpickr match SUI in both light and dark mode. Includes focus-visible ring (keyboard nav), z-index stacking, and `appendTo: document.body` for clipping prevention. Live demo with date, range, and datetime pickers. Copy-paste `<style>` block. Flatpickr is not bundled — you bring the library, SUI makes it match. Tested with v4.6.13.
+
+### Fixed
+
+- **Init count accuracy** — Console log now counts tabs (`.sui-nav[aria-label]`) and tooltips (`.sui-tooltip`). Dropdown selector corrected from `[data-sui-dropdown-trigger]` to `.sui-dropdown` to match what `init()` actually targets.
+- **README bundle size** — Updated from "under 90KB" to "under 95KB" (actual: 91.6KB minified).
+- **`preflight.js` encoding** — All 38 mojibake lines in decorative characters (section dividers, pass/fail markers) fixed with byte-level replacements. Terminal output now renders clean Unicode.
+
+---
+
 ## [2.5.0] — 2026-02-18
 
 ### Added

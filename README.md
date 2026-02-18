@@ -129,7 +129,7 @@ Paste one of the [AI prompts](#ai-integration) into any coding assistant. The pr
 | `sui-components.css` | Component classes built from tokens | ~60KB | Yes |
 | `sui.js` | Interactive behaviours (modals, toasts, dropdowns, sheets, panels) | ~23KB | **No** |
 
-**Core:** under 90KB (tokens + components + JS). Zero runtime dependencies.
+**Core:** under 95KB (tokens + components + JS). Zero runtime dependencies.
 
 CSS handles all appearance. JS adds interactivity for modals, toasts, dropdowns, tooltips, accordion, sheets, sidenav, and panels. Components render correctly without JS — they just won't open/close/animate.
 
@@ -651,6 +651,10 @@ SUI.sidenav.close('#id')                       // Close sidenav
 SUI.sidenav.toggle('#id')                      // Toggle sidenav
 SUI.sidenav.collapseAll('#id')                 // Collapse all groups
 SUI.sidenav.expandAll('#id')                   // Expand all groups
+SUI.tabs.activate(tabElement)                  // Programmatic tab switch
+SUI.accordion.toggle(triggerElement)           // Toggle accordion section
+SUI.accordion.expandAll(containerElement)      // Expand all sections
+SUI.accordion.collapseAll(containerElement)    // Collapse all sections
 SUI.toast.success('Saved!', 'Details here')    // Auto-dismiss, stackable
 SUI.toast.error('Failed', 'Try again')
 SUI.dropdown.toggle(element)                   // Click toggle, outside-click close

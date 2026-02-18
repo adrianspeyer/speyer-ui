@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "2.5.0",
+    "version": "2.5.1",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -42,6 +42,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Flatpickr — loaded for integration recipe demo only (not part of SUI) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
   <style>
     /* Tab section headings demoted to H2 for SEO (single H1 per page) but keep H1 visual size */
     .sui-section-head h2 { font-size: 2em; margin-block: 0.67em; }
@@ -84,7 +87,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.5.0</span>
+          <span class="sui-version-pill">v2.5.1</span>
         </div>
       </div>
 
@@ -184,6 +187,7 @@
             <a href="#recipe-button-group" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="radio options select toggle">Button Group</a>
             <a href="#recipe-document-library" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="file list table download">Document Library</a>
             <a href="#recipe-fab" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="floating action bar bulk toolbar fixed selection">Floating Action Bar</a>
+            <a href="#recipe-flatpickr" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="datepicker date picker calendar date range time flatpickr integration third-party"><i data-lucide="calendar" style="width:14px;height:14px;margin-right:4px;vertical-align:-2px;opacity:.5"></i>Flatpickr</a>
             <a href="#recipe-inline-edit" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="click edit save cancel field">Inline Edit</a>
             <a href="#recipe-kanban" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="board pipeline columns drag trello">Kanban Board</a>
             <a href="#recipe-master-detail" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="inbox preview crm email helpdesk">Master-Detail</a>
@@ -1671,8 +1675,8 @@ CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt; with defer.
 Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
-Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Sidenav: sui-sidenav with collapsible groups (sui-sidenav-group-toggle + aria-expanded + aria-controls). Panel: sui-panel (slides from right, --sui-panel-width, sui-panel-no-backdrop). SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators), sui-table-stack (card stacking at tablet), sui-table-sticky (sticky thead), sui-table-dense (compact). Input with button: sui-input-action. Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
-CRITICAL: Before building custom CSS, check if a recipe exists. SUI composes patterns like Kanban (flex-nowrap + scroll-x + card), Master-Detail (table-interactive + panel), Notification Panel (panel + card + badge), Floating Action Bar (card-shadow + btn + fixed position), and 12+ more. Full recipe list and comprehensive AI reference: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
+Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Sidenav: sui-sidenav with collapsible groups (sui-sidenav-group-toggle + aria-expanded + aria-controls). Panel: sui-panel (slides from right, --sui-panel-width, sui-panel-no-backdrop). SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators), sui-table-stack (card stacking at tablet), sui-table-sticky (sticky thead), sui-table-dense (compact). Input with button: sui-input-action. Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. SUI.tabs.activate(tabElement) for programmatic switching. Accordion: SUI.accordion.toggle(trigger), .expandAll(container), .collapseAll(container). Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
+CRITICAL: Before building custom CSS, check if a recipe exists. SUI composes patterns like Kanban (flex-nowrap + scroll-x + card), Master-Detail (table-interactive + panel), Notification Panel (panel + card + badge), Floating Action Bar (card-shadow + btn + fixed position), Flatpickr Integration (SUI token overrides for date pickers), and 13+ more. Full recipe list and comprehensive AI reference: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
 Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -2195,6 +2199,264 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     count.textContent = selectedCount + ' selected';
   }
 &lt;/script&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="sui-section" id="recipe-flatpickr">
+        <h2>Flatpickr Integration <span class="sui-badge sui-badge-new sui-badge-sm">v2.5.1</span></h2>
+        <p class="sui-text-cap sui-mt-2">SUI-native datepicker using <a href="https://flatpickr.js.org" target="_blank" rel="noreferrer">Flatpickr</a>. Token-based overrides for light/dark mode, accessible keyboard nav, zero custom CSS needed. This is an <strong>integration recipe</strong> — Flatpickr is not part of SUI. You bring the library; SUI makes it match.</p>
+
+        <!-- SUI token overrides for Flatpickr -->
+        <style>
+          /* ── Flatpickr SUI Integration ─────────────────────────────
+             Token-based overrides. Copy this block into your project.
+             Requires: sui-tokens.css + flatpickr.min.css loaded first.
+          */
+          .flatpickr-calendar {
+            background: var(--sui-bg-card);
+            border: 1px solid var(--sui-border);
+            border-radius: var(--sui-radius);
+            box-shadow: var(--sui-shadow-lg);
+            font-family: var(--sui-font);
+            color: var(--sui-text-primary);
+          }
+          .flatpickr-calendar::before,
+          .flatpickr-calendar::after { display: none; }
+
+          .flatpickr-months .flatpickr-month,
+          .flatpickr-current-month .flatpickr-monthDropdown-months {
+            background: transparent;
+            color: var(--sui-text-primary);
+            fill: var(--sui-text-primary);
+          }
+          .flatpickr-months .flatpickr-prev-month,
+          .flatpickr-months .flatpickr-next-month {
+            color: var(--sui-text-secondary);
+            fill: var(--sui-text-secondary);
+          }
+          .flatpickr-months .flatpickr-prev-month:hover,
+          .flatpickr-months .flatpickr-next-month:hover {
+            color: var(--sui-text-primary);
+          }
+          .flatpickr-months .flatpickr-prev-month:hover svg,
+          .flatpickr-months .flatpickr-next-month:hover svg {
+            fill: var(--sui-blue-primary);
+          }
+          .flatpickr-current-month input.cur-year { color: var(--sui-text-primary); }
+
+          .flatpickr-weekdays { background: transparent; }
+          .flatpickr-weekday {
+            color: var(--sui-text-muted);
+            font-weight: 600;
+            font-size: var(--sui-text-meta);
+          }
+
+          .flatpickr-day {
+            color: var(--sui-text-primary);
+            border-radius: var(--sui-radius-sm);
+          }
+          .flatpickr-day:hover {
+            background: var(--sui-bg-elevated);
+            border-color: var(--sui-bg-elevated);
+          }
+          .flatpickr-day.today {
+            border-color: var(--sui-blue-primary);
+            color: var(--sui-blue-primary);
+          }
+          .flatpickr-day.today:hover {
+            background: var(--sui-blue-primary);
+            border-color: var(--sui-blue-primary);
+            color: #fff;
+          }
+          .flatpickr-day.selected,
+          .flatpickr-day.selected:hover {
+            background: var(--sui-btn-primary-bg);
+            border-color: var(--sui-btn-primary-bg);
+            color: #fff;
+          }
+          .flatpickr-day.flatpickr-disabled,
+          .flatpickr-day.prevMonthDay,
+          .flatpickr-day.nextMonthDay {
+            color: var(--sui-text-muted);
+          }
+          .flatpickr-day.inRange {
+            background: var(--sui-blue-soft);
+            border-color: var(--sui-blue-soft);
+            color: var(--sui-text-primary);
+          }
+
+          .flatpickr-time { border-top: 1px solid var(--sui-border); }
+          .flatpickr-time input,
+          .flatpickr-time .flatpickr-am-pm {
+            color: var(--sui-text-primary);
+          }
+          .flatpickr-time input:hover,
+          .flatpickr-time .flatpickr-am-pm:hover,
+          .numInputWrapper:hover {
+            background: var(--sui-bg-elevated);
+          }
+
+          /* Focus ring — matches SUI's canonical pattern */
+          .flatpickr-day:focus {
+            outline: 3px solid var(--sui-blue-soft);
+            outline-offset: 2px;
+          }
+          .flatpickr-months .flatpickr-prev-month:focus-visible,
+          .flatpickr-months .flatpickr-next-month:focus-visible {
+            outline: 3px solid var(--sui-blue-soft);
+            outline-offset: 2px;
+          }
+
+          /* Stacking — prevents clipping inside overflow:hidden containers */
+          .flatpickr-calendar { z-index: 9999; }
+        </style>
+
+        <div class="sui-card sui-mt-4">
+          <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — toggle the theme to see dark mode. Try keyboard navigation (arrow keys, Escape).</p>
+          <div class="sui-flex sui-gap-4 sui-mt-3" style="flex-wrap:wrap;align-items:end;">
+            <div>
+              <label class="sui-label">Select date</label>
+              <input type="text" class="sui-input" id="recipeFlatpickrDate" placeholder="Pick a date…" style="width:220px;" />
+            </div>
+            <div>
+              <label class="sui-label">Date range</label>
+              <input type="text" class="sui-input" id="recipeFlatpickrRange" placeholder="Start → End" style="width:260px;" />
+            </div>
+            <div>
+              <label class="sui-label">Date + time</label>
+              <input type="text" class="sui-input" id="recipeFlatpickrTime" placeholder="Pick date and time…" style="width:260px;" />
+            </div>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            if (typeof flatpickr === 'undefined') return;
+            flatpickr('#recipeFlatpickrDate', { dateFormat: 'Y-m-d', appendTo: document.body });
+            flatpickr('#recipeFlatpickrRange', { mode: 'range', dateFormat: 'Y-m-d', appendTo: document.body });
+            flatpickr('#recipeFlatpickrTime', { enableTime: true, dateFormat: 'Y-m-d H:i', appendTo: document.body });
+          });
+        </script>
+
+        <div class="sui-mt-3">
+          <p style="font-size:var(--sui-text-small);"><strong>What this recipe provides:</strong> token-based colour overrides (light + dark), consistent border-radius, SUI font family, focus-visible ring (keyboard nav), shadow depth, z-index stacking. <strong>What you bring:</strong> Flatpickr CSS + JS from CDN, your init configuration. Use <code>appendTo: document.body</code> if the calendar is inside an <code>overflow: hidden</code> container.</p>
+        </div>
+
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Flatpickr Integration Recipe — copy this into your project --&gt;
+
+&lt;!-- 1. Load Flatpickr (CDN) --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" /&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/flatpickr" defer&gt;&lt;/script&gt;
+
+&lt;!-- 2. SUI token overrides (paste in your &lt;style&gt; or CSS file) --&gt;
+&lt;style&gt;
+  .flatpickr-calendar {
+    background: var(--sui-bg-card);
+    border: 1px solid var(--sui-border);
+    border-radius: var(--sui-radius);
+    box-shadow: var(--sui-shadow-lg);
+    font-family: var(--sui-font);
+    color: var(--sui-text-primary);
+  }
+  .flatpickr-calendar::before,
+  .flatpickr-calendar::after { display: none; }
+  .flatpickr-months .flatpickr-month,
+  .flatpickr-current-month .flatpickr-monthDropdown-months {
+    background: transparent;
+    color: var(--sui-text-primary);
+    fill: var(--sui-text-primary);
+  }
+  .flatpickr-months .flatpickr-prev-month,
+  .flatpickr-months .flatpickr-next-month {
+    color: var(--sui-text-secondary);
+    fill: var(--sui-text-secondary);
+  }
+  .flatpickr-months .flatpickr-prev-month:hover svg,
+  .flatpickr-months .flatpickr-next-month:hover svg {
+    fill: var(--sui-blue-primary);
+  }
+  .flatpickr-current-month input.cur-year {
+    color: var(--sui-text-primary);
+  }
+  .flatpickr-weekdays { background: transparent; }
+  .flatpickr-weekday {
+    color: var(--sui-text-muted);
+    font-weight: 600;
+  }
+  .flatpickr-day {
+    color: var(--sui-text-primary);
+    border-radius: var(--sui-radius-sm);
+  }
+  .flatpickr-day:hover {
+    background: var(--sui-bg-elevated);
+    border-color: var(--sui-bg-elevated);
+  }
+  .flatpickr-day.today {
+    border-color: var(--sui-blue-primary);
+    color: var(--sui-blue-primary);
+  }
+  .flatpickr-day.today:hover {
+    background: var(--sui-blue-primary);
+    border-color: var(--sui-blue-primary);
+    color: #fff;
+  }
+  .flatpickr-day.selected,
+  .flatpickr-day.selected:hover {
+    background: var(--sui-btn-primary-bg);
+    border-color: var(--sui-btn-primary-bg);
+    color: #fff;
+  }
+  .flatpickr-day.flatpickr-disabled,
+  .flatpickr-day.prevMonthDay,
+  .flatpickr-day.nextMonthDay {
+    color: var(--sui-text-muted);
+  }
+  .flatpickr-day.inRange {
+    background: var(--sui-blue-soft);
+    border-color: var(--sui-blue-soft);
+    color: var(--sui-text-primary);
+  }
+  .flatpickr-time { border-top: 1px solid var(--sui-border); }
+  .flatpickr-time input,
+  .flatpickr-time .flatpickr-am-pm {
+    color: var(--sui-text-primary);
+  }
+  .flatpickr-time input:hover,
+  .flatpickr-time .flatpickr-am-pm:hover,
+  .numInputWrapper:hover {
+    background: var(--sui-bg-elevated);
+  }
+  /* Focus ring — matches SUI's canonical pattern */
+  .flatpickr-day:focus {
+    outline: 3px solid var(--sui-blue-soft);
+    outline-offset: 2px;
+  }
+  .flatpickr-months .flatpickr-prev-month:focus-visible,
+  .flatpickr-months .flatpickr-next-month:focus-visible {
+    outline: 3px solid var(--sui-blue-soft);
+    outline-offset: 2px;
+  }
+  /* Stacking — prevents clipping inside overflow:hidden containers */
+  .flatpickr-calendar { z-index: 9999; }
+&lt;/style&gt;
+
+&lt;!-- 3. Use with SUI inputs --&gt;
+&lt;label class="sui-label"&gt;Select date&lt;/label&gt;
+&lt;input type="text" class="sui-input" id="myDate" placeholder="Pick a date…" /&gt;
+
+&lt;script&gt;
+  // appendTo: document.body prevents clipping inside overflow:hidden containers
+  flatpickr('#myDate', { dateFormat: 'Y-m-d', appendTo: document.body });
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+
+        <div class="sui-alert sui-alert-info sui-mt-3" role="note">
+          <div class="sui-alert-body">
+            <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Flatpickr is not bundled, versioned, or maintained as part of SUI. Tested with Flatpickr v4.6.13.
           </div>
         </div>
       </div>
@@ -2980,7 +3242,7 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.5.0</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.5.1</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->

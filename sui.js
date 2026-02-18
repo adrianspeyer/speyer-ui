@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.5.0
+ * Version: 2.5.1
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -101,6 +101,9 @@ const SUI = (() => {
         if (scope === document) window.scrollTo({ top: 0, behavior: 'instant' });
       };
 
+      // Store reference for programmatic access
+      navEl._suiSetView = setView;
+
       tabBtns.forEach(t => t.addEventListener('click', () => setView(t.getAttribute('data-tab'))));
 
       // Keyboard nav
@@ -115,6 +118,15 @@ const SUI = (() => {
       // Set initial view
       const active = tabBtns.find(t => t.getAttribute('aria-selected') === 'true') || tabBtns[0];
       setView(active.getAttribute('data-tab'));
+    },
+
+    activate(tabEl) {
+      if (typeof tabEl === 'string') tabEl = $(tabEl);
+      if (!tabEl) return;
+      const navEl = tabEl.closest('[role="tablist"]');
+      if (navEl && navEl._suiSetView) {
+        navEl._suiSetView(tabEl.getAttribute('data-tab'));
+      }
     }
   };
 
@@ -123,6 +135,36 @@ const SUI = (() => {
      ==================================================================== */
 
   const accordion = {
+    toggle(trigger) {
+      if (typeof trigger === 'string') trigger = $(trigger);
+      if (!trigger) return;
+      const panel = trigger.nextElementSibling;
+      if (!panel) return;
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      panel.hidden = expanded;
+    },
+
+    expandAll(container) {
+      if (typeof container === 'string') container = $(container);
+      if (!container) return;
+      $$('.sui-accordion-trigger', container).forEach(trigger => {
+        trigger.setAttribute('aria-expanded', 'true');
+        const panel = trigger.nextElementSibling;
+        if (panel) panel.hidden = false;
+      });
+    },
+
+    collapseAll(container) {
+      if (typeof container === 'string') container = $(container);
+      if (!container) return;
+      $$('.sui-accordion-trigger', container).forEach(trigger => {
+        trigger.setAttribute('aria-expanded', 'false');
+        const panel = trigger.nextElementSibling;
+        if (panel) panel.hidden = true;
+      });
+    },
+
     init(container) {
       $$('.sui-accordion-trigger', container).forEach(trigger => {
         const panel = trigger.nextElementSibling;
@@ -134,11 +176,7 @@ const SUI = (() => {
           trigger.setAttribute('aria-expanded', 'false');
         }
 
-        trigger.addEventListener('click', () => {
-          const expanded = trigger.getAttribute('aria-expanded') === 'true';
-          trigger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          panel.hidden = expanded;
-        });
+        trigger.addEventListener('click', () => this.toggle(trigger));
 
         trigger.addEventListener('keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
@@ -1032,10 +1070,11 @@ const SUI = (() => {
     const initCount = [
       '[data-sui-modal]', '[data-sui-sheet]', '[data-sui-panel]',
       '[data-sui-sidenav]', '[data-sui-copy]', '[data-sui-theme]',
-      '[data-sui-dropdown-trigger]',
-      '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle'
+      '.sui-dropdown',
+      '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
+      '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v2.5.0 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v2.5.1 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready
@@ -1066,3 +1105,6 @@ const SUI = (() => {
     init
   };
 })();
+
+// Expose on window for defensive checks, test frameworks, and AI-generated code
+window.SUI = SUI;
