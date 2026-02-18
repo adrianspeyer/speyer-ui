@@ -151,10 +151,10 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - `SUI.sidenav.open(selectorOrEl)` / `SUI.sidenav.close(selectorOrEl)` / `SUI.sidenav.toggle(selectorOrEl)`
 - `SUI.sidenav.collapseAll(selectorOrEl)` / `SUI.sidenav.expandAll(selectorOrEl)`
 - `SUI.toast.success(title, message)` / `SUI.toast.error(title, message)` / `SUI.toast.warning(title, message)` / `SUI.toast.info(title, message)`
-- `SUI.tabs.activate(tabEl)` — Programmatically activate a tab
-- `SUI.accordion.toggle(triggerEl)` — Toggle accordion section
-- `SUI.tooltip.show(el)` / `SUI.tooltip.hide(el)`
-- `SUI.segmented.select(segmentEl)` — Programmatically select a segment
+- `SUI.tabs.init()` — Auto-wires `data-tab`/`data-view` buttons. No public imperative API (v2.5.1 planned).
+- `SUI.accordion.init()` — Auto-wires accordion triggers. No public imperative API (v2.5.1 planned).
+- `SUI.tooltip.init()` — Hover/focus positioning. CSS-driven, no imperative show/hide.
+- `SUI.segmented.init()` — Auto-wires segment selection. No public imperative API.
 
 ### Content & Typography
 - `sui-prose` (+ `-sm`/`-lg`/`-narrow`/`-wide`) — Long-form typography
