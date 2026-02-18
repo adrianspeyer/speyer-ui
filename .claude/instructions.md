@@ -90,6 +90,7 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 
 ### Forms & Inputs
 - `sui-input`, `sui-input-group`, `sui-input-label`, `sui-input-error`, `sui-input-error-msg`
+- `sui-input-action` — Wrapper for input with embedded button (search, copy, clear, show/hide password). Place `.sui-btn` inside after `.sui-input`
 - `sui-select` — Select dropdown
 - `sui-checkbox-label` — Checkbox
 - `sui-toggle`, `sui-toggle-label`, `sui-toggle-track` — Toggle switch
@@ -106,6 +107,9 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - `sui-table-wrap` > `sui-table` — Use `data-label` on `<td>` for mobile stacking
 - `sui-table-interactive` — Clickable rows (add `tabindex="0"`, `role="link"`)
 - `sui-table-sortable` — Sort indicators: `th[data-sort="asc|desc|none"]`
+- `sui-table-stack` — Card stacking at tablet (768px). Wider than default 520px mobile stacking
+- `sui-table-sticky` — Sticky `<thead>` when scrolling long tables
+- `sui-table-dense` — Compact padding. Note: may fall below 44px touch target. Do not combine with `sui-table-interactive` on touch-heavy interfaces without custom padding
 
 ### Progress
 - `sui-progress` + `sui-progress-bar` + status variants
@@ -139,6 +143,18 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - `sui-segmented` + `sui-segment` — Segmented control (`role="radiogroup"`)
 - `sui-tooltip` + `sui-tooltip-content` — Tooltip (Escape to dismiss)
 - Toast — `SUI.toast.success/error/warning/info(title, message)`
+
+### JS API Summary
+- `SUI.modal.open(selectorOrEl)` / `SUI.modal.close(selectorOrEl)`
+- `SUI.sheet.open(selectorOrEl)` / `SUI.sheet.close(selectorOrEl)`
+- `SUI.panel.open(selectorOrEl)` / `SUI.panel.close(selectorOrEl)` / `SUI.panel.toggle(selectorOrEl)`
+- `SUI.sidenav.open(selectorOrEl)` / `SUI.sidenav.close(selectorOrEl)` / `SUI.sidenav.toggle(selectorOrEl)`
+- `SUI.sidenav.collapseAll(selectorOrEl)` / `SUI.sidenav.expandAll(selectorOrEl)`
+- `SUI.toast.success(title, message)` / `SUI.toast.error(title, message)` / `SUI.toast.warning(title, message)` / `SUI.toast.info(title, message)`
+- `SUI.tabs.activate(tabEl)` — Programmatically activate a tab
+- `SUI.accordion.toggle(triggerEl)` — Toggle accordion section
+- `SUI.tooltip.show(el)` / `SUI.tooltip.hide(el)`
+- `SUI.segmented.select(segmentEl)` — Programmatically select a segment
 
 ### Content & Typography
 - `sui-prose` (+ `-sm`/`-lg`/`-narrow`/`-wide`) — Long-form typography
@@ -227,6 +243,32 @@ Check these before building custom patterns:
 | Panel Push Mode | CSS grid toggle resizing main content |
 | Master-Detail | `sui-table-interactive` row click → `sui-panel` detail |
 | Notification Centre | `sui-panel` + stacked `sui-card` + `sui-badge` |
+| Floating Action Bar | `sui-card-shadow` + `sui-btn` + `sui-badge` + `position: fixed` |
+
+### Common Names → SUI Solutions
+
+| What you call it | SUI solution | Type |
+|-----------------|-------------|------|
+| Sidebar / Side menu | `sui-sidenav` + `sui-sidenav-group` | Component |
+| Modal / Popup / Dialog | `sui-dialog` with native `<dialog>` | Component |
+| Drawer / Slide-over | `sui-panel` (right) or `sui-sheet` (bottom) | Component |
+| Toast / Snackbar | `SUI.toast.success/error/warning/info()` | JS API |
+| Tabs / Tab bar | `sui-nav` + `[role="tablist"]` + `data-tab`/`data-view` — auto-init via `SUI.tabs.init()` | Component |
+| Wizard / Steps | `sui-stepper` + `sui-step` + `sui-step-indicator` | Component |
+| Activity feed / Log | `sui-timeline` + `sui-timeline-item` | Component |
+| Search highlight | `sui-mark` + `sui-mark-current` | Component |
+| Action bar | `sui-toolbar` + `sui-toolbar-btn` + `sui-toolbar-sep` | Component |
+| Tag / Chip | `sui-chip` + `sui-chip-remove` | Component |
+| Segmented toggle | `sui-segmented` + `sui-segment` | Component |
+| Empty state | `sui-empty` + `sui-empty-icon/title/text` | Component |
+| File upload area | `sui-dropzone` | Component |
+| App shell / SPA layout | `sui-screen` + `sui-screen-header/body/footer` | Component |
+| Kanban / Board | `sui-flex-nowrap` + `sui-scroll-x` + `sui-card` | Recipe |
+| Master-Detail / Inbox | `sui-table-interactive` row click → `sui-panel` detail | Recipe |
+| Push layout | CSS grid toggle resizing main content | Recipe |
+| Notification panel | `sui-panel` + stacked `sui-card` + `sui-badge` | Recipe |
+| Inline edit | `sui-input` + click-to-edit | Recipe |
+| Floating action bar | `sui-card-shadow` + `sui-btn` + fixed positioning | Recipe |
 
 ---
 

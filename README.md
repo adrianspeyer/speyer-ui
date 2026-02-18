@@ -172,7 +172,9 @@ SUI provides 50+ components. All built from design tokens. Code examples for eve
 
 ### Inputs
 
-`sui-input` · `sui-input-error` · `sui-input-label` · `sui-input-group` · `sui-input-help` · `sui-checkbox` · `sui-radio` · `sui-checkbox-label` · `sui-radio-label`
+`sui-input` · `sui-input-error` · `sui-input-label` · `sui-input-group` · `sui-input-help` · `sui-input-action` · `sui-checkbox` · `sui-radio` · `sui-checkbox-label` · `sui-radio-label`
+
+**v2.5.0:** `sui-input-action` wraps an input with an embedded button for search, copy, clear, or show/hide password. Place `.sui-btn` inside after `.sui-input`.
 
 ### Toggle / Switch
 
@@ -234,9 +236,11 @@ Initials by default with deterministic colours from `sui.js`. Optional photo sup
 
 ### Tables
 
-`sui-table-wrap` · `sui-table` · `sui-table-striped` · `sui-table-hover` · `sui-table-interactive` · `sui-table-sortable`
+`sui-table-wrap` · `sui-table` · `sui-table-striped` · `sui-table-hover` · `sui-table-interactive` · `sui-table-sortable` · `sui-table-stack` · `sui-table-sticky` · `sui-table-dense`
 
 Responsive: stacks to card layout on mobile via `data-label` attributes on `<td>`. `sui-table-interactive` adds clickable rows with cursor and focus ring — developer adds `tabindex="0"`, `role="link"`, `aria-label`, and click handler. `sui-table-sortable` adds visual sort indicators on `<th data-sort>`.
+
+**v2.5.0 modifiers:** `sui-table-stack` stacks at 768px (tablet) — wider than the default 520px mobile stacking, useful for data-heavy admin tables. `sui-table-sticky` pins `<thead>` when scrolling long tables. `sui-table-dense` reduces padding for high-density views (note: may fall below 44px touch target — do not combine with `sui-table-interactive` on touch-heavy interfaces without custom padding).
 
 ### Navigation
 
@@ -395,7 +399,17 @@ Dividers · Empty state · Skeleton loaders · Stat cards · Responsive embed (`
 
 ### Screen Layout
 
-`sui-screen` — full-viewport flex column (`100dvh`) for mobile-first app shells. `sui-screen-header` (sticky top with safe area inset), `sui-screen-body` (scrollable `flex:1`), `sui-screen-footer` (pinned bottom with safe area inset). Multi-view switching: inactive screens hidden by default, toggle with `.is-active`. Use `sui-screen-solo` for single-screen apps.
+`sui-screen` — full-viewport flex column (`100dvh`) for mobile-first app shells. `sui-screen-header` (sticky top with safe area inset), `sui-screen-body` (scrollable `flex:1`), `sui-screen-footer` (pinned bottom with safe area inset). Multi-view switching: only sibling screens without `.is-active` are hidden (v2.5.0 — a single `sui-screen` renders without needing `.is-active`). Use `sui-screen-solo` for legacy single-screen apps (now redundant but kept for backwards compatibility).
+
+#### Static page vs SPA shell
+
+SUI supports two usage modes:
+
+**Static page (most common):** Standard HTML page with scrollable `<body>`. Use `sui-topbar`, `sui-section`, and `sui-footer` as needed. The page scrolls naturally. This is the default — no `sui-screen` required.
+
+**SPA shell (app mode):** Full-viewport layout with fixed header/footer and scrollable body region. Use `sui-screen` + `sui-screen-header` + `sui-screen-body` + `sui-screen-footer`. The `sui-screen-body` scrolls independently while header/footer stay pinned. Multi-view switching: add multiple `sui-screen` elements and toggle `.is-active` to switch between views.
+
+**When to use which:** If your page has a natural document flow with scrolling content, use static page mode. If you're building a mobile-first app with fixed navigation bars and independently scrolling content regions (like a native app), use SPA shell mode.
 
 ### File Upload
 
@@ -629,6 +643,14 @@ SUI.modal.open('#id')                          // Native <dialog> or legacy over
 SUI.modal.close('#id')                         // Works with both patterns
 SUI.sheet.open('#id')                          // Bottom sheet
 SUI.sheet.close('#id')                         // Close bottom sheet
+SUI.panel.open('#id')                          // Side panel
+SUI.panel.close('#id')                         // Close panel
+SUI.panel.toggle('#id')                        // Toggle panel
+SUI.sidenav.open('#id')                        // Open sidenav
+SUI.sidenav.close('#id')                       // Close sidenav
+SUI.sidenav.toggle('#id')                      // Toggle sidenav
+SUI.sidenav.collapseAll('#id')                 // Collapse all groups
+SUI.sidenav.expandAll('#id')                   // Expand all groups
 SUI.toast.success('Saved!', 'Details here')    // Auto-dismiss, stackable
 SUI.toast.error('Failed', 'Try again')
 SUI.dropdown.toggle(element)                   // Click toggle, outside-click close
@@ -747,21 +769,21 @@ jsDelivr serves any tagged GitHub release automatically. No signup required.
 
 ```
 speyer-ui/
-â”œâ”€â”€ dist/                    â† Minified (CDN/production)
-â”‚   â”œâ”€â”€ sui-tokens.min.css
-â”‚   â”œâ”€â”€ sui-components.min.css
-â”‚   â””â”€â”€ sui.min.js
-â”œâ”€â”€ scripts/
-â”‚   â””â”€â”€ preflight.js         â† Build-time accessibility validator
-â”œâ”€â”€ sui-tokens.css           â† Source (readable)
-â”œâ”€â”€ sui-components.css
-â”œâ”€â”€ sui.js
-â”œâ”€â”€ index.html               â† Live demo (GitHub Pages)
-â”œâ”€â”€ package.json
-â”œâ”€â”€ README.md
-â”œâ”€â”€ CHANGELOG.md
-â”œâ”€â”€ CONTRIBUTING.md
-â””â”€â”€ LICENSE
+├── dist/                    ← Minified (CDN/production)
+│   ├── sui-tokens.min.css
+│   ├── sui-components.min.css
+│   └── sui.min.js
+├── scripts/
+│   └── preflight.js         ← Build-time accessibility validator
+├── sui-tokens.css           ← Source (readable)
+├── sui-components.css
+├── sui.js
+├── index.html               ← Live demo (GitHub Pages)
+├── package.json
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+└── LICENSE
 ```
 
 ### Preflight Validator

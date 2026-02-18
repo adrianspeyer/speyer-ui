@@ -1,0 +1,27 @@
+# Speyer UI System (SUI)
+
+> Lightweight, accessible CSS design system for SaaS applications. Mobile-first, WCAG 2.1 AA, zero icon dependencies, under 93KB total.
+
+## Quick Start
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
+```
+
+## Documentation
+
+- Live Demo: https://adrianspeyer.github.io/speyer-ui/
+- Repo: https://github.com/adrianspeyer/speyer-ui
+- AI Rules (comprehensive reference for LLMs): https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
+
+## For AI Assistants
+
+If you are an AI assistant building with SUI, fetch the comprehensive reference file above before generating code. It contains:
+- Complete class list with every component and modifier
+- ARIA requirements table
+- Recipe table (16 pre-built SaaS patterns)
+- Common name alias table (Sidebar → sui-sidenav, Modal → sui-dialog, etc.)
+- Design token reference
+- Namespace rules (never invent sui-* classes)

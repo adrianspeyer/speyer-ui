@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.4.1
+ * Version: 2.5.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -193,12 +193,15 @@ kbd {
   border-top: 1px solid var(--sui-border);
 }
 
-/* Multi-view screen switching (hidden by default, show with .is-active) */
+/* Multi-view screen switching: only hide screens when siblings exist.
+   A single sui-screen renders without needing .is-active (no blank-page footgun). */
 .sui-screen[hidden] { display: none; }
-.sui-screen:not(.is-active) { display: none; }
+.sui-screen ~ .sui-screen:not(.is-active) { display: none; }
 .sui-screen.is-active { display: flex; }
 
-/* Escape hatch: standalone screen that doesn't need .is-active toggling */
+/* Legacy escape hatch: standalone screen that doesn't need .is-active toggling.
+   Functionally redundant since the sibling selector fix (v2.5.0),
+   but kept for backwards compatibility. */
 .sui-screen-solo { display: flex; }
 
 
@@ -746,6 +749,43 @@ textarea.sui-input {
   accent-color: var(--sui-blue-primary);
   cursor: pointer;
   flex-shrink: 0;
+}
+
+/* Input with embedded action button (search, copy, clear, show/hide password) */
+.sui-input-action {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sui-input-action .sui-input {
+  padding-right: calc(var(--sui-space-3) + 36px);
+}
+
+.sui-input-action .sui-btn {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  min-height: 36px;
+  min-width: 36px;
+  padding: 0 var(--sui-space-2);
+  border: none;
+  background: transparent;
+  color: var(--sui-text-muted);
+  border-radius: var(--sui-radius-sm);
+  transition: color var(--sui-duration-fast) var(--sui-easing),
+              background var(--sui-duration-fast) var(--sui-easing);
+}
+
+.sui-input-action .sui-btn:hover {
+  color: var(--sui-text-primary);
+  background: var(--sui-bg-elevated);
+}
+
+.sui-input-action .sui-btn:focus-visible {
+  outline: 3px solid var(--sui-blue-soft);
+  outline-offset: 2px;
 }
 
 
@@ -1994,6 +2034,53 @@ dialog.sui-dialog-wide { max-width: 720px; }
     text-transform: uppercase;
     margin-bottom: 6px;
   }
+}
+
+/* Opt-in card stacking at tablet (768px) — wider than the default 520px mobile stacking.
+   Use when you want card-mode earlier, e.g. data-heavy admin tables on tablets. */
+@media (max-width: 768px) {
+  .sui-table-stack { min-width: 0; }
+  .sui-table-stack thead { display: none; }
+  .sui-table-stack tbody,
+  .sui-table-stack tr,
+  .sui-table-stack td { display: block; width: 100%; }
+  .sui-table-stack tr {
+    border-bottom: 1px solid var(--sui-border);
+    padding: var(--sui-space-2) 0;
+  }
+  .sui-table-stack td {
+    border-bottom: 0;
+    padding: var(--sui-space-1) var(--sui-space-4);
+  }
+  .sui-table-stack td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: var(--sui-text-meta);
+    color: var(--sui-text-muted);
+    font-weight: var(--sui-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+}
+
+/* Sticky table header — pins thead when scrolling long tables */
+.sui-table-sticky thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--sui-bg-card);
+  box-shadow: 0 1px 0 0 var(--sui-border);
+}
+
+/* Dense/compact table — reduced padding for high-density views.
+   Note: dense rows may fall below the 44px touch target. Do not combine
+   with sui-table-interactive on touch-heavy interfaces without adding
+   your own padding override for interactive rows. */
+.sui-table-dense th,
+.sui-table-dense td {
+  padding: var(--sui-space-1) var(--sui-space-2);
+  font-size: var(--sui-text-small);
 }
 
 

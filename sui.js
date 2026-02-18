@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.4.1
+ * Version: 2.5.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -1027,6 +1027,15 @@ const SUI = (() => {
       });
       if (!el.hasAttribute('aria-hidden')) el.setAttribute('aria-hidden', 'true');
     });
+
+    // Init summary
+    const initCount = [
+      '[data-sui-modal]', '[data-sui-sheet]', '[data-sui-panel]',
+      '[data-sui-sidenav]', '[data-sui-copy]', '[data-sui-theme]',
+      '[data-sui-dropdown-trigger]',
+      '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle'
+    ].reduce((n, sel) => n + $$(sel).length, 0);
+    console.log('SUI v2.5.0 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

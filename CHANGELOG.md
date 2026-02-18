@@ -4,6 +4,34 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.5.0] — 2026-02-18
+
+### Added
+
+- **Table modifiers** — Three new opt-in modifiers for `sui-table`:
+  - `sui-table-stack` — Card stacking at tablet width (768px). Wider than the default 520px mobile stacking. Useful for data-heavy admin tables on tablets.
+  - `sui-table-sticky` — Pins `<thead>` when scrolling long tables. Uses `position: sticky` with `z-index: 1` and `box-shadow` separator.
+  - `sui-table-dense` — Compact padding (`--sui-space-1` × `--sui-space-2`) with smaller font size. Note: may fall below 44px touch target — do not combine with `sui-table-interactive` on touch-heavy interfaces without custom padding.
+- **Input action modifier** (`sui-input-action`) — Wrapper for embedding a button inside an input field. Common use cases: search, copy, clear, show/hide password. Button sits absolute-positioned right, input gets extra right padding. Focus-visible ring on the embedded button. Both themes.
+- **Floating Action Bar recipe** — Fixed-position bulk action bar that appears when items are selected. Composes from `sui-card-shadow` + `sui-btn` + `sui-badge` + fixed positioning. Live demo with checkbox selection.
+- **`llms.txt`** — AI discoverability file at repo root pointing to the comprehensive reference.
+- **SUI init console log** — `sui.js` now logs `SUI v2.5.0 — N components initialised` at the end of auto-init. Counts all data-sui-* triggers, accordions, segmented controls, and sidenav group toggles.
+
+### Fixed
+
+- **Screen layout blank-page footgun** — A single `sui-screen` without `.is-active` no longer renders as blank. Changed from `.sui-screen:not(.is-active) { display: none }` to `.sui-screen ~ .sui-screen:not(.is-active) { display: none }`. The sibling selector means a lone `sui-screen` always renders. `sui-screen-solo` kept as legacy alias for backwards compatibility.
+
+### Improved
+
+- **AI prompt overhaul (all 3 tiers)** — Quick, Minimal, and System prompts updated with:
+  - Recipe awareness table (16 SaaS patterns with composition details)
+  - Common name → SUI solution alias table (Sidebar → sui-sidenav, Modal → sui-dialog, etc.)
+  - Pointer URL to comprehensive AI reference (`.claude/instructions.md`)
+  - New v2.5.0 modifiers documented in all tiers
+- **Sidenav keyword search** — All 46 sidenav links now have `data-keywords` attributes. Filter search matches on keywords in addition to link text (e.g. searching "drawer" finds Panel and Bottom Sheet).
+- **AI context files** (`.claude/instructions.md`, `.cursor/rules`) — Added: table modifiers, `sui-input-action`, FAB recipe, complete JS API method reference (`SUI.tabs`, `SUI.accordion`, `SUI.tooltip`, `SUI.segmented`), common name alias table.
+- **README** — Added: table modifier docs, `sui-input-action` docs, "Static page vs SPA shell" usage guide, complete JS API reference (13 additional methods: panel, sidenav, tabs, accordion, tooltip, segmented).
+
 ## [2.4.1] — 2026-02-17
 
 ### Fixed
@@ -149,7 +177,7 @@ The gap between "design system" and "app framework" is content. Interface compon
 - **Scoped Tabs:** `data-sui-tabs` wrapper scopes tab discovery by container. Multiple independent tab sets on one page no longer conflict. Pages without the wrapper work as before (backward compatible).
 - **Avatar XL:** `sui-avatar-xl` at 80px for profile pages and account headers.
 - **Table Interactive:** `sui-table-interactive` — clickable rows with `cursor: pointer` and focus ring. Composes with `sui-table-hover`. Developer adds `tabindex="0"`, `role="link"`, and handler.
-- **Table Sortable:** `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Three states: neutral (â‡…), ascending (â†‘), descending (â†“). Developer toggles attribute value. No JS needed.
+- **Table Sortable:** `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Three states: neutral (⇅), ascending (↑), descending (↓). Developer toggles attribute value. No JS needed.
 - **Progress Labeled:** `sui-progress-labeled` + `sui-progress-text` — text inside the progress bar fill. Uses `-strong` backgrounds in light mode and hardcoded dark-mode overrides for WCAG AA white-text contrast on all five colour variants.
 - **Dropzone:** `sui-dropzone` — file upload area with dashed border, hover state, `.is-dragover` state. CSS only — drag-and-drop behaviour is bring-your-own JS.
 - **Timeline:** `sui-timeline` + `sui-timeline-item` + `sui-timeline-content` — activity feed layout with avatar-left, content-right, and vertical connector. Optimised for `sui-avatar-sm`. `role="feed"` + `role="article"` for accessibility.
