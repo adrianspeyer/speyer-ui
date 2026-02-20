@@ -214,7 +214,7 @@ function checkHardcodedContrast() {
 }
 
 function checkRgbaComposites() {
-  console.log('  â”€â”€ Contrast: RGBA Composites â”€â”€');
+  console.log('  ── Contrast: RGBA Composites ──');
   const tokens = readFile('sui-tokens.css');
   if (!tokens) return;
   const dark = parseTokens(tokens, '[data-theme="dark"]');
@@ -414,8 +414,10 @@ function checkHTML() {
 
   // ─── aria-hidden-focus (axe: aria-hidden-focus) ───
   // Focusable elements must not live inside aria-hidden="true"
+  // Only match aria-hidden on container elements — decorative icon
+  // aria-hidden (on <i>, <svg>) is not a focus-trap risk.
   console.log('     Focus inside aria-hidden');
-  const ahRe = /aria-hidden="true"[^>]*>([\s\S]*?)<\/(?:div|span|section|nav)>/gi;
+  const ahRe = /<(?:div|span|section|nav)\b[^>]*aria-hidden="true"[^>]*>([\s\S]*?)<\/(?:div|span|section|nav)>/gi;
   let hiddenFocus = 0;
   while ((m = ahRe.exec(html))) {
     const inner = m[1];
@@ -594,7 +596,7 @@ if (totalFail > 0) {
   console.log('');
   process.exit(1);
 } else {
-  console.log('  ✔ All checks passed.');
+  console.log('  ✓ All checks passed.');
   console.log('');
   process.exit(0);
 }

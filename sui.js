@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.5.1
+ * Version: 2.6.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -11,7 +11,7 @@
  *   — Auto-initializes via data-sui-* attributes
  *   — Or call SUI.modal.open('#id'), SUI.toast.success('msg'), etc.
  *
- * Made in Canada with love ðŸ‡¨ðŸ‡¦
+ * Made in Canada with love 🇨🇦
  * License: MIT
  */
 
@@ -57,6 +57,13 @@ const SUI = (() => {
       return this.current();
     },
 
+    /** Returns the actual rendered theme ('light' or 'dark'), even when preference is 'auto'. */
+    resolved() {
+      const explicit = document.documentElement.getAttribute('data-theme');
+      if (explicit === 'dark' || explicit === 'light') return explicit;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    },
+
     init() {
       this.set(this.current());
     }
@@ -86,6 +93,18 @@ const SUI = (() => {
       // Enforce tabpanel role on associated sections within scope
       $$('[data-view]', scope).forEach(v => {
         if (!v.hasAttribute('role')) v.setAttribute('role', 'tabpanel');
+      });
+
+      // A7: Wire aria-controls (tab → panel) and aria-labelledby (panel → tab)
+      tabBtns.forEach(t => {
+        const key = t.getAttribute('data-tab');
+        if (!key) return;
+        const panel = $$('[data-view]', scope).find(v => v.getAttribute('data-view') === key);
+        if (!panel) return;
+        if (!t.id) t.id = uid();
+        if (!panel.id) panel.id = uid();
+        t.setAttribute('aria-controls', panel.id);
+        panel.setAttribute('aria-labelledby', t.id);
       });
 
       const setView = (key) => {
@@ -374,6 +393,7 @@ const SUI = (() => {
       const el = document.createElement('div');
       el.className = `sui-toast sui-toast-${type}`;
       el.setAttribute('role', 'alert');
+      if (type === 'error') el.setAttribute('aria-live', 'assertive');
       el.innerHTML = `
         <span class="sui-toast-icon">${icons[type] || icons.info}</span>
         <div class="sui-toast-content">
@@ -405,6 +425,18 @@ const SUI = (() => {
       el.addEventListener('animationend', () => el.remove(), { once: true });
     },
 
+    /** Programmatic dismissal of a single toast (public wrapper around _dismiss). */
+    dismiss(el) {
+      if (typeof el === 'string') el = $(el);
+      if (el && el.classList.contains('sui-toast')) this._dismiss(el);
+    },
+
+    /** Dismiss all active toasts. */
+    clearAll() {
+      if (!this._container) return;
+      $$('.sui-toast', this._container).forEach(t => this._dismiss(t));
+    },
+
     // Convenience methods
     success(title, message) { return this.show({ title, message, type: 'success' }); },
     warning(title, message) { return this.show({ title, message, type: 'warning' }); },
@@ -417,6 +449,28 @@ const SUI = (() => {
      ==================================================================== */
 
   const tooltip = {
+    /** Programmatically show a tooltip (advisory — CSS hover/focus still takes precedence). */
+    show(el) {
+      if (typeof el === 'string') el = document.querySelector(el);
+      if (!el) return;
+      el.classList.add('is-tooltip-visible');
+      if (el._suiReposition) el._suiReposition();
+      // Dismiss on Escape while programmatically shown
+      el._suiProgKeyHandler = (e) => { if (e.key === 'Escape') this.hide(el); };
+      document.addEventListener('keydown', el._suiProgKeyHandler);
+    },
+
+    /** Remove programmatic tooltip visibility. */
+    hide(el) {
+      if (typeof el === 'string') el = document.querySelector(el);
+      if (!el) return;
+      el.classList.remove('is-tooltip-visible');
+      if (el._suiProgKeyHandler) {
+        document.removeEventListener('keydown', el._suiProgKeyHandler);
+        delete el._suiProgKeyHandler;
+      }
+    },
+
     init(el) {
       const content = el.querySelector('.sui-tooltip-content');
       if (!content) return;
@@ -451,6 +505,7 @@ const SUI = (() => {
         }
       };
 
+      el._suiReposition = reposition;
       el.addEventListener('mouseenter', reposition);
       el.addEventListener('focusin', reposition);
 
@@ -621,6 +676,9 @@ const SUI = (() => {
         target.focus();
       };
 
+      // Store reference for programmatic access (A10)
+      container._suiSetValue = select;
+
       segments.forEach(seg => seg.addEventListener('click', () => select(seg)));
 
       // Arrow key navigation
@@ -636,6 +694,14 @@ const SUI = (() => {
           select(segments[(idx - 1 + segments.length) % segments.length]);
         }
       });
+    },
+
+    /** Programmatically select a segment. */
+    select(el) {
+      if (typeof el === 'string') el = document.querySelector(el);
+      if (!el) return;
+      const container = el.closest('.sui-segmented');
+      if (container && container._suiSetValue) container._suiSetValue(el);
     }
   };
 
@@ -707,6 +773,12 @@ const SUI = (() => {
       const el = typeof selector === 'string' ? $(selector) : selector;
       if (!el) return;
       el.classList.contains('is-open') ? this.close(el) : this.open(el);
+    },
+
+    /** Returns true if the sidenav overlay is open (mobile state). */
+    isOpen(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      return el ? el.classList.contains('is-open') : false;
     },
 
     /** Collapse all sidenav groups within a container */
@@ -828,6 +900,12 @@ const SUI = (() => {
       const el = typeof selector === 'string' ? $(selector) : selector;
       if (!el) return;
       el.classList.contains('is-open') ? this.close(el) : this.open(el);
+    },
+
+    /** Returns true if the panel is open. */
+    isOpen(selector) {
+      const el = typeof selector === 'string' ? $(selector) : selector;
+      return el ? el.classList.contains('is-open') : false;
     }
   };
 
@@ -889,6 +967,9 @@ const SUI = (() => {
         const target = btn.getAttribute('data-sui-copy');
         const ok = await copy.fromElement(target);
         if (ok) {
+          // A8: Visual feedback — class toggle (icon-library-agnostic)
+          btn.classList.add('is-copied');
+          setTimeout(() => btn.classList.remove('is-copied'), 1600);
           // Change only the text node — leave icon elements untouched
           const textNode = [...btn.childNodes].find(n => n.nodeType === Node.TEXT_NODE && /copy/i.test(n.textContent));
           if (textNode) {
@@ -1074,7 +1155,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v2.5.1 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v2.6.0 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

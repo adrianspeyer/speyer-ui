@@ -1,4 +1,4 @@
-# Speyer UI System (SUI) — AI Rules
+# Speyer UI System (SUI) â€” AI Rules
 
 You are working with the **Speyer UI System (SUI)**, a lightweight, accessible CSS design system for SaaS applications.
 
@@ -14,33 +14,33 @@ You are working with the **Speyer UI System (SUI)**, a lightweight, accessible C
 
 ## Design Philosophy
 
-SUI is the **shell** — containers, chrome, interactive primitives, typography, and tokens. What goes *inside* (data visualisation, icons, charts, drag-and-drop) is the developer's choice. SUI makes it look consistent and accessible.
+SUI is the **shell** â€” containers, chrome, interactive primitives, typography, and tokens. What goes *inside* (data visualisation, icons, charts, drag-and-drop) is the developer's choice. SUI makes it look consistent and accessible.
 
 **Core constraints:**
 - Mobile-first (375px baseline, enhance upward)
 - Min touch target: 44px
 - WCAG 2.1 AA contrast
-- Status never communicated by colour alone — always pair with icon + text
+- Status never communicated by colour alone â€” always pair with icon + text
 - Components work without JavaScript. CSS handles appearance, JS adds interactivity
 - Script tags use `defer`
 - Borders are the default card separation. Shadows are opt-in (`sui-card-shadow`)
 
-**SUI does NOT ship:** icons, charts, data visualisation, drag-and-drop, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
+**SUI does NOT ship:** icons, charts, data visualisation, drag-and-drop, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) â€” SUI provides token overrides, you bring the library.
 
 ---
 
-## The `sui-` Namespace — Critical
+## The `sui-` Namespace â€” Critical
 
 **Never invent `sui-*` classes that don't exist in this document.**
 
 The `sui-` prefix is a namespace contract. If you create `sui-calendar` today and SUI ships a real `sui-calendar` tomorrow with different markup, every site using your code breaks on the next CDN update.
 
 **When SUI doesn't have what you need:**
-1. **Check the recipes list** — the pattern may already be documented
-2. **Compose from existing SUI classes** — most patterns are 5–15 lines of custom CSS on top of SUI primitives
+1. **Check the recipes list** â€” the pattern may already be documented
+2. **Compose from existing SUI classes** â€” most patterns are 5â€“15 lines of custom CSS on top of SUI primitives
 3. **Use your own class names** for custom CSS (e.g. `app-calendar`, `my-sidebar`)
 4. **Use SUI tokens** (`var(--sui-radius-lg)`, `var(--sui-border)`, etc.) in your custom CSS for visual consistency
-5. **Tell the human** — suggest they open an issue or contribute if SUI is missing a common pattern
+5. **Tell the human** â€” suggest they open an issue or contribute if SUI is missing a common pattern
 
 **Never silently invent a fake `sui-*` class.** Warn the human: *"SUI doesn't have sui-calendar. I'll build this with custom CSS using SUI tokens. If this comes up often, consider proposing it as a component."*
 
@@ -49,39 +49,39 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 ## Complete Component List
 
 ### Layout & Structure
-- `sui-topbar` — Sticky top bar (grid layout, default)
-- `sui-topbar-aligned` — Modifier: flex layout, brand left, nav+actions right
-- `sui-topbar-inner` — Max-width container inside topbar
-- `sui-brand`, `sui-brand-mark`, `sui-brand-title`, `sui-brand-name` — Brand area
-- `sui-nav` — Tab navigation bar
-- `sui-tab` — Individual tab button
-- `sui-topbar-actions` — Right-side action area
-- `sui-section`, `sui-section-head` — Content sections
-- `sui-footer` — Page footer
-- `sui-screen` — Full-viewport app shell (100dvh)
-- `sui-screen-header`, `sui-screen-body`, `sui-screen-footer` — Screen regions
-- `sui-screen-solo` — Single-screen mode
-- `sui-container` — Opt-in container queries
+- `sui-topbar` â€” Sticky top bar (grid layout, default)
+- `sui-topbar-aligned` â€” Modifier: flex layout, brand left, nav+actions right
+- `sui-topbar-inner` â€” Max-width container inside topbar
+- `sui-brand`, `sui-brand-mark`, `sui-brand-title`, `sui-brand-name` â€” Brand area
+- `sui-nav` â€” Tab navigation bar
+- `sui-tab` â€” Individual tab button
+- `sui-topbar-actions` â€” Right-side action area
+- `sui-section`, `sui-section-head` â€” Content sections
+- `sui-footer` â€” Page footer
+- `sui-screen` â€” Full-viewport app shell (100dvh)
+- `sui-screen-header`, `sui-screen-body`, `sui-screen-footer` â€” Screen regions
+- `sui-screen-solo` â€” Single-screen mode
+- `sui-container` â€” Opt-in container queries
 
 ### Buttons
-- `sui-btn` — Base button (44px, 12px radius)
-- `sui-btn-primary` — Primary action (blue)
-- `sui-btn-secondary` — Secondary action (grey fill)
-- `sui-btn-ghost` — Ghost (transparent, border)
-- `sui-btn-dashed` — Dashed border, muted — for de-emphasised actions ("Skip", "Add item")
-- `sui-btn-danger` — Destructive action (red)
-- `sui-btn-success` — Positive action (green)
-- `sui-btn-outline` — Outline variant
-- `sui-btn-sm` — Small (36px)
-- `sui-btn-full` — Full width
+- `sui-btn` â€” Base button (44px, 12px radius)
+- `sui-btn-primary` â€” Primary action (blue)
+- `sui-btn-secondary` â€” Secondary action (grey fill)
+- `sui-btn-ghost` â€” Ghost (transparent, border)
+- `sui-btn-dashed` â€” Dashed border, muted â€” for de-emphasised actions ("Skip", "Add item")
+- `sui-btn-danger` â€” Destructive action (red)
+- `sui-btn-success` â€” Positive action (green)
+- `sui-btn-outline` â€” Outline variant
+- `sui-btn-sm` â€” Small (36px)
+- `sui-btn-full` â€” Full width
 
 ### Cards
-- `sui-card` — Base card (border, radius, padding)
-- `sui-card-lg` — Large padding
-- `sui-card-muted` — Muted background
-- `sui-card-shadow` — Shadow elevation (opt-in)
-- `sui-card-flush` — No padding
-- `sui-card-interactive` — Clickable (hover shadow + focus ring)
+- `sui-card` â€” Base card (border, radius, padding)
+- `sui-card-lg` â€” Large padding
+- `sui-card-muted` â€” Muted background
+- `sui-card-shadow` â€” Shadow elevation (opt-in)
+- `sui-card-flush` â€” No padding
+- `sui-card-interactive` â€” Clickable (hover shadow + focus ring)
 
 ### Badges
 - `sui-badge` + variants: `-success`, `-warning`, `-error`, `-info`, `-neutral`, `-new`, `-beta`, `-pro`
@@ -90,10 +90,10 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 
 ### Forms & Inputs
 - `sui-input`, `sui-input-group`, `sui-input-label`, `sui-input-error`, `sui-input-error-msg`
-- `sui-input-action` — Wrapper for input with embedded button (search, copy, clear, show/hide password). Place `.sui-btn` inside after `.sui-input`
-- `sui-select` — Select dropdown
-- `sui-checkbox-label` — Checkbox
-- `sui-toggle`, `sui-toggle-label`, `sui-toggle-track` — Toggle switch
+- `sui-input-action` â€” Wrapper for input with embedded button (search, copy, clear, show/hide password). Place `.sui-btn` inside after `.sui-input`
+- `sui-select` â€” Select dropdown
+- `sui-checkbox-label` â€” Checkbox
+- `sui-toggle`, `sui-toggle-label`, `sui-toggle-track` â€” Toggle switch
 
 ### Alerts
 - `sui-alert` + variants: `-success`, `-warning`, `-error`, `-info`
@@ -104,18 +104,18 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - Initials-first with optional `<img>` + `onerror="this.remove()"`
 
 ### Tables
-- `sui-table-wrap` > `sui-table` — Use `data-label` on `<td>` for mobile stacking
-- `sui-table-interactive` — Clickable rows (add `tabindex="0"`, `role="link"`)
-- `sui-table-sortable` — Sort indicators: `th[data-sort="asc|desc|none"]`
-- `sui-table-stack` — Card stacking at tablet (768px). Wider than default 520px mobile stacking
-- `sui-table-sticky` — Sticky `<thead>` when scrolling long tables
-- `sui-table-dense` — Compact padding. Note: may fall below 44px touch target. Do not combine with `sui-table-interactive` on touch-heavy interfaces without custom padding
+- `sui-table-wrap` > `sui-table` â€” Use `data-label` on `<td>` for mobile stacking
+- `sui-table-interactive` â€” Clickable rows (add `tabindex="0"`, `role="link"`)
+- `sui-table-sortable` â€” Sort indicators: `th[data-sort="asc|desc|none"]`
+- `sui-table-stack` â€” Card stacking at tablet (768px). Wider than default 520px mobile stacking
+- `sui-table-sticky` â€” Sticky `<thead>` when scrolling long tables
+- `sui-table-dense` â€” Compact padding. Note: may fall below 44px touch target. Do not combine with `sui-table-interactive` on touch-heavy interfaces without custom padding
 
 ### Progress
 - `sui-progress` + `sui-progress-bar` + status variants
-- `sui-progress-labeled` + `sui-progress-text` — Text inside bar
-- `sui-progress-indeterminate` — Animated
-- **Always pair with label text — colour alone is not sufficient**
+- `sui-progress-labeled` + `sui-progress-text` â€” Text inside bar
+- `sui-progress-indeterminate` â€” Animated
+- **Always pair with label text â€” colour alone is not sufficient**
 
 ### Navigation
 - `sui-breadcrumb`, `sui-pagination`, `sui-page-btn`
@@ -126,61 +126,72 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - CSS-only. Horizontal desktop, vertical mobile
 ```html
 <ol class="sui-stepper">
-  <li class="sui-step is-complete"><span class="sui-step-indicator">✓</span><span>Account</span></li>
+  <li class="sui-step is-complete"><span class="sui-step-indicator">âœ“</span><span>Account</span></li>
   <li class="sui-step is-active" aria-current="step"><span class="sui-step-indicator">2</span><span>Details</span></li>
   <li class="sui-step is-pending"><span class="sui-step-indicator">3</span><span>Review</span></li>
 </ol>
 ```
 
 ### Interactive (require sui.js)
-- `sui-accordion` — Collapsible sections
-- `sui-dropdown` — Dropdown menu (`aria-haspopup`, `aria-expanded`)
-- `sui-dialog` — Native `<dialog>` modal (`SUI.modal.open/close`)
-- `sui-sheet` — Bottom sheet (`SUI.sheet.open/close`)
-- `sui-sidenav` — Responsive sidebar nav, sticky desktop, slide-in mobile (`SUI.sidenav.open/close/toggle`)
-  - `sui-sidenav-group` / `sui-sidenav-group-toggle` / `sui-sidenav-group-links` — Collapsible groups (`SUI.sidenav.collapseAll/expandAll`)
-- `sui-panel` — Side panel / slide-over, slides from right. Desktop: no focus trap (parallel content). Mobile: focus trap (full-screen). Width via `--sui-panel-width`. (`SUI.panel.open/close/toggle`)
-- `sui-segmented` + `sui-segment` — Segmented control (`role="radiogroup"`)
-- `sui-tooltip` + `sui-tooltip-content` — Tooltip (Escape to dismiss)
-- Toast — `SUI.toast.success/error/warning/info(title, message)`
+- `sui-accordion` â€” Collapsible sections
+- `sui-dropdown` â€” Dropdown menu (`aria-haspopup`, `aria-expanded`)
+- `sui-dialog` â€” Native `<dialog>` modal (`SUI.modal.open/close`)
+- `sui-sheet` â€” Bottom sheet (`SUI.sheet.open/close`)
+- `sui-sidenav` â€” Responsive sidebar nav, sticky desktop, slide-in mobile (`SUI.sidenav.open/close/toggle/isOpen`)
+  - `sui-sidenav-group` / `sui-sidenav-group-toggle` / `sui-sidenav-group-links` â€” Collapsible groups (`SUI.sidenav.collapseAll/expandAll`)
+- `sui-panel` â€” Side panel / slide-over, slides from right. Desktop: no focus trap (parallel content). Mobile: focus trap (full-screen). Width via `--sui-panel-width`. (`SUI.panel.open/close/toggle/isOpen`)
+- `sui-segmented` + `sui-segment` â€” Segmented control (`role="radiogroup"`)
+- `sui-tooltip` + `sui-tooltip-content` â€” Tooltip (Escape to dismiss)
+- Toast â€” `SUI.toast.success/error/warning/info(title, message)`
 
-### JS API Summary
-- `SUI.modal.open(selectorOrEl)` / `SUI.modal.close(selectorOrEl)`
-- `SUI.sheet.open(selectorOrEl)` / `SUI.sheet.close(selectorOrEl)`
-- `SUI.panel.open(selectorOrEl)` / `SUI.panel.close(selectorOrEl)` / `SUI.panel.toggle(selectorOrEl)`
-- `SUI.sidenav.open(selectorOrEl)` / `SUI.sidenav.close(selectorOrEl)` / `SUI.sidenav.toggle(selectorOrEl)`
-- `SUI.sidenav.collapseAll(selectorOrEl)` / `SUI.sidenav.expandAll(selectorOrEl)`
-- `SUI.toast.success(title, message)` / `SUI.toast.error(title, message)` / `SUI.toast.warning(title, message)` / `SUI.toast.info(title, message)`
-- `SUI.tabs.init()` — Auto-wires `data-tab`/`data-view` buttons. `SUI.tabs.activate(tabElement)` for programmatic switching.
-- `SUI.accordion.init()` — Auto-wires accordion triggers. `SUI.accordion.toggle(trigger)`, `.expandAll(container)`, `.collapseAll(container)`.
-- `SUI.tooltip.init()` — Hover/focus positioning. CSS-driven, no imperative show/hide.
-- `SUI.segmented.init()` — Auto-wires segment selection. No public imperative API.
+### JS API Reference (grep-verified against sui.js and dist/sui.min.js)
+
+| Module | Public Methods |
+|--------|---------------|
+| SUI.theme | set(mode), toggle(), current(), resolved() |
+| SUI.tabs | activate(el) |
+| SUI.accordion | toggle(trigger), expandAll(container), collapseAll(container) |
+| SUI.dropdown | open(el), close(el), toggle(el) |
+| SUI.modal | open(sel), close(sel) |
+| SUI.toast | show(opts), success(t,m), error(t,m), warning(t,m), info(t,m), dismiss(el), clearAll() |
+| SUI.tooltip | show(el), hide(el) |
+| SUI.copy | text(str), fromElement(sel) |
+| SUI.sheet | open(sel), close(sel), toggle(sel) |
+| SUI.segmented | select(el) |
+| SUI.sidenav | open(sel), close(sel), toggle(sel), expandAll(nav), collapseAll(nav), isOpen(sel) |
+| SUI.panel | open(sel), close(sel), toggle(sel), isOpen(sel) |
+
+**Classes that do NOT exist** (commonly hallucinated):
+- ✘ `sui-card-content` — use `sui-card-body`
+- ✘ `SUI.utils.copy()` — use `SUI.copy.text()` or `SUI.copy.fromElement()`
+- ✘ `SUI.modal.confirm()` / `SUI.modal.prompt()` — do not exist. Use the Confirmation Dialog recipe
+- ✘ `sui-layout` / `sui-main` / `sui-layout-body` — do not exist. Use the App Shell Scaffold recipe
 
 ### Content & Typography
-- `sui-prose` (+ `-sm`/`-lg`/`-narrow`/`-wide`) — Long-form typography
-- `sui-mark`, `sui-mark-current` — Search highlights
-- `sui-meta` — Dot-separated metadata
-- `sui-toolbar`, `sui-toolbar-btn`, `sui-toolbar-sep` — Action bar
-- `sui-kpi-value`, `sui-kpi-label` — Metric display
+- `sui-prose` (+ `-sm`/`-lg`/`-narrow`/`-wide`) â€” Long-form typography
+- `sui-mark`, `sui-mark-current` â€” Search highlights
+- `sui-meta` â€” Dot-separated metadata
+- `sui-toolbar`, `sui-toolbar-btn`, `sui-toolbar-sep` â€” Action bar
+- `sui-kpi-value`, `sui-kpi-label` â€” Metric display
 
 ### Other Components
-- `sui-empty` + `sui-empty-icon/title/text` — Empty states
-- `sui-skeleton` + `-text/-heading/-avatar/-card` — Loading
-- `sui-chip` + `sui-chip-remove` — Tags (CSS only, BYOJS)
-- `sui-dropzone` — File drop area (CSS only, BYOJS)
-- `sui-timeline` + `sui-timeline-item/content` — Activity feed
-- `sui-shield` — Two-segment badge (label + value)
-- `sui-divider` — Horizontal rule
+- `sui-empty` + `sui-empty-icon/title/text` â€” Empty states
+- `sui-skeleton` + `-text/-heading/-avatar/-card` â€” Loading
+- `sui-chip` + `sui-chip-remove` â€” Tags (CSS only, BYOJS)
+- `sui-dropzone` â€” File drop area (CSS only, BYOJS)
+- `sui-timeline` + `sui-timeline-item/content` â€” Activity feed
+- `sui-shield` â€” Two-segment badge (label + value)
+- `sui-divider` â€” Horizontal rule
 
 ### Utilities
 - `sui-flex`, `sui-flex-col`, `sui-flex-nowrap`, `sui-flex-between`, `sui-items-center`
 - `sui-grid`, `sui-grid-2/3/4`, `sui-grid-auto`
 - `sui-gap-1/2/3/4`, `sui-mt-1/2/3/4`, `sui-mb-1/2/3/4`
-- `sui-scroll-x` — Horizontal scroll
-- `sui-hidden` — `display: none !important`
-- `sui-visually-hidden` — Screen reader only
+- `sui-scroll-x` â€” Horizontal scroll
+- `sui-hidden` â€” `display: none !important`
+- `sui-visually-hidden` â€” Screen reader only
 - `sui-text-center/right`, `sui-text-cap`
-- `sui-round-none/sm/md/lg/full` — Radius overrides
+- `sui-round-none/sm/md/lg/full` â€” Radius overrides
 
 ---
 
@@ -241,7 +252,7 @@ Check these before building custom patterns:
 | Sidenav Search | `sui-input` + filter JS hiding `sui-sidenav-link` elements |
 | Sidenav Context | `SUI.sidenav.collapseAll()` + expand active group |
 | Panel Push Mode | CSS grid toggle resizing main content |
-| Master-Detail | `sui-table-interactive` row click → `sui-panel` detail |
+| Master-Detail | `sui-table-interactive` row click â†’ `sui-panel` detail |
 | Notification Centre | `sui-panel` + stacked `sui-card` + `sui-badge` |
 | Floating Action Bar | `sui-card-shadow` + `sui-btn` + `sui-badge` + `position: fixed` |
 | Stepper / Wizard | `sui-card` + `sui-badge` + numbered steps + JS state |
@@ -250,8 +261,15 @@ Check these before building custom patterns:
 | FilePond Integration | SUI token overrides for FilePond file upload (background, border, status colours). Complements `sui-dropzone` |
 | Quill Integration | SUI token overrides for Quill Snow theme (toolbar, editor, picker dropdowns). CDN-first choice; TipTap/Lexical for bundler setups |
 | Tom Select Integration | SUI token overrides for Tom Select (control, dropdown, tags, focus ring). Enhanced select/autocomplete/tagging |
+| Search Bar | `sui-input` + `sui-btn`, flex non-wrapping. Icon or text button variant |
+| Inline Selection Bar | Selection count + action buttons above content. `sui-btn`, `aria-live`, `.is-selected` rows |
+| Command Palette | `<dialog>` + `sui-input` + results list + `sui-kbd` hints. ⌘K pattern, BYOJS search logic |
+| Confirmation Dialog | `role="alertdialog"` + `sui-btn-danger`. No `SUI.modal.confirm()` API — build your own |
+| Panel Polish | Panel header/footer/sizing patterns. CRM detail drawer variant. Recipe CSS, not modifiers |
+| Popover | Light (click-outside) and heavy (focus-trap) patterns. Positioned content region |
+| App Shell Scaffold | `sui-topbar` + `sui-sidenav` + scrollable main. Uses `app-*` classes, not `sui-*` |
 
-### Common Names → SUI Solutions
+### Common Names â†’ SUI Solutions
 
 | What you call it | SUI solution | Type |
 |-----------------|-------------|------|
@@ -259,7 +277,7 @@ Check these before building custom patterns:
 | Modal / Popup / Dialog | `sui-dialog` with native `<dialog>` | Component |
 | Drawer / Slide-over | `sui-panel` (right) or `sui-sheet` (bottom) | Component |
 | Toast / Snackbar | `SUI.toast.success/error/warning/info()` | JS API |
-| Tabs / Tab bar | `sui-nav` + `[role="tablist"]` + `data-tab`/`data-view` — `SUI.tabs.activate(el)` for programmatic switching | Component |
+| Tabs / Tab bar | `sui-nav` + `[role="tablist"]` + `data-tab`/`data-view` â€” `SUI.tabs.activate(el)` for programmatic switching | Component |
 | Wizard / Steps | `sui-stepper` + `sui-step` + `sui-step-indicator` | Component |
 | Activity feed / Log | `sui-timeline` + `sui-timeline-item` | Component |
 | Search highlight | `sui-mark` + `sui-mark-current` | Component |
@@ -269,23 +287,23 @@ Check these before building custom patterns:
 | Empty state | `sui-empty` + `sui-empty-icon/title/text` | Component |
 | File upload area | `sui-dropzone` | Component |
 | App shell / SPA layout | `sui-screen` + `sui-screen-header/body/footer` | Component |
-| Date picker / Calendar | Flatpickr integration recipe — SUI token overrides, not a native component | Recipe |
+| Date picker / Calendar | Flatpickr integration recipe â€” SUI token overrides, not a native component | Recipe |
 | Kanban / Board | `sui-flex-nowrap` + `sui-scroll-x` + `sui-card` | Recipe |
-| Master-Detail / Inbox | `sui-table-interactive` row click → `sui-panel` detail | Recipe |
+| Master-Detail / Inbox | `sui-table-interactive` row click â†’ `sui-panel` detail | Recipe |
 | Push layout | CSS grid toggle resizing main content | Recipe |
 | Notification panel | `sui-panel` + stacked `sui-card` + `sui-badge` | Recipe |
 | Inline edit | `sui-input` + click-to-edit | Recipe |
 | Floating action bar | `sui-card-shadow` + `sui-btn` + fixed positioning | Recipe |
-| Chart / Graph / Data viz | Chart.js integration recipe — SUI token helper for colours/fonts | Recipe |
-| File upload / Drag-drop | FilePond integration recipe — SUI token overrides. Also see `sui-dropzone` for CSS-only | Recipe |
-| Rich text / WYSIWYG editor | Quill integration recipe — SUI token overrides (CDN-first). TipTap/Lexical for bundlers | Recipe |
-| Enhanced select / Autocomplete / Tagging | Tom Select integration recipe — SUI token overrides for control + dropdown | Recipe |
+| Chart / Graph / Data viz | Chart.js integration recipe â€” SUI token helper for colours/fonts | Recipe |
+| File upload / Drag-drop | FilePond integration recipe â€” SUI token overrides. Also see `sui-dropzone` for CSS-only | Recipe |
+| Rich text / WYSIWYG editor | Quill integration recipe â€” SUI token overrides (CDN-first). TipTap/Lexical for bundlers | Recipe |
+| Enhanced select / Autocomplete / Tagging | Tom Select integration recipe â€” SUI token overrides for control + dropdown | Recipe |
 
 ---
 
 ## Icons
 
-SUI has **zero icon dependency**. Any library works (Lucide, Heroicons, Phosphor, Font Awesome, SVG). **Do NOT assume `sui-icon-*` classes exist — they don't.**
+SUI has **zero icon dependency**. Any library works (Lucide, Heroicons, Phosphor, Font Awesome, SVG). **Do NOT assume `sui-icon-*` classes exist â€” they don't.**
 - `aria-hidden="true"` on decorative icons
 - Always pair icons with text labels
 
@@ -293,20 +311,20 @@ SUI has **zero icon dependency**. Any library works (Lucide, Heroicons, Phosphor
 
 ## Canadian English
 
-SUI's documentation uses Canadian English (colour, behaviour, organisation). This is a documentation convention — it does not apply to your application code.
+SUI's documentation uses Canadian English (colour, behaviour, organisation). This is a documentation convention â€” it does not apply to your application code.
 
 ---
 
 ## Common Mistakes
 
-1. **Inventing `sui-*` classes** — Warn the human, use custom classes with SUI tokens
-2. **Semantic tokens for logos** — `--sui-blue-primary` shifts between themes
-3. **Colour-only status** — Always pair with icon + text
-4. **Missing tab ARIA** — `role="tablist"`, `role="tab"`, `role="tabpanel"`
-5. **Skipping recipes** — Check the list before building custom
-6. **`!important` in components** — Only in utility classes
-7. **Hardcoding hex** — Use `--sui-*` tokens
-8. **Forgetting mobile** — 375px first, `data-label` on tables
+1. **Inventing `sui-*` classes** â€” Warn the human, use custom classes with SUI tokens
+2. **Semantic tokens for logos** â€” `--sui-blue-primary` shifts between themes
+3. **Colour-only status** â€” Always pair with icon + text
+4. **Missing tab ARIA** â€” `role="tablist"`, `role="tab"`, `role="tabpanel"`
+5. **Skipping recipes** â€” Check the list before building custom
+6. **`!important` in components** â€” Only in utility classes
+7. **Hardcoding hex** â€” Use `--sui-*` tokens
+8. **Forgetting mobile** â€” 375px first, `data-label` on tables
 
 ---
 

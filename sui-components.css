@@ -1,13 +1,13 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.5.1
+ * Version: 2.6.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
  * Requires: sui-tokens.css
  * Optional: sui.js (for interactive components)
  *
- * Made in Canada with love ðŸ‡¨ðŸ‡¦
+ * Made in Canada with love 🇨🇦
  * License: MIT
  */
 
@@ -128,10 +128,11 @@ pre code {
 }
 
 /* Keyboard input */
-kbd {
+kbd,
+.sui-kbd {
   font-family: var(--sui-font-mono);
-  font-size: 0.85em;
-  padding: 2px 6px;
+  font-size: var(--sui-text-small);
+  padding: var(--sui-space-1) var(--sui-space-2);
   border-radius: var(--sui-radius-sm);
   border: 1px solid var(--sui-border);
   background: var(--sui-bg-card);
@@ -479,6 +480,9 @@ kbd {
 .sui-card-flush { padding: 0; }
 .sui-card-muted { background: var(--sui-bg-elevated); }
 .sui-card-shadow { box-shadow: var(--sui-shadow-md); }
+.sui-card-compact { padding: var(--sui-space-2); }
+.sui-card-compact .sui-card-header,
+.sui-card-compact .sui-card-body { padding: var(--sui-space-2); }
 
 .sui-card-interactive {
   cursor: pointer;
@@ -620,7 +624,7 @@ kbd {
 .sui-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .sui-btn-sm svg { width: 16px; height: 16px; }
 
-/* Dark mode: progress-labeled backgrounds use brand tokens for white text (â‰¥4.5:1) */
+/* Dark mode: progress-labeled backgrounds use brand tokens for white text (≥4.5:1) */
 [data-theme="dark"] .sui-progress-labeled .sui-progress-bar                          { background: var(--sui-btn-primary-bg); }
 [data-theme="dark"] .sui-progress-success.sui-progress-labeled .sui-progress-bar     { background: var(--sui-btn-success-bg); }
 [data-theme="dark"] .sui-progress-warning.sui-progress-labeled .sui-progress-bar     { background: #92400E; }
@@ -1864,7 +1868,8 @@ dialog.sui-dialog-wide { max-width: 720px; }
 }
 
 .sui-tooltip:hover .sui-tooltip-content,
-.sui-tooltip:focus-within .sui-tooltip-content {
+.sui-tooltip:focus-within .sui-tooltip-content,
+.sui-tooltip.is-tooltip-visible .sui-tooltip-content {
   opacity: 1;
 }
 
@@ -1936,6 +1941,13 @@ dialog.sui-dialog-wide { max-width: 720px; }
   line-height: 1;
 }
 
+.sui-kpi-foot {
+  font-size: var(--sui-text-small);
+  color: var(--sui-text-muted);
+  margin-top: var(--sui-space-1);
+  line-height: 1.4;
+}
+
 
 /* ==========================================================================
    Tables
@@ -1985,6 +1997,12 @@ dialog.sui-dialog-wide { max-width: 720px; }
 .sui-table-interactive tbody tr:focus-visible {
   outline: 3px solid var(--sui-blue-soft);
   outline-offset: -3px;
+}
+
+/* Selected row state — uses box-shadow instead of border-left (border-collapse) */
+.sui-table tbody tr.is-selected {
+  background: var(--sui-blue-soft);
+  box-shadow: inset 3px 0 0 0 var(--sui-blue-primary);
 }
 
 /* Sortable columns */
@@ -2129,7 +2147,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
      </nav>
    Mobile toggle:
      <button class="sui-btn sui-btn-sm sui-btn-ghost sui-nav-toggle"
-             data-sui-nav-toggle=".sui-nav" aria-label="Menu">â˜°</button>
+             data-sui-nav-toggle=".sui-nav" aria-label="Menu">☰</button>
    ========================================================================== */
 
 .sui-nav {
@@ -3135,7 +3153,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
 }
 
 .sui-sidenav-title {
-  font-size: var(--sui-text-sm);
+  font-size: var(--sui-text-small);
   font-weight: var(--sui-weight-semibold);
   color: var(--sui-text-secondary);
   text-transform: uppercase;
@@ -3147,7 +3165,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
 
 .sui-sidenav-heading {
   display: block;
-  font-size: var(--sui-text-xs);
+  font-size: var(--sui-text-meta);
   font-weight: var(--sui-weight-semibold);
   color: var(--sui-text-muted);
   text-transform: uppercase;
@@ -3158,7 +3176,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
 .sui-sidenav-link {
   display: block;
   padding: var(--sui-space-2) var(--sui-space-4);
-  font-size: var(--sui-text-sm);
+  font-size: var(--sui-text-small);
   color: var(--sui-text-secondary);
   text-decoration: none;
   border-left: 3px solid transparent;
@@ -3184,7 +3202,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
   color: var(--sui-blue-primary);
   border-left-color: var(--sui-blue-primary);
   background: var(--sui-bg-elevated);
-  font-weight: var(--sui-weight-medium);
+  font-weight: var(--sui-weight-semibold);
 }
 
 /* Toggle button — visible on mobile only */
@@ -3195,7 +3213,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
   min-width: 44px;
   min-height: 44px;
   padding: var(--sui-space-2);
-  font-size: var(--sui-text-lg);
+  font-size: var(--sui-text-h3);
   background: var(--sui-bg-card);
   border: 1px solid var(--sui-border);
   border-radius: var(--sui-radius-md);
@@ -3265,7 +3283,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
   justify-content: space-between;
   width: 100%;
   padding: var(--sui-space-2) var(--sui-space-4);
-  font-size: var(--sui-text-xs);
+  font-size: var(--sui-text-meta);
   font-weight: var(--sui-weight-semibold);
   color: var(--sui-text-muted);
   text-transform: uppercase;

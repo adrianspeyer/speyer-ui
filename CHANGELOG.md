@@ -4,6 +4,60 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.6.0] — 2026-02-20
+
+### Theme: API Completeness + Showcase Polish
+
+Closes the "hallucination surface" — four interactive modules (tooltip, segmented, toast, panel) lacked complete public APIs that other modules provided, causing AIs to infer non-existent methods. This release adds 11 new methods, 5 CSS primitives, and 7 new recipes.
+
+### Added
+
+**JavaScript (11 new public methods):**
+- **`SUI.theme.resolved()`** — Returns the actual rendered theme (`'light'` or `'dark'`), even when preference is `'auto'`. Essential for canvas-based integrations (Chart.js).
+- **`SUI.toast.dismiss(el)`** — Programmatic dismissal of a single toast. Type-checks the element, delegates to internal `_dismiss()`.
+- **`SUI.toast.clearAll()`** — Dismisses all active toasts. Useful for navigation, logout, or state transitions.
+- **`SUI.tooltip.show(el)` / `SUI.tooltip.hide(el)`** — Programmatic tooltip visibility for onboarding flows and guided tours. Advisory hide: CSS hover/focus takes precedence.
+- **`SUI.segmented.select(el)`** — Programmatic selection of a segmented control option. Matches the `tabs.activate()` pattern.
+- **`SUI.sidenav.isOpen(sel)`** — Boolean getter for sidenav mobile overlay state.
+- **`SUI.panel.isOpen(sel)`** — Boolean getter for panel open state.
+- **Tab ↔ Panel ARIA wiring (A7)** — `tabs.init()` now generates `aria-controls` on tabs and `aria-labelledby` on panels, completing WAI-ARIA Authoring Practices association.
+- **Copy `is-copied` class toggle (A8)** — `[data-sui-copy]` buttons receive `is-copied` class for 1.6s on success. Icon-library-agnostic visual feedback.
+- **Toast error `aria-live="assertive"` (A3)** — Error toasts now set `aria-live="assertive"` for immediate screen reader announcement.
+
+**CSS (5 new primitives):**
+- **`.sui-kbd`** — Class alias for `<kbd>` element styling. Tokenised padding and font size.
+- **`.is-selected` (on table rows)** — Blue tint + left accent for selected row state. Uses box-shadow for border-collapse compatibility.
+- **`.sui-card-compact`** — Dense card padding for KPI grids and dashboards.
+- **`.sui-kpi-foot`** — Subtext line for KPI cards (font-size, muted colour, spacing).
+- **`.is-tooltip-visible`** — CSS class for programmatic tooltip visibility (pairs with `SUI.tooltip.show()`).
+
+**Recipes (7 new, all zero bundle cost):**
+- **Search Bar** — Input + action button, non-wrapping flex composition.
+- **Inline Selection Bar** — Selection count + actions above content. Distinct from Floating Action Bar (FAB).
+- **Command Palette** — ⌘K dialog with search input, results list, and `sui-kbd` shortcut hints.
+- **Confirmation Dialog** — `role="alertdialog"` with destructive action pattern. Demonstrates why there is no `SUI.modal.confirm()`.
+- **Panel Polish** — Header/footer/sizing patterns + CRM-style detail drawer variant.
+- **Popover** — Light (click-outside dismissal) and heavy (focus-trap) interactive content patterns.
+- **App Shell Scaffold** — Canonical responsive layout with `sui-topbar` + `sui-sidenav` + scrollable main. Uses `app-*` classes (not `sui-*`). Documents the alternative to hallucinated `sui-layout`/`sui-main`.
+
+**Documentation:**
+- **JS API Reference Table** in AI context files (`.claude/instructions.md`, `.cursor/rules`, `llms.txt`) — replaces prose API descriptions with scannable table. Directly addresses #1 root cause of API hallucinations.
+- **Card double-padding callout** in demo page — documents `sui-card-flush` + `sui-card-compact` pattern.
+- **docs/ folder** updated: `javascript-api.md` reflects all new methods, `recipes.md` includes all 29 recipes.
+
+### Fixed
+
+- **Sidenav token mismatches (B5)** — 6 undefined token references fixed: `--sui-text-sm` → `--sui-text-small`, `--sui-text-xs` → `--sui-text-meta`, `--sui-text-lg` → `--sui-text-h3`, `--sui-weight-medium` → `--sui-weight-semibold`.
+- **Preflight false positives (D1)** — `aria-hidden-focus` regex tightened to only match container elements. Decorative `aria-hidden="true"` on `<i>` and `<svg>` icons no longer triggers false focusable-element warnings.
+
+### Bundle
+
+- **Total:** ~94KB minified (under 95KB ceiling)
+- **CSS delta:** +18 lines source
+- **JS delta:** +81 lines source (~1.8KB minified)
+
+---
+
 ## [2.5.1] — 2026-02-18
 
 ### Added
@@ -103,7 +157,7 @@ All notable changes to the Speyer UI System are documented here.
 - **Mark/Highlight dark mode contrast** — Dark `sui-mark` opacity bumped 0.2 → 0.25 (clearer highlight). Dark `sui-mark-current` opacity bumped 0.5 → 0.6, text switched from white to black (contrast improved from 5.35:1 to 6.9:1). Light mode unchanged.
 - **Stepper complete indicator dark contrast** — `--sui-success-strong` → `--sui-btn-success-bg` (contrast improved from 2.28:1 to 5.02:1).
 - **Encoding cleanup** — 200+ mojibake characters fixed across all source files (em dashes, arrows, multiply symbols). Added preflight gate to prevent recurrence.
-- **Decorative emoji removed** — Flag emoji removed from footer (index.html, README.md). Functional emoji (status indicators ✔ ⚠ ✕) retained.
+- **Decorative emoji removed** — Flag emoji removed from footer (index.html, README.md). Functional emoji (status indicators ✓ ⚠ ✕) retained.
 
 ### Changed
 
@@ -194,7 +248,7 @@ The gap between "design system" and "app framework" is content. Interface compon
 - **Scoped Tabs:** `data-sui-tabs` wrapper scopes tab discovery by container. Multiple independent tab sets on one page no longer conflict. Pages without the wrapper work as before (backward compatible).
 - **Avatar XL:** `sui-avatar-xl` at 80px for profile pages and account headers.
 - **Table Interactive:** `sui-table-interactive` — clickable rows with `cursor: pointer` and focus ring. Composes with `sui-table-hover`. Developer adds `tabindex="0"`, `role="link"`, and handler.
-- **Table Sortable:** `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Three states: neutral (⇅), ascending (↑), descending (↓). Developer toggles attribute value. No JS needed.
+- **Table Sortable:** `sui-table-sortable` — visual sort indicators on `<th data-sort>`. Three states: neutral (…), ascending (↑), descending (↓). Developer toggles attribute value. No JS needed.
 - **Progress Labeled:** `sui-progress-labeled` + `sui-progress-text` — text inside the progress bar fill. Uses `-strong` backgrounds in light mode and hardcoded dark-mode overrides for WCAG AA white-text contrast on all five colour variants.
 - **Dropzone:** `sui-dropzone` — file upload area with dashed border, hover state, `.is-dragover` state. CSS only — drag-and-drop behaviour is bring-your-own JS.
 - **Timeline:** `sui-timeline` + `sui-timeline-item` + `sui-timeline-content` — activity feed layout with avatar-left, content-right, and vertical connector. Optimised for `sui-avatar-sm`. `role="feed"` + `role="article"` for accessibility.
@@ -405,7 +459,7 @@ The gap between "design system" and "app framework" is content. Interface compon
 
 ## [2.0.0] — 2026-02-14
 
-### ðŸš€ Major Release — Complete Design System
+### 🚀 Major Release — Complete Design System
 
 This release transforms SUI from a token + component starter into a complete, production-ready design system with 25+ components, an optional JavaScript toolkit, and comprehensive AI integration prompts.
 

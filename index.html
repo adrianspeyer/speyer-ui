@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "2.5.1",
+    "version": "2.6.0",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -98,7 +98,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.5.1</span>
+          <span class="sui-version-pill">v2.6.0</span>
         </div>
       </div>
 
@@ -143,7 +143,7 @@
         <div class="sui-sidenav-header">
           <span class="sui-sidenav-title">Sections</span>
           <button class="sui-sidenav-close sui-btn sui-btn-ghost sui-btn-sm"
-                  aria-label="Close navigation" type="button">âœ•</button>
+                  aria-label="Close navigation" type="button">✕</button>
         </div>
         <div class="demo-sidenav-search">
           <input type="search" class="sui-input" id="sidenavSearch"
@@ -194,20 +194,27 @@
           <div class="sui-sidenav-group-links" id="group-recipes">
             <a href="#recipe-action-sheet" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="mobile menu options share">Action Sheet</a>
             <a href="#recipe-app-shell" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="spa layout viewport scaffold">App Shell</a>
+            <a href="#recipe-app-shell-scaffold" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="responsive layout topbar sidenav sidebar desktop scaffold">App Shell Scaffold</a>
             <a href="#recipe-blog-post" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="article content writing">Blog Post</a>
             <a href="#recipe-button-group" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="radio options select toggle">Button Group</a>
             <a href="#recipe-chartjs" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="chart graph bar line pie doughnut data visualisation chartjs integration third-party">Chart.js</a>
+            <a href="#recipe-command-palette" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="cmdk search shortcut keyboard command palette">Command Palette</a>
+            <a href="#recipe-confirm" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="confirm delete destructive alert dialog modal">Confirmation Dialog</a>
             <a href="#recipe-document-library" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="file list table download">Document Library</a>
             <a href="#recipe-filepond" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="file upload drag drop browse filepond integration third-party">FilePond</a>
             <a href="#recipe-flatpickr" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="datepicker date picker calendar date range time flatpickr integration third-party">Flatpickr</a>
             <a href="#recipe-fab" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="floating action bar bulk toolbar fixed selection">Floating Action Bar</a>
             <a href="#recipe-inline-edit" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="click edit save cancel field">Inline Edit</a>
+            <a href="#recipe-inline-selection-bar" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="bulk actions selected count table checkbox">Inline Selection Bar</a>
             <a href="#recipe-kanban" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="board pipeline columns drag trello">Kanban Board</a>
             <a href="#recipe-master-detail" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="inbox preview crm email helpdesk">Master-Detail</a>
             <a href="#recipe-notification-centre" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="alerts messages inbox bell">Notification Centre</a>
+            <a href="#recipe-panel-polish" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="panel header footer drawer detail sizing crm">Panel Polish</a>
             <a href="#recipe-push-mode" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="panel resize content layout grid">Panel Push Mode</a>
+            <a href="#recipe-popover" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="popover dropdown floating content filter quick-add">Popover</a>
             <a href="#recipe-profile-page" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="user account settings avatar">Profile Page</a>
             <a href="#recipe-quill" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="rich text editor wysiwyg quill formatting bold italic integration third-party">Quill</a>
+            <a href="#recipe-search-bar" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="search input button action find">Search Bar</a>
             <a href="#recipe-settings" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="preferences options toggles configuration">Settings</a>
             <a href="#recipe-sidenav-context" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="collapse switch workspace project">Sidenav Context</a>
             <a href="#recipe-sidenav-search" class="sui-sidenav-link" data-sidenav-tab="recipes" data-keywords="filter find navigation links">Sidenav Search</a>
@@ -574,6 +581,10 @@
             <div class="sui-kpi-label sui-mb-2">Muted + Interactive</div>
             <p>Subtle hover lift. Lower visual weight than regular interactive.</p>
           </div>
+        </div>
+        <div class="sui-alert sui-alert-info sui-mt-3" role="note">
+          <i data-lucide="info" aria-hidden="true"></i>
+          <div><strong>Avoid double padding.</strong> If you use <code>.sui-card-header</code> / <code>.sui-card-body</code>, pair the wrapper with <code>.sui-card-flush</code> to zero out the card’s own padding. Use <code>.sui-card-compact</code> for dense layouts like KPI grids.</div>
         </div>
       </div>
 
@@ -1664,7 +1675,7 @@ Accessibility (mandatory):
 Icons: SUI works with any icon library. Always add aria-hidden="true" on decorative icons. Always pair icons with visible text labels — never use an icon alone to communicate meaning.
 
 Status patterns (always icon + text):
-- Success: âœ” + text | Warning: âš  + text | Error: âœ• + text | Info: â„¹ + text
+- Success: ✓ + text | Warning: ⚠ + text | Error: ✕ + text | Info: ℹ + text
 
 Elevation: Borders are the default card separation. Shadows are opt-in (sui-card-shadow).
 Motion: 150-250ms ease-out. Feedback only. No decorative animations.
@@ -1943,6 +1954,91 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
 
+            <div class="sui-section" id="recipe-app-shell-scaffold">
+        <h2>App Shell Scaffold</h2>
+        <p class="sui-text-cap sui-mt-2">Canonical responsive layout combining <code>sui-topbar</code> + <code>sui-sidenav</code> + scrollable main content. Uses <code>app-*</code> classes (not <code>sui-</code>). Composes from existing SUI components. Custom CSS: ~15 lines.</p>
+        <p class="sui-text-muted sui-mt-2"><strong>Note:</strong> <code>sui-layout</code>, <code>sui-main</code>, and <code>sui-layout-body</code> do <strong>not</strong> exist in SUI. This recipe provides the documented alternative.</p>
+        <style>
+          .app-shell { display: flex; flex-direction: column; height: 400px; overflow: hidden; border-radius: var(--sui-radius-lg); border: 1px solid var(--sui-border); }
+          .app-shell .sui-topbar { flex-shrink: 0; }
+          .app-shell-body { display: flex; flex: 1; min-height: 0; }
+          .app-shell-body .sui-sidenav { position: static; height: auto; border-radius: 0; border: none; border-right: 1px solid var(--sui-border); }
+          .app-shell-body .sui-sidenav-panel { position: static; width: 220px; height: 100%; box-shadow: none; }
+          .app-shell-main { flex: 1; overflow-y: auto; padding: var(--sui-space-4); background: var(--sui-bg-primary); }
+          @media (max-width: 768px) {
+            .app-shell-body .sui-sidenav { display: none; }
+            .app-shell-main { padding: var(--sui-space-3); }
+          }
+        </style>
+        <div class="sui-card sui-card-flush sui-mt-4">
+          <div class="app-shell">
+            <header class="sui-topbar">
+              <div class="sui-brand"><span class="sui-brand-name">My App</span></div>
+              <div class="sui-topbar-actions">
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><i data-lucide="bell" aria-hidden="true"></i></button>
+              </div>
+            </header>
+            <div class="app-shell-body">
+              <nav class="sui-sidenav" aria-label="App navigation">
+                <div class="sui-sidenav-panel">
+                  <a href="#" class="sui-sidenav-link is-active" aria-current="page"><i data-lucide="layout-dashboard" aria-hidden="true"></i> Dashboard</a>
+                  <a href="#" class="sui-sidenav-link"><i data-lucide="users" aria-hidden="true"></i> Contacts</a>
+                  <a href="#" class="sui-sidenav-link"><i data-lucide="file-text" aria-hidden="true"></i> Documents</a>
+                  <a href="#" class="sui-sidenav-link"><i data-lucide="settings" aria-hidden="true"></i> Settings</a>
+                </div>
+              </nav>
+              <main class="app-shell-main">
+                <h2 style="margin-top:0;">Dashboard</h2>
+                <div class="sui-grid sui-grid-3 sui-gap-3 sui-mt-3">
+                  <div class="sui-card sui-card-compact"><div class="sui-kpi-label">Revenue</div><div class="sui-kpi-value">$84K</div></div>
+                  <div class="sui-card sui-card-compact"><div class="sui-kpi-label">Users</div><div class="sui-kpi-value">2,847</div></div>
+                  <div class="sui-card sui-card-compact"><div class="sui-kpi-label">Tickets</div><div class="sui-kpi-value">12</div></div>
+                </div>
+              </main>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- App Shell Scaffold (~15 lines custom CSS) --&gt;
+&lt;style&gt;
+.app-shell { display: flex; flex-direction: column; height: 100vh; }
+.app-shell .sui-topbar { flex-shrink: 0; }
+.app-shell-body { display: flex; flex: 1; min-height: 0; }
+.app-shell-body .sui-sidenav {
+  position: static; height: auto; border-radius: 0;
+  border: none; border-right: 1px solid var(--sui-border);
+}
+.app-shell-body .sui-sidenav-panel {
+  position: static; width: 240px; height: 100%; box-shadow: none;
+}
+.app-shell-main { flex: 1; overflow-y: auto; padding: var(--sui-space-4); }
+@media (max-width: 768px) {
+  .app-shell-body .sui-sidenav { display: none; }
+}
+&lt;/style&gt;
+
+&lt;div class="app-shell"&gt;
+  &lt;header class="sui-topbar"&gt;...&lt;/header&gt;
+  &lt;div class="app-shell-body"&gt;
+    &lt;nav class="sui-sidenav" aria-label="App navigation"&gt;
+      &lt;div class="sui-sidenav-panel"&gt;
+        &lt;a href="/dashboard" class="sui-sidenav-link is-active"&gt;Dashboard&lt;/a&gt;
+        &lt;a href="/contacts" class="sui-sidenav-link"&gt;Contacts&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+    &lt;main class="app-shell-main"&gt;
+      &lt;!-- Your page content --&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: SEARCH BAR (v2.6.0) -->
+
       <!-- RECIPE: PROFILE PAGE -->
       <div class="sui-section" id="recipe-blog-post">
         <h2>Blog Post / Article</h2>
@@ -2213,7 +2309,106 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
 
-      <div class="sui-section" id="recipe-document-library">
+      <div class="sui-section" id="recipe-command-palette">
+        <h2>Command Palette</h2>
+        <p class="sui-text-cap sui-mt-2"><kbd>Ctrl</kbd>+<kbd>K</kbd> dialog with search input and results. Composes from: <code>sui-dialog</code>, <code>sui-input</code>, <code>sui-kbd</code>. Custom CSS: ~10 lines. BYOJS: you provide search logic.</p>
+        <style>
+          .recipe-cmdk-results { list-style: none; padding: 0; margin: var(--sui-space-2) 0 0; max-height: 220px; overflow-y: auto; }
+          .recipe-cmdk-results li { display: flex; align-items: center; gap: var(--sui-space-2); padding: var(--sui-space-2) var(--sui-space-3); border-radius: var(--sui-radius-sm); cursor: pointer; font-size: var(--sui-text-small); }
+          .recipe-cmdk-results li:hover, .recipe-cmdk-results li.is-active { background: var(--sui-bg-elevated); }
+          .recipe-cmdk-results li kbd { margin-left: auto; }
+        </style>
+        <div class="sui-card sui-mt-4">
+          <div style="background:var(--sui-bg-elevated);border-radius:var(--sui-radius-md);max-width:480px;margin:0 auto;overflow:hidden;border:1px solid var(--sui-border);">
+            <div style="padding:var(--sui-space-3);border-bottom:1px solid var(--sui-border);">
+              <input class="sui-input" type="text" placeholder="Type a command..." aria-label="Command palette" role="combobox" aria-expanded="true" autocomplete="off">
+            </div>
+            <ul class="recipe-cmdk-results" role="listbox">
+              <li role="option"><i data-lucide="plus" aria-hidden="true" style="width:16px;height:16px;"></i> New Contact <kbd class="sui-kbd">N</kbd></li>
+              <li role="option" class="is-active"><i data-lucide="search" aria-hidden="true" style="width:16px;height:16px;"></i> Search Deals <kbd class="sui-kbd">S</kbd></li>
+              <li role="option"><i data-lucide="settings" aria-hidden="true" style="width:16px;height:16px;"></i> Settings <kbd class="sui-kbd">,</kbd></li>
+              <li role="option"><i data-lucide="moon" aria-hidden="true" style="width:16px;height:16px;"></i> Toggle Theme <kbd class="sui-kbd">T</kbd></li>
+            </ul>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Open with Ctrl/Cmd+K --&gt;
+&lt;dialog class="sui-dialog" id="cmdk" aria-label="Command palette"&gt;
+  &lt;div class="sui-dialog-content" style="max-width:480px;"&gt;
+    &lt;input class="sui-input" type="text" placeholder="Type a command..."
+           role="combobox" aria-expanded="true"&gt;
+    &lt;ul role="listbox"&gt;
+      &lt;li role="option"&gt;
+        &lt;i data-lucide="plus" aria-hidden="true"&gt;&lt;/i&gt; New Contact
+        &lt;kbd class="sui-kbd"&gt;N&lt;/kbd&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;
+
+&lt;script&gt;
+document.addEventListener('keydown', e =&gt; {
+  if ((e.metaKey || e.ctrlKey) &amp;&amp; e.key === 'k') {
+    e.preventDefault();
+    SUI.modal.open('#cmdk');
+  }
+});
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+            <div class="sui-section" id="recipe-confirm">
+        <h2>Confirmation Dialog</h2>
+        <p class="sui-text-cap sui-mt-2">Accessible destructive-action confirmation using <code>role="alertdialog"</code>. Composes from: <code>sui-dialog</code>, <code>sui-btn-danger</code>. Custom CSS: 0 lines.</p>
+        <div class="sui-card sui-mt-4">
+          <button class="sui-btn sui-btn-danger" type="button" data-sui-modal="#recipe-confirm-dialog"><i data-lucide="trash-2" aria-hidden="true"></i> Delete account</button>
+          <dialog class="sui-dialog" id="recipe-confirm-dialog" role="alertdialog" aria-label="Confirm account deletion">
+            <div class="sui-dialog-content">
+              <h3 style="margin-top:0;">Delete your account?</h3>
+              <p class="sui-text-muted">This action is permanent. All your data will be removed and cannot be recovered.</p>
+              <div class="sui-flex sui-gap-2 sui-mt-4">
+                <button class="sui-btn sui-btn-danger" type="button" onclick="SUI.modal.close('#recipe-confirm-dialog')">Delete permanently</button>
+                <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.modal.close('#recipe-confirm-dialog')">Cancel</button>
+              </div>
+            </div>
+          </dialog>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;button class="sui-btn sui-btn-danger" data-sui-modal="#confirm"&gt;
+  Delete account
+&lt;/button&gt;
+
+&lt;dialog class="sui-dialog" id="confirm"
+        role="alertdialog" aria-label="Confirm deletion"&gt;
+  &lt;div class="sui-dialog-content"&gt;
+    &lt;h3&gt;Delete your account?&lt;/h3&gt;
+    &lt;p&gt;This action is permanent.&lt;/p&gt;
+    &lt;div class="sui-flex sui-gap-2 sui-mt-4"&gt;
+      &lt;button class="sui-btn sui-btn-danger"
+              onclick="SUI.modal.close('#confirm')"&gt;Delete&lt;/button&gt;
+      &lt;button class="sui-btn sui-btn-ghost"
+              onclick="SUI.modal.close('#confirm')"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;
+
+&lt;!-- Custom CSS: 0 lines. All SUI classes. --&gt;
+&lt;!-- Note: there is no SUI.modal.confirm() API — build your
+     own confirmation logic. This recipe shows the pattern. --&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: PANEL POLISH (v2.6.0) -->
+
+      <!-- RECIPE: CONFIRMATION DIALOG (v2.6.0) -->
+
+            <div class="sui-section" id="recipe-document-library">
         <h2>Document Library</h2>
         <p class="sui-text-cap sui-mt-2">Searchable file list with toolbar, metadata, and status indicators. Composes from: <code>sui-toolbar</code>, <code>sui-meta</code>, <code>sui-badge</code>, <code>sui-card</code>, <code>sui-input</code>. Custom CSS: ~3 lines.</p>
         <div class="sui-card sui-card-flush sui-mt-4">
@@ -2840,6 +3035,66 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
       </div>
 
+            <div class="sui-section" id="recipe-inline-selection-bar">
+        <h2>Inline Selection Bar</h2>
+        <p class="sui-text-cap sui-mt-2">Selection count + action buttons above content. Not to be confused with the <a href="#recipe-fab">Floating Action Bar</a> (FAB) which is a fixed-position toolbar. Composes from: <code>sui-btn</code>, <code>sui-flex</code>. Custom CSS: ~6 lines.</p>
+        <style>
+          .recipe-selection-bar { display: flex; align-items: center; gap: var(--sui-space-3); padding: var(--sui-space-2) var(--sui-space-3); background: var(--sui-blue-soft); border-radius: var(--sui-radius-sm); flex-wrap: wrap; }
+          .recipe-selection-bar .recipe-count { font-weight: var(--sui-weight-semibold); font-size: var(--sui-text-small); white-space: nowrap; }
+        </style>
+        <div class="sui-card sui-mt-4">
+          <div class="recipe-selection-bar">
+            <span class="recipe-count" aria-live="polite">3 selected</span>
+            <div class="sui-flex sui-gap-2" style="flex:1;">
+              <button class="sui-btn sui-btn-primary sui-btn-sm" type="button"><i data-lucide="mail" aria-hidden="true"></i> Email</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="tag" aria-hidden="true"></i> Tag</button>
+              <button class="sui-btn sui-btn-danger sui-btn-sm" type="button"><i data-lucide="trash-2" aria-hidden="true"></i> Delete</button>
+              <div style="flex:1;"></div>
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Clear</button>
+            </div>
+          </div>
+          <div class="sui-mt-3">
+            <div class="sui-table-wrap">
+              <table class="sui-table sui-table-hover">
+                <thead><tr><th></th><th>Name</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Acme Corp"></td><td>Acme Corp</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
+                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Globex"></td><td>Globex</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
+                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Initech"></td><td>Initech</td><td><span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle" aria-hidden="true"></i> Pending</span></td></tr>
+                  <tr><td><input type="checkbox" aria-label="Select Umbrella"></td><td>Umbrella</td><td><span class="sui-badge sui-badge-neutral"><i data-lucide="minus-circle" aria-hidden="true"></i> Inactive</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;style&gt;
+.my-selection-bar {
+  display: flex; align-items: center; gap: var(--sui-space-3);
+  padding: var(--sui-space-2) var(--sui-space-3);
+  background: var(--sui-blue-soft); border-radius: var(--sui-radius-sm);
+  flex-wrap: wrap;
+}
+&lt;/style&gt;
+
+&lt;div class="my-selection-bar"&gt;
+  &lt;span aria-live="polite"&gt;&lt;strong&gt;3 selected&lt;/strong&gt;&lt;/span&gt;
+  &lt;button class="sui-btn sui-btn-primary sui-btn-sm"&gt;Email&lt;/button&gt;
+  &lt;button class="sui-btn sui-btn-ghost sui-btn-sm"&gt;Tag&lt;/button&gt;
+  &lt;button class="sui-btn sui-btn-danger sui-btn-sm"&gt;Delete&lt;/button&gt;
+  &lt;button class="sui-btn sui-btn-ghost sui-btn-sm"&gt;Clear&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Table rows use .is-selected (v2.6.0) for visual state --&gt;
+&lt;tr class="is-selected"&gt;...&lt;/tr&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: COMMAND PALETTE (v2.6.0) -->
+
       <!-- RECIPE: KANBAN BOARD -->
       <div class="sui-section" id="recipe-kanban">
         <h2>Kanban Board</h2>
@@ -2965,7 +3220,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
               </div>
               <div class="sui-text-muted sui-mt-1" style="font-size: var(--sui-text-meta);" id="recipeMdRole"></div>
               <div class="sui-mt-3 sui-flex sui-gap-2">
-                <span class="sui-badge sui-badge-success" id="recipeMdStage"><span class="sui-badge-icon" aria-hidden="true">●</span><span id="recipeMdStageText"></span></span>
+                <span class="sui-badge sui-badge-success" id="recipeMdStage"><span class="sui-badge-icon" aria-hidden="true">↓</span><span id="recipeMdStageText"></span></span>
                 <span class="sui-badge" id="recipeMdAmount"></span>
               </div>
               <p class="sui-mt-3" style="font-size: var(--sui-text-small);" id="recipeMdDesc"></p>
@@ -3126,6 +3381,95 @@ function showDetail(id) {
         </div>
       </div>
 
+            <div class="sui-section" id="recipe-panel-polish">
+        <h2>Panel Polish</h2>
+        <p class="sui-text-cap sui-mt-2">Canonical patterns for <code>sui-panel</code> internals: header with title + close, sticky footer, sizing, and a CRM-style detail drawer variant. Custom CSS: ~10 lines.</p>
+        <style>
+          .recipe-panel-header { display: flex; align-items: center; gap: var(--sui-space-2); padding: var(--sui-space-3) var(--sui-space-4); border-bottom: 1px solid var(--sui-border); }
+          .recipe-panel-header h3 { margin: 0; flex: 1; }
+          .recipe-panel-body { flex: 1; overflow-y: auto; padding: var(--sui-space-4); }
+          .recipe-panel-footer { display: flex; gap: var(--sui-space-2); padding: var(--sui-space-3) var(--sui-space-4); border-top: 1px solid var(--sui-border); justify-content: flex-end; }
+          .recipe-panel-demo { display: flex; flex-direction: column; height: 350px; background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md); overflow: hidden; }
+        </style>
+        <div class="sui-card sui-card-flush sui-mt-4">
+          <div class="sui-grid sui-grid-2 sui-gap-4" style="padding:var(--sui-space-4);">
+            <div>
+              <div class="sui-kpi-label sui-mb-2">Standard panel layout</div>
+              <div class="recipe-panel-demo">
+                <div class="recipe-panel-header">
+                  <h3>Edit Contact</h3>
+                  <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><i data-lucide="x" aria-hidden="true"></i></button>
+                </div>
+                <div class="recipe-panel-body">
+                  <div class="sui-input-group sui-mb-3"><label class="sui-input-label">Name</label><input class="sui-input" value="Jane Cooper"></div>
+                  <div class="sui-input-group sui-mb-3"><label class="sui-input-label">Email</label><input class="sui-input" value="jane@acme.com"></div>
+                  <div class="sui-input-group"><label class="sui-input-label">Role</label><input class="sui-input" value="VP Sales"></div>
+                </div>
+                <div class="recipe-panel-footer">
+                  <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Cancel</button>
+                  <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Save</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="sui-kpi-label sui-mb-2">Detail drawer (CRM pattern)</div>
+              <div class="recipe-panel-demo">
+                <div class="recipe-panel-header">
+                  <span class="sui-avatar sui-avatar-sm">JC</span>
+                  <div>
+                    <strong>Jane Cooper</strong>
+                    <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">VP Sales, Acme Corp</div>
+                  </div>
+                  <div style="flex:1;"></div>
+                  <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><i data-lucide="x" aria-hidden="true"></i></button>
+                </div>
+                <div class="recipe-panel-body">
+                  <div class="sui-kpi-label">Contact info</div>
+                  <p style="margin:var(--sui-space-1) 0;font-size:var(--sui-text-small);">jane@acme.com</p>
+                  <p style="margin:var(--sui-space-1) 0;font-size:var(--sui-text-small);">+1 (555) 123-4567</p>
+                  <hr class="sui-divider sui-mt-3 sui-mb-3">
+                  <div class="sui-kpi-label">Recent activity</div>
+                  <div class="sui-text-muted" style="font-size:var(--sui-text-small);margin-top:var(--sui-space-2);">Opened proposal &mdash; 2h ago</div>
+                  <div class="sui-text-muted" style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Email sent &mdash; Yesterday</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;style&gt;
+.panel-header { display: flex; align-items: center; gap: var(--sui-space-2);
+  padding: var(--sui-space-3) var(--sui-space-4); border-bottom: 1px solid var(--sui-border); }
+.panel-header h3 { margin: 0; flex: 1; }
+.panel-body { flex: 1; overflow-y: auto; padding: var(--sui-space-4); }
+.panel-footer { display: flex; gap: var(--sui-space-2); justify-content: flex-end;
+  padding: var(--sui-space-3) var(--sui-space-4); border-top: 1px solid var(--sui-border); }
+&lt;/style&gt;
+
+&lt;!-- Use with SUI.panel.open('#my-panel') --&gt;
+&lt;div class="sui-panel" id="my-panel" aria-label="Edit contact"&gt;
+  &lt;div class="panel-header"&gt;
+    &lt;h3&gt;Edit Contact&lt;/h3&gt;
+    &lt;button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm"
+            aria-label="Close"&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="panel-body"&gt;...&lt;/div&gt;
+  &lt;div class="panel-footer"&gt;
+    &lt;button class="sui-btn sui-btn-ghost"&gt;Cancel&lt;/button&gt;
+    &lt;button class="sui-btn sui-btn-primary"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Sizing: override --panel-width in your CSS --&gt;
+&lt;!-- .sui-panel { --panel-width: 480px; } for wide panels --&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: POPOVER (v2.6.0) -->
+
       <!-- RECIPE: Floating Action Bar -->
       <div class="sui-section" id="recipe-push-mode">
         <h2>Panel Push Mode (Content Resize)</h2>
@@ -3191,6 +3535,77 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
           </div>
         </div>
       </div>
+
+            <div class="sui-section" id="recipe-popover">
+        <h2>Popover</h2>
+        <p class="sui-text-cap sui-mt-2">Interactive content region: more than a tooltip, less than a dialog. Light (dropdown-style, click-outside dismissal) and heavy (focus-trap, explicit close) patterns. Custom CSS: ~12 lines.</p>
+        <style>
+          .recipe-popover-wrap { position: relative; display: inline-block; }
+          .recipe-popover { position: absolute; top: calc(100% + var(--sui-space-1)); left: 0; z-index: var(--sui-z-dropdown); background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md); box-shadow: var(--sui-shadow-md); padding: var(--sui-space-3); min-width: 240px; display: none; }
+          .recipe-popover.is-open { display: block; }
+        </style>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex sui-gap-4">
+            <div>
+              <div class="sui-kpi-label sui-mb-2">Light popover</div>
+              <div class="recipe-popover-wrap">
+                <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><i data-lucide="filter" aria-hidden="true"></i> Filter</button>
+                <div class="recipe-popover" role="group" aria-label="Filter options">
+                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Status</label><select class="sui-input"><option>All</option><option>Active</option><option>Pending</option></select></div>
+                  <div class="sui-input-group"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Owner</label><select class="sui-input"><option>Anyone</option><option>Me</option></select></div>
+                  <button class="sui-btn sui-btn-primary sui-btn-sm sui-mt-3" type="button" style="width:100%;" onclick="this.closest('.recipe-popover').classList.remove('is-open')">Apply</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="sui-kpi-label sui-mb-2">Heavy popover (focus-trapped)</div>
+              <div class="recipe-popover-wrap">
+                <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><i data-lucide="plus" aria-hidden="true"></i> Quick add</button>
+                <div class="recipe-popover" role="dialog" aria-label="Quick add contact">
+                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Name</label><input class="sui-input" placeholder="Contact name"></div>
+                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Email</label><input class="sui-input" type="email" autocomplete="email" placeholder="email@example.com"></div>
+                  <div class="sui-flex sui-gap-2 sui-mt-3">
+                    <button class="sui-btn sui-btn-primary sui-btn-sm" type="button" onclick="this.closest('.recipe-popover').classList.remove('is-open')">Save</button>
+                    <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" onclick="this.closest('.recipe-popover').classList.remove('is-open')">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;style&gt;
+.my-popover-wrap { position: relative; display: inline-block; }
+.my-popover {
+  position: absolute; top: calc(100% + var(--sui-space-1)); left: 0;
+  z-index: var(--sui-z-dropdown); background: var(--sui-bg-card);
+  border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md);
+  box-shadow: var(--sui-shadow-md); padding: var(--sui-space-3);
+  min-width: 240px; display: none;
+}
+.my-popover.is-open { display: block; }
+&lt;/style&gt;
+
+&lt;!-- Light popover (no focus trap, click-outside close) --&gt;
+&lt;div class="my-popover-wrap"&gt;
+  &lt;button class="sui-btn" aria-haspopup="true"
+          aria-expanded="false"&gt;Filter&lt;/button&gt;
+  &lt;div class="my-popover" role="group"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Heavy popover (focus trap, explicit close) --&gt;
+&lt;div class="my-popover-wrap"&gt;
+  &lt;button class="sui-btn" aria-haspopup="dialog"&gt;Quick add&lt;/button&gt;
+  &lt;div class="my-popover" role="dialog" aria-label="Quick add"&gt;
+    &lt;!-- Form + Save/Cancel --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+      </div>
+
 
       <!-- RECIPE: Master-Detail (Table + Panel) -->
       <div class="sui-section" id="recipe-profile-page">
@@ -3475,7 +3890,53 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
         </div>
       </div>
 
-      <div class="sui-section" id="recipe-settings">
+      <div class="sui-section" id="recipe-search-bar">
+        <h2>Search Bar</h2>
+        <p class="sui-text-cap sui-mt-2">Input + action button, non-wrapping. Composes from: <code>sui-input</code>, <code>sui-btn</code>, <code>sui-flex</code>. Custom CSS: ~4 lines.</p>
+        <style>
+          .recipe-search-bar { display: flex; gap: var(--sui-space-2); }
+          .recipe-search-bar .sui-input { flex: 1; min-width: 0; }
+        </style>
+        <div class="sui-card sui-mt-4">
+          <div class="sui-flex-col sui-gap-4">
+            <div>
+              <div class="sui-kpi-label sui-mb-2">Icon button variant</div>
+              <div class="recipe-search-bar">
+                <input class="sui-input" type="search" placeholder="Search contacts..." aria-label="Search contacts">
+                <button class="sui-btn sui-btn-primary" type="button" aria-label="Search"><i data-lucide="search" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <div>
+              <div class="sui-kpi-label sui-mb-2">Text button variant</div>
+              <div class="recipe-search-bar">
+                <input class="sui-input" type="search" placeholder="Search documents..." aria-label="Search documents">
+                <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="search" aria-hidden="true"></i> Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;style&gt;
+.my-search-bar { display: flex; gap: var(--sui-space-2); }
+.my-search-bar .sui-input { flex: 1; min-width: 0; }
+&lt;/style&gt;
+
+&lt;div class="my-search-bar"&gt;
+  &lt;input class="sui-input" type="search" placeholder="Search..."
+         aria-label="Search contacts"&gt;
+  &lt;button class="sui-btn sui-btn-primary" aria-label="Search"&gt;
+    &lt;i data-lucide="search" aria-hidden="true"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIPE: INLINE SELECTION BAR (v2.6.0) -->
+
+            <div class="sui-section" id="recipe-settings">
         <h2>Settings / Preferences</h2>
         <p class="sui-text-cap sui-mt-2">Vertical stack of labelled sections with controls. Composes from: <code>sui-card</code>, <code>sui-toggle</code>, <code>sui-segmented</code>, <code>sui-input</code>, <code>sui-divider</code>. Custom CSS: ~4 lines.</p>
         <div class="sui-card sui-mt-4">
@@ -3926,7 +4387,7 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.5.1</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.6.0</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->
@@ -4045,7 +4506,7 @@ search.addEventListener('input', () =&gt; {
   </div>
 
   <!-- ===== SCRIPTS ===== -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="./sui.js"></script>
+  <script src="./sui.js" defer></script>
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
@@ -4066,7 +4527,7 @@ search.addEventListener('input', () =&gt; {
     const observer = new MutationObserver(syncThemeIcon);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    // â”€â”€ SIDENAV DEMO LOGIC â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── SIDENAV DEMO LOGIC ──────────────────────────────────
     (function() {
       const nav = document.getElementById('demoSidenav');
       const layout = document.querySelector('.demo-layout');
@@ -4079,7 +4540,7 @@ search.addEventListener('input', () =&gt; {
       // Tabs that have sidenav sections
       const sidenavTabs = new Set(['components', 'recipes']);
 
-      // â”€â”€ Tab awareness: show/hide sidenav + auto-collapse groups â”€â”€
+      // ── Tab awareness: show/hide sidenav + auto-collapse groups ──
       function updateSidenavForTab(tabName) {
         const show = sidenavTabs.has(tabName);
         layout.classList.toggle('demo-no-sidenav', !show);
@@ -4112,14 +4573,14 @@ search.addEventListener('input', () =&gt; {
       const activeTab = document.querySelector('[role="tab"][aria-selected="true"]');
       if (activeTab) updateSidenavForTab(activeTab.getAttribute('data-tab'));
 
-      // â”€â”€ Collapsible groups â”€â”€
+      // ── Collapsible groups ──
       groups.forEach(group => {
         const links = group.querySelector('.sui-sidenav-group-links');
         const count = group.querySelector('.sui-sidenav-group-count');
         count.textContent = links.querySelectorAll('.sui-sidenav-link').length;
       });
 
-      // â”€â”€ Search / filter â”€â”€
+      // ── Search / filter ──
       search.addEventListener('input', () => {
         const q = search.value.toLowerCase().trim();
         let totalVisible = 0;
@@ -4143,7 +4604,7 @@ search.addEventListener('input', () =&gt; {
         emptyMsg.hidden = totalVisible > 0;
       });
 
-      // â”€â”€ Cross-tab link navigation â”€â”€
+      // ── Cross-tab link navigation ──
       allLinks.forEach(link => {
         link.addEventListener('click', () => {
           const targetTab = link.getAttribute('data-sidenav-tab');
@@ -4159,6 +4620,82 @@ search.addEventListener('input', () =&gt; {
           setTimeout(() => {
             history.replaceState(null, '', window.location.pathname + window.location.search);
           }, 600);
+        });
+      });
+    })();
+
+    // ── SCROLLSPY — highlight sidenav link for current section ──
+    (function() {
+      const sections = document.querySelectorAll('.sui-section[id]');
+      const navLinks = document.querySelectorAll('#demoSidenav .sui-sidenav-link[href^="#"]');
+      if (!sections.length || !navLinks.length) return;
+
+      const linkMap = {};
+      navLinks.forEach(l => { linkMap[l.getAttribute('href').slice(1)] = l; });
+
+      let ticking = false;
+      const observer = new IntersectionObserver(entries => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          let topId = null;
+          let topY = Infinity;
+          entries.forEach(e => {
+            if (e.isIntersecting && e.boundingClientRect.top < topY) {
+              topY = e.boundingClientRect.top;
+              topId = e.target.id;
+            }
+          });
+          if (topId && linkMap[topId]) {
+            navLinks.forEach(l => l.classList.remove('is-active'));
+            linkMap[topId].classList.add('is-active');
+            // Scroll link into view within sidenav
+            linkMap[topId].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          }
+          ticking = false;
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+    })();
+
+    // ── SORT HEADER TOGGLE — cycle data-sort on click ──
+    document.querySelectorAll('th[data-sort]').forEach(th => {
+      th.style.cursor = 'pointer';
+      th.addEventListener('click', () => {
+        const current = th.getAttribute('data-sort');
+        // Cycle: asc → desc → (none) → asc
+        const next = current === 'asc' ? 'desc' : current === 'desc' ? '' : 'asc';
+        // Reset siblings
+        th.closest('tr').querySelectorAll('th[data-sort]').forEach(s => {
+          if (s !== th) s.setAttribute('data-sort', '');
+        });
+        th.setAttribute('data-sort', next);
+      });
+    });
+
+    // ── APP SHELL RECIPE — bottom tab content switching ──
+    (function() {
+      const shell = document.querySelector('#recipe-app-shell .sui-segmented');
+      if (!shell) return;
+      const segments = shell.querySelectorAll('.sui-segment');
+      const body = document.querySelector('#recipe-app-shell [style*="overflow-y:auto"]');
+      if (!body) return;
+
+      const screens = {
+        People: body.innerHTML,
+        Schedule: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><i data-lucide="calendar" aria-hidden="true"></i></div><div class="sui-empty-title">Schedule</div><div class="sui-empty-text">Your upcoming meetings will appear here.</div></div>',
+        Messages: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><i data-lucide="message-circle" aria-hidden="true"></i></div><div class="sui-empty-title">Messages</div><div class="sui-empty-text">No new messages. Start a conversation.</div></div>',
+        Profile: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><i data-lucide="user" aria-hidden="true"></i></div><div class="sui-empty-title">Profile</div><div class="sui-empty-text">Manage your account and preferences.</div></div>'
+      };
+
+      segments.forEach(seg => {
+        seg.addEventListener('click', () => {
+          const label = seg.getAttribute('aria-label');
+          if (label && screens[label]) {
+            body.innerHTML = screens[label];
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+          }
         });
       });
     })();
