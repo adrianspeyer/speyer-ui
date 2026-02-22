@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../dist/sui-components.min.css">
   <script src="../dist/sui.min.js" defer></script>
   <style>
-    body { font-family: var(--sui-font-primary); padding: var(--sui-space-4); background: var(--sui-bg-body); color: var(--sui-text-primary); }
+    body { font-family: var(--sui-font-primary); padding: var(--sui-space-4); background: var(--sui-bg-primary); color: var(--sui-text-primary); }
     h1 { font-size: var(--sui-text-h2); margin-bottom: var(--sui-space-3); }
     .smoke-results { margin-top: var(--sui-space-3); }
     .smoke-row { display: flex; align-items: center; gap: var(--sui-space-2); padding: var(--sui-space-2) 0; border-bottom: 1px solid var(--sui-border); }
@@ -117,8 +117,8 @@
         return typeof window.SUI === 'object' && SUI !== null;
       });
 
-      assert('sui-version', 'SUI version matches 2.7.1', () => {
-        // Check console would have printed 2.7.1 — verify via init existence
+      assert('sui-version', 'SUI version matches 2.7.2', () => {
+        // Check console would have printed 2.7.2 — verify via init existence
         return typeof SUI.init === 'function';
       });
 
@@ -229,7 +229,7 @@
         const versionEl = $('#smoke-version');
         const started = new Date().toISOString();
 
-        versionEl.textContent = '2.7.1';
+        versionEl.textContent = '2.7.2';
         statusEl.textContent = 'Running…';
         resultsEl.innerHTML = '';
 
@@ -269,7 +269,7 @@
 
         // JS results object (contract H1-2)
         window.__SUI_SMOKE_RESULTS__ = {
-          version: '2.7.1',
+          version: '2.7.2',
           startedAt: started,
           finishedAt: finished,
           pass: allPass,

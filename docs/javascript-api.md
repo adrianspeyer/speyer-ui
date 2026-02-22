@@ -2,7 +2,7 @@
 
 SUI's JavaScript (`sui.js`) is optional. Components render correctly without it — they just won't open, close, or animate. When included, it auto-initialises interactive behaviours via `data-sui-*` attributes.
 
-**Current version:** 2.7.1
+**Current version:** 2.7.2
 **Bundle size:** ~26KB minified
 **Dependencies:** Zero
 
@@ -148,6 +148,8 @@ SUI.sheet.open('#my-sheet');
 SUI.sheet.close('#my-sheet');
 SUI.sheet.toggle('#my-sheet');
 ```
+
+Markup note: include a close button inside the sheet using the JS hook class `.sui-sheet-close` (for example, a `button` that also has `sui-btn` classes for styling).
 
 ### SUI.panel
 

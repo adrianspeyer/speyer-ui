@@ -4,6 +4,41 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.7.2] — 2026-02-22
+
+### Theme: Token/Class Drift Audit + Shipped Bug Fix
+
+Fixes a production CSS bug (undefined spacing token) and eliminates 25+ undefined token references and 9 phantom classes from the demo page that AIs and developers would copy verbatim. Adds automated drift detection to preflight.
+
+### Fixed
+
+- **`--sui-space-8` in `sui-components.css`** — Desktop sidenav `max-height: calc(100vh - var(--sui-space-8))` referenced a token that does not exist. Spacing scale is 1–6 (4px–48px). Fixed to `--sui-space-6` (48px). This is the only shipped production CSS bug.
+- **25 undefined token references in demo** — `--sui-font` → `--sui-font-primary`, `--sui-radius` → `--sui-radius-md`, `--sui-text-sm` → `--sui-text-small`, `--sui-text-lg` → `--sui-text-h3`. All silently fell back to inherited values.
+- **`--sui-bg-body` in AI context files + smoke test** — Token does not exist (correct: `--sui-bg-primary`). Was teaching AIs the wrong name. Fixed in `.claude/instructions.md`, `.cursor/rules`, and `tests/smoke.html`.
+- **9 phantom classes in demo** — `sui-alert-body` → `sui-alert-content`, `sui-dialog-content` → `sui-modal-body`, `sui-toggle-slider` → `sui-toggle-track`, `sui-label` → `sui-input-label`, `sui-sr-only` → `sui-visually-hidden`, `sui-h1` (removed), `sui-code` → `sui-code-block`, `sui-justify-around` → `sui-flex-between`, `sui-badge-icon` (removed — no such class).
+- **`class="sui-sidenav-group"`** → `data-sui-sidenav-group` — `.sui-sidenav-group` is not a CSS class. Only `-group-toggle`, `-group-links`, and `-group-count` exist. The wrapper used a data attribute from the start.
+- **Panel Polish: Record Detail enriched** — original demo was bare (4-row table, 3-line activity). Now a full CRM-style record with 3 tabs (Overview with badges/progress/chips, Activity with colour-coded timeline, Notes with elevated cards), richer header (more-actions button), and a "Log Call" footer action. Dedicated "View record detail code" accordion added alongside the standard panel code accordion.
+- **Settings: segmented had spurious `data-sui-tabs`** — the `role="radiogroup"` segmented control in the Settings recipe had a `data-sui-tabs` attribute that is semantically wrong (radiogroups are not tab containers). Functionally harmless but removed for correctness.
+- **Recipe tabs collapsed sidenav** — `document.querySelectorAll('[role="tab"]')` in demo JS caught every tab on the page including recipe-internal tabs (e.g. Record Detail's Overview/Activity). Clicking a recipe tab called `updateSidenavForTab('rd-activity')` which wasn't in the allowed set, hiding the sidenav. Fixed by scoping the listener to `mainNav.querySelectorAll('[role="tab"]')` (the `aria-label="Demo views"` nav only).
+- **Global tabs stomped scoped tab panels** — `SUI.tabs` bug: when the global (unscoped) tab controller ran `setView`, it toggled `is-active` on ALL `[data-view]` elements in the document, including panels inside `[data-sui-tabs]` scopes. This caused scoped tabs (e.g. Record Detail's Overview/Activity/Notes) to lose their active state whenever the global tabs switched. Fixed by filtering: global `setView` now skips any `[data-view]` element inside a `[data-sui-tabs]` container.
+
+### Added
+
+- **Token drift check in preflight** — Scans `sui-components.css`, `index.html`, and `tests/smoke.html` for any `var(--sui-*)` not defined in `sui-tokens.css`. Allowlist for documented consumer-override properties (e.g., `--sui-panel-width`).
+- **Class drift check in preflight** — Scans `index.html` for any `class="sui-*"` not in `sui-components.css` or `sui.js` (JS hooks like `.sui-sheet-close` are covered). 74 checks total (up from 72).
+
+### Improved
+
+- **AI context files** — Removed false claim that `sui-sidenav-group` is a CSS class. Documented `.sui-sheet-close` as a JS hook class. Expanded "Does NOT exist" hallucination table with 11 new entries from v2.7.2 drift audit (`--sui-bg-body`, `--sui-radius`, `--sui-text-sm`, `--sui-text-lg`, `--sui-space-7/8`, `sui-sr-only`, `sui-label`, `sui-alert-body`, `sui-dialog-content`, `sui-toggle-slider`, `sui-sidenav-group` class).
+- **`docs/javascript-api.md`** — Added `.sui-sheet-close` JS hook documentation.
+- **`docs/getting-started.md`** — Fixed `sui-dialog-content` → `sui-modal-body` in modal example.
+
+### Bundle
+
+~94KB total. Production CSS change: 1 line (spacing token fix).
+
+---
+
 ## [2.7.1] — 2026-02-22
 
 ### Theme: Accessibility Hardening + Version Hygiene

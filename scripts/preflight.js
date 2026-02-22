@@ -616,6 +616,110 @@ function checkEncoding() {
 
 
 // ════════════════════════════════════════════════════════════════════
+//  7. TOKEN DRIFT
+//     Every var(--sui-*) in index.html and sui-components.css must
+//     resolve to an actual token defined in sui-tokens.css, OR be a
+//     component-scoped custom property defined in sui-components.css.
+// ════════════════════════════════════════════════════════════════════
+
+function checkTokenDrift() {
+  console.log('  ── Token Drift ──');
+  const tokens = readFile('sui-tokens.css');
+  const components = readFile('sui-components.css');
+  const html = readFile('index.html');
+  if (!tokens || !components) { fail('Cannot read source files'); return; }
+
+  // Build set of defined tokens from sui-tokens.css
+  const definedTokens = new Set();
+  const tokenRe = /(--sui-[a-z0-9-]+)\s*:/g;
+  let m;
+  while ((m = tokenRe.exec(tokens))) definedTokens.add(m[1]);
+
+  // Also collect component-scoped custom properties (defined in sui-components.css)
+  const compTokenRe = /(--sui-[a-z0-9-]+)\s*:/g;
+  while ((m = compTokenRe.exec(components))) definedTokens.add(m[1]);
+
+  // Scan both files for var(--sui-*) usage
+  // Allowlist: documented consumer-override properties (set by users, not by tokens)
+  const allowlist = new Set([
+    '--sui-panel-width',  // Consumer sets panel width; fallback in component CSS
+  ]);
+  const filesToScan = [
+    ['sui-components.css', components],
+    ['index.html', html],
+    ['tests/smoke.html', readFile('tests/smoke.html')],
+  ];
+
+  let driftCount = 0;
+  for (const [filename, content] of filesToScan) {
+    if (!content) continue;
+    const usageRe = /var\((--sui-[a-z0-9-]+)/g;
+    const seen = new Set();
+    while ((m = usageRe.exec(content))) {
+      const tok = m[1];
+      if (!seen.has(tok) && !definedTokens.has(tok) && !allowlist.has(tok)) {
+        const lineNum = content.substring(0, m.index).split('\n').length;
+        fail(`Undefined token ${tok} in ${filename}:${lineNum}`);
+        driftCount++;
+        seen.add(tok);
+      }
+    }
+  }
+  if (driftCount === 0) pass();
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  8. CLASS DRIFT
+//     Every sui-* class used in index.html must exist in
+//     sui-components.css OR be a documented JS hook in sui.js.
+// ════════════════════════════════════════════════════════════════════
+
+function checkClassDrift() {
+  console.log('  ── Class Drift ──');
+  const components = readFile('sui-components.css');
+  const js = readFile('sui.js');
+  const html = readFile('index.html');
+  if (!components || !js || !html) { fail('Cannot read source files'); return; }
+
+  // Build set of all sui-* classes defined in CSS
+  const cssClasses = new Set();
+  const cssRe = /\.(sui-[a-z][a-z0-9-]*)/g;
+  let m;
+  while ((m = cssRe.exec(components))) cssClasses.add(m[1]);
+
+  // Build set of sui-* classes referenced in JS (hooks like sui-sheet-close, sui-modal-close)
+  const jsClasses = new Set();
+  const jsRe = /['"](sui-[a-z][a-z0-9-]*)['"]/g;
+  while ((m = jsRe.exec(js))) jsClasses.add(m[1]);
+  // Also catch dotted selectors in JS
+  const jsDotRe = /\.(sui-[a-z][a-z0-9-]*)/g;
+  while ((m = jsDotRe.exec(js))) jsClasses.add(m[1]);
+
+  // Scan index.html for class="...sui-*..."
+  const htmlClassRe = /class="([^"]*)"/g;
+  const suiRe = /\b(sui-[a-z][a-z0-9-]*)\b/g;
+  const seen = new Set();
+  let driftCount = 0;
+
+  while ((m = htmlClassRe.exec(html))) {
+    const classAttr = m[1];
+    let cm;
+    while ((cm = suiRe.exec(classAttr))) {
+      const cls = cm[1];
+      if (!seen.has(cls) && !cssClasses.has(cls) && !jsClasses.has(cls)) {
+        const lineNum = html.substring(0, m.index).split('\n').length;
+        fail(`Undefined class .${cls} in index.html:${lineNum}`);
+        driftCount++;
+        seen.add(cls);
+      }
+    }
+  }
+  if (driftCount === 0) pass();
+}
+
+
+// ════════════════════════════════════════════════════════════════════
 //  Runner
 // ════════════════════════════════════════════════════════════════════
 
@@ -630,6 +734,8 @@ checkHTML();
 checkVersions();
 checkDistHygiene();
 checkEncoding();
+checkTokenDrift();
+checkClassDrift();
 
 console.log('');
 const parts = [`${totalPass} passed`, `${totalFail} failed`];

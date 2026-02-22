@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.7.1
+ * Version: 2.7.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -90,8 +90,13 @@ const SUI = (() => {
           t.setAttribute('aria-label', t.getAttribute('data-tab'));
         }
       });
+      // Collect panels — global tabs must skip panels inside a [data-sui-tabs] scope
+      const panels = $$('[data-view]', scope).filter(v =>
+        scope !== document || !v.closest('[data-sui-tabs]')
+      );
+
       // Enforce tabpanel role on associated sections within scope
-      $$('[data-view]', scope).forEach(v => {
+      panels.forEach(v => {
         if (!v.hasAttribute('role')) v.setAttribute('role', 'tabpanel');
       });
 
@@ -99,7 +104,7 @@ const SUI = (() => {
       tabBtns.forEach(t => {
         const key = t.getAttribute('data-tab');
         if (!key) return;
-        const panel = $$('[data-view]', scope).find(v => v.getAttribute('data-view') === key);
+        const panel = panels.find(v => v.getAttribute('data-view') === key);
         if (!panel) return;
         if (!t.id) t.id = uid();
         if (!panel.id) panel.id = uid();
@@ -108,7 +113,7 @@ const SUI = (() => {
       });
 
       const setView = (key) => {
-        $$('[data-view]', scope).forEach(v =>
+        panels.forEach(v =>
           v.classList.toggle('is-active', v.getAttribute('data-view') === key)
         );
         tabBtns.forEach(t => {
@@ -1156,7 +1161,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v2.7.1 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v2.7.2 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

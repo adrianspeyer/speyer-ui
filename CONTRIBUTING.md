@@ -4,7 +4,7 @@ Thank you for your interest in contributing to SUI! This project is built on the
 
 ## Current Status
 
-SUI is currently in a **stability plateau** following v2.7.1. The core component set and API surface are complete. We are accepting:
+SUI is currently in a **stability plateau** following v2.7.2. The core component set and API surface are complete. We are accepting:
 
 - **Bug fixes** — regressions, accessibility issues, browser compatibility
 - **Documentation improvements** — corrections, clarifications, better examples

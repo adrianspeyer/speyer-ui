@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 2.7.1
+ * Version: 2.7.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -3257,7 +3257,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
     transform: none;
     transition: none;
     padding: var(--sui-space-2) 0;
-    max-height: calc(100vh - var(--sui-space-8));
+    max-height: calc(100vh - var(--sui-space-6));
     overflow-y: auto;
   }
 

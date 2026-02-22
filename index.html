@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "2.7.1",
+    "version": "2.7.2",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -72,12 +72,12 @@
 
     /* Sidenav search */
     .demo-sidenav-search { padding: var(--sui-space-2) var(--sui-space-3); }
-    .demo-sidenav-search .sui-input { font-size: var(--sui-text-sm); padding: 6px 10px; }
+    .demo-sidenav-search .sui-input { font-size: var(--sui-text-small); padding: 6px 10px; }
 
       // Group counts (SUI handles expand/collapse via auto-init)
     .demo-sidenav-empty {
       padding: var(--sui-space-3) var(--sui-space-4);
-      font-size: var(--sui-text-sm); color: var(--sui-text-muted);
+      font-size: var(--sui-text-small); color: var(--sui-text-muted);
       text-align: center;
     }
     /* Scrollable link area — search stays pinned, groups scroll */
@@ -98,7 +98,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.7.1</span>
+          <span class="sui-version-pill">v2.7.2</span>
         </div>
       </div>
 
@@ -150,7 +150,7 @@
                  placeholder="Filter…" aria-label="Filter sections" autocomplete="off">
         </div>
         <div class="demo-sidenav-scroll">
-        <div class="sui-sidenav-group" data-group="components">
+        <div data-sui-sidenav-group data-group="components">
           <button class="sui-sidenav-group-toggle" type="button"
                   aria-expanded="true" aria-controls="group-components">
             Components <span class="sui-sidenav-group-count"></span>
@@ -186,7 +186,7 @@
             <a href="#comp-visibility" class="sui-sidenav-link" data-sidenav-tab="components" data-keywords="hidden show hide screen-reader accessible">Visibility</a>
           </div>
         </div>
-        <div class="sui-sidenav-group" data-group="recipes">
+        <div data-sui-sidenav-group data-group="recipes">
           <button class="sui-sidenav-group-toggle" type="button"
                   aria-expanded="true" aria-controls="group-recipes">
             Recipes <span class="sui-sidenav-group-count"></span>
@@ -250,7 +250,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.7.1</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.7.2</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -377,7 +377,7 @@
     <section data-view="components" role="tabpanel" aria-label="Components">
       <div class="sui-section-head" style="margin-top: var(--sui-space-4);">
         <div>
-          <h2 class="sui-h1">Component Library</h2>
+          <h2>Component Library</h2>
           <p class="sui-text-cap sui-mt-2">
             Every SUI component, live and interactive. All built from design tokens, all accessible by default.
           </p>
@@ -952,7 +952,7 @@
 
         <div class="sui-card sui-mt-4">
           <div class="sui-kpi-label sui-mb-3">Usage</div>
-          <pre class="sui-code"><code>&lt;!-- Trigger --&gt;
+          <pre class="sui-code-block"><code>&lt;!-- Trigger --&gt;
 &lt;button data-sui-panel="#my-panel" aria-expanded="false"&gt;Open&lt;/button&gt;
 
 &lt;!-- Panel (outside main for stacking context) --&gt;
@@ -976,7 +976,7 @@
 &lt;div class="sui-panel sui-panel-no-backdrop"&gt;...&lt;/div&gt;</code></pre>
 
           <div class="sui-kpi-label sui-mt-4 sui-mb-2">JavaScript API</div>
-          <pre class="sui-code"><code>SUI.panel.open('#my-panel');
+          <pre class="sui-code-block"><code>SUI.panel.open('#my-panel');
 SUI.panel.close('#my-panel');
 SUI.panel.toggle('#my-panel');</code></pre>
         </div>
@@ -1109,7 +1109,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
               <div class="sui-card sui-card-muted sui-mb-2" style="padding:var(--sui-space-2);font-size:12px;">Item 7</div>
             </div>
             <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-3);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
-              <div class="sui-flex sui-justify-around">
+              <div class="sui-flex-between">
                 <i data-lucide="home" style="width:16px;height:16px;color:var(--sui-blue-primary);"></i>
                 <i data-lucide="search" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
                 <i data-lucide="user" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
@@ -1599,7 +1599,7 @@ Components (use SUI classes):
 - Skeleton: sui-skeleton + sui-skeleton-text/heading/avatar/card
 - Bottom sheet: sui-sheet + sui-sheet-panel/handle/header/body/footer (requires sui.js). SUI.sheet.open/close.
 - Sidenav: sui-sidenav + sui-sidenav-panel/link/heading/toggle/close (requires sui.js). Sticky sidebar desktop, slide-in mobile. SUI.sidenav.open/close/toggle.
-  - Collapsible groups: sui-sidenav-group + sui-sidenav-group-toggle (aria-expanded + aria-controls) + sui-sidenav-group-links. SUI.sidenav.collapseAll/expandAll.
+  - Collapsible groups: use sui-sidenav-group-toggle (aria-expanded + aria-controls) + sui-sidenav-group-links (+ optional sui-sidenav-group-count). SUI.sidenav.collapseAll/expandAll.
 - Panel: sui-panel + sui-panel-header/title/close/body/footer (requires sui.js). Slides from right. Desktop: no focus trap (parallel content). Mobile: full-screen with trap. Width: --sui-panel-width. No backdrop: sui-panel-no-backdrop. SUI.panel.open/close/toggle.
 - Segmented control: sui-segmented + sui-segment (role="radiogroup" + role="radio", requires sui.js)
 - Chip/Tag: sui-chip + sui-chip-remove (CSS only, behaviour is bring-your-own JS)
@@ -1644,7 +1644,7 @@ Before writing custom CSS, check if a recipe exists:
 | Sidenav Context | SUI.sidenav.collapseAll() + expand active | Recipe |
 
 Common names → SUI solutions:
-- Sidebar / Side menu → sui-sidenav + sui-sidenav-group (Component)
+- Sidebar / Side menu → sui-sidenav (Component). Collapsible groups: sui-sidenav-group-toggle + sui-sidenav-group-links.
 - Modal / Popup / Dialog → sui-dialog with native &lt;dialog&gt; (Component)
 - Drawer / Slide-over → sui-panel (right) or sui-sheet (bottom) (Component)
 - Toast / Snackbar → SUI.toast.success/error/warning/info() (JS API)
@@ -1755,7 +1755,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    sui-container (container queries, opt-in), sui-avatar-xl,
    sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right),
    sui-screen/sui-screen-header/sui-screen-body/sui-screen-footer (app shells),
-   sui-sidenav + sui-sidenav-group/toggle/links (collapsible groups, SUI.sidenav.collapseAll/expandAll),
+   sui-sidenav + sui-sidenav-group-toggle/links (collapsible groups, SUI.sidenav.collapseAll/expandAll),
    sui-panel (side panel, slides from right, --sui-panel-width, sui-panel-no-backdrop, SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap.), etc.
    Themes: light, dark, auto.
 7. CRITICAL: Before building custom CSS, check if a recipe exists. SUI uses composition:
@@ -1915,7 +1915,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
             </div>
           </div>
           <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-4);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
-            <div class="sui-segmented" role="radiogroup" aria-label="Navigation" data-sui-tabs style="width:100%;">
+            <div class="sui-segmented" role="radiogroup" aria-label="Navigation" style="width:100%;">
               <button class="sui-segment" type="button" role="radio" aria-checked="true" aria-label="People" style="flex:1;"><i data-lucide="users" style="width:16px;height:16px;"></i></button>
               <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Schedule" style="flex:1;"><i data-lucide="calendar" style="width:16px;height:16px;"></i></button>
               <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Messages" style="flex:1;"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></button>
@@ -2177,7 +2177,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
               var text = getSUIToken('--sui-text-primary');
               var muted = getSUIToken('--sui-text-muted');
               var border = getSUIToken('--sui-border');
-              var font = getSUIToken('--sui-font') || 'Inter, system-ui, sans-serif';
+              var font = getSUIToken('--sui-font-primary') || 'Inter, system-ui, sans-serif';
               Chart.defaults.color = muted;
               Chart.defaults.borderColor = border;
               Chart.defaults.font.family = font;
@@ -2260,7 +2260,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
     Chart.defaults.color = getSUIToken('--sui-text-muted');
     Chart.defaults.borderColor = getSUIToken('--sui-border');
     Chart.defaults.font.family =
-      getSUIToken('--sui-font') || 'Inter, system-ui, sans-serif';
+      getSUIToken('--sui-font-primary') || 'Inter, system-ui, sans-serif';
     return {
       blue:    getSUIToken('--sui-blue-primary'),
       green:   getSUIToken('--sui-success-strong'),
@@ -2303,7 +2303,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         </div>
 
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
-          <div class="sui-alert-body">
+          <div class="sui-alert-content">
             <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Chart.js is not bundled, versioned, or maintained as part of SUI. Chart.js is canvas-based — no CSS overrides needed, just token values passed to the JS config.
           </div>
         </div>
@@ -2336,7 +2336,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <div class="sui-accordion-panel" hidden>
             <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;!-- Open with Ctrl/Cmd+K --&gt;
 &lt;dialog class="sui-dialog" id="cmdk" aria-label="Command palette"&gt;
-  &lt;div class="sui-dialog-content" style="max-width:480px;"&gt;
+  &lt;div class="sui-modal-body" style="max-width:480px;"&gt;
     &lt;input class="sui-input" type="text" placeholder="Type a command..."
            role="combobox" aria-expanded="true"&gt;
     &lt;ul role="listbox"&gt;
@@ -2366,7 +2366,7 @@ document.addEventListener('keydown', e =&gt; {
         <div class="sui-card sui-mt-4">
           <button class="sui-btn sui-btn-danger" type="button" data-sui-modal="#recipe-confirm-dialog"><i data-lucide="trash-2" aria-hidden="true"></i> Delete account</button>
           <dialog class="sui-dialog" id="recipe-confirm-dialog" role="alertdialog" aria-label="Confirm account deletion">
-            <div class="sui-dialog-content">
+            <div class="sui-modal-body">
               <h3 style="margin-top:0;">Delete your account?</h3>
               <p class="sui-text-muted">This action is permanent. All your data will be removed and cannot be recovered.</p>
               <div class="sui-flex sui-gap-2 sui-mt-4">
@@ -2385,7 +2385,7 @@ document.addEventListener('keydown', e =&gt; {
 
 &lt;dialog class="sui-dialog" id="confirm"
         role="alertdialog" aria-label="Confirm deletion"&gt;
-  &lt;div class="sui-dialog-content"&gt;
+  &lt;div class="sui-modal-body"&gt;
     &lt;h3&gt;Delete your account?&lt;/h3&gt;
     &lt;p&gt;This action is permanent.&lt;/p&gt;
     &lt;div class="sui-flex sui-gap-2 sui-mt-4"&gt;
@@ -2511,10 +2511,10 @@ document.addEventListener('keydown', e =&gt; {
              Token-based overrides. Copy this block into your project.
              Requires: sui-tokens.css + filepond.min.css loaded first.
           */
-          .filepond--root { font-family: var(--sui-font); }
+          .filepond--root { font-family: var(--sui-font-primary); }
           .filepond--panel-root {
             background-color: var(--sui-bg-elevated);
-            border-radius: var(--sui-radius);
+            border-radius: var(--sui-radius-md);
           }
           .filepond--drop-label {
             color: var(--sui-text-secondary);
@@ -2548,7 +2548,7 @@ document.addEventListener('keydown', e =&gt; {
         <div class="sui-card sui-mt-4">
           <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — drop files or click to browse. Files are not actually uploaded (demo only).</p>
           <div class="sui-mt-3">
-            <label for="recipeFilePond" class="sui-sr-only">Upload files</label>
+            <label for="recipeFilePond" class="sui-visually-hidden">Upload files</label>
             <input type="file" class="filepond" id="recipeFilePond" multiple />
           </div>
         </div>
@@ -2578,10 +2578,10 @@ document.addEventListener('keydown', e =&gt; {
 
 &lt;!-- 2. SUI token overrides --&gt;
 &lt;style&gt;
-  .filepond--root { font-family: var(--sui-font); }
+  .filepond--root { font-family: var(--sui-font-primary); }
   .filepond--panel-root {
     background-color: var(--sui-bg-elevated);
-    border-radius: var(--sui-radius);
+    border-radius: var(--sui-radius-md);
   }
   .filepond--drop-label {
     color: var(--sui-text-secondary);
@@ -2622,7 +2622,7 @@ document.addEventListener('keydown', e =&gt; {
         </div>
 
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
-          <div class="sui-alert-body">
+          <div class="sui-alert-content">
             <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. FilePond is not bundled, versioned, or maintained as part of SUI. Tested with FilePond v4.32.11.
           </div>
         </div>
@@ -2641,9 +2641,9 @@ document.addEventListener('keydown', e =&gt; {
           .flatpickr-calendar {
             background: var(--sui-bg-card);
             border: 1px solid var(--sui-border);
-            border-radius: var(--sui-radius);
+            border-radius: var(--sui-radius-md);
             box-shadow: var(--sui-shadow-lg);
-            font-family: var(--sui-font);
+            font-family: var(--sui-font-primary);
             color: var(--sui-text-primary);
           }
           .flatpickr-calendar::before,
@@ -2746,15 +2746,15 @@ document.addEventListener('keydown', e =&gt; {
           <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — toggle the theme to see dark mode. Try keyboard navigation (arrow keys, Escape).</p>
           <div class="sui-flex sui-gap-4 sui-mt-3" style="flex-wrap:wrap;align-items:end;">
             <div>
-              <label class="sui-label">Select date</label>
+              <label class="sui-input-label">Select date</label>
               <input type="text" class="sui-input" id="recipeFlatpickrDate" placeholder="Pick a date…" autocomplete="off" style="width:220px;" />
             </div>
             <div>
-              <label class="sui-label">Date range</label>
+              <label class="sui-input-label">Date range</label>
               <input type="text" class="sui-input" id="recipeFlatpickrRange" placeholder="Start → End" autocomplete="off" style="width:260px;" />
             </div>
             <div>
-              <label class="sui-label">Date + time</label>
+              <label class="sui-input-label">Date + time</label>
               <input type="text" class="sui-input" id="recipeFlatpickrTime" placeholder="Pick date and time…" autocomplete="off" style="width:260px;" />
             </div>
           </div>
@@ -2786,9 +2786,9 @@ document.addEventListener('keydown', e =&gt; {
   .flatpickr-calendar {
     background: var(--sui-bg-card);
     border: 1px solid var(--sui-border);
-    border-radius: var(--sui-radius);
+    border-radius: var(--sui-radius-md);
     box-shadow: var(--sui-shadow-lg);
-    font-family: var(--sui-font);
+    font-family: var(--sui-font-primary);
     color: var(--sui-text-primary);
   }
   .flatpickr-calendar::before,
@@ -2876,7 +2876,7 @@ document.addEventListener('keydown', e =&gt; {
 &lt;/style&gt;
 
 &lt;!-- 3. Use with SUI inputs --&gt;
-&lt;label class="sui-label"&gt;Select date&lt;/label&gt;
+&lt;label class="sui-input-label"&gt;Select date&lt;/label&gt;
 &lt;input type="text" class="sui-input" id="myDate" placeholder="Pick a date…" /&gt;
 
 &lt;script&gt;
@@ -2887,7 +2887,7 @@ document.addEventListener('keydown', e =&gt; {
         </div>
 
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
-          <div class="sui-alert-body">
+          <div class="sui-alert-content">
             <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Flatpickr is not bundled, versioned, or maintained as part of SUI. Tested with Flatpickr v4.6.13.
           </div>
         </div>
@@ -3057,7 +3057,7 @@ document.addEventListener('keydown', e =&gt; {
           <div class="sui-mt-3">
             <div class="sui-table-wrap">
               <table class="sui-table sui-table-hover">
-                <thead><tr><th><span class="sui-sr-only">Select</span></th><th>Name</th><th>Status</th></tr></thead>
+                <thead><tr><th><span class="sui-visually-hidden">Select</span></th><th>Name</th><th>Status</th></tr></thead>
                 <tbody>
                   <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Acme Corp"></td><td>Acme Corp</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
                   <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Globex"></td><td>Globex</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
@@ -3221,7 +3221,7 @@ document.addEventListener('keydown', e =&gt; {
               </div>
               <div class="sui-text-muted sui-mt-1" style="font-size: var(--sui-text-meta);" id="recipeMdRole"></div>
               <div class="sui-mt-3 sui-flex sui-gap-2">
-                <span class="sui-badge sui-badge-success" id="recipeMdStage"><span class="sui-badge-icon" aria-hidden="true">↓</span><span id="recipeMdStageText"></span></span>
+                <span class="sui-badge sui-badge-success" id="recipeMdStage"><span aria-hidden="true">↓</span><span id="recipeMdStageText"></span></span>
                 <span class="sui-badge" id="recipeMdAmount"></span>
               </div>
               <p class="sui-mt-3" style="font-size: var(--sui-text-small);" id="recipeMdDesc"></p>
@@ -3250,7 +3250,7 @@ document.addEventListener('keydown', e =&gt; {
       &lt;td&gt;Jane Cooper&lt;/td&gt;
       &lt;td&gt;jane@acme.com&lt;/td&gt;
       &lt;td&gt;&lt;span class="sui-badge sui-badge-info"&gt;
-        &lt;span class="sui-badge-icon" aria-hidden="true"&gt;&amp;#x25CF;&lt;/span&gt;Qualified
+        &lt;span aria-hidden="true"&gt;&amp;#x25CF;&lt;/span&gt;Qualified
       &lt;/span&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -3438,14 +3438,18 @@ function showDetail(id) {
           </div>
         </div>
 
-        <!-- Panel Polish: Record Detail variant (v2.7.0) -->
+        <!-- Panel Polish: Record Detail variant (v2.7.0, enriched v2.7.2) -->
         <div class="sui-kpi-label sui-mt-4 sui-mb-2">Panel Polish: Record Detail (Tabs + Table + Sticky Actions)</div>
         <style>
-          .recipe-record-detail { display: flex; flex-direction: column; height: 420px; background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md); overflow: hidden; max-width: 720px; }
+          .recipe-record-detail { display: flex; flex-direction: column; height: 480px; background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md); overflow: hidden; max-width: 720px; }
           .recipe-record-detail .recipe-panel-body { padding: 0; }
           .recipe-record-tabs { padding: 0 var(--sui-space-4); border-bottom: 1px solid var(--sui-border); }
           .recipe-record-tab-panel { padding: var(--sui-space-4); flex: 1; overflow-y: auto; }
           .recipe-record-footer { display: flex; gap: var(--sui-space-2); padding: var(--sui-space-3) var(--sui-space-4); border-top: 1px solid var(--sui-border); justify-content: flex-end; position: sticky; bottom: 0; background: var(--sui-bg-card); }
+          .recipe-record-activity { display: flex; gap: var(--sui-space-3); padding: var(--sui-space-3) 0; border-bottom: 1px solid var(--sui-border); }
+          .recipe-record-activity:last-child { border-bottom: none; }
+          .recipe-record-activity-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
+          .recipe-record-note { padding: var(--sui-space-3); background: var(--sui-bg-elevated); border-radius: var(--sui-radius-md); margin-bottom: var(--sui-space-3); }
         </style>
         <div class="sui-card sui-card-flush sui-mt-2">
           <div style="padding:var(--sui-space-4);">
@@ -3458,34 +3462,79 @@ function showDetail(id) {
                 </div>
                 <div style="flex:1;"></div>
                 <span class="sui-badge sui-badge-success"><span aria-hidden="true">&#10003;</span> Active</span>
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="More actions"><i data-lucide="more-vertical" aria-hidden="true"></i></button>
                 <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><i data-lucide="x" aria-hidden="true"></i></button>
               </div>
               <div class="recipe-record-tabs">
                 <nav class="sui-nav" role="tablist" aria-label="Record detail tabs" style="margin-bottom:-1px;">
                   <button class="sui-tab is-active" role="tab" aria-selected="true" data-tab="rd-overview">Overview</button>
                   <button class="sui-tab" role="tab" aria-selected="false" data-tab="rd-activity">Activity</button>
+                  <button class="sui-tab" role="tab" aria-selected="false" data-tab="rd-notes">Notes</button>
                 </nav>
               </div>
               <div data-view="rd-overview" class="recipe-record-tab-panel is-active" role="tabpanel" aria-label="Overview">
                 <div class="sui-table-wrap">
                   <table class="sui-table sui-table-dense">
                     <tbody>
-                      <tr><td class="sui-text-muted" data-label="Field" style="width:35%;">Owner</td><td data-label="Value">Jane Cooper</td></tr>
-                      <tr><td class="sui-text-muted" data-label="Field">Stage</td><td data-label="Value">Negotiation</td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field" style="width:35%;">Owner</td><td data-label="Value"><span class="sui-avatar" style="width:20px;height:20px;font-size:9px;vertical-align:middle;">JC</span> Jane Cooper</td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Stage</td><td data-label="Value"><span class="sui-badge sui-badge-info"><span aria-hidden="true">&#8594;</span> Negotiation</span></td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Deal Value</td><td data-label="Value"><strong>$240,000</strong></td></tr>
                       <tr><td class="sui-text-muted" data-label="Field">Close Date</td><td data-label="Value">Mar 15, 2026</td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Probability</td><td data-label="Value"><div class="sui-progress" style="max-width:120px;display:inline-flex;vertical-align:middle;"><div class="sui-progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:75%;">75%</div></div></td></tr>
                       <tr><td class="sui-text-muted" data-label="Field">Next Step</td><td data-label="Value">Send SOW</td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Tags</td><td data-label="Value"><span class="sui-chip">Enterprise</span> <span class="sui-chip">Renewal</span></td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
               <div data-view="rd-activity" class="recipe-record-tab-panel" role="tabpanel" aria-label="Activity">
-                <div class="sui-text-muted" style="font-size:var(--sui-text-small);">
-                  <div style="margin-bottom:var(--sui-space-2);">Proposal sent &mdash; Today</div>
-                  <div style="margin-bottom:var(--sui-space-2);">Meeting scheduled &mdash; Yesterday</div>
-                  <div>Account created &mdash; Feb 10, 2026</div>
+                <div class="recipe-record-activity">
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-success-soft);color:var(--sui-success-strong);" aria-hidden="true"><i data-lucide="send" style="width:14px;height:14px;"></i></div>
+                  <div>
+                    <div style="font-size:var(--sui-text-small);"><strong>Jane Cooper</strong> sent proposal</div>
+                    <div class="sui-meta sui-mt-1">Today at 2:15 PM</div>
+                  </div>
+                </div>
+                <div class="recipe-record-activity">
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-info-soft);color:var(--sui-info-strong);" aria-hidden="true"><i data-lucide="calendar" style="width:14px;height:14px;"></i></div>
+                  <div>
+                    <div style="font-size:var(--sui-text-small);"><strong>Marcus Lee</strong> scheduled a meeting</div>
+                    <div class="sui-meta sui-mt-1">Yesterday at 10:30 AM</div>
+                  </div>
+                </div>
+                <div class="recipe-record-activity">
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-warning-soft);color:var(--sui-warning-strong);" aria-hidden="true"><i data-lucide="edit-3" style="width:14px;height:14px;"></i></div>
+                  <div>
+                    <div style="font-size:var(--sui-text-small);"><strong>Jane Cooper</strong> updated deal value from $180K to $240K</div>
+                    <div class="sui-meta sui-mt-1">Feb 18, 2026</div>
+                  </div>
+                </div>
+                <div class="recipe-record-activity">
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-bg-elevated);color:var(--sui-text-muted);" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></div>
+                  <div>
+                    <div style="font-size:var(--sui-text-small);"><strong>System</strong> created account</div>
+                    <div class="sui-meta sui-mt-1">Feb 10, 2026</div>
+                  </div>
+                </div>
+              </div>
+              <div data-view="rd-notes" class="recipe-record-tab-panel" role="tabpanel" aria-label="Notes">
+                <div class="recipe-record-note">
+                  <div class="sui-flex" style="justify-content:space-between;align-items:center;">
+                    <strong style="font-size:var(--sui-text-small);">Jane Cooper</strong>
+                    <span class="sui-meta">Feb 20, 2026</span>
+                  </div>
+                  <p class="sui-mt-2" style="font-size:var(--sui-text-small);">Client wants multi-year pricing. Will send SOW with 3-year option and 15% discount. CFO approval needed on their side before signature.</p>
+                </div>
+                <div class="recipe-record-note">
+                  <div class="sui-flex" style="justify-content:space-between;align-items:center;">
+                    <strong style="font-size:var(--sui-text-small);">Marcus Lee</strong>
+                    <span class="sui-meta">Feb 14, 2026</span>
+                  </div>
+                  <p class="sui-mt-2" style="font-size:var(--sui-text-small);">Discovery call went well. They&rsquo;re migrating from Competitor X. Main concerns: data migration timeline and API compatibility.</p>
                 </div>
               </div>
               <div class="recipe-record-footer">
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="message-square" aria-hidden="true" style="width:14px;height:14px;"></i> Log Call</button>
                 <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Edit</button>
                 <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Send SOW</button>
               </div>
@@ -3494,7 +3543,103 @@ function showDetail(id) {
         </div>
 
         <div class="sui-accordion sui-mt-3">
-          <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
+          <button class="sui-accordion-trigger" aria-expanded="false">View record detail code</button>
+          <div class="sui-accordion-panel" hidden>
+            <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;style&gt;
+.record-detail  { display: flex; flex-direction: column; height: 480px;
+  background: var(--sui-bg-card); border: 1px solid var(--sui-border);
+  border-radius: var(--sui-radius-md); overflow: hidden; }
+.record-tabs    { padding: 0 var(--sui-space-4);
+  border-bottom: 1px solid var(--sui-border); }
+.record-panel   { padding: var(--sui-space-4); flex: 1; overflow-y: auto; }
+.record-footer  { display: flex; gap: var(--sui-space-2);
+  justify-content: flex-end;
+  padding: var(--sui-space-3) var(--sui-space-4);
+  border-top: 1px solid var(--sui-border);
+  position: sticky; bottom: 0; background: var(--sui-bg-card); }
+.record-activity { display: flex; gap: var(--sui-space-3);
+  padding: var(--sui-space-3) 0; border-bottom: 1px solid var(--sui-border); }
+.record-activity:last-child { border-bottom: none; }
+.record-activity-dot { width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; }
+.record-note { padding: var(--sui-space-3);
+  background: var(--sui-bg-elevated);
+  border-radius: var(--sui-radius-md); margin-bottom: var(--sui-space-3); }
+&lt;/style&gt;
+
+&lt;!-- Wrap in data-sui-tabs to scope tab switching --&gt;
+&lt;div class="record-detail" data-sui-tabs&gt;
+  &lt;div class="panel-header"&gt;
+    &lt;span class="sui-avatar sui-avatar-sm"&gt;AC&lt;/span&gt;
+    &lt;div&gt;&lt;strong&gt;Acme Corp&lt;/strong&gt;
+      &lt;div class="sui-text-muted" style="font-size:var(--sui-text-meta);"&gt;
+        Enterprise&lt;/div&gt;&lt;/div&gt;
+    &lt;div style="flex:1;"&gt;&lt;/div&gt;
+    &lt;span class="sui-badge sui-badge-success"&gt;Active&lt;/span&gt;
+    &lt;button class="sui-btn sui-btn-ghost sui-btn-sm"
+            aria-label="Close"&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="record-tabs"&gt;
+    &lt;nav class="sui-nav" role="tablist" aria-label="Record detail"
+         style="margin-bottom:-1px;"&gt;
+      &lt;button class="sui-tab is-active" role="tab"
+              aria-selected="true" data-tab="overview"&gt;Overview&lt;/button&gt;
+      &lt;button class="sui-tab" role="tab"
+              aria-selected="false" data-tab="activity"&gt;Activity&lt;/button&gt;
+      &lt;button class="sui-tab" role="tab"
+              aria-selected="false" data-tab="notes"&gt;Notes&lt;/button&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Overview: property table with badges, progress, chips --&gt;
+  &lt;div data-view="overview" class="record-panel is-active"
+       role="tabpanel" aria-label="Overview"&gt;
+    &lt;table class="sui-table sui-table-dense"&gt;&lt;tbody&gt;
+      &lt;tr&gt;&lt;td class="sui-text-muted" style="width:35%;"&gt;Owner&lt;/td&gt;
+          &lt;td&gt;Jane Cooper&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td class="sui-text-muted"&gt;Stage&lt;/td&gt;
+          &lt;td&gt;&lt;span class="sui-badge sui-badge-info"&gt;Negotiation&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td class="sui-text-muted"&gt;Tags&lt;/td&gt;
+          &lt;td&gt;&lt;span class="sui-chip"&gt;Enterprise&lt;/span&gt;
+              &lt;span class="sui-chip"&gt;Renewal&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;&lt;/table&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Activity: colour-coded timeline --&gt;
+  &lt;div data-view="activity" class="record-panel"
+       role="tabpanel" aria-label="Activity"&gt;
+    &lt;div class="record-activity"&gt;
+      &lt;div class="record-activity-dot"
+           style="background:var(--sui-success-soft);
+                  color:var(--sui-success-strong);"&gt;&amp;#10003;&lt;/div&gt;
+      &lt;div&gt;&lt;strong&gt;Jane Cooper&lt;/strong&gt; sent proposal
+        &lt;div class="sui-meta"&gt;Today&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Repeat for each event --&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Notes: elevated cards --&gt;
+  &lt;div data-view="notes" class="record-panel"
+       role="tabpanel" aria-label="Notes"&gt;
+    &lt;div class="record-note"&gt;
+      &lt;strong&gt;Jane Cooper&lt;/strong&gt;
+      &lt;span class="sui-meta"&gt;Feb 20&lt;/span&gt;
+      &lt;p class="sui-mt-2"&gt;Client wants multi-year pricing...&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="record-footer"&gt;
+    &lt;button class="sui-btn sui-btn-ghost sui-btn-sm"&gt;Edit&lt;/button&gt;
+    &lt;button class="sui-btn sui-btn-primary sui-btn-sm"&gt;Send SOW&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+
+        <div class="sui-accordion sui-mt-3">
+          <button class="sui-accordion-trigger" aria-expanded="false">View standard panel code</button>
           <div class="sui-accordion-panel" hidden>
             <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;style&gt;
 .panel-header { display: flex; align-items: center; gap: var(--sui-space-2);
@@ -3780,15 +3925,15 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
           */
           .ql-toolbar.ql-snow {
             border: 1px solid var(--sui-border);
-            border-radius: var(--sui-radius) var(--sui-radius) 0 0;
+            border-radius: var(--sui-radius-md) var(--sui-radius-md) 0 0;
             background: var(--sui-bg-elevated);
-            font-family: var(--sui-font);
+            font-family: var(--sui-font-primary);
           }
           .ql-container.ql-snow {
             border: 1px solid var(--sui-border);
             border-top: none;
-            border-radius: 0 0 var(--sui-radius) var(--sui-radius);
-            font-family: var(--sui-font);
+            border-radius: 0 0 var(--sui-radius-md) var(--sui-radius-md);
+            font-family: var(--sui-font-primary);
             font-size: var(--sui-text-body);
             color: var(--sui-text-primary);
             background: var(--sui-bg-card);
@@ -3842,7 +3987,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
           .ql-container.ql-snow:focus-within {
             outline: 3px solid var(--sui-blue-soft);
             outline-offset: 2px;
-            border-radius: 0 0 var(--sui-radius) var(--sui-radius);
+            border-radius: 0 0 var(--sui-radius-md) var(--sui-radius-md);
           }
         </style>
 
@@ -3890,15 +4035,15 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
 &lt;style&gt;
   .ql-toolbar.ql-snow {
     border: 1px solid var(--sui-border);
-    border-radius: var(--sui-radius) var(--sui-radius) 0 0;
+    border-radius: var(--sui-radius-md) var(--sui-radius-md) 0 0;
     background: var(--sui-bg-elevated);
-    font-family: var(--sui-font);
+    font-family: var(--sui-font-primary);
   }
   .ql-container.ql-snow {
     border: 1px solid var(--sui-border);
     border-top: none;
-    border-radius: 0 0 var(--sui-radius) var(--sui-radius);
-    font-family: var(--sui-font);
+    border-radius: 0 0 var(--sui-radius-md) var(--sui-radius-md);
+    font-family: var(--sui-font-primary);
     color: var(--sui-text-primary);
     background: var(--sui-bg-card);
   }
@@ -3941,7 +4086,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
         </div>
 
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
-          <div class="sui-alert-body">
+          <div class="sui-alert-content">
             <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Quill is not bundled, versioned, or maintained as part of SUI. Tested with Quill v2.0.3. <strong>Note:</strong> Quill is chosen for CDN-first / zero-build compatibility. If you are in a bundler or React ecosystem, <a href="https://tiptap.dev" target="_blank" rel="noreferrer">TipTap</a> or <a href="https://lexical.dev" target="_blank" rel="noreferrer">Lexical</a> are stronger choices.
           </div>
         </div>
@@ -4032,14 +4177,14 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
               <strong>Email notifications</strong>
               <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Receive updates about your account activity.</div>
             </div>
-            <label class="sui-toggle"><input type="checkbox" checked aria-label="Email notifications"><span class="sui-toggle-slider"></span></label>
+            <label class="sui-toggle"><input type="checkbox" checked aria-label="Email notifications"><span class="sui-toggle-track"></span></label>
           </div>
           <div class="recipe-settings-row">
             <div>
               <strong>Marketing emails</strong>
               <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Product announcements and feature updates.</div>
             </div>
-            <label class="sui-toggle"><input type="checkbox" aria-label="Marketing emails"><span class="sui-toggle-slider"></span></label>
+            <label class="sui-toggle"><input type="checkbox" aria-label="Marketing emails"><span class="sui-toggle-track"></span></label>
           </div>
           <hr class="sui-divider">
           <h3>Appearance</h3>
@@ -4048,7 +4193,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
               <strong>Theme</strong>
               <div class="sui-text-muted" style="font-size:var(--sui-text-small);">Choose your preferred colour scheme.</div>
             </div>
-            <div class="sui-segmented" role="radiogroup" aria-label="Theme preference" data-sui-tabs>
+            <div class="sui-segmented" role="radiogroup" aria-label="Theme preference">
               <button class="sui-segment" type="button" role="radio" aria-checked="true">Light</button>
               <button class="sui-segment" type="button" role="radio" aria-checked="false">Dark</button>
               <button class="sui-segment" type="button" role="radio" aria-checked="false">Auto</button>
@@ -4075,7 +4220,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
       &lt;strong&gt;Email notifications&lt;/strong&gt;
       &lt;div class="sui-text-muted"&gt;Description text&lt;/div&gt;
     &lt;/div&gt;
-    &lt;label class="sui-toggle"&gt;&lt;input type="checkbox" checked&gt;&lt;span class="sui-toggle-slider"&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;label class="sui-toggle"&gt;&lt;input type="checkbox" checked&gt;&lt;span class="sui-toggle-track"&gt;&lt;/span&gt;&lt;/label&gt;
   &lt;/div&gt;
   &lt;hr class="sui-divider"&gt;
   &lt;h3&gt;Appearance&lt;/h3&gt;
@@ -4160,7 +4305,7 @@ function onContextSwitch(activeGroupName) {
 
 &lt;script&gt;
 const search = document.querySelector('.app-sidenav-search input');
-const groups = document.querySelectorAll('.sui-sidenav-group');
+const groups = document.querySelectorAll('[data-sui-sidenav-group]');
 const links  = document.querySelectorAll('.sui-sidenav-link');
 
 search.addEventListener('input', () =&gt; {
@@ -4298,7 +4443,7 @@ search.addEventListener('input', () =&gt; {
             border-radius: var(--sui-radius-sm);
             background: var(--sui-bg-card);
             color: var(--sui-text-primary);
-            font-family: var(--sui-font);
+            font-family: var(--sui-font-primary);
             padding: 6px 8px;
             min-height: 38px;
           }
@@ -4360,7 +4505,7 @@ search.addEventListener('input', () =&gt; {
           <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — toggle the theme to see dark mode. Try keyboard navigation and typing to filter.</p>
           <div class="sui-flex sui-gap-4 sui-mt-3" style="flex-wrap:wrap;align-items:start;">
             <div style="flex:1;min-width:220px;">
-              <label class="sui-label" for="recipeTomSingle">Single select</label>
+              <label class="sui-input-label" for="recipeTomSingle">Single select</label>
               <select id="recipeTomSingle" aria-label="Single select">
                 <option value="">Choose a department…</option>
                 <option value="eng">Engineering</option>
@@ -4371,7 +4516,7 @@ search.addEventListener('input', () =&gt; {
               </select>
             </div>
             <div style="flex:1;min-width:220px;">
-              <label class="sui-label" for="recipeTomMulti">Multi-select with tagging</label>
+              <label class="sui-input-label" for="recipeTomMulti">Multi-select with tagging</label>
               <select id="recipeTomMulti" multiple aria-label="Multi-select with tagging">
                 <option value="js" selected>JavaScript</option>
                 <option value="py">Python</option>
@@ -4417,7 +4562,7 @@ search.addEventListener('input', () =&gt; {
     border-radius: var(--sui-radius-sm);
     background: var(--sui-bg-card);
     color: var(--sui-text-primary);
-    font-family: var(--sui-font);
+    font-family: var(--sui-font-primary);
     min-height: 38px;
   }
   .full .ts-control { background: var(--sui-bg-card); }
@@ -4448,7 +4593,7 @@ search.addEventListener('input', () =&gt; {
 &lt;/style&gt;
 
 &lt;!-- 3. Use with a native select --&gt;
-&lt;label class="sui-label"&gt;Choose a department&lt;/label&gt;
+&lt;label class="sui-input-label"&gt;Choose a department&lt;/label&gt;
 &lt;select id="mySelect"&gt;
   &lt;option value=""&gt;Select…&lt;/option&gt;
   &lt;option value="eng"&gt;Engineering&lt;/option&gt;
@@ -4461,7 +4606,7 @@ search.addEventListener('input', () =&gt; {
         </div>
 
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
-          <div class="sui-alert-body">
+          <div class="sui-alert-content">
             <strong>Integration recipes</strong> document how to make third-party widgets SUI-native. SUI provides the token overrides; you bring the library. Tom Select is not bundled, versioned, or maintained as part of SUI. Tested with Tom Select v2.5.1.
           </div>
         </div>
@@ -4473,7 +4618,7 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada with ❤️</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.7.1</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.7.2</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->
@@ -4540,14 +4685,14 @@ search.addEventListener('input', () =&gt; {
       </div>
       <div class="sui-panel-body">
         <div style="display: flex; align-items: center; gap: var(--sui-space-3); margin-bottom: var(--sui-space-4);">
-          <div class="sui-avatar" data-initials="JC" style="width: 48px; height: 48px; font-size: var(--sui-text-lg);"></div>
+          <div class="sui-avatar" data-initials="JC" style="width: 48px; height: 48px; font-size: var(--sui-text-h3);"></div>
           <div>
             <div style="font-weight: var(--sui-weight-semibold);">Jane Cooper</div>
-            <div style="font-size: var(--sui-text-sm); color: var(--sui-text-secondary);">VP of Sales</div>
+            <div style="font-size: var(--sui-text-small); color: var(--sui-text-secondary);">VP of Sales</div>
           </div>
         </div>
         <div class="sui-divider sui-mb-3"></div>
-        <dl style="display: grid; grid-template-columns: auto 1fr; gap: var(--sui-space-2) var(--sui-space-3); font-size: var(--sui-text-sm);">
+        <dl style="display: grid; grid-template-columns: auto 1fr; gap: var(--sui-space-2) var(--sui-space-3); font-size: var(--sui-text-small);">
           <dt style="color: var(--sui-text-muted);">Email</dt>
           <dd style="margin: 0;">jane.cooper@example.com</dd>
           <dt style="color: var(--sui-text-muted);">Phone</dt>
@@ -4555,7 +4700,7 @@ search.addEventListener('input', () =&gt; {
           <dt style="color: var(--sui-text-muted);">Company</dt>
           <dd style="margin: 0;">Acme Corp</dd>
           <dt style="color: var(--sui-text-muted);">Stage</dt>
-          <dd style="margin: 0;"><span class="sui-badge sui-badge-info"><span class="sui-badge-icon" aria-hidden="true"><i data-lucide="target"></i></span>Qualified</span></dd>
+          <dd style="margin: 0;"><span class="sui-badge sui-badge-info"><span aria-hidden="true"><i data-lucide="target"></i></span>Qualified</span></dd>
           <dt style="color: var(--sui-text-muted);">Value</dt>
           <dd style="margin: 0;">$48,000</dd>
         </dl>
@@ -4583,7 +4728,7 @@ search.addEventListener('input', () =&gt; {
       </div>
       <div class="sui-panel-body">
         <p>This panel has no backdrop on desktop — it floats over the content with a shadow for depth. Main content remains fully interactive.</p>
-        <p class="sui-mt-3" style="font-size: var(--sui-text-sm); color: var(--sui-text-muted);">On mobile, the backdrop always appears because the panel goes full-screen.</p>
+        <p class="sui-mt-3" style="font-size: var(--sui-text-small); color: var(--sui-text-muted);">On mobile, the backdrop always appears because the panel goes full-screen.</p>
       </div>
       <div class="sui-panel-footer">
         <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.panel.close('#demoPanelNoBg')">Close</button>
@@ -4621,7 +4766,7 @@ search.addEventListener('input', () =&gt; {
       const toggle = document.getElementById('sidenavToggle');
       const emptyMsg = nav.querySelector('.demo-sidenav-empty');
       const allLinks = nav.querySelectorAll('.sui-sidenav-link');
-      const groups = nav.querySelectorAll('.sui-sidenav-group');
+      const groups = nav.querySelectorAll('[data-sui-sidenav-group]');
 
       // Tabs that have sidenav sections
       const sidenavTabs = new Set(['components', 'recipes']);
@@ -4645,7 +4790,9 @@ search.addEventListener('input', () =&gt; {
         }
       }
 
-      document.querySelectorAll('[role="tab"]').forEach(tab => {
+      // Only listen to main page tabs (not recipe tabs like Record Detail)
+      const mainNav = document.querySelector('.sui-nav[aria-label="Demo views"]');
+      if (mainNav) mainNav.querySelectorAll('[role="tab"]').forEach(tab => {
         tab.addEventListener('click', () => {
           updateSidenavForTab(tab.getAttribute('data-tab'));
           // Clear hash when switching tabs — prevents stale anchors

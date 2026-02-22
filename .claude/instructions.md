@@ -166,8 +166,9 @@ When building on SUI and you need custom tokens (brand colours, app-specific spa
 - `sui-dropdown` — Dropdown menu (`aria-haspopup`, `aria-expanded`)
 - `sui-dialog` — Native `<dialog>` modal (`SUI.modal.open/close`)
 - `sui-sheet` — Bottom sheet (`SUI.sheet.open/close`)
+  - Close buttons use the JS hook class `.sui-sheet-close` (style the button with `sui-btn` variants as usual).
 - `sui-sidenav` — Responsive sidebar nav, sticky desktop, slide-in mobile (`SUI.sidenav.open/close/toggle/isOpen`)
-  - `sui-sidenav-group` / `sui-sidenav-group-toggle` / `sui-sidenav-group-links` — Collapsible groups (`SUI.sidenav.collapseAll/expandAll`)
+  - `sui-sidenav-group-toggle` / `sui-sidenav-group-links` / `sui-sidenav-group-count` — Collapsible groups (`SUI.sidenav.collapseAll/expandAll`)
 - `sui-panel` — Side panel / slide-over, slides from right. Desktop: no focus trap (parallel content). Mobile: focus trap (full-screen). Width via `--sui-panel-width`. (`SUI.panel.open/close/toggle/isOpen`)
 - `sui-segmented` + `sui-segment` — Segmented control (`role="radiogroup"`)
 - `sui-tooltip` + `sui-tooltip-content` — Tooltip (Escape to dismiss)
@@ -209,6 +210,17 @@ Do not invent or reference these — they are common AI hallucinations:
 | `--sui-font` | Use `--sui-font-primary` or `--sui-font-mono`. |
 | `--sui-weight-normal` | Use `--sui-weight-regular`. |
 | `--sui-text-h4` | Does not exist. Heading tokens stop at `--sui-text-h3`. |
+| `--sui-bg-body` | Use `--sui-bg-primary`. Background tokens: `bg-primary`, `bg-card`, `bg-elevated`. |
+| `--sui-radius` | Use `--sui-radius-sm`, `--sui-radius-md`, or `--sui-radius-lg`. |
+| `--sui-text-sm` | Use `--sui-text-small`. |
+| `--sui-text-lg` | Use `--sui-text-h3` (20px) or `--sui-text-h2` (24px). |
+| `--sui-space-7`/`--sui-space-8` | Do not exist. Spacing scale is 1–6 (4px–48px). |
+| `sui-sr-only` | Use `sui-visually-hidden`. |
+| `sui-label` (for inputs) | Use `sui-input-label`. |
+| `sui-alert-body` | Use `sui-alert-content`. |
+| `sui-dialog-content` | Use `sui-modal-body`. |
+| `sui-toggle-slider` | Use `sui-toggle-track`. |
+| `sui-sidenav-group` (class) | Not a CSS class. Use `data-sui-sidenav-group` attribute on the wrapper. CSS classes are `sui-sidenav-group-toggle`, `-links`, `-count`. |
 
 ### Content & Typography
 - `sui-prose` (+ `-sm`/`-lg`/`-narrow`/`-wide`) — Long-form typography
@@ -242,7 +254,7 @@ Do not invent or reference these — they are common AI hallucinations:
 
 All colours use `--sui-*` custom properties. **Never hardcode hex in components.**
 
-- **Backgrounds:** `--sui-bg-card`, `--sui-bg-elevated`, `--sui-bg-body`
+- **Backgrounds:** `--sui-bg-card`, `--sui-bg-elevated`, `--sui-bg-primary`
 - **Text:** `--sui-text-primary`, `--sui-text-secondary`, `--sui-text-muted`, `--sui-text-inverse`
 - **Status:** `--sui-success/error/warning/info` + `-strong` + `-soft`
 - **Blue:** `--sui-blue-primary`, `--sui-blue-strong`, `--sui-blue-soft`
@@ -316,7 +328,7 @@ Check these before building custom patterns:
 
 | What you call it | SUI solution | Type |
 |-----------------|-------------|------|
-| Sidebar / Side menu | `sui-sidenav` + `sui-sidenav-group` | Component |
+| Sidebar / Side menu | `sui-sidenav` | Component |
 | Modal / Popup / Dialog | `sui-dialog` with native `<dialog>` | Component |
 | Drawer / Slide-over | `sui-panel` (right) or `sui-sheet` (bottom) | Component |
 | Toast / Snackbar | `SUI.toast.success/error/warning/info()` | JS API |

@@ -64,3 +64,14 @@ Do not invent or reference these — they are common AI hallucinations:
 | `--sui-font` | Use `--sui-font-primary` or `--sui-font-mono`. |
 | `--sui-weight-normal` | Use `--sui-weight-regular`. |
 | `--sui-text-h4` | Does not exist. Heading tokens stop at `--sui-text-h3`. |
+| `--sui-bg-body` | Use `--sui-bg-primary`. Background tokens: `bg-primary`, `bg-card`, `bg-elevated`. |
+| `--sui-radius` | Use `--sui-radius-sm`, `--sui-radius-md`, or `--sui-radius-lg`. |
+| `--sui-text-sm` | Use `--sui-text-small`. |
+| `--sui-text-lg` | Use `--sui-text-h3` (20px) or `--sui-text-h2` (24px). |
+| `--sui-space-7`/`--sui-space-8` | Do not exist. Spacing scale is 1–6 (4px–48px). |
+| `sui-sr-only` | Use `sui-visually-hidden`. |
+| `sui-label` (for inputs) | Use `sui-input-label`. |
+| `sui-alert-body` | Use `sui-alert-content`. |
+| `sui-dialog-content` | Use `sui-modal-body`. |
+| `sui-toggle-slider` | Use `sui-toggle-track`. |
+| `sui-sidenav-group` (class) | Not a CSS class. Wrapper uses `data-sui-sidenav-group` attribute. CSS classes: `sui-sidenav-group-toggle`, `-links`, `-count`. |

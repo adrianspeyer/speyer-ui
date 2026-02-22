@@ -37,7 +37,7 @@ That's it. Three tags for SUI, one optional tag for icons.
 
 ```html
 <!-- Pin to v2.7.1 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.1/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.2/dist/sui-tokens.min.css">
 ```
 
 ---
@@ -154,7 +154,7 @@ SUI's JavaScript auto-initialises. Drop `data-sui-*` attributes on elements and 
 <!-- Modal trigger -->
 <button data-sui-modal="#my-modal">Open Modal</button>
 <dialog class="sui-dialog" id="my-modal" aria-label="Confirmation">
-  <div class="sui-dialog-content">
+  <div class="sui-modal-body">
     <h2>Are you sure?</h2>
     <p>This action cannot be undone.</p>
     <div class="sui-flex sui-gap-2 sui-mt-4">
