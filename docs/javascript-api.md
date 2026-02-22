@@ -2,7 +2,7 @@
 
 SUI's JavaScript (`sui.js`) is optional. Components render correctly without it — they just won't open, close, or animate. When included, it auto-initialises interactive behaviours via `data-sui-*` attributes.
 
-**Current version:** 2.7.2
+**Current version:** 3.0.0
 **Bundle size:** ~26KB minified
 **Dependencies:** Zero
 
@@ -252,7 +252,7 @@ Do not invent or reference these — they are common AI hallucinations:
 | Hallucinated name | Reality / correct approach |
 |---|---|
 | `sui-card-content` | Use `sui-card-body` |
-| `sui-icon` / `sui-icon-*` | Not shipped. Icons are BYO. Use your own class (e.g. `app-icon`). |
+| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG |
 | `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
 | `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
 | `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |

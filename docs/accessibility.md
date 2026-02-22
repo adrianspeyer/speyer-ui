@@ -69,7 +69,7 @@ When building custom patterns with SUI, follow the same principle: if you remove
 
 ## Icons and Screen Readers
 
-SUI has zero icon library dependency — icons are bring-your-own. Regardless of which icon library you use (Lucide, Heroicons, Phosphor, Font Awesome, inline SVG), there are three patterns for how icons interact with screen readers.
+SUI ships 483 first-party icons with built-in accessibility. If you use SUI Icons, the `sui-icon` class handles sizing and `currentColor` inheritance. If you bring your own icons (Heroicons, Phosphor, Font Awesome, inline SVG), the same three patterns apply.
 
 ### 1. Decorative icon (icon + visible text)
 

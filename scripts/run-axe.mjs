@@ -1,14 +1,17 @@
 /**
  * SUI Axe A11y Scanner
  * ────────────────────
- * Runs axe-core against index.html in a jsdom headless environment.
+ * Runs axe-core against an HTML file in a jsdom headless environment.
  * Reports WCAG 2.1 AA violations and best-practice issues.
  *
  * Prerequisites:
  *   npm install --save-dev jsdom axe-core
  *
  * Usage:
- *   node scripts/run-axe.mjs
+ *   node scripts/run-axe.mjs              # scans index.html (default)
+ *   node scripts/run-axe.mjs icons.html   # scans icons.html
+ *   npm run axe                            # scans index.html
+ *   npm run axe -- icons.html              # scans icons.html
  *
  * Exit codes:
  *   0 = zero violations
@@ -38,17 +41,24 @@ try {
   process.exit(1);
 }
 
-// ── Load index.html ─────────────────────────────────────────────────
-const indexPath = path.join(ROOT, 'index.html');
-if (!fs.existsSync(indexPath)) {
-  console.error('index.html not found at repo root');
+// ── Load target HTML file ────────────────────────────────────────────
+const targetFile = process.argv[2] || 'index.html';
+const targetPath = path.join(ROOT, targetFile);
+if (!fs.existsSync(targetPath)) {
+  console.error(`${targetFile} not found at repo root`);
   process.exit(1);
 }
-const indexHTML = fs.readFileSync(indexPath, 'utf8');
-const suiJS = fs.readFileSync(path.join(ROOT, 'sui.js'), 'utf8');
+const targetHTML = fs.readFileSync(targetPath, 'utf8');
+
+// Only inject sui.js for index.html (other pages may not need it)
+let suiJS = '';
+const suiJSPath = path.join(ROOT, 'sui.js');
+if (fs.existsSync(suiJSPath)) {
+  suiJS = fs.readFileSync(suiJSPath, 'utf8');
+}
 
 // Strip external CDN scripts (not our code to audit)
-let cleanHTML = indexHTML
+let cleanHTML = targetHTML
   .replace(/<script src="https:\/\/unpkg\.com\/[^"]*"[^>]*><\/script>/g, '')
   .replace(/<script src="https:\/\/cdn\.jsdelivr[^"]*"[^>]*><\/script>/g, '')
   .replace(/<link rel="stylesheet" href="https:\/\/cdn\.jsdelivr[^"]*"[^>]*\/>/g, '')
@@ -56,7 +66,7 @@ let cleanHTML = indexHTML
 
 // ── Create jsdom environment ────────────────────────────────────────
 const dom = new JSDOM(cleanHTML, {
-  url: 'http://localhost/index.html',
+  url: `http://localhost/${targetFile}`,
   pretendToBeVisual: true,
   runScripts: 'dangerously',
   beforeParse(w) {
@@ -84,13 +94,15 @@ document.querySelectorAll('dialog').forEach(dl => {
   if (!dl.close) dl.close = function () { this.removeAttribute('open'); };
 });
 
-// Inject SUI JS
-try { window.eval(suiJS); } catch { /* non-critical in headless */ }
+// Inject SUI JS (if available)
+if (suiJS) {
+  try { window.eval(suiJS); } catch { /* non-critical in headless */ }
+}
 await new Promise(r => setTimeout(r, 300));
 
 // ── Run axe ─────────────────────────────────────────────────────────
 console.log('');
-console.log('SUI Axe A11y Scanner');
+console.log(`SUI Axe A11y Scanner — ${targetFile}`);
 console.log('═'.repeat(60));
 console.log('');
 

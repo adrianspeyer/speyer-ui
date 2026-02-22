@@ -1,0 +1,128 @@
+/*!
+ * SUI Icons — Companion Stylesheet
+ * Version: 3.0.0
+ * Part of the Speyer UI System (SUI)
+ * https://github.com/adrianspeyer/speyer-ui
+ *
+ * Requires: sui-tokens.css (for --sui-* custom properties)
+ *
+ * Usage:
+ *   <svg class="sui-icon sui-icon-lg" viewBox="0 0 24 24" aria-hidden="true">
+ *     <use href="#sui-icon-act-search"/>
+ *   </svg>
+ *
+ * Made in Canada 🍁 · MIT Licence
+ */
+
+
+/* ==========================================================================
+   Base Icon
+   ========================================================================== */
+
+.sui-icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.125em; /* optical baseline alignment */
+  flex-shrink: 0;
+  overflow: visible;        /* allow focus rings / effects to bleed */
+}
+
+
+/* ==========================================================================
+   Size Scale (font-size drives em-based width/height)
+   ========================================================================== */
+
+.sui-icon-xs  { font-size: 0.75rem;  } /*  12px */
+.sui-icon-sm  { font-size: 0.875rem; } /*  14px */
+.sui-icon-md  { font-size: 1rem;     } /*  16px */
+.sui-icon-lg  { font-size: 1.25rem;  } /*  20px */
+.sui-icon-xl  { font-size: 1.5rem;   } /*  24px */
+.sui-icon-2xl { font-size: 2rem;     } /*  32px */
+.sui-icon-3xl { font-size: 3rem;     } /*  48px */
+
+
+/* ==========================================================================
+   Spin Animation (for status-loader and similar)
+   Apply .sui-icon-spin to the <svg> element.
+   ========================================================================== */
+
+.sui-icon-spin {
+  animation: sui-icon-spin 0.75s linear infinite;
+  transform-origin: center; /* keeps rotation centred — required */
+}
+
+@keyframes sui-icon-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sui-icon-spin { animation: none; }
+}
+
+
+/* ==========================================================================
+   Forced Colours (Windows High Contrast)
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .sui-icon { forced-color-adjust: auto; }
+}
+
+
+/* ==========================================================================
+   Colour Utilities
+   Pair with a status icon — never communicate state by colour alone.
+   Always include an icon + visible label alongside colour.
+   ========================================================================== */
+
+.sui-icon-primary { color: var(--sui-blue-primary); }
+.sui-icon-success { color: var(--sui-success);      }
+.sui-icon-warning { color: var(--sui-warning);      }
+.sui-icon-error   { color: var(--sui-error);        }
+.sui-icon-info    { color: var(--sui-info);         }
+.sui-icon-muted   { color: var(--sui-text-muted);   }
+
+
+/* ==========================================================================
+   Icon Button
+   A minimal 44×44 touch-target wrapper for standalone icon controls.
+   Always provide aria-label on the button, not the SVG.
+
+   Example:
+     <button class="sui-icon-btn" aria-label="Delete item">
+       <svg class="sui-icon sui-icon-lg" viewBox="0 0 24 24" aria-hidden="true">
+         <use href="#sui-icon-act-trash"/>
+       </svg>
+     </button>
+   ========================================================================== */
+
+.sui-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--sui-touch-target, 44px);
+  min-height: var(--sui-touch-target, 44px);
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--sui-radius-sm, 8px);
+  cursor: pointer;
+  color: inherit;
+  transition: background-color var(--sui-duration-fast, 150ms) var(--sui-easing, ease-out);
+}
+
+.sui-icon-btn:hover {
+  background-color: var(--sui-bg-elevated);
+}
+
+.sui-icon-btn:focus-visible {
+  outline: 2px solid var(--sui-blue-focus, #60a5fa);
+  outline-offset: 2px;
+}
+
+.sui-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

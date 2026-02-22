@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "2.7.2",
+    "version": "3.0.0",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -41,7 +41,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/lucide@0.475.0"></script>
+  <link rel="stylesheet" href="./sui-icons.css" />
+  <!-- SUI Icon sprite injection -->
+  <script defer>
+    fetch('./sui-icons.svg')
+      .then(function(r){return r.text()})
+      .then(function(svg){var d=document.createElement('div');d.style.display='none';d.setAttribute('aria-hidden','true');d.innerHTML=svg;document.body.prepend(d);});
+  </script>
   <!-- Flatpickr — loaded for integration recipe demo only (not part of SUI) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13" defer></script>
@@ -95,40 +101,40 @@
   <header class="sui-topbar">
     <div class="sui-topbar-inner">
       <div class="sui-brand">
-        <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
+        <div class="sui-brand-mark" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-dev-layers"/></svg></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.7.2</span>
+          <span class="sui-version-pill">v3.0.0</span>
         </div>
       </div>
 
       <nav class="sui-nav" role="tablist" aria-label="Demo views">
         <button class="sui-tab" type="button" role="tab" data-tab="overview" aria-selected="true" aria-label="Overview">
-          <i data-lucide="layout"></i><span class="sui-tab-label">Overview</span>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-layout"/></svg><span class="sui-tab-label">Overview</span>
         </button>
         <button class="sui-tab" type="button" role="tab" data-tab="components" aria-selected="false" aria-label="Components">
-          <i data-lucide="box"></i><span class="sui-tab-label">Components</span>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-box"/></svg><span class="sui-tab-label">Components</span>
         </button>
         <button class="sui-tab" type="button" role="tab" data-tab="designers" aria-selected="false" aria-label="Designers">
-          <i data-lucide="pen-tool"></i><span class="sui-tab-label">Designers</span>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-pen-tool"/></svg><span class="sui-tab-label">Designers</span>
         </button>
         <button class="sui-tab" type="button" role="tab" data-tab="prompt" aria-selected="false" aria-label="AI Prompt">
-          <i data-lucide="bot"></i><span class="sui-tab-label">AI Prompt</span>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-bot"/></svg><span class="sui-tab-label">AI Prompt</span>
         </button>
         <button class="sui-tab" type="button" role="tab" data-tab="recipes" aria-selected="false" aria-label="Recipes">
-          <i data-lucide="chef-hat"></i><span class="sui-tab-label">Recipes</span>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-chef-hat"/></svg><span class="sui-tab-label">Recipes</span>
         </button>
       </nav>
 
       <div class="sui-topbar-actions">
         <button class="sui-sidenav-toggle" id="sidenavToggle" data-sui-sidenav="#demoSidenav"
-                aria-label="Open section navigation" type="button"><i data-lucide="menu"></i></button>
+                aria-label="Open section navigation" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-menu"/></svg></button>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer" aria-label="View on GitHub">
-          <i data-lucide="github"></i>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-github"/></svg>
         </a>
         <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" data-sui-theme aria-label="Toggle theme">
-          <i data-lucide="moon" id="themeIconLight"></i>
-          <i data-lucide="sun" id="themeIconDark" style="display:none;"></i>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" id="themeIconLight"><use href="#sui-icon-ui-moon"/></svg>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" id="themeIconDark" style="display:none;"><use href="#sui-icon-ui-sun"/></svg>
         </button>
       </div>
     </div>
@@ -250,28 +256,28 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.7.2</span>
+            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>v3.0.0</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">Dependencies</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">0</div>
-            <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Zero</span>
+            <span class="sui-badge sui-badge-success"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg>Zero</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">A11y Target</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">AA</div>
-            <span class="sui-badge sui-badge-info"><i data-lucide="shield-check"></i>WCAG 2.1</span>
+            <span class="sui-badge sui-badge-info"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-sec-shield-check"/></svg>WCAG 2.1</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
           <div class="sui-kpi-label">Lighthouse</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">100</div>
-            <span class="sui-badge sui-badge-success"><i data-lucide="shield-check"></i>A11y</span>
+            <span class="sui-badge sui-badge-success"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-sec-shield-check"/></svg>A11y</span>
           </div>
         </div>
       </div>
@@ -284,31 +290,31 @@
           <div class="sui-flex-col sui-gap-3 sui-mt-4">
             <div class="sui-card sui-card-muted">
               <div class="sui-info-row">
-                <i data-lucide="eye" class="sui-info-row-icon sui-text-info"></i>
+                <svg class="sui-icon sui-info-row-icon sui-text-info" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-eye"/></svg>
                 <div><div class="sui-info-row-title">Readability</div><small>Text and data must be easy to scan and understand at a glance.</small></div>
               </div>
             </div>
             <div class="sui-card sui-card-muted">
               <div class="sui-info-row">
-                <i data-lucide="shield-check" class="sui-info-row-icon sui-text-success"></i>
+                <svg class="sui-icon sui-info-row-icon sui-text-success" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-sec-shield-check"/></svg>
                 <div><div class="sui-info-row-title">Accessibility</div><small>WCAG 2.1 AA compliance. Color is never the sole way to convey information.</small></div>
               </div>
             </div>
             <div class="sui-card sui-card-muted">
               <div class="sui-info-row">
-                <i data-lucide="smartphone" class="sui-info-row-icon sui-text-warning"></i>
+                <svg class="sui-icon sui-info-row-icon sui-text-warning" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-dev-smartphone"/></svg>
                 <div><div class="sui-info-row-title">Mobile-First</div><small>Layouts designed for small screens, then scaled up. 44px touch targets.</small></div>
               </div>
             </div>
             <div class="sui-card sui-card-muted">
               <div class="sui-info-row">
-                <i data-lucide="palette" class="sui-info-row-icon sui-text-error"></i>
+                <svg class="sui-icon sui-info-row-icon sui-text-error" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-palette"/></svg>
                 <div><div class="sui-info-row-title">Color-Blind Friendly</div><small>No red/green only patterns. Every status uses icon + text label.</small></div>
               </div>
             </div>
             <div class="sui-card sui-card-muted">
               <div class="sui-info-row">
-                <i data-lucide="copy" class="sui-info-row-icon sui-text-pro"></i>
+                <svg class="sui-icon sui-info-row-icon sui-text-pro" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-copy"/></svg>
                 <div><div class="sui-info-row-title">Consistency</div><small>Same components, same behavior, everywhere. Tokens are the contract.</small></div>
               </div>
             </div>
@@ -343,7 +349,7 @@
                   <div class="sui-info-row-title">sui.js</div>
                   <small>Interactive toolkit — modals, toasts, dropdowns, tooltips, accordion</small>
                 </div>
-                <span class="sui-badge sui-badge-info"><i data-lucide="info"></i>Optional</span>
+                <span class="sui-badge sui-badge-info"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg>Optional</span>
               </div>
             </div>
           </div>
@@ -354,7 +360,7 @@
                 <div class="sui-info-row-title">CDN Ready</div>
                 <small>Minified files in <code>/dist</code> — served via jsDelivr. No signup required.</small>
               </div>
-              <span class="sui-badge sui-badge-new"><i data-lucide="globe"></i>CDN</span>
+              <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-globe"/></svg>CDN</span>
             </div>
           </div>
           <hr class="sui-divider" />
@@ -364,7 +370,7 @@
                 <div class="sui-info-row-title">AI-Ready</div>
                 <small>Paste a prompt, get SUI-compliant code. Works with any AI tool.</small>
               </div>
-              <span class="sui-badge sui-badge-pro"><i data-lucide="sparkles"></i>AI</span>
+              <span class="sui-badge sui-badge-pro"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>AI</span>
             </div>
           </div>
         </div>
@@ -392,7 +398,7 @@
           <div class="sui-accordion-item">
             <button class="sui-accordion-trigger" type="button" aria-expanded="true" aria-controls="acc-1">
               What is Speyer UI?
-              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+              <svg class="sui-icon sui-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-chevron-down"/></svg>
             </button>
             <div class="sui-accordion-panel" id="acc-1">
               <p>SUI is a lightweight, accessible design system built on CSS custom properties. It provides design tokens, reusable component classes, and an optional JavaScript toolkit for interactive components — no heavy frameworks required.</p>
@@ -401,7 +407,7 @@
           <div class="sui-accordion-item">
             <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-2">
               Do I need the JavaScript file?
-              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+              <svg class="sui-icon sui-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-chevron-down"/></svg>
             </button>
             <div class="sui-accordion-panel" id="acc-2" hidden>
               <p>No. The CSS files handle all visual styling. <code>sui.js</code> is optional and adds behavior for modals, toasts, dropdowns, tooltips, and accordion interactivity. Everything degrades gracefully without it.</p>
@@ -410,7 +416,7 @@
           <div class="sui-accordion-item">
             <button class="sui-accordion-trigger" type="button" aria-expanded="false" aria-controls="acc-3">
               Can I use SUI with React, Vue, or other frameworks?
-              <i data-lucide="chevron-down" class="sui-accordion-chevron"></i>
+              <svg class="sui-icon sui-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-chevron-down"/></svg>
             </button>
             <div class="sui-accordion-panel" id="acc-3" hidden>
               <p>Absolutely. SUI tokens are plain CSS custom properties that work in any environment. The component classes are standard CSS and can be applied to any HTML element. Use the tokens as your design foundation and build framework-specific components on top.</p>
@@ -425,19 +431,19 @@
         <p class="sui-text-cap sui-mt-2">Every alert uses icon + text. Color is never the sole indicator.</p>
         <div class="sui-grid sui-grid-2 sui-mt-4">
           <div class="sui-alert sui-alert-success" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="check-circle"></i></span>
+            <span class="sui-alert-icon" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg></span>
             <div class="sui-alert-content"><div class="sui-alert-title">Saved successfully</div><div>Your changes have been published.</div></div>
           </div>
           <div class="sui-alert sui-alert-warning" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="alert-triangle"></i></span>
+            <span class="sui-alert-icon" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-alert-triangle"/></svg></span>
             <div class="sui-alert-content"><div class="sui-alert-title">Review required</div><div>Some fields need your attention.</div></div>
           </div>
           <div class="sui-alert sui-alert-error" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="x-circle"></i></span>
+            <span class="sui-alert-icon" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-x-circle"/></svg></span>
             <div class="sui-alert-content"><div class="sui-alert-title">Upload failed</div><div>The file exceeds the maximum size of 10MB.</div></div>
           </div>
           <div class="sui-alert sui-alert-info" role="alert">
-            <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+            <span class="sui-alert-icon" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg></span>
             <div class="sui-alert-content"><div class="sui-alert-title">Changes applied</div><div>Settings will take effect next session.</div></div>
           </div>
         </div>
@@ -484,30 +490,30 @@
         <div class="sui-card sui-mt-4">
           <div class="sui-kpi-label sui-mb-3">Status badges</div>
           <div class="sui-flex">
-            <span class="sui-badge sui-badge-success"><i data-lucide="check-circle"></i>Active</span>
-            <span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle"></i>Pending</span>
-            <span class="sui-badge sui-badge-error"><i data-lucide="x-circle"></i>Failed</span>
-            <span class="sui-badge sui-badge-info"><i data-lucide="activity"></i>Stable</span>
-            <span class="sui-badge sui-badge-neutral"><i data-lucide="minus-circle"></i>Inactive</span>
+            <span class="sui-badge sui-badge-success"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg>Active</span>
+            <span class="sui-badge sui-badge-warning"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-alert-triangle"/></svg>Pending</span>
+            <span class="sui-badge sui-badge-error"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-x-circle"/></svg>Failed</span>
+            <span class="sui-badge sui-badge-info"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-activity"/></svg>Stable</span>
+            <span class="sui-badge sui-badge-neutral"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-minus-circle"/></svg>Inactive</span>
           </div>
 
           <div class="sui-kpi-label sui-mb-3 sui-mt-4">Feature badges</div>
           <div class="sui-flex">
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>New</span>
-            <span class="sui-badge sui-badge-beta"><i data-lucide="flask-conical"></i>Beta</span>
-            <span class="sui-badge sui-badge-pro"><i data-lucide="crown"></i>Pro</span>
+            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>New</span>
+            <span class="sui-badge sui-badge-beta"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-flask"/></svg>Beta</span>
+            <span class="sui-badge sui-badge-pro"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-crown"/></svg>Pro</span>
           </div>
 
           <div class="sui-kpi-label sui-mb-3 sui-mt-4">Modifiers</div>
           <div class="sui-flex sui-items-center">
-            <span class="sui-badge sui-badge-success sui-badge-outline"><i data-lucide="check-circle"></i>Outline</span>
+            <span class="sui-badge sui-badge-success sui-badge-outline"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg>Outline</span>
             <span class="sui-badge sui-badge-info sui-badge-sm">Small</span>
             <span class="sui-badge sui-badge-success sui-badge-dot">Online</span>
             <span class="sui-badge sui-badge-error sui-badge-dot">Offline</span>
             <span class="sui-badge-count">3</span>
             <span class="sui-badge-count">99+</span>
             <span class="sui-badge-overlay" aria-label="Notifications, 3 unread">
-              <button class="sui-btn sui-btn-ghost sui-btn-sm" aria-label="Notifications, 3 unread"><i data-lucide="bell"></i></button>
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" aria-label="Notifications, 3 unread"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-bell"/></svg></button>
               <span class="sui-badge-count" aria-hidden="true">3</span>
             </span>
           </div>
@@ -536,7 +542,7 @@
         <h2>Bottom Sheet</h2>
         <p class="sui-text-cap sui-mt-2">Mobile-first slide-up drawer. Handles safe areas, scroll trapping, and Escape key.</p>
         <div class="sui-card sui-mt-4">
-          <button class="sui-btn sui-btn-primary" type="button" data-sui-sheet="#demoSheet"><i data-lucide="panel-bottom-open"></i>Open Bottom Sheet</button>
+          <button class="sui-btn sui-btn-primary" type="button" data-sui-sheet="#demoSheet"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-panel-bottom"/></svg>Open Bottom Sheet</button>
         </div>
       </div>
 
@@ -545,18 +551,18 @@
         <h2>Buttons</h2>
         <p class="sui-text-cap sui-mt-2">44px touch-friendly. Visible focus states. Tab through to test keyboard navigation.</p>
         <div class="sui-flex sui-mt-4">
-          <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Primary</button>
+          <button class="sui-btn sui-btn-primary" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg>Primary</button>
           <button class="sui-btn sui-btn-secondary" type="button">Secondary</button>
           <button class="sui-btn sui-btn-ghost" type="button">Ghost</button>
-          <button class="sui-btn sui-btn-dashed" type="button"><i data-lucide="plus"></i>Dashed</button>
-          <button class="sui-btn sui-btn-danger" type="button"><i data-lucide="trash-2"></i>Danger</button>
-          <button class="sui-btn sui-btn-success" type="button"><i data-lucide="check"></i>Success</button>
+          <button class="sui-btn sui-btn-dashed" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg>Dashed</button>
+          <button class="sui-btn sui-btn-danger" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-trash-2"/></svg>Danger</button>
+          <button class="sui-btn sui-btn-success" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check"/></svg>Success</button>
           <button class="sui-btn" type="button" disabled>Disabled</button>
         </div>
         <div class="sui-flex sui-mt-3">
           <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Small Primary</button>
-          <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="settings"></i>Settings</button>
-          <button class="sui-btn sui-btn-dashed sui-btn-sm" type="button"><i data-lucide="plus"></i>Add Item</button>
+          <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-settings"/></svg>Settings</button>
+          <button class="sui-btn sui-btn-dashed sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg>Add Item</button>
         </div>
       </div>
 
@@ -583,7 +589,7 @@
           </div>
         </div>
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
-          <i data-lucide="info" aria-hidden="true"></i>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg>
           <div><strong>Avoid double padding.</strong> If you use <code>.sui-card-header</code> / <code>.sui-card-body</code>, pair the wrapper with <code>.sui-card-flush</code> to zero out the card’s own padding. Use <code>.sui-card-compact</code> for dense layouts like KPI grids.</div>
         </div>
       </div>
@@ -595,18 +601,18 @@
         <div class="sui-card sui-mt-4">
           <div class="sui-kpi-label sui-mb-3">Default chips</div>
           <div class="sui-flex">
-            <span class="sui-chip"><i data-lucide="tag"></i>Design</span>
+            <span class="sui-chip"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-tag"/></svg>Design</span>
             <span class="sui-chip">Frontend</span>
             <span class="sui-chip">Accessibility<button class="sui-chip-remove" aria-label="Remove Accessibility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
             <span class="sui-chip">React<button class="sui-chip-remove" aria-label="Remove React"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
           </div>
           <div class="sui-kpi-label sui-mb-3 sui-mt-4">Colour variants</div>
           <div class="sui-flex">
-            <span class="sui-chip sui-chip-success"><i data-lucide="check"></i>Approved</span>
-            <span class="sui-chip sui-chip-warning"><i data-lucide="clock"></i>Pending</span>
-            <span class="sui-chip sui-chip-error"><i data-lucide="x"></i>Rejected</span>
-            <span class="sui-chip sui-chip-info"><i data-lucide="info"></i>Review</span>
-            <span class="sui-chip sui-chip-pro"><i data-lucide="crown"></i>Premium</span>
+            <span class="sui-chip sui-chip-success"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check"/></svg>Approved</span>
+            <span class="sui-chip sui-chip-warning"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-time-clock"/></svg>Pending</span>
+            <span class="sui-chip sui-chip-error"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg>Rejected</span>
+            <span class="sui-chip sui-chip-info"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg>Review</span>
+            <span class="sui-chip sui-chip-pro"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-crown"/></svg>Premium</span>
           </div>
         </div>
       </div>
@@ -617,7 +623,7 @@
         <p class="sui-text-cap sui-mt-2">File upload area. CSS only — drag-and-drop behaviour is bring-your-own JS.</p>
         <div class="sui-card sui-mt-4">
           <div class="sui-dropzone" role="button" tabindex="0" aria-label="Upload files">
-            <i data-lucide="upload-cloud"></i>
+            <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-cloud-upload"/></svg>
             <p><strong>Drop files here</strong> or click to browse</p>
             <p class="sui-text-muted">PNG, JPG, PDF up to 10MB</p>
           </div>
@@ -654,10 +660,10 @@
         <p class="sui-text-cap sui-mt-2">The "no data yet" pattern every table, list, and dashboard needs.</p>
         <div class="sui-card sui-mt-4">
           <div class="sui-empty">
-            <div class="sui-empty-icon"><i data-lucide="inbox"></i></div>
+            <div class="sui-empty-icon"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-comm-inbox"/></svg></div>
             <div class="sui-empty-title">No projects yet</div>
             <div class="sui-empty-text">Create your first project to get started. It only takes a few seconds.</div>
-            <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="plus"></i>Create project</button>
+            <button class="sui-btn sui-btn-primary" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg>Create project</button>
           </div>
         </div>
       </div>
@@ -676,7 +682,7 @@
             <div class="sui-input-group sui-mb-3">
               <label class="sui-input-label" for="demo-email">Email Address</label>
               <input class="sui-input sui-input-error" type="email" id="demo-email" autocomplete="email" value="invalid-email" aria-describedby="demo-email-err" aria-invalid="true">
-              <span class="sui-input-error-msg" id="demo-email-err"><i data-lucide="x-circle"></i> Please enter a valid email address.</span>
+              <span class="sui-input-error-msg" id="demo-email-err"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-x-circle"/></svg> Please enter a valid email address.</span>
             </div>
             <div class="sui-input-group">
               <label class="sui-input-label" for="demo-role">Role</label>
@@ -718,14 +724,14 @@
               <label class="sui-input-label" for="demo-search">Search</label>
               <div class="sui-input-action">
                 <input class="sui-input" type="search" id="demo-search" placeholder="Search records…">
-                <button class="sui-btn" type="button" aria-label="Search"><i data-lucide="search" aria-hidden="true"></i></button>
+                <button class="sui-btn" type="button" aria-label="Search"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-search"/></svg></button>
               </div>
             </div>
             <div class="sui-input-group">
               <label class="sui-input-label" for="demo-copy-url">Share link</label>
               <div class="sui-input-action">
                 <input class="sui-input" type="url" id="demo-copy-url" value="https://example.com/invite/abc123" readonly>
-                <button class="sui-btn" type="button" aria-label="Copy link"><i data-lucide="copy" aria-hidden="true"></i></button>
+                <button class="sui-btn" type="button" aria-label="Copy link"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-copy"/></svg></button>
               </div>
             </div>
           </div>
@@ -734,7 +740,7 @@
               <label class="sui-input-label" for="demo-pw">Password</label>
               <div class="sui-input-action">
                 <input class="sui-input" type="password" id="demo-pw" value="hunter2" autocomplete="current-password">
-                <button class="sui-btn" type="button" aria-label="Show password"><i data-lucide="eye" aria-hidden="true"></i></button>
+                <button class="sui-btn" type="button" aria-label="Show password"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-eye"/></svg></button>
               </div>
               <span class="sui-input-hint">Click the eye to toggle visibility.</span>
             </div>
@@ -750,29 +756,29 @@
           <div class="sui-flex sui-items-center">
             <!-- Dropdown -->
             <div class="sui-dropdown">
-              <button class="sui-btn" type="button" data-sui-dropdown-trigger><i data-lucide="more-horizontal"></i>Dropdown</button>
+              <button class="sui-btn" type="button" data-sui-dropdown-trigger><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-more-horizontal"/></svg>Dropdown</button>
               <div class="sui-dropdown-menu">
-                <button class="sui-dropdown-item"><i data-lucide="edit-3"></i>Edit</button>
-                <button class="sui-dropdown-item"><i data-lucide="copy"></i>Duplicate</button>
-                <button class="sui-dropdown-item"><i data-lucide="archive"></i>Archive</button>
+                <button class="sui-dropdown-item"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-edit-3"/></svg>Edit</button>
+                <button class="sui-dropdown-item"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-copy"/></svg>Duplicate</button>
+                <button class="sui-dropdown-item"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-archive"/></svg>Archive</button>
                 <hr class="sui-dropdown-divider" />
-                <button class="sui-dropdown-item sui-dropdown-item-danger"><i data-lucide="trash-2"></i>Delete</button>
+                <button class="sui-dropdown-item sui-dropdown-item-danger"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-trash-2"/></svg>Delete</button>
               </div>
             </div>
 
             <!-- Tooltip -->
             <span class="sui-tooltip">
-              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Settings"><i data-lucide="settings"></i></button>
+              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Settings"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-settings"/></svg></button>
               <span class="sui-tooltip-content" role="tooltip">Settings</span>
             </span>
 
             <span class="sui-tooltip">
-              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Help"><i data-lucide="help-circle"></i></button>
+              <button class="sui-btn sui-btn-ghost" type="button" aria-label="Help"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-help-circle"/></svg></button>
               <span class="sui-tooltip-content" role="tooltip">Help &amp; Support</span>
             </span>
 
             <!-- Modal trigger -->
-            <button class="sui-btn sui-btn-primary" type="button" data-sui-modal="#demoModal"><i data-lucide="external-link"></i>Open Modal</button>
+            <button class="sui-btn sui-btn-primary" type="button" data-sui-modal="#demoModal"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-external-link"/></svg>Open Modal</button>
 
             <!-- Toast triggers -->
             <button class="sui-btn sui-btn-success sui-btn-sm" type="button" onclick="SUI.toast.success('Saved!', 'Your changes have been saved.')">Toast</button>
@@ -900,13 +906,13 @@
           <div class="sui-divider-label">Pagination</div>
 
           <nav class="sui-pagination" aria-label="Page navigation">
-            <button class="sui-page-btn" aria-label="Previous page"><i data-lucide="chevron-left"></i></button>
+            <button class="sui-page-btn" aria-label="Previous page"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-chevron-left"/></svg></button>
             <button class="sui-page-btn" aria-label="Page 1">1</button>
             <button class="sui-page-btn" aria-current="page" aria-label="Page 2, current">2</button>
             <button class="sui-page-btn" aria-label="Page 3">3</button>
             <span class="sui-page-ellipsis">…</span>
             <button class="sui-page-btn" aria-label="Page 12">12</button>
-            <button class="sui-page-btn" aria-label="Next page"><i data-lucide="chevron-right"></i></button>
+            <button class="sui-page-btn" aria-label="Next page"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-chevron-right"/></svg></button>
           </nav>
 
           <div class="sui-divider-label">Dividers</div>
@@ -938,8 +944,8 @@
           <div class="sui-kpi-label sui-mb-3">CRM Contact Detail</div>
           <p class="sui-mb-3">Click to open a panel with contact details. Desktop: panel appears alongside this content. Mobile: full-screen overlay.</p>
           <div style="display: flex; gap: var(--sui-space-2); flex-wrap: wrap;">
-            <button class="sui-btn sui-btn-primary" data-sui-panel="#demoPanel" aria-expanded="false" type="button"><i data-lucide="user"></i>View Contact</button>
-            <button class="sui-btn sui-btn-outline" data-sui-panel="#demoPanelNoBg" aria-expanded="false" type="button"><i data-lucide="panel-right"></i>No Backdrop</button>
+            <button class="sui-btn sui-btn-primary" data-sui-panel="#demoPanel" aria-expanded="false" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-user"/></svg>View Contact</button>
+            <button class="sui-btn sui-btn-outline" data-sui-panel="#demoPanelNoBg" aria-expanded="false" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-panel-right"/></svg>No Backdrop</button>
           </div>
         </div>
 
@@ -1093,10 +1099,10 @@ SUI.panel.toggle('#my-panel');</code></pre>
             <div class="sui-kpi-label" style="padding:var(--sui-space-2) var(--sui-space-3);font-size:10px;">sui-screen mock</div>
             <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-3);background:var(--sui-bg-card);border-bottom:1px solid var(--sui-border);">
               <div class="sui-flex sui-items-center sui-gap-2">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+                <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-nav-arrow-left"/></svg>
                 <strong style="font-size:var(--sui-text-small);">My App</strong>
                 <div style="flex:1;"></div>
-                <i data-lucide="settings" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
+                <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;color:var(--sui-text-muted);"><use href="#sui-icon-nav-settings"/></svg>
               </div>
             </div>
             <div style="flex:1;overflow-y:auto;padding:var(--sui-space-3);background:var(--sui-bg-primary);">
@@ -1110,9 +1116,9 @@ SUI.panel.toggle('#my-panel');</code></pre>
             </div>
             <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-3);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
               <div class="sui-flex-between">
-                <i data-lucide="home" style="width:16px;height:16px;color:var(--sui-blue-primary);"></i>
-                <i data-lucide="search" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
-                <i data-lucide="user" style="width:16px;height:16px;color:var(--sui-text-muted);"></i>
+                <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;color:var(--sui-blue-primary);"><use href="#sui-icon-nav-home"/></svg>
+                <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;color:var(--sui-text-muted);"><use href="#sui-icon-act-search"/></svg>
+                <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;color:var(--sui-text-muted);"><use href="#sui-icon-nav-user"/></svg>
               </div>
             </div>
           </div>
@@ -1136,9 +1142,9 @@ SUI.panel.toggle('#my-panel');</code></pre>
         <div class="sui-card sui-mt-4">
           <div class="sui-kpi-label sui-mb-3">View mode</div>
           <div class="sui-segmented" role="radiogroup" aria-label="View mode">
-            <button class="sui-segment" type="button" role="radio" aria-checked="true"><i data-lucide="layout-grid"></i>Grid</button>
-            <button class="sui-segment" type="button" role="radio" aria-checked="false"><i data-lucide="list"></i>List</button>
-            <button class="sui-segment" type="button" role="radio" aria-checked="false"><i data-lucide="kanban"></i>Board</button>
+            <button class="sui-segment" type="button" role="radio" aria-checked="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-layout-grid"/></svg>Grid</button>
+            <button class="sui-segment" type="button" role="radio" aria-checked="false"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-list"/></svg>List</button>
+            <button class="sui-segment" type="button" role="radio" aria-checked="false"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-kanban"/></svg>Board</button>
           </div>
           <div class="sui-kpi-label sui-mb-3 sui-mt-4">Billing period</div>
           <div class="sui-segmented" role="radiogroup" aria-label="Billing period">
@@ -1237,7 +1243,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
         <div class="sui-card sui-card-flush sui-mt-4">
           <div class="sui-card-header">
             <h3>Team Members</h3>
-            <button class="sui-btn sui-btn-primary sui-btn-sm" type="button"><i data-lucide="plus"></i>Invite</button>
+            <button class="sui-btn sui-btn-primary sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg>Invite</button>
           </div>
           <div class="sui-table-wrap">
             <table class="sui-table sui-table-hover" aria-label="Team members">
@@ -1353,7 +1359,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
                   <strong>David Kim</strong>
                   <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">2h ago</span>
                 </div>
-                <span class="sui-badge sui-badge-info sui-badge-sm"><i data-lucide="mail"></i> Email</span>
+                <span class="sui-badge sui-badge-info sui-badge-sm"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-comm-mail"/></svg> Email</span>
                 <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Updated proposal attached — ready for review.</p>
               </div>
             </div>
@@ -1364,7 +1370,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
                   <strong>Sarah Chen</strong>
                   <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">Yesterday</span>
                 </div>
-                <span class="sui-badge sui-badge-success sui-badge-sm"><i data-lucide="phone"></i> Call</span>
+                <span class="sui-badge sui-badge-success sui-badge-sm"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-comm-phone"/></svg> Call</span>
                 <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">30 min discovery call. Interested in Enterprise tier.</p>
               </div>
             </div>
@@ -1375,7 +1381,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
                   <strong>Alex Rivera</strong>
                   <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">2 days ago</span>
                 </div>
-                <span class="sui-badge sui-badge-warning sui-badge-sm"><i data-lucide="calendar"></i> Meeting</span>
+                <span class="sui-badge sui-badge-warning sui-badge-sm"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-time-calendar"/></svg> Meeting</span>
                 <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Quarterly review. Action items assigned.</p>
               </div>
             </div>
@@ -1386,7 +1392,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
                   <strong>Jordan Lee</strong>
                   <span class="sui-text-muted" style="font-size:var(--sui-text-meta);">3 days ago</span>
                 </div>
-                <span class="sui-badge sui-badge-neutral sui-badge-sm"><i data-lucide="sticky-note"></i> Note</span>
+                <span class="sui-badge sui-badge-neutral sui-badge-sm"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-work-sticky-note"/></svg> Note</span>
                 <p style="font-size:var(--sui-text-small);margin-top:var(--sui-space-1);">Contract renewal due next month. Flag for follow-up.</p>
               </div>
             </div>
@@ -1403,26 +1409,26 @@ SUI.panel.toggle('#my-panel');</code></pre>
         <div class="sui-card sui-mt-4">
           <div class="sui-kpi-label sui-mb-2">Default</div>
           <div class="sui-toolbar">
-            <button class="sui-toolbar-btn" type="button" title="Bold" aria-label="Bold" aria-pressed="true"><i data-lucide="bold"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Italic" aria-label="Italic"><i data-lucide="italic"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Underline" aria-label="Underline"><i data-lucide="underline"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Bold" aria-label="Bold" aria-pressed="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-bold"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Italic" aria-label="Italic"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-italic"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Underline" aria-label="Underline"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-underline"/></svg></button>
             <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Heading" aria-label="Heading"><i data-lucide="heading"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="List" aria-label="List"><i data-lucide="list"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Quote" aria-label="Quote"><i data-lucide="quote"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Heading" aria-label="Heading"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-heading"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="List" aria-label="List"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-list"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Quote" aria-label="Quote"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-quote"/></svg></button>
             <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Link" aria-label="Link"><i data-lucide="link"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Image" aria-label="Image"><i data-lucide="image"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Code" aria-label="Code"><i data-lucide="code"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Link" aria-label="Link"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-link"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Image" aria-label="Image"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-file-image"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Code" aria-label="Code"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-dev-code"/></svg></button>
           </div>
           <div class="sui-kpi-label sui-mb-2 sui-mt-4">Bordered + Compact</div>
           <div class="sui-toolbar sui-toolbar-bordered sui-toolbar-compact">
-            <button class="sui-toolbar-btn" type="button" title="Align left" aria-label="Align left"><i data-lucide="align-left"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Align centre" aria-label="Align centre" aria-pressed="true"><i data-lucide="align-center"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Align right" aria-label="Align right"><i data-lucide="align-right"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Align left" aria-label="Align left"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-align-left"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Align centre" aria-label="Align centre" aria-pressed="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-align-center"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Align right" aria-label="Align right"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-align-right"/></svg></button>
             <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Undo" aria-label="Undo"><i data-lucide="undo"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Redo" aria-label="Redo"><i data-lucide="redo"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Undo" aria-label="Undo"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-undo"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Redo" aria-label="Redo"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-redo"/></svg></button>
           </div>
         </div>
       </div>
@@ -1463,21 +1469,145 @@ SUI.panel.toggle('#my-panel');</code></pre>
         </div>
       </div>
 
+      <!-- ── Icon showcase ── -->
+      <div class="sui-section">
+        <style>
+          .icon-showcase {
+            background: var(--sui-bg-elevated);
+            border: 1px solid var(--sui-border);
+            border-radius: var(--sui-radius-lg);
+            padding: var(--sui-space-5) var(--sui-space-4);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+          }
+          .icon-showcase h3 {
+            font-size: var(--sui-text-h3);
+            font-weight: var(--sui-weight-bold);
+            margin-bottom: var(--sui-space-1);
+          }
+          .icon-showcase p {
+            color: var(--sui-text-secondary);
+            font-size: var(--sui-text-small);
+            margin-bottom: var(--sui-space-4);
+          }
+          .icon-wall {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--sui-space-3);
+            margin-bottom: var(--sui-space-4);
+          }
+          .icon-wall-item {
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--sui-bg-card);
+            border: 1px solid var(--sui-border);
+            border-radius: var(--sui-radius-md);
+            color: var(--sui-text-secondary);
+            transition: all var(--sui-duration-normal) var(--sui-easing);
+            animation: icon-float 3s ease-in-out infinite;
+          }
+          .icon-wall-item:nth-child(even) { animation-delay: -1.5s; }
+          .icon-wall-item:nth-child(3n)   { animation-delay: -0.7s; }
+          .icon-wall-item:nth-child(5n)   { animation-delay: -2.2s; }
+          .icon-wall-item:hover {
+            color: var(--sui-blue-primary);
+            border-color: var(--sui-blue-soft);
+            background: var(--sui-blue-soft);
+            transform: scale(1.15);
+          }
+          @keyframes icon-float {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-3px); }
+          }
+          .icon-wall-item:hover { animation: none; }
+          @media (prefers-reduced-motion: reduce) {
+            .icon-wall-item { animation: none; }
+          }
+          .showcase-cats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--sui-space-1);
+            margin-bottom: var(--sui-space-4);
+          }
+        </style>
+        <div class="icon-showcase">
+          <h3>483 Hand-drawn Icons <span class="sui-badge sui-badge-new">New in v3</span></h3>
+          <p>Original SVG icons for SaaS interfaces — 28 categories, accessibility built in, works in both themes.</p>
+          <div class="icon-wall" aria-hidden="true">
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-nav-home"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-people-user-check"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-act-search"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-status-check-circle"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-data-bar-chart"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-comm-mail"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-nav-bell"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-sec-shield-check"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-dev-terminal"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-pay-credit-card"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-ai-sparkles"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-file-folder"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-time-calendar"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-act-pen-tool"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-work-kanban"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-ops-truck"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-weather-cloud"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-loc-map-pin"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-edu-trophy"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-ui-palette"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-media-play"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-health-heart-pulse"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-misc-flame"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-soc-star"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-input-toggle-on"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-view-scan"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-brand-github"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-loc-compass"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-sec-key"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-comm-message-circle"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-data-pie-chart"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-misc-coffee"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-act-zap"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-file-code"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-soc-thumbs-up"/></svg></div>
+            <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-travel-plane"/></svg></div>
+          </div>
+          <div class="showcase-cats">
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Navigation</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Actions</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Status</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Data</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Commerce</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">AI</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Dev</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Brand</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">Travel</span>
+            <span class="sui-badge sui-badge-sm sui-badge-neutral">+ 19 more</span>
+          </div>
+          <a href="icons.html" class="sui-btn sui-btn-primary">
+            <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-eye"/></svg>
+            Browse all 483 icons
+          </a>
+        </div>
+      </div>
+
       <!-- Token-first workflow -->
       <div class="sui-section sui-grid sui-grid-2">
         <div class="sui-card sui-card-lg">
-          <h2>Token-first workflow</h2>
+          <h3>Token-first workflow</h3>
           <p class="sui-text-cap sui-mt-2">Design in layers: background → surface → border → text → accents.</p>
           <div class="sui-flex-col sui-gap-3 sui-mt-4">
             <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Contrast rule</div><small>Target 4.5:1 for body text. Use token pairs: <code>--sui-text-primary</code> on <code>--sui-bg-card</code>.</small></div>
-            <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Red/green safe</div><small>Never rely on color alone. Always pair icon + label + (optional) shape.</small></div>
+            <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Red/green safe</div><small>Never rely on colour alone. Always pair icon + label + (optional) shape.</small></div>
             <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Spacing system</div><small>Use the 8px grid: <code>--sui-space-2</code> (8px), <code>--sui-space-3</code> (16px), <code>--sui-space-4</code> (24px).</small></div>
             <div class="sui-card sui-card-muted"><div class="sui-info-row-title">Typography</div><small>Inter via Google Fonts. H1 32/700, H2 24/600, H3 20/600, Body 16/400.</small></div>
           </div>
         </div>
 
         <div class="sui-card sui-card-lg">
-          <h2>Quick reference</h2>
+          <h3>Quick reference</h3>
           <p class="sui-text-cap sui-mt-2">The most common tokens for day-to-day layouts.</p>
           <div class="sui-flex-col sui-gap-3 sui-mt-4">
             <div class="sui-card sui-card-muted"><div class="sui-flex-between"><strong>Background</strong><code>--sui-bg-primary</code></div></div>
@@ -1492,7 +1622,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
 
       <!-- Geometry -->
       <div class="sui-section">
-        <h2>Component Geometry</h2>
+        <h3>Component Geometry</h3>
         <p class="sui-text-cap sui-mt-2">Consistent border radius, sizing, and elevation from the token system.</p>
         <div class="sui-grid sui-grid-4 sui-mt-4">
           <div class="sui-card sui-card-muted sui-text-center">
@@ -1536,7 +1666,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
       <div class="sui-section">
         <div class="sui-flex-between">
           <div><h2>Quick Prompt</h2><p class="sui-mt-1">Recommended for most tasks.</p></div>
-          <button class="sui-btn sui-btn-primary" type="button" data-sui-copy="#promptQuick"><i data-lucide="copy"></i>Copy</button>
+          <button class="sui-btn sui-btn-primary" type="button" data-sui-copy="#promptQuick"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-copy"/></svg>Copy</button>
         </div>
         <div class="sui-card sui-card-lg sui-mt-4">
           <pre id="promptQuick" class="sui-code-block">I want you to use the Speyer UI System (SUI) for this project.
@@ -1549,9 +1679,15 @@ Fetch the official SUI CSS and JS from CDN:
 
 Place CSS &lt;link&gt; tags in &lt;head&gt;. Place &lt;script&gt; tags before &lt;/body&gt; with the defer attribute.
 
-Icons — SUI has no icon dependency. Add any icon library you prefer (Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG). Example with Lucide:
-&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
-&lt;script&gt;lucide.createIcons();&lt;/script&gt;
+Icons — SUI ships 483 first-party icons. Add the icon CSS and sprite loader:
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.css"&gt;
+&lt;script defer&gt;
+  fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.svg')
+    .then(r =&gt; r.text())
+    .then(svg =&gt; { var d=document.createElement('div'); d.style.display='none'; d.innerHTML=svg; document.body.prepend(d); });
+&lt;/script&gt;
+
+Or bring your own icons (Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG).
 
 Or fetch the readable source files from:
 - https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/sui-tokens.css
@@ -1691,14 +1827,14 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       <div class="sui-section">
         <div class="sui-flex-between">
           <div><h2>Minimal Prompt</h2><p class="sui-mt-1">For quick tasks.</p></div>
-          <button class="sui-btn sui-btn-ghost" type="button" data-sui-copy="#promptMinimal"><i data-lucide="copy"></i>Copy</button>
+          <button class="sui-btn sui-btn-ghost" type="button" data-sui-copy="#promptMinimal"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-copy"/></svg>Copy</button>
         </div>
         <div class="sui-card sui-card-lg sui-mt-4">
           <pre id="promptMinimal" class="sui-code-block">Use the Speyer UI System (SUI).
 CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css and sui-components.min.css
 Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
 CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt; with defer.
-Icons: No icon dependency. Use any library (Lucide, Heroicons, Phosphor, Font Awesome) or plain SVG. Always pair icons with text labels.
+Icons: SUI ships 483 first-party icons. Add sui-icons.min.css + sprite loader (see docs). Or bring your own (Heroicons, Phosphor, Font Awesome, plain SVG). Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
 Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Sidenav: sui-sidenav with collapsible groups (sui-sidenav-group-toggle + aria-expanded + aria-controls). Panel: sui-panel (slides from right, --sui-panel-width, sui-panel-no-backdrop). SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators), sui-table-stack (card stacking at tablet), sui-table-sticky (sticky thead), sui-table-dense (compact). Input with button: sui-input-action. Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. SUI.tabs.activate(tabElement) for programmatic switching. Accordion: SUI.accordion.toggle(trigger), .expandAll(container), .collapseAll(container). Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
@@ -1713,7 +1849,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
       <div class="sui-section">
         <div class="sui-flex-between">
           <div><h2>System Prompt</h2><p class="sui-mt-1">For custom instructions or Cursor rules.</p></div>
-          <button class="sui-btn sui-btn-ghost" type="button" data-sui-copy="#promptSystem"><i data-lucide="copy"></i>Copy</button>
+          <button class="sui-btn sui-btn-ghost" type="button" data-sui-copy="#promptSystem"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-copy"/></svg>Copy</button>
         </div>
         <div class="sui-card sui-card-lg sui-mt-4">
           <pre id="promptSystem" class="sui-code-block">When the user says "use SUI", "use the Speyer UI System", or "Speyer UI":
@@ -1724,7 +1860,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js (optional, for modals/toasts/dropdowns)
    Or readable source from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/
    CSS &lt;link&gt; tags go in &lt;head&gt;. &lt;script&gt; tags go before &lt;/body&gt; with defer.
-2. Icons: SUI has no icon dependency. Add any icon library the user prefers (Lucide, Heroicons, Phosphor, Font Awesome, or plain SVG). Ask if they have a preference.
+2. Icons: SUI ships 483 first-party icons via sui-icons.min.css + sprite loader. Add the CSS and use &lt;svg class="sui-icon"&gt;&lt;use href="#sui-icon-{category}-{name}"/&gt;&lt;/svg&gt;. Or bring your own icons (Heroicons, Phosphor, Font Awesome, or plain SVG). Ask if they have a preference.
 3. Ask the user: "Would you like light mode, dark mode, or both?"
 4. Apply all CSS custom properties (--sui- prefix) and component classes.
 5. Follow these design rules:
@@ -1828,11 +1964,11 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <div class="sui-kpi-label sui-mb-3">Action sheet preview</div>
           <div style="background: var(--sui-bg-elevated); border-radius: var(--sui-radius-lg); padding: var(--sui-space-3); max-width: 360px;">
             <div class="recipe-action-sheet">
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="edit-3"></i>Edit</button>
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="copy"></i>Duplicate</button>
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><i data-lucide="share-2"></i>Share</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-edit-3"/></svg>Edit</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-copy"/></svg>Duplicate</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-share-2"/></svg>Share</button>
               <hr class="sui-divider">
-              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button" style="color: var(--sui-error);"><i data-lucide="trash-2"></i>Delete</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-full recipe-action-sheet-btn" type="button" style="color: var(--sui-error);"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-trash-2"/></svg>Delete</button>
             </div>
           </div>
         </div>
@@ -1879,7 +2015,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
                 <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">AI Summit 2026</div>
               </div>
               <div style="flex:1;"></div>
-              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><i data-lucide="bell"></i></button>
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-bell"/></svg></button>
             </div>
           </div>
           <div style="flex:1;overflow-y:auto;padding:var(--sui-space-3);background:var(--sui-bg-primary);">
@@ -1916,10 +2052,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           </div>
           <div style="flex-shrink:0;padding:var(--sui-space-2) var(--sui-space-4);background:var(--sui-bg-card);border-top:1px solid var(--sui-border);">
             <div class="sui-segmented" role="radiogroup" aria-label="Navigation" style="width:100%;">
-              <button class="sui-segment" type="button" role="radio" aria-checked="true" aria-label="People" style="flex:1;"><i data-lucide="users" style="width:16px;height:16px;"></i></button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Schedule" style="flex:1;"><i data-lucide="calendar" style="width:16px;height:16px;"></i></button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Messages" style="flex:1;"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></button>
-              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Profile" style="flex:1;"><i data-lucide="user" style="width:16px;height:16px;"></i></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="true" aria-label="People" style="flex:1;"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-nav-users"/></svg></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Schedule" style="flex:1;"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-time-calendar"/></svg></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Messages" style="flex:1;"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-comm-message-circle"/></svg></button>
+              <button class="sui-segment" type="button" role="radio" aria-checked="false" aria-label="Profile" style="flex:1;"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-nav-user"/></svg></button>
             </div>
           </div>
         </div>
@@ -1975,16 +2111,16 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
             <header class="sui-topbar">
               <div class="sui-brand"><span class="sui-brand-name">My App</span></div>
               <div class="sui-topbar-actions">
-                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><i data-lucide="bell" aria-hidden="true"></i></button>
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Notifications"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-bell"/></svg></button>
               </div>
             </header>
             <div class="app-shell-body">
               <nav class="sui-sidenav" aria-label="App navigation">
                 <div class="sui-sidenav-panel">
-                  <a href="#" class="sui-sidenav-link is-active" aria-current="page"><i data-lucide="layout-dashboard" aria-hidden="true"></i> Dashboard</a>
-                  <a href="#" class="sui-sidenav-link"><i data-lucide="users" aria-hidden="true"></i> Contacts</a>
-                  <a href="#" class="sui-sidenav-link"><i data-lucide="file-text" aria-hidden="true"></i> Documents</a>
-                  <a href="#" class="sui-sidenav-link"><i data-lucide="settings" aria-hidden="true"></i> Settings</a>
+                  <a href="#" class="sui-sidenav-link is-active" aria-current="page"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-layout-dashboard"/></svg> Dashboard</a>
+                  <a href="#" class="sui-sidenav-link"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-users"/></svg> Contacts</a>
+                  <a href="#" class="sui-sidenav-link"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-file-text"/></svg> Documents</a>
+                  <a href="#" class="sui-sidenav-link"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-settings"/></svg> Settings</a>
                 </div>
               </nav>
               <div class="app-shell-main">
@@ -2103,10 +2239,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <div class="sui-card sui-mt-4">
           <div class="sui-kpi-label sui-mb-3">Select your plan</div>
           <div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan">
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="zap"></i>Starter</button>
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="rocket"></i>Pro</button>
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="building-2"></i>Team</button>
-            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><i data-lucide="crown"></i>Enterprise</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-zap"/></svg>Starter</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-rocket"/></svg>Pro</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-people-building"/></svg>Team</button>
+            <button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false" type="button" onclick="this.parentElement.querySelectorAll('[role=radio]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-checked','false')});this.classList.add('is-selected');this.setAttribute('aria-checked','true')"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-crown"/></svg>Enterprise</button>
           </div>
         </div>
         <div class="sui-accordion sui-mt-3">
@@ -2114,10 +2250,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
           <div class="sui-accordion-panel" hidden>
             <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;div class="sui-grid-2 sui-gap-2" role="radiogroup" aria-label="Select plan"&gt;
   &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option" role="radio" aria-checked="false"&gt;
-    &lt;i data-lucide="zap"&gt;&lt;/i&gt;Starter
+    &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-act-zap"/&gt;&lt;/svg&gt;Starter
   &lt;/button&gt;
   &lt;button class="sui-btn sui-btn-ghost recipe-btn-group-option is-selected" role="radio" aria-checked="true"&gt;
-    &lt;i data-lucide="rocket"&gt;&lt;/i&gt;Pro
+    &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-act-rocket"/&gt;&lt;/svg&gt;Pro
   &lt;/button&gt;
   &lt;!-- More options... --&gt;
 &lt;/div&gt;
@@ -2324,10 +2460,10 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
               <input class="sui-input" type="text" placeholder="Type a command..." aria-label="Command palette" role="combobox" aria-expanded="true" aria-controls="cmdk-results" autocomplete="off">
             </div>
             <ul class="recipe-cmdk-results" role="listbox" id="cmdk-results" aria-label="Command results">
-              <li role="option"><i data-lucide="plus" aria-hidden="true" style="width:16px;height:16px;"></i> New Contact <kbd class="sui-kbd">N</kbd></li>
-              <li role="option" class="is-active"><i data-lucide="search" aria-hidden="true" style="width:16px;height:16px;"></i> Search Deals <kbd class="sui-kbd">S</kbd></li>
-              <li role="option"><i data-lucide="settings" aria-hidden="true" style="width:16px;height:16px;"></i> Settings <kbd class="sui-kbd">,</kbd></li>
-              <li role="option"><i data-lucide="moon" aria-hidden="true" style="width:16px;height:16px;"></i> Toggle Theme <kbd class="sui-kbd">T</kbd></li>
+              <li role="option"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-act-plus"/></svg> New Contact <kbd class="sui-kbd">N</kbd></li>
+              <li role="option" class="is-active"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-act-search"/></svg> Search Deals <kbd class="sui-kbd">S</kbd></li>
+              <li role="option"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-nav-settings"/></svg> Settings <kbd class="sui-kbd">,</kbd></li>
+              <li role="option"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><use href="#sui-icon-ui-moon"/></svg> Toggle Theme <kbd class="sui-kbd">T</kbd></li>
             </ul>
           </div>
         </div>
@@ -2341,7 +2477,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
            role="combobox" aria-expanded="true"&gt;
     &lt;ul role="listbox"&gt;
       &lt;li role="option"&gt;
-        &lt;i data-lucide="plus" aria-hidden="true"&gt;&lt;/i&gt; New Contact
+        &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-act-plus"/&gt;&lt;/svg&gt; New Contact
         &lt;kbd class="sui-kbd"&gt;N&lt;/kbd&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -2364,7 +2500,7 @@ document.addEventListener('keydown', e =&gt; {
         <h2>Confirmation Dialog</h2>
         <p class="sui-text-cap sui-mt-2">Accessible destructive-action confirmation using <code>role="alertdialog"</code>. Composes from: <code>sui-dialog</code>, <code>sui-btn-danger</code>. Custom CSS: 0 lines.</p>
         <div class="sui-card sui-mt-4">
-          <button class="sui-btn sui-btn-danger" type="button" data-sui-modal="#recipe-confirm-dialog"><i data-lucide="trash-2" aria-hidden="true"></i> Delete account</button>
+          <button class="sui-btn sui-btn-danger" type="button" data-sui-modal="#recipe-confirm-dialog"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-trash-2"/></svg> Delete account</button>
           <dialog class="sui-dialog" id="recipe-confirm-dialog" role="alertdialog" aria-label="Confirm account deletion">
             <div class="sui-modal-body">
               <h3 style="margin-top:0;">Delete your account?</h3>
@@ -2413,11 +2549,11 @@ document.addEventListener('keydown', e =&gt; {
         <p class="sui-text-cap sui-mt-2">Searchable file list with toolbar, metadata, and status indicators. Composes from: <code>sui-toolbar</code>, <code>sui-meta</code>, <code>sui-badge</code>, <code>sui-card</code>, <code>sui-input</code>. Custom CSS: ~3 lines.</p>
         <div class="sui-card sui-card-flush sui-mt-4">
           <div class="sui-toolbar sui-toolbar-bordered">
-            <button class="sui-toolbar-btn" type="button" title="List view" aria-label="List view" aria-pressed="true"><i data-lucide="list"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Grid view" aria-label="Grid view"><i data-lucide="layout-grid"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="List view" aria-label="List view" aria-pressed="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-list"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Grid view" aria-label="Grid view"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-layout-grid"/></svg></button>
             <div class="sui-toolbar-sep"></div>
-            <button class="sui-toolbar-btn" type="button" title="Sort" aria-label="Sort"><i data-lucide="arrow-up-down"></i></button>
-            <button class="sui-toolbar-btn" type="button" title="Filter" aria-label="Filter"><i data-lucide="filter"></i></button>
+            <button class="sui-toolbar-btn" type="button" title="Sort" aria-label="Sort"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-arrow-up-down"/></svg></button>
+            <button class="sui-toolbar-btn" type="button" title="Filter" aria-label="Filter"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-filter"/></svg></button>
             <div style="flex:1;"></div>
             <div style="min-width:200px;padding-right:var(--sui-space-2);">
               <input class="sui-input" type="search" placeholder="Search documents..." style="height:32px;font-size:var(--sui-text-small);">
@@ -2425,7 +2561,7 @@ document.addEventListener('keydown', e =&gt; {
           </div>
           <div class="recipe-doc-list-item">
             <div class="sui-flex sui-items-center sui-gap-3">
-              <i data-lucide="file-text" style="color:var(--sui-blue-primary);flex-shrink:0;"></i>
+              <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--sui-blue-primary);flex-shrink:0;"><use href="#sui-icon-file-text"/></svg>
               <div style="flex:1;min-width:0;">
                 <strong>Q4 Strategy Deck.md</strong>
                 <div class="sui-meta sui-mt-1">
@@ -2439,7 +2575,7 @@ document.addEventListener('keydown', e =&gt; {
           </div>
           <div class="recipe-doc-list-item">
             <div class="sui-flex sui-items-center sui-gap-3">
-              <i data-lucide="file-text" style="color:var(--sui-warning);flex-shrink:0;"></i>
+              <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--sui-warning);flex-shrink:0;"><use href="#sui-icon-file-text"/></svg>
               <div style="flex:1;min-width:0;">
                 <strong>The Human Advantage — Chapter 3.md</strong>
                 <div class="sui-meta sui-mt-1">
@@ -2453,7 +2589,7 @@ document.addEventListener('keydown', e =&gt; {
           </div>
           <div class="recipe-doc-list-item">
             <div class="sui-flex sui-items-center sui-gap-3">
-              <i data-lucide="file-code" style="color:var(--sui-text-muted);flex-shrink:0;"></i>
+              <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--sui-text-muted);flex-shrink:0;"><use href="#sui-icon-file-code"/></svg>
               <div style="flex:1;min-width:0;">
                 <strong>COMPONENT-ROADMAP.md</strong>
                 <div class="sui-meta sui-mt-1">
@@ -2477,7 +2613,7 @@ document.addEventListener('keydown', e =&gt; {
   &lt;/div&gt;
   &lt;div class="recipe-doc-list-item"&gt;
     &lt;div class="sui-flex sui-items-center sui-gap-3"&gt;
-      &lt;i data-lucide="file-text"&gt;&lt;/i&gt;
+      &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-file-text"/&gt;&lt;/svg&gt;
       &lt;div&gt;
         &lt;strong&gt;Document Name.md&lt;/strong&gt;
         &lt;div class="sui-meta"&gt;
@@ -2907,9 +3043,9 @@ document.addEventListener('keydown', e =&gt; {
                style="display:none;position:absolute;bottom:var(--sui-space-3);left:50%;transform:translateX(-50%);padding:var(--sui-space-2) var(--sui-space-3);z-index:10;white-space:nowrap;">
             <div class="sui-flex sui-gap-2" style="align-items:center;">
               <span class="sui-badge sui-badge-info" id="recipeFabCount">0 selected</span>
-              <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"><i data-lucide="download"></i> Export</button>
-              <button class="sui-btn sui-btn-sm sui-btn-ghost" type="button"><i data-lucide="archive"></i> Archive</button>
-              <button class="sui-btn sui-btn-sm sui-btn-danger" type="button"><i data-lucide="trash-2"></i> Delete</button>
+              <button class="sui-btn sui-btn-sm sui-btn-primary" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-download"/></svg> Export</button>
+              <button class="sui-btn sui-btn-sm sui-btn-ghost" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-archive"/></svg> Archive</button>
+              <button class="sui-btn sui-btn-sm sui-btn-danger" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-trash-2"/></svg> Delete</button>
             </div>
           </div>
         </div>
@@ -2956,10 +3092,10 @@ document.addEventListener('keydown', e =&gt; {
   &lt;div class="sui-flex sui-gap-2" style="align-items:center"&gt;
     &lt;span class="sui-badge sui-badge-info" id="bulkCount"&gt;0 selected&lt;/span&gt;
     &lt;button class="sui-btn sui-btn-sm sui-btn-primary"&gt;
-      &lt;i data-lucide="download" aria-hidden="true"&gt;&lt;/i&gt; Export
+      &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-act-download"/&gt;&lt;/svg&gt; Export
     &lt;/button&gt;
     &lt;button class="sui-btn sui-btn-sm sui-btn-danger"&gt;
-      &lt;i data-lucide="trash-2" aria-hidden="true"&gt;&lt;/i&gt; Delete
+      &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-act-trash-2"/&gt;&lt;/svg&gt; Delete
     &lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -3047,9 +3183,9 @@ document.addEventListener('keydown', e =&gt; {
           <div class="recipe-selection-bar">
             <span class="recipe-count" aria-live="polite">3 selected</span>
             <div class="sui-flex sui-gap-2" style="flex:1;">
-              <button class="sui-btn sui-btn-primary sui-btn-sm" type="button"><i data-lucide="mail" aria-hidden="true"></i> Email</button>
-              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="tag" aria-hidden="true"></i> Tag</button>
-              <button class="sui-btn sui-btn-danger sui-btn-sm" type="button"><i data-lucide="trash-2" aria-hidden="true"></i> Delete</button>
+              <button class="sui-btn sui-btn-primary sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-comm-mail"/></svg> Email</button>
+              <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-tag"/></svg> Tag</button>
+              <button class="sui-btn sui-btn-danger sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-trash-2"/></svg> Delete</button>
               <div style="flex:1;"></div>
               <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Clear</button>
             </div>
@@ -3059,10 +3195,10 @@ document.addEventListener('keydown', e =&gt; {
               <table class="sui-table sui-table-hover">
                 <thead><tr><th><span class="sui-visually-hidden">Select</span></th><th>Name</th><th>Status</th></tr></thead>
                 <tbody>
-                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Acme Corp"></td><td>Acme Corp</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
-                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Globex"></td><td>Globex</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
-                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Initech"></td><td>Initech</td><td><span class="sui-badge sui-badge-warning"><i data-lucide="alert-triangle" aria-hidden="true"></i> Pending</span></td></tr>
-                  <tr><td><input type="checkbox" aria-label="Select Umbrella"></td><td>Umbrella</td><td><span class="sui-badge sui-badge-neutral"><i data-lucide="minus-circle" aria-hidden="true"></i> Inactive</span></td></tr>
+                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Acme Corp"></td><td>Acme Corp</td><td><span class="sui-badge sui-badge-success"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg> Active</span></td></tr>
+                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Globex"></td><td>Globex</td><td><span class="sui-badge sui-badge-success"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg> Active</span></td></tr>
+                  <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Initech"></td><td>Initech</td><td><span class="sui-badge sui-badge-warning"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-alert-triangle"/></svg> Pending</span></td></tr>
+                  <tr><td><input type="checkbox" aria-label="Select Umbrella"></td><td>Umbrella</td><td><span class="sui-badge sui-badge-neutral"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-minus-circle"/></svg> Inactive</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -3301,7 +3437,7 @@ function showDetail(id) {
                 <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"
                         aria-label="Notifications, 3 unread"
                         onclick="document.getElementById('recipeNotifWrap').classList.toggle('recipe-notif-open')">
-                  <i data-lucide="bell"></i>
+                  <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-bell"/></svg>
                 </button>
                 <span class="sui-badge-count" aria-hidden="true" style="position: absolute; top: -2px; right: -2px;">3</span>
               </div>
@@ -3348,7 +3484,7 @@ function showDetail(id) {
   &lt;button data-sui-panel="#notifPanel"
           aria-label="Notifications, 3 unread"
           aria-expanded="false"&gt;
-    &lt;i data-lucide="bell"&gt;&lt;/i&gt;
+    &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-nav-bell"/&gt;&lt;/svg&gt;
   &lt;/button&gt;
   &lt;span class="sui-badge-count" aria-hidden="true"&gt;3&lt;/span&gt;
 &lt;/div&gt;
@@ -3399,7 +3535,7 @@ function showDetail(id) {
               <div class="recipe-panel-demo">
                 <div class="recipe-panel-header">
                   <h3>Edit Contact</h3>
-                  <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><i data-lucide="x" aria-hidden="true"></i></button>
+                  <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
                 </div>
                 <div class="recipe-panel-body">
                   <div class="sui-input-group sui-mb-3"><label class="sui-input-label" for="rd-name">Name</label><input class="sui-input" id="rd-name" value="Jane Cooper"></div>
@@ -3422,7 +3558,7 @@ function showDetail(id) {
                     <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">VP Sales, Acme Corp</div>
                   </div>
                   <div style="flex:1;"></div>
-                  <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><i data-lucide="x" aria-hidden="true"></i></button>
+                  <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
                 </div>
                 <div class="recipe-panel-body">
                   <div class="sui-kpi-label">Contact info</div>
@@ -3462,8 +3598,8 @@ function showDetail(id) {
                 </div>
                 <div style="flex:1;"></div>
                 <span class="sui-badge sui-badge-success"><span aria-hidden="true">&#10003;</span> Active</span>
-                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="More actions"><i data-lucide="more-vertical" aria-hidden="true"></i></button>
-                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><i data-lucide="x" aria-hidden="true"></i></button>
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="More actions"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-more-vertical"/></svg></button>
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
               </div>
               <div class="recipe-record-tabs">
                 <nav class="sui-nav" role="tablist" aria-label="Record detail tabs" style="margin-bottom:-1px;">
@@ -3480,7 +3616,7 @@ function showDetail(id) {
                       <tr><td class="sui-text-muted" data-label="Field">Stage</td><td data-label="Value"><span class="sui-badge sui-badge-info"><span aria-hidden="true">&#8594;</span> Negotiation</span></td></tr>
                       <tr><td class="sui-text-muted" data-label="Field">Deal Value</td><td data-label="Value"><strong>$240,000</strong></td></tr>
                       <tr><td class="sui-text-muted" data-label="Field">Close Date</td><td data-label="Value">Mar 15, 2026</td></tr>
-                      <tr><td class="sui-text-muted" data-label="Field">Probability</td><td data-label="Value"><div class="sui-progress" style="max-width:120px;display:inline-flex;vertical-align:middle;"><div class="sui-progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:75%;">75%</div></div></td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Probability</td><td data-label="Value"><div class="sui-progress" style="max-width:120px;display:inline-flex;vertical-align:middle;"><div class="sui-progress-bar" role="progressbar" aria-label="Probability" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:75%;">75%</div></div></td></tr>
                       <tr><td class="sui-text-muted" data-label="Field">Next Step</td><td data-label="Value">Send SOW</td></tr>
                       <tr><td class="sui-text-muted" data-label="Field">Tags</td><td data-label="Value"><span class="sui-chip">Enterprise</span> <span class="sui-chip">Renewal</span></td></tr>
                     </tbody>
@@ -3489,28 +3625,28 @@ function showDetail(id) {
               </div>
               <div data-view="rd-activity" class="recipe-record-tab-panel" role="tabpanel" aria-label="Activity">
                 <div class="recipe-record-activity">
-                  <div class="recipe-record-activity-dot" style="background:var(--sui-success-soft);color:var(--sui-success-strong);" aria-hidden="true"><i data-lucide="send" style="width:14px;height:14px;"></i></div>
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-success-soft);color:var(--sui-success-strong);" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;"><use href="#sui-icon-comm-send"/></svg></div>
                   <div>
                     <div style="font-size:var(--sui-text-small);"><strong>Jane Cooper</strong> sent proposal</div>
                     <div class="sui-meta sui-mt-1">Today at 2:15 PM</div>
                   </div>
                 </div>
                 <div class="recipe-record-activity">
-                  <div class="recipe-record-activity-dot" style="background:var(--sui-info-soft);color:var(--sui-info-strong);" aria-hidden="true"><i data-lucide="calendar" style="width:14px;height:14px;"></i></div>
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-info-soft);color:var(--sui-info-strong);" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;"><use href="#sui-icon-time-calendar"/></svg></div>
                   <div>
                     <div style="font-size:var(--sui-text-small);"><strong>Marcus Lee</strong> scheduled a meeting</div>
                     <div class="sui-meta sui-mt-1">Yesterday at 10:30 AM</div>
                   </div>
                 </div>
                 <div class="recipe-record-activity">
-                  <div class="recipe-record-activity-dot" style="background:var(--sui-warning-soft);color:var(--sui-warning-strong);" aria-hidden="true"><i data-lucide="edit-3" style="width:14px;height:14px;"></i></div>
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-warning-soft);color:var(--sui-warning-strong);" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;"><use href="#sui-icon-act-edit-3"/></svg></div>
                   <div>
                     <div style="font-size:var(--sui-text-small);"><strong>Jane Cooper</strong> updated deal value from $180K to $240K</div>
                     <div class="sui-meta sui-mt-1">Feb 18, 2026</div>
                   </div>
                 </div>
                 <div class="recipe-record-activity">
-                  <div class="recipe-record-activity-dot" style="background:var(--sui-bg-elevated);color:var(--sui-text-muted);" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></div>
+                  <div class="recipe-record-activity-dot" style="background:var(--sui-bg-elevated);color:var(--sui-text-muted);" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;"><use href="#sui-icon-act-plus"/></svg></div>
                   <div>
                     <div style="font-size:var(--sui-text-small);"><strong>System</strong> created account</div>
                     <div class="sui-meta sui-mt-1">Feb 10, 2026</div>
@@ -3534,7 +3670,7 @@ function showDetail(id) {
                 </div>
               </div>
               <div class="recipe-record-footer">
-                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><i data-lucide="message-square" aria-hidden="true" style="width:14px;height:14px;"></i> Log Call</button>
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;"><use href="#sui-icon-comm-message-sq"/></svg> Log Call</button>
                 <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Edit</button>
                 <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Send SOW</button>
               </div>
@@ -3751,7 +3887,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
             <div>
               <div class="sui-kpi-label sui-mb-2">Light popover</div>
               <div class="recipe-popover-wrap">
-                <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><i data-lucide="filter" aria-hidden="true"></i> Filter</button>
+                <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-filter"/></svg> Filter</button>
                 <div class="recipe-popover" role="group" aria-label="Filter options">
                   <div class="sui-input-group sui-mb-2"><label class="sui-input-label" for="pop-status" style="font-size:var(--sui-text-meta);">Status</label><select class="sui-input" id="pop-status"><option>All</option><option>Active</option><option>Pending</option></select></div>
                   <div class="sui-input-group"><label class="sui-input-label" for="pop-owner" style="font-size:var(--sui-text-meta);">Owner</label><select class="sui-input" id="pop-owner"><option>Anyone</option><option>Me</option></select></div>
@@ -3762,7 +3898,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
             <div>
               <div class="sui-kpi-label sui-mb-2">Heavy popover (focus-trapped)</div>
               <div class="recipe-popover-wrap">
-                <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><i data-lucide="plus" aria-hidden="true"></i> Quick add</button>
+                <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg> Quick add</button>
                 <div class="recipe-popover" role="dialog" aria-label="Quick add contact">
                   <div class="sui-input-group sui-mb-2"><label class="sui-input-label" for="pop-name" style="font-size:var(--sui-text-meta);">Name</label><input class="sui-input" id="pop-name" placeholder="Contact name"></div>
                   <div class="sui-input-group sui-mb-2"><label class="sui-input-label" for="pop-email" style="font-size:var(--sui-text-meta);">Email</label><input class="sui-input" id="pop-email" type="email" autocomplete="email" placeholder="email@example.com"></div>
@@ -4105,14 +4241,14 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
               <div class="sui-kpi-label sui-mb-2">Icon button variant</div>
               <div class="recipe-search-bar">
                 <input class="sui-input" type="search" placeholder="Search contacts..." aria-label="Search contacts">
-                <button class="sui-btn sui-btn-primary" type="button" aria-label="Search"><i data-lucide="search" aria-hidden="true"></i></button>
+                <button class="sui-btn sui-btn-primary" type="button" aria-label="Search"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-search"/></svg></button>
               </div>
             </div>
             <div>
               <div class="sui-kpi-label sui-mb-2">Text button variant</div>
               <div class="recipe-search-bar">
                 <input class="sui-input" type="search" placeholder="Search documents..." aria-label="Search documents">
-                <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="search" aria-hidden="true"></i> Search</button>
+                <button class="sui-btn sui-btn-primary" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-search"/></svg> Search</button>
               </div>
             </div>
             <div>
@@ -4130,7 +4266,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
                 </select>
                 <input class="sui-input" type="search" placeholder="Search..." aria-label="Search records">
                 <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Clear search">Clear</button>
-                <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="search" aria-hidden="true"></i> Search</button>
+                <button class="sui-btn sui-btn-primary" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-search"/></svg> Search</button>
               </div>
             </div>
           </div>
@@ -4150,7 +4286,7 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
   &lt;input class="sui-input" type="search" placeholder="Search..."
          aria-label="Search contacts"&gt;
   &lt;button class="sui-btn sui-btn-primary" aria-label="Search"&gt;
-    &lt;i data-lucide="search" aria-hidden="true"&gt;&lt;/i&gt;
+    &lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;use href="#sui-icon-act-search"/&gt;&lt;/svg&gt;
   &lt;/button&gt;
 &lt;/div&gt;
 
@@ -4421,7 +4557,7 @@ search.addEventListener('input', () =&gt; {
       <div class="sui-section" id="recipe-stepper">
         <h2>Stepper / Wizard</h2>
         <div class="sui-alert sui-alert-info sui-mt-3">
-          <i data-lucide="arrow-up-circle"></i>
+          <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-arrow-up-circle"/></svg>
           <div><strong>Promoted to component.</strong> The stepper pattern has been promoted from recipe to a first-class component in v2.2.0. See <code>sui-stepper</code> in the Components tab above.</div>
         </div>
       </div>
@@ -4614,11 +4750,11 @@ search.addEventListener('input', () =&gt; {
     </section>
     <footer class="sui-footer">
       <div class="sui-footer-links">
-        <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer"><i data-lucide="github"></i>GitHub</a>
-        <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
+        <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-github"/></svg>GitHub</a>
+        <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-soc-heart"/></svg>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada with ❤️</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.7.2</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v3.0.0</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->
@@ -4629,12 +4765,12 @@ search.addEventListener('input', () =&gt; {
   <dialog class="sui-dialog" id="demoModal" aria-labelledby="modalTitle">
     <div class="sui-modal-header">
       <span class="sui-modal-title" id="modalTitle">Confirm Action</span>
-      <button class="sui-modal-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
+      <button class="sui-modal-close" type="button" aria-label="Close"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
     </div>
     <div class="sui-modal-body">
       <p>This is a native <code>&lt;dialog&gt;</code> modal. The browser handles focus trapping, scroll lock, Escape key, and backdrop — no custom JavaScript needed for accessibility.</p>
       <div class="sui-alert sui-alert-info sui-mt-3" role="alert">
-        <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+        <span class="sui-alert-icon" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg></span>
         <div class="sui-alert-content">
           <div class="sui-alert-title">Powered by the browser</div>
           <div>SUI styles the dialog. The browser does the heavy lifting.</div>
@@ -4653,7 +4789,7 @@ search.addEventListener('input', () =&gt; {
       <div class="sui-sheet-handle"></div>
       <div class="sui-sheet-header">
         <span class="sui-sheet-title">Share Project</span>
-        <button class="sui-sheet-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><i data-lucide="x"></i></button>
+        <button class="sui-sheet-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
       </div>
       <div class="sui-sheet-body">
         <p>This is a bottom sheet — a mobile-first slide-up drawer that handles safe areas and scroll trapping. Try pressing <kbd>Escape</kbd> or clicking the backdrop to close.</p>
@@ -4662,7 +4798,7 @@ search.addEventListener('input', () =&gt; {
           <input class="sui-input" type="email" id="sheet-email" autocomplete="email" placeholder="colleague@company.com">
         </div>
         <div class="sui-alert sui-alert-info sui-mt-3" role="alert">
-          <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+          <span class="sui-alert-icon" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg></span>
           <div class="sui-alert-content">
             <div class="sui-alert-title">Safe area aware</div>
             <div>Padding respects <code>env(safe-area-inset-bottom)</code> for iOS notch devices.</div>
@@ -4681,7 +4817,7 @@ search.addEventListener('input', () =&gt; {
     <div>
       <div class="sui-panel-header">
         <span class="sui-panel-title">Jane Cooper</span>
-        <button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><i data-lucide="x"></i></button>
+        <button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
       </div>
       <div class="sui-panel-body">
         <div style="display: flex; align-items: center; gap: var(--sui-space-3); margin-bottom: var(--sui-space-4);">
@@ -4700,12 +4836,12 @@ search.addEventListener('input', () =&gt; {
           <dt style="color: var(--sui-text-muted);">Company</dt>
           <dd style="margin: 0;">Acme Corp</dd>
           <dt style="color: var(--sui-text-muted);">Stage</dt>
-          <dd style="margin: 0;"><span class="sui-badge sui-badge-info"><span aria-hidden="true"><i data-lucide="target"></i></span>Qualified</span></dd>
+          <dd style="margin: 0;"><span class="sui-badge sui-badge-info"><span aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-target"/></svg></span>Qualified</span></dd>
           <dt style="color: var(--sui-text-muted);">Value</dt>
           <dd style="margin: 0;">$48,000</dd>
         </dl>
         <div class="sui-alert sui-alert-info sui-mt-4" role="alert">
-          <span class="sui-alert-icon" aria-hidden="true"><i data-lucide="info"></i></span>
+          <span class="sui-alert-icon" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg></span>
           <div class="sui-alert-content">
             <div class="sui-alert-title">Desktop: no focus trap</div>
             <div>Both the panel and main content are interactive. Tab freely between them. Mobile: full-screen with focus trap.</div>
@@ -4714,7 +4850,7 @@ search.addEventListener('input', () =&gt; {
       </div>
       <div class="sui-panel-footer">
         <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.panel.close('#demoPanel')">Close</button>
-        <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.panel.close('#demoPanel'); SUI.toast.success('Saved!', 'Contact updated.')"><i data-lucide="check"></i>Save</button>
+        <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.panel.close('#demoPanel'); SUI.toast.success('Saved!', 'Contact updated.')"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check"/></svg>Save</button>
       </div>
     </div>
   </div>
@@ -4724,7 +4860,7 @@ search.addEventListener('input', () =&gt; {
     <div>
       <div class="sui-panel-header">
         <span class="sui-panel-title">Quick View</span>
-        <button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><i data-lucide="x"></i></button>
+        <button class="sui-panel-close sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
       </div>
       <div class="sui-panel-body">
         <p>This panel has no backdrop on desktop — it floats over the content with a shadow for depth. Main content remains fully interactive.</p>
@@ -4739,11 +4875,6 @@ search.addEventListener('input', () =&gt; {
   <!-- ===== SCRIPTS ===== -->
   <script src="./sui.js" defer></script>
   <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
-    // Re-init after SUI auto-init
-    setTimeout(() => lucide.createIcons(), 100);
-
     // Sync theme toggle icon (moon in light, sun in dark)
     function syncThemeIcon() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
@@ -4917,9 +5048,9 @@ search.addEventListener('input', () =&gt; {
 
       const screens = {
         People: body.innerHTML,
-        Schedule: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><i data-lucide="calendar" aria-hidden="true"></i></div><div class="sui-empty-title">Schedule</div><div class="sui-empty-text">Your upcoming meetings will appear here.</div></div>',
-        Messages: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><i data-lucide="message-circle" aria-hidden="true"></i></div><div class="sui-empty-title">Messages</div><div class="sui-empty-text">No new messages. Start a conversation.</div></div>',
-        Profile: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><i data-lucide="user" aria-hidden="true"></i></div><div class="sui-empty-title">Profile</div><div class="sui-empty-text">Manage your account and preferences.</div></div>'
+        Schedule: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-time-calendar"/></svg></div><div class="sui-empty-title">Schedule</div><div class="sui-empty-text">Your upcoming meetings will appear here.</div></div>',
+        Messages: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-comm-message-circle"/></svg></div><div class="sui-empty-title">Messages</div><div class="sui-empty-text">No new messages. Start a conversation.</div></div>',
+        Profile: '<div class="sui-empty sui-mt-4"><div class="sui-empty-icon"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-user"/></svg></div><div class="sui-empty-title">Profile</div><div class="sui-empty-text">Manage your account and preferences.</div></div>'
       };
 
       segments.forEach(seg => {
@@ -4927,7 +5058,6 @@ search.addEventListener('input', () =&gt; {
           const label = seg.getAttribute('aria-label');
           if (label && screens[label]) {
             body.innerHTML = screens[label];
-            if (typeof lucide !== 'undefined') lucide.createIcons();
           }
         });
       });

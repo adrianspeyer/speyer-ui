@@ -25,7 +25,9 @@ SUI is the **shell** — containers, chrome, interactive primitives, typography,
 - Script tags use `defer`
 - Borders are the default card separation. Shadows are opt-in (`sui-card-shadow`)
 
-**SUI does NOT ship:** icons, charts, data visualisation, drag-and-drop, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
+**SUI ships 483 hand-drawn icons** with built-in accessibility (forced-colours, reduced-motion, 44px touch targets). Icons are optional — bring-your-own is fully supported.
+
+**SUI does NOT ship:** charts, data visualisation, drag-and-drop, or application logic. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
 
 ---
 
@@ -198,7 +200,9 @@ Do not invent or reference these — they are common AI hallucinations:
 | Hallucinated name | Reality / correct approach |
 |---|---|
 | `sui-card-content` | Use `sui-card-body` |
-| `sui-icon` / `sui-icon-*` | Not shipped. Icons are BYO. Use your own class (e.g. `app-icon`). |
+| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG |
+| `sui-icon-{name}` (no category) | Must include category: `sui-icon-{category}-{name}` |
+| `data-sui-icon` | No data attribute for icons — use `<svg><use href>` pattern |
 | `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
 | `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
 | `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |
@@ -358,9 +362,14 @@ Check these before building custom patterns:
 
 ## Icons
 
-SUI has **zero icon dependency**. Any library works (Lucide, Heroicons, Phosphor, Font Awesome, SVG). **Do NOT assume `sui-icon-*` classes exist — they don't.**
-- `aria-hidden="true"` on decorative icons
+SUI ships **483 hand-drawn SVG icons** (456 unique + 27 aliases, 28 categories). Use the `<svg><use href>` pattern:
+```html
+<svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-search"/></svg>
+```
+- `aria-hidden="true"` on all decorative SVG icons — label the parent element instead
 - Always pair icons with text labels
+- Icon CSS classes: `.sui-icon`, `.sui-icon-xs/sm/md/lg/xl/2xl/3xl`, `.sui-icon-btn`, `.sui-icon-primary/success/warning/error/info/muted`, `.sui-icon-spin`
+- BYOI still supported — skip `sui-icons.css` and sprite loader to use any icon library
 
 ---
 

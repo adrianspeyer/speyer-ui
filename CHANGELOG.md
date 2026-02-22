@@ -4,6 +4,58 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.0.0] — 2026-02-22
+
+### Theme: SUI Icons — Batteries Included
+
+SUI ships a first-party icon system: 483 hand-drawn SVG icons with better accessibility than any competing set. Demo migrates from Lucide to SUI Icons. BYOI remains fully supported.
+
+### Added
+
+- **SUI Icons** — 483 SVG icons (456 unique + 27 aliases) across 28 categories
+- **Icon Browser** (`icons.html`) — searchable catalogue with click-to-copy
+- Categories: nav, act, status, data, people, pay, file, time, sec, comm, loc, dev, soc, media, ai, brand, input, ui, view, ops, work, misc, weather, health, edu, travel, a11y, sci
+
+### Changed
+
+- Demo: 180 `data-lucide` → `<svg><use href="#sui-icon-*"/>`
+- Lucide CDN removed
+- CDN Quick Start: four files + sprite loader
+- README: icons section, comparison table, updated positioning
+- AI context files: icon patterns, hallucination table revised
+
+### Removed
+
+- Lucide CDN (`unpkg.com/lucide@0.475.0`)
+- All `data-lucide` attributes
+
+### Bundle
+
+~95KB core + 235KB icon sprite (~25KB gzipped). 483 icons · 28 categories · 25+ components · 29 recipes.
+
+---
+
+## [2.8.0] — 2026-02-22
+
+### Theme: Icon Infrastructure
+
+Build system scaffolding for SUI Icons (shipping in v3.0.0). No icons in this release.
+
+### Added
+
+- **SVGO build pipeline** — `svgo.config.mjs` + `minify:icons-svg` script
+- **Icon validator** — `scripts/validate-icons.mjs` (10-point spec check)
+- **Icon CSS build** — `minify:icons-css` script
+- **`icons.html` scaffold** — page structure using SUI tokens, empty pending v3.0
+- **Conditional icon build** — `npm run build` runs icon steps when files present
+- **Designers tab card** — links to `icons.html` with "Preview" badge
+
+### Bundle
+
+~94KB total (unchanged).
+
+---
+
 ## [2.7.2] — 2026-02-22
 
 ### Theme: Token/Class Drift Audit + Shipped Bug Fix

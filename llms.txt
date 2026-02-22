@@ -1,13 +1,22 @@
 # Speyer UI System (SUI)
 
-> Lightweight, accessible CSS design system for SaaS applications. Mobile-first, WCAG 2.1 AA, zero icon dependencies, under 95KB total.
+> Lightweight, accessible CSS design system for SaaS applications. Mobile-first, WCAG 2.1 AA, 483 hand-drawn icons, under 100KB core.
 
 ## Quick Start
 
 ```html
+<!-- Core (tokens + components + JS) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
 <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
+
+<!-- Icons (optional — or bring your own) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.css">
+<script defer>
+  fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.svg')
+    .then(r => r.text())
+    .then(svg => { const d = document.createElement('div'); d.style.display = 'none'; d.innerHTML = svg; document.body.prepend(d); });
+</script>
 ```
 
 ## Documentation
@@ -27,6 +36,8 @@
 | Recipe code | `index.html` | Search `id="recipe-"` |
 | Recipe catalogue | `docs/recipes.md` | Linked list with descriptions |
 | Token catalogue | `docs/design-tokens.md` | Organised by category with both theme values |
+| Icon names | `sui-icons.svg` | Search `id="sui-icon-"` |
+| Icon browser | `icons.html` | Visual catalogue with search and copy |
 
 **For recipes:** Every recipe in `index.html` has a "View code" accordion with copy/paste HTML.
 
@@ -52,7 +63,8 @@ Do not invent or reference these — they are common AI hallucinations:
 |---|---|
 | `sui-card-content` | Use `sui-card-body` |
 | `sui-card` with nested padding divs | Use `sui-card-flush` when content handles its own padding (tables, tabs). Use `sui-card-compact` for KPI grids. |
-| `sui-icon` / `sui-icon-*` | Not shipped. Icons are BYO. Use your own class (e.g. `app-icon`). |
+| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG |
+| `sui-icon-{name}` (no category) | Must include category: `sui-icon-{category}-{name}` |
 | `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
 | `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
 | `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |

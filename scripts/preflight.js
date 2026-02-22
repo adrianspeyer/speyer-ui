@@ -514,6 +514,17 @@ function checkVersions() {
     else fail(`${file}: ${found} (expected ${expected})`);
   }
 
+  // Icon file version checks (optional — only if files exist)
+  for (const file of ['sui-icons.css', 'sui-icons.svg']) {
+    const content = readFile(file);
+    if (content) {
+      const match = content.match(/Version:\s*([0-9.]+)/);
+      const found = match ? match[1] : 'NOT FOUND';
+      if (found === expected) pass();
+      else fail(`${file}: ${found} (expected ${expected})`);
+    }
+  }
+
   // Extended checks: README, docs, index.html (catch drift early)
   const readme = readFile('README.md');
   if (readme) {
@@ -573,7 +584,7 @@ function checkDistHygiene() {
   const distDir = path.join(ROOT, 'dist');
   if (!fs.existsSync(distDir)) { pass(); return; }
 
-  const ALLOWED_EXTENSIONS = ['.css', '.js', '.map'];
+  const ALLOWED_EXTENSIONS = ['.css', '.js', '.map', '.svg'];
   let unexpected = 0;
 
   for (const file of fs.readdirSync(distDir)) {
@@ -646,6 +657,7 @@ function checkTokenDrift() {
   ]);
   const filesToScan = [
     ['sui-components.css', components],
+    ['sui-icons.css', readFile('sui-icons.css')],
     ['index.html', html],
     ['tests/smoke.html', readFile('tests/smoke.html')],
   ];
@@ -678,15 +690,17 @@ function checkTokenDrift() {
 function checkClassDrift() {
   console.log('  ── Class Drift ──');
   const components = readFile('sui-components.css');
+  const icons = readFile('sui-icons.css') || '';
   const js = readFile('sui.js');
   const html = readFile('index.html');
   if (!components || !js || !html) { fail('Cannot read source files'); return; }
 
-  // Build set of all sui-* classes defined in CSS
+  // Build set of all sui-* classes defined in CSS (components + icons)
   const cssClasses = new Set();
   const cssRe = /\.(sui-[a-z][a-z0-9-]*)/g;
   let m;
   while ((m = cssRe.exec(components))) cssClasses.add(m[1]);
+  while ((m = cssRe.exec(icons))) cssClasses.add(m[1]);
 
   // Build set of sui-* classes referenced in JS (hooks like sui-sheet-close, sui-modal-close)
   const jsClasses = new Set();

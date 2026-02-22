@@ -1,8 +1,8 @@
 # Speyer UI System
 
-A lightweight, zero-runtime-dependency design system that treats accessibility as architecture, not afterthought. Colour-blind friendly, mobile-first, AI-ready. Made in Canada 🇨🇦
+A lightweight, batteries-included design system that treats accessibility as architecture, not afterthought. 483 hand-drawn icons. Colour-blind friendly, mobile-first, AI-ready. Made in Canada 🇨🇦
 
-**v2.7.2** · ~94KB minified · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/)
+**v3.0.0** · ~95KB core · 483 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
 
 ---
 
@@ -12,6 +12,7 @@ A lightweight, zero-runtime-dependency design system that treats accessibility a
 - [Quick Start](#quick-start)
 - [Architecture](#architecture)
 - [Components](#components)
+- [Icons](#icons)
 - [Design Tokens](#design-tokens)
 - [Recipes](#recipes)
 - [JavaScript API](#javascript-api)
@@ -24,11 +25,11 @@ A lightweight, zero-runtime-dependency design system that treats accessibility a
 
 ## Why SUI
 
-SUI is built for SaaS teams who need a design system that works without a build step, respects accessibility standards, and plays well with AI-assisted development. Three CDN links and you have buttons, cards, modals, toasts, tables, navigation, and 29 documented composition patterns — all under 95KB.
+SUI is built for SaaS teams who need a design system that works without a build step, respects accessibility standards, and plays well with AI-assisted development. Four CDN links, one SVG sprite, and you have buttons, cards, modals, toasts, tables, navigation, 483 hand-drawn icons, and 29 documented composition patterns — all under 100KB core.
 
-**What SUI provides:** Containers, chrome, interactive primitives, typography, and design tokens.
+**What SUI provides:** Containers, chrome, interactive primitives, typography, design tokens, and 483 hand-drawn icons with built-in accessibility (forced-colours mode, 44px touch targets, reduced-motion guards).
 
-**What SUI does not provide:** Icons, charts, data visualisation, drag-and-drop, or application logic. Those are bring-your-own. Integration recipes show how to make third-party libraries (Chart.js, Flatpickr, Tom Select, FilePond, Quill) match SUI in both themes.
+**What SUI does not provide:** Charts, data visualisation, drag-and-drop, or application logic. Those are bring-your-own. Integration recipes show how to make third-party libraries (Chart.js, Flatpickr, Tom Select, FilePond, Quill) match SUI in both themes.
 
 ---
 
@@ -43,11 +44,21 @@ SUI is built for SaaS teams who need a design system that works without a build 
 <!-- Component styles (buttons, cards, tables, etc.) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
 
-<!-- Optional: interactive behaviours (modals, toasts, dropdowns) -->
+<!-- SUI Icons (optional — or bring your own) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.css">
+
+<!-- Interactive behaviours (modals, toasts, dropdowns) -->
 <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
+
+<!-- Load icon sprite (paste once, near top of <body>) -->
+<script defer>
+  fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.svg')
+    .then(r => r.text())
+    .then(svg => { const d = document.createElement('div'); d.style.display = 'none'; d.innerHTML = svg; document.body.prepend(d); });
+</script>
 ```
 
-Pin a version for production: replace `@latest` with `@2.7.2`.
+Pin a version for production: replace `@latest` with `@3.0.0`.
 
 ### Starter Template
 
@@ -58,15 +69,24 @@ Pin a version for production: replace `@latest` with `@2.7.2`.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.2/dist/sui-tokens.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.2/dist/sui-components.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui-tokens.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui-components.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui-icons.min.css">
 </head>
 <body>
+  <script defer>
+    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui-icons.min.svg')
+      .then(r => r.text())
+      .then(svg => { const d = document.createElement('div'); d.style.display = 'none'; d.innerHTML = svg; document.body.prepend(d); });
+  </script>
   <main style="max-width: 720px; margin: 0 auto; padding: var(--sui-space-4);">
     <h1>Hello, SUI</h1>
-    <button class="sui-btn sui-btn-primary">Get Started</button>
+    <button class="sui-btn sui-btn-primary">
+      <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-rocket"/></svg>
+      Get Started
+    </button>
   </main>
-  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.2/dist/sui.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui.min.js" defer></script>
 </body>
 </html>
 ```
@@ -89,7 +109,7 @@ SUI is three files with clear responsibilities:
 - **Design tokens for everything.** Never hardcode hex colours in components. Use `--sui-*` custom properties.
 - **Mobile-first.** Design for 375px, enhance upward. Minimum touch target: 44px.
 - **Accessibility as architecture.** WCAG 2.1 AA baseline. Status never communicated by colour alone — always pair with icon + text.
-- **Icons are bring-your-own.** SUI has zero icon library code. Works with Lucide, Heroicons, Phosphor, or any library.
+- **483 hand-drawn icons included.** First-party icon system with forced-colours mode, 44px touch targets, and reduced-motion guards. Bring-your-own icons still fully supported.
 - **`!important` only in utility classes.** Never in components.
 
 ### File Structure
@@ -103,7 +123,9 @@ speyer-ui/
 ├── dist/                      ← Minified (CDN/production)
 │   ├── sui-tokens.min.css
 │   ├── sui-components.min.css
-│   └── sui.min.js
+│   ├── sui.min.js
+│   ├── sui-icons.min.css
+│   └── sui-icons.min.svg
 ├── docs/                      ← Extended documentation
 │   ├── getting-started.md
 │   ├── javascript-api.md
@@ -112,10 +134,14 @@ speyer-ui/
 │   ├── accessibility.md
 │   └── design-decisions.md
 ├── scripts/
-│   └── preflight.js           ← Build-time accessibility validator
+│   ├── preflight.js           ← Build-time accessibility validator
+│   └── validate-icons.mjs     ← Icon sprite validator
 ├── sui-tokens.css             ← Source (readable)
 ├── sui-components.css
 ├── sui.js
+├── sui-icons.css              ← Icon companion stylesheet
+├── sui-icons.svg              ← 483-symbol SVG sprite
+├── icons.html                 ← Icon browser (search, copy)
 ├── index.html                 ← Live demo (GitHub Pages)
 ├── llms.txt                   ← AI crawler context
 ├── package.json
@@ -150,6 +176,43 @@ SUI provides 25+ component classes. Full documentation with live examples: [adri
 ### Avoid Double Padding
 
 If you use `.sui-card-header` / `.sui-card-body`, pair the wrapper with `.sui-card-flush` to zero out the card's own padding. Use `.sui-card-compact` for dense layouts like KPI grids.
+
+---
+
+## Icons
+
+SUI ships 483 hand-drawn SVG icons (456 unique + 27 cross-category aliases) across 28 categories. The icon system is optional — omit `sui-icons.css` and the sprite loader to bring your own.
+
+### Usage
+
+```html
+<!-- Decorative (icon + visible text) -->
+<svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
+  <use href="#sui-icon-status-check-circle"/>
+</svg>
+Active
+
+<!-- Icon button -->
+<button class="sui-icon-btn" aria-label="Delete item">
+  <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <use href="#sui-icon-act-trash-2"/>
+  </svg>
+</button>
+```
+
+**Browse all 483 icons:** [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
+
+### Size Classes
+
+Use font-size-based sizing: `.sui-icon-xs` (12px) through `.sui-icon-3xl` (48px). Default is 1em.
+
+### Colour Utilities
+
+`.sui-icon-primary`, `.sui-icon-success`, `.sui-icon-warning`, `.sui-icon-error`, `.sui-icon-info`, `.sui-icon-muted`
+
+### Bring Your Own Icons
+
+Skip `sui-icons.css` and the sprite loader. Use any icon library (Heroicons, Phosphor, Font Awesome) or plain SVGs. SUI's component classes work with any icon approach — only pair icons with text labels and use `aria-hidden="true"` on decorative icons.
 
 ---
 
@@ -291,7 +354,7 @@ npm run preflight
 
 ### CDN Usage
 
-SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@2.7.2` for production.
+SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@3.0.0` for production.
 
 ### Versioning
 
@@ -314,7 +377,9 @@ These have been hallucinated by AI assistants. They are documented here to preve
 | `SUI.modal.confirm()` | Use Confirmation Dialog recipe |
 | `SUI.modal.prompt()` | Build with `SUI.modal.open()` + custom form |
 | `sui-layout`, `sui-main` | Use App Shell Scaffold recipe with `app-*` classes |
-| `sui-icon-*` | SUI has zero icon library code — icons are bring-your-own |
+| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG |
+| `sui-icon-{name}` (no category) | Must include category prefix: `sui-icon-{category}-{name}` |
+| `data-sui-icon` | No data attribute for icons — use `<svg><use href>` pattern |
 
 ---
 

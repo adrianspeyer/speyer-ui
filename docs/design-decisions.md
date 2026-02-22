@@ -34,7 +34,7 @@ Cards use borders by default (`sui-card`). Shadow is opt-in (`sui-card-shadow`).
 
 ### Why no icon library?
 
-SUI has zero icon library code. Icons are bring-your-own: Lucide, Heroicons, Phosphor, Font Awesome, plain SVG — anything works. The demo page uses Lucide, but that's a demo choice, not a dependency.
+SUI ships 483 hand-drawn SVG icons with built-in accessibility. Icons are optional — bring-your-own is fully supported: Heroicons, Phosphor, Font Awesome, plain SVG, or anything works alongside or instead of SUI Icons.
 
 Why? Icon libraries are 50–200KB. Including one would double SUI's size and lock developers into a specific icon style. Instead, SUI's accessibility rules (always pair icons with text labels, `aria-hidden="true"` on decorative icons) work with any icon system.
 

@@ -19,25 +19,30 @@ SUI is three files. No npm, no bundler, no configuration. This guide gets you fr
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-components.min.css">
   <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
 
-  <!-- Icons (optional — any library works) -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- SUI Icons (optional — or bring your own) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.css">
 </head>
 <body>
+  <!-- Load icon sprite -->
+  <script defer>
+    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.svg')
+      .then(r => r.text())
+      .then(svg => { const d = document.createElement('div'); d.style.display = 'none'; d.innerHTML = svg; document.body.prepend(d); });
+  </script>
   <h1>Hello, SUI</h1>
-  <script>lucide.createIcons();</script>
 </body>
 </html>
 ```
 
-That's it. Three tags for SUI, one optional tag for icons.
+That's it. Three CSS/JS tags for SUI, one optional CSS + sprite loader for icons.
 
 ### Version Pinning
 
 `@latest` always serves the newest release. To pin a specific version:
 
 ```html
-<!-- Pin to v2.7.1 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.2/dist/sui-tokens.min.css">
+<!-- Pin to v3.0.0 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui-tokens.min.css">
 ```
 
 ---
@@ -48,7 +53,7 @@ Add a button:
 
 ```html
 <button class="sui-btn sui-btn-primary">
-  <i data-lucide="plus" aria-hidden="true"></i> Create Project
+  <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg> Create Project
 </button>
 ```
 
@@ -56,7 +61,7 @@ Add a status badge:
 
 ```html
 <span class="sui-badge sui-badge-success">
-  <i data-lucide="check-circle" aria-hidden="true"></i> Active
+  <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg> Active
 </span>
 ```
 
@@ -65,7 +70,7 @@ Add an alert:
 ```html
 <div class="sui-alert sui-alert-error" role="alert">
   <span class="sui-alert-icon" aria-hidden="true">
-    <i data-lucide="x-circle"></i>
+    <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-x-circle"/></svg>
   </span>
   <div class="sui-alert-content">
     <div class="sui-alert-title">Upload failed</div>
@@ -92,7 +97,7 @@ A simple settings page:
     </div>
     <div class="sui-topbar-actions">
       <button class="sui-btn sui-btn-ghost" data-sui-theme>
-        <i data-lucide="moon" aria-hidden="true"></i> Theme
+        <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-moon"/></svg> Theme
       </button>
     </div>
   </header>
@@ -135,7 +140,7 @@ A simple settings page:
     </div>
   </main>
 
-  <script>lucide.createIcons();</script>
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
 </body>
 ```
 
