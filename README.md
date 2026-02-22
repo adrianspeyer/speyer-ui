@@ -130,6 +130,7 @@ speyer-ui/
 │   ├── getting-started.md
 │   ├── javascript-api.md
 │   ├── design-tokens.md
+│   ├── icons.md
 │   ├── recipes.md
 │   ├── accessibility.md
 │   └── design-decisions.md
@@ -213,6 +214,8 @@ Use font-size-based sizing: `.sui-icon-xs` (12px) through `.sui-icon-3xl` (48px)
 ### Bring Your Own Icons
 
 Skip `sui-icons.css` and the sprite loader. Use any icon library (Heroicons, Phosphor, Font Awesome) or plain SVGs. SUI's component classes work with any icon approach — only pair icons with text labels and use `aria-hidden="true"` on decorative icons.
+
+Full icon reference: [docs/icons.md](docs/icons.md)
 
 ---
 
@@ -329,8 +332,9 @@ Extended documentation lives in the `docs/` folder:
 | [getting-started.md](docs/getting-started.md) | Installation, CDN, starter templates |
 | [javascript-api.md](docs/javascript-api.md) | Complete API reference with code examples |
 | [design-tokens.md](docs/design-tokens.md) | Full token catalogue with values |
+| [icons.md](docs/icons.md) | Icon system: sizing, colours, categories, accessibility patterns |
 | [recipes.md](docs/recipes.md) | All 29 recipes with links and guidance |
-| [accessibility.md](docs/accessibility.md) | WCAG compliance details and testing |
+| [accessibility.md](docs/accessibility.md) | WCAG compliance details, icon a11y, and testing |
 | [design-decisions.md](docs/design-decisions.md) | Architecture rationale and trade-offs |
 
 ---

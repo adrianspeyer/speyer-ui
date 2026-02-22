@@ -13,6 +13,7 @@ Most design systems treat accessibility as a checklist. SUI treats it as a const
 - **Touch targets are enforced.** Minimum 44px (WCAG 2.1 AA). Buttons, links, and interactive elements all meet this.
 - **Reduced motion is respected.** All transitions drop to 0ms when `prefers-reduced-motion: reduce` is active.
 - **High contrast is supported.** When `prefers-contrast: more` is active, borders thicken, text darkens, and focus rings intensify. No configuration needed.
+- **Forced colours mode is supported.** SUI Icons use `forced-color-adjust: auto` so icons render in the user's chosen text colour under Windows High Contrast themes.
 - **Components work without JavaScript.** A modal without JS is still a visible dialog. A dropdown without JS is still a visible menu. CSS handles appearance; JS adds interactivity.
 
 ---
@@ -71,58 +72,127 @@ When building custom patterns with SUI, follow the same principle: if you remove
 
 SUI ships 483 first-party icons with built-in accessibility. If you use SUI Icons, the `sui-icon` class handles sizing and `currentColor` inheritance. If you bring your own icons (Heroicons, Phosphor, Font Awesome, inline SVG), the same three patterns apply.
 
-### 1. Decorative icon (icon + visible text)
+### Pattern A — Decorative icon (icon + visible text)
 
 The most common pattern. The text already conveys meaning, so the icon is decorative. **Hide the icon from screen readers.**
 
 ```html
-<span class="sui-badge sui-badge-success">
-  <span aria-hidden="true"><!-- icon (any library) --></span>
-  Active
-</span>
+<!-- SUI Icons -->
+<svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
+  <use href="#sui-icon-status-check-circle"/>
+</svg>
+Active
 
+<!-- Any icon library — same principle -->
 <button class="sui-btn sui-btn-primary" type="button">
-  <svg aria-hidden="true" focusable="false"><!-- icon --></svg>
+  <svg aria-hidden="true" focusable="false"><!-- your icon --></svg>
   Save Changes
 </button>
 ```
 
-### 2. Icon-only control (no visible text)
+### Pattern B — Icon-only button (no visible text)
 
-Buttons or links with only an icon. **Label the control, hide the icon.**
+Buttons with only an icon. **Label the control, hide the icon.**
 
 ```html
-<button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"
-        aria-label="Notifications">
-  <svg aria-hidden="true" focusable="false"><!-- bell icon --></svg>
-</button>
-
-<button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"
-        aria-label="Close panel">
-  <svg aria-hidden="true" focusable="false"><!-- x icon --></svg>
+<button class="sui-icon-btn" aria-label="Delete item">
+  <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <use href="#sui-icon-act-trash"/>
+  </svg>
 </button>
 ```
 
-The `aria-label` goes on the **button**, not on the icon. `focusable="false"` prevents SVGs from appearing in the tab order in Internet Explorer and older Edge.
+- `aria-label` goes on the **button**, not on the SVG
+- `aria-hidden="true"` on the SVG — screen readers read the button label
+- `.sui-icon-btn` enforces 44px minimum touch target
 
-### 3. Meaningful standalone icon (rare)
+### Pattern C — Icon-only link (no visible text)
+
+```html
+<a href="/search" class="sui-icon-btn" aria-label="Search">
+  <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <use href="#sui-icon-act-search"/>
+  </svg>
+</a>
+```
+
+- `aria-label` goes on the **`<a>`**, not on the SVG
+
+### Pattern D — Meaningful standalone icon (rare)
 
 An icon displayed outside an interactive control where no visible text explains it. **Label the icon itself.**
 
 ```html
-<svg role="img" aria-label="Warning" focusable="false">
-  <!-- icon paths -->
+<svg class="sui-icon" viewBox="0 0 24 24"
+     role="img" aria-label="Warning">
+  <use href="#sui-icon-status-alert-triangle"/>
 </svg>
 ```
 
-Use `role="img"` + `aria-label` on the SVG. Do **not** combine `aria-label` with a `<title>` element inside the same SVG — this causes duplicate announcements in some screen readers. If you prefer `<title>`, use `aria-labelledby` to reference it instead.
+Use `role="img"` + `aria-label` on the SVG. Do **not** combine `aria-label` with a `<title>` element inside the same SVG — this causes duplicate announcements in some screen readers.
+
+### Why `<title>` alone is not enough
+
+The consensus from Deque, Scott O'Hara, and cross-browser testing (2021–2025): `<title>` inside SVG sprites via `<use>` does **not** reliably propagate to assistive technology across all browser/screen reader combinations. The robust pattern is: **label on the interactive parent, hide the SVG.**
+
+SUI Icons preserves `<title>` in every `<symbol>` for documentation, search, and direct SVG use — but recommended patterns never rely on it for accessibility.
+
+### Quick Reference
+
+| Scenario | SVG attribute | Accessible name lives on |
+|----------|--------------|--------------------------|
+| Icon + visible text | `aria-hidden="true"` | The visible text |
+| Icon-only button | `aria-hidden="true"` | `aria-label` on `<button>` |
+| Icon-only link | `aria-hidden="true"` | `aria-label` on `<a>` |
+| Standalone informative | `role="img" aria-label="..."` | `aria-label` on `<svg>` |
 
 ### Tips
 
 - **Use `currentColor`** so icons inherit SUI text utilities (`sui-text-primary`, `sui-text-muted`) automatically.
-- **Prefer Pattern 1** (decorative icon + text). SUI's core principle is that icons always accompany text labels.
-- **Pattern 2** (icon-only) should be limited to well-understood icons (close, search, menu, notifications). If users might not recognise the icon, add visible text.
+- **Prefer Pattern A** (decorative icon + text). SUI's core principle is that icons always accompany text labels.
+- **Pattern B/C** (icon-only) should be limited to well-understood icons (close, search, menu, notifications). If users might not recognise the icon, add visible text.
 - **Never use `aria-hidden="true"` on an icon-only control** without an `aria-label` on the parent — this makes the control invisible to screen readers.
+
+---
+
+## Icon Colour Utilities & Contrast
+
+SUI Icons include colour utility classes that must always be paired with text — never as the sole status indicator:
+
+```html
+<!-- ✓ Correct — icon colour reinforces text -->
+<svg class="sui-icon sui-icon-success" viewBox="0 0 24 24" aria-hidden="true">
+  <use href="#sui-icon-status-check-circle"/>
+</svg>
+Approved
+
+<!-- ✗ Wrong — colour alone, no text -->
+<svg class="sui-icon sui-icon-error" viewBox="0 0 24 24" aria-hidden="true">
+  <use href="#sui-icon-status-x-circle"/>
+</svg>
+```
+
+Available colour classes: `.sui-icon-primary`, `.sui-icon-success`, `.sui-icon-warning`, `.sui-icon-error`, `.sui-icon-info`, `.sui-icon-muted`.
+
+Since all SUI Icons use `currentColor`, they automatically inherit the text colour of their parent — which means they automatically meet the same contrast ratio as the surrounding text.
+
+---
+
+## Forced Colours Mode (Windows High Contrast)
+
+SUI Icons ships forced colours support in `sui-icons.css`:
+
+```css
+@media (forced-colors: active) {
+  .sui-icon {
+    forced-color-adjust: auto;
+  }
+}
+```
+
+With `forced-color-adjust: auto` and `currentColor` in the SVG, icons render in the user's chosen system text colour. Without this rule, SVG fills and strokes are **not** automatically overridden by forced colours mode — icons could become invisible against the high-contrast background.
+
+**Test with:** Windows Settings → Accessibility → Contrast themes (all four presets).
 
 ---
 
@@ -153,8 +223,9 @@ When `prefers-reduced-motion: reduce` is set at the OS level:
 - All CSS animation durations → `0ms`
 - Scroll behaviour → `auto` (no smooth scrolling)
 - Progress bar indeterminate animation stops
+- Icon spin animation (`.sui-icon-spin`) stops — the icon remains visible
 
-This is handled automatically by token overrides in `sui-tokens.css`. No configuration needed.
+This is handled automatically by token overrides in `sui-tokens.css` and `sui-icons.css`. No configuration needed.
 
 ---
 
@@ -171,6 +242,31 @@ Works in both light and dark modes. No configuration needed.
 
 ---
 
+## Focus Indicators
+
+Icon buttons use `:focus-visible` (not `:focus`) — the outline appears for keyboard navigation only, not mouse clicks:
+
+```css
+.sui-icon-btn:focus-visible {
+  outline: 2px solid var(--sui-blue-focus, #60a5fa);
+  outline-offset: 2px;
+}
+```
+
+Uses `outline` not `box-shadow` — outline survives forced-colours mode.
+
+---
+
+## Touch Targets
+
+`.sui-icon-btn` enforces 44px minimum dimensions via `var(--sui-touch-target)`:
+
+- Exceeds WCAG 2.5.8 Target Size (Minimum) — 24×24px required
+- Meets WCAG 2.5.5 Target Size (Enhanced) — 44×44px required
+- The icon itself can be any size (12px – 48px) — the touch target is always 44px
+
+---
+
 ## Testing Your Implementation
 
 ### Quick Checks
@@ -183,18 +279,21 @@ Works in both light and dark modes. No configuration needed.
 
 ### Automated
 
-- **Lighthouse** (Chrome DevTools → Lighthouse → Accessibility). SUI's demo page scores 100/100 in both themes.
-- **SUI Preflight** (`npm run build`). Runs 66 automated checks including ARIA validation, contrast ratios, and heading order.
+- **Lighthouse** (Chrome DevTools → Lighthouse → Accessibility). SUI scores 100/100 on both `index.html` and `icons.html` in both themes.
+- **axe-core** (`npm run axe` for index.html, `npm run axe -- icons.html` for the icon browser). 0 violations on both pages.
+- **SUI Preflight** (`npm run build`). Runs 76 automated checks including ARIA validation, contrast ratios, and heading order.
 
-### What the Preflight Catches
+### Icon-Specific Testing Checklist
 
-- Missing button names, image alt text, link text
-- Heading order violations (H1 → H3 skip)
-- Duplicate IDs
-- Focusable elements inside `aria-hidden="true"` containers
-- Missing ARIA attributes on tabs, steppers, and interactive tables
-- Contrast ratio failures across 40+ token pairs
-- Version consistency across files
+- [ ] axe-core scan of icons.html: 0 violations
+- [ ] VoiceOver (macOS Safari): decorative icons silent, icon buttons announced by label
+- [ ] NVDA (Windows Chrome): same verification
+- [ ] Windows High Contrast Black: all icons visible
+- [ ] Windows High Contrast White: all icons visible
+- [ ] `prefers-reduced-motion`: spin animation stops, icon remains visible
+- [ ] Keyboard-only navigation: all icon buttons reachable and focusable
+- [ ] 16px rendering: all icons recognisable (no detail collapse)
+- [ ] 48px rendering: no visual artefacts
 
 ---
 
@@ -205,3 +304,9 @@ Works in both light and dark modes. No configuration needed.
 3. **Decorative icons without `aria-hidden`.** If an icon is decorative (next to a text label), add `aria-hidden="true"` to prevent screen readers from announcing it.
 4. **Custom components without focus management.** If you build a custom modal or dropdown, ensure focus is trapped, Escape closes it, and focus returns to the trigger element.
 5. **Missing `data-label` on responsive tables.** SUI tables stack on mobile. Each `<td>` needs `data-label="Column Name"` so the label appears when stacked.
+6. **Relying on `<title>` in SVG sprites.** `<title>` inside `<symbol>` via `<use>` does not reliably propagate to screen readers. Use `aria-label` on the interactive parent instead.
+7. **Icon-only control without `aria-label`.** If you hide the icon with `aria-hidden="true"` but forget `aria-label` on the button/link, the control is invisible to screen readers.
+
+---
+
+*Made in Canada with love 🇨🇦*

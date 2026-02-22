@@ -37,6 +37,7 @@
 | Recipe catalogue | `docs/recipes.md` | Linked list with descriptions |
 | Token catalogue | `docs/design-tokens.md` | Organised by category with both theme values |
 | Icon names | `sui-icons.svg` | Search `id="sui-icon-"` |
+| Icon reference | `docs/icons.md` | Sizing, colours, categories, accessibility patterns |
 | Icon browser | `icons.html` | Visual catalogue with search and copy |
 
 **For recipes:** Every recipe in `index.html` has a "View code" accordion with copy/paste HTML.
