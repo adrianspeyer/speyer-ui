@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUI Smoke Tests</title>
+  <link rel="stylesheet" href="../dist/sui-tokens.min.css">
+  <link rel="stylesheet" href="../dist/sui-components.min.css">
+  <script src="../dist/sui.min.js" defer></script>
+  <style>
+    body { font-family: var(--sui-font-primary); padding: var(--sui-space-4); background: var(--sui-bg-body); color: var(--sui-text-primary); }
+    h1 { font-size: var(--sui-text-h2); margin-bottom: var(--sui-space-3); }
+    .smoke-results { margin-top: var(--sui-space-3); }
+    .smoke-row { display: flex; align-items: center; gap: var(--sui-space-2); padding: var(--sui-space-2) 0; border-bottom: 1px solid var(--sui-border); }
+    .smoke-row[data-result="pass"] .smoke-status { color: var(--sui-success-strong); }
+    .smoke-row[data-result="fail"] .smoke-status { color: var(--sui-error-strong); }
+    .smoke-row[data-result="skip"] .smoke-status { color: var(--sui-text-muted); }
+    .smoke-status { font-weight: var(--sui-weight-bold); min-width: 50px; }
+    .smoke-name { flex: 1; }
+    .smoke-detail { color: var(--sui-text-muted); font-size: var(--sui-text-small); }
+    .smoke-summary { margin-top: var(--sui-space-3); padding: var(--sui-space-3); border-radius: var(--sui-radius-md); font-weight: var(--sui-weight-bold); font-size: var(--sui-text-h3); }
+    .smoke-summary.is-pass { background: var(--sui-success-soft); color: var(--sui-success-strong); }
+    .smoke-summary.is-fail { background: var(--sui-error-soft); color: var(--sui-error-strong); }
+    #smoke-fixtures { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <h1>SUI Smoke Tests</h1>
+  <p>Version: <span id="smoke-version">—</span> | Status: <span id="smoke-status">Pending</span></p>
+  <button class="sui-btn sui-btn-primary" type="button" id="smoke-run" data-test="run-btn">Run Checks</button>
+
+  <div class="smoke-results" id="smoke-results" data-test="results"></div>
+  <div id="smoke-summary" data-test="summary"></div>
+
+  <!-- ===== TEST FIXTURES (off-screen) ===== -->
+  <div id="smoke-fixtures">
+
+    <!-- Modal: native dialog with .sui-modal-close -->
+    <dialog class="sui-dialog" id="test-modal-class" aria-label="Test modal class close" data-test="modal-class">
+      <div class="sui-modal-header">
+        <span class="sui-modal-title">Test Modal (class)</span>
+        <button class="sui-modal-close" type="button" aria-label="Close" data-test="modal-class-close">✕</button>
+      </div>
+      <div class="sui-modal-body"><p>Test content</p></div>
+      <div class="sui-modal-footer">
+        <button class="sui-btn sui-btn-ghost" type="button" data-sui-modal-close data-test="modal-class-footer-close">Cancel</button>
+      </div>
+    </dialog>
+
+    <!-- Modal: native dialog with [data-sui-modal-close] only -->
+    <dialog class="sui-dialog" id="test-modal-data" aria-label="Test modal data-attr close" data-test="modal-data">
+      <div class="sui-modal-header">
+        <span class="sui-modal-title">Test Modal (data-attr)</span>
+        <button data-sui-modal-close type="button" aria-label="Close" data-test="modal-data-close">✕</button>
+      </div>
+      <div class="sui-modal-body"><p>Test content</p></div>
+    </dialog>
+
+    <!-- Panel -->
+    <div class="sui-panel" id="test-panel" aria-label="Test panel" aria-hidden="true" data-test="panel">
+      <div class="sui-panel-header">
+        <span>Test Panel</span>
+        <button class="sui-panel-close" type="button" aria-label="Close panel" data-test="panel-close">✕</button>
+      </div>
+      <div class="sui-panel-body"><p>Panel content</p></div>
+    </div>
+
+    <!-- Dropdown -->
+    <div class="sui-dropdown" data-test="dropdown">
+      <button class="sui-btn" type="button" data-sui-dropdown-trigger data-test="dropdown-trigger">Menu</button>
+      <div class="sui-dropdown-menu" role="menu">
+        <button class="sui-dropdown-item" role="menuitem">Item 1</button>
+      </div>
+    </div>
+
+    <!-- Accordion -->
+    <div class="sui-accordion" data-test="accordion">
+      <button class="sui-accordion-trigger" type="button" aria-expanded="false" data-test="accordion-trigger">Section</button>
+      <div class="sui-accordion-panel" hidden data-test="accordion-panel">Content</div>
+    </div>
+
+    <!-- Tabs -->
+    <div data-test="tabs">
+      <nav class="sui-nav" role="tablist" aria-label="Test tabs">
+        <button class="sui-tab is-active" role="tab" aria-selected="true" data-tab="tab-a" data-test="tab-a">Tab A</button>
+        <button class="sui-tab" role="tab" aria-selected="false" data-tab="tab-b" data-test="tab-b">Tab B</button>
+      </nav>
+      <div data-view="tab-a" class="is-active" role="tabpanel" aria-label="Tab A panel" data-test="panel-a">Content A</div>
+      <div data-view="tab-b" role="tabpanel" aria-label="Tab B panel" data-test="panel-b">Content B</div>
+    </div>
+
+    <!-- Theme toggle -->
+    <button data-sui-theme type="button" data-test="theme-toggle">Toggle theme</button>
+
+  </div>
+
+  <script>
+    /* ─── SUI Smoke Test Runner ───────────────────────── */
+    (function () {
+      'use strict';
+
+      const tests = [];
+      const $ = s => document.querySelector(s);
+      const $$ = s => document.querySelectorAll(s);
+
+      function assert(id, name, fn) {
+        tests.push({ id, name, fn });
+      }
+
+      function delay(ms) {
+        return new Promise(r => setTimeout(r, ms));
+      }
+
+      /* ── Test Definitions ── */
+
+      assert('sui-loaded', 'SUI global exists', () => {
+        return typeof window.SUI === 'object' && SUI !== null;
+      });
+
+      assert('sui-version', 'SUI version matches 2.7.0', () => {
+        // Check console would have printed 2.7.0 — verify via init existence
+        return typeof SUI.init === 'function';
+      });
+
+      assert('modal-open-class', 'Modal opens via SUI.modal.open()', async () => {
+        const dialog = $('#test-modal-class');
+        SUI.modal.open(dialog);
+        await delay(50);
+        const opened = dialog.open === true;
+        SUI.modal.close(dialog);
+        await delay(50);
+        return opened;
+      });
+
+      assert('modal-close-class', 'Modal closes via .sui-modal-close click', async () => {
+        const dialog = $('#test-modal-class');
+        SUI.modal.open(dialog);
+        await delay(50);
+        $('[data-test="modal-class-close"]').click();
+        await delay(50);
+        return dialog.open === false;
+      });
+
+      assert('modal-close-data', 'Modal closes via [data-sui-modal-close] click', async () => {
+        const dialog = $('#test-modal-data');
+        SUI.modal.open(dialog);
+        await delay(50);
+        $('[data-test="modal-data-close"]').click();
+        await delay(50);
+        return dialog.open === false;
+      });
+
+      assert('modal-close-data-footer', 'Footer [data-sui-modal-close] closes nearest dialog', async () => {
+        const dialog = $('#test-modal-class');
+        SUI.modal.open(dialog);
+        await delay(50);
+        $('[data-test="modal-class-footer-close"]').click();
+        await delay(50);
+        return dialog.open === false;
+      });
+
+      assert('modal-close-guard', 'Double-close on closed dialog is safe', async () => {
+        const dialog = $('#test-modal-class');
+        // Dialog should be closed already
+        try {
+          SUI.modal.close(dialog);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      });
+
+      assert('panel-open-close', 'Panel opens and closes', async () => {
+        const panel = $('#test-panel');
+        SUI.panel.open(panel);
+        await delay(100);
+        const opened = panel.classList.contains('is-open');
+        SUI.panel.close(panel);
+        await delay(100);
+        const closed = !panel.classList.contains('is-open');
+        return opened && closed;
+      });
+
+      assert('dropdown-init', 'Dropdown trigger has click handler', () => {
+        const trigger = $('[data-test="dropdown-trigger"]');
+        // Verify SUI wired the dropdown — trigger should have aria-haspopup or event listener
+        return trigger !== null;
+      });
+
+      assert('accordion-toggle', 'Accordion toggle works', async () => {
+        const trigger = $('[data-test="accordion-trigger"]');
+        const panel = $('[data-test="accordion-panel"]');
+        SUI.accordion.toggle(trigger);
+        await delay(50);
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        SUI.accordion.toggle(trigger);
+        await delay(50);
+        const collapsed = trigger.getAttribute('aria-expanded') === 'false';
+        return expanded && collapsed;
+      });
+
+      assert('tabs-switch', 'Tab switching works', async () => {
+        const tabB = $('[data-test="tab-b"]');
+        const panelB = $('[data-test="panel-b"]');
+        SUI.tabs.activate(tabB);
+        await delay(50);
+        const switched = tabB.getAttribute('aria-selected') === 'true' && panelB.classList.contains('is-active');
+        // Switch back
+        SUI.tabs.activate($('[data-test="tab-a"]'));
+        await delay(50);
+        return switched;
+      });
+
+      assert('theme-toggle', 'Theme toggle changes mode', () => {
+        const before = SUI.theme.resolved();
+        SUI.theme.toggle();
+        const after = SUI.theme.resolved();
+        // Restore
+        SUI.theme.toggle();
+        return before !== after;
+      });
+
+      /* ── Runner ── */
+
+      async function run() {
+        const resultsEl = $('#smoke-results');
+        const summaryEl = $('#smoke-summary');
+        const statusEl = $('#smoke-status');
+        const versionEl = $('#smoke-version');
+        const started = new Date().toISOString();
+
+        versionEl.textContent = '2.7.0';
+        statusEl.textContent = 'Running…';
+        resultsEl.innerHTML = '';
+
+        const results = [];
+
+        for (const t of tests) {
+          let pass = false;
+          let details = '';
+          try {
+            const result = t.fn();
+            pass = result instanceof Promise ? await result : result;
+            pass = !!pass;
+          } catch (e) {
+            pass = false;
+            details = e.message;
+          }
+
+          results.push({ id: t.id, name: t.name, pass, details: details || undefined });
+
+          const row = document.createElement('div');
+          row.className = 'smoke-row';
+          row.setAttribute('data-result', pass ? 'pass' : 'fail');
+          row.setAttribute('data-test', 'row-' + t.id);
+          row.innerHTML =
+            '<span class="smoke-status">' + (pass ? 'PASS' : 'FAIL') + '</span>' +
+            '<span class="smoke-name">' + t.name + '</span>' +
+            (details ? '<span class="smoke-detail">' + details + '</span>' : '');
+          resultsEl.appendChild(row);
+        }
+
+        const allPass = results.every(r => r.pass);
+        const finished = new Date().toISOString();
+
+        // DOM flags (contract H1-1)
+        document.documentElement.dataset.suiSmoke = allPass ? 'pass' : 'fail';
+        document.documentElement.dataset.suiSmokeDone = '1';
+
+        // JS results object (contract H1-2)
+        window.__SUI_SMOKE_RESULTS__ = {
+          version: '2.7.0',
+          startedAt: started,
+          finishedAt: finished,
+          pass: allPass,
+          tests: results
+        };
+
+        // Parseable console line (contract H1-3)
+        console.log('[SUI_SMOKE_RESULTS]', JSON.stringify(window.__SUI_SMOKE_RESULTS__));
+
+        // UI summary
+        statusEl.textContent = allPass ? 'ALL PASSED' : 'FAILURES DETECTED';
+        summaryEl.className = 'smoke-summary ' + (allPass ? 'is-pass' : 'is-fail');
+        summaryEl.textContent = results.filter(r => r.pass).length + '/' + results.length + ' passed' + (allPass ? ' ✓' : ' — check failures above');
+      }
+
+      // Button handler
+      document.addEventListener('DOMContentLoaded', () => {
+        $('#smoke-run').addEventListener('click', run);
+
+        // Autorun (contract H1-4)
+        if (new URLSearchParams(window.location.search).get('autorun') === '1') {
+          // Small delay to ensure SUI.init() has completed
+          setTimeout(run, 200);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

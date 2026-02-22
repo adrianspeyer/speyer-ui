@@ -75,6 +75,28 @@ These make third-party widgets SUI-native using token-based CSS overrides. SUI p
 
 ---
 
+## Table Modifiers — Quick Reference
+
+SUI tables have several modifiers that combine freely. Here's what to reach for:
+
+| Modifier | What it does | When to use it |
+|----------|-------------|----------------|
+| `.sui-table-wrap` | Scrollable container for wide tables | Always wrap `<table>` in this |
+| `.sui-table-sticky` | Sticky `<thead>` when scrolling long tables | Tables with 10+ rows in a scrollable container |
+| `.sui-table-stack` | Card-stacks rows at tablet (768px) instead of default 520px | Tables viewed primarily on tablets |
+| `.sui-table-sortable` | Sort indicators via `th[data-sort="asc\|desc\|none"]` | Sortable columns (you provide sort logic) |
+| `.sui-table-dense` | Compact padding | Data-heavy admin tables. Caution: may fall below 44px touch target |
+| `tr.is-selected` | Highlighted row (soft blue background) | Multi-select, batch actions |
+| `.sui-table-interactive` | Clickable rows with hover + focus ring | Master-detail patterns (add `tabindex="0"` + `role="link"`) |
+
+**Mobile stacking:** Add `data-label="Column Name"` to every `<td>` for automatic card-style layout on small screens.
+
+**Combining modifiers:** All modifiers can be combined. Example: `.sui-table.sui-table-sticky.sui-table-sortable.sui-table-dense` gives you a compact, scrollable, sortable table with a pinned header.
+
+→ [Live demos](https://adrianspeyer.github.io/speyer-ui/#comp-tables)
+
+---
+
 ## Choosing the Right Pattern
 
 ### "I need a sidebar with navigation"

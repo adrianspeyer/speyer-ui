@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "2.6.0",
+    "version": "2.7.0",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -98,7 +98,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.6.0</span>
+          <span class="sui-version-pill">v2.7.0</span>
         </div>
       </div>
 
@@ -250,7 +250,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.6.0</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.7.0</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -710,7 +710,7 @@
             </div>
           </div>
         </div>
-        <h3 class="sui-mt-4">Input Action <span class="sui-badge sui-badge-new sui-badge-sm">v2.6.0</span></h3>
+        <h3 class="sui-mt-4">Input Action <span class="sui-badge sui-badge-new sui-badge-sm">v2.5.0</span></h3>
         <p class="sui-text-cap sui-mt-1">Embed a button inside an input — for search, copy, clear, or show/hide password.</p>
         <div class="sui-grid sui-grid-2 sui-mt-3">
           <div class="sui-card">
@@ -939,7 +939,7 @@
           <p class="sui-mb-3">Click to open a panel with contact details. Desktop: panel appears alongside this content. Mobile: full-screen overlay.</p>
           <div style="display: flex; gap: var(--sui-space-2); flex-wrap: wrap;">
             <button class="sui-btn sui-btn-primary" data-sui-panel="#demoPanel" aria-expanded="false" type="button"><i data-lucide="user"></i>View Contact</button>
-            <button class="sui-btn sui-btn-outline" data-sui-panel="#demoPanelNoBg" aria-expanded="false" type="button"><i data-lucide="layout-sidebar-right"></i>No Backdrop</button>
+            <button class="sui-btn sui-btn-outline" data-sui-panel="#demoPanelNoBg" aria-expanded="false" type="button"><i data-lucide="panel-right"></i>No Backdrop</button>
           </div>
         </div>
 
@@ -1305,7 +1305,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
             </table>
           </div>
         </div>
-        <h3 class="sui-mt-4">Table Modifiers <span class="sui-badge sui-badge-new sui-badge-sm">v2.6.0</span></h3>
+        <h3 class="sui-mt-4">Table Modifiers <span class="sui-badge sui-badge-new sui-badge-sm">v2.5.0</span></h3>
         <p class="sui-text-cap sui-mt-1">Combine with any <code>sui-table</code>. Sticky header, dense rows, and tablet card stacking.</p>
         <div class="sui-grid sui-grid-2 sui-mt-3">
           <div class="sui-card sui-card-flush">
@@ -3436,6 +3436,62 @@ function showDetail(id) {
             </div>
           </div>
         </div>
+
+        <!-- Panel Polish: Record Detail variant (v2.7.0) -->
+        <div class="sui-kpi-label sui-mt-4 sui-mb-2">Panel Polish: Record Detail (Tabs + Table + Sticky Actions)</div>
+        <style>
+          .recipe-record-detail { display: flex; flex-direction: column; height: 420px; background: var(--sui-bg-card); border: 1px solid var(--sui-border); border-radius: var(--sui-radius-md); overflow: hidden; max-width: 720px; }
+          .recipe-record-detail .recipe-panel-body { padding: 0; }
+          .recipe-record-tabs { padding: 0 var(--sui-space-4); border-bottom: 1px solid var(--sui-border); }
+          .recipe-record-tab-panel { padding: var(--sui-space-4); flex: 1; overflow-y: auto; }
+          .recipe-record-footer { display: flex; gap: var(--sui-space-2); padding: var(--sui-space-3) var(--sui-space-4); border-top: 1px solid var(--sui-border); justify-content: flex-end; position: sticky; bottom: 0; background: var(--sui-bg-card); }
+        </style>
+        <div class="sui-card sui-card-flush sui-mt-2">
+          <div style="padding:var(--sui-space-4);">
+            <div class="recipe-record-detail" data-sui-tabs>
+              <div class="recipe-panel-header">
+                <span class="sui-avatar sui-avatar-sm">AC</span>
+                <div>
+                  <strong>Acme Corp</strong>
+                  <div class="sui-text-muted" style="font-size:var(--sui-text-meta);">Enterprise &mdash; $240K ARR</div>
+                </div>
+                <div style="flex:1;"></div>
+                <span class="sui-badge sui-badge-success"><span aria-hidden="true">&#10003;</span> Active</span>
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close"><i data-lucide="x" aria-hidden="true"></i></button>
+              </div>
+              <div class="recipe-record-tabs">
+                <nav class="sui-nav" role="tablist" aria-label="Record detail tabs" style="margin-bottom:-1px;">
+                  <button class="sui-tab is-active" role="tab" aria-selected="true" data-tab="rd-overview">Overview</button>
+                  <button class="sui-tab" role="tab" aria-selected="false" data-tab="rd-activity">Activity</button>
+                </nav>
+              </div>
+              <div data-view="rd-overview" class="recipe-record-tab-panel is-active" role="tabpanel" aria-label="Overview">
+                <div class="sui-table-wrap">
+                  <table class="sui-table sui-table-dense">
+                    <tbody>
+                      <tr><td class="sui-text-muted" data-label="Field" style="width:35%;">Owner</td><td data-label="Value">Jane Cooper</td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Stage</td><td data-label="Value">Negotiation</td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Close Date</td><td data-label="Value">Mar 15, 2026</td></tr>
+                      <tr><td class="sui-text-muted" data-label="Field">Next Step</td><td data-label="Value">Send SOW</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div data-view="rd-activity" class="recipe-record-tab-panel" role="tabpanel" aria-label="Activity">
+                <div class="sui-text-muted" style="font-size:var(--sui-text-small);">
+                  <div style="margin-bottom:var(--sui-space-2);">Proposal sent &mdash; Today</div>
+                  <div style="margin-bottom:var(--sui-space-2);">Meeting scheduled &mdash; Yesterday</div>
+                  <div>Account created &mdash; Feb 10, 2026</div>
+                </div>
+              </div>
+              <div class="recipe-record-footer">
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Edit</button>
+                <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Send SOW</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="sui-accordion sui-mt-3">
           <button class="sui-accordion-trigger" aria-expanded="false">View code</button>
           <div class="sui-accordion-panel" hidden>
@@ -3462,8 +3518,8 @@ function showDetail(id) {
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;!-- Sizing: override --panel-width in your CSS --&gt;
-&lt;!-- .sui-panel { --panel-width: 480px; } for wide panels --&gt;</pre>
+&lt;!-- Sizing: override --sui-panel-width in your CSS --&gt;
+&lt;!-- .sui-panel { --sui-panel-width: 480px; } for wide panels --&gt;</pre>
           </div>
         </div>
       </div>
@@ -3913,6 +3969,24 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
                 <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="search" aria-hidden="true"></i> Search</button>
               </div>
             </div>
+            <div>
+              <div class="sui-kpi-label sui-mb-2">Inline toolbar variant (select + search + action)</div>
+              <style>
+                .recipe-toolbar-bar { display: flex; gap: var(--sui-space-2); align-items: center; }
+                .recipe-toolbar-bar .sui-input { flex: 1; min-width: 0; }
+                .recipe-toolbar-bar .sui-select { width: auto; min-width: 120px; }
+              </style>
+              <div class="recipe-toolbar-bar">
+                <select class="sui-select" aria-label="Filter type">
+                  <option>All types</option>
+                  <option>Contacts</option>
+                  <option>Deals</option>
+                </select>
+                <input class="sui-input" type="search" placeholder="Search..." aria-label="Search records">
+                <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Clear search">Clear</button>
+                <button class="sui-btn sui-btn-primary" type="button"><i data-lucide="search" aria-hidden="true"></i> Search</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="sui-accordion sui-mt-3">
@@ -3921,14 +3995,25 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
             <pre class="sui-code-block" style="white-space:pre;overflow-x:auto;">&lt;style&gt;
 .my-search-bar { display: flex; gap: var(--sui-space-2); }
 .my-search-bar .sui-input { flex: 1; min-width: 0; }
+/* Toolbar variant: constrain select width */
+.my-search-bar .sui-select { width: auto; min-width: 120px; }
 &lt;/style&gt;
 
+&lt;!-- Simple search bar --&gt;
 &lt;div class="my-search-bar"&gt;
   &lt;input class="sui-input" type="search" placeholder="Search..."
          aria-label="Search contacts"&gt;
   &lt;button class="sui-btn sui-btn-primary" aria-label="Search"&gt;
     &lt;i data-lucide="search" aria-hidden="true"&gt;&lt;/i&gt;
   &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Toolbar variant (select + search + action) --&gt;
+&lt;div class="my-search-bar"&gt;
+  &lt;select class="sui-select" aria-label="Filter type"&gt;...&lt;/select&gt;
+  &lt;input class="sui-input" type="search" placeholder="Search..." aria-label="Search"&gt;
+  &lt;button class="sui-btn sui-btn-ghost sui-btn-sm"&gt;Clear&lt;/button&gt;
+  &lt;button class="sui-btn sui-btn-primary"&gt;Search&lt;/button&gt;
 &lt;/div&gt;</pre>
           </div>
         </div>
@@ -4386,8 +4471,8 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/" target="_blank" rel="noreferrer"><i data-lucide="github"></i>GitHub</a>
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
-      <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.6.0</span></a>
+      <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada with ❤️</small>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.7.0</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->

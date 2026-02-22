@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 2.6.0
+ * Version: 2.7.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -939,10 +939,11 @@ const SUI = (() => {
     });
 
     // Modal close buttons (works with both patterns)
-    $$('.sui-modal-close').forEach(btn => {
+    // [data-sui-modal-close] is a convenience alias — closest-parent resolution only
+    $$('.sui-modal-close, [data-sui-modal-close]').forEach(btn => {
       btn.addEventListener('click', () => {
         const dialog = btn.closest('dialog.sui-dialog');
-        if (dialog) { modal.close(dialog); return; }
+        if (dialog) { if (dialog.open) modal.close(dialog); return; }
         const overlay = btn.closest('.sui-modal-overlay');
         if (overlay) modal.close(overlay);
       });
@@ -1155,7 +1156,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v2.6.0 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v2.7.0 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

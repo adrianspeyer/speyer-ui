@@ -4,6 +4,38 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.7.0] — 2026-02-21
+
+### Theme: Stability Plateau + AI Survivability
+
+Ergonomic fixes, documentation accuracy, and AI guardrails. After this release, SUI enters a stability plateau — patches only for regressions, accessibility issues, or security fixes.
+
+### Added
+
+- **`[data-sui-modal-close]`** — Data attribute alternative to `.sui-modal-close` for closing the nearest parent dialog or legacy overlay. Useful on footer buttons that don't naturally receive the CSS class. Closest-parent resolution only. `.sui-modal-close` remains canonical.
+- **Smoke harness** — `tests/smoke.html` with deterministic contract: DOM flags, `window.__SUI_SMOKE_RESULTS__` object, parseable console line, `?autorun=1` support. Covers modal, panel, dropdown, accordion, tabs, and theme toggle.
+
+### Improved
+
+- **Panel Polish recipe** — Corrected `--sui-panel-width` guidance (was `--panel-width`). Added "Record Detail" variant with tabs, table, and sticky footer actions.
+- **Search Bar recipe** — Added inline toolbar variant (scoped select + search input + clear + action button).
+- **AI context files** — Fixed 198 mojibake instances across `.claude/instructions.md`, `.cursor/rules`, `llms.txt`. Added "How to Find Things" repo map. Added canonical "Does NOT exist" table (13 entries) synchronised across all AI files.
+
+### Fixed
+
+- **README token drift** — Spacing values corrected from `(4, 8, 12, 16, 24, 32)` to `(4, 8, 16, 24, 32, 48)`. `--sui-font` → `--sui-font-primary`/`--sui-font-mono`. `--sui-weight-normal` → `--sui-weight-regular`. Removed non-existent `--sui-text-h4`.
+
+### Docs
+
+- **Table modifier cheat-sheet** in `docs/recipes.md` — quick reference for `.sui-table-wrap`, `.sui-table-sticky`, `.sui-table-stack`, `.sui-table-sortable`, `.sui-table-dense`, `.is-selected`.
+- **Icon accessibility patterns** in `docs/accessibility.md` — three-tier pattern: decorative icon, icon-only control, meaningful standalone icon.
+
+### Demo
+
+- **Footer** — "Made in Canada with ❤️"
+
+---
+
 ## [2.6.0] — 2026-02-20
 
 ### Theme: API Completeness + Showcase Polish

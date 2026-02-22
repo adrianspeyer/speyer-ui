@@ -2,7 +2,7 @@
 
 SUI's JavaScript (`sui.js`) is optional. Components render correctly without it — they just won't open, close, or animate. When included, it auto-initialises interactive behaviours via `data-sui-*` attributes.
 
-**Current version:** 2.6.0
+**Current version:** 2.7.0
 **Bundle size:** ~26KB minified
 **Dependencies:** Zero
 
@@ -40,6 +40,7 @@ Drop these on HTML elements. SUI's `init()` wires up the behaviour automatically
 |-----------|--------|
 | `data-sui-theme` | Toggles light/dark/auto on click |
 | `data-sui-modal="#id"` | Opens modal on click |
+| `data-sui-modal-close` | Closes nearest parent dialog/overlay on click (v2.7.0) |
 | `data-sui-sheet="#id"` | Opens bottom sheet on click |
 | `data-sui-copy="#id"` | Copies element text on click |
 | `data-sui-dropdown-trigger` | Opens parent dropdown on click |
@@ -242,15 +243,22 @@ If you add dynamic content after page load, call `SUI.init()` to initialise new 
 
 ---
 
-## Classes That Do NOT Exist
+## Classes and Methods That Do NOT Exist
 
-These have been hallucinated by AI assistants in past sessions. They are documented here to prevent recurrence:
+Do not invent or reference these — they are common AI hallucinations:
 
-| Hallucinated | Correct |
-|-------------|---------|
-| `sui-card-content` | `sui-card-body` |
-| `SUI.utils.copy()` | `SUI.copy.text()` or `SUI.copy.fromElement()` |
-| `SUI.modal.confirm()` | Use Confirmation Dialog recipe |
-| `SUI.modal.prompt()` | Build with `SUI.modal.open()` + custom form |
-| `sui-layout`, `sui-main`, `sui-layout-body` | Use App Shell Scaffold recipe with `app-*` classes |
-| `sui-icon-*` | SUI has zero icon library code. Icons are bring-your-own. |
+| Hallucinated name | Reality / correct approach |
+|---|---|
+| `sui-card-content` | Use `sui-card-body` |
+| `sui-icon` / `sui-icon-*` | Not shipped. Icons are BYO. Use your own class (e.g. `app-icon`). |
+| `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
+| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
+| `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |
+| `SUI.modal.confirm()` / `SUI.modal.prompt()` | Not shipped. Use Confirmation Dialog recipe. |
+| `SUI.toast.close()` | Not shipped. Toasts use `SUI.toast.dismiss(el)` or `SUI.toast.clearAll()`. |
+| `data-sui-toast-close` | Not shipped. Toast close uses `.sui-toast-close` (internal) + `SUI.toast.dismiss()`. |
+| `data-sui-modal-dismiss` | Not shipped. Use `[data-sui-modal-close]` — close ≠ dismiss. |
+| `SUI.animate()` | Not shipped. SUI uses CSS transitions; use WAAPI in app code. |
+| `--sui-font` | Use `--sui-font-primary` or `--sui-font-mono`. |
+| `--sui-weight-normal` | Use `--sui-weight-regular`. |
+| `--sui-text-h4` | Does not exist. Heading tokens stop at `--sui-text-h3`. |

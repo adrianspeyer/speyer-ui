@@ -67,6 +67,65 @@ When building custom patterns with SUI, follow the same principle: if you remove
 
 ---
 
+## Icons and Screen Readers
+
+SUI has zero icon library dependency — icons are bring-your-own. Regardless of which icon library you use (Lucide, Heroicons, Phosphor, Font Awesome, inline SVG), there are three patterns for how icons interact with screen readers.
+
+### 1. Decorative icon (icon + visible text)
+
+The most common pattern. The text already conveys meaning, so the icon is decorative. **Hide the icon from screen readers.**
+
+```html
+<span class="sui-badge sui-badge-success">
+  <span aria-hidden="true"><!-- icon (any library) --></span>
+  Active
+</span>
+
+<button class="sui-btn sui-btn-primary" type="button">
+  <svg aria-hidden="true" focusable="false"><!-- icon --></svg>
+  Save Changes
+</button>
+```
+
+### 2. Icon-only control (no visible text)
+
+Buttons or links with only an icon. **Label the control, hide the icon.**
+
+```html
+<button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"
+        aria-label="Notifications">
+  <svg aria-hidden="true" focusable="false"><!-- bell icon --></svg>
+</button>
+
+<button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"
+        aria-label="Close panel">
+  <svg aria-hidden="true" focusable="false"><!-- x icon --></svg>
+</button>
+```
+
+The `aria-label` goes on the **button**, not on the icon. `focusable="false"` prevents SVGs from appearing in the tab order in Internet Explorer and older Edge.
+
+### 3. Meaningful standalone icon (rare)
+
+An icon displayed outside an interactive control where no visible text explains it. **Label the icon itself.**
+
+```html
+<svg role="img" aria-label="Warning" focusable="false">
+  <!-- icon paths -->
+</svg>
+```
+
+Use `role="img"` + `aria-label` on the SVG. Do **not** combine `aria-label` with a `<title>` element inside the same SVG — this causes duplicate announcements in some screen readers. If you prefer `<title>`, use `aria-labelledby` to reference it instead.
+
+### Tips
+
+- **Use `currentColor`** so icons inherit SUI text utilities (`sui-text-primary`, `sui-text-muted`) automatically.
+- **Prefer Pattern 1** (decorative icon + text). SUI's core principle is that icons always accompany text labels.
+- **Pattern 2** (icon-only) should be limited to well-understood icons (close, search, menu, notifications). If users might not recognise the icon, add visible text.
+- **Never use `aria-hidden="true"` on an icon-only control** without an `aria-label` on the parent — this makes the control invisible to screen readers.
+
+---
+
 ## Contrast Ratios
 
 SUI's preflight validator (`npm run build`) checks 40+ foreground/background token pairs in both themes before every build. All combinations meet WCAG 2.1 AA (4.5:1 for normal text, 3:1 for large text).

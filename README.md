@@ -159,9 +159,9 @@ SUI uses CSS custom properties (`--sui-*`) for all visual values. Tokens are def
 
 **Colour:** `--sui-blue-primary`, `--sui-success-strong`, `--sui-error-strong`, `--sui-warning-strong`, `--sui-text-primary`, `--sui-text-muted`, `--sui-bg-primary`, `--sui-bg-card`, `--sui-bg-elevated`, `--sui-border`
 
-**Spacing:** `--sui-space-1` through `--sui-space-6` (4px, 8px, 12px, 16px, 24px, 32px)
+**Spacing:** `--sui-space-1` through `--sui-space-6` (4px, 8px, 16px, 24px, 32px, 48px)
 
-**Typography:** `--sui-font`, `--sui-text-body`, `--sui-text-small`, `--sui-text-meta`, `--sui-text-h1` through `--sui-text-h4`, `--sui-weight-normal`, `--sui-weight-semibold`, `--sui-weight-bold`
+**Typography:** `--sui-font-primary`, `--sui-font-mono`, `--sui-text-body`, `--sui-text-small`, `--sui-text-meta`, `--sui-text-h1` through `--sui-text-h3`, `--sui-weight-regular`, `--sui-weight-semibold`, `--sui-weight-bold`
 
 **Other:** `--sui-radius-sm`, `--sui-radius-md`, `--sui-radius-lg`, `--sui-shadow-sm`, `--sui-shadow-md`, `--sui-shadow-lg`, `--sui-z-*` layers
 

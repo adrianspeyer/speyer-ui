@@ -16,12 +16,50 @@
 - Repo: https://github.com/adrianspeyer/speyer-ui
 - AI Rules (comprehensive reference for LLMs): https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
 
+## How to Find Things
+
+| Need | File | How to find |
+|---|---|---|
+| Token values | `sui-tokens.css` | Search `/* Spacing */`, `/* Typography */`, etc. |
+| Component classes | `sui-components.css` | Search `.sui-<component>` |
+| JS API (canonical) | `docs/javascript-api.md` | Complete method table |
+| JS API (source) | `sui.js` | Search `return {` in the IIFE |
+| Recipe code | `index.html` | Search `id="recipe-"` |
+| Recipe catalogue | `docs/recipes.md` | Linked list with descriptions |
+| Token catalogue | `docs/design-tokens.md` | Organised by category with both theme values |
+
+**For recipes:** Every recipe in `index.html` has a "View code" accordion with copy/paste HTML.
+
+**Token truth:** `sui-tokens.css` and `docs/design-tokens.md` are canonical. README is a summary only.
+
+**Critical rule:** Never invent `sui-*` classes. If it's not in `sui-components.css`, it doesn't exist.
+
 ## For AI Assistants
 
 If you are an AI assistant building with SUI, fetch the comprehensive reference file above before generating code. It contains:
 - Complete class list with every component and modifier
 - ARIA requirements table
-- Recipe table (29 pre-built SaaS patterns including 5 integration recipes for third-party widgets)
-- Common name alias table (Sidebar â†’ sui-sidenav, Modal â†’ sui-dialog, etc.)
+- Recipe table (29+ pre-built SaaS patterns including 5 integration recipes for third-party widgets)
+- Common name alias table (Sidebar → sui-sidenav, Modal → sui-dialog, etc.)
 - Design token reference
 - Namespace rules (never invent sui-* classes)
+
+## Classes and Methods That Do NOT Exist
+
+Do not invent or reference these — they are common AI hallucinations:
+
+| Hallucinated name | Reality / correct approach |
+|---|---|
+| `sui-card-content` | Use `sui-card-body` |
+| `sui-icon` / `sui-icon-*` | Not shipped. Icons are BYO. Use your own class (e.g. `app-icon`). |
+| `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
+| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
+| `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |
+| `SUI.modal.confirm()` / `SUI.modal.prompt()` | Not shipped. Use Confirmation Dialog recipe. |
+| `SUI.toast.close()` | Not shipped. Toasts use `SUI.toast.dismiss(el)` or `SUI.toast.clearAll()`. |
+| `data-sui-toast-close` | Not shipped. Toast close uses `.sui-toast-close` (internal) + `SUI.toast.dismiss()`. |
+| `data-sui-modal-dismiss` | Not shipped. Use `[data-sui-modal-close]` — close ≠ dismiss. |
+| `SUI.animate()` | Not shipped. SUI uses CSS transitions; use WAAPI in app code. |
+| `--sui-font` | Use `--sui-font-primary` or `--sui-font-mono`. |
+| `--sui-weight-normal` | Use `--sui-weight-regular`. |
+| `--sui-text-h4` | Does not exist. Heading tokens stop at `--sui-text-h3`. |
