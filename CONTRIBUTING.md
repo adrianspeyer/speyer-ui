@@ -2,6 +2,16 @@
 
 Thank you for your interest in contributing to SUI! This project is built on the belief that good design should be accessible to everyone — and that includes making the system itself easy to contribute to.
 
+## Current Status
+
+SUI is currently in a **stability plateau** following v2.7.1. The core component set and API surface are complete. We are accepting:
+
+- **Bug fixes** — regressions, accessibility issues, browser compatibility
+- **Documentation improvements** — corrections, clarifications, better examples
+- **Recipe contributions** — new SaaS patterns using existing SUI components
+
+We are **not** accepting new core components or API additions unless they address a clearly demonstrated, broad-base need. If you think something is missing, open an issue first to discuss.
+
 ## How to Contribute
 
 ### Reporting Issues
@@ -54,6 +64,7 @@ All contributions must align with the five SUI design principles:
 
 Before submitting:
 
+- [ ] `npm run build` passes (preflight + minification) with 0 failures
 - [ ] Light mode contrast meets WCAG AA
 - [ ] Dark mode contrast meets WCAG AA
 - [ ] Tested with color blindness simulation

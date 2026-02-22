@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "2.7.0",
+    "version": "2.7.1",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -41,21 +41,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@0.475.0"></script>
   <!-- Flatpickr — loaded for integration recipe demo only (not part of SUI) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13" defer></script>
   <!-- Tom Select — loaded for integration recipe demo only (not part of SUI) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.5.1/dist/css/tom-select.css" />
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.5.1/dist/js/tom-select.complete.min.js" defer></script>
   <!-- FilePond — loaded for integration recipe demo only (not part of SUI) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/filepond@4.32.11/dist/filepond.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/filepond@4.32.11/dist/filepond.min.js" defer></script>
   <!-- Quill — loaded for integration recipe demo only (not part of SUI) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" />
-  <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
   <!-- Chart.js — loaded for integration recipe demo only (not part of SUI) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7" defer></script>
   <style>
     /* Tab section headings demoted to H2 for SEO (single H1 per page) but keep H1 visual size */
     .sui-section-head h2 { font-size: 2em; margin-block: 0.67em; }
@@ -98,7 +98,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><i data-lucide="layers"></i></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v2.7.0</span>
+          <span class="sui-version-pill">v2.7.1</span>
         </div>
       </div>
 
@@ -250,7 +250,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.7.0</span>
+            <span class="sui-badge sui-badge-new"><i data-lucide="sparkles"></i>v2.7.1</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -1987,14 +1987,14 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
                   <a href="#" class="sui-sidenav-link"><i data-lucide="settings" aria-hidden="true"></i> Settings</a>
                 </div>
               </nav>
-              <main class="app-shell-main">
+              <div class="app-shell-main">
                 <h2 style="margin-top:0;">Dashboard</h2>
                 <div class="sui-grid sui-grid-3 sui-gap-3 sui-mt-3">
                   <div class="sui-card sui-card-compact"><div class="sui-kpi-label">Revenue</div><div class="sui-kpi-value">$84K</div></div>
                   <div class="sui-card sui-card-compact"><div class="sui-kpi-label">Users</div><div class="sui-kpi-value">2,847</div></div>
                   <div class="sui-card sui-card-compact"><div class="sui-kpi-label">Tickets</div><div class="sui-kpi-value">12</div></div>
                 </div>
-              </main>
+              </div>
             </div>
           </div>
         </div>
@@ -2321,9 +2321,9 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
         <div class="sui-card sui-mt-4">
           <div style="background:var(--sui-bg-elevated);border-radius:var(--sui-radius-md);max-width:480px;margin:0 auto;overflow:hidden;border:1px solid var(--sui-border);">
             <div style="padding:var(--sui-space-3);border-bottom:1px solid var(--sui-border);">
-              <input class="sui-input" type="text" placeholder="Type a command..." aria-label="Command palette" role="combobox" aria-expanded="true" autocomplete="off">
+              <input class="sui-input" type="text" placeholder="Type a command..." aria-label="Command palette" role="combobox" aria-expanded="true" aria-controls="cmdk-results" autocomplete="off">
             </div>
-            <ul class="recipe-cmdk-results" role="listbox">
+            <ul class="recipe-cmdk-results" role="listbox" id="cmdk-results" aria-label="Command results">
               <li role="option"><i data-lucide="plus" aria-hidden="true" style="width:16px;height:16px;"></i> New Contact <kbd class="sui-kbd">N</kbd></li>
               <li role="option" class="is-active"><i data-lucide="search" aria-hidden="true" style="width:16px;height:16px;"></i> Search Deals <kbd class="sui-kbd">S</kbd></li>
               <li role="option"><i data-lucide="settings" aria-hidden="true" style="width:16px;height:16px;"></i> Settings <kbd class="sui-kbd">,</kbd></li>
@@ -2548,6 +2548,7 @@ document.addEventListener('keydown', e =&gt; {
         <div class="sui-card sui-mt-4">
           <p class="sui-text-muted" style="font-size:var(--sui-text-small);">Live demo — drop files or click to browse. Files are not actually uploaded (demo only).</p>
           <div class="sui-mt-3">
+            <label for="recipeFilePond" class="sui-sr-only">Upload files</label>
             <input type="file" class="filepond" id="recipeFilePond" multiple />
           </div>
         </div>
@@ -3056,7 +3057,7 @@ document.addEventListener('keydown', e =&gt; {
           <div class="sui-mt-3">
             <div class="sui-table-wrap">
               <table class="sui-table sui-table-hover">
-                <thead><tr><th></th><th>Name</th><th>Status</th></tr></thead>
+                <thead><tr><th><span class="sui-sr-only">Select</span></th><th>Name</th><th>Status</th></tr></thead>
                 <tbody>
                   <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Acme Corp"></td><td>Acme Corp</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
                   <tr class="is-selected"><td><input type="checkbox" checked aria-label="Select Globex"></td><td>Globex</td><td><span class="sui-badge sui-badge-success"><i data-lucide="check-circle" aria-hidden="true"></i> Active</span></td></tr>
@@ -3401,9 +3402,9 @@ function showDetail(id) {
                   <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" aria-label="Close panel"><i data-lucide="x" aria-hidden="true"></i></button>
                 </div>
                 <div class="recipe-panel-body">
-                  <div class="sui-input-group sui-mb-3"><label class="sui-input-label">Name</label><input class="sui-input" value="Jane Cooper"></div>
-                  <div class="sui-input-group sui-mb-3"><label class="sui-input-label">Email</label><input class="sui-input" value="jane@acme.com"></div>
-                  <div class="sui-input-group"><label class="sui-input-label">Role</label><input class="sui-input" value="VP Sales"></div>
+                  <div class="sui-input-group sui-mb-3"><label class="sui-input-label" for="rd-name">Name</label><input class="sui-input" id="rd-name" value="Jane Cooper"></div>
+                  <div class="sui-input-group sui-mb-3"><label class="sui-input-label" for="rd-email">Email</label><input class="sui-input" id="rd-email" value="jane@acme.com"></div>
+                  <div class="sui-input-group"><label class="sui-input-label" for="rd-role">Role</label><input class="sui-input" id="rd-role" value="VP Sales"></div>
                 </div>
                 <div class="recipe-panel-footer">
                   <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button">Cancel</button>
@@ -3607,8 +3608,8 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
               <div class="recipe-popover-wrap">
                 <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><i data-lucide="filter" aria-hidden="true"></i> Filter</button>
                 <div class="recipe-popover" role="group" aria-label="Filter options">
-                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Status</label><select class="sui-input"><option>All</option><option>Active</option><option>Pending</option></select></div>
-                  <div class="sui-input-group"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Owner</label><select class="sui-input"><option>Anyone</option><option>Me</option></select></div>
+                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" for="pop-status" style="font-size:var(--sui-text-meta);">Status</label><select class="sui-input" id="pop-status"><option>All</option><option>Active</option><option>Pending</option></select></div>
+                  <div class="sui-input-group"><label class="sui-input-label" for="pop-owner" style="font-size:var(--sui-text-meta);">Owner</label><select class="sui-input" id="pop-owner"><option>Anyone</option><option>Me</option></select></div>
                   <button class="sui-btn sui-btn-primary sui-btn-sm sui-mt-3" type="button" style="width:100%;" onclick="this.closest('.recipe-popover').classList.remove('is-open')">Apply</button>
                 </div>
               </div>
@@ -3618,8 +3619,8 @@ document.getElementById('toggleBtn').addEventListener('click', () =&gt; {
               <div class="recipe-popover-wrap">
                 <button class="sui-btn sui-btn-ghost" type="button" onclick="this.nextElementSibling.classList.toggle('is-open')"><i data-lucide="plus" aria-hidden="true"></i> Quick add</button>
                 <div class="recipe-popover" role="dialog" aria-label="Quick add contact">
-                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Name</label><input class="sui-input" placeholder="Contact name"></div>
-                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" style="font-size:var(--sui-text-meta);">Email</label><input class="sui-input" type="email" autocomplete="email" placeholder="email@example.com"></div>
+                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" for="pop-name" style="font-size:var(--sui-text-meta);">Name</label><input class="sui-input" id="pop-name" placeholder="Contact name"></div>
+                  <div class="sui-input-group sui-mb-2"><label class="sui-input-label" for="pop-email" style="font-size:var(--sui-text-meta);">Email</label><input class="sui-input" id="pop-email" type="email" autocomplete="email" placeholder="email@example.com"></div>
                   <div class="sui-flex sui-gap-2 sui-mt-3">
                     <button class="sui-btn sui-btn-primary sui-btn-sm" type="button" onclick="this.closest('.recipe-popover').classList.remove('is-open')">Save</button>
                     <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button" onclick="this.closest('.recipe-popover').classList.remove('is-open')">Cancel</button>
@@ -4472,7 +4473,7 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><i data-lucide="heart"></i>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada with ❤️</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.7.0</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v2.7.1</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->

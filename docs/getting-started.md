@@ -36,8 +36,8 @@ That's it. Three tags for SUI, one optional tag for icons.
 `@latest` always serves the newest release. To pin a specific version:
 
 ```html
-<!-- Pin to v2.6.0 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.6.0/dist/sui-tokens.min.css">
+<!-- Pin to v2.7.1 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.1/dist/sui-tokens.min.css">
 ```
 
 ---

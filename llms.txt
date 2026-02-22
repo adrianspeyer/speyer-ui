@@ -51,6 +51,7 @@ Do not invent or reference these — they are common AI hallucinations:
 | Hallucinated name | Reality / correct approach |
 |---|---|
 | `sui-card-content` | Use `sui-card-body` |
+| `sui-card` with nested padding divs | Use `sui-card-flush` when content handles its own padding (tables, tabs). Use `sui-card-compact` for KPI grids. |
 | `sui-icon` / `sui-icon-*` | Not shipped. Icons are BYO. Use your own class (e.g. `app-icon`). |
 | `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
 | `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |

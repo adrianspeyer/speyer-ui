@@ -513,6 +513,52 @@ function checkVersions() {
     if (found === expected) pass();
     else fail(`${file}: ${found} (expected ${expected})`);
   }
+
+  // Extended checks: README, docs, index.html (catch drift early)
+  const readme = readFile('README.md');
+  if (readme) {
+    const rmMatch = readme.match(/^\*\*v([0-9.]+)\*\*/m);
+    const rmVer = rmMatch ? rmMatch[1] : 'NOT FOUND';
+    if (rmVer === expected) pass();
+    else fail(`README.md hero: v${rmVer} (expected v${expected})`);
+  }
+
+  const jsApi = readFile('docs/javascript-api.md');
+  if (jsApi) {
+    const apiMatch = jsApi.match(/Current version:\*\*\s*([0-9.]+)/);
+    const apiVer = apiMatch ? apiMatch[1] : 'NOT FOUND';
+    if (apiVer === expected) pass();
+    else fail(`docs/javascript-api.md: ${apiVer} (expected ${expected})`);
+  }
+
+  const gs = readFile('docs/getting-started.md');
+  if (gs) {
+    const gsMatch = gs.match(/speyer-ui@([0-9.]+)\/dist\//);
+    const gsVer = gsMatch ? gsMatch[1] : 'NOT FOUND';
+    if (gsVer === expected) pass();
+    else fail(`docs/getting-started.md pinned example: @${gsVer} (expected @${expected})`);
+  }
+
+  const html = readFile('index.html');
+  if (html) {
+    // JSON-LD version
+    const ldMatch = html.match(/"version":\s*"([0-9.]+)"/);
+    const ldVer = ldMatch ? ldMatch[1] : 'NOT FOUND';
+    if (ldVer === expected) pass();
+    else fail(`index.html JSON-LD: ${ldVer} (expected ${expected})`);
+
+    // Version pill
+    const pillMatch = html.match(/sui-version-pill">v([0-9.]+)</);
+    const pillVer = pillMatch ? pillMatch[1] : 'NOT FOUND';
+    if (pillVer === expected) pass();
+    else fail(`index.html pill: v${pillVer} (expected v${expected})`);
+
+    // Footer shield
+    const shieldMatch = html.match(/sui-shield-value">SUI v([0-9.]+)</);
+    const shieldVer = shieldMatch ? shieldMatch[1] : 'NOT FOUND';
+    if (shieldVer === expected) pass();
+    else fail(`index.html shield: v${shieldVer} (expected v${expected})`);
+  }
 }
 
 

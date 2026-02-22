@@ -4,6 +4,35 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [2.7.1] — 2026-02-22
+
+### Theme: Accessibility Hardening + Version Hygiene
+
+Zero-violation axe scan, CDN pinning, extended preflight checks, and documentation drift fixes. No changes to core CSS or JavaScript — demo and tooling only.
+
+### Fixed
+
+- **8 axe-core a11y violations in demo** — Command Palette missing `aria-controls` and `aria-label` on listbox (critical). Record Detail inputs missing `for`/`id` label association (critical). Popover selects missing label association (critical). FilePond input missing accessible label. App Shell recipe had duplicate `<main>` landmark. Empty `<th>` in table recipe. Popover form inputs missing label association.
+- **README version drift** — 6 stale `v2.6.0` references (hero, pinned CDN snippets, distribution note) updated to `v2.7.1`. Caught by ChatGPT cross-AI review.
+- **Third-party CDN breakage risk** — Pinned all external demo dependencies to tested versions: Lucide 0.475.0, Flatpickr 4.6.13, FilePond 4.32.11, Quill 2.0.3, Chart.js 4.4.7. Tom Select was already pinned at 2.5.1.
+
+### Added
+
+- **`scripts/run-axe.mjs`** — Headless axe-core a11y scanner via jsdom. Runs WCAG 2.1 AA + best-practice rules against the full demo page. `npm run axe` (requires `npm install --save-dev jsdom axe-core`).
+- **Extended preflight version checks** — `checkVersions()` now validates `README.md` hero, `docs/javascript-api.md`, and `index.html` (JSON-LD, pill, shield) in addition to the 3 source files. Catches version drift before release. 71 checks total (up from 66).
+
+### Improved
+
+- **AI context files** — Added `sui-card-flush` and `sui-card-compact` usage guidance. Added token extension guidance (use `--app-*` prefix, reference SUI tokens as fallbacks). Synced `.cursor/rules` with `DO NOT EDIT` header.
+- **CONTRIBUTING.md** — Added stability plateau note and `npm run build` to testing checklist.
+- **`llms.txt`** — Added `sui-card-flush`/`sui-card-compact` to hallucination prevention table.
+
+### Bundle
+
+~94KB total (no change — no source file modifications).
+
+---
+
 ## [2.7.0] — 2026-02-21
 
 ### Theme: Stability Plateau + AI Survivability

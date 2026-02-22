@@ -2,7 +2,7 @@
 
 A lightweight, zero-runtime-dependency design system that treats accessibility as architecture, not afterthought. Colour-blind friendly, mobile-first, AI-ready. Made in Canada 🇨🇦
 
-**v2.6.0** · ~94KB minified · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/)
+**v2.7.1** · ~94KB minified · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/)
 
 ---
 
@@ -47,7 +47,7 @@ SUI is built for SaaS teams who need a design system that works without a build 
 <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
 ```
 
-Pin a version for production: replace `@latest` with `@2.6.0`.
+Pin a version for production: replace `@latest` with `@2.7.1`.
 
 ### Starter Template
 
@@ -58,15 +58,15 @@ Pin a version for production: replace `@latest` with `@2.6.0`.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.6.0/dist/sui-tokens.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.6.0/dist/sui-components.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.1/dist/sui-tokens.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.1/dist/sui-components.min.css">
 </head>
 <body>
   <main style="max-width: 720px; margin: 0 auto; padding: var(--sui-space-4);">
     <h1>Hello, SUI</h1>
     <button class="sui-btn sui-btn-primary">Get Started</button>
   </main>
-  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.6.0/dist/sui.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@2.7.1/dist/sui.min.js" defer></script>
 </body>
 </html>
 ```
@@ -291,7 +291,7 @@ npm run preflight
 
 ### CDN Usage
 
-SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@2.6.0` for production.
+SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@2.7.1` for production.
 
 ### Versioning
 

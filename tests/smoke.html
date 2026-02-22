@@ -117,8 +117,8 @@
         return typeof window.SUI === 'object' && SUI !== null;
       });
 
-      assert('sui-version', 'SUI version matches 2.7.0', () => {
-        // Check console would have printed 2.7.0 — verify via init existence
+      assert('sui-version', 'SUI version matches 2.7.1', () => {
+        // Check console would have printed 2.7.1 — verify via init existence
         return typeof SUI.init === 'function';
       });
 
@@ -229,7 +229,7 @@
         const versionEl = $('#smoke-version');
         const started = new Date().toISOString();
 
-        versionEl.textContent = '2.7.0';
+        versionEl.textContent = '2.7.1';
         statusEl.textContent = 'Running…';
         resultsEl.innerHTML = '';
 
@@ -269,7 +269,7 @@
 
         // JS results object (contract H1-2)
         window.__SUI_SMOKE_RESULTS__ = {
-          version: '2.7.0',
+          version: '2.7.1',
           startedAt: started,
           finishedAt: finished,
           pass: allPass,

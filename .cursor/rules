@@ -1,3 +1,7 @@
+# DO NOT EDIT — this file is copied from .claude/instructions.md during release.
+# Any changes must be made in .claude/instructions.md and synced here.
+# ──────────────────────────────────────────────────────────────────────
+
 # Speyer UI System (SUI) — AI Rules
 
 You are working with the **Speyer UI System (SUI)**, a lightweight, accessible CSS design system for SaaS applications.
@@ -64,6 +68,14 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 
 **Never silently invent a fake `sui-*` class.** Warn the human: *"SUI doesn't have sui-calendar. I'll build this with custom CSS using SUI tokens. If this comes up often, consider proposing it as a component."*
 
+### Extending Tokens for App-Specific Needs
+
+When building on SUI and you need custom tokens (brand colours, app-specific spacing, etc.):
+- **Use your own prefix** — `--app-*`, `--brand-*`, `--my-*`. Never extend `--sui-*`.
+- **Reference SUI tokens as fallbacks** — `--app-sidebar-bg: var(--sui-bg-elevated)` keeps visual consistency.
+- **Define in `:root`** — same scope as SUI tokens, both themes get the value.
+- **For theme-aware custom tokens**, use the `[data-theme="dark"]` selector to provide dark variants.
+
 ---
 
 ## Complete Component List
@@ -100,8 +112,9 @@ The `sui-` prefix is a namespace contract. If you create `sui-calendar` today an
 - `sui-card-lg` — Large padding
 - `sui-card-muted` — Muted background
 - `sui-card-shadow` — Shadow elevation (opt-in)
-- `sui-card-flush` — No padding
+- `sui-card-flush` — No padding (use when card content handles its own padding, e.g. tables, tab panels, or full-bleed images inside cards)
 - `sui-card-interactive` — Clickable (hover shadow + focus ring)
+- `sui-card-compact` — Reduced padding (use for KPI/stat cards in dense grids)
 
 ### Badges
 - `sui-badge` + variants: `-success`, `-warning`, `-error`, `-info`, `-neutral`, `-new`, `-beta`, `-pro`
