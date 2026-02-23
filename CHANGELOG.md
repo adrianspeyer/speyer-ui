@@ -4,6 +4,67 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.1.0] — 2026-02-23
+
+### Theme: SUI Icons Expansion — 45 New Symbols
+
+Comprehensive icon gap-fill across all three rounds. 45 additions bring the sprite from 483 to 528 symbols, completing core SaaS admin coverage.
+
+### Added
+
+**Round 1 — Fix + Seasonal / Social**
+- `soc-reddit`, `brand-reddit` (alias) — Reddit / Snoo geometry
+- `soc-smile`, `soc-meh`, `soc-frown` — survey sentiment faces (circle + dot eyes + arc)
+- `misc-flower` — 8-petal radial design for decorative use
+- `misc-christmas-tree` — 3-tier silhouette + trunk
+- `misc-maple-leaf` — Canadian maple leaf (filled compound path, rescaled to 24×24 via transform)
+
+**Round 2 — Actions, People, Devices, Files, Media, Format**
+- `act-filter`, `act-sort-asc`, `act-sort-desc` — data table controls
+- `act-login`, `act-logout` — authentication actions
+- `act-brush`, `act-crop`, `act-paste`, `act-eraser` — creative/editor tools
+- `people-user`, `people-user-circle` — user profile icons
+- `dev-tablet`, `dev-desktop`, `dev-laptop`, `dev-monitor`, `dev-bluetooth` — device family
+- `file-pdf` (alias of `file-text`), `file-book`
+- `media-record`, `media-fast-forward`, `media-shuffle`, `media-volume-low`
+- `format-strikethrough` — S-letterform arcs + midline
+
+**Round 3 — SaaS Admin Staples**
+- `ui-drag-handle` — 6-dot grip for sortable lists
+- `act-paperclip` — file attachments
+- `act-image` — image placeholder / rich text
+- `format-hr` — horizontal rule with end caps
+- `act-headset` — customer support / audio
+- `misc-ticket` — helpdesk / support queue (dashed perforation line)
+- `misc-briefcase` — projects / workspaces
+- `misc-building` — organisation / company profile
+- `misc-lifebuoy` — help / docs links
+- `ui-theme-auto` — half-filled circle for system/auto theme toggle
+- `ui-layout-gallery` — gallery view toggle (2×2 card grid)
+- `misc-scale` — balanced beam scale / justice
+
+**Cross-category Aliases**
+- `act-thumbs-up` (alias of `soc-thumbs-up`) — feedback/voting actions
+- `act-thumbs-down` (alias of `soc-thumbs-down`) — feedback/voting actions
+- `file-pdf` (alias of `file-text`) — PDF file type indicator
+
+### Fixed
+
+- `ui-list-ordered` — redrawn using Lucide numeral approach (legible at 16px, no bezier mud)
+
+### Changed
+
+- `validate-icons.mjs`: `EXPECTED_TOTAL` updated to 528; `VB_EXCEPTIONS` removed (both icons now conform to 24×24 viewBox)
+- Alias count: 27→32 (`brand-reddit`, `dev-monitor`, `file-pdf`, `act-thumbs-up`, `act-thumbs-down`)
+- `misc-maple-leaf`: viewBox rescaled from 32×32 to 24×24 via `<g transform>` wrapper
+- `docs/icons.md`: Fixed phantom icon IDs (`nav-x`→`act-x`, `ui-settings`→`nav-settings`, removed non-existent `soc-like` alias example)
+
+### Bundle
+
+~95KB core + ~270KB icon sprite (~28KB gzipped). 528 icons · 29 categories · 25+ components · 29 recipes.
+
+---
+
 ## [3.0.0] — 2026-02-22
 
 ### Theme: SUI Icons — Batteries Included

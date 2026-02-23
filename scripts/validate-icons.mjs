@@ -25,7 +25,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
 const SVG_PATH = resolve('./sui-icons.svg');
-const EXPECTED_TOTAL = 483;
+const EXPECTED_TOTAL = 528;
 const SW_EXCEPTIONS = new Set(['sui-icon-status-help-circle', 'sui-icon-ai-lightbulb']);
 
 let raw;

@@ -1,6 +1,6 @@
 # SUI Icons
 
-483 hand-drawn SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
+528 hand-drawn SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
 
 **[Browse all icons →](https://adrianspeyer.github.io/speyer-ui/icons.html)**
 
@@ -53,7 +53,7 @@ The icon IS the interface. Label the button, hide the SVG.
 ```html
 <button class="sui-icon-btn" aria-label="Close panel">
   <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <use href="#sui-icon-nav-x"/>
+    <use href="#sui-icon-act-x"/>
   </svg>
 </button>
 ```
@@ -63,7 +63,7 @@ The icon IS the interface. Label the button, hide the SVG.
 ```html
 <a href="/settings" class="sui-icon-btn" aria-label="Settings">
   <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <use href="#sui-icon-ui-settings"/>
+    <use href="#sui-icon-nav-settings"/>
   </svg>
 </a>
 ```
@@ -176,35 +176,36 @@ The `status-loader` icon is designed for this purpose, but `.sui-icon-spin` work
 
 ## Categories
 
-483 icons across 28 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
+528 icons across 29 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
 
 | Prefix | Category | Count |
 |--------|----------|-------|
 | `a11y` | Accessibility | 5 |
-| `act` | Actions | 55 |
+| `act` | Actions | 69 |
 | `ai` | Artificial Intelligence | 14 |
-| `brand` | Brands | 14 |
+| `brand` | Brands | 15 |
 | `comm` | Communication | 15 |
 | `data` | Data & Charts | 29 |
-| `dev` | Development | 18 |
+| `dev` | Development | 23 |
 | `edu` | Education | 6 |
-| `file` | Files & Documents | 22 |
+| `file` | Files & Documents | 24 |
+| `format` | Text Formatting | 2 |
 | `health` | Health & Wellness | 6 |
 | `input` | Form Inputs | 12 |
 | `loc` | Location | 11 |
-| `media` | Media | 15 |
-| `misc` | Miscellaneous | 21 |
+| `media` | Media | 19 |
+| `misc` | Miscellaneous | 29 |
 | `nav` | Navigation | 36 |
 | `ops` | Operations | 9 |
 | `pay` | Payments & Commerce | 24 |
-| `people` | People & Users | 14 |
+| `people` | People & Users | 16 |
 | `sci` | Science | 1 |
 | `sec` | Security | 16 |
-| `soc` | Social | 17 |
+| `soc` | Social | 21 |
 | `status` | Status & Feedback | 28 |
 | `time` | Time & Date | 13 |
 | `travel` | Travel | 6 |
-| `ui` | UI Elements | 45 |
+| `ui` | UI Elements | 48 |
 | `view` | View & Display | 12 |
 | `weather` | Weather | 8 |
 | `work` | Workspace | 11 |
@@ -224,12 +225,12 @@ sui-icon-{category}-{descriptor}
 
 ### Aliases
 
-27 icons have aliases — alternate names pointing to the same geometry. Aliases are marked with ↗ in the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html). Either name works in your markup:
+32 icons have aliases — alternate names pointing to the same geometry. Aliases are marked with ↗ in the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html). Either name works in your markup:
 
 ```html
 <!-- These render the same icon -->
-<use href="#sui-icon-soc-heart"/>
-<use href="#sui-icon-soc-like"/>
+<use href="#sui-icon-act-close"/>
+<use href="#sui-icon-act-x"/>
 ```
 
 ---
@@ -263,7 +264,7 @@ The `sui-icons.css` size classes (`.sui-icon-sm`, `.sui-icon-xl`, etc.) and colo
 
 | File | Description |
 |------|-------------|
-| `sui-icons.svg` | Source sprite — 483 `<symbol>` elements |
+| `sui-icons.svg` | Source sprite — 528 `<symbol>` elements |
 | `sui-icons.css` | Companion CSS — sizing, colours, spin, touch targets, forced colours |
 | `sui-icons.min.svg` | Minified sprite (in `dist/`) |
 | `sui-icons.min.css` | Minified CSS (in `dist/`) |
