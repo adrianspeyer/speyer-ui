@@ -25,7 +25,7 @@ SUI is the **shell** — containers, chrome, interactive primitives, typography,
 - Script tags use `defer`
 - Borders are the default card separation. Shadows are opt-in (`sui-card-shadow`)
 
-**SUI ships 530 hand-drawn icons** with built-in accessibility (forced-colours, reduced-motion, 44px touch targets). Icons are optional — bring-your-own is fully supported.
+**SUI ships 536 purpose-built icons** with built-in accessibility (forced-colours, reduced-motion, 44px touch targets). Icons are optional — bring-your-own is fully supported.
 
 **SUI does NOT ship:** charts, data visualisation, drag-and-drop, or application logic. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
 
@@ -94,6 +94,7 @@ When building on SUI and you need custom tokens (brand colours, app-specific spa
 - `sui-screen` — Full-viewport app shell (100dvh)
 - `sui-screen-header`, `sui-screen-body`, `sui-screen-footer` — Screen regions
 - `sui-screen-solo` — Single-screen mode
+- Multi-screen toggling: wrap screens in `<div data-sui-screens>` and add `.is-active` to the default
 - `sui-container` — Opt-in container queries
 
 ### Buttons
@@ -184,15 +185,15 @@ When building on SUI and you need custom tokens (brand colours, app-specific spa
 | Module | Public Methods |
 |--------|---------------|
 | SUI.theme | set(mode), toggle(), current(), resolved() |
-| SUI.tabs | activate(el) |
-| SUI.accordion | toggle(trigger), expandAll(container), collapseAll(container) |
-| SUI.dropdown | open(el), close(el), toggle(el) |
+| SUI.tabs | activate(el), destroy(navEl) |
+| SUI.accordion | toggle(trigger), expandAll(container), collapseAll(container), destroy(container) |
+| SUI.dropdown | open(el), close(el), toggle(el), destroy(el) |
 | SUI.modal | open(sel), close(sel) |
 | SUI.toast | show(opts), success(t,m), error(t,m), warning(t,m), info(t,m), dismiss(el), clearAll() |
-| SUI.tooltip | show(el), hide(el) |
+| SUI.tooltip | show(el), hide(el), destroy(el) |
 | SUI.copy | text(str), fromElement(sel) |
 | SUI.sheet | open(sel), close(sel), toggle(sel) |
-| SUI.segmented | select(el) |
+| SUI.segmented | select(el), destroy(container) |
 | SUI.sidenav | open(sel), close(sel), toggle(sel), expandAll(nav), collapseAll(nav), isOpen(sel) |
 | SUI.panel | open(sel), close(sel), toggle(sel), isOpen(sel) |
 
@@ -365,7 +366,7 @@ Check these before building custom patterns:
 
 ## Icons
 
-SUI ships **530 hand-drawn SVG icons** (498 unique + 32 aliases, 29 categories). Use the `<svg><use href>` pattern:
+SUI ships **536 purpose-built SVG icons** (504 unique + 32 aliases, 29 categories). Use the `<svg><use href>` pattern:
 ```html
 <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-search"/></svg>
 ```

@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 3.1.1
+ * Version: 3.2.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -27,6 +27,21 @@ const SUI = (() => {
 
   function uid() {
     return 'sui-' + Math.random().toString(36).slice(2, 9);
+  }
+
+  // Handler tracking for destroy() support
+  function suiOn(root, target, event, fn) {
+    target.addEventListener(event, fn);
+    if (!root._suiHandlers) root._suiHandlers = [];
+    root._suiHandlers.push({ target, event, fn });
+  }
+  function suiOff(root) {
+    if (root._suiHandlers) {
+      root._suiHandlers.forEach(h => h.target.removeEventListener(h.event, h.fn));
+      delete root._suiHandlers;
+    }
+    delete root._suiInit;
+    delete root._suiSetView;
   }
 
   /* ====================================================================
@@ -75,6 +90,8 @@ const SUI = (() => {
 
   const tabs = {
     init(navEl) {
+      if (navEl._suiInit) return; // Idempotency guard — safe to call repeatedly
+      navEl._suiInit = true;
       const tabBtns = $$('.sui-tab', navEl);
       if (!tabBtns.length) return;
 
@@ -128,10 +145,10 @@ const SUI = (() => {
       // Store reference for programmatic access
       navEl._suiSetView = setView;
 
-      tabBtns.forEach(t => t.addEventListener('click', () => setView(t.getAttribute('data-tab'))));
+      tabBtns.forEach(t => suiOn(navEl, t, 'click', () => setView(t.getAttribute('data-tab'))));
 
       // Keyboard nav
-      navEl.addEventListener('keydown', e => {
+      suiOn(navEl, navEl, 'keydown', e => {
         const arr = tabBtns;
         const idx = arr.indexOf(document.activeElement);
         if (idx < 0) return;
@@ -151,6 +168,11 @@ const SUI = (() => {
       if (navEl && navEl._suiSetView) {
         navEl._suiSetView(tabEl.getAttribute('data-tab'));
       }
+    },
+
+    destroy(navEl) {
+      if (typeof navEl === 'string') navEl = $(navEl);
+      if (navEl) suiOff(navEl);
     }
   };
 
@@ -190,6 +212,8 @@ const SUI = (() => {
     },
 
     init(container) {
+      if (container._suiInit) return; // Idempotency guard
+      container._suiInit = true;
       $$('.sui-accordion-trigger', container).forEach(trigger => {
         const panel = trigger.nextElementSibling;
         if (!panel) return;
@@ -200,12 +224,17 @@ const SUI = (() => {
           trigger.setAttribute('aria-expanded', 'false');
         }
 
-        trigger.addEventListener('click', () => this.toggle(trigger));
+        suiOn(container, trigger, 'click', () => this.toggle(trigger));
 
-        trigger.addEventListener('keydown', e => {
+        suiOn(container, trigger, 'keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
         });
       });
+    },
+
+    destroy(container) {
+      if (typeof container === 'string') container = $(container);
+      if (container) suiOff(container);
     }
   };
 
@@ -217,6 +246,8 @@ const SUI = (() => {
     _active: null,
 
     init(el) {
+      if (el._suiInit) return; // Idempotency guard
+      el._suiInit = true;
       const trigger = el.querySelector('[data-sui-dropdown-trigger]') || el.querySelector('.sui-btn');
       const menu = el.querySelector('.sui-dropdown-menu');
       if (!trigger || !menu) return;
@@ -229,13 +260,13 @@ const SUI = (() => {
         if (!item.hasAttribute('role')) item.setAttribute('role', 'menuitem');
       });
 
-      trigger.addEventListener('click', e => {
+      suiOn(el, trigger, 'click', e => {
         e.stopPropagation();
         this.toggle(el);
       });
 
       // Arrow key navigation within menu
-      menu.addEventListener('keydown', e => {
+      suiOn(el, menu, 'keydown', e => {
         const items = $$('.sui-dropdown-item', menu);
         const idx = items.indexOf(document.activeElement);
         if (e.key === 'ArrowDown') { e.preventDefault(); items[(idx + 1) % items.length]?.focus(); }
@@ -254,6 +285,11 @@ const SUI = (() => {
       // Focus first item
       const first = el.querySelector('.sui-dropdown-item');
       if (first) setTimeout(() => first.focus(), 50);
+      // Register outside-click handler (one-time, removed on close)
+      if (!this._outsideClick) {
+        this._outsideClick = () => { if (this._active) this.close(this._active); };
+        setTimeout(() => document.addEventListener('click', this._outsideClick), 0);
+      }
     },
 
     close(el) {
@@ -263,18 +299,25 @@ const SUI = (() => {
       const trigger = el.querySelector('[data-sui-dropdown-trigger]') || el.querySelector('.sui-btn');
       if (trigger) trigger.setAttribute('aria-expanded', 'false');
       if (this._active === el) this._active = null;
+      // Remove outside-click handler when nothing is open
+      if (!this._active && this._outsideClick) {
+        document.removeEventListener('click', this._outsideClick);
+        this._outsideClick = null;
+      }
     },
 
     toggle(el) {
       if (typeof el === 'string') el = $(el);
       el.classList.contains('is-open') ? this.close(el) : this.open(el);
+    },
+
+    destroy(el) {
+      if (typeof el === 'string') el = $(el);
+      if (!el) return;
+      if (this._active === el) this.close(el);
+      suiOff(el);
     }
   };
-
-  // Close dropdown on outside click
-  document.addEventListener('click', () => {
-    if (dropdown._active) dropdown.close(dropdown._active);
-  });
 
   /* ====================================================================
      Modal
@@ -477,6 +520,8 @@ const SUI = (() => {
     },
 
     init(el) {
+      if (el._suiInit) return; // Idempotency guard
+      el._suiInit = true;
       const content = el.querySelector('.sui-tooltip-content');
       if (!content) return;
 
@@ -511,13 +556,20 @@ const SUI = (() => {
       };
 
       el._suiReposition = reposition;
-      el.addEventListener('mouseenter', reposition);
-      el.addEventListener('focusin', reposition);
+      suiOn(el, el, 'mouseenter', reposition);
+      suiOn(el, el, 'focusin', reposition);
 
       // Escape key dismisses tooltip when focused
-      el.addEventListener('keydown', e => {
+      suiOn(el, el, 'keydown', e => {
         if (e.key === 'Escape') el.blur();
       });
+    },
+
+    destroy(el) {
+      if (typeof el === 'string') el = $(el);
+      if (!el) return;
+      delete el._suiReposition;
+      suiOff(el);
     }
   };
 
@@ -549,10 +601,17 @@ const SUI = (() => {
     },
 
     init(el) {
+      if (el._suiInit) return; // Idempotency guard
+      el._suiInit = true;
       const initials = el.textContent.trim();
       if (initials && !el.style.background) {
         el.style.background = this.colorFor(initials);
       }
+    },
+
+    destroy(el) {
+      if (typeof el === 'string') el = $(el);
+      if (el) { delete el._suiInit; }
     }
   };
 
@@ -659,6 +718,8 @@ const SUI = (() => {
 
   const segmented = {
     init(container) {
+      if (container._suiInit) return; // Idempotency guard
+      container._suiInit = true;
       const segments = $$('.sui-segment', container);
       if (!segments.length) return;
 
@@ -684,10 +745,10 @@ const SUI = (() => {
       // Store reference for programmatic access (A10)
       container._suiSetValue = select;
 
-      segments.forEach(seg => seg.addEventListener('click', () => select(seg)));
+      segments.forEach(seg => suiOn(container, seg, 'click', () => select(seg)));
 
       // Arrow key navigation
-      container.addEventListener('keydown', e => {
+      suiOn(container, container, 'keydown', e => {
         const idx = segments.indexOf(document.activeElement);
         if (idx < 0) return;
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -707,6 +768,13 @@ const SUI = (() => {
       if (!el) return;
       const container = el.closest('.sui-segmented');
       if (container && container._suiSetValue) container._suiSetValue(el);
+    },
+
+    destroy(container) {
+      if (typeof container === 'string') container = $(container);
+      if (!container) return;
+      delete container._suiSetValue;
+      suiOff(container);
     }
   };
 
@@ -948,7 +1016,13 @@ const SUI = (() => {
     $$('.sui-modal-close, [data-sui-modal-close]').forEach(btn => {
       btn.addEventListener('click', () => {
         const dialog = btn.closest('dialog.sui-dialog');
-        if (dialog) { if (dialog.open) modal.close(dialog); return; }
+        if (dialog) {
+          if (!dialog.open) return;
+          // If opened natively (not via SUI.modal.open), just close natively
+          if (!modal._stack.includes(dialog)) { dialog.close(); return; }
+          modal.close(dialog);
+          return;
+        }
         const overlay = btn.closest('.sui-modal-overlay');
         if (overlay) modal.close(overlay);
       });
@@ -1161,7 +1235,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v3.1.1 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v3.2.0 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

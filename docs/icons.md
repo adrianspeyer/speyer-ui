@@ -1,6 +1,6 @@
 # SUI Icons
 
-530 hand-drawn SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
+536 purpose-built SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
 
 **[Browse all icons →](https://adrianspeyer.github.io/speyer-ui/icons.html)**
 
@@ -176,7 +176,7 @@ The `status-loader` icon is designed for this purpose, but `.sui-icon-spin` work
 
 ## Categories
 
-530 icons across 29 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
+536 icons across 29 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
 
 | Prefix | Category | Count |
 |--------|----------|-------|
@@ -264,7 +264,7 @@ The `sui-icons.css` size classes (`.sui-icon-sm`, `.sui-icon-xl`, etc.) and colo
 
 | File | Description |
 |------|-------------|
-| `sui-icons.svg` | Source sprite — 530 `<symbol>` elements |
+| `sui-icons.svg` | Source sprite — 536 `<symbol>` elements |
 | `sui-icons.css` | Companion CSS — sizing, colours, spin, touch targets, forced colours |
 | `sui-icons.min.svg` | Minified sprite (in `dist/`) |
 | `sui-icons.min.css` | Minified CSS (in `dist/`) |
@@ -287,5 +287,306 @@ The `sui-icons.css` size classes (`.sui-icon-sm`, `.sui-icon-xl`, etc.) and colo
 | Aliases | `<use href>` — never duplicate geometry |
 
 ---
+
+
+## Migrating from Lucide
+
+SUI provides direct equivalents for 284 Lucide icons. Use this lookup when migrating:
+
+| Lucide | SUI |
+|---|---|
+| `accessibility` | `sui-icon-people-accessibility` |
+| `activity` | `sui-icon-data-activity` |
+| `alarm-clock` | `sui-icon-time-alarm` |
+| `alert-circle` | `sui-icon-status-alert-circle` |
+| `alert-triangle` | `sui-icon-status-alert-triangle` |
+| `align-center` | `sui-icon-ui-align-center` |
+| `align-left` | `sui-icon-ui-align-left` |
+| `align-right` | `sui-icon-ui-align-right` |
+| `apple` | `sui-icon-health-apple` |
+| `archive` | `sui-icon-act-archive` |
+| `arrow-down` | `sui-icon-nav-arrow-down` |
+| `arrow-down-a-z` | `sui-icon-act-sort-a-z` |
+| `arrow-down-wide-narrow` | `sui-icon-act-sort-desc` |
+| `arrow-left` | `sui-icon-nav-arrow-left` |
+| `arrow-right` | `sui-icon-nav-arrow-right` |
+| `arrow-up` | `sui-icon-nav-arrow-up` |
+| `arrow-up-a-z` | `sui-icon-act-sort-z-a` |
+| `arrow-up-down` | `sui-icon-nav-arrow-up-down` |
+| `arrow-up-narrow-wide` | `sui-icon-act-sort-asc` |
+| `atom` | `sui-icon-ai-atom` |
+| `badge-check` | `sui-icon-status-badge-check` |
+| `ban` | `sui-icon-status-ban` |
+| `bandage` | `sui-icon-health-bandage` |
+| `bar-chart-2` | `sui-icon-data-bar-chart` |
+| `bar-chart-3` | `sui-icon-data-bar-chart` |
+| `barcode` | `sui-icon-pay-barcode` |
+| `battery` | `sui-icon-status-battery` |
+| `battery-low` | `sui-icon-status-battery-low` |
+| `beer` | `sui-icon-misc-beer` |
+| `binary` | `sui-icon-data-binary` |
+| `bitcoin` | `sui-icon-pay-bitcoin` |
+| `bluetooth` | `sui-icon-dev-bluetooth` |
+| `bold` | `sui-icon-ui-bold` |
+| `book-open` | `sui-icon-edu-book-open` |
+| `bookmark` | `sui-icon-act-bookmark` |
+| `bot` | `sui-icon-ai-bot` |
+| `braces` | `sui-icon-dev-braces` |
+| `brain` | `sui-icon-ai-brain` |
+| `bug` | `sui-icon-dev-bug` |
+| `calculator` | `sui-icon-pay-calculator` |
+| `calendar` | `sui-icon-view-calendar` |
+| `calendar-days` | `sui-icon-time-cal-days` |
+| `calendar-range` | `sui-icon-time-cal-range` |
+| `camera` | `sui-icon-media-camera` |
+| `car` | `sui-icon-travel-car` |
+| `check` | `sui-icon-status-check` |
+| `check-circle` | `sui-icon-status-check-circle` |
+| `chevron-down` | `sui-icon-nav-chevron-down` |
+| `chevron-left` | `sui-icon-nav-chevron-left` |
+| `chevron-right` | `sui-icon-nav-chevron-right` |
+| `chevron-up` | `sui-icon-nav-chevron-up` |
+| `chevrons-down` | `sui-icon-nav-chevrons-down` |
+| `chevrons-left` | `sui-icon-nav-chevrons-left` |
+| `chevrons-right` | `sui-icon-nav-chevrons-right` |
+| `chevrons-up` | `sui-icon-nav-chevrons-up` |
+| `circle-alert` | `sui-icon-status-alert-circle` |
+| `circle-check` | `sui-icon-status-check-circle` |
+| `circle-help` | `sui-icon-status-help-circle` |
+| `circle-x` | `sui-icon-status-x-circle` |
+| `clipboard` | `sui-icon-file-clipboard` |
+| `clipboard-copy` | `sui-icon-act-copy` |
+| `clipboard-list` | `sui-icon-work-checklist` |
+| `clipboard-paste` | `sui-icon-act-paste` |
+| `clock` | `sui-icon-time-clock` |
+| `cloud` | `sui-icon-weather-cloud` |
+| `cloud-lightning` | `sui-icon-weather-cloud-lightning` |
+| `cloud-rain` | `sui-icon-weather-cloud-rain` |
+| `cloud-snow` | `sui-icon-weather-cloud-snow` |
+| `code-2` | `sui-icon-ui-code-block` |
+| `codepen` | `sui-icon-brand-codepen` |
+| `coffee` | `sui-icon-misc-coffee` |
+| `columns-2` | `sui-icon-ui-columns` |
+| `compass` | `sui-icon-loc-compass` |
+| `contact` | `sui-icon-people-contact` |
+| `container` | `sui-icon-dev-container` |
+| `copy` | `sui-icon-act-copy` |
+| `corner-down-left` | `sui-icon-nav-corner-down-left` |
+| `corner-down-right` | `sui-icon-nav-corner-down-right` |
+| `corner-up-left` | `sui-icon-nav-corner-up-left` |
+| `corner-up-right` | `sui-icon-nav-corner-up-right` |
+| `cpu` | `sui-icon-ai-cpu` |
+| `credit-card` | `sui-icon-pay-credit-card` |
+| `database` | `sui-icon-data-database` |
+| `discord` | `sui-icon-brand-discord` |
+| `dollar-sign` | `sui-icon-pay-dollar-sign` |
+| `download` | `sui-icon-act-download` |
+| `droplets` | `sui-icon-weather-droplets` |
+| `dumbbell` | `sui-icon-health-dumbbell` |
+| `eraser` | `sui-icon-act-eraser` |
+| `eye` | `sui-icon-sec-eye` |
+| `eye-off` | `sui-icon-sec-eye-off` |
+| `facebook` | `sui-icon-soc-facebook` |
+| `fast-forward` | `sui-icon-media-fast-forward` |
+| `file` | `sui-icon-file-generic` |
+| `file-audio` | `sui-icon-file-audio` |
+| `file-code` | `sui-icon-file-code` |
+| `file-image` | `sui-icon-file-image` |
+| `file-json` | `sui-icon-file-json` |
+| `file-text` | `sui-icon-file-text` |
+| `file-video` | `sui-icon-file-video` |
+| `filter` | `sui-icon-act-filter` |
+| `fingerprint` | `sui-icon-sec-fingerprint` |
+| `flag` | `sui-icon-soc-flag` |
+| `flower` | `sui-icon-misc-flower` |
+| `folder` | `sui-icon-file-folder` |
+| `folder-open` | `sui-icon-file-folder-open` |
+| `forward` | `sui-icon-comm-forward` |
+| `funnel` | `sui-icon-data-funnel` |
+| `gallery-horizontal` | `sui-icon-view-gallery` |
+| `gantt-chart` | `sui-icon-work-gantt` |
+| `gauge` | `sui-icon-data-gauge` |
+| `gift` | `sui-icon-misc-gift` |
+| `git-branch` | `sui-icon-dev-git-branch` |
+| `git-commit` | `sui-icon-dev-git-commit` |
+| `git-commit-horizontal` | `sui-icon-data-git-commit` |
+| `git-merge` | `sui-icon-data-git-merge` |
+| `github` | `sui-icon-brand-github` |
+| `glasses` | `sui-icon-misc-glasses` |
+| `globe` | `sui-icon-loc-globe` |
+| `graduation-cap` | `sui-icon-edu-graduation` |
+| `grip-horizontal` | `sui-icon-nav-grip-horizontal` |
+| `grip-vertical` | `sui-icon-nav-grip-vertical` |
+| `hard-hat` | `sui-icon-ops-hard-hat` |
+| `hash` | `sui-icon-data-hash` |
+| `headphones` | `sui-icon-media-headphones` |
+| `heart` | `sui-icon-soc-heart` |
+| `heart-pulse` | `sui-icon-health-heart-pulse` |
+| `help-circle` | `sui-icon-status-help-circle` |
+| `history` | `sui-icon-time-history` |
+| `hourglass` | `sui-icon-time-hourglass` |
+| `id-card` | `sui-icon-people-id-badge` |
+| `image` | `sui-icon-media-image` |
+| `inbox` | `sui-icon-comm-inbox` |
+| `info` | `sui-icon-status-info` |
+| `instagram` | `sui-icon-soc-instagram` |
+| `italic` | `sui-icon-ui-italic` |
+| `kanban` | `sui-icon-work-kanban` |
+| `key` | `sui-icon-sec-key` |
+| `layers` | `sui-icon-ui-layers` |
+| `layout-grid` | `sui-icon-ui-layout-grid` |
+| `layout-list` | `sui-icon-view-list` |
+| `leaf` | `sui-icon-misc-leaf` |
+| `lifebuoy` | `sui-icon-misc-lifebuoy` |
+| `lightbulb` | `sui-icon-ai-lightbulb` |
+| `line-chart` | `sui-icon-data-line-chart` |
+| `link-2` | `sui-icon-ui-link-2` |
+| `linkedin` | `sui-icon-soc-linkedin` |
+| `list` | `sui-icon-data-list` |
+| `list-ordered` | `sui-icon-ui-list-ordered` |
+| `loader` | `sui-icon-status-loader` |
+| `locate` | `sui-icon-loc-locate` |
+| `lock` | `sui-icon-sec-lock` |
+| `log-in` | `sui-icon-sec-log-in` |
+| `log-out` | `sui-icon-act-logout` |
+| `mail` | `sui-icon-comm-mail` |
+| `mail-open` | `sui-icon-comm-mail-open` |
+| `map` | `sui-icon-loc-map` |
+| `map-pin` | `sui-icon-loc-pin` |
+| `maximize` | `sui-icon-ui-maximize` |
+| `megaphone` | `sui-icon-comm-megaphone` |
+| `menu` | `sui-icon-nav-menu` |
+| `message-circle` | `sui-icon-soc-message-circle` |
+| `message-square` | `sui-icon-comm-message` |
+| `mic` | `sui-icon-media-mic` |
+| `mic-off` | `sui-icon-media-mic-off` |
+| `milestone` | `sui-icon-work-milestone` |
+| `minimize` | `sui-icon-ui-minimize` |
+| `monitor` | `sui-icon-dev-monitor` |
+| `moon` | `sui-icon-ui-moon` |
+| `more-horizontal` | `sui-icon-nav-more-horizontal` |
+| `more-vertical` | `sui-icon-nav-more-vertical` |
+| `mountain` | `sui-icon-misc-mountain` |
+| `move` | `sui-icon-nav-move` |
+| `music` | `sui-icon-media-music` |
+| `navigation` | `sui-icon-loc-navigation` |
+| `navigation-2` | `sui-icon-loc-navigation-2` |
+| `notebook` | `sui-icon-edu-notebook` |
+| `package` | `sui-icon-file-archive` |
+| `palette` | `sui-icon-ui-palette` |
+| `panel-bottom` | `sui-icon-ui-panel-bottom` |
+| `panel-right` | `sui-icon-ui-panel-right` |
+| `party-popper` | `sui-icon-misc-party` |
+| `passkey` | `sui-icon-sec-passkey` |
+| `passport` | `sui-icon-travel-passport` |
+| `pause` | `sui-icon-media-pause` |
+| `paw-print` | `sui-icon-misc-paw` |
+| `pencil` | `sui-icon-act-edit-pencil` |
+| `phone` | `sui-icon-comm-phone` |
+| `phone-call` | `sui-icon-comm-phone-call` |
+| `phone-off` | `sui-icon-comm-phone-off` |
+| `picture-in-picture` | `sui-icon-ui-picture-in-picture` |
+| `pie-chart` | `sui-icon-data-pie-chart` |
+| `piggy-bank` | `sui-icon-pay-piggy-bank` |
+| `pill` | `sui-icon-health-pill` |
+| `pin` | `sui-icon-act-pin` |
+| `pipette` | `sui-icon-input-color-picker` |
+| `plane` | `sui-icon-travel-plane` |
+| `play` | `sui-icon-media-play` |
+| `plug` | `sui-icon-dev-plug` |
+| `plus` | `sui-icon-act-plus` |
+| `presentation` | `sui-icon-work-presentation` |
+| `rainbow` | `sui-icon-misc-rainbow` |
+| `receipt` | `sui-icon-pay-receipt` |
+| `redo` | `sui-icon-act-redo` |
+| `refresh-ccw` | `sui-icon-act-refresh-ccw` |
+| `refresh-cw` | `sui-icon-act-refresh-cw` |
+| `regex` | `sui-icon-dev-regex` |
+| `repeat` | `sui-icon-act-repeat` |
+| `replace` | `sui-icon-act-replace` |
+| `reply` | `sui-icon-comm-reply` |
+| `rocket` | `sui-icon-act-rocket` |
+| `save` | `sui-icon-act-save` |
+| `scale` | `sui-icon-misc-scale` |
+| `scan-face` | `sui-icon-sec-scan-face` |
+| `school` | `sui-icon-edu-school` |
+| `scissors` | `sui-icon-act-scissors` |
+| `search` | `sui-icon-act-search` |
+| `send` | `sui-icon-comm-send` |
+| `server` | `sui-icon-dev-server` |
+| `share` | `sui-icon-act-share` |
+| `share-2` | `sui-icon-act-share-2` |
+| `shield` | `sui-icon-sec-shield` |
+| `shield-check` | `sui-icon-sec-shield-check` |
+| `ship` | `sui-icon-travel-ship` |
+| `sidebar` | `sui-icon-ui-sidebar` |
+| `sigma` | `sui-icon-data-sigma` |
+| `signal` | `sui-icon-status-signal` |
+| `skip-back` | `sui-icon-media-skip-back` |
+| `skip-forward` | `sui-icon-media-skip-fwd` |
+| `slack` | `sui-icon-brand-slack` |
+| `sliders-horizontal` | `sui-icon-input-slider` |
+| `smartphone` | `sui-icon-dev-smartphone` |
+| `sort-asc` | `sui-icon-data-sort-asc` |
+| `sort-desc` | `sui-icon-data-sort-desc` |
+| `sparkles` | `sui-icon-ai-sparkles` |
+| `star` | `sui-icon-soc-star` |
+| `stethoscope` | `sui-icon-health-stethoscope` |
+| `strikethrough` | `sui-icon-ui-strikethrough` |
+| `sun` | `sui-icon-weather-sun` |
+| `table` | `sui-icon-data-table` |
+| `tablet` | `sui-icon-dev-tablet` |
+| `terminal` | `sui-icon-dev-terminal` |
+| `text-cursor` | `sui-icon-input-text-cursor` |
+| `thermometer` | `sui-icon-weather-thermometer` |
+| `thumbs-down` | `sui-icon-act-thumbs-down` |
+| `thumbs-up` | `sui-icon-act-thumbs-up` |
+| `ticket` | `sui-icon-misc-ticket` |
+| `timer` | `sui-icon-time-timer` |
+| `toggle-left` | `sui-icon-input-toggle-off` |
+| `toggle-right` | `sui-icon-input-toggle-on` |
+| `train-front` | `sui-icon-travel-train` |
+| `trash` | `sui-icon-act-trash` |
+| `trash-2` | `sui-icon-act-trash` |
+| `tree-pine` | `sui-icon-misc-tree` |
+| `trending-down` | `sui-icon-data-trending-down` |
+| `trending-up` | `sui-icon-data-trending-up` |
+| `triangle-alert` | `sui-icon-status-alert-triangle` |
+| `twitter` | `sui-icon-soc-twitter` |
+| `type` | `sui-icon-input-type` |
+| `umbrella` | `sui-icon-misc-umbrella` |
+| `underline` | `sui-icon-ui-underline` |
+| `undo` | `sui-icon-act-undo` |
+| `unlock` | `sui-icon-sec-unlock` |
+| `upload` | `sui-icon-act-upload` |
+| `user` | `sui-icon-people-user` |
+| `user-check` | `sui-icon-people-user-check` |
+| `user-minus` | `sui-icon-people-user-minus` |
+| `user-plus` | `sui-icon-people-user-plus` |
+| `user-x` | `sui-icon-people-user-x` |
+| `video` | `sui-icon-media-video` |
+| `volume-1` | `sui-icon-media-volume-low` |
+| `volume-2` | `sui-icon-media-volume` |
+| `wallet` | `sui-icon-pay-wallet` |
+| `wand-2` | `sui-icon-act-wand` |
+| `wand-sparkles` | `sui-icon-ai-wand` |
+| `wifi` | `sui-icon-status-wifi` |
+| `wifi-off` | `sui-icon-status-wifi-off` |
+| `wind` | `sui-icon-weather-wind` |
+| `wine` | `sui-icon-misc-wine` |
+| `wrench` | `sui-icon-ops-wrench` |
+| `x` | `sui-icon-act-close` |
+| `x-circle` | `sui-icon-status-x-circle` |
+| `youtube` | `sui-icon-soc-youtube` |
+| `zap` | `sui-icon-act-zap` |
+
+**284 mappings.** For Lucide icons not listed, browse the [Icon Browser](https://adrianspeyer.github.io/speyer-ui/icons.html) to find the closest SUI equivalent.
+
+### Quick Migration Steps
+
+1. Replace `<i data-lucide="icon-name">` with `<svg class="sui-icon"><use href="#sui-icon-{category}-{name}"/></svg>`
+2. Remove the Lucide JS import and CDN link
+3. Add the SUI icon sprite loader (see [Getting Started](getting-started.md))
+4. SUI icons inherit `currentColor` — no separate colour setup needed
 
 *Made in Canada with love 🇨🇦*

@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 3.1.1
+ * Version: 3.2.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -194,15 +194,15 @@ kbd,
   border-top: 1px solid var(--sui-border);
 }
 
-/* Multi-view screen switching: only hide screens when siblings exist.
-   A single sui-screen renders without needing .is-active (no blank-page footgun). */
+/* Multi-view screen switching — opt-in via [data-sui-screens] on the parent.
+   Without the attribute a single sui-screen renders normally (no blank-page footgun).
+   With the attribute, only .is-active screens are shown.
+   Migration: wrap your screens in <div data-sui-screens> and add .is-active to the default. */
 .sui-screen[hidden] { display: none; }
-.sui-screen ~ .sui-screen:not(.is-active) { display: none; }
-.sui-screen.is-active { display: flex; }
+[data-sui-screens] > .sui-screen:not(.is-active) { display: none; }
+[data-sui-screens] > .sui-screen.is-active { display: flex; }
 
-/* Legacy escape hatch: standalone screen that doesn't need .is-active toggling.
-   Functionally redundant since the sibling selector fix (v2.5.0),
-   but kept for backwards compatibility. */
+/* Legacy escape hatch: standalone screen that doesn't need .is-active toggling. */
 .sui-screen-solo { display: flex; }
 
 

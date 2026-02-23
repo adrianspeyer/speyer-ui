@@ -4,27 +4,56 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
-## [3.1.1] — 2026-02-23
+## [3.2.0] — 2026-02-23
 
-### Theme: Icon Refinements — 2 New Icons + Geometry Fixes
+### Theme: Icon Refinements, Bug Fixes & Lucide Migration Map
 
-Patch release adding missing icon pairs, fixing sparkles geometry, and improving maple leaf visual weight.
+Geometry refinements across 16 icons for better canvas usage, 4 new icons, 4 JavaScript bug fixes from real-world PWA migration feedback, and a 284-entry Lucide → SUI migration map.
 
 ### Added
-- `act-refresh-ccw` — counter-clockwise refresh (mirror of `act-refresh-cw`)
-- `data-cloud-download` — download from cloud (arrow-down pair for `data-cloud-upload`)
+
+**New Icons (4)**
+- `act-sort-a-z` — Alphabetical A→Z sort with down-arrow (stroke paths, no `<text>`)
+- `act-sort-z-a` — Reverse Z→A sort with up-arrow
+- `misc-glasses` — Rounded-rect lens eyeglasses with bridge and arms
+- `misc-sunglasses` — Shield-lens sunglasses with filled lenses
+
+**Lucide Migration Map**
+- 284-entry Lucide → SUI icon lookup in `llms.txt` and `docs/icons.md`
+- Quick migration guide with step-by-step instructions
 
 ### Changed
-- `ai-sparkles` — reduced from 3 stars to 2 (large centre-left + small top-right) for cleaner composition
-- `misc-maple-leaf` — added `stroke="currentColor" stroke-width="1"` for visual weight consistency with stroke-based icons
-- `index.html` brand mark — `dev-layers` → `ui-layers` (correct category for UI element)
 
-### Stats
-- 530 total symbols (498 unique + 32 aliases), 29 categories
-- Bundle: ~96KB core + ~270KB icon sprite (~28KB gzipped)
-- Preflight: 76 passed, 0 failed, 6 advisory
-- Axe: 0 violations on both index.html and icons.html
-- Validator: 530 symbols, 3144 checks, 0 failures
+**Icon Geometry Refinements (16)** — Same design language, expanded to fill 24×24 canvas:
+- `ai-sparkles` — Big star shifted up, small star bottom-right (54%→83% Y usage)
+- `status-badge-check` — Starburst scaled to fill box (56%→83%)
+- `data-gauge` — Wider arc, base line anchors bottom (44%→79%)
+- `work-gantt` — 3 staggered bars, axis from top (42%→83%)
+- `health-apple` — Wider, taller apple body
+- `work-milestone` — Diamond to full edges with check mark
+- `pay-receipt` — Check mark added for "paid receipt" clarity
+- `misc-party` — Party hat cone + scattered confetti
+- `act-wand` — Bigger star, small sparkle added
+- `dev-regex` — Slashes pushed to edges, asterisk and dot enlarged
+- `edu-notebook` — Line rings, spine, full height
+- `health-dumbbell` — 4 weight plates instead of 2 flat pills (25%→58%)
+- `health-pill` — Diagonal capsule replaces horizontal bar (25%→83%)
+- `edu-school` — Pediment roof, columns, clock circle, arched doorway
+- `input-color-picker` — Pipette with rounded bulb, collar, tapered shaft
+- `misc-beer` — Foam head with bubbly curves, handle on right
+
+**Language**
+- Replaced "hand-drawn" with "purpose-built" across all documentation
+
+### Fixed
+
+**⚠️ Multi-screen footgun (CSS — migration required for multi-screen apps)** — `.sui-screen ~ .sui-screen:not(.is-active)` broke multi-screen apps silently (first screen could never hide). Now opt-in via `[data-sui-screens]` attribute on the parent wrapper. Single-screen apps unaffected. **Migration:** wrap your screens in `<div data-sui-screens>` and ensure the default screen has `.is-active`.
+
+**Idempotency guards (JS)** — All component `init()` methods (tabs, accordion, dropdown, tooltip, avatar, segmented) now check `el._suiInit` before wiring handlers. Prevents double-binding when calling init manually before DOMContentLoaded. Each component also gains a `destroy()` method that removes all handlers and clears the init flag, enabling clean re-initialisation after DOM changes.
+
+**Native dialog close (JS)** — `.sui-modal-close` buttons now detect whether the dialog was opened via `SUI.modal.open()` or natively via `dialog.showModal()`. Native-opened dialogs close with `dialog.close()` directly, avoiding SUI teardown and stale focus restoration.
+
+**Dropdown click handler (JS)** — Replaced global `document.addEventListener('click')` (fired on every click) with a scoped handler that registers only when a dropdown opens and removes when it closes.
 
 ---
 

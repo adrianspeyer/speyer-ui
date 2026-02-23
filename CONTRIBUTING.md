@@ -63,7 +63,7 @@ All contributions must align with the five SUI design principles:
 
 ## Contributing Icons
 
-SUI ships 483 hand-drawn SVG icons. New icons are welcome — especially for under-represented categories. Before starting, check the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html) to see if the icon (or a close variant) already exists.
+SUI ships 536 purpose-built SVG icons. New icons are welcome — especially for under-represented categories. Before starting, check the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html) to see if the icon (or a close variant) already exists.
 
 ### Design Rules
 
