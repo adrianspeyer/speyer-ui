@@ -17,16 +17,16 @@ This table documents every public method developers should call directly. Method
 | Module | Public Methods | Since |
 |--------|---------------|-------|
 | `SUI.theme` | `set(mode)`, `toggle()`, `current()`, `resolved()` | v2.0, resolved v2.6.0 |
-| `SUI.tabs` | `activate(el)` | v2.5.1 |
-| `SUI.accordion` | `toggle(trigger)`, `expandAll(container)`, `collapseAll(container)` | v2.5.1 |
-| `SUI.dropdown` | `open(el)`, `close(el)`, `toggle(el)` | v2.5.1 |
+| `SUI.tabs` | `activate(el)`, `destroy(navEl)` | v2.5.1, destroy v3.2.0 |
+| `SUI.accordion` | `toggle(trigger)`, `expandAll(container)`, `collapseAll(container)`, `destroy(container)` | v2.5.1, destroy v3.2.0 |
+| `SUI.dropdown` | `open(el)`, `close(el)`, `toggle(el)`, `destroy(el)` | v2.5.1, destroy v3.2.0 |
 | `SUI.modal` | `open(sel)`, `close(sel)` | v2.0 |
 | `SUI.toast` | `show(opts)`, `success(t, m)`, `error(t, m)`, `warning(t, m)`, `info(t, m)`, `dismiss(el)`, `clearAll()` | v2.5.1, dismiss/clearAll v2.6.0 |
-| `SUI.tooltip` | `show(el)`, `hide(el)` | v2.6.0 |
-| `SUI.avatar` | `colorFor(text)` | v2.5.0 |
+| `SUI.tooltip` | `show(el)`, `hide(el)`, `destroy(el)` | v2.6.0, destroy v3.2.0 |
+| `SUI.avatar` | `colorFor(text)`, `destroy(el)` | v2.5.0, destroy v3.2.0 |
 | `SUI.copy` | `text(str)`, `fromElement(sel)` | v2.5.0 |
 | `SUI.sheet` | `open(sel)`, `close(sel)`, `toggle(sel)` | v2.0 |
-| `SUI.segmented` | `select(el)` | v2.6.0 |
+| `SUI.segmented` | `select(el)`, `destroy(container)` | v2.6.0, destroy v3.2.0 |
 | `SUI.sidenav` | `open(sel)`, `close(sel)`, `toggle(sel)`, `expandAll(nav)`, `collapseAll(nav)`, `isOpen(sel)` | v2.5.0, isOpen v2.6.0 |
 | `SUI.panel` | `open(sel)`, `close(sel)`, `toggle(sel)`, `isOpen(sel)` | v2.5.0, isOpen v2.6.0 |
 
@@ -117,6 +117,14 @@ SUI.tabs.activate(tabElement);  // Pass a [role="tab"] element or selector
 
 The tab must be inside a `[role="tablist"]` container. `activate()` updates ARIA states and shows the corresponding `data-view` panel.
 
+**Teardown:**
+
+```javascript
+SUI.tabs.destroy(navElement);  // Pass the [role="tablist"] element
+```
+
+Removes all SUI event listeners from the tab navigation and resets the initialisation flag, allowing safe re-init or DOM removal. See [Lifecycle: destroy()](#lifecycle-destroy) below.
+
 ### SUI.accordion
 
 Toggle, expand, or collapse accordion sections.
@@ -126,6 +134,14 @@ SUI.accordion.toggle(triggerElement);          // Toggle one section
 SUI.accordion.expandAll(containerElement);     // Open all sections
 SUI.accordion.collapseAll(containerElement);   // Close all sections
 ```
+
+**Teardown:**
+
+```javascript
+SUI.accordion.destroy(containerElement);  // Remove all SUI listeners from accordion
+```
+
+See [Lifecycle: destroy()](#lifecycle-destroy) below.
 
 ### SUI.dropdown
 
@@ -138,6 +154,14 @@ SUI.dropdown.toggle(element);  // Toggle state
 ```
 
 ARIA: trigger gets `aria-haspopup` + `aria-expanded`, menu gets `role="menu"`, items get `role="menuitem"`. Keyboard: arrow keys navigate items, Escape closes.
+
+**Teardown:**
+
+```javascript
+SUI.dropdown.destroy(element);  // Closes if open, then removes all SUI listeners
+```
+
+If the dropdown is currently open, `destroy()` closes it first (removing the outside-click handler) before tearing down. See [Lifecycle: destroy()](#lifecycle-destroy) below.
 
 ### SUI.sheet
 
@@ -189,6 +213,14 @@ SUI.tooltip.hide('.my-tooltip');   // Remove programmatic visibility
 
 **Advisory hide:** If the user is hovering or focusing the tooltip trigger, CSS takes precedence and the tooltip stays visible. Programmatic `hide()` only removes the programmatic reveal. Dismiss on Escape is automatic.
 
+**Teardown:**
+
+```javascript
+SUI.tooltip.destroy(element);  // Removes reposition logic and all SUI listeners
+```
+
+Cleans up the stored reposition handler and all event listeners. See [Lifecycle: destroy()](#lifecycle-destroy) below.
+
 ### SUI.segmented
 
 Programmatic selection of segmented control options.
@@ -198,6 +230,14 @@ SUI.segmented.select('.my-segment');  // Select a segment (moves focus)
 ```
 
 Matches the `SUI.tabs.activate()` pattern. The selected segment must be inside a `.sui-segmented` container.
+
+**Teardown:**
+
+```javascript
+SUI.segmented.destroy(containerElement);  // Removes selection logic and all SUI listeners
+```
+
+Cleans up the stored selection handler and all event listeners. See [Lifecycle: destroy()](#lifecycle-destroy) below.
 ### SUI.copy
 
 Clipboard operations with async API fallback.
@@ -218,6 +258,56 @@ const colour = SUI.avatar.colorFor('AS');  // Returns a hex colour
 ```
 
 Uses a hash of the input string to select from a curated palette. Same input always produces the same colour.
+
+**Teardown:**
+
+```javascript
+SUI.avatar.destroy(element);  // Resets the initialisation flag
+```
+
+Unlike other modules, avatar has no event listeners to remove — `destroy()` only clears the `_suiInit` flag so the element can be re-initialised with new content. See [Lifecycle: destroy()](#lifecycle-destroy) below.
+
+---
+
+## Lifecycle: destroy()
+
+Six modules support `destroy()` for safe teardown — useful for SPAs, dynamic content removal, or re-initialisation after DOM changes. Added in v3.2.0.
+
+| Module | `destroy()` parameter | Extra behaviour |
+|--------|-----------------------|-----------------|
+| `SUI.tabs` | `navEl` — the `[role="tablist"]` element | Removes click and keyboard listeners |
+| `SUI.accordion` | `container` — the accordion wrapper | Removes click and keyboard listeners |
+| `SUI.dropdown` | `el` — the `.sui-dropdown` element | Closes first if currently open |
+| `SUI.tooltip` | `el` — the `.sui-tooltip` element | Clears stored reposition handler |
+| `SUI.avatar` | `el` — the `.sui-avatar` element | Resets init flag only (no listeners) |
+| `SUI.segmented` | `container` — the `.sui-segmented` element | Clears stored selection handler |
+
+**What destroy() does:**
+
+1. Removes all event listeners registered via SUI's internal handler tracking (`suiOn`/`suiOff` pattern)
+2. Clears the `_suiInit` flag, allowing `SUI.init()` to re-initialise the element
+3. Cleans up any stored references (`_suiSetView`, `_suiReposition`, `_suiSetValue`)
+
+**What destroy() does NOT do:**
+
+- Does not remove the DOM element
+- Does not reset ARIA attributes added during init
+- Does not remove inline styles (e.g., avatar background colour)
+
+**Usage pattern (SPA route change):**
+
+```javascript
+// Before removing a section from the DOM
+const nav = document.querySelector('#my-tabs [role="tablist"]');
+SUI.tabs.destroy(nav);
+nav.closest('#my-tabs').remove();
+
+// After inserting new dynamic content
+document.getElementById('app').innerHTML = newHTML;
+SUI.init();  // Safe — destroyed elements won't double-init
+```
+
+All `destroy()` methods accept either a CSS selector string or a DOM element, consistent with SUI's [Selector Resolution](#selector-resolution) pattern.
 
 ---
 
