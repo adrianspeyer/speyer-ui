@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   SUI Icons — Speyer UI System
-  Version: 3.1.0
+  Version: 3.1.1
   Icons: 456 unique + 27 aliases = 483 total symbols
   Categories: 28
   Licence: MIT
@@ -376,6 +376,11 @@
     <title>Refresh</title>
     <use href="#sui-icon-act-refresh"/>
   </symbol>
+<symbol id="sui-icon-act-refresh-ccw" viewBox="0 0 24 24">
+    <title>Refresh Counter-Clockwise</title>
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 4v6h6"/>
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+  </symbol>
 <symbol id="sui-icon-act-repeat" viewBox="0 0 24 24">
     <title>Repeat</title>
     <polyline points="17 2 21 6 17 10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -704,6 +709,11 @@
 <symbol id="sui-icon-data-cloud-upload" viewBox="0 0 24 24">
     <title>Upload to Cloud</title>
     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 16-4-4-4 4m4-4v9"/>
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+  </symbol>
+<symbol id="sui-icon-data-cloud-download" viewBox="0 0 24 24">
+    <title>Download from Cloud</title>
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 17 4 4 4-4m-4 4v-9"/>
     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
   </symbol>
 <symbol id="sui-icon-data-database" viewBox="0 0 24 24">
@@ -1961,7 +1971,7 @@
   </symbol>
 <symbol id="sui-icon-ai-sparkles" viewBox="0 0 24 24">
     <title>AI Sparkles</title>
-    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 3 1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5zm7 0 .75 2.25L22 6l-2.25.75L19 9l-.75-2.25L16 6l2.25-.75zM5 17l.5 1.5L7 19l-1.5.5L5 21l-.5-1.5L3 19l1.5-.5z"/>
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10 4 1.5 4.5L16 10l-4.5 1.5L10 16l-1.5-4.5L4 10l4.5-1.5zM19 3l.75 2.25L22 6l-2.25.75L19 9l-.75-2.25L16 6l2.25-.75z"/>
   </symbol>
 <symbol id="sui-icon-ai-wand" viewBox="0 0 24 24">
     <title>Magic Wand</title>

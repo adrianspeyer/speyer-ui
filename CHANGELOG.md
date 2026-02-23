@@ -4,6 +4,30 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.1.1] — 2026-02-23
+
+### Theme: Icon Refinements — 2 New Icons + Geometry Fixes
+
+Patch release adding missing icon pairs, fixing sparkles geometry, and improving maple leaf visual weight.
+
+### Added
+- `act-refresh-ccw` — counter-clockwise refresh (mirror of `act-refresh-cw`)
+- `data-cloud-download` — download from cloud (arrow-down pair for `data-cloud-upload`)
+
+### Changed
+- `ai-sparkles` — reduced from 3 stars to 2 (large centre-left + small top-right) for cleaner composition
+- `misc-maple-leaf` — added `stroke="currentColor" stroke-width="1"` for visual weight consistency with stroke-based icons
+- `index.html` brand mark — `dev-layers` → `ui-layers` (correct category for UI element)
+
+### Stats
+- 530 total symbols (498 unique + 32 aliases), 29 categories
+- Bundle: ~96KB core + ~270KB icon sprite (~28KB gzipped)
+- Preflight: 76 passed, 0 failed, 6 advisory
+- Axe: 0 violations on both index.html and icons.html
+- Validator: 530 symbols, 3144 checks, 0 failures
+
+---
+
 ## [3.1.0] — 2026-02-23
 
 ### Theme: SUI Icons Expansion — 45 New Symbols

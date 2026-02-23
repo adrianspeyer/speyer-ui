@@ -25,7 +25,7 @@ SUI is the **shell** — containers, chrome, interactive primitives, typography,
 - Script tags use `defer`
 - Borders are the default card separation. Shadows are opt-in (`sui-card-shadow`)
 
-**SUI ships 528 hand-drawn icons** with built-in accessibility (forced-colours, reduced-motion, 44px touch targets). Icons are optional — bring-your-own is fully supported.
+**SUI ships 530 hand-drawn icons** with built-in accessibility (forced-colours, reduced-motion, 44px touch targets). Icons are optional — bring-your-own is fully supported.
 
 **SUI does NOT ship:** charts, data visualisation, drag-and-drop, or application logic. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
 
@@ -365,7 +365,7 @@ Check these before building custom patterns:
 
 ## Icons
 
-SUI ships **528 hand-drawn SVG icons** (496 unique + 32 aliases, 29 categories). Use the `<svg><use href>` pattern:
+SUI ships **530 hand-drawn SVG icons** (498 unique + 32 aliases, 29 categories). Use the `<svg><use href>` pattern:
 ```html
 <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-search"/></svg>
 ```

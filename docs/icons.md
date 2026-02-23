@@ -1,6 +1,6 @@
 # SUI Icons
 
-528 hand-drawn SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
+530 hand-drawn SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
 
 **[Browse all icons →](https://adrianspeyer.github.io/speyer-ui/icons.html)**
 
@@ -176,7 +176,7 @@ The `status-loader` icon is designed for this purpose, but `.sui-icon-spin` work
 
 ## Categories
 
-528 icons across 29 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
+530 icons across 29 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
 
 | Prefix | Category | Count |
 |--------|----------|-------|
@@ -264,7 +264,7 @@ The `sui-icons.css` size classes (`.sui-icon-sm`, `.sui-icon-xl`, etc.) and colo
 
 | File | Description |
 |------|-------------|
-| `sui-icons.svg` | Source sprite — 528 `<symbol>` elements |
+| `sui-icons.svg` | Source sprite — 530 `<symbol>` elements |
 | `sui-icons.css` | Companion CSS — sizing, colours, spin, touch targets, forced colours |
 | `sui-icons.min.svg` | Minified sprite (in `dist/`) |
 | `sui-icons.min.css` | Minified CSS (in `dist/`) |

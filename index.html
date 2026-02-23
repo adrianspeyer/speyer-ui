@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "3.1.0",
+    "version": "3.1.1",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -104,7 +104,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-layers"/></svg></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v3.1.0</span>
+          <span class="sui-version-pill">v3.1.1</span>
         </div>
       </div>
 
@@ -256,7 +256,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>v3.1.0</span>
+            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>v3.1.1</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -1534,7 +1534,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
           }
         </style>
         <div class="icon-showcase">
-          <h3>528 Hand-drawn Icons <span class="sui-badge sui-badge-new">New in v3</span></h3>
+          <h3>530 Hand-drawn Icons <span class="sui-badge sui-badge-new">New in v3</span></h3>
           <p>Original SVG icons for SaaS interfaces — 28 categories, accessibility built in, works in both themes.</p>
           <div class="icon-wall" aria-hidden="true">
             <div class="icon-wall-item"><svg class="sui-icon" viewBox="0 0 24 24"><use href="#sui-icon-nav-home"/></svg></div>
@@ -1588,7 +1588,7 @@ SUI.panel.toggle('#my-panel');</code></pre>
           </div>
           <a href="icons.html" class="sui-btn sui-btn-primary">
             <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-view-eye"/></svg>
-            Browse all 528 icons
+            Browse all 530 icons
           </a>
         </div>
       </div>
@@ -1679,7 +1679,7 @@ Fetch the official SUI CSS and JS from CDN:
 
 Place CSS &lt;link&gt; tags in &lt;head&gt;. Place &lt;script&gt; tags before &lt;/body&gt; with the defer attribute.
 
-Icons — SUI ships 528 first-party icons. Add the icon CSS and sprite loader:
+Icons — SUI ships 530 first-party icons. Add the icon CSS and sprite loader:
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.css"&gt;
 &lt;script defer&gt;
   fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-icons.min.svg')
@@ -1834,7 +1834,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
 CDN: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui-tokens.min.css and sui-components.min.css
 Optional JS: https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js
 CSS links go in &lt;head&gt;. Scripts go before &lt;/body&gt; with defer.
-Icons: SUI ships 528 first-party icons. Add sui-icons.min.css + sprite loader (see docs). Or bring your own (Heroicons, Phosphor, Font Awesome, plain SVG). Always pair icons with text labels.
+Icons: SUI ships 530 first-party icons. Add sui-icons.min.css + sprite loader (see docs). Or bring your own (Heroicons, Phosphor, Font Awesome, plain SVG). Always pair icons with text labels.
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
 Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Sidenav: sui-sidenav with collapsible groups (sui-sidenav-group-toggle + aria-expanded + aria-controls). Panel: sui-panel (slides from right, --sui-panel-width, sui-panel-no-backdrop). SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators), sui-table-stack (card stacking at tablet), sui-table-sticky (sticky thead), sui-table-dense (compact). Input with button: sui-input-action. Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. SUI.tabs.activate(tabElement) for programmatic switching. Accordion: SUI.accordion.toggle(trigger), .expandAll(container), .collapseAll(container). Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
@@ -1860,7 +1860,7 @@ Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
    https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js (optional, for modals/toasts/dropdowns)
    Or readable source from: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/
    CSS &lt;link&gt; tags go in &lt;head&gt;. &lt;script&gt; tags go before &lt;/body&gt; with defer.
-2. Icons: SUI ships 528 first-party icons via sui-icons.min.css + sprite loader. Add the CSS and use &lt;svg class="sui-icon"&gt;&lt;use href="#sui-icon-{category}-{name}"/&gt;&lt;/svg&gt;. Or bring your own icons (Heroicons, Phosphor, Font Awesome, or plain SVG). Ask if they have a preference.
+2. Icons: SUI ships 530 first-party icons via sui-icons.min.css + sprite loader. Add the CSS and use &lt;svg class="sui-icon"&gt;&lt;use href="#sui-icon-{category}-{name}"/&gt;&lt;/svg&gt;. Or bring your own icons (Heroicons, Phosphor, Font Awesome, or plain SVG). Ask if they have a preference.
 3. Ask the user: "Would you like light mode, dark mode, or both?"
 4. Apply all CSS custom properties (--sui- prefix) and component classes.
 5. Follow these design rules:
@@ -4754,7 +4754,7 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-soc-heart"/></svg>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada with ❤️</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v3.1.0</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v3.1.1</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->

@@ -1,6 +1,6 @@
 # Speyer UI System (SUI)
 
-> Lightweight, accessible CSS design system for SaaS applications. Mobile-first, WCAG 2.1 AA, 528 hand-drawn icons, under 100KB core.
+> Lightweight, accessible CSS design system for SaaS applications. Mobile-first, WCAG 2.1 AA, 530 hand-drawn icons, under 100KB core.
 
 ## Quick Start
 
