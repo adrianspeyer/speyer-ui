@@ -26,7 +26,7 @@ import { resolve } from 'path';
 
 const SVG_PATH = resolve('./sui-icons.svg');
 const EXPECTED_TOTAL = 528;
-const SW_EXCEPTIONS = new Set(['sui-icon-status-help-circle', 'sui-icon-ai-lightbulb']);
+const SW_EXCEPTIONS = new Set(['sui-icon-status-help-circle', 'sui-icon-ai-lightbulb', 'sui-icon-misc-maple-leaf']);
 
 let raw;
 try {
