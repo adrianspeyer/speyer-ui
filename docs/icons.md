@@ -1,6 +1,6 @@
 # SUI Icons
 
-536 purpose-built SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
+538 purpose-built SVG icons designed for SaaS admin interfaces. Accessible by default, theme-aware, zero dependencies.
 
 **[Browse all icons →](https://adrianspeyer.github.io/speyer-ui/icons.html)**
 
@@ -176,7 +176,7 @@ The `status-loader` icon is designed for this purpose, but `.sui-icon-spin` work
 
 ## Categories
 
-536 icons across 29 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
+538 icons across 29 categories. Browse them all at the [icon browser](https://adrianspeyer.github.io/speyer-ui/icons.html).
 
 | Prefix | Category | Count |
 |--------|----------|-------|
@@ -264,7 +264,7 @@ The `sui-icons.css` size classes (`.sui-icon-sm`, `.sui-icon-xl`, etc.) and colo
 
 | File | Description |
 |------|-------------|
-| `sui-icons.svg` | Source sprite — 536 `<symbol>` elements |
+| `sui-icons.svg` | Source sprite — 538 `<symbol>` elements |
 | `sui-icons.css` | Companion CSS — sizing, colours, spin, touch targets, forced colours |
 | `sui-icons.min.svg` | Minified sprite (in `dist/`) |
 | `sui-icons.min.css` | Minified CSS (in `dist/`) |
@@ -334,6 +334,7 @@ SUI provides direct equivalents for 284 Lucide icons. Use this lookup when migra
 | `braces` | `sui-icon-dev-braces` |
 | `brain` | `sui-icon-ai-brain` |
 | `bug` | `sui-icon-dev-bug` |
+| `bus` | `sui-icon-travel-bus` |
 | `calculator` | `sui-icon-pay-calculator` |
 | `calendar` | `sui-icon-view-calendar` |
 | `calendar-days` | `sui-icon-time-cal-days` |
@@ -580,7 +581,7 @@ SUI provides direct equivalents for 284 Lucide icons. Use this lookup when migra
 | `youtube` | `sui-icon-soc-youtube` |
 | `zap` | `sui-icon-act-zap` |
 
-**284 mappings.** For Lucide icons not listed, browse the [Icon Browser](https://adrianspeyer.github.io/speyer-ui/icons.html) to find the closest SUI equivalent.
+**285 mappings.** For Lucide icons not listed, browse the [Icon Browser](https://adrianspeyer.github.io/speyer-ui/icons.html) to find the closest SUI equivalent.
 
 ### Quick Migration Steps
 

@@ -11,7 +11,7 @@ Welcome to the SUI docs. These guides complement the [README](../README.md) and 
 | [Getting Started](getting-started.md) | CDN setup, your first component, your first page — up and running in 5 minutes |
 | [JavaScript API](javascript-api.md) | Complete module reference — every public method, verified against source |
 | [Design Tokens](design-tokens.md) | Every `--sui-*` token organised by category, with light and dark values |
-| [Icons](icons.md) | 536 purpose-built icons: sizing, colours, categories, accessibility patterns, naming convention |
+| [Icons](icons.md) | 538 purpose-built icons: sizing, colours, categories, accessibility patterns, naming convention |
 | [Accessibility](accessibility.md) | Philosophy, ARIA requirements, keyboard behaviour, colour-blind design, icon a11y, testing |
 | [Design Decisions](design-decisions.md) | Why SUI works the way it does — the reasoning behind the rules |
 | [Recipes](recipes.md) | When to use which pattern, recipe philosophy, full catalog with demos |

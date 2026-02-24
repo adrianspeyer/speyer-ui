@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 3.2.0
+ * Version: 3.3.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -438,22 +438,43 @@ const SUI = (() => {
         info:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
       };
 
+      // Hardening: guard against unexpected types (prevents odd class injection + ensures icon fallback)
+      const allowed = ['success', 'warning', 'error', 'info'];
+      if (!allowed.includes(type)) type = 'info';
+
       const el = document.createElement('div');
       el.className = `sui-toast sui-toast-${type}`;
       el.setAttribute('role', 'alert');
       if (type === 'error') el.setAttribute('aria-live', 'assertive');
-      el.innerHTML = `
-        <span class="sui-toast-icon">${icons[type] || icons.info}</span>
-        <div class="sui-toast-content">
-          <div class="sui-toast-title">${title}</div>
-          ${message ? `<div class="sui-toast-message">${message}</div>` : ''}
-        </div>
-        <button class="sui-toast-close" aria-label="Dismiss">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      `;
 
-      el.querySelector('.sui-toast-close').addEventListener('click', () => this._dismiss(el));
+      // Build DOM safely (avoid interpolating untrusted strings into HTML)
+      const icon = document.createElement('span');
+      icon.className = 'sui-toast-icon';
+      icon.innerHTML = icons[type] || icons.info; // safe constant SVG only
+
+      const content = document.createElement('div');
+      content.className = 'sui-toast-content';
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'sui-toast-title';
+      titleEl.textContent = title != null ? String(title) : '';
+      content.appendChild(titleEl);
+
+      if (message) {
+        const msgEl = document.createElement('div');
+        msgEl.className = 'sui-toast-message';
+        msgEl.textContent = String(message);
+        content.appendChild(msgEl);
+      }
+
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'sui-toast-close';
+      closeBtn.type = 'button';
+      closeBtn.setAttribute('aria-label', 'Dismiss');
+      closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+      closeBtn.addEventListener('click', () => this._dismiss(el));
+
+      el.append(icon, content, closeBtn);
       container.appendChild(el);
 
       // Pause auto-dismiss on hover
@@ -1235,7 +1256,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v3.2.0 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v3.3.0 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

@@ -4,6 +4,76 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.3.0] — 2026-02-24
+
+### Theme: Icon QA Redesigns, New Bus Icon & Smoke Test Refresh
+
+Side-by-side Lucide comparison audit identified 7 icons needing artwork improvements and 1 icon recategorisation. Full smoke test refresh from 12 to 26 tests covering all JS modules.
+
+### Added
+
+**New Icons (2)**
+- `travel-bus` — Bus (old `travel-car` artwork reassigned; bus-like proportions were a better fit)
+- `act-sort-z-a-2` — Sort Z to A variant (Z top, A bottom, down arrow)
+
+**Smoke Tests (14 new)**
+- Toast: show, success, error (assertive), XSS safety, type guard, close button
+- Tooltip: show/hide
+- Segmented control: switching
+- Copy utility: API existence
+- Destroy/re-init lifecycle: tabs, accordion
+- Idempotency: double init guard
+- Dynamic version display (no more hardcoded version strings)
+
+### Changed
+
+**Icon Artwork Replacements (7)** — Same IDs, improved designs from Lucide QA audit:
+- `act-sort-a-z` — Clearer A/Z letter forms, arrow ↑ (ascending)
+- `act-sort-z-a` — Matched pair with sort-a-z, arrow ↓ (descending)
+- `weather-droplets` — Two teardrop shapes replacing abstract loops
+- `weather-cloud-rain` — Angled rain lines replacing horizontal dashes; matches cloud-snow/cloud-lightning family
+- `travel-car` — New sedan profile replacing bus-like design
+- `pay-receipt` — Dollar sign ($) replacing checkmark; clearer "payment" metaphor
+- `status-wifi-off` — Full wifi arcs + diagonal slash replacing half-arc design
+- `weather-wind` — Flowing lines with visible curves replacing collapsible endpoint loops
+
+**Lucide Migration Map**
+- 285 entries (was 284) — added `bus` → `sui-icon-travel-bus`
+
+### Bundle
+
+~98KB core + ~269KB icon sprite (~29KB gzipped). 538 icons (506 unique + 32 aliases) · 29 categories.
+
+---
+
+## [3.2.1] — 2026-02-23
+
+### Theme: Security Hardening, API Docs & Icon Refinement
+
+Toast XSS fix, destroy() method documentation, SECURITY.md, piggy bank icon replacement, and innerHTML preflight check.
+
+### Fixed
+
+**Toast XSS hardening (JS)** — `toast.show()` previously interpolated `title` and `message` directly into `innerHTML` (DOM XSS vector if either contained untrusted input). Now uses safe DOM construction: `title` and `message` go through `textContent`. Icon and close button SVGs remain as `innerHTML` but use constant strings only (no user input). Type parameter now validated against an allowlist (`success`, `warning`, `error`, `info`) with fallback to `info`.
+
+### Changed
+
+**`pay-piggy-bank` icon replaced** — New artwork with coin-on-top design, compound body path, and proper leg/snout detail. Same icon ID — no breaking change. Title updated from "Savings" to "Piggy Bank" to match the icon name.
+
+### Added
+
+**`SECURITY.md`** — Security policy with GitHub private vulnerability reporting, production pinning guidance, and safe DOM construction advice.
+
+**`docs/javascript-api.md` — destroy() methods** — All 6 destroy() methods (tabs, accordion, dropdown, tooltip, avatar, segmented) now documented in the API table, module detail sections, and a new "Lifecycle: destroy()" cross-reference section. Public method count: 44 (was 38).
+
+**Preflight: innerHTML audit** — New check scans `sui.js` for unannotated `innerHTML`, `outerHTML`, `insertAdjacentHTML`, and `document.write` usage. Constant-string assignments and lines with "safe constant" annotations are allowlisted. Prevents future XSS regressions.
+
+### Bundle
+
+~93KB core + ~268KB icon sprite (~28KB gzipped). 536 icons unchanged.
+
+---
+
 ## [3.2.0] — 2026-02-23
 
 ### Theme: Icon Refinements, Bug Fixes & Lucide Migration Map

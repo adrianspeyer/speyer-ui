@@ -1,6 +1,6 @@
 # Speyer UI System (SUI)
 
-> Lightweight, accessible CSS design system for SaaS applications. Mobile-first, WCAG 2.1 AA, 536 purpose-built icons, under 100KB core.
+> Lightweight, accessible CSS design system for SaaS applications. Mobile-first, WCAG 2.1 AA, 538 purpose-built icons, under 100KB core.
 
 ## Quick Start
 
@@ -134,6 +134,7 @@ If migrating from Lucide icons to SUI Icons, use this lookup. Not every Lucide i
 | `braces` | `sui-icon-dev-braces` |
 | `brain` | `sui-icon-ai-brain` |
 | `bug` | `sui-icon-dev-bug` |
+| `bus` | `sui-icon-travel-bus` |
 | `calculator` | `sui-icon-pay-calculator` |
 | `calendar` | `sui-icon-view-calendar` |
 | `calendar-days` | `sui-icon-time-cal-days` |
@@ -380,4 +381,4 @@ If migrating from Lucide icons to SUI Icons, use this lookup. Not every Lucide i
 | `youtube` | `sui-icon-soc-youtube` |
 | `zap` | `sui-icon-act-zap` |
 
-**284 mappings.** For icons not listed, browse the [Icon Browser](https://adrianspeyer.github.io/speyer-ui/icons.html) or use `data-lucide` attribute search in the migration tool.
+**285 mappings.** For icons not listed, browse the [Icon Browser](https://adrianspeyer.github.io/speyer-ui/icons.html) or use `data-lucide` attribute search in the migration tool.

@@ -1,6 +1,6 @@
 {
   "name": "speyer-ui",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "A lightweight, accessible design system built for colour-blind users and AI-assisted development.",
   "author": "Adrian Speyer",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "axe": "node scripts/run-axe.mjs",
     "minify:css": "npx clean-css-cli -o dist/sui-tokens.min.css sui-tokens.css && npx clean-css-cli -o dist/sui-components.min.css sui-components.css",
     "minify:icons-css": "npx clean-css-cli -o dist/sui-icons.min.css sui-icons.css",
-    "minify:icons-svg": "cp sui-icons.min.svg dist/sui-icons.min.svg",
+    "minify:icons-svg": "node scripts/minify-sprite.mjs",
     "validate:icons": "node scripts/validate-icons.mjs",
     "minify:js": "npx terser sui.js --comments '/^!/' -o dist/sui.min.js",
     "build": "npm run preflight && npm run minify:css && npm run minify:js && npm run minify:icons-css && npm run minify:icons-svg"

@@ -4,8 +4,8 @@
  * Conservative SVGO configuration for contributor use.
  * Run on individual icon files BEFORE adding them to the sprite.
  *
- * NOTE: svgo is NOT a build dependency. The build pipeline copies the
- * pre-minified sprite (sui-icons.min.svg) directly. This config exists
+ * NOTE: svgo is NOT a build dependency. The build pipeline minifies the
+ * sprite via scripts/minify-sprite.mjs (whitespace stripping). This config exists
  * for contributors preparing individual icons before sprite assembly.
  * Install svgo locally if needed: npx svgo --config svgo.config.mjs icon.svg
  *

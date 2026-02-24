@@ -732,6 +732,36 @@ function checkClassDrift() {
   if (driftCount === 0) pass();
 }
 
+// ════════════════════════════════════════════════════════════════════
+//  Check 10: Dangerous DOM sinks in sui.js
+// ════════════════════════════════════════════════════════════════════
+
+function checkDangerousSinks() {
+  console.log('  ── Dangerous DOM Sinks ──');
+  const js = readFile('sui.js');
+  if (!js) { fail('Cannot read sui.js'); return; }
+  const lines = js.split('\n');
+  const sinkRe = /\.(innerHTML|outerHTML|insertAdjacentHTML)\s*[=(]/;
+  const writeRe = /document\.write\s*\(/;
+  let issues = 0;
+
+  lines.forEach((line, i) => {
+    const lineNum = i + 1;
+    const trimmed = line.trim();
+    if (sinkRe.test(trimmed) || writeRe.test(trimmed)) {
+      // Allowlisted: lines with "safe constant" annotation
+      if (/safe constant/i.test(trimmed)) return;
+      // Allowlisted: lines that only assign string literals (no variable interpolation)
+      // e.g., el.innerHTML = '<svg ...' (constant SVG markup)
+      if (/\.innerHTML\s*=\s*'[^']*'\s*;?\s*$/.test(trimmed)) return;
+      if (/\.innerHTML\s*=\s*"[^"]*"\s*;?\s*$/.test(trimmed)) return;
+      fail(`Unannotated DOM sink at sui.js:${lineNum} — ${trimmed.substring(0, 80)}`);
+      issues++;
+    }
+  });
+  if (issues === 0) pass();
+}
+
 
 // ════════════════════════════════════════════════════════════════════
 //  Runner
@@ -750,6 +780,7 @@ checkDistHygiene();
 checkEncoding();
 checkTokenDrift();
 checkClassDrift();
+checkDangerousSinks();
 
 console.log('');
 const parts = [`${totalPass} passed`, `${totalFail} failed`];
