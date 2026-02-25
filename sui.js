@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 3.3.0
+ * Version: 3.3.1
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -340,6 +340,14 @@ const SUI = (() => {
         el.addEventListener('click', el._suiBackdrop = (e) => {
           if (e.target === el) this.close(el);
         });
+        // iOS Safari: showModal() marks siblings inert but may fail
+        // to remove the attribute on close. Persistent cleanup listener.
+        if (!el._suiInertCleanup) {
+          el._suiInertCleanup = () => {
+            document.querySelectorAll('[inert]').forEach(n => n.removeAttribute('inert'));
+          };
+          el.addEventListener('close', el._suiInertCleanup);
+        }
         this._stack.push(el);
         return;
       }
@@ -378,6 +386,8 @@ const SUI = (() => {
       // Native <dialog> path
       if (el.tagName === 'DIALOG') {
         el.close();
+        // iOS Safari inert cleanup (synchronous — close event may be async)
+        document.querySelectorAll('[inert]').forEach(n => n.removeAttribute('inert'));
         if (el._suiBackdrop) {
           el.removeEventListener('click', el._suiBackdrop);
           delete el._suiBackdrop;
@@ -1256,7 +1266,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v3.3.0 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v3.3.1 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

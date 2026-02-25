@@ -4,6 +4,18 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.3.1] — 2026-02-25
+
+### Theme: iOS Safari Modal Inert Fix
+
+Defensive fix for a WebKit bug where `showModal()` adds `inert` to dialog siblings but sometimes fails to remove the attribute on close, leaving the page unresponsive. Affects iOS Safari (all versions using `<dialog>` + `showModal()`). Zero cost on browsers that behave correctly.
+
+### Fixed
+
+**iOS Safari stale `inert` cleanup (JS)** — `SUI.modal.open()` now attaches a persistent `close` event listener on native `<dialog>` elements that strips stale `[inert]` attributes from the document. `SUI.modal.close()` also performs synchronous cleanup before teardown. Belt-and-suspenders: the event listener catches non-SUI close paths (Escape key, `form[method=dialog]`, direct `.close()`), while the synchronous line covers the `SUI.modal.close()` path immediately.
+
+---
+
 ## [3.3.0] — 2026-02-24
 
 ### Theme: Icon QA Redesigns, New Bus Icon & Smoke Test Refresh
