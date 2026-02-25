@@ -102,7 +102,7 @@
 
     <!-- Segmented control -->
     <div class="sui-segmented" data-test="segmented" role="radiogroup" aria-label="Test segmented">
-      <button class="sui-segment is-active" role="radio" aria-checked="true" data-test="seg-a">Option A</button>
+      <button class="sui-segment" role="radio" aria-checked="true" data-test="seg-a">Option A</button>
       <button class="sui-segment" role="radio" aria-checked="false" data-test="seg-b">Option B</button>
     </div>
 
@@ -332,9 +332,8 @@
         const segA = $('[data-test="seg-a"]');
         segB.click();
         await delay(50);
-        const switched = segB.classList.contains('is-active') &&
-                         segB.getAttribute('aria-checked') === 'true' &&
-                         !segA.classList.contains('is-active');
+        const switched = segB.getAttribute('aria-checked') === 'true' &&
+                         segA.getAttribute('aria-checked') === 'false';
         segA.click();
         await delay(50);
         return switched;
