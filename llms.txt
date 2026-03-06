@@ -46,6 +46,8 @@
 
 **Critical rule:** Never invent `sui-*` classes. If it's not in `sui-components.css`, it doesn't exist.
 
+---
+
 ## For AI Assistants
 
 If you are an AI assistant building with SUI, fetch the comprehensive reference file above before generating code. It contains:
@@ -55,6 +57,143 @@ If you are an AI assistant building with SUI, fetch the comprehensive reference 
 - Common name alias table (Sidebar → sui-sidenav, Modal → sui-dialog, etc.)
 - Design token reference
 - Namespace rules (never invent sui-* classes)
+
+---
+
+## Security Patterns for App Code Built on SUI
+
+SUI's own JS is safe (toast XSS hardened in v3.2.1; preflight audits for unsafe DOM methods). These rules apply to **app code** you write on top of SUI.
+
+**Never pass user-controlled data to innerHTML.** Use `textContent` or safe DOM construction instead:
+
+```js
+// Wrong — XSS vector
+cardBody.innerHTML = `<p>${userData}</p>`;
+
+// Correct
+const p = document.createElement('p');
+p.textContent = userData;
+cardBody.appendChild(p);
+```
+
+**Sanitise before calling `SUI.toast.show()`.** The `title` and `message` parameters are set via `textContent` internally, so raw SUI toasts are safe — but if you pre-process or concatenate strings before passing them in, sanitise first.
+
+**Never reflect URL parameters into the DOM without encoding.** Query strings, hash fragments, and `window.location` values must be treated as untrusted:
+
+```js
+// Wrong
+el.innerHTML = location.search;
+
+// Correct — encode before display
+el.textContent = decodeURIComponent(location.search);
+```
+
+**Validate `data-*` attribute values before use in JS.** If your app reads `data-sui-*` or custom `data-*` attributes to drive behaviour, treat the values as untrusted input. Validate type and range before acting.
+
+**Use Content Security Policy headers.** SUI has no inline styles or eval. Your app can ship a restrictive CSP:
+```
+Content-Security-Policy: default-src 'self'; style-src 'self' https://cdn.jsdelivr.net; script-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:;
+```
+
+**Keep CDN links version-pinned in production.** `@latest` is convenient for development. Pin to a specific tag (e.g. `@3.3.1`) in production so a CDN update never silently changes your app's behaviour.
+
+---
+
+## Mobile QA Checklist
+
+SUI is mobile-first (375px baseline). Before marking any view complete, verify:
+
+- [ ] `<meta name="viewport" content="width=device-width, initial-scale=1">` is present in `<head>`
+- [ ] No hardcoded pixel widths on containers — use `%`, `rem`, tokens, or `max-width` with `width: 100%`
+- [ ] All interactive elements (buttons, links, inputs) meet the 44px minimum touch target. Use `.sui-icon-btn` for icon-only controls — it enforces this automatically
+- [ ] Tables use `.sui-table-stack` and include `data-label="Column Name"` on every `<td>` so they reflow to a card layout on small screens
+- [ ] Modals and sheets are scrollable on small viewports — check that long content doesn't overflow the dialog
+- [ ] Text does not overflow or truncate unexpectedly at 375px — test with real content, not placeholder lorem ipsum
+- [ ] `prefers-reduced-motion` is respected — SUI handles this for its own transitions, but custom animations in app code need their own `@media (prefers-reduced-motion: reduce)` override
+
+---
+
+## Accessibility Requirements (Inline Reference)
+
+SUI targets WCAG 2.1 AA. Status is **never** communicated by colour alone — always pair with icon + text. All interactive elements are keyboard-navigable and screen-reader-compatible.
+
+### ARIA Requirements by Component
+
+| Component | Required ARIA |
+|---|---|
+| **Tabs** | `role="tablist"` on container, `role="tab"` on buttons, `role="tabpanel"` on panels, `aria-selected` managed by JS |
+| **Dropdown** | `aria-haspopup` + `aria-expanded` on trigger, `role="menu"` on menu, `role="menuitem"` on items |
+| **Modal** | Native `<dialog>` with `aria-label` or `aria-labelledby`. Focus trapped inside. |
+| **Sheet** | `aria-modal="true"`, `role="dialog"`, `aria-label` |
+| **Panel** | `aria-label` on panel, `aria-hidden` managed by JS, `aria-expanded` on trigger, `aria-label` on close button |
+| **Sidenav groups** | `aria-expanded` + `aria-controls` on toggle button, `id` on links container |
+| **Segmented control** | `role="radiogroup"` on container, `role="radio"` on segments, `aria-checked` managed by JS |
+| **Accordion** | `aria-expanded` on trigger, `hidden` attribute on collapsed panel |
+| **Stepper** | `<ol>` + `<li>` for list semantics, `aria-current="step"` on active step |
+| **Badge count** | Parent element has `aria-label` with count context; count `<span>` has `aria-hidden="true"` |
+| **Table interactive** | `tabindex="0"` + `role="link"` on clickable rows |
+| **Skip link** | `<a href="#main" class="sui-visually-hidden">Skip to main content</a>` as first child of `<body>` |
+
+### Icon Accessibility Patterns
+
+Icons use `<svg><use href="#sui-icon-..."/></svg>` from the injected sprite.
+
+**Icon paired with visible text (decorative):** Add `aria-hidden="true"` to the SVG. The text is the accessible name.
+
+```html
+<svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
+  <use href="#sui-icon-status-check-circle"/>
+</svg>
+Active
+```
+
+**Icon-only button:** `aria-label` goes on `<button>`, not the SVG. Always use `.sui-icon-btn` (enforces 44px touch target).
+
+```html
+<button class="sui-icon-btn" aria-label="Delete item">
+  <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <use href="#sui-icon-act-trash"/>
+  </svg>
+</button>
+```
+
+**Standalone informative icon (rare):** `role="img"` and `aria-label` on the SVG itself. Prefer pairing with text instead.
+
+```html
+<svg class="sui-icon" viewBox="0 0 24 24" role="img" aria-label="Warning">
+  <use href="#sui-icon-status-alert-triangle"/>
+</svg>
+```
+
+### Common Accessibility Mistakes
+
+- `aria-selected` on a plain `<button>` — invalid without `role="tab"`. Lighthouse flags this.
+- Missing `data-label` on `<td>` — tables break on mobile without it.
+- Icon-only button without `aria-label` — control is invisible to screen readers.
+- Relying on `<title>` inside SVG `<symbol>` — does not reliably reach screen readers. Always use `aria-label` on the interactive parent.
+- Status communicated by colour alone — always pair colour with icon + text.
+
+---
+
+## Design Token Rules
+
+All colours, spacing, typography, and radii use `--sui-*` custom properties. Never hardcode hex values or pixel sizes that match token values.
+
+**Spacing scale:** `--sui-space-1` (4px) through `--sui-space-6` (48px). No `--sui-space-7` or higher.
+
+**Typography:** `--sui-text-small`, `--sui-text-base`, `--sui-text-h3` (20px), `--sui-text-h2` (24px), `--sui-text-h1` (32px). No `--sui-text-h4`.
+
+**Font families:** `--sui-font-primary`, `--sui-font-mono`. No `--sui-font`.
+
+**Font weights:** `--sui-weight-regular`, `--sui-weight-medium`, `--sui-weight-bold`. No `--sui-weight-normal`.
+
+**Radii:** `--sui-radius-sm`, `--sui-radius-md`, `--sui-radius-lg`. No bare `--sui-radius`.
+
+**Backgrounds:** `--sui-bg-primary`, `--sui-bg-card`, `--sui-bg-elevated`. No `--sui-bg-body`.
+
+**Extending tokens:** Use `--app-*` prefix for custom tokens. Reference SUI tokens as fallbacks: `--app-sidebar-width: var(--sui-space-6)`.
+
+---
 
 ## Classes and Methods That Do NOT Exist
 
@@ -88,6 +227,8 @@ Do not invent or reference these — they are common AI hallucinations:
 | `sui-dialog-content` | Use `sui-modal-body`. |
 | `sui-toggle-slider` | Use `sui-toggle-track`. |
 | `sui-sidenav-group` (class) | Not a CSS class. Wrapper uses `data-sui-sidenav-group` attribute. CSS classes: `sui-sidenav-group-toggle`, `-links`, `-count`. |
+
+---
 
 ## Lucide → SUI Icon Migration Map
 
