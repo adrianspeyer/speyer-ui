@@ -70,7 +70,7 @@ When building custom patterns with SUI, follow the same principle: if you remove
 
 ## Icons and Screen Readers
 
-SUI ships 483 first-party icons with built-in accessibility. If you use SUI Icons, the `sui-icon` class handles sizing and `currentColor` inheritance. If you bring your own icons (Heroicons, Phosphor, Font Awesome, inline SVG), the same three patterns apply.
+SUI ships 538 first-party icons with built-in accessibility. If you use SUI Icons, the `sui-icon` class handles sizing and `currentColor` inheritance. If you bring your own icons (Heroicons, Phosphor, Font Awesome, inline SVG), the same three patterns apply.
 
 ### Pattern A — Decorative icon (icon + visible text)
 

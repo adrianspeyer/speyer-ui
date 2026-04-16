@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Design Tokens
- * Version: 3.3.1
+ * Version: 3.4.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * A lightweight, accessible token system for modern web applications.
@@ -114,12 +114,14 @@
   --sui-touch-target: 44px;
 
   /* Interactive — button/component backgrounds (overridable for brand theming) */
-  --sui-btn-primary-bg:       var(--sui-blue-primary);
-  --sui-btn-primary-bg-hover: var(--sui-blue-hover);
-  --sui-btn-danger-bg:        var(--sui-error-strong);
-  --sui-btn-danger-bg-hover:  #991B1B;
-  --sui-btn-success-bg:       var(--sui-success-strong);
-  --sui-btn-success-bg-hover: #116932;
+  --sui-btn-primary-bg:         var(--sui-blue-primary);
+  --sui-btn-primary-bg-hover:   var(--sui-blue-hover);
+  --sui-btn-secondary-bg:       #334155;  /* 10.35:1 on white text — AAA */
+  --sui-btn-secondary-bg-hover: #1E293B;
+  --sui-btn-danger-bg:          var(--sui-error-strong);
+  --sui-btn-danger-bg-hover:    #991B1B;
+  --sui-btn-success-bg:         var(--sui-success-strong);
+  --sui-btn-success-bg-hover:   #116932;
 }
 
 
@@ -168,19 +170,15 @@
   --sui-overlay: rgba(0, 0, 0, 0.65);
 
   /* Interactive — contrast-safe overrides for dark backgrounds */
-  --sui-btn-primary-bg:       #2563EB;
-  --sui-btn-primary-bg-hover: #1D4ED8;
-  --sui-btn-danger-bg:        #B91C1C;
-  --sui-btn-danger-bg-hover:  #991B1B;
-  --sui-btn-success-bg:       #15803D;
-  --sui-btn-success-bg-hover: #116932;
+  --sui-btn-primary-bg:         #2563EB;
+  --sui-btn-primary-bg-hover:   #1D4ED8;
+  --sui-btn-secondary-bg:       #475569;  /* 7.24:1 on white text — AAA on dark */
+  --sui-btn-secondary-bg-hover: #334155;
+  --sui-btn-danger-bg:          #B91C1C;
+  --sui-btn-danger-bg-hover:    #991B1B;
+  --sui-btn-success-bg:         #15803D;
+  --sui-btn-success-bg-hover:   #116932;
 }
-
-
-
-/* ==========================================================================
-   System Preference: Auto Dark Mode
-   ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
@@ -229,12 +227,14 @@
     --sui-overlay: rgba(0, 0, 0, 0.65);
 
     /* Interactive — contrast-safe overrides for dark backgrounds */
-    --sui-btn-primary-bg:       #2563EB;
-    --sui-btn-primary-bg-hover: #1D4ED8;
-    --sui-btn-danger-bg:        #B91C1C;
-    --sui-btn-danger-bg-hover:  #991B1B;
-    --sui-btn-success-bg:       #15803D;
-    --sui-btn-success-bg-hover: #116932;
+    --sui-btn-primary-bg:         #2563EB;
+    --sui-btn-primary-bg-hover:   #1D4ED8;
+    --sui-btn-secondary-bg:       #475569;  /* 7.24:1 on white text — AAA on dark */
+    --sui-btn-secondary-bg-hover: #334155;
+    --sui-btn-danger-bg:          #B91C1C;
+    --sui-btn-danger-bg-hover:    #991B1B;
+    --sui-btn-success-bg:         #15803D;
+    --sui-btn-success-bg-hover:   #116932;
   }
 }
 

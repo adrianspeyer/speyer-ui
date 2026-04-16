@@ -95,7 +95,7 @@ el.textContent = decodeURIComponent(location.search);
 Content-Security-Policy: default-src 'self'; style-src 'self' https://cdn.jsdelivr.net; script-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:;
 ```
 
-**Keep CDN links version-pinned in production.** `@latest` is convenient for development. Pin to a specific tag (e.g. `@3.3.1`) in production so a CDN update never silently changes your app's behaviour.
+**Keep CDN links version-pinned in production.** `@latest` is convenient for development. Pin to a specific tag (e.g. `@3.4.0`) in production so a CDN update never silently changes your app's behaviour.
 
 ---
 

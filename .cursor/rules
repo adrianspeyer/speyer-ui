@@ -31,7 +31,7 @@ SUI is the **shell** — containers, chrome, interactive primitives, typography,
 
 **SUI ships 538 purpose-built icons** with built-in accessibility (forced-colours, reduced-motion, 44px touch targets). Icons are optional — bring-your-own is fully supported.
 
-**SUI does NOT ship:** charts, data visualisation, drag-and-drop, or application logic. These are bring-your-own. SUI provides the visual tokens to keep them consistent. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
+**SUI does NOT ship:** charts, data visualisation, drag-and-drop, or application logic. Integration recipes exist for Flatpickr (dates), Tom Select (enhanced selects), FilePond (file upload), Quill (rich text), and Chart.js (data viz) — SUI provides token overrides, you bring the library.
 
 ---
 
@@ -103,13 +103,13 @@ When building on SUI and you need custom tokens (brand colours, app-specific spa
 
 ### Buttons
 - `sui-btn` — Base button (44px, 12px radius)
-- `sui-btn-primary` — Primary action (blue)
-- `sui-btn-secondary` — Secondary action (grey fill)
-- `sui-btn-ghost` — Ghost (transparent, border)
+- `sui-btn-primary` — Primary action (blue fill, white text)
+- `sui-btn-secondary` — Secondary action (filled slate grey, white text) — filled button for secondary emphasis
+- `sui-btn-outline` — Outline variant (transparent background, blue border, blue text) — outlined button for tertiary emphasis
+- `sui-btn-ghost` — Ghost (transparent, grey border)
 - `sui-btn-dashed` — Dashed border, muted — for de-emphasised actions ("Skip", "Add item")
-- `sui-btn-danger` — Destructive action (red)
-- `sui-btn-success` — Positive action (green)
-- `sui-btn-outline` — Outline variant
+- `sui-btn-danger` — Destructive action (red fill)
+- `sui-btn-success` — Positive action (green fill)
 - `sui-btn-sm` — Small (36px)
 - `sui-btn-full` — Full width
 
@@ -195,6 +195,7 @@ When building on SUI and you need custom tokens (brand colours, app-specific spa
 | SUI.modal | open(sel), close(sel) |
 | SUI.toast | show(opts), success(t,m), error(t,m), warning(t,m), info(t,m), dismiss(el), clearAll() |
 | SUI.tooltip | show(el), hide(el), destroy(el) |
+| SUI.avatar | colorFor(text), destroy(el) |
 | SUI.copy | text(str), fromElement(sel) |
 | SUI.sheet | open(sel), close(sel), toggle(sel) |
 | SUI.segmented | select(el), destroy(container) |
@@ -207,18 +208,70 @@ Do not invent or reference these — they are common AI hallucinations:
 
 | Hallucinated name | Reality / correct approach |
 |---|---|
-| `sui-card-content` | Use `sui-card-body` |
-| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG |
-| `sui-icon-{name}` (no category) | Must include category: `sui-icon-{category}-{name}` |
-| `data-sui-icon` | No data attribute for icons — use `<svg><use href>` pattern |
+| **Buttons** | |
+| `sui-btn-link` | Not shipped. Use a native `<a>` element — SUI styles links already. |
+| `sui-btn-lg` / `sui-btn-xl` / `sui-btn-xs` | Not shipped. SUI has base (44px) and `sui-btn-sm` (36px) only. |
+| `sui-btn-block` | Use `sui-btn-full`. |
+| `sui-btn-group` | Not shipped. Use the Button Group recipe. |
+| `sui-btn-loading` | Not shipped. Use `disabled` + add a spinner icon/animation in app code. |
+| `sui-btn-warning` / `sui-btn-info` | Not shipped. Filled buttons: `primary`, `secondary`, `danger`, `success`. Use `sui-btn-outline` or `sui-btn-ghost` for other intents. |
+| `sui-btn-text` / `sui-btn-default` | Base `sui-btn` is the default. For text-only, use `sui-btn-ghost`. |
+| `sui-btn-disabled` | Not a class. Use the `disabled` attribute or `.is-disabled`. |
+| **Cards** | |
+| `sui-card-content` | Use `sui-card-body`. |
+| `sui-card-title` | Not shipped. Use a heading element inside `sui-card-header` or `sui-card-body`. |
+| `sui-card-footer` | Not shipped. Use `sui-card-body` with flex layout, or put a border-top `<div>` at the bottom. |
+| `sui-card-actions` | Not shipped. Use `sui-flex-between` inside `sui-card-header` or `sui-card-body`. |
+| **Forms** | |
+| `sui-form` / `sui-form-group` | Not shipped. Use `sui-input-group` for label + input + hint combos. |
+| `sui-label` (for inputs) | Use `sui-input-label`. |
+| `sui-textarea` | Not a class. Use `<textarea class="sui-input">`. |
+| `sui-input-sm` / `sui-input-lg` | Not shipped. Inputs have one size (44px touch target). |
+| **Text & typography** | |
+| `sui-text-danger` | Use `sui-text-error`. Note: buttons use `-danger`, text utilities use `-error` (follows token names). |
+| `sui-text-sm` / `sui-text-lg` / `sui-text-xl` | Not shipped. Use tokens directly: `font-size: var(--sui-text-small)` / `var(--sui-text-h3)`. |
+| `sui-h1` / `sui-h2` / `sui-h3` | Not shipped. Use native heading elements — SUI styles them globally. |
+| **Layout** | |
 | `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
-| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
+| `sui-container` (for max-width wrapping) | `sui-container` is for container queries. For max-width wrapping, use `sui-wrap`. |
+| `sui-sidebar` | Use `sui-sidenav`. |
+| `sui-row` / `sui-col` | Not shipped. Use `sui-grid` + `sui-grid-2/3/4` or `sui-flex`. |
+| `sui-header` / `sui-content` | Not shipped. Use `sui-topbar`, `sui-screen-header/body/footer`. |
+| **Overlays** | |
+| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `sui-dialog-wide` (720px). For wider, use `--sui-panel-width`. |
+| `sui-dialog-sm` / `sui-modal-sm` / `sui-modal-lg` | Not shipped. Dialogs have one default size (520px) and one wide size (`sui-dialog-wide`, 720px). |
+| `sui-dialog-content` / `sui-dialog-body` / `sui-dialog-header` / `sui-dialog-footer` | Use `sui-modal-body`, `sui-modal-header`, `sui-modal-footer`. The `dialog` element gets `sui-dialog`; its inner structure uses `sui-modal-*`. |
+| `sui-dialog-close` | Use `sui-modal-close`. |
+| `sui-popover` | Not shipped. Use the Popover recipe (light or heavy pattern). |
+| **Navigation** | |
+| `sui-tabs` / `sui-tab-panel` / `sui-tab-content` / `sui-tab-pane` | Use `sui-nav` + `[role="tablist"]` for the bar, `[data-view]` for panels. |
+| `sui-navbar` / `sui-nav-item` | Use `sui-topbar` for the bar, `sui-tab` for items, `sui-nav-link` for link-style items. |
+| **Components** | |
+| `sui-tag` | Use `sui-chip` + `sui-chip-remove`. |
+| `sui-spinner` / `sui-loading` | Use `sui-skeleton` (loading placeholders) or `sui-progress-indeterminate` (animated bar). |
+| `sui-collapse` | Use `sui-accordion`. |
+| `sui-list` / `sui-list-item` | Not shipped. Use native `<ul>` / `<ol>` — SUI styles them globally. |
+| `sui-alert-body` | Use `sui-alert-content`. |
+| `sui-alert-close` / `sui-alert-dismiss` | Not shipped. Alerts are static. For dismissible, add your own close button. |
+| `sui-toggle-slider` | Use `sui-toggle-track`. |
+| **Utilities** | |
+| `sui-sr-only` | Use `sui-visually-hidden`. |
+| `sui-d-none` / `sui-d-flex` / `sui-d-block` | Not shipped. Use `sui-hidden` or `sui-flex`. For `display: block`, use plain CSS. |
+| `sui-w-full` / `sui-w-100` / `sui-h-full` | Not shipped. Use `width: 100%` in custom CSS. For buttons, use `sui-btn-full`. |
+| `sui-shadow` / `sui-shadow-sm` / `sui-shadow-lg` | Not classes. Shadows are opt-in on cards only: `sui-card-shadow`. Use tokens `var(--sui-shadow-sm/md/lg)` in custom CSS. |
+| `sui-border` / `sui-rounded` | Not classes. Use tokens `var(--sui-border)`, `var(--sui-radius-md)` in custom CSS. For radius overrides, use `sui-round-sm/md/lg/full`. |
+| **Icons** | |
+| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG. |
+| `sui-icon-{name}` (no category) | Must include category: `sui-icon-{category}-{name}`. |
+| `data-sui-icon` | No data attribute for icons — use `<svg><use href>` pattern. |
+| **JS API** | |
 | `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |
 | `SUI.modal.confirm()` / `SUI.modal.prompt()` | Not shipped. Use Confirmation Dialog recipe. |
 | `SUI.toast.close()` | Not shipped. Toasts use `SUI.toast.dismiss(el)` or `SUI.toast.clearAll()`. |
 | `data-sui-toast-close` | Not shipped. Toast close uses `.sui-toast-close` (internal) + `SUI.toast.dismiss()`. |
 | `data-sui-modal-dismiss` | Not shipped. Use `[data-sui-modal-close]` — close ≠ dismiss. |
 | `SUI.animate()` | Not shipped. SUI uses CSS transitions; use WAAPI in app code. |
+| **Tokens** | |
 | `--sui-font` | Use `--sui-font-primary` or `--sui-font-mono`. |
 | `--sui-weight-normal` | Use `--sui-weight-regular`. |
 | `--sui-text-h4` | Does not exist. Heading tokens stop at `--sui-text-h3`. |
@@ -227,11 +280,6 @@ Do not invent or reference these — they are common AI hallucinations:
 | `--sui-text-sm` | Use `--sui-text-small`. |
 | `--sui-text-lg` | Use `--sui-text-h3` (20px) or `--sui-text-h2` (24px). |
 | `--sui-space-7`/`--sui-space-8` | Do not exist. Spacing scale is 1–6 (4px–48px). |
-| `sui-sr-only` | Use `sui-visually-hidden`. |
-| `sui-label` (for inputs) | Use `sui-input-label`. |
-| `sui-alert-body` | Use `sui-alert-content`. |
-| `sui-dialog-content` | Use `sui-modal-body`. |
-| `sui-toggle-slider` | Use `sui-toggle-track`. |
 | `sui-sidenav-group` (class) | Not a CSS class. Use `data-sui-sidenav-group` attribute on the wrapper. CSS classes are `sui-sidenav-group-toggle`, `-links`, `-count`. |
 
 ### Content & Typography
@@ -257,7 +305,8 @@ Do not invent or reference these — they are common AI hallucinations:
 - `sui-scroll-x` — Horizontal scroll
 - `sui-hidden` — `display: none !important`
 - `sui-visually-hidden` — Screen reader only
-- `sui-text-center/right`, `sui-text-cap`
+- `sui-text-center`, `sui-text-right`, `sui-text-cap`
+- `sui-text-truncate` — Single-line ellipsis (overflow hidden, text-overflow ellipsis, nowrap)
 - `sui-round-none/sm/md/lg/full` — Radius overrides
 
 ---
@@ -273,7 +322,7 @@ All colours use `--sui-*` custom properties. **Never hardcode hex in components.
 - **Borders:** `--sui-border`
 - **Spacing:** `--sui-space-1` through `--sui-space-6` (8px grid)
 - **Radius:** `--sui-radius-sm/md/lg/full`
-- **Brand buttons:** `--sui-btn-primary-bg`, `--sui-btn-danger-bg`, `--sui-btn-success-bg`
+- **Brand buttons:** `--sui-btn-primary-bg`, `--sui-btn-secondary-bg`, `--sui-btn-danger-bg`, `--sui-btn-success-bg`
 
 ### Brand Colours Warning
 

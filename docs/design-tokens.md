@@ -47,6 +47,8 @@ Override these to customise your brand colour while keeping contrast safe:
 |-------|-------|------|---------|
 | `--sui-btn-primary-bg` | `var(--sui-blue-primary)` | `#2563EB` | Primary button fill |
 | `--sui-btn-primary-bg-hover` | `var(--sui-blue-hover)` | `#1D4ED8` | Primary button hover |
+| `--sui-btn-secondary-bg` | `#334155` | `#475569` | Secondary button fill |
+| `--sui-btn-secondary-bg-hover` | `#1E293B` | `#334155` | Secondary button hover |
 | `--sui-btn-danger-bg` | `var(--sui-error-strong)` | `#B91C1C` | Danger button fill |
 | `--sui-btn-danger-bg-hover` | `#991B1B` | `#991B1B` | Danger button hover |
 | `--sui-btn-success-bg` | `var(--sui-success-strong)` | `#15803D` | Success button fill |

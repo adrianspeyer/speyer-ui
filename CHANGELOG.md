@@ -4,6 +4,44 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.4.0] — 2026-04-16
+
+### Theme: Button Variant Naming Overhaul
+
+Reconciles button variant names with what the code actually does. The old `sui-btn-secondary` was visually an outline button (transparent background, blue border) despite its name — this caused confusion for developers and AI assistants alike, who expected "secondary" to mean a filled neutral button and "outline" to exist as a separate class.
+
+### BREAKING
+
+**`sui-btn-secondary` is now a filled slate-grey button** with white text. It uses new `--sui-btn-secondary-bg` and `--sui-btn-secondary-bg-hover` design tokens (light: `#334155`/`#1E293B`, dark: `#475569`/`#334155`). Both meet WCAG AAA contrast (10.35:1 light, 7.24:1 dark).
+
+**Migration:** Any existing `sui-btn-secondary` that was intended as a blue-outlined button should be updated to `sui-btn-outline`.
+
+### Added
+
+- **`sui-btn-outline`** — New button variant. Transparent background, blue border, blue text. This is the old `sui-btn-secondary` behaviour under its correct name. The orphaned `@media (prefers-contrast: more)` rule that previously referenced this non-existent class is now legitimate.
+- **`--sui-btn-secondary-bg`** and **`--sui-btn-secondary-bg-hover`** design tokens — Overridable brand tokens for the filled secondary button, matching the existing pattern for primary, danger, and success.
+- **`sui-text-right`** — Text alignment utility. Previously documented as existing (`sui-text-center/right`) but only `sui-text-center` was actually in the CSS. Now both exist.
+- **`sui-text-truncate`** — Single-line ellipsis utility (`overflow: hidden; text-overflow: ellipsis; white-space: nowrap`). SUI already used this pattern inline on `.sui-brand-name` — now exposed as a composable utility.
+- **Expanded hallucination prevention table** (`.claude/instructions.md`) — Grew from ~27 to ~55 entries, organised by category (Buttons, Cards, Forms, Text, Layout, Overlays, Navigation, Components, Utilities, Icons, JS API, Tokens). Covers high-frequency AI traps like `sui-btn-link`, `sui-btn-lg`, `sui-btn-group`, `sui-text-danger` (→ use `sui-text-error`), `sui-card-title`, `sui-form`, `sui-tabs`, `sui-navbar`, `sui-tag`, `sui-spinner`, `sui-container` (clarified: container queries, not max-width wrapping).
+
+### Fixed
+
+- **`sui-btn-outline` orphan rule** — `sui-components.css` had a high-contrast override for `.sui-btn-outline` (line ~3502) but no base variant existed, causing any use of the class to silently fail. The demo page (`index.html`) had a "No Backdrop" panel trigger button using this non-existent class — now renders correctly.
+- **`.claude/instructions.md` JS API table** — Added missing `SUI.avatar` row (`colorFor(text)`, `destroy(el)`) to match the canonical `docs/javascript-api.md`. Table previously claimed to be "grep-verified" but omitted this module.
+- **Button variant descriptions** — `.claude/instructions.md` described `sui-btn-secondary` as "grey fill" when the actual code was a blue outline. All AI context files now accurately describe what each variant renders.
+- **`sui-text-right` documentation claim** — AI context files listed `sui-text-center/right` as existing utilities, but only `sui-text-center` was in the CSS. Added the missing `sui-text-right` utility class.
+
+### Changed
+
+- **Button demo** (`index.html`) — Showcase row now displays both Secondary (filled) and Outline variants side by side.
+- **Version bumped** across all files: `sui-tokens.css`, `sui-components.css`, `sui.js`, `sui-icons.css`, `icons.html`, `index.html`, `package.json`, `README.md`, `llms.txt`, `docs/javascript-api.md`, `.claude/instructions.md`, `.cursor/rules`.
+
+### Bundle
+
+~98KB core + ~269KB icon sprite (~29KB gzipped). 538 icons (506 unique + 32 aliases) · 29 categories.
+
+---
+
 ## [3.3.1] — 2026-02-25
 
 ### Theme: iOS Safari Modal Inert Fix

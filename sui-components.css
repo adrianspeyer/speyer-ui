@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 3.3.1
+ * Version: 3.4.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -573,11 +573,18 @@ kbd,
 .sui-btn-primary:active { background: var(--sui-blue-active); }
 
 .sui-btn-secondary {
+  background: var(--sui-btn-secondary-bg);
+  border-color: transparent;
+  color: var(--sui-text-inverse);
+}
+.sui-btn-secondary:hover { background: var(--sui-btn-secondary-bg-hover); }
+
+.sui-btn-outline {
   background: transparent;
   border-color: var(--sui-blue-primary);
   color: var(--sui-blue-primary);
 }
-.sui-btn-secondary:hover { background: var(--sui-blue-soft); }
+.sui-btn-outline:hover { background: var(--sui-blue-soft); }
 
 .sui-btn-ghost {
   background: transparent;
@@ -2279,6 +2286,13 @@ dialog.sui-dialog-wide { max-width: 720px; }
 .sui-items-end    { align-items: flex-end; }
 
 .sui-text-center { text-align: center; }
+.sui-text-right  { text-align: right; }
+
+.sui-text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 
 /* ==========================================================================

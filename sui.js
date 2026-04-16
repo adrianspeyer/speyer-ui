@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 3.3.1
+ * Version: 3.4.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -1266,7 +1266,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v3.3.1 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v3.4.0 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

@@ -42,7 +42,7 @@ That's it. Three CSS/JS tags for SUI, one optional CSS + sprite loader for icons
 
 ```html
 <!-- Pin to v3.0.0 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.3.1/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.0/dist/sui-tokens.min.css">
 ```
 
 ---
