@@ -4,6 +4,37 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.4.3] — 2026-05-29
+
+### Theme: Documentation & Consistency Sweep
+
+A cleanup patch that fixes a stale documentation file, removes a duplicate, corrects now-inaccurate bundle-size claims, reconciles AI-context files, surfaces two previously undocumented CSS classes, fixes a latent panel accessibility asymmetry, and hardens the preflight validator so this class of drift can't ship silently again. No breaking changes.
+
+### Fixed
+
+- **Stale icon count in docs index** — `docs/README.md` still read "Browse all 483 icons"; corrected to 538. This was the rendered GitHub docs landing page.
+- **Duplicate docs file removed** — `docs/docs-README.md` was a near-identical orphan of `docs/README.md` (a fix committed alongside the original instead of replacing it). Deleted.
+- **Inaccurate bundle-size claims** — Core dist is ~96.6KB, so the "95KB" ceiling/budget language in `index.html`, `docs/design-decisions.md`, and `docs/recipes.md` was false. Standardised to "under 100KB".
+- **Stale CDN pin examples** — `SECURITY.md` pinned to `@3.3.0` and `docs/icons.md` pinned to `@3.0.0`; both updated to the current version. Neither file was previously covered by preflight's version checks.
+- **`panel.open()` aria-expanded asymmetry** — `SUI.panel.open(element)` (passing a DOM element rather than a selector string) failed to set `aria-expanded="true"` on the trigger, while `close()` handled it correctly via `el.id`. `open()` now resolves the trigger the same way. Auto-init was unaffected (it passes strings); this fixes direct element-argument calls.
+- **AI-context "Does NOT exist" table drift** — The canonical table in `docs/javascript-api.md` and its `llms.txt` mirror steered wide-dialog needs to `--sui-panel-width`, omitting the real `sui-dialog-wide` class; `.claude`/`.cursor` were already accurate. All four copies are now verbatim-identical.
+
+### Added
+
+- **Documented `sui-dialog-wide` / `sui-modal-wide`** — Both are real, shipping 720px width variants that were previously undocumented and never demoed (orphaned like `sui-btn-outline` was before v3.4.0). Now documented in `docs/javascript-api.md` and demonstrated in the modal showcase (`index.html`).
+- **Preflight hardening (4 new checks, 77 → 81)** — (1) Doc icon-count drift scan over markdown prose; (2) stray/duplicate-file guard (e.g. `docs-README.md`, `*-copy`, `*.bak`); (3) stale CDN version-reference scan across shipped files; (4) "Does NOT exist" table parity across all four copies. Each was verified to catch its corresponding regression.
+
+### Changed
+
+- **README architecture** — Now describes three core files plus an optional icon stylesheet, with per-file sizes refreshed to measured values; "three files" / "four files" messaging reconciled across `README.md` and `index.html`.
+- **Version bumped** to 3.4.3 across all source files, dist headers, docs, and AI-context files.
+
+### Bundle
+
+~98KB core + ~270KB icon sprite (~29KB gzipped). 538 icons · 29 categories · 25+ components · 29 recipes.
+
+---
+
 ## [3.4.0] — 2026-04-16
 
 ### Theme: Button Variant Naming Overhaul

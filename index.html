@@ -8,7 +8,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="Speyer UI System — Accessibility as Architecture" />
-  <meta property="og:description" content="A lightweight, accessible design system. Three files, under 95 KB, zero dependencies. WCAG 2.1 AA baseline. Made in Canada." />
+  <meta property="og:description" content="A lightweight, accessible design system. Four files, under 100 KB, zero dependencies. WCAG 2.1 AA baseline. Made in Canada." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://adrianspeyer.github.io/speyer-ui/" />
 
@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "3.4.0",
+    "version": "3.4.3",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -104,7 +104,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-layers"/></svg></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v3.4.0</span>
+          <span class="sui-version-pill">v3.4.3</span>
         </div>
       </div>
 
@@ -256,7 +256,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>v3.4.0</span>
+            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>v3.4.3</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -323,7 +323,7 @@
 
         <div class="sui-card sui-card-lg">
           <h2>Architecture</h2>
-          <p class="sui-text-cap sui-mt-2">Three files, zero runtime dependencies, instant deployment.</p>
+          <p class="sui-text-cap sui-mt-2">Four files, zero runtime dependencies, instant deployment.</p>
           <div class="sui-flex-col sui-gap-3 sui-mt-4">
             <div class="sui-card sui-card-muted">
               <div class="sui-flex-between">
@@ -780,6 +780,7 @@
 
             <!-- Modal trigger -->
             <button class="sui-btn sui-btn-primary" type="button" data-sui-modal="#demoModal"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-external-link"/></svg>Open Modal</button>
+            <button class="sui-btn sui-btn-outline" type="button" data-sui-modal="#demoModalWide"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-external-link"/></svg>Wide Modal</button>
 
             <!-- Toast triggers -->
             <button class="sui-btn sui-btn-success sui-btn-sm" type="button" onclick="SUI.toast.success('Saved!', 'Your changes have been saved.')">Toast</button>
@@ -4755,7 +4756,7 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-soc-heart"/></svg>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada with ❤️</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v3.4.0</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v3.4.3</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->
@@ -4781,6 +4782,19 @@ search.addEventListener('input', () =&gt; {
     <div class="sui-modal-footer">
       <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.modal.close('#demoModal')">Cancel</button>
       <button class="sui-btn sui-btn-primary" type="button" onclick="SUI.modal.close('#demoModal'); SUI.toast.success('Confirmed!', 'Action completed successfully.')">Confirm</button>
+    </div>
+  </dialog>
+
+  <dialog class="sui-dialog sui-dialog-wide" id="demoModalWide" aria-labelledby="modalWideTitle">
+    <div class="sui-modal-header">
+      <span class="sui-modal-title" id="modalWideTitle">Wide Dialog</span>
+      <button class="sui-modal-close" type="button" aria-label="Close"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-close"/></svg></button>
+    </div>
+    <div class="sui-modal-body">
+      <p>Add <code>sui-dialog-wide</code> to a native <code>&lt;dialog class="sui-dialog"&gt;</code> for a 720px-wide surface — useful for record detail, side-by-side content, or wider forms. The legacy overlay pattern has an equivalent <code>sui-modal-wide</code> modifier.</p>
+    </div>
+    <div class="sui-modal-footer">
+      <button class="sui-btn sui-btn-ghost" type="button" onclick="SUI.modal.close('#demoModalWide')">Close</button>
     </div>
   </dialog>
 

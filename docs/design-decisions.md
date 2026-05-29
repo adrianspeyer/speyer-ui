@@ -18,9 +18,9 @@ SUI is three files loaded from a CDN. No npm install, no webpack, no Vite, no bu
 
 For developers who want build tools, the source files (`sui-tokens.css`, `sui-components.css`, `sui.js`) work fine as imports. But the CDN path is always the primary use case.
 
-### Why under 95KB?
+### Why under 100KB?
 
-Every kilobyte is a tax on every page load. SUI's ceiling is 95KB total (tokens + components + JS, minified). This keeps it competitive with loading a single large framework. New features must justify their weight.
+Every kilobyte is a tax on every page load. SUI's ceiling is 100KB total (tokens + components + JS, minified). This keeps it competitive with loading a single large framework. New features must justify their weight.
 
 ### Why borders over shadows?
 
@@ -110,7 +110,7 @@ The creator is Canadian. Colour, behaviour, organisation, labelled, centre. This
 
 Recipes are documented composition patterns, not shipped components. Their CSS lives in `<style>` tags on the demo page. This means:
 
-- **Zero bundle cost.** Adding a recipe doesn't increase the 95KB budget.
+- **Zero bundle cost.** Adding a recipe doesn't increase the 100KB budget.
 - **Zero maintenance commitment.** Recipes can evolve without breaking changes.
 - **Clear boundary.** If something is in the bundle, it's supported. If it's a recipe, it's a starting point.
 

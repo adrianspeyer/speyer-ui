@@ -37,7 +37,7 @@ Welcome to the SUI docs. These guides complement the [README](../README.md) and 
 | Look up a JS method | [JavaScript API](javascript-api.md) |
 | Find a token value or name | [Design Tokens](design-tokens.md) |
 | Use icons (sizing, colours, categories) | [Icons](icons.md) |
-| Browse all 483 icons visually | [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html) |
+| Browse all 538 icons visually | [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html) |
 | Check ARIA requirements for a component | [Accessibility](accessibility.md) |
 | Understand why SUI does something a certain way | [Design Decisions](design-decisions.md) |
 | Build a common app pattern (CRM, dashboard, etc.) | [Recipes](recipes.md) |

@@ -95,7 +95,7 @@ el.textContent = decodeURIComponent(location.search);
 Content-Security-Policy: default-src 'self'; style-src 'self' https://cdn.jsdelivr.net; script-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:;
 ```
 
-**Keep CDN links version-pinned in production.** `@latest` is convenient for development. Pin to a specific tag (e.g. `@3.4.0`) in production so a CDN update never silently changes your app's behaviour.
+**Keep CDN links version-pinned in production.** `@latest` is convenient for development. Pin to a specific tag (e.g. `@3.4.3`) in production so a CDN update never silently changes your app's behaviour.
 
 ---
 
@@ -201,12 +201,12 @@ Do not invent or reference these — they are common AI hallucinations:
 
 | Hallucinated name | Reality / correct approach |
 |---|---|
-| `sui-card-content` | Use `sui-card-body` |
+| `sui-card-content` | Use `sui-card-body`. |
 | `sui-card` with nested padding divs | Use `sui-card-flush` when content handles its own padding (tables, tabs). Use `sui-card-compact` for KPI grids. |
-| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG |
+| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG. |
 | `sui-icon-{name}` (no category) | Must include category: `sui-icon-{category}-{name}` |
 | `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
-| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
+| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `sui-dialog-wide` (720px). For wider, use `--sui-panel-width`. |
 | `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |
 | `SUI.modal.confirm()` / `SUI.modal.prompt()` | Not shipped. Use Confirmation Dialog recipe. |
 | `SUI.toast.close()` | Not shipped. Toasts use `SUI.toast.dismiss(el)` or `SUI.toast.clearAll()`. |

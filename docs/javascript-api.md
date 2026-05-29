@@ -2,7 +2,7 @@
 
 SUI's JavaScript (`sui.js`) is optional. Components render correctly without it — they just won't open, close, or animate. When included, it auto-initialises interactive behaviours via `data-sui-*` attributes.
 
-**Current version:** 3.4.0
+**Current version:** 3.4.3
 **Bundle size:** ~26KB minified
 **Dependencies:** Zero
 
@@ -74,6 +74,8 @@ SUI.modal.close('#my-modal');
 ```
 
 Accepts a CSS selector string or a DOM element. Manages focus trapping, Escape to close, and overlay click dismissal.
+
+**Width variants (CSS):** the default dialog/modal is 520px. For a wider 720px surface (record detail, side-by-side content, wider forms), add `sui-dialog-wide` to a native `<dialog class="sui-dialog">`, or `sui-modal-wide` to the legacy `.sui-modal` overlay. For anything wider, use a `sui-panel` with the `--sui-panel-width` custom property.
 
 **There is no `SUI.modal.confirm()` or `SUI.modal.prompt()`.** Confirmation dialogs are app-specific — use the [Confirmation Dialog recipe](https://adrianspeyer.github.io/speyer-ui/#recipe-confirm) instead.
 
@@ -341,10 +343,10 @@ Do not invent or reference these — they are common AI hallucinations:
 
 | Hallucinated name | Reality / correct approach |
 |---|---|
-| `sui-card-content` | Use `sui-card-body` |
-| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG |
+| `sui-card-content` | Use `sui-card-body`. |
+| `SUI.icons.*` | No JS API for icons — they're pure CSS + SVG. |
 | `sui-layout` / `sui-main` / `sui-layout-body` | Not shipped. Use App Shell Scaffold recipe (`app-*` classes). |
-| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `--sui-panel-width` for wide detail surfaces. |
+| `sui-dialog-xl` / `sui-modal-xl` | Not shipped. Use `sui-dialog-wide` (720px). For wider, use `--sui-panel-width`. |
 | `SUI.utils.*` | No `utils` namespace. Modules are top-level: `SUI.copy`, `SUI.modal`, etc. |
 | `SUI.modal.confirm()` / `SUI.modal.prompt()` | Not shipped. Use Confirmation Dialog recipe. |
 | `SUI.toast.close()` | Not shipped. Toasts use `SUI.toast.dismiss(el)` or `SUI.toast.clearAll()`. |

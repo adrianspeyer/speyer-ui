@@ -767,6 +767,125 @@ function checkDangerousSinks() {
 //  Runner
 // ════════════════════════════════════════════════════════════════════
 
+// ════════════════════════════════════════════════════════════════════
+//  11. DOC ICON-COUNT DRIFT
+//      Markdown prose must not reference a stale icon/symbol count.
+//      Allowed counts: 538 (total), 506 (unique). CHANGELOG is historical.
+// ════════════════════════════════════════════════════════════════════
+
+function checkDocIconCounts() {
+  console.log('  ── Doc Icon Counts ──');
+  const ALLOWED = new Set(['538', '506']);
+  const files = ['README.md', 'docs/README.md', 'docs/icons.md', 'docs/accessibility.md',
+                 'docs/getting-started.md', 'docs/recipes.md', 'docs/design-decisions.md',
+                 'docs/design-tokens.md', 'docs/javascript-api.md'];
+  let issues = 0;
+  const re = /\b(\d{3})\s+(?:icons?|symbols?)\b|\b(?:all|browse)\s+(\d{3})\b/gi;
+  for (const f of files) {
+    const content = readFile(f);
+    if (!content) continue;
+    content.split('\n').forEach((line, i) => {
+      let m;
+      re.lastIndex = 0;
+      while ((m = re.exec(line)) !== null) {
+        const n = m[1] || m[2];
+        if (n && !ALLOWED.has(n)) {
+          fail(`${f}:${i + 1} stale icon count "${n}" (expected 538/506)`);
+          issues++;
+        }
+      }
+    });
+  }
+  if (issues === 0) pass();
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  12. STRAY / DUPLICATE FILES
+//      Guards against orphaned working copies sneaking into the repo
+//      (e.g. docs/docs-README.md, *-copy, *.bak, *-old).
+// ════════════════════════════════════════════════════════════════════
+
+function checkStrayFiles() {
+  console.log('  ── Stray Files ──');
+  const denyExact = ['docs/docs-README.md'];
+  const denyPattern = /(-copy|\bcopy\b|-old|\.bak|~)\.?[a-z]*$/i;
+  let issues = 0;
+  for (const rel of denyExact) {
+    if (fs.existsSync(path.join(ROOT, rel))) { fail(`stray file present: ${rel}`); issues++; }
+  }
+  const walk = (dir, base = '') => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (e.name === 'node_modules' || e.name.startsWith('.git')) continue;
+      const rel = base ? `${base}/${e.name}` : e.name;
+      if (e.isDirectory()) walk(path.join(dir, e.name), rel);
+      else if (denyPattern.test(e.name)) { fail(`stray file present: ${rel}`); issues++; }
+    }
+  };
+  walk(ROOT);
+  if (issues === 0) pass();
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  13. STALE VERSION REFERENCES
+//      Any pinned CDN example (speyer-ui@X.Y.Z) in a shipped file must
+//      match the current version. Use @latest for floating. CHANGELOG
+//      is historical and exempt.
+// ════════════════════════════════════════════════════════════════════
+
+function checkStaleVersionRefs() {
+  console.log('  ── Stale Version Refs ──');
+  const pkg = JSON.parse(readFile('package.json') || '{}');
+  const expected = pkg.version;
+  const files = ['README.md', 'SECURITY.md', 'llms.txt', 'index.html', 'icons.html',
+                 'docs/icons.md', 'docs/getting-started.md', 'docs/javascript-api.md',
+                 'docs/recipes.md', 'docs/accessibility.md'];
+  let issues = 0;
+  const re = /speyer-ui@(\d+\.\d+\.\d+)/g;
+  for (const f of files) {
+    const content = readFile(f);
+    if (!content) continue;
+    let m;
+    re.lastIndex = 0;
+    while ((m = re.exec(content)) !== null) {
+      if (m[1] !== expected) {
+        fail(`${f}: pinned @${m[1]} (expected @${expected} or @latest)`);
+        issues++;
+      }
+    }
+  }
+  if (issues === 0) pass();
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  14. DOES-NOT-EXIST TABLE PARITY
+//      The canonical table in docs/javascript-api.md must be mirrored
+//      verbatim in .claude/instructions.md, .cursor/rules, and llms.txt.
+// ════════════════════════════════════════════════════════════════════
+
+function checkDoesNotExistParity() {
+  console.log('  ── Does-Not-Exist Table Parity ──');
+  const canon = readFile('docs/javascript-api.md');
+  if (!canon) { pass(); return; }
+  const idx = canon.indexOf('Classes and Methods That Do NOT Exist');
+  if (idx === -1) { pass(); return; }
+  const after = canon.slice(idx);
+  const end = after.indexOf('\n## ');
+  const block = end === -1 ? after : after.slice(0, end);
+  const rows = block.split('\n').filter(l => /^\|\s*`/.test(l));
+  let issues = 0;
+  for (const mirror of ['.claude/instructions.md', '.cursor/rules', 'llms.txt']) {
+    const content = readFile(mirror);
+    if (!content) continue;
+    for (const row of rows) {
+      if (!content.includes(row.trim())) {
+        fail(`${mirror}: missing canonical row "${row.trim().slice(0, 48)}…"`);
+        issues++;
+      }
+    }
+  }
+  if (issues === 0) pass();
+}
+
 console.log('');
 console.log('  SUI Preflight Validator');
 console.log('  ═══════════════════════════════════════════════');
@@ -781,6 +900,10 @@ checkEncoding();
 checkTokenDrift();
 checkClassDrift();
 checkDangerousSinks();
+checkDocIconCounts();
+checkStrayFiles();
+checkStaleVersionRefs();
+checkDoesNotExistParity();
 
 console.log('');
 const parts = [`${totalPass} passed`, `${totalFail} failed`];

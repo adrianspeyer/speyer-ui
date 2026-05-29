@@ -10,7 +10,7 @@ Recipes are documented composition patterns that show how to combine SUI compone
 
 A recipe is a documented pattern — typically 4–20 lines of custom CSS plus SUI component markup. Recipe CSS lives in `<style>` tags on the demo page. This means:
 
-- **Zero bundle cost.** Adding recipes doesn't increase SUI's 95KB budget.
+- **Zero bundle cost.** Adding recipes doesn't increase SUI's 100KB budget.
 - **Zero maintenance commitment.** Recipes can change between versions without breaking your app.
 - **Starting points, not contracts.** Copy a recipe, modify it for your needs. It's guidance, not a dependency.
 

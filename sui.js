@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 3.4.0
+ * Version: 3.4.3
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -928,8 +928,9 @@ const SUI = (() => {
       el.setAttribute('aria-hidden', 'false');
       this._active = el;
 
-      // Update trigger aria-expanded
-      $$(`[data-sui-panel="${selector}"]`).forEach(t => t.setAttribute('aria-expanded', 'true'));
+      // Update trigger aria-expanded (resolve via el.id so element and string args behave identically — mirrors close())
+      const id = el.id ? `#${el.id}` : (typeof selector === 'string' ? selector : null);
+      if (id) $$(`[data-sui-panel="${id}"]`).forEach(t => t.setAttribute('aria-expanded', 'true'));
 
       // Mobile: lock body scroll (full-screen blocking)
       if (!this._mediaQuery.matches) document.body.style.overflow = 'hidden';
@@ -1266,7 +1267,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v3.4.0 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v3.4.3 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

@@ -26,7 +26,7 @@ SUI documentation uses `@latest` for convenience. In production, pin to a specif
 <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@latest/dist/sui.min.js" defer></script>
 
 <!-- Production — pin the version -->
-<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.3.0/dist/sui.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui.min.js" defer></script>
 ```
 
 ### Use textContent for untrusted data
@@ -48,7 +48,7 @@ The SVG sprite is injected into the page via `innerHTML`. Only load it from orig
 ```javascript
 // ✓ Same-origin or pinned CDN
 fetch('./sui-icons.svg')
-fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.3.0/dist/sui-icons.min.svg')
+fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-icons.min.svg')
 
 // ✗ Never load sprites from untrusted origins
 ```

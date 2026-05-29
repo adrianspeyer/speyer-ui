@@ -2,7 +2,7 @@
 
 A lightweight, batteries-included design system that treats accessibility as architecture, not afterthought. 538 purpose-built icons. Colour-blind friendly, mobile-first, AI-ready. Made in Canada 🇨🇦
 
-**v3.4.0** · ~98KB core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
+**v3.4.3** · ~98KB core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
 
 > **⚠️ v3.2.0 migration note:** Multi-screen apps using `.sui-screen` must now wrap screens in a parent with `data-sui-screens` and add `.is-active` to the default screen. Single-screen apps are unaffected. See [CHANGELOG](CHANGELOG.md) for details.
 
@@ -60,7 +60,7 @@ SUI is built for SaaS teams who need a design system that works without a build 
 </script>
 ```
 
-Pin a version for production: replace `@latest` with `@3.4.0`.
+Pin a version for production: replace `@latest` with `@3.4.3`.
 
 ### Starter Template
 
@@ -71,13 +71,13 @@ Pin a version for production: replace `@latest` with `@3.4.0`.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.0/dist/sui-tokens.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.0/dist/sui-components.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.0/dist/sui-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-tokens.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-components.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-icons.min.css">
 </head>
 <body>
   <script defer>
-    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.0/dist/sui-icons.min.svg')
+    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-icons.min.svg')
       .then(r => r.text())
       .then(svg => { const d = document.createElement('div'); d.style.display = 'none'; d.innerHTML = svg; document.body.prepend(d); });
   </script>
@@ -88,7 +88,7 @@ Pin a version for production: replace `@latest` with `@3.4.0`.
       Get Started
     </button>
   </main>
-  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.0/dist/sui.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui.min.js" defer></script>
 </body>
 </html>
 ```
@@ -97,13 +97,14 @@ Pin a version for production: replace `@latest` with `@3.4.0`.
 
 ## Architecture
 
-SUI is three files with clear responsibilities:
+SUI's core is three files, with an optional fourth for icons:
 
 | File | Purpose | Size |
 |------|---------|------|
-| `sui-tokens.css` | Design tokens — colours, spacing, typography, shadows, z-index | ~5.5KB |
-| `sui-components.css` | All component classes — buttons, cards, badges, tables, and more | ~63.6KB |
-| `sui.js` | Interactive toolkit — modals, toasts, dropdowns, tooltips, accordion | ~27KB |
+| `sui-tokens.css` | Design tokens — colours, spacing, typography, shadows, z-index | ~5.6KB |
+| `sui-components.css` | All component classes — buttons, cards, badges, tables, and more | ~62.5KB |
+| `sui.js` | Interactive toolkit — modals, toasts, dropdowns, tooltips, accordion | ~28.5KB |
+| `sui-icons.css` *(optional)* | Companion stylesheet for the 538-icon SVG sprite | ~1.8KB |
 
 **Key principles:**
 
@@ -362,7 +363,7 @@ npm run preflight
 
 ### CDN Usage
 
-SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@3.4.0` for production.
+SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@3.4.3` for production.
 
 ### Versioning
 

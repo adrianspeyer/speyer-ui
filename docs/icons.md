@@ -10,11 +10,11 @@
 
 ```html
 <!-- Icon CSS (sizing, colour utilities, spin animation, touch targets) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-icons.min.css">
 
 <!-- Load sprite (once, near top of <body>) -->
 <script>
-  fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.0.0/dist/sui-icons.min.svg')
+  fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-icons.min.svg')
     .then(r => r.text())
     .then(svg => { const d = document.createElement('div'); d.hidden = true; d.innerHTML = svg; document.body.prepend(d); });
 </script>
@@ -25,7 +25,7 @@
 </svg>
 ```
 
-Replace `@3.0.0` with `@latest` for automatic updates, or pin to a specific version for production stability.
+Replace `@3.4.3` with `@latest` for automatic updates, or pin to a specific version for production stability.
 
 ---
 
