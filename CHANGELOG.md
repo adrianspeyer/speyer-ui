@@ -4,6 +4,64 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.5.0] — 2026-06-10
+
+### Theme: Three Demand-Driven Additions
+
+First new component surface since the v3.0.0 stability plateau, shipped via the proposal-review process: each addition was specced, rendered, and owner-approved before a line landed in the source. ~0.5KB minified total. No breaking changes.
+
+### Added
+
+- **`sui-card-footer`** — Action footer section for structured cards: top border, right-aligned buttons, `flex-wrap`, matching `sui-card-header` anatomy. Pairs with `sui-card-flush` like header/body; `sui-card-compact` tightens it along with the other sections. Cards now have the full header / body / footer anatomy that modals already had.
+- **`sui-btn-lg`** — Large button (52px min-height, `--sui-text-h3`, 24px icons), completing a consistent 36 → 44 → 52 size scale alongside `sui-btn-sm` and base. `sui-btn-xl` / `sui-btn-xs` remain intentionally unshipped.
+- **`sui-input-success`** + **`sui-input-success-msg`** — Positive validation state mirroring the error pattern exactly (2px `--sui-success` border, `--sui-success-soft` focus ring, semibold icon + text message in `--sui-success-strong`). Status is never colour alone: the message pairs an icon with text, wired via `aria-describedby`.
+
+### Changed
+
+- Anti-hallucination tables updated across all four AI-context files: `sui-btn-lg` and `sui-card-footer` graduated from phantom to real; `sui-btn-xl`/`sui-btn-xs` and `sui-card-title` remain listed as not shipped. Shipped Utility Scales and Common Names → SUI Equivalents updated to match. Class inventories (docs and embedded AI context) extended with the three additions.
+- Demos added to index.html: structured card with footer, button size scale row, success-state input.
+- Version bumped to 3.5.0 across all source files, dist headers, docs, and AI-context files.
+
+### Bundle
+
+~98KB core + ~270KB icon sprite (~29KB gzipped). 538 icons · 29 categories · 25+ components · 29 recipes.
+
+---
+
+## [3.4.4] — 2026-06-10
+
+### Theme: AI-Context Canonicalization & Drift Guards
+
+A follow-up consistency patch. Canonicalizes the AI-context files (one authoritative vocabulary, mirrored verbatim), expands the anti-hallucination surface based on a systematic phantom-class analysis, completes the panel trigger-resolution symmetry, and extends preflight so icon counts are derived from the sprite rather than hardcoded. No breaking changes.
+
+### Fixed
+
+- **Stale recipe count** — index.html's embedded AI context claimed "22 recipes total"; corrected to 29. Caught by the new recipe-count preflight guard on its first run.
+- **"Three files" messaging stragglers** — `docs/getting-started.md` and `docs/design-decisions.md` body text updated to "three core files plus an optional icon stylesheet", matching the v3.4.3 reconciliation.
+- **`panel.close()` trigger fallback** — `close()` now resolves the trigger via `el.id` with a string-selector fallback, mirroring `open()`. Completes the symmetry fix from v3.4.3 in both directions.
+- **AI-context drift between mirrors** — `.claude/instructions.md` and `.cursor/rules` carried richer "common names" and phantom-class content than the canonical `docs/javascript-api.md`. All of it is now merged into the canonical file and mirrored verbatim; superseded mirror-local variants removed.
+
+### Added
+
+- **9 new anti-hallucination table entries** from a systematic phantom-surface analysis (~50 candidates tested against source): `sui-btn-icon` (the real class is `sui-icon-btn`), `sui-switch` (→ `sui-toggle`), `sui-btn-lg/xl/xs`, `sui-btn-warning`/`sui-btn-info`, `sui-card-footer`/`sui-card-title`, `sui-spinner`/`sui-loader`/`sui-loading`, `sui-textarea`, `--sui-primary`/`--sui-color-primary`.
+- **"Common Names → SUI Equivalents"** — a 37-row canonical vocabulary table (drawer → `sui-panel`/`sui-sheet`, switch → `sui-toggle`, navbar → `sui-topbar`, spinner → `sui-icon-spin`, etc.) in `docs/javascript-api.md`, mirrored to all AI-context files.
+- **"Shipped Utility Scales"** — explicit documentation of SUI's intentionally partial scales (`sui-mt-1..6`, `sui-mb-2..4`, `sui-p-3..5`, `sui-gap-1..4`, tooltip placements, token ranges) so AIs and humans stop extrapolating missing steps.
+- **Two smoke-test assertions** — `panel.open(element)` sets trigger `aria-expanded` (regression test for the v3.4.3 fix), and the wide dialog opens/closes.
+- **CHANGELOG backfill** — entries for the v3.4.1 and v3.4.2 deployment-only releases (below).
+
+### Changed
+
+- **Preflight: derived icon counts** — the doc icon-count guard now derives total (538) and unique (506) counts from `sui-icons.svg` itself (symbols, and symbols whose content is a `<use>` alias), removing the hardcoded allowlist. Adding icons no longer requires touching preflight.
+- **Preflight: recipe-count guard (new, 82 checks total)** — recipes are counted from their `<div class="sui-section" id="recipe-*">` convention in index.html and compared against every "N recipes" claim in shipped prose (historical "added N recipes" phrasing exempt).
+- **Preflight: parity check widened** — now verifies the Common Names and Shipped Utility Scales sections verbatim across all four AI-context files, in addition to the does-not-exist table.
+- **Version bumped** to 3.4.4 across all source files, dist headers, docs, and AI-context files.
+
+### Bundle
+
+~98KB core + ~270KB icon sprite (~29KB gzipped). 538 icons · 29 categories · 25+ components · 29 recipes.
+
+---
+
 ## [3.4.3] — 2026-05-29
 
 ### Theme: Documentation & Consistency Sweep
@@ -32,6 +90,18 @@ A cleanup patch that fixes a stale documentation file, removes a duplicate, corr
 ### Bundle
 
 ~98KB core + ~270KB icon sprite (~29KB gzipped). 538 icons · 29 categories · 25+ components · 29 recipes.
+
+---
+
+## [3.4.2] — 2026-05
+
+Deployment-only release: re-tagged to clear a stale file from the CDN. No code or documentation changes. (Exact date not recorded.)
+
+---
+
+## [3.4.1] — 2026-05
+
+Deployment-only release: re-tagged to clear a stale file from the CDN. No code or documentation changes. (Exact date not recorded.)
 
 ---
 

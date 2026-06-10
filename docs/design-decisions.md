@@ -14,7 +14,7 @@ CSS handles appearance. JS adds interactivity (open, close, toggle, animate). Th
 
 ### Why no build tools?
 
-SUI is three files loaded from a CDN. No npm install, no webpack, no Vite, no bundler. This is deliberate — it keeps the barrier to entry at "paste three `<link>`/`<script>` tags."
+SUI is three core files loaded from a CDN (plus an optional icon stylesheet and sprite). No npm install, no webpack, no Vite, no bundler. This is deliberate — it keeps the barrier to entry at "paste a few `<link>`/`<script>` tags."
 
 For developers who want build tools, the source files (`sui-tokens.css`, `sui-components.css`, `sui.js`) work fine as imports. But the CDN path is always the primary use case.
 

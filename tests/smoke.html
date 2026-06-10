@@ -58,6 +58,10 @@
     </dialog>
 
     <!-- Panel -->
+    <button class="sui-btn" type="button" data-sui-panel="#test-panel" aria-expanded="false" data-test="panel-trigger" hidden>Panel trigger</button>
+    <dialog class="sui-dialog sui-dialog-wide" id="test-modal-wide" aria-label="Test wide dialog" data-test="modal-wide">
+      <div class="sui-modal-body">Wide dialog fixture</div>
+    </dialog>
     <div class="sui-panel" id="test-panel" aria-label="Test panel" aria-hidden="true" data-test="panel">
       <div class="sui-panel-header">
         <span>Test Panel</span>
@@ -204,6 +208,28 @@
         await delay(100);
         const closed = !panel.classList.contains('is-open');
         return opened && closed;
+      });
+
+      assert('panel-element-arg-aria', 'panel.open(element) sets trigger aria-expanded', async () => {
+        const panel = $('#test-panel');
+        const trigger = $('[data-test="panel-trigger"]');
+        SUI.panel.open(panel);            // element argument, not selector string
+        await delay(100);
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        SUI.panel.close(panel);
+        await delay(100);
+        const collapsed = trigger.getAttribute('aria-expanded') === 'false';
+        return expanded && collapsed;
+      });
+
+      assert('modal-wide-open-close', 'Wide dialog opens and closes', async () => {
+        const dlg = $('#test-modal-wide');
+        SUI.modal.open(dlg);
+        await delay(100);
+        const opened = dlg.open === true;
+        SUI.modal.close(dlg);
+        await delay(100);
+        return opened && dlg.open === false;
       });
 
       /* ── Dropdown ── */

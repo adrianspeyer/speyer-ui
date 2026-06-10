@@ -2,7 +2,7 @@
 
 SUI's JavaScript (`sui.js`) is optional. Components render correctly without it — they just won't open, close, or animate. When included, it auto-initialises interactive behaviours via `data-sui-*` attributes.
 
-**Current version:** 3.4.3
+**Current version:** 3.5.0
 **Bundle size:** ~26KB minified
 **Dependencies:** Zero
 
@@ -356,3 +356,78 @@ Do not invent or reference these — they are common AI hallucinations:
 | `--sui-font` | Use `--sui-font-primary` or `--sui-font-mono`. |
 | `--sui-weight-normal` | Use `--sui-weight-regular`. |
 | `--sui-text-h4` | Does not exist. Heading tokens stop at `--sui-text-h3`. |
+| `sui-btn-icon` | Inverted name. The icon-only button class is `sui-icon-btn` (in sui-icons.css). |
+| `sui-switch` | Use `sui-toggle` (+ `sui-toggle-track`, `sui-toggle-label`). |
+| `sui-btn-xl` / `sui-btn-xs` | Not shipped. Button sizes are `sui-btn-sm` (36px), base (44px), `sui-btn-lg` (52px). |
+| `sui-btn-warning` / `sui-btn-info` | Not shipped. Filled variants: primary, secondary, danger, success. Use `sui-btn-outline` or `sui-btn-ghost` for other intents. |
+| `sui-card-title` | Not shipped. `sui-card-header` takes plain content — there is no separate title class. |
+| `sui-spinner` / `sui-loader` / `sui-loading` | Use `sui-icon-spin` on an icon, `sui-skeleton` (loading placeholders), or `sui-progress-indeterminate` (animated bar). |
+| `sui-textarea` | Not a class. Use `<textarea class="sui-input">`. |
+| `--sui-primary` / `--sui-color-primary` | Use `--sui-blue-primary` (with `-hover`, `-active`, `-soft`, `-strong`, `-focus` siblings). |
+
+## Common Names → SUI Equivalents
+
+If you're looking for a familiar component name from another framework, this is the SUI vocabulary:
+
+| What you call it | SUI solution | Type |
+|-----------------|-------------|------|
+| Sidebar / Side menu | `sui-sidenav` | Component |
+| Modal / Popup / Dialog | `sui-dialog` with native `<dialog>` | Component |
+| Drawer / Slide-over | `sui-panel` (right) or `sui-sheet` (bottom) | Component |
+| Navbar / Header bar | `sui-topbar` + `sui-nav` | Component |
+| Switch | `sui-toggle` (+ `sui-toggle-track`, `sui-toggle-label`) | Component |
+| Callout / Banner | `sui-alert` + `sui-alert-info/success/warning/error` | Component |
+| Spinner / Loader | `sui-icon-spin` on an icon, `sui-skeleton`, or `sui-progress-indeterminate` | Component |
+| Block button | `sui-btn-full` | Component |
+| Icon-only button | `sui-icon-btn` | Component |
+| Row / Col / Stack | `sui-grid-2/3/4`, or `sui-flex` / `sui-flex-col` + `sui-gap-1..4` | Utility |
+| Justify-between | `sui-flex-between` | Utility |
+| Textarea styling | `sui-input` on the `<textarea>` element | Component |
+| Card footer | `sui-card-footer` (pair the card wrapper with `sui-card-flush`) | Component |
+| Breadcrumbs | `sui-breadcrumb` | Component |
+| Keyboard shortcut hint | `sui-kbd` | Component |
+| Toast / Snackbar | `SUI.toast.success/error/warning/info()` | JS API |
+| Tabs / Tab bar | `sui-nav` + `[role="tablist"]` + `data-tab`/`data-view` — `SUI.tabs.activate(el)` for programmatic switching | Component |
+| Wizard / Steps | `sui-stepper` + `sui-step` + `sui-step-indicator` | Component |
+| Activity feed / Log | `sui-timeline` + `sui-timeline-item` | Component |
+| Search highlight | `sui-mark` + `sui-mark-current` | Component |
+| Action bar | `sui-toolbar` + `sui-toolbar-btn` + `sui-toolbar-sep` | Component |
+| Tag / Chip | `sui-chip` + `sui-chip-remove` | Component |
+| Segmented toggle | `sui-segmented` + `sui-segment` | Component |
+| Empty state | `sui-empty` + `sui-empty-icon/title/text` | Component |
+| File upload area | `sui-dropzone` | Component |
+| App shell / SPA layout | `sui-screen` + `sui-screen-header/body/footer` | Component |
+| Date picker / Calendar | Flatpickr integration recipe — SUI token overrides, not a native component | Recipe |
+| Kanban / Board | `sui-flex-nowrap` + `sui-scroll-x` + `sui-card` | Recipe |
+| Master-Detail / Inbox | `sui-table-interactive` row click → `sui-panel` detail | Recipe |
+| Push layout | CSS grid toggle resizing main content | Recipe |
+| Notification panel | `sui-panel` + stacked `sui-card` + `sui-badge` | Recipe |
+| Inline edit | `sui-input` + click-to-edit | Recipe |
+| Floating action bar | `sui-card-shadow` + `sui-btn` + fixed positioning | Recipe |
+| Chart / Graph / Data viz | Chart.js integration recipe — SUI token helper for colours/fonts | Recipe |
+| File upload / Drag-drop | FilePond integration recipe — SUI token overrides. Also see `sui-dropzone` for CSS-only | Recipe |
+| Rich text / WYSIWYG editor | Quill integration recipe — SUI token overrides (CDN-first). TipTap/Lexical for bundlers | Recipe |
+| Enhanced select / Autocomplete / Tagging | Tom Select integration recipe — SUI token overrides for control + dropdown | Recipe |
+
+## Shipped Utility Scales
+
+SUI ships **partial** utility scales on purpose — do not extrapolate missing steps:
+
+- Margin-top: `sui-mt-1` … `sui-mt-6` only
+- Margin-bottom: `sui-mb-2` … `sui-mb-4` only
+- Padding (all sides): `sui-p-3` … `sui-p-5` only
+- Gap: `sui-gap-1` … `sui-gap-4` only
+- No `sui-px-*`, `sui-py-*`, `sui-mx-*`, `sui-my-*`, `sui-ml-*`, `sui-mr-*`, or `sui-m-*`
+- Border radius utilities: `sui-round-none/sm/md/lg/full`
+- Icon sizes: `sui-icon-xs/sm/md/lg/xl`
+- Button sizes: `sui-btn-sm` (36px), base (44px), `sui-btn-lg` (52px) — no xl/xs
+- Badge sizes: default + `sui-badge-sm` only
+- Avatar sizes: `sui-avatar-sm/md/lg/xl`
+- Tooltip placement: default (top) + `sui-tooltip-bottom` only
+- Space tokens: `--sui-space-1` … `--sui-space-6` (no 0, no 7+)
+- Radius tokens: `--sui-radius-sm/md/lg/full` (no xl)
+- Shadow tokens: `--sui-shadow-sm/md/lg` (no xl)
+- Z-index tokens: `--sui-z-dropdown/sticky/modal/tooltip` (no `--sui-z-toast`)
+- Text tokens: `--sui-text-h1/h2/h3/body/small/meta` (no h4+, no sm/xs/lg)
+- Weight tokens: `--sui-weight-regular/semibold/bold` (no `-normal`, no `-medium`)
+

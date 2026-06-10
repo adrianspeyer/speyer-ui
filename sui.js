@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 3.4.3
+ * Version: 3.5.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -980,8 +980,8 @@ const SUI = (() => {
       el.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
 
-      // Update trigger aria-expanded
-      const id = el.id ? `#${el.id}` : null;
+      // Update trigger aria-expanded (resolve via el.id, string fallback — mirrors open())
+      const id = el.id ? `#${el.id}` : (typeof selector === 'string' ? selector : null);
       if (id) $$(`[data-sui-panel="${id}"]`).forEach(t => t.setAttribute('aria-expanded', 'false'));
 
       if (el._suiDocKeyHandler) {
@@ -1267,7 +1267,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v3.4.3 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v3.5.0 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

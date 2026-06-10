@@ -1,6 +1,6 @@
 # Getting Started
 
-SUI is three files. No npm, no bundler, no configuration. This guide gets you from zero to a working page in under 5 minutes.
+SUI is three core files plus an optional icon stylesheet. No npm, no bundler, no configuration. This guide gets you from zero to a working page in under 5 minutes.
 
 ---
 
@@ -42,7 +42,7 @@ That's it. Three CSS/JS tags for SUI, one optional CSS + sprite loader for icons
 
 ```html
 <!-- Pin to v3.0.0 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.4.3/dist/sui-tokens.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.0/dist/sui-tokens.min.css">
 ```
 
 ---

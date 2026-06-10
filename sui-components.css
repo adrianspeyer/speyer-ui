@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 3.4.3
+ * Version: 3.5.0
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -482,7 +482,8 @@ kbd,
 .sui-card-shadow { box-shadow: var(--sui-shadow-md); }
 .sui-card-compact { padding: var(--sui-space-2); }
 .sui-card-compact .sui-card-header,
-.sui-card-compact .sui-card-body { padding: var(--sui-space-2); }
+.sui-card-compact .sui-card-body,
+.sui-card-compact .sui-card-footer { padding: var(--sui-space-2); }
 
 .sui-card-interactive {
   cursor: pointer;
@@ -516,6 +517,16 @@ kbd,
 }
 
 .sui-card-body { padding: var(--sui-space-4); }
+
+.sui-card-footer {
+  padding: var(--sui-space-4);
+  border-top: 1px solid var(--sui-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sui-space-2);
+  flex-wrap: wrap;
+}
 
 
 /* ==========================================================================
@@ -626,10 +637,17 @@ kbd,
   padding: 0 var(--sui-space-2);
 }
 
+.sui-btn-lg {
+  min-height: 52px;
+  font-size: var(--sui-text-h3);
+  padding: 0 var(--sui-space-5);
+}
+
 .sui-btn-full { width: 100%; }
 
 .sui-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .sui-btn-sm svg { width: 16px; height: 16px; }
+.sui-btn-lg svg { width: 24px; height: 24px; }
 
 /* Dark mode: progress-labeled backgrounds use brand tokens for white text (≥4.5:1) */
 [data-theme="dark"] .sui-progress-labeled .sui-progress-bar                          { background: var(--sui-btn-primary-bg); }
@@ -696,6 +714,9 @@ kbd,
 .sui-input-error { border-color: var(--sui-error); border-width: 2px; }
 .sui-input-error:focus { box-shadow: 0 0 0 3px var(--sui-error-soft); }
 
+.sui-input-success { border-color: var(--sui-success); border-width: 2px; }
+.sui-input-success:focus { box-shadow: 0 0 0 3px var(--sui-success-soft); }
+
 .sui-input-hint {
   font-size: var(--sui-text-meta);
   color: var(--sui-text-muted);
@@ -711,6 +732,17 @@ kbd,
 }
 
 .sui-input-error-msg svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.sui-input-success-msg {
+  display: flex;
+  align-items: center;
+  gap: var(--sui-space-1);
+  font-size: var(--sui-text-meta);
+  font-weight: var(--sui-weight-semibold);
+  color: var(--sui-success-strong);
+}
+
+.sui-input-success-msg svg { width: 14px; height: 14px; flex-shrink: 0; }
 
 /* Select */
 .sui-select {

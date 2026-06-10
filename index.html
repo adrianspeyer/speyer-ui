@@ -27,7 +27,7 @@
     "programmingLanguage": ["CSS", "JavaScript"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "3.4.3",
+    "version": "3.5.0",
     "author": {
       "@type": "Person",
       "name": "Adrian Speyer",
@@ -104,7 +104,7 @@
         <div class="sui-brand-mark" aria-hidden="true"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ui-layers"/></svg></div>
         <div class="sui-brand-title">
           <span class="sui-brand-name">Speyer UI</span>
-          <span class="sui-version-pill">v3.4.3</span>
+          <span class="sui-version-pill">v3.5.0</span>
         </div>
       </div>
 
@@ -256,7 +256,7 @@
           <div class="sui-kpi-label">Components</div>
           <div class="sui-stat-row">
             <div class="sui-kpi-value">50+</div>
-            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>v3.4.3</span>
+            <span class="sui-badge sui-badge-new"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ai-sparkles"/></svg>v3.5.0</span>
           </div>
         </div>
         <div class="sui-card sui-stat">
@@ -562,6 +562,8 @@
         </div>
         <div class="sui-flex sui-mt-3">
           <button class="sui-btn sui-btn-primary sui-btn-sm" type="button">Small Primary</button>
+          <button class="sui-btn sui-btn-primary" type="button">Base Primary</button>
+          <button class="sui-btn sui-btn-primary sui-btn-lg" type="button">Large Primary</button>
           <button class="sui-btn sui-btn-ghost sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-nav-settings"/></svg>Settings</button>
           <button class="sui-btn sui-btn-dashed sui-btn-sm" type="button"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg>Add Item</button>
         </div>
@@ -584,6 +586,14 @@
             <div class="sui-kpi-label sui-mb-2">Muted</div>
             <p>Elevated background for nested cards.</p>
           </div>
+          <div class="sui-card sui-card-flush">
+            <div class="sui-card-header"><strong>Structured Card</strong></div>
+            <div class="sui-card-body"><p>Header, body, and the action footer — <code>sui-card-footer</code> right-aligns buttons with a top border, matching the modal footer anatomy.</p></div>
+            <div class="sui-card-footer">
+              <button class="sui-btn sui-btn-ghost" type="button">Cancel</button>
+              <button class="sui-btn sui-btn-primary" type="button">Save</button>
+            </div>
+          </div>
           <div class="sui-card sui-card-muted sui-card-interactive" tabindex="0">
             <div class="sui-kpi-label sui-mb-2">Muted + Interactive</div>
             <p>Subtle hover lift. Lower visual weight than regular interactive.</p>
@@ -591,7 +601,7 @@
         </div>
         <div class="sui-alert sui-alert-info sui-mt-3" role="note">
           <svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg>
-          <div><strong>Avoid double padding.</strong> If you use <code>.sui-card-header</code> / <code>.sui-card-body</code>, pair the wrapper with <code>.sui-card-flush</code> to zero out the card’s own padding. Use <code>.sui-card-compact</code> for dense layouts like KPI grids.</div>
+          <div><strong>Avoid double padding.</strong> If you use <code>.sui-card-header</code> / <code>.sui-card-body</code> / <code>.sui-card-footer</code>, pair the wrapper with <code>.sui-card-flush</code> to zero out the card’s own padding. Use <code>.sui-card-compact</code> for dense layouts like KPI grids.</div>
         </div>
       </div>
 
@@ -684,6 +694,11 @@
               <label class="sui-input-label" for="demo-email">Email Address</label>
               <input class="sui-input sui-input-error" type="email" id="demo-email" autocomplete="email" value="invalid-email" aria-describedby="demo-email-err" aria-invalid="true">
               <span class="sui-input-error-msg" id="demo-email-err"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-x-circle"/></svg> Please enter a valid email address.</span>
+            </div>
+            <div>
+              <label class="sui-input-label" for="demo-username">Username (success state)</label>
+              <input class="sui-input sui-input-success" type="text" id="demo-username" autocomplete="username" value="adrian" aria-describedby="demo-username-ok">
+              <span class="sui-input-success-msg" id="demo-username-ok"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-check-circle"/></svg> Username is available.</span>
             </div>
             <div class="sui-input-group">
               <label class="sui-input-label" for="demo-role">Role</label>
@@ -1715,9 +1730,9 @@ Scale: H1 32px/700, H2 24px/600, H3 20px/600, Body 16px/400, Small 14px/400, Met
 Layout: 8px spacing grid (--sui-space-1 through --sui-space-6). Mobile-first. Max width: 1280px. Min touch target: 44px.
 
 Components (use SUI classes):
-- Buttons: sui-btn, sui-btn-primary, sui-btn-secondary, sui-btn-outline, sui-btn-ghost, sui-btn-dashed, sui-btn-danger, sui-btn-success
-- Cards: sui-card, sui-card-lg, sui-card-muted, sui-card-shadow, sui-card-flush
-- Inputs: sui-input, sui-input-group, sui-input-label, sui-select, sui-checkbox-label
+- Buttons: sui-btn, sui-btn-primary, sui-btn-secondary, sui-btn-outline, sui-btn-ghost, sui-btn-dashed, sui-btn-danger, sui-btn-success, sui-btn-sm, sui-btn-lg, sui-btn-full
+- Cards: sui-card, sui-card-lg, sui-card-muted, sui-card-shadow, sui-card-flush, sui-card-header, sui-card-body, sui-card-footer
+- Inputs: sui-input, sui-input-group, sui-input-label, sui-input-error, sui-input-success, sui-select, sui-checkbox-label
 - Toggle: sui-toggle-label, sui-toggle, sui-toggle-track
 - Badges: sui-badge + sui-badge-success/warning/error/info/neutral/new/beta/pro
 - Badge modifiers: sui-badge-outline, sui-badge-sm, sui-badge-dot, sui-badge-count
@@ -1840,7 +1855,7 @@ Icons: SUI ships 538 purpose-built icons. Add sui-icons.min.css + sprite loader 
 Ask me if I want light mode, dark mode, or both before coding.
 Key rules: Inter font, 8px spacing grid, 44px min touch targets, 12px button radius, 16px card radius, borders default (shadows opt-in), WCAG 2.1 AA, all status indicators must use icon + text (never colour alone), mobile-first, colour-blind friendly, tabs must use role="tablist"/role="tab"/role="tabpanel".
 Avatars are initials-first (optional photo with onerror fallback). Modals use native &lt;dialog class="sui-dialog"&gt;. Bottom sheet: sui-sheet. Sidenav: sui-sidenav with collapsible groups (sui-sidenav-group-toggle + aria-expanded + aria-controls). Panel: sui-panel (slides from right, --sui-panel-width, sui-panel-no-backdrop). SUI.panel.open/close/toggle. Desktop: no focus trap. Mobile: focus trap. Segmented control: sui-segmented. Chips: sui-chip. Tables: sui-table-interactive (clickable rows), sui-table-sortable (sort indicators), sui-table-stack (card stacking at tablet), sui-table-sticky (sticky thead), sui-table-dense (compact). Input with button: sui-input-action. Timeline: sui-timeline. Dropzone: sui-dropzone. Stepper: sui-stepper + sui-step + sui-step-indicator (is-complete/is-active/is-pending). Scoped tabs: wrap in data-sui-tabs. SUI.tabs.activate(tabElement) for programmatic switching. Accordion: SUI.accordion.toggle(trigger), .expandAll(container), .collapseAll(container). Prose: sui-prose for long-form content. Mark: sui-mark for search highlights. Meta: sui-meta for dot-separated metadata. Toolbar: sui-toolbar for action bars. Screen layout: sui-screen (100dvh), sui-screen-header, sui-screen-body, sui-screen-footer. Topbar: sui-topbar (grid default) or sui-topbar-aligned (flex, brand left, nav+actions right). Multi-view: toggle .is-active. Single-screen: sui-screen-solo. Buttons: sui-btn + sui-btn-primary/secondary/ghost/dashed/danger/success. Use sui-* component classes for everything.
-CRITICAL: Before building custom CSS, check if a recipe exists. SUI composes patterns like Kanban (flex-nowrap + scroll-x + card), Master-Detail (table-interactive + panel), Notification Panel (panel + card + badge), Floating Action Bar (card-shadow + btn + fixed position), and 5 integration recipes (Flatpickr, Tom Select, FilePond, Quill, Chart.js) with SUI token overrides. 22 recipes total. Full recipe list and comprehensive AI reference: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
+CRITICAL: Before building custom CSS, check if a recipe exists. SUI composes patterns like Kanban (flex-nowrap + scroll-x + card), Master-Detail (table-interactive + panel), Notification Panel (panel + card + badge), Floating Action Bar (card-shadow + btn + fixed position), and 5 integration recipes (Flatpickr, Tom Select, FilePond, Quill, Chart.js) with SUI token overrides. 29 recipes total. Full recipe list and comprehensive AI reference: https://raw.githubusercontent.com/adrianspeyer/speyer-ui/main/.claude/instructions.md
 Skip link: add &lt;a href="#main" class="sui-visually-hidden"&gt;Skip to main content&lt;/a&gt; as first child of &lt;body&gt;.
 If a component is missing from SUI, mention it — contributions welcome.
 Full docs: https://github.com/adrianspeyer/speyer-ui</pre>
@@ -4756,7 +4771,7 @@ search.addEventListener('input', () =&gt; {
         <a class="sui-btn sui-btn-ghost sui-btn-sm" href="https://github.com/adrianspeyer/speyer-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer"><svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-soc-heart"/></svg>Contribute</a>
       </div>
       <small>SPEYER UI SYSTEM • MIT LICENSE • Made in Canada with ❤️</small>
-      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v3.4.3</span></a>
+      <a href="https://github.com/adrianspeyer/speyer-ui" target="_blank" rel="noreferrer" class="sui-shield" style="margin-top:8px;"><span class="sui-shield-label">built with</span><span class="sui-shield-value">SUI v3.5.0</span></a>
     </footer>
     </div><!-- .demo-content -->
     </div><!-- .demo-layout -->

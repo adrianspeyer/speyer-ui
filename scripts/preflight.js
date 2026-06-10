@@ -775,7 +775,14 @@ function checkDangerousSinks() {
 
 function checkDocIconCounts() {
   console.log('  ── Doc Icon Counts ──');
-  const ALLOWED = new Set(['538', '506']);
+  // Derive allowed counts from the sprite itself — no hardcoding.
+  // Total = all <symbol> elements; aliases = symbols whose content is a <use> ref.
+  const sprite = readFile('sui-icons.svg') || '';
+  const symbolBlocks = sprite.match(/<symbol[\s\S]*?<\/symbol>/g) || [];
+  const total = symbolBlocks.length;
+  const aliases = symbolBlocks.filter(b => /<use\s/.test(b)).length;
+  const unique = total - aliases;
+  const ALLOWED = new Set([String(total), String(unique)]);
   const files = ['README.md', 'docs/README.md', 'docs/icons.md', 'docs/accessibility.md',
                  'docs/getting-started.md', 'docs/recipes.md', 'docs/design-decisions.md',
                  'docs/design-tokens.md', 'docs/javascript-api.md'];
@@ -863,15 +870,26 @@ function checkStaleVersionRefs() {
 // ════════════════════════════════════════════════════════════════════
 
 function checkDoesNotExistParity() {
-  console.log('  ── Does-Not-Exist Table Parity ──');
+  console.log('  ── Canonical AI-Context Parity ──');
+  // Covers the Does-NOT-exist table AND the Common Names / Shipped Utility
+  // Scales sections. Every canonical row/bullet must appear verbatim in all
+  // three mirrors.
   const canon = readFile('docs/javascript-api.md');
   if (!canon) { pass(); return; }
   const idx = canon.indexOf('Classes and Methods That Do NOT Exist');
   if (idx === -1) { pass(); return; }
   const after = canon.slice(idx);
-  const end = after.indexOf('\n## ');
+  // canonical region runs through the end of Shipped Utility Scales
+  const scalesIdx = after.indexOf('## Shipped Utility Scales');
+  let end;
+  if (scalesIdx !== -1) {
+    const afterScales = after.indexOf('\n## ', scalesIdx + 10);
+    end = afterScales === -1 ? -1 : afterScales;
+  } else {
+    end = after.indexOf('\n## ');
+  }
   const block = end === -1 ? after : after.slice(0, end);
-  const rows = block.split('\n').filter(l => /^\|\s*`/.test(l));
+  const rows = block.split('\n').filter(l => /^\|\s*`/.test(l) || /^- /.test(l));
   let issues = 0;
   for (const mirror of ['.claude/instructions.md', '.cursor/rules', 'llms.txt']) {
     const content = readFile(mirror);
@@ -879,6 +897,38 @@ function checkDoesNotExistParity() {
     for (const row of rows) {
       if (!content.includes(row.trim())) {
         fail(`${mirror}: missing canonical row "${row.trim().slice(0, 48)}…"`);
+        issues++;
+      }
+    }
+  }
+  if (issues === 0) pass();
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  15. RECIPE COUNT DRIFT
+//      Recipes are <div class="sui-section" id="recipe-*"> blocks in
+//      index.html. Any "N recipes" claim in shipped prose must match.
+// ════════════════════════════════════════════════════════════════════
+
+function checkRecipeCounts() {
+  console.log('  ── Recipe Counts ──');
+  const html = readFile('index.html') || '';
+  const actual = (html.match(/<div class="sui-section"[^>]*id="recipe-[a-z0-9-]+"/g) || []).length;
+  const files = ['README.md', 'index.html', 'icons.html', 'llms.txt', 'docs/recipes.md',
+                 'docs/getting-started.md', 'docs/javascript-api.md', '.claude/instructions.md', '.cursor/rules'];
+  let issues = 0;
+  const re = /(\d+)\+?\s+recipes/gi;
+  for (const f of files) {
+    const content = readFile(f);
+    if (!content) continue;
+    let m;
+    re.lastIndex = 0;
+    while ((m = re.exec(content)) !== null) {
+      // Skip historical phrasing ("added 7 recipes") — only current-count claims drift.
+      const before = content.slice(Math.max(0, m.index - 12), m.index);
+      if (/add(ed|s|ing)\s$/.test(before)) continue;
+      if (parseInt(m[1], 10) !== actual) {
+        fail(`${f}: claims "${m[0]}" but index.html has ${actual} recipe sections`);
         issues++;
       }
     }
@@ -904,6 +954,7 @@ checkDocIconCounts();
 checkStrayFiles();
 checkStaleVersionRefs();
 checkDoesNotExistParity();
+checkRecipeCounts();
 
 console.log('');
 const parts = [`${totalPass} passed`, `${totalFail} failed`];
