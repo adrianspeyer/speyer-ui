@@ -4,21 +4,22 @@
  * Conservative SVGO configuration for contributor use.
  * Run on individual icon files BEFORE adding them to the sprite.
  *
- * NOTE: svgo is NOT a build dependency. The build pipeline minifies the
- * sprite via scripts/minify-sprite.mjs (whitespace stripping). This config exists
- * for contributors preparing individual icons before sprite assembly.
- * Install svgo locally if needed: npx svgo --config svgo.config.mjs icon.svg
+ * SVGO is a development dependency for contributor tooling and regression tests.
+ * The build pipeline uses scripts/minify-sprite.mjs (whitespace stripping),
+ * not SVGO, for the assembled sprite.
+ * After npm install:
+ *   npx svgo --config svgo.config.mjs --input icon.svg --output icon.optimized.svg
  *
  * ⚠ DO NOT run this on the assembled sprite (sui-icons.svg).
- *   The sprite embeds <symbol> and <use> elements that SVGO
- *   will incorrectly treat as unreferenced and remove.
+ *   This configuration targets standalone icons; the sprite has its own
+ *   assembly, alias validation, and whitespace-only minification workflow.
  *
  * What this config does:
  *   ✓ Removes editor metadata (Figma, Illustrator, Inkscape IDs)
  *   ✓ Removes comments
  *   ✓ Removes empty attributes and redundant xmlns on child elements
  *   ✓ Collapses useless groups
- *   ✓ Removes style="" and class="" that don't belong in the SUI spec
+ *   ✓ Removes <desc> (SUI uses a required <title> for each icon)
  *
  * What this config deliberately does NOT do:
  *   ✗ Simplify or round path data — hand-crafted geometry must be preserved
@@ -31,6 +32,9 @@
 
 export default {
   multipass: false,
+  // Explicit allowlist: SVGO 3+ ignores `active: false`. Plugins that must
+  // not run (including removeTitle and geometry optimizers) must be omitted.
+  // Do not add preset-default: its extra optimizations are not safe for SUI.
   plugins: [
     // Safe: remove editor-injected metadata
     'removeDoctype',
@@ -44,43 +48,22 @@ export default {
     'removeEmptyContainers',
     'collapseGroups',
 
-    // Safe: remove xmlns on child elements (not root)
+    // Remove unknown/editor attributes while preserving explicit SVG styling.
     {
       name: 'removeUnknownsAndDefaults',
       params: {
         keepDataAttrs: false,
         keepAriaAttrs: true,
         keepRoleAttr: true,
+        defaultAttrs: false,
+        uselessOverrides: false,
       },
     },
 
-    // Safe: clean up title/desc handling
-    // Note: SUI spec requires <title> as first child — SVGO must not remove it
-    {
-      name: 'removeTitle',
-      active: false,  // DISABLED — <title> is required by SUI a11y spec
-    },
+    // SUI requires <title> and forbids <desc>, including authored descriptions.
     {
       name: 'removeDesc',
-      active: true,   // ENABLED — <desc> is forbidden by SUI spec
+      params: { removeAny: true },
     },
-
-    // ── DISABLED — geometry-altering plugins ────────────────────────────────
-    // These are disabled explicitly so future SVGO versions don't re-enable them.
-    { name: 'convertPathData',          active: false },
-    { name: 'mergePaths',               active: false },
-    { name: 'convertShapeToPath',       active: false },
-    { name: 'convertEllipseToCircle',   active: false },
-    { name: 'convertTransform',         active: false },
-    { name: 'cleanupNumericValues',     active: false },
-    // roundViewBox removed — not available in svgo 3.3.x
-    { name: 'removeViewBox',            active: false },
-    { name: 'removeDimensions',         active: false },
-    { name: 'removeAttributesBySelector', active: false },
-    { name: 'removeAttrs',              active: false },
-    { name: 'reusePaths',               active: false },
-    { name: 'inlineStyles',             active: false },
-    { name: 'minifyStyles',             active: false },
-    { name: 'prefixIds',                active: false },
   ],
 };

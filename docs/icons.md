@@ -269,7 +269,7 @@ The `sui-icons.css` size classes (`.sui-icon-sm`, `.sui-icon-xl`, etc.) and colo
 | `sui-icons.min.svg` | Minified sprite (in `dist/`) |
 | `sui-icons.min.css` | Minified CSS (in `dist/`) |
 | `icons.html` | Interactive browser — search, size/theme toggles, click-to-copy |
-| `scripts/validate-icons.mjs` | 12-point sprite validator (2,873 checks) |
+| `scripts/validate-icons.mjs` | 12-point sprite validator (3,192 checks) |
 | `svgo.config.mjs` | SVGO config for contributors preparing individual icon SVGs |
 
 ---

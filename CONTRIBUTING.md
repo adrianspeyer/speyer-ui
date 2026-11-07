@@ -96,6 +96,14 @@ Pick from the existing 28 categories (`act`, `ai`, `brand`, `comm`, `data`, `dev
 
 ### Validation
 
+After `npm install`, you can prepare an individual icon with the conservative SVGO configuration:
+
+```bash
+npx svgo --config svgo.config.mjs --input icon.svg --output icon.optimized.svg
+```
+
+This preserves the required title and geometry. Review the result against the design rules before adding it to the sprite. Do not run SVGO on the assembled sprite; the build uses its own whitespace-only minifier. `npm test` includes regression checks for this configuration.
+
 Run the sprite validator after adding your icon to `sui-icons.svg`:
 
 ```bash
@@ -114,7 +122,7 @@ Full icon reference: [docs/icons.md](docs/icons.md)
 
 Before submitting:
 
-- [ ] `npm test` passes (preflight regression tests)
+- [ ] `npm test` passes (preflight and icon-optimization regression tests)
 - [ ] `npm run build` passes (preflight + minification) with 0 failures
 - [ ] `npm run qa:browser` passes (browser smoke tests and accessibility scans of all demo tabs)
 - [ ] `tests/smoke.html?autorun=1` passes in desktop and mobile browser viewports

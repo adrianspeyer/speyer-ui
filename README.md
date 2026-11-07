@@ -2,9 +2,7 @@
 
 A lightweight, batteries-included design system that treats accessibility as architecture, not afterthought. 538 purpose-built icons. Colour-blind friendly, mobile-first, AI-ready. Made in Canada 🇨🇦
 
-**v3.5.1** · ~98KB core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
-
-> **⚠️ v3.2.0 migration note:** Multi-screen apps using `.sui-screen` must now wrap screens in a parent with `data-sui-screens` and add `.is-active` to the default screen. Single-screen apps are unaffected. See [CHANGELOG](CHANGELOG.md) for details.
+**v3.5.1** · ~98.2 KiB minified core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
 
 ---
 
@@ -27,7 +25,7 @@ A lightweight, batteries-included design system that treats accessibility as arc
 
 ## Why SUI
 
-SUI is built for SaaS teams who need a design system that works without a build step, respects accessibility standards, and plays well with AI-assisted development. Four CDN links, one SVG sprite, and you have buttons, cards, modals, toasts, tables, navigation, 538 purpose-built icons, and 29 documented composition patterns — all under 100KB core.
+SUI is built for SaaS teams who need a design system that works without a build step, respects accessibility standards, and plays well with AI-assisted development. Four CDN links, one SVG sprite, and you have buttons, cards, modals, toasts, tables, navigation, 538 purpose-built icons, and 29 documented composition patterns — all under 100 KiB minified core.
 
 **What SUI provides:** Containers, chrome, interactive primitives, typography, design tokens, and 538 purpose-built icons with built-in accessibility (forced-colours mode, 44px touch targets, reduced-motion guards).
 
@@ -99,12 +97,14 @@ Pin a version for production: replace `@latest` with `@3.5.1`.
 
 SUI's core is three files, with an optional fourth for icons:
 
-| File | Purpose | Size |
+Sizes are for the matching minified files in `dist/`, before HTTP compression (1 KiB = 1,024 bytes).
+
+| File | Purpose | Minified size |
 |------|---------|------|
-| `sui-tokens.css` | Design tokens — colours, spacing, typography, shadows, z-index | ~5.6KB |
-| `sui-components.css` | All component classes — buttons, cards, badges, tables, and more | ~63.2KB |
-| `sui.js` | Interactive toolkit — modals, toasts, dropdowns, tooltips, accordion | ~28.6KB |
-| `sui-icons.css` *(optional)* | Companion stylesheet for the 538-icon SVG sprite | ~1.8KB |
+| `sui-tokens.css` | Design tokens — colours, spacing, typography, shadows, z-index | ~5.6 KiB |
+| `sui-components.css` | All component classes — buttons, cards, badges, tables, and more | ~63.3 KiB |
+| `sui.js` | Interactive toolkit — modals, toasts, dropdowns, tooltips, accordion | ~29.4 KiB |
+| `sui-icons.css` *(optional)* | Companion stylesheet for the 538-icon SVG sprite | ~1.8 KiB |
 
 **Key principles:**
 
@@ -294,7 +294,7 @@ Full reference with code examples: [docs/javascript-api.md](docs/javascript-api.
 
 ## Accessibility
 
-SUI maintains WCAG 2.1 AA compliance as an architectural requirement. The preflight validator (`scripts/preflight.js`) runs 66 automated checks before every build:
+SUI maintains WCAG 2.1 AA compliance as an architectural requirement. The preflight validator (`scripts/preflight.js`) runs before every build. The current baseline is 82 passing checks and six documented focus-contrast advisories:
 
 - **Contrast:** 40+ foreground/background token pairs in both themes, P1–P3 error tiers
 - **HTML/ARIA:** 15 axe-core rules including button-name, link-name, heading-order, aria-hidden-focus
@@ -350,7 +350,7 @@ Extended documentation lives in the `docs/` folder:
 
 ```bash
 npm install
-npm test         # Regression tests for the preflight validator
+npm test         # Regression tests
 npm run build    # Runs preflight validator + minifies to dist/
 ```
 

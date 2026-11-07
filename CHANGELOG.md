@@ -4,6 +4,16 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [Unreleased]
+
+### Fixed
+
+- Updated the contributor SVGO configuration for SVGO 3+ by omitting disabled plugins. Required icon titles, shape types, path precision, IDs, dimensions, and explicit paint attributes are preserved; editor metadata and forbidden descriptions are removed.
+- Added SVGO as a development-only dependency and regression coverage to `npm test`. The production sprite build still uses whitespace-only minification.
+- Corrected current documentation check counts, bundle sizes, and version-pinning comments, and removed the old v3.2.0 migration banner from the README. Historical migration details remain in the changelog.
+
+---
+
 ## [3.5.1] — 2026-11-06
 
 ### Theme: Interaction and Accessibility Fixes
