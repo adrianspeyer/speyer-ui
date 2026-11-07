@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Interactive Toolkit
- * Version: 3.5.0
+ * Version: 3.5.1
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Lightweight, dependency-free behaviors for SUI components.
@@ -42,6 +42,19 @@ const SUI = (() => {
     }
     delete root._suiInit;
     delete root._suiSetView;
+  }
+
+  // Auto-init bindings are independent of component lifecycle handlers. Track
+  // each behavior separately so repeated init() can also discover new controls.
+  const autoHandlers = new WeakMap();
+  function suiAutoOn(root, key, target, event, fn) {
+    let handlers = autoHandlers.get(root);
+    if (!handlers) autoHandlers.set(root, handlers = new Map());
+    const previous = handlers.get(key);
+    if (previous?.target === target) return;
+    if (previous) previous.target.removeEventListener(previous.event, previous.fn);
+    target.addEventListener(event, fn);
+    handlers.set(key, { target, event, fn });
   }
 
   /* ====================================================================
@@ -325,28 +338,44 @@ const SUI = (() => {
 
   const modal = {
     _stack: [],
-    _previousFocus: null,
+
+    _finishClose(el) {
+      if (el._suiBackdrop) {
+        el.removeEventListener('click', el._suiBackdrop);
+        delete el._suiBackdrop;
+      }
+      if (el._suiTrap) {
+        el.removeEventListener('keydown', el._suiTrap);
+        delete el._suiTrap;
+      }
+      this._stack = this._stack.filter(m => m !== el);
+      const previousFocus = el._suiPreviousFocus;
+      delete el._suiPreviousFocus;
+      if (previousFocus?.isConnected) previousFocus.focus();
+    },
 
     open(selector) {
       const el = typeof selector === 'string' ? $(selector) : selector;
       if (!el) return;
+      if (el.tagName === 'DIALOG' ? el.open : el.classList.contains('is-open')) return;
 
-      this._previousFocus = document.activeElement;
+      // A native close event may still be queued when a dialog is reopened.
+      if (this._stack.includes(el)) this._finishClose(el);
+      el._suiPreviousFocus = document.activeElement;
 
-      // Native <dialog> path — browser handles focus trap, scroll lock, Escape
+      // Native <dialog> owns modal inertness; never alter application [inert].
       if (el.tagName === 'DIALOG') {
         el.showModal();
         // Close on backdrop click
         el.addEventListener('click', el._suiBackdrop = (e) => {
           if (e.target === el) this.close(el);
         });
-        // iOS Safari: showModal() marks siblings inert but may fail
-        // to remove the attribute on close. Persistent cleanup listener.
-        if (!el._suiInertCleanup) {
-          el._suiInertCleanup = () => {
-            document.querySelectorAll('[inert]').forEach(n => n.removeAttribute('inert'));
+        // Also clean up after Escape, form method="dialog", or native close().
+        if (!el._suiCloseHandler) {
+          el._suiCloseHandler = () => {
+            if (!el.open) this._finishClose(el);
           };
-          el.addEventListener('close', el._suiInertCleanup);
+          el.addEventListener('close', el._suiCloseHandler);
         }
         this._stack.push(el);
         return;
@@ -386,14 +415,7 @@ const SUI = (() => {
       // Native <dialog> path
       if (el.tagName === 'DIALOG') {
         el.close();
-        // iOS Safari inert cleanup (synchronous — close event may be async)
-        document.querySelectorAll('[inert]').forEach(n => n.removeAttribute('inert'));
-        if (el._suiBackdrop) {
-          el.removeEventListener('click', el._suiBackdrop);
-          delete el._suiBackdrop;
-        }
-        this._stack = this._stack.filter(m => m !== el);
-        if (this._previousFocus) this._previousFocus.focus();
+        this._finishClose(el);
         return;
       }
 
@@ -401,14 +423,8 @@ const SUI = (() => {
       el.classList.remove('is-open');
       el.setAttribute('aria-hidden', 'true');
 
-      if (el._suiTrap) {
-        el.removeEventListener('keydown', el._suiTrap);
-        delete el._suiTrap;
-      }
-
-      this._stack = this._stack.filter(m => m !== el);
+      this._finishClose(el);
       if (this._stack.length === 0) document.body.style.overflow = '';
-      if (this._previousFocus) this._previousFocus.focus();
     }
   };
 
@@ -686,7 +702,7 @@ const SUI = (() => {
 
     open(selector) {
       const el = typeof selector === 'string' ? $(selector) : selector;
-      if (!el) return;
+      if (!el || el.classList.contains('is-open')) return;
 
       this._previousFocus = document.activeElement;
       el.classList.add('is-open');
@@ -820,7 +836,7 @@ const SUI = (() => {
 
     open(selector) {
       const el = typeof selector === 'string' ? $(selector) : selector;
-      if (!el) return;
+      if (!el || el.classList.contains('is-open')) return;
 
       // Desktop: sidenav is always visible, no overlay
       if (this._mediaQuery.matches) return;
@@ -921,7 +937,7 @@ const SUI = (() => {
 
     open(selector) {
       const el = typeof selector === 'string' ? $(selector) : selector;
-      if (!el) return;
+      if (!el || el.classList.contains('is-open')) return;
 
       this._previousFocus = document.activeElement;
       el.classList.add('is-open');
@@ -1027,7 +1043,7 @@ const SUI = (() => {
 
     // Theme toggle buttons
     $$('[data-sui-theme]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      suiAutoOn(btn, 'theme-toggle', btn, 'click', () => {
         theme.toggle();
       });
     });
@@ -1040,13 +1056,13 @@ const SUI = (() => {
 
     // Modals — open triggers (works with both <dialog> and legacy overlay)
     $$('[data-sui-modal]').forEach(btn => {
-      btn.addEventListener('click', () => modal.open(btn.getAttribute('data-sui-modal')));
+      suiAutoOn(btn, 'modal-open', btn, 'click', () => modal.open(btn.getAttribute('data-sui-modal')));
     });
 
     // Modal close buttons (works with both patterns)
     // [data-sui-modal-close] is a convenience alias — closest-parent resolution only
     $$('.sui-modal-close, [data-sui-modal-close]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      suiAutoOn(btn, 'modal-close', btn, 'click', () => {
         const dialog = btn.closest('dialog.sui-dialog');
         if (dialog) {
           if (!dialog.open) return;
@@ -1062,7 +1078,7 @@ const SUI = (() => {
 
     // Legacy modal overlay click-to-close
     $$('.sui-modal-overlay').forEach(overlay => {
-      overlay.addEventListener('click', e => {
+      suiAutoOn(overlay, 'modal-backdrop', overlay, 'click', e => {
         if (e.target === overlay) modal.close(overlay);
       });
     });
@@ -1075,7 +1091,7 @@ const SUI = (() => {
 
     // Copy buttons
     $$('[data-sui-copy]').forEach(btn => {
-      btn.addEventListener('click', async () => {
+      suiAutoOn(btn, 'copy', btn, 'click', async () => {
         const target = btn.getAttribute('data-sui-copy');
         const ok = await copy.fromElement(target);
         if (ok) {
@@ -1105,20 +1121,22 @@ const SUI = (() => {
       if (nav.id && !btn.hasAttribute('aria-controls')) {
         btn.setAttribute('aria-controls', nav.id);
       }
-      if (!nav.closest('nav') && nav.getAttribute('role') !== 'navigation') {
+      if (!nav.closest('nav') && !nav.hasAttribute('role')) {
         nav.setAttribute('role', 'navigation');
       }
       if (!nav.hasAttribute('aria-label') && !nav.closest('nav[aria-label]')) {
         nav.setAttribute('aria-label', 'Primary navigation');
       }
 
-      btn.addEventListener('click', () => {
+      suiAutoOn(btn, 'nav-toggle', btn, 'click', () => {
+        const nav = $(btn.getAttribute('data-sui-nav-toggle'));
+        if (!nav) return;
         const isOpen = nav.classList.toggle('is-open');
         btn.setAttribute('aria-expanded', String(isOpen));
       });
 
       // Escape key closes open nav
-      nav.addEventListener('keydown', e => {
+      suiAutoOn(btn, 'nav-escape', nav, 'keydown', e => {
         if (e.key === 'Escape' && nav.classList.contains('is-open')) {
           nav.classList.remove('is-open');
           btn.setAttribute('aria-expanded', 'false');
@@ -1129,7 +1147,7 @@ const SUI = (() => {
 
     // Navigation containers: ensure landmark role
     $$('.sui-nav').forEach(nav => {
-      if (!nav.closest('nav') && nav.getAttribute('role') !== 'navigation') {
+      if (!nav.closest('nav') && !nav.hasAttribute('role')) {
         nav.setAttribute('role', 'navigation');
       }
     });
@@ -1164,12 +1182,12 @@ const SUI = (() => {
 
     // Bottom sheet triggers
     $$('[data-sui-sheet]').forEach(btn => {
-      btn.addEventListener('click', () => sheet.open(btn.getAttribute('data-sui-sheet')));
+      suiAutoOn(btn, 'sheet-open', btn, 'click', () => sheet.open(btn.getAttribute('data-sui-sheet')));
     });
 
     // Bottom sheet close buttons
     $$('.sui-sheet-close').forEach(btn => {
-      btn.addEventListener('click', () => {
+      suiAutoOn(btn, 'sheet-close', btn, 'click', () => {
         const s = btn.closest('.sui-sheet');
         if (s) sheet.close(s);
       });
@@ -1177,7 +1195,7 @@ const SUI = (() => {
 
     // Bottom sheet backdrop click-to-close
     $$('.sui-sheet').forEach(el => {
-      el.addEventListener('click', e => {
+      suiAutoOn(el, 'sheet-backdrop', el, 'click', e => {
         if (e.target === el) sheet.close(el);
       });
       // Set initial ARIA
@@ -1189,12 +1207,12 @@ const SUI = (() => {
 
     // Sidenav triggers
     $$('[data-sui-sidenav]').forEach(btn => {
-      btn.addEventListener('click', () => sidenav.open(btn.getAttribute('data-sui-sidenav')));
+      suiAutoOn(btn, 'sidenav-open', btn, 'click', () => sidenav.open(btn.getAttribute('data-sui-sidenav')));
     });
 
     // Sidenav close buttons
     $$('.sui-sidenav-close').forEach(btn => {
-      btn.addEventListener('click', () => {
+      suiAutoOn(btn, 'sidenav-close', btn, 'click', () => {
         const nav = btn.closest('.sui-sidenav');
         if (nav) sidenav.close(nav);
       });
@@ -1202,7 +1220,7 @@ const SUI = (() => {
 
     // Sidenav: set aria-hidden based on viewport
     $$('.sui-sidenav').forEach(el => {
-      el.addEventListener('click', e => {
+      suiAutoOn(el, 'sidenav-backdrop', el, 'click', e => {
         if (e.target === el) sidenav.close(el);
       });
       // Desktop: always visible, remove aria-hidden
@@ -1214,12 +1232,12 @@ const SUI = (() => {
         }
       };
       updateAria();
-      sidenav._mediaQuery.addEventListener('change', updateAria);
+      suiAutoOn(el, 'sidenav-breakpoint', sidenav._mediaQuery, 'change', updateAria);
     });
 
     // Sidenav links: close on mobile after click, smooth scroll
     $$('.sui-sidenav-link').forEach(link => {
-      link.addEventListener('click', () => {
+      suiAutoOn(link, 'sidenav-link', link, 'click', () => {
         const nav = link.closest('.sui-sidenav');
         if (nav && !sidenav._mediaQuery.matches) {
           sidenav.close(nav);
@@ -1229,7 +1247,7 @@ const SUI = (() => {
 
     // Sidenav group toggles — expand/collapse
     $$('.sui-sidenav-group-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
+      suiAutoOn(btn, 'sidenav-group', btn, 'click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         btn.setAttribute('aria-expanded', String(!expanded));
         const id = btn.getAttribute('aria-controls');
@@ -1239,12 +1257,12 @@ const SUI = (() => {
 
     // Panel triggers
     $$('[data-sui-panel]').forEach(btn => {
-      btn.addEventListener('click', () => panel.toggle(btn.getAttribute('data-sui-panel')));
+      suiAutoOn(btn, 'panel-toggle', btn, 'click', () => panel.toggle(btn.getAttribute('data-sui-panel')));
     });
 
     // Panel close buttons
     $$('.sui-panel-close').forEach(btn => {
-      btn.addEventListener('click', () => {
+      suiAutoOn(btn, 'panel-close', btn, 'click', () => {
         const p = btn.closest('.sui-panel');
         if (p) panel.close(p);
       });
@@ -1252,7 +1270,7 @@ const SUI = (() => {
 
     // Panel backdrop click-to-close + initial ARIA
     $$('.sui-panel').forEach(el => {
-      el.addEventListener('click', e => {
+      suiAutoOn(el, 'panel-backdrop', el, 'click', e => {
         // Close on backdrop click (not if no-backdrop modifier)
         if (e.target === el && !el.classList.contains('sui-panel-no-backdrop')) panel.close(el);
       });
@@ -1267,7 +1285,7 @@ const SUI = (() => {
       '.sui-accordion', '.sui-segmented', '.sui-sidenav-group-toggle',
       '.sui-nav[aria-label]', '.sui-tooltip'
     ].reduce((n, sel) => n + $$(sel).length, 0);
-    console.log('SUI v3.5.0 \u2014 ' + initCount + ' components initialised');
+    console.log('SUI v3.5.1 \u2014 ' + initCount + ' components initialised');
   }
 
   // Run on DOM ready

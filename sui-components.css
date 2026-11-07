@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 3.5.0
+ * Version: 3.5.1
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -335,7 +335,7 @@ kbd,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--sui-blue-primary);
+  background: var(--sui-btn-primary-bg);
   color: var(--sui-text-inverse);
   flex-shrink: 0;
 }
@@ -755,7 +755,8 @@ kbd,
   font-family: var(--sui-font-primary);
   font-size: var(--sui-text-body);
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%23475569' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  /* SVG backgrounds cannot inherit CSS tokens; this neutral stroke clears 3:1 in both themes. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%2364748B' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   cursor: pointer;
@@ -1013,13 +1014,13 @@ textarea.sui-input {
   flex-shrink: 0;
 }
 
-/* Count badge (notification number) — uses error-strong for WCAG AA on white */
+/* Count badge (notification number) — inverse text needs a filled-action token. */
 .sui-badge-count {
   min-width: 22px;
   height: 22px;
   padding: 0 6px;
   border-radius: var(--sui-radius-full);
-  background: var(--sui-error-strong);
+  background: var(--sui-btn-danger-bg);
   color: var(--sui-text-inverse);
   font-size: 11px;
   font-weight: var(--sui-weight-bold);
@@ -2044,6 +2045,8 @@ dialog.sui-dialog-wide { max-width: 720px; }
   box-shadow: inset 3px 0 0 0 var(--sui-blue-primary);
 }
 
+.sui-table tbody tr.is-selected td { color: var(--sui-text-primary); }
+
 /* Sortable columns */
 .sui-table-sortable th[data-sort] {
   cursor: pointer;
@@ -2842,6 +2845,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
 
 .sui-mark {
   background: var(--sui-warning-soft);
+  color: var(--sui-text-primary);
   border-radius: 2px;
   padding: 0 1px;
 }
@@ -3085,7 +3089,7 @@ dialog.sui-dialog-wide { max-width: 720px; }
 .sui-step.is-active .sui-step-indicator {
   border-color: var(--sui-blue-primary);
   background: var(--sui-blue-soft);
-  color: var(--sui-blue-primary);
+  color: var(--sui-blue-strong);
 }
 .sui-step.is-active {
   color: var(--sui-text-primary);

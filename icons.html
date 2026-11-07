@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SUI Icons v3.5.0</title>
+<title>SUI Icons v3.5.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -61,6 +61,7 @@ h2.section-head{
   border-radius:var(--sui-radius-sm);overflow-x:auto;white-space:pre;
   color:var(--sui-text-primary);
 }
+.code-block:focus-visible{outline:2px solid var(--sui-blue-strong);outline-offset:2px;}
 .demo-row{display:flex;align-items:center;gap:var(--sui-space-2);}
 
 /* ── Pattern copy button ── */
@@ -153,7 +154,8 @@ h2.section-head{
   padding:1px 3px;border-radius:3px;line-height:1.2;
 }
 .ic-alias{background:var(--sui-pro-soft);color:var(--sui-pro);}
-.ic-note{background:var(--sui-blue-soft);color:var(--sui-blue-primary);cursor:help;}
+.ic-note{display:inline-flex;background:var(--sui-blue-soft);color:var(--sui-blue-strong);cursor:help;}
+.ic-note svg{width:12px;height:12px;}
 .ic-copied{
   position:absolute;top:3px;left:3px;
   font-size:8px;font-weight:700;
@@ -3576,7 +3578,7 @@ footer{
         <div class="sui-brand-mark" aria-hidden="true">SUI</div>
         <span class="sui-brand-name">Icons</span>
       </a>
-      <span class="sui-version-pill">v3.5.0</span>
+      <span class="sui-version-pill">v3.5.1</span>
     </div>
 
     <div class="tb-actions">
@@ -3591,16 +3593,16 @@ footer{
     <p>The icon system for the Speyer UI Design System. Click any icon to copy its &lt;use&gt; snippet.</p>
     <div class="meta-badges">
       <span class="sui-badge sui-badge-success">538 Symbols</span>
-      <span class="sui-badge sui-badge-neutral">456 Unique</span>
-      <span class="sui-badge sui-badge-neutral">27 Aliases</span>
-      <span class="sui-badge sui-badge-neutral">28 Categories</span>
+      <span class="sui-badge sui-badge-neutral">506 Unique</span>
+      <span class="sui-badge sui-badge-neutral">32 Aliases</span>
+      <span class="sui-badge sui-badge-neutral">29 Categories</span>
       <span class="sui-badge sui-badge-neutral">24×24 · 2px Stroke</span>
       <span class="sui-badge sui-badge-neutral">WCAG 2.1 AA</span>
       <span class="sui-badge sui-badge-neutral">currentColor</span>
       <span class="sui-badge sui-badge-neutral">MIT Licence</span>
     </div>
     <p style="margin-top:var(--sui-space-2);font-size:var(--sui-text-meta)">
-      ↗ = alias to another icon &nbsp;·&nbsp; i = usage note (hover) &nbsp;·&nbsp; Click any icon to copy snippet
+      ↗ = alias to another icon &nbsp;·&nbsp; ⓘ = usage note (hover) &nbsp;·&nbsp; Click any icon to copy snippet
     </p>
   </div>
 
@@ -3614,7 +3616,7 @@ footer{
     <div class="sui-card-header"><h3 style="font-size:var(--sui-text-small);font-weight:var(--sui-weight-semibold)">Pattern A — Decorative</h3></div>
     <div class="sui-card-body">
       <div class="pattern-code-wrap">
-        <pre class="code-block" id="patternA">&lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
+        <pre class="code-block" id="patternA" tabindex="0" role="region" aria-label="Decorative icon code example">&lt;svg class="sui-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
   &lt;use href="#sui-icon-status-check-circle"/&gt;
 &lt;/svg&gt;
 Active</pre>
@@ -3630,7 +3632,7 @@ Active</pre>
     <div class="sui-card-header"><h3 style="font-size:var(--sui-text-small);font-weight:var(--sui-weight-semibold)">Pattern B — Icon Button</h3></div>
     <div class="sui-card-body">
       <div class="pattern-code-wrap">
-        <pre class="code-block" id="patternB">&lt;button class="sui-icon-btn" aria-label="Delete"&gt;
+        <pre class="code-block" id="patternB" tabindex="0" role="region" aria-label="Icon button code example">&lt;button class="sui-icon-btn" aria-label="Delete"&gt;
   &lt;svg class="sui-icon" viewBox="0 0 24 24"
        aria-hidden="true"&gt;
     &lt;use href="#sui-icon-act-trash"/&gt;
@@ -3648,7 +3650,7 @@ Active</pre>
     <div class="sui-card-header"><h3 style="font-size:var(--sui-text-small);font-weight:var(--sui-weight-semibold)">Pattern C — Icon Link</h3></div>
     <div class="sui-card-body">
       <div class="pattern-code-wrap">
-        <pre class="code-block" id="patternC">&lt;a href="/search" class="sui-icon-btn"
+        <pre class="code-block" id="patternC" tabindex="0" role="region" aria-label="Icon link code example">&lt;a href="/search" class="sui-icon-btn"
    aria-label="Search"&gt;
   &lt;svg class="sui-icon" viewBox="0 0 24 24"
        aria-hidden="true"&gt;
@@ -3853,7 +3855,7 @@ Active</pre>
 <button class="ic-card" data-id="act-pin" data-cat="act" aria-label="Copy act-pin icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-pin"/></svg><span class="ic-name">act-pin</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="act-pin-off" data-cat="act" aria-label="Copy act-pin-off icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-pin-off"/></svg><span class="ic-name">act-pin-off</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="act-plus" data-cat="act" aria-label="Copy act-plus icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-plus"/></svg><span class="ic-name">act-plus</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="act-qr-code" data-cat="act" aria-label="Copy act-qr-code icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-qr-code"/></svg><span class="ic-name">act-qr-code</span><span class="ic-badge ic-note" aria-hidden="true" title="Complex — decorative only at 12px, use ≥20px">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="act-qr-code" data-cat="act" aria-label="Copy act-qr-code icon snippet" aria-describedby="note-act-qr-code"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-qr-code"/></svg><span class="ic-name">act-qr-code</span><span class="ic-badge ic-note" aria-hidden="true" title="Complex — decorative only at 12px, use ≥20px"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-act-qr-code" hidden>Complex — decorative only at 12px, use ≥20px</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="act-redo" data-cat="act" aria-label="Copy act-redo icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-redo"/></svg><span class="ic-name">act-redo</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="act-refresh" data-cat="act" aria-label="Copy act-refresh icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-refresh"/></svg><span class="ic-name">act-refresh</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="act-refresh-cw" data-cat="act" aria-label="Copy act-refresh-cw icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-act-refresh-cw"/></svg><span class="ic-name">act-refresh-cw</span><span class="ic-badge ic-alias" aria-hidden="true">↗</span><span class="ic-copied" aria-hidden="true">✓</span></button>
@@ -3920,8 +3922,8 @@ Active</pre>
 <button class="ic-card" data-id="status-help-filled" data-cat="status" aria-label="Copy status-help-filled icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-help-filled"/></svg><span class="ic-name">status-help-filled</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="status-info" data-cat="status" aria-label="Copy status-info icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info"/></svg><span class="ic-name">status-info</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="status-info-filled" data-cat="status" aria-label="Copy status-info-filled icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-info-filled"/></svg><span class="ic-name">status-info-filled</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="status-loader" data-cat="status" aria-label="Copy status-loader icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-loader"/></svg><span class="ic-name">status-loader</span><span class="ic-badge ic-note" aria-hidden="true" title="Static 8-line spinner — requires .sui-icon-spin class to animate">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="status-loader-2" data-cat="status" aria-label="Copy status-loader-2 icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-loader-2"/></svg><span class="ic-name">status-loader-2</span><span class="ic-badge ic-note" aria-hidden="true" title="Static C-arc — requires .sui-icon-spin class to animate">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="status-loader" data-cat="status" aria-label="Copy status-loader icon snippet" aria-describedby="note-status-loader"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-loader"/></svg><span class="ic-name">status-loader</span><span class="ic-badge ic-note" aria-hidden="true" title="Static 8-line spinner — requires .sui-icon-spin class to animate"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-status-loader" hidden>Static 8-line spinner — requires .sui-icon-spin class to animate</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="status-loader-2" data-cat="status" aria-label="Copy status-loader-2 icon snippet" aria-describedby="note-status-loader-2"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-loader-2"/></svg><span class="ic-name">status-loader-2</span><span class="ic-badge ic-note" aria-hidden="true" title="Static C-arc — requires .sui-icon-spin class to animate"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-status-loader-2" hidden>Static C-arc — requires .sui-icon-spin class to animate</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="status-minus-circle" data-cat="status" aria-label="Copy status-minus-circle icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-minus-circle"/></svg><span class="ic-name">status-minus-circle</span><span class="ic-badge ic-alias" aria-hidden="true">↗</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="status-power" data-cat="status" aria-label="Copy status-power icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-power"/></svg><span class="ic-name">status-power</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="status-signal" data-cat="status" aria-label="Copy status-signal icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-status-signal"/></svg><span class="ic-name">status-signal</span><span class="ic-copied" aria-hidden="true">✓</span></button>
@@ -3937,7 +3939,7 @@ Active</pre>
 <button class="ic-card" data-id="data-binary" data-cat="data" aria-label="Copy data-binary icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-binary"/></svg><span class="ic-name">data-binary</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="data-chart-area" data-cat="data" aria-label="Copy data-chart-area icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-chart-area"/></svg><span class="ic-name">data-chart-area</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="data-chart-donut" data-cat="data" aria-label="Copy data-chart-donut icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-chart-donut"/></svg><span class="ic-name">data-chart-donut</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="data-chart-scatter" data-cat="data" aria-label="Copy data-chart-scatter icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-chart-scatter"/></svg><span class="ic-name">data-chart-scatter</span><span class="ic-badge ic-note" aria-hidden="true" title="Complex — decorative only at 12px, use ≥20px">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="data-chart-scatter" data-cat="data" aria-label="Copy data-chart-scatter icon snippet" aria-describedby="note-data-chart-scatter"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-chart-scatter"/></svg><span class="ic-name">data-chart-scatter</span><span class="ic-badge ic-note" aria-hidden="true" title="Complex — decorative only at 12px, use ≥20px"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-data-chart-scatter" hidden>Complex — decorative only at 12px, use ≥20px</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="data-cloud" data-cat="data" aria-label="Copy data-cloud icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-cloud"/></svg><span class="ic-name">data-cloud</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="data-cloud-upload" data-cat="data" aria-label="Copy data-cloud-upload icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-cloud-upload"/></svg><span class="ic-name">data-cloud-upload</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="data-cloud-download" data-cat="data" aria-label="Copy data-cloud-download icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-data-cloud-download"/></svg><span class="ic-name">data-cloud-download</span><span class="ic-copied" aria-hidden="true">✓</span></button>
@@ -3998,7 +4000,7 @@ Active</pre>
 <button class="ic-card" data-id="pay-receipt" data-cat="pay" aria-label="Copy pay-receipt icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-receipt"/></svg><span class="ic-name">pay-receipt</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="pay-refund" data-cat="pay" aria-label="Copy pay-refund icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-refund"/></svg><span class="ic-name">pay-refund</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="pay-returns" data-cat="pay" aria-label="Copy pay-returns icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-returns"/></svg><span class="ic-name">pay-returns</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="pay-scale" data-cat="pay" aria-label="Copy pay-scale icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-scale"/></svg><span class="ic-name">pay-scale</span><span class="ic-badge ic-note" aria-hidden="true" title="Decorative only at 12px, use ≥16px">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="pay-scale" data-cat="pay" aria-label="Copy pay-scale icon snippet" aria-describedby="note-pay-scale"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-scale"/></svg><span class="ic-name">pay-scale</span><span class="ic-badge ic-note" aria-hidden="true" title="Decorative only at 12px, use ≥16px"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-pay-scale" hidden>Decorative only at 12px, use ≥16px</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="pay-shipping-fast" data-cat="pay" aria-label="Copy pay-shipping-fast icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-shipping-fast"/></svg><span class="ic-name">pay-shipping-fast</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="pay-shopping-cart" data-cat="pay" aria-label="Copy pay-shopping-cart icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-shopping-cart"/></svg><span class="ic-name">pay-shopping-cart</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="pay-store" data-cat="pay" aria-label="Copy pay-store icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-pay-store"/></svg><span class="ic-name">pay-store</span><span class="ic-copied" aria-hidden="true">✓</span></button>
@@ -4187,7 +4189,7 @@ Active</pre>
 <button class="ic-card" data-id="brand-spotify" data-cat="brand" aria-label="Copy brand-spotify icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-spotify"/></svg><span class="ic-name">brand-spotify</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="brand-tiktok" data-cat="brand" aria-label="Copy brand-tiktok icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-tiktok"/></svg><span class="ic-name">brand-tiktok</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="brand-telegram" data-cat="brand" aria-label="Copy brand-telegram icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-telegram"/></svg><span class="ic-name">brand-telegram</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="brand-codepen" data-cat="brand" aria-label="Copy brand-codepen icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-codepen"/></svg><span class="ic-name">brand-codepen</span><span class="ic-badge ic-note" aria-hidden="true" title="Hexagon wireframe — use ≥16px">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="brand-codepen" data-cat="brand" aria-label="Copy brand-codepen icon snippet" aria-describedby="note-brand-codepen"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-codepen"/></svg><span class="ic-name">brand-codepen</span><span class="ic-badge ic-note" aria-hidden="true" title="Hexagon wireframe — use ≥16px"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-brand-codepen" hidden>Hexagon wireframe — use ≥16px</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="brand-stackoverflow" data-cat="brand" aria-label="Copy brand-stackoverflow icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-stackoverflow"/></svg><span class="ic-name">brand-stackoverflow</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 
 <button class="ic-card" data-id="brand-reddit" data-cat="brand" aria-label="Copy brand-reddit icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-brand-reddit"/></svg><span class="ic-name">brand-reddit</span><span class="ic-badge ic-alias" aria-hidden="true">↗</span><span class="ic-copied" aria-hidden="true">✓</span></button>
@@ -4273,7 +4275,7 @@ Active</pre>
 <button class="ic-card" data-id="ops-truck" data-cat="ops" aria-label="Copy ops-truck icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-truck"/></svg><span class="ic-name">ops-truck</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="ops-package" data-cat="ops" aria-label="Copy ops-package icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-package"/></svg><span class="ic-name">ops-package</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="ops-warehouse" data-cat="ops" aria-label="Copy ops-warehouse icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-warehouse"/></svg><span class="ic-name">ops-warehouse</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="ops-barcode" data-cat="ops" aria-label="Copy ops-barcode icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-barcode"/></svg><span class="ic-name">ops-barcode</span><span class="ic-badge ic-note" aria-hidden="true" title="Dense bars — use ≥16px">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="ops-barcode" data-cat="ops" aria-label="Copy ops-barcode icon snippet" aria-describedby="note-ops-barcode"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-barcode"/></svg><span class="ic-name">ops-barcode</span><span class="ic-badge ic-note" aria-hidden="true" title="Dense bars — use ≥16px"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-ops-barcode" hidden>Dense bars — use ≥16px</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="ops-clipboard-list" data-cat="ops" aria-label="Copy ops-clipboard-list icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-clipboard-list"/></svg><span class="ic-name">ops-clipboard-list</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="ops-hard-hat" data-cat="ops" aria-label="Copy ops-hard-hat icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-hard-hat"/></svg><span class="ic-name">ops-hard-hat</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="ops-wrench" data-cat="ops" aria-label="Copy ops-wrench icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-ops-wrench"/></svg><span class="ic-name">ops-wrench</span><span class="ic-copied" aria-hidden="true">✓</span></button>
@@ -4298,7 +4300,7 @@ Active</pre>
 </div></section>
 <section class="cat-section" data-cat="misc"><div class="cat-header"><code class="cat-prefix sui-badge sui-badge-neutral sui-badge-sm">misc-</code><span class="cat-label">Miscellaneous & Delight</span><span class="cat-count">31&thinsp;<span class="cat-alias">(1 alias)</span></span></div><div class="cat-grid"><button class="ic-card" data-id="misc-flame" data-cat="misc" aria-label="Copy misc-flame icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-misc-flame"/></svg><span class="ic-name">misc-flame</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="misc-leaf" data-cat="misc" aria-label="Copy misc-leaf icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-misc-leaf"/></svg><span class="ic-name">misc-leaf</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="misc-snowflake" data-cat="misc" aria-label="Copy misc-snowflake icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-misc-snowflake"/></svg><span class="ic-name">misc-snowflake</span><span class="ic-badge ic-note" aria-hidden="true" title="Intricate geometry — use ≥16px">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="misc-snowflake" data-cat="misc" aria-label="Copy misc-snowflake icon snippet" aria-describedby="note-misc-snowflake"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-misc-snowflake"/></svg><span class="ic-name">misc-snowflake</span><span class="ic-badge ic-note" aria-hidden="true" title="Intricate geometry — use ≥16px"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-misc-snowflake" hidden>Intricate geometry — use ≥16px</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="misc-coffee" data-cat="misc" aria-label="Copy misc-coffee icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-misc-coffee"/></svg><span class="ic-name">misc-coffee</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="misc-wine" data-cat="misc" aria-label="Copy misc-wine icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-misc-wine"/></svg><span class="ic-name">misc-wine</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="misc-beer" data-cat="misc" aria-label="Copy misc-beer icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-misc-beer"/></svg><span class="ic-name">misc-beer</span><span class="ic-copied" aria-hidden="true">✓</span></button>
@@ -4364,14 +4366,14 @@ Active</pre>
 <button class="ic-card" data-id="a11y-contrast" data-cat="a11y" aria-label="Copy a11y-contrast icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-a11y-contrast"/></svg><span class="ic-name">a11y-contrast</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="a11y-font-size" data-cat="a11y" aria-label="Copy a11y-font-size icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-a11y-font-size"/></svg><span class="ic-name">a11y-font-size</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 <button class="ic-card" data-id="a11y-screen-reader" data-cat="a11y" aria-label="Copy a11y-screen-reader icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-a11y-screen-reader"/></svg><span class="ic-name">a11y-screen-reader</span><span class="ic-copied" aria-hidden="true">✓</span></button>
-<button class="ic-card" data-id="a11y-keyboard" data-cat="a11y" aria-label="Copy a11y-keyboard icon snippet"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-a11y-keyboard"/></svg><span class="ic-name">a11y-keyboard</span><span class="ic-badge ic-note" aria-hidden="true" title="Fine detail — use ≥16px">i</span><span class="ic-copied" aria-hidden="true">✓</span></button>
+<button class="ic-card" data-id="a11y-keyboard" data-cat="a11y" aria-label="Copy a11y-keyboard icon snippet" aria-describedby="note-a11y-keyboard"><svg class="ic-svg" viewBox="0 0 24 24" aria-hidden="true"><use href="#sui-icon-a11y-keyboard"/></svg><span class="ic-name">a11y-keyboard</span><span class="ic-badge ic-note" aria-hidden="true" title="Fine detail — use ≥16px"><svg viewBox="0 0 24 24" focusable="false"><use href="#sui-icon-status-info"/></svg></span><span id="note-a11y-keyboard" hidden>Fine detail — use ≥16px</span><span class="ic-copied" aria-hidden="true">✓</span></button>
 </div></section>
 
   <div class="no-results" id="no-results" role="status">No icons match your search.</div>
 </main>
 
 <footer>
-  SUI Icons v3.5.0 &nbsp;·&nbsp; 506 unique + 32 aliases = 538 total
+  SUI Icons v3.5.1 &nbsp;·&nbsp; 506 unique + 32 aliases = 538 total
   &nbsp;·&nbsp; Speyer UI Design System &nbsp;·&nbsp; Made in Canada 🍁<br>
   <span style="margin-top:4px;display:block">
     ⚠ <code>brand-*</code> icons: Logos and trademarks are the property of their respective owners and are used here for identification purposes only.

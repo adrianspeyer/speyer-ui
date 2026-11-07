@@ -114,7 +114,10 @@ Full icon reference: [docs/icons.md](docs/icons.md)
 
 Before submitting:
 
+- [ ] `npm test` passes (preflight regression tests)
 - [ ] `npm run build` passes (preflight + minification) with 0 failures
+- [ ] `npm run qa:browser` passes (browser smoke tests and accessibility scans of all demo tabs)
+- [ ] `tests/smoke.html?autorun=1` passes in desktop and mobile browser viewports
 - [ ] `npm run axe` passes (0 violations on index.html)
 - [ ] `npm run axe -- icons.html` passes (0 violations on icons.html)
 - [ ] Light mode contrast meets WCAG AA

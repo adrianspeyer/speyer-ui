@@ -1,6 +1,6 @@
 {
   "name": "speyer-ui",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "A lightweight, accessible design system built for colour-blind users and AI-assisted development.",
   "author": "Adrian Speyer",
   "license": "MIT",
@@ -20,6 +20,8 @@
     "dist/"
   ],
   "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "qa:browser": "node scripts/qa-browser.mjs",
     "preflight": "node scripts/preflight.js",
     "axe": "node scripts/run-axe.mjs",
     "minify:css": "npx clean-css-cli -o dist/sui-tokens.min.css sui-tokens.css && npx clean-css-cli -o dist/sui-components.min.css sui-components.css",
@@ -33,6 +35,7 @@
     "axe-core": "^4.11.1",
     "clean-css-cli": "^5.6.3",
     "jsdom": "^28.1.0",
+    "playwright": "^1.61.1",
     "terser": "^5.46.0"
   }
 }

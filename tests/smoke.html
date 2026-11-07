@@ -98,6 +98,12 @@
     <!-- Theme toggle -->
     <button data-sui-theme type="button" data-test="theme-toggle">Toggle theme</button>
 
+    <!-- Auto-init controls -->
+    <button data-sui-nav-toggle="#test-mobile-nav" type="button" data-test="nav-toggle">Menu</button>
+    <div id="test-mobile-nav"><a href="#smoke-run">Navigation link</a></div>
+    <button class="sui-sidenav-group-toggle" type="button" aria-expanded="false" aria-controls="test-nav-group" data-test="group-toggle">Group</button>
+    <div id="test-nav-group" hidden>Group links</div>
+
     <!-- Tooltip -->
     <span class="sui-tooltip" data-test="tooltip">
       Hover me
@@ -127,6 +133,20 @@
 
       function delay(ms) {
         return new Promise(r => setTimeout(r, ms));
+      }
+
+      function nextEvent(target, type) {
+        return new Promise((resolve, reject) => {
+          const onEvent = () => {
+            clearTimeout(timer);
+            resolve();
+          };
+          const timer = setTimeout(() => {
+            target.removeEventListener(type, onEvent);
+            reject(new Error('Timed out waiting for ' + type));
+          }, 2000);
+          target.addEventListener(type, onEvent, { once: true });
+        });
       }
 
       /* ── Core ── */
@@ -178,13 +198,55 @@
         return dialog.open === false;
       });
 
-      assert('modal-inert-cleanup', 'No stale [inert] after modal close', async () => {
+      assert('modal-preserves-inert', 'Modal close preserves application-owned inert state', async () => {
+        const dialog = $('#test-modal-class');
+        const before = document.createElement('div');
+        const during = document.createElement('div');
+        before.inert = true;
+        $('#smoke-fixtures').append(before, during);
+        try {
+          SUI.modal.open(dialog);
+          during.inert = true;
+          const closed = nextEvent(dialog, 'close');
+          SUI.modal.close(dialog);
+          await closed;
+          return before.inert && during.inert;
+        } finally {
+          SUI.modal.close(dialog);
+          before.remove();
+          during.remove();
+        }
+      });
+
+      assert('modal-native-close', 'Native dialog close cleans up and restores the original focus', async () => {
+        const dialog = $('#test-modal-class');
+        const trigger = $('#smoke-run');
+        trigger.focus();
+        SUI.modal.open(dialog);
+        SUI.modal.open(dialog); // An already-open modal must keep its original opener.
+        const nativeClosed = nextEvent(dialog, 'close');
+        dialog.close();
+        await nativeClosed;
+        const closed = !dialog.open && !SUI.modal._stack.includes(dialog) && document.activeElement === trigger;
+        SUI.modal.open(dialog);
+        const suiClosed = nextEvent(dialog, 'close');
+        SUI.modal.close(dialog);
+        await suiClosed;
+        return closed && document.activeElement === trigger;
+      });
+
+      assert('modal-immediate-reopen', 'A queued native close event does not clean up a reopened dialog', async () => {
         const dialog = $('#test-modal-class');
         SUI.modal.open(dialog);
-        await delay(50);
+        const firstClosed = nextEvent(dialog, 'close');
         SUI.modal.close(dialog);
-        await delay(50);
-        return document.querySelectorAll('[inert]').length === 0;
+        SUI.modal.open(dialog);
+        await firstClosed;
+        const reopened = dialog.open && SUI.modal._stack.filter(el => el === dialog).length === 1;
+        const secondClosed = nextEvent(dialog, 'close');
+        SUI.modal.close(dialog);
+        await secondClosed;
+        return reopened && !SUI.modal._stack.includes(dialog);
       });
 
       assert('modal-double-close', 'Double-close on closed dialog is safe', () => {
@@ -220,6 +282,18 @@
         await delay(100);
         const collapsed = trigger.getAttribute('aria-expanded') === 'false';
         return expanded && collapsed;
+      });
+
+      assert('panel-repeated-open-focus', 'Repeated panel open preserves its original focus target', async () => {
+        const panel = $('#test-panel');
+        const trigger = $('#smoke-run');
+        trigger.focus();
+        SUI.panel.open(panel);
+        await delay(100);
+        SUI.panel.open(panel);
+        SUI.panel.close(panel);
+        await delay(100);
+        return !SUI.panel.isOpen(panel) && document.activeElement === trigger;
       });
 
       assert('modal-wide-open-close', 'Wide dialog opens and closes', async () => {
@@ -400,7 +474,7 @@
 
       /* ── Idempotency ── */
 
-      assert('idempotent-init', 'Double init() does not duplicate handlers', async () => {
+      assert('idempotent-tabs-init', 'Double tabs.init() preserves tab switching', async () => {
         const nav = $('[data-test="tabs-nav"]');
         SUI.tabs.init(nav); // Already initialised — should be no-op
         const tabB = $('[data-test="tab-b"]');
@@ -410,6 +484,87 @@
         SUI.tabs.activate($('[data-test="tab-a"]'));
         await delay(50);
         return ok;
+      });
+
+      assert('idempotent-global-init', 'Repeated SUI.init() keeps existing toggles working once per click', async () => {
+        const theme = SUI.theme.current();
+        const panel = $('#test-panel');
+        const panelTrigger = $('[data-test="panel-trigger"]');
+        const nav = $('#test-mobile-nav');
+        const navTrigger = $('[data-test="nav-toggle"]');
+        const group = $('#test-nav-group');
+        const groupTrigger = $('[data-test="group-toggle"]');
+        try {
+          SUI.init();
+          SUI.theme.set('light');
+          $('[data-test="theme-toggle"]').click();
+          const themed = SUI.theme.resolved() === 'dark';
+          panelTrigger.click();
+          await delay(100);
+          const opened = SUI.panel.isOpen(panel) && panelTrigger.getAttribute('aria-expanded') === 'true';
+          panelTrigger.click();
+          const closed = !SUI.panel.isOpen(panel);
+          navTrigger.click();
+          const navOpened = nav.classList.contains('is-open') && navTrigger.getAttribute('aria-expanded') === 'true';
+          navTrigger.click();
+          const navClosed = !nav.classList.contains('is-open');
+          groupTrigger.click();
+          const groupOpened = !group.hidden && groupTrigger.getAttribute('aria-expanded') === 'true';
+          groupTrigger.click();
+          return themed && opened && closed && navOpened && navClosed && groupOpened && group.hidden;
+        } finally {
+          SUI.theme.set(theme);
+          SUI.panel.close(panel);
+          nav.classList.remove('is-open');
+          navTrigger.setAttribute('aria-expanded', 'false');
+          group.hidden = true;
+          groupTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      assert('init-dynamic-controls', 'Re-init discovers new controls without duplicating existing behavior', async () => {
+        const theme = SUI.theme.current();
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.setAttribute('data-sui-theme', '');
+        $('#smoke-fixtures').appendChild(button);
+        try {
+          SUI.init();
+          SUI.theme.set('light');
+          button.click();
+          const newControlWorks = SUI.theme.resolved() === 'dark';
+          $('[data-test="theme-toggle"]').click();
+          const existingControlWorks = SUI.theme.resolved() === 'light';
+          SUI.init();
+          button.click();
+          return newControlWorks && existingControlWorks && SUI.theme.resolved() === 'dark';
+        } finally {
+          button.remove();
+          SUI.theme.set(theme);
+        }
+      });
+
+      assert('div-tablist-role', 'Div tablists retain their role and programmatic activation after init', () => {
+        const fixture = document.createElement('div');
+        fixture.setAttribute('data-sui-tabs', '');
+        fixture.innerHTML = '<button type="button" data-sui-nav-toggle="#test-div-tablist">Tabs</button>' +
+          '<div class="sui-nav" id="test-div-tablist" role="tablist" aria-label="Div tabs">' +
+          '<button class="sui-tab" role="tab" aria-selected="true" data-tab="div-a">A</button>' +
+          '<button class="sui-tab" role="tab" data-tab="div-b">B</button></div>' +
+          '<div data-view="div-a">A content</div><div data-view="div-b">B content</div>';
+        $('#smoke-fixtures').appendChild(fixture);
+        const nav = fixture.querySelector('.sui-nav');
+        try {
+          SUI.init();
+          SUI.init();
+          const tab = fixture.querySelector('[data-tab="div-b"]');
+          SUI.tabs.activate(tab);
+          return nav.getAttribute('role') === 'tablist' && tab.getAttribute('aria-selected') === 'true' &&
+            fixture.querySelector('[data-view="div-b"]').classList.contains('is-active');
+        } finally {
+          SUI.tabs.destroy(nav);
+          fixture.remove();
+        }
       });
 
       /* ── Runner ── */

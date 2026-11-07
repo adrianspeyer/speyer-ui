@@ -4,6 +4,33 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.5.1] — 2026-11-06
+
+### Theme: Interaction and Accessibility Fixes
+
+Patch release correcting initialization, dialog cleanup, tab semantics, and icon-gallery accessibility. No breaking API or markup changes.
+
+### Fixed
+
+- **Repeated initialization** — `SUI.init()` now binds each automatic behavior once while still discovering newly inserted controls. Theme, panel, mobile navigation, and sidenav group toggles no longer cancel themselves out after reinitialization; copy, modal, sheet, and sidenav handlers are also protected against duplicate binding.
+- **Modal cleanup** — Closing a native dialog preserves application-owned `inert` attributes. Native close events, including Escape and dialog forms, clean up SUI's handlers and stack. Focus is tracked per dialog, and repeated opens do not register duplicate handlers.
+- **Tab semantics** — Navigation safety nets preserve explicit roles, including `role="tablist"` on non-`nav` elements, so `SUI.tabs.activate()` continues to work.
+- **Documentation parity** — Preflight checks prose-first Common Names mappings as well as code-first names and utility scales. Missing or empty AI-context mirrors now fail validation.
+- **Icon-gallery accessibility** — Usage-note badges use an information icon and expose their guidance through accessible descriptions. Code examples support keyboard scrolling and visible focus, and note indicators use a stronger contrast token.
+- **Component contrast** — Brand marks and count badges use existing contrast-safe filled-color tokens. Highlighted text and selected table rows explicitly follow the theme, and active step numbers use the stronger blue text token.
+- **Select indicator** — The dropdown chevron uses a neutral stroke that remains visible in both themes, including dark mode.
+- **Demo accessibility** — Corrected example labels and headings, keyboard access to scrollable regions, inline-link styling, and recipe contrast in both themes.
+- **Icon-gallery counts** — Corrected stale summary badges to 506 unique icons, 32 aliases, and 29 categories.
+
+### Tests and Distribution
+
+- Expanded browser smoke coverage for repeated initialization, dynamic controls, modal lifecycle, preserved inert state, and non-`nav` tablists.
+- Added preflight CLI regression tests, available through `npm test`, covering changed, removed, missing, and empty mirrored content.
+- Added `npm run qa:browser` for reproducible source/production smoke tests and real-browser axe scans across every demo tab, both themes, and desktop/mobile sizes. Playwright is a development-only dependency; runtime dependencies remain zero.
+- Updated current version references and pinned CDN examples to 3.5.1, and rebuilt production assets in `dist/`.
+
+---
+
 ## [3.5.0] — 2026-06-10
 
 ### Theme: Three Demand-Driven Additions

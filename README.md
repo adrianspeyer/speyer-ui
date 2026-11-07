@@ -2,7 +2,7 @@
 
 A lightweight, batteries-included design system that treats accessibility as architecture, not afterthought. 538 purpose-built icons. Colour-blind friendly, mobile-first, AI-ready. Made in Canada 🇨🇦
 
-**v3.5.0** · ~98KB core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
+**v3.5.1** · ~98KB core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
 
 > **⚠️ v3.2.0 migration note:** Multi-screen apps using `.sui-screen` must now wrap screens in a parent with `data-sui-screens` and add `.is-active` to the default screen. Single-screen apps are unaffected. See [CHANGELOG](CHANGELOG.md) for details.
 
@@ -60,7 +60,7 @@ SUI is built for SaaS teams who need a design system that works without a build 
 </script>
 ```
 
-Pin a version for production: replace `@latest` with `@3.5.0`.
+Pin a version for production: replace `@latest` with `@3.5.1`.
 
 ### Starter Template
 
@@ -71,13 +71,13 @@ Pin a version for production: replace `@latest` with `@3.5.0`.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.0/dist/sui-tokens.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.0/dist/sui-components.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.0/dist/sui-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-tokens.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-components.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-icons.min.css">
 </head>
 <body>
   <script defer>
-    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.0/dist/sui-icons.min.svg')
+    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-icons.min.svg')
       .then(r => r.text())
       .then(svg => { const d = document.createElement('div'); d.style.display = 'none'; d.innerHTML = svg; document.body.prepend(d); });
   </script>
@@ -88,7 +88,7 @@ Pin a version for production: replace `@latest` with `@3.5.0`.
       Get Started
     </button>
   </main>
-  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.0/dist/sui.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui.min.js" defer></script>
 </body>
 </html>
 ```
@@ -350,20 +350,36 @@ Extended documentation lives in the `docs/` folder:
 
 ```bash
 npm install
+npm test         # Regression tests for the preflight validator
 npm run build    # Runs preflight validator + minifies to dist/
 ```
 
 ### Preflight Validator
 
-The preflight script (`scripts/preflight.js`) runs 66 checks across 7 categories. It must pass with 0 failures before any release. Advisory warnings (focus ring AAA contrast) are expected and documented.
+The preflight script (`scripts/preflight.js`) checks contrast, HTML/ARIA, versions, assets, and documentation consistency. It must pass with 0 failures before any release. Advisory warnings (focus ring AAA contrast) are expected and documented.
 
 ```bash
 npm run preflight
 ```
 
+### Browser Regression Checks
+
+```bash
+npx playwright install chromium
+npm run qa:browser
+```
+
+The browser runner serves the repository locally, checks source and production smoke tests at desktop/mobile widths, and scans every demo tab plus the icon gallery in both themes with axe. It fails on smoke failures, page errors, or accessibility violations, and reports incomplete accessibility checks for manual review. External network requests are blocked during QA.
+
+Use `-- --smoke-only` or `-- --axe-only` to run one suite. For WebKit, install it with `npx playwright install webkit` and run `SUI_BROWSER=webkit npm run qa:browser`. `SUI_BROWSER_EXECUTABLE_PATH` optionally selects an existing browser executable.
+
+For interactive testing, serve the repository over HTTP and open `tests/smoke.html?autorun=1`. Results appear on the page and in `window.__SUI_SMOKE_RESULTS__`.
+
+Run `npm run axe` and `npm run axe -- icons.html` for the jsdom accessibility checks. Layout, contrast, and keyboard behavior also need validation in a real browser; jsdom cannot verify rendering.
+
 ### CDN Usage
 
-SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@3.5.0` for production.
+SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@3.5.1` for production.
 
 ### Versioning
 

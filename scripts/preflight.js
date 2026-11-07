@@ -864,8 +864,8 @@ function checkStaleVersionRefs() {
 }
 
 // ════════════════════════════════════════════════════════════════════
-//  14. DOES-NOT-EXIST TABLE PARITY
-//      The canonical table in docs/javascript-api.md must be mirrored
+//  14. CANONICAL AI-CONTEXT PARITY
+//      The canonical tables and scales in docs/javascript-api.md must be mirrored
 //      verbatim in .claude/instructions.md, .cursor/rules, and llms.txt.
 // ════════════════════════════════════════════════════════════════════
 
@@ -889,11 +889,22 @@ function checkDoesNotExistParity() {
     end = after.indexOf('\n## ');
   }
   const block = end === -1 ? after : after.slice(0, end);
-  const rows = block.split('\n').filter(l => /^\|\s*`/.test(l) || /^- /.test(l));
+  const lines = block.split('\n').map(line => line.trim());
+  const tableSeparator = /^\|(?:\s*:?-+:?\s*\|)+\s*$/;
+  // Include prose-first mappings as well as code-first names. Ignore table
+  // headers (the line before a separator), which may differ in the mirrors.
+  const rows = lines.filter((line, i) => /^- /.test(line) || (
+    /^\|/.test(line) && !tableSeparator.test(line) &&
+    !tableSeparator.test(lines[i + 1] || '')
+  ));
   let issues = 0;
   for (const mirror of ['.claude/instructions.md', '.cursor/rules', 'llms.txt']) {
     const content = readFile(mirror);
-    if (!content) continue;
+    if (!content.trim()) {
+      fail(`${mirror}: missing or empty canonical AI-context mirror`);
+      issues++;
+      continue;
+    }
     for (const row of rows) {
       if (!content.includes(row.trim())) {
         fail(`${mirror}: missing canonical row "${row.trim().slice(0, 48)}…"`);
