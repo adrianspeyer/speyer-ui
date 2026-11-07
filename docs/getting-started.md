@@ -41,8 +41,8 @@ That's it. Three CSS/JS tags for SUI, one optional CSS + sprite loader for icons
 `@latest` always serves the newest release. To pin a specific version:
 
 ```html
-<!-- Pin to v3.5.1 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-tokens.min.css">
+<!-- Pin to v3.5.2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.2/dist/sui-tokens.min.css">
 ```
 
 ---

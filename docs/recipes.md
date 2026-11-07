@@ -1,6 +1,6 @@
 # Recipes Guide
 
-Recipes are documented composition patterns that show how to combine SUI components for common application layouts. They live on the [demo page](https://adrianspeyer.github.io/speyer-ui/) with live examples and copy-paste code.
+Recipes are documented composition patterns that show how to combine SUI components for common application layouts. The 29 catalogue recipes live on the [demo page](https://adrianspeyer.github.io/speyer-ui/) with live examples and copy-paste code. Additional installation and framework examples are documented in the [Application Integration Recipes](integrations.md).
 
 ---
 
@@ -72,6 +72,16 @@ These make third-party widgets SUI-native using token-based CSS overrides. SUI p
 | **Flatpickr** | Date picker, range, datetime | v4.6.13 | [View →](https://adrianspeyer.github.io/speyer-ui/#recipe-flatpickr) |
 | **Quill** | Rich text editor (Snow theme) | v2.0.3 | [View →](https://adrianspeyer.github.io/speyer-ui/#recipe-quill) |
 | **Tom Select** | Enhanced select, autocomplete, tagging | v2.5.1 | [View →](https://adrianspeyer.github.io/speyer-ui/#recipe-tom-select) |
+
+### Application Integration Examples
+
+These documentation examples use existing SUI components and are separate from the 29 live catalogue recipes. They add no package dependencies or core APIs.
+
+| Example | What it solves | Guide |
+|---------|----------------|-------|
+| **ShadowRoot installation** | Scoped styles, token root adaptation and host-owned themes | [Read →](integrations.md#shadowroot-installation-and-themes) |
+| **Strict-CSP progress** | Finite progress states using external CSS without inline widths | [Read →](integrations.md#progress-under-a-strict-content-security-policy) |
+| **React field composition** | Stable IDs with hints and errors separate from the accessible name | [Read →](integrations.md#react-fields-with-separate-labels-and-descriptions) |
 
 ---
 

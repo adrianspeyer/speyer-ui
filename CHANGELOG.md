@@ -4,13 +4,27 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
-## [Unreleased]
+## [3.5.2] — 2026-11-07
+
+Patch release separating mobile tablists from hamburger navigation and documenting application integration patterns. No new runtime dependencies, components, or JavaScript APIs.
 
 ### Fixed
 
+- Mobile hamburger rules no longer hide or vertically stack `.sui-nav[role="tablist"]` at widths of 768px and below. Tablist layout stays independent of `.is-open`; ordinary navigation retains its mobile toggle behaviour. Selector specificity is unchanged, preserving application CSS overrides.
+- Gave the demo's scrollable example regions distinct accessible names, resolving duplicate-landmark findings in the DOM-only accessibility scan.
 - Updated the contributor SVGO configuration for SVGO 3+ by omitting disabled plugins. Required icon titles, shape types, path precision, IDs, dimensions, and explicit paint attributes are preserved; editor metadata and forbidden descriptions are removed.
 - Added SVGO as a development-only dependency and regression coverage to `npm test`. The production sprite build still uses whitespace-only minification.
 - Corrected current documentation check counts, bundle sizes, and version-pinning comments, and removed the old v3.2.0 migration banner from the README. Historical migration details remain in the changelog.
+
+### Documentation
+
+- Added application integration recipes for ShadowRoot styles and host themes, finite progress states under a strict CSP, and React fields with separate accessible names and descriptions. These compose existing SUI components; application state and event handling remain application-owned.
+- Clarified that tablists should declare `role="tablist"` in their markup, including before JavaScript initialisation, and do not need a hamburger toggle.
+
+### Tests and Distribution
+
+- Added real-browser regression coverage for mobile and desktop tablists, hamburger navigation, breakpoint boundaries, custom vertical layout, and keyboard interaction against source and minified assets.
+- Updated current version references to 3.5.2 and rebuilt the production assets in `dist/`.
 
 ---
 

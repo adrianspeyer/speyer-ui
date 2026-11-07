@@ -2,7 +2,7 @@
 
 SUI's JavaScript (`sui.js`) is optional. Components render correctly without it — they just won't open, close, or animate. When included, it auto-initialises interactive behaviours via `data-sui-*` attributes.
 
-**Current version:** 3.5.1
+**Current version:** 3.5.2
 **Bundle size:** ~29.4 KiB minified (30,056 bytes, before HTTP compression)
 **Dependencies:** Zero
 
@@ -110,6 +110,8 @@ SUI.toast.clearAll();      // Dismiss all active toasts (useful for navigation/l
 **Accessibility:** Error toasts (`type: 'error'`) automatically get `aria-live="assertive"` for immediate screen reader announcement. All other types use `polite` via the container.
 
 ### SUI.tabs
+
+Declare `role="tablist"` on the `.sui-nav` container in your HTML, so its presentation is correct before JavaScript runs. Since 3.5.2, mobile hamburger rules only apply to navigation without that role. Tablists remain visible and horizontal by default, without `.is-open` or `data-sui-nav-toggle`; application CSS can still provide another layout. SUI's built-in tab keyboard handling uses Left/Right arrows; an application providing vertical tabs must also supply the corresponding Up/Down behaviour.
 
 Programmatic tab switching. Works with the `data-tab` / `data-view` attribute pattern.
 

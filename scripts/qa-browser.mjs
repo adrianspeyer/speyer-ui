@@ -147,6 +147,111 @@ async function smoke(browser, base, browserName) {
   }
 }
 
+async function responsiveNavigation(browser, base, browserName) {
+  for (const width of [320, 375, 768, 769, 1280]) {
+    for (const source of [true, false]) {
+      const label = `navigation ${browserName} ${source ? 'source' : 'dist'} ${width}px`;
+      await withPage(browser, base, label, { width, source }, async page => {
+        // Use the smoke page's local styles/scripts without running its off-screen fixtures.
+        await page.goto(`${base}/tests/smoke.html`, { waitUntil: 'networkidle' });
+        await page.evaluate(() => {
+          const style = document.createElement('style');
+          style.textContent = '.qa-vertical { flex-direction: column; }';
+          document.head.append(style);
+          const fixture = document.createElement('section');
+          fixture.id = 'qa-navigation';
+          fixture.innerHTML = `
+            <div data-sui-tabs>
+              <nav class="sui-nav" role="tablist" aria-label="QA horizontal tabs" id="qa-tabs">
+                <button class="sui-tab" role="tab" aria-selected="true" data-tab="qa-a">Account</button>
+                <button class="sui-tab" role="tab" aria-selected="false" data-tab="qa-b">Billing</button>
+              </nav>
+              <div data-view="qa-a">Account panel</div><div data-view="qa-b">Billing panel</div>
+            </div>
+            <div class="sui-nav" role="tablist" aria-label="QA application-owned tabs" id="qa-div-tabs">
+              <button role="tab" aria-selected="true">First</button><button role="tab" aria-selected="false">Second</button>
+            </div>
+            <div class="sui-nav qa-vertical" role="tablist" aria-orientation="vertical" aria-label="QA vertical layout" id="qa-vertical-tabs">
+              <button role="tab" aria-selected="true">First</button><button role="tab" aria-selected="false">Second</button>
+            </div>
+            <button class="sui-nav-toggle" data-sui-nav-toggle="#qa-links" type="button" id="qa-menu">Menu</button>
+            <nav class="sui-nav" aria-label="QA site navigation" id="qa-links">
+              <a class="sui-nav-link" href="#qa-navigation">Home</a><a class="sui-nav-link" href="#smoke-run">Help</a>
+            </nav>
+            <button class="sui-nav-toggle" data-sui-nav-toggle="#qa-div-links" type="button" id="qa-div-menu">Other menu</button>
+            <div class="sui-nav" aria-label="QA div navigation" id="qa-div-links">
+              <a class="sui-nav-link" href="#qa-navigation">Home</a><a class="sui-nav-link" href="#smoke-run">Help</a>
+            </div>`;
+          document.body.prepend(fixture);
+        });
+
+        async function tabsKeepLayout() {
+          return page.evaluate(() => ['qa-tabs', 'qa-div-tabs', 'qa-vertical-tabs'].every(id => {
+            const nav = document.getElementById(id);
+            const style = getComputedStyle(nav);
+            return style.display === 'flex' && nav.getClientRects().length > 0 &&
+              style.flexDirection === (id === 'qa-vertical-tabs' ? 'column' : 'row');
+          }));
+        }
+        const beforeInit = await tabsKeepLayout();
+        report(`${label} CSS-only tablists`, beforeInit, 'horizontal tabs remain visible; custom vertical layout is preserved');
+        await page.evaluate(() => SUI.init());
+        const initialized = await tabsKeepLayout();
+        await page.evaluate(() => document.querySelectorAll('#qa-navigation [role="tablist"]')
+          .forEach(nav => nav.classList.add('is-open')));
+        const opened = await tabsKeepLayout();
+        await page.evaluate(() => document.querySelectorAll('#qa-navigation [role="tablist"]')
+          .forEach(nav => nav.classList.remove('is-open')));
+        report(`${label} tablists after init and is-open`, initialized && opened);
+        // A visibility regression should fail immediately, without waiting for keyboard timeouts.
+        if (!beforeInit || !initialized || !opened) return;
+
+        const account = page.locator('#qa-tabs [data-tab="qa-a"]');
+        const billing = page.locator('#qa-tabs [data-tab="qa-b"]');
+        await account.focus();
+        await account.press('ArrowRight');
+        const next = await billing.evaluate(tab => tab === document.activeElement &&
+          tab.getAttribute('aria-selected') === 'true' && tab.tabIndex === 0 &&
+          document.querySelector('#qa-tabs [data-tab="qa-a"]').tabIndex === -1 &&
+          document.getElementById(tab.getAttribute('aria-controls')).classList.contains('is-active'));
+        await billing.press('ArrowRight');
+        const wrapped = await account.evaluate(tab => tab === document.activeElement && tab.getAttribute('aria-selected') === 'true');
+        await account.press('ArrowLeft');
+        const previous = await billing.evaluate(tab => tab === document.activeElement && tab.getAttribute('aria-selected') === 'true');
+        report(`${label} keyboard tabs`, next && wrapped && previous, 'selection, roving focus, panels and wraparound');
+
+        for (const [navId, toggleId] of [['qa-links', 'qa-menu'], ['qa-div-links', 'qa-div-menu']]) {
+          const mobile = width <= 768;
+          const closed = await page.evaluate(({ navId, toggleId, mobile }) => {
+            const nav = document.getElementById(navId);
+            const style = getComputedStyle(nav);
+            const toggle = document.getElementById(toggleId);
+            return nav.getAttribute('role') !== 'tablist' &&
+              style.display === (mobile ? 'none' : 'flex') &&
+              style.flexDirection === (mobile ? 'column' : 'row') &&
+              getComputedStyle(toggle).display === (mobile ? 'inline-flex' : 'none') &&
+              toggle.getAttribute('aria-expanded') === 'false';
+          }, { navId, toggleId, mobile });
+          report(`${label} ${navId} initial state`, closed);
+          if (!mobile || !closed) continue;
+          const toggle = page.locator(`#${toggleId}`);
+          await toggle.click();
+          const expanded = await page.evaluate(({ navId, toggleId }) => {
+            const style = getComputedStyle(document.getElementById(navId));
+            return style.display === 'flex' && style.flexDirection === 'column' &&
+              document.getElementById(toggleId).getAttribute('aria-expanded') === 'true';
+          }, { navId, toggleId });
+          await page.locator(`#${navId} a`).first().press('Escape');
+          const escaped = await toggle.evaluate(button => button === document.activeElement &&
+            button.getAttribute('aria-expanded') === 'false' &&
+            getComputedStyle(document.querySelector(button.getAttribute('data-sui-nav-toggle'))).display === 'none');
+          report(`${label} ${navId} open and Escape`, expanded && escaped, 'mobile menu closes and restores trigger focus');
+        }
+      });
+    }
+  }
+}
+
 async function accessibility(browser, base, browserName, axePath) {
   for (const target of ['index.html', 'icons.html']) {
     for (const width of [1280, 375]) {
@@ -264,7 +369,10 @@ async function main() {
     const executablePath = process.env.SUI_BROWSER_EXECUTABLE_PATH;
     browser = await playwright[browserName].launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
     console.log(`SUI browser QA — ${browserName}; external network blocked`);
-    if (!args.has('--axe-only')) await smoke(browser, base, browserName);
+    if (!args.has('--axe-only')) {
+      await smoke(browser, base, browserName);
+      await responsiveNavigation(browser, base, browserName);
+    }
     if (!args.has('--smoke-only')) await accessibility(browser, base, browserName, axePath);
     console.log(`\n${checks} checks; ${failures} failed; ${incompleteRules} incomplete rule results require manual review.`);
     if (failures) process.exitCode = 1;

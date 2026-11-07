@@ -1,6 +1,6 @@
 /*!
  * Speyer UI System (SUI) — Components
- * Version: 3.5.1
+ * Version: 3.5.2
  * https://github.com/adrianspeyer/speyer-ui
  *
  * Reusable component classes built on SUI design tokens.
@@ -2232,14 +2232,16 @@ dialog.sui-dialog-wide { max-width: 720px; }
 .sui-nav-toggle { display: none; }
 
 @media (max-width: 768px) {
-  .sui-nav {
+  /* Tablist layout stays independent of the mobile hamburger state.
+     :where() preserves the existing specificity for application overrides. */
+  .sui-nav:where(:not([role="tablist"])) {
     display: none;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
     padding: var(--sui-space-2) 0;
   }
-  .sui-nav.is-open { display: flex; }
+  .sui-nav:where(:not([role="tablist"])).is-open { display: flex; }
   .sui-nav-toggle { display: inline-flex; }
 }
 

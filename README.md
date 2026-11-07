@@ -2,7 +2,7 @@
 
 A lightweight, batteries-included design system that treats accessibility as architecture, not afterthought. 538 purpose-built icons. Colour-blind friendly, mobile-first, AI-ready. Made in Canada 🇨🇦
 
-**v3.5.1** · ~98.2 KiB minified core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
+**v3.5.2** · ~98.3 KiB minified core · 538 icons · WCAG 2.1 AA · Zero runtime dependencies · [Live Demo →](https://adrianspeyer.github.io/speyer-ui/) · [Icon Browser →](https://adrianspeyer.github.io/speyer-ui/icons.html)
 
 ---
 
@@ -58,7 +58,7 @@ SUI is built for SaaS teams who need a design system that works without a build 
 </script>
 ```
 
-Pin a version for production: replace `@latest` with `@3.5.1`.
+Pin a version for production: replace `@latest` with `@3.5.2`.
 
 ### Starter Template
 
@@ -69,13 +69,13 @@ Pin a version for production: replace `@latest` with `@3.5.1`.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-tokens.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-components.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.2/dist/sui-tokens.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.2/dist/sui-components.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.2/dist/sui-icons.min.css">
 </head>
 <body>
   <script defer>
-    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui-icons.min.svg')
+    fetch('https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.2/dist/sui-icons.min.svg')
       .then(r => r.text())
       .then(svg => { const d = document.createElement('div'); d.style.display = 'none'; d.innerHTML = svg; document.body.prepend(d); });
   </script>
@@ -86,7 +86,7 @@ Pin a version for production: replace `@latest` with `@3.5.1`.
       Get Started
     </button>
   </main>
-  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.1/dist/sui.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrianspeyer/speyer-ui@3.5.2/dist/sui.min.js" defer></script>
 </body>
 </html>
 ```
@@ -379,7 +379,7 @@ Run `npm run axe` and `npm run axe -- icons.html` for the jsdom accessibility ch
 
 ### CDN Usage
 
-SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@3.5.1` for production.
+SUI is distributed via [jsDelivr](https://www.jsdelivr.com/). Files in `dist/` are the production assets. Use `@latest` for development, pin `@3.5.2` for production.
 
 ### Versioning
 

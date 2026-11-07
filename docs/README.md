@@ -15,6 +15,7 @@ Welcome to the SUI docs. These guides complement the [README](../README.md) and 
 | [Accessibility](accessibility.md) | Philosophy, ARIA requirements, keyboard behaviour, colour-blind design, icon a11y, testing |
 | [Design Decisions](design-decisions.md) | Why SUI works the way it does — the reasoning behind the rules |
 | [Recipes](recipes.md) | When to use which pattern, recipe philosophy, full catalog with demos |
+| [Application Integrations](integrations.md) | ShadowRoot styles and themes, strict-CSP progress, and accessible React field composition |
 
 ---
 
