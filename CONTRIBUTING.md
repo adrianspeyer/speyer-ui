@@ -122,7 +122,7 @@ Full icon reference: [docs/icons.md](docs/icons.md)
 
 Before submitting:
 
-- [ ] `npm test` passes (preflight and icon-optimization regression tests)
+- [ ] `npm test` passes (preflight, icon-optimization, and production-sprite XML regression tests)
 - [ ] `npm run build` passes (preflight + minification) with 0 failures
 - [ ] `npm run qa:browser` passes (browser smoke tests and accessibility scans of all demo tabs)
 - [ ] `tests/smoke.html?autorun=1` passes in desktop and mobile browser viewports

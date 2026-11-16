@@ -2,7 +2,7 @@
 
 SUI's JavaScript (`sui.js`) is optional. Components render correctly without it — they just won't open, close, or animate. When included, it auto-initialises interactive behaviours via `data-sui-*` attributes.
 
-**Current version:** 3.5.2
+**Current version:** 3.5.3
 **Bundle size:** ~29.4 KiB minified (30,056 bytes, before HTTP compression)
 **Dependencies:** Zero
 

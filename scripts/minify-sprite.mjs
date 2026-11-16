@@ -32,7 +32,9 @@ const lines = content.split('\n')
   .filter(l => l.length > 0);
 
 // Join and collapse inter-tag whitespace
-let minified = lines.join('');
+// A line break can separate attributes or path commands inside one tag.
+// Preserve that separator before removing whitespace between complete tags.
+let minified = lines.join(' ');
 minified = minified.replace(/>\s+</g, '><');
 minified = minified.replace(/\s{2,}/g, ' ');
 

@@ -19,7 +19,7 @@ Copy the pinned SUI source files into your application's `vendor/` directory. Sa
 ```js
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
-// These exact selector replacements match SUI 3.5.2 source assets.
+// These exact selector replacements match SUI 3.5.3 source assets.
 // Review them when upgrading SUI; this is not a general CSS transformer.
 function forShadow(css) {
   return css

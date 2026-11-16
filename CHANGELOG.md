@@ -4,6 +4,20 @@ All notable changes to the Speyer UI System are documented here.
 
 ---
 
+## [3.5.3] — 2026-11-16
+
+### Fixed
+
+- Preserve whitespace between attributes and path commands split across lines when building the minified icon sprite. The previous minifier merged attributes in the heading icon, producing invalid XML and breaking DOMParser-based sprite imports.
+- Rebuilt distribution assets and updated current version references and CDN examples to 3.5.3. Existing 3.5.2 consumers can continue using the valid unminified sprite until they upgrade.
+
+### Tests
+
+- Added production-minifier regressions for multiline attributes/path data and XML parsing of the complete sprite, comparing every element and attribute with the source.
+- Release validation: 18 tests, production build, 3,192 icon checks, and 94 Chrome browser checks passed. Chrome DOMParser accepts the rebuilt sprite with all 538 symbols. Browser axe reported zero violations and eight incomplete contrast-rule results requiring manual review; preflight retained six advisory focus-contrast results.
+
+---
+
 ## [3.5.2] — 2026-11-07
 
 Patch release separating mobile tablists from hamburger navigation and documenting application integration patterns. No new runtime dependencies, components, or JavaScript APIs.
